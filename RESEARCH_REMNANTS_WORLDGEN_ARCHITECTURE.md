@@ -1,7 +1,9 @@
 # Remnants World-Generation Architecture Audit
 
-Date: 2026-09-01  
-Audited project: [lazy-wombat/Remnants](https://github.com/lazy-wombat/Remnants)  
+Date: 2026-09-01
+
+Audited project: [lazy-wombat/Remnants](https://github.com/lazy-wombat/Remnants)
+
 Audited commit: [`9c2cbf9`](https://github.com/lazy-wombat/Remnants/tree/9c2cbf9cd2edcd8ae18a297357c4bcdc2870a389)
 
 ## Question
@@ -117,4 +119,3 @@ Deterministic generation tests should verify:
 The previous idea that the Maw should consume all ordinary intersecting chests, hives, trees, ore, silt, and microstructures is rejected.
 
 The replacement is an early plan-and-reserve system with a deterministic navigation spine, shared `StructureMap` registration, bounded rerouting, a later terrain pass, and a final validation/liquid pass. This gives the Maw a strong authored silhouette while preserving Terraria's world and avoiding Remnants' total-overhaul compatibility cost.
-
