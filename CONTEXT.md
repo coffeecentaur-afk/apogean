@@ -20,6 +20,18 @@ _Avoid_: The Maw when referring to the organism itself
 The major continuous planetary scar connecting the surface, underground, caverns, and an infected region of the Underworld.
 _Avoid_: Engraft scar, generic Maw biome
 
+**Maw Node**:
+A feeding and amplification organ extended by the Broodmass into a Maw region. It accelerates local spread and hostility but does not sustain the Maw's intrinsic life or passive growth.
+_Avoid_: Boss summon, biome heart
+
+**Brood Nest**:
+A reproductive structure whose destruction provokes the early Nest Warden. It does not control terrain spread.
+_Avoid_: Brood Cyst, Maw Node
+
+**Maw dormancy**:
+The subdued state after MATRIARCH-7A-1 is defeated, when amber organs dim and biological activity falls to its minimum without erasing Maw terrain or passive growth.
+_Avoid_: Purification, destruction of the Maw
+
 **Deep Maw**:
 The later post-corporate hive domain where the Broodmass is no longer constrained to recognizable terrestrial forms.
 _Avoid_: Maw Rupture

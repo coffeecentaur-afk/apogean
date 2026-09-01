@@ -56,12 +56,17 @@ Surface compositions may crossfade through their parallax layers. Underground ba
 The Maw is the hostile biome created by the distributed Broodmass organism, not a recolored Corruption. The neutral Wastes beneath the rest of the world are a separate biome and do not spread.
 
 - **Maw Nodes** are visible, destructible growth sources. They thicken local contamination and enemy activity.
+- The Maw has extremely slow intrinsic frontier growth even without Nodes. Nodes are feeding and amplification organs: each greatly accelerates local spread, enemy density, nest production, and mutation pressure, but destroying every local Node never kills the biome.
+- Before the Nest Warden falls, a struck Node's sheath may reveal its amber inner organ but immediately seals without showing misleading normal damage. The Warden's cauterization component makes Nodes genuinely destructible.
+- A destroyed Node retracts its visible cords and loose growth in a bounded, non-destructive implosion, then condenses into a local mineable ore core. Existing solid Maw terrain remains; local spread and spawn pressure return to their slow baseline.
+- **Brood Nests** are separate reproductive structures. Destroying three awakens the Nest Warden; they do not control biome spread.
 - **Maw Ruptures** are large, persistent collapsed hollows where players can build their own boss arenas.
 - **The Deep Maw** is the later, endgame hive domain.
 - New worlds receive one major rupture and smaller outgrowths away from spawn. The major rupture is an authored vertical scar that penetrates natural surface, underground, cavern, and Underworld terrain rather than repainting only the first soil row. Its terrain, walls, hazards, and scenery change with depth while remaining one continuous landmark. Growth is slow before Hardmode and bounded thereafter.
 - Where the major rupture enters the Underworld, it creates a distinct Maw-Underworld sub-biome rather than globally replacing Hell. This terminus is reserved for a deliberate progression encounter; assigning an existing boss to it requires a separate progression decision.
 - It consumes natural terrain only. Player structures, chests, housing, and protected sites are never conversion targets.
-- Ordinary Maw turf does not glow. Amber cysts, Maw Nodes, active organs, and other explicit energy-bearing growths may emit amber light.
+- Ordinary Maw turf does not glow. Amber glands, Maw Nodes, active organs, and other explicit energy-bearing growths may emit amber light.
+- MATRIARCH-7A-1's defeat forces the network into visible dormancy: amber lighting dims and biological motion and spread fall to their minimum. Wall of Flesh and Hardmode awaken the network again; dormancy never purifies existing Maw terrain.
 - Corruption and Crimson are consumed at a frontier; Hallow pushes back and slows Maw growth.
 - The Maw is frightening through pounces, larvae, tethers, burrows, and overlapping terrain pressure—not unreasonably large stats.
 
