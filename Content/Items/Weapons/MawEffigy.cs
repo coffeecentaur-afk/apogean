@@ -16,8 +16,8 @@ namespace apogean.Content.Items.Weapons
 			Item.damage = 18;
 			Item.DamageType = DamageClass.Summon;
 			Item.mana = 10;
-			Item.width = 20;
-			Item.height = 20;
+			Item.width = 48;
+			Item.height = 48;
 			Item.useTime = 30;
 			Item.useAnimation = 30;
 			Item.useStyle = ItemUseStyleID.HoldUp;

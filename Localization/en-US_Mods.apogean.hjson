@@ -70,7 +70,11 @@ Items: {
 
 	RendHook: {
 		DisplayName: Rend Hook
-		Tooltip: A pouncer's limb given a handle.
+		Tooltip:
+			'''
+			Hold to draw the severed limb taut
+			Release to lunge in the aimed direction
+			'''
 	}
 
 	SinewBow: {
@@ -80,7 +84,11 @@ Items: {
 
 	AmberSiphon: {
 		DisplayName: Amber Siphon
-		Tooltip: Coaxes a warm bolt from a dead growth.
+		Tooltip:
+			'''
+			Channel while pointing near an enemy to fasten an umbilical tether
+			The tether slowly steals life while the target remains in range
+			'''
 	}
 
 	MawEffigy: {
@@ -100,6 +108,8 @@ Projectiles: {
 	ContainmentPulse.DisplayName: Containment Pulse
 	AmberBolt.DisplayName: Amber Bolt
 	MawSentry.DisplayName: Maw Sentry
+	UmbilicalTether.DisplayName: Umbilical Tether
+	RendHookLunge.DisplayName: Rend Hook
 }
 
 Dialogue: {
@@ -139,7 +149,7 @@ Dialogue: {
 
 Biomes: {
 	EngraftBiome: {
-		DisplayName: Engraft Biome
-		TownNPCDialogueName: the Engraft Biome
+		DisplayName: The Engraft
+		TownNPCDialogueName: the Engraft
 	}
 }

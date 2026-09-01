@@ -21,8 +21,8 @@ namespace apogean.Content.World
 	/// </summary>
 	public sealed class EngraftSystem : ModSystem
 	{
-		private const int InitialRadiusX = 96;
-		private const int InitialRadiusY = 42;
+		private const int InitialRadiusX = 160;
+		private const int InitialRadiusY = 70;
 		private const int BiomeRadiusX = 86;
 		private const int BiomeRadiusY = 48;
 		private const int MaxTotalNodes = 7;
@@ -76,7 +76,7 @@ namespace apogean.Content.World
 				int offset = WorldGen.genRand.NextBool() ? WorldGen.genRand.Next(180, 360) : -WorldGen.genRand.Next(180, 360);
 				int outgrowthX = Utils.Clamp(x + offset, 220, Main.maxTilesX - 220);
 				int outgrowthY = FindSurface(outgrowthX);
-				CreateRupture(new Point16(outgrowthX, outgrowthY), 38, 22, WorldGen.genRand);
+				CreateRupture(new Point16(outgrowthX, outgrowthY), 60, 35, WorldGen.genRand);
 				RegisterNode(new Point16(outgrowthX, Math.Max(10, outgrowthY - 3)));
 			}
 		}
@@ -108,12 +108,46 @@ namespace apogean.Content.World
 					tile.TileType = (ushort)turf;
 				}
 			}
+
+			MutateSurfaceGrowth(center, radiusX, radiusY, random);
 		}
 
 		private static bool IsConvertibleTerrain(Tile tile)
 		{
-			if (!tile.HasTile || tile.WallType != WallID.None) return false;
-			return tile.TileType is TileID.Dirt or TileID.Grass or TileID.Stone or TileID.ClayBlock or TileID.Mud;
+			if (!tile.HasTile || (tile.WallType > WallID.None && Main.wallHouse[tile.WallType])) return false;
+			return tile.TileType is TileID.Dirt or TileID.Grass or TileID.Stone or TileID.ClayBlock or TileID.Mud or
+				TileID.Sand or TileID.HardenedSand or TileID.Sandstone;
+		}
+
+		private static void MutateSurfaceGrowth(Point16 center, int radiusX, int radiusY, UnifiedRandom random)
+		{
+			int turf = ModContent.TileType<EngraftTurf>();
+			int tuft = ModContent.TileType<EngraftTuft>();
+			int minX = Math.Max(12, center.X - radiusX);
+			int maxX = Math.Min(Main.maxTilesX - 12, center.X + radiusX);
+			int minY = Math.Max(12, center.Y - radiusY);
+			int maxY = Math.Min(Main.maxTilesY - 12, center.Y + radiusY);
+
+			for (int x = minX; x <= maxX; x++)
+			{
+				for (int y = minY; y <= maxY; y++)
+				{
+					Tile ground = Framing.GetTileSafely(x, y);
+					if (!ground.HasTile || ground.TileType != turf) continue;
+
+					Tile above = Framing.GetTileSafely(x, y - 1);
+					if (above.HasTile && above.TileType is TileID.Plants or TileID.Plants2 or TileID.Vines or TileID.Saplings or TileID.Trees)
+					{
+						WorldGen.KillTile(x, y - 1, noItem: true);
+						above = Framing.GetTileSafely(x, y - 1);
+					}
+
+					if (!above.HasTile && ground.Slope == SlopeType.Solid && !ground.IsHalfBlock && random.NextBool(7))
+					{
+						WorldGen.PlaceTile(x, y - 1, tuft, mute: true, forced: true);
+					}
+				}
+			}
 		}
 
 		public static bool IsInEngraft(Vector2 worldPosition)
@@ -166,7 +200,7 @@ namespace apogean.Content.World
 			if (!NPC.downedBoss3 || nodes.Count >= MaxTotalNodes) return;
 			int x = Main.rand.Next(300, Main.maxTilesX - 300);
 			int y = FindSurface(x);
-			CreateRupture(new Point16(x, y), 30, 18, Main.rand);
+			CreateRupture(new Point16(x, y), 48, 28, Main.rand);
 			RegisterNode(new Point16(x, Math.Max(10, y - 3)));
 			ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("The Engraft stirs beneath the broken altar."), new Color(194, 126, 44));
 		}
@@ -191,7 +225,7 @@ namespace apogean.Content.World
 		{
 			int x = (int)(player.Center.X / 16f);
 			int y = FindSurface(x);
-			CreateRupture(new Point16(x, y), 54, 28, Main.rand);
+			CreateRupture(new Point16(x, y), 90, 45, Main.rand);
 			RegisterNode(new Point16(x, Math.Max(10, y - 3)));
 		}
 

@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using apogean.Content.Backgrounds;
 using apogean.Content.World;
 
 namespace apogean.Content.Biomes
@@ -11,6 +12,7 @@ namespace apogean.Content.Biomes
 	{
 		public override SceneEffectPriority Priority => SceneEffectPriority.BiomeLow;
 		public override int Music => MusicID.UndergroundCorruption;
+		public override ModSurfaceBackgroundStyle SurfaceBackgroundStyle => ModContent.GetInstance<EngraftRuinedBackgroundStyle>();
 		public override string BestiaryIcon => "Terraria/Images/MapBG28";
 		public override string BackgroundPath => "Terraria/Images/MapBG28";
 		public override Color? BackgroundColor => new Color(47, 37, 25);

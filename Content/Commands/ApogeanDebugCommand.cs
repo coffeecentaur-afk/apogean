@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using apogean.Content.Backgrounds;
 using apogean.Content.Factions;
 using apogean.Content.Items.Consumables;
 using apogean.Content.Items.Materials;
@@ -22,7 +23,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft|ruin|background|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -58,6 +59,17 @@ namespace apogean.Content.Commands
 				case "engraft":
 					EngraftSystem.Instance.CreateDebugRupture(player);
 					caller.Reply("Created a playtest Maw Rupture at the local surface.", new Color(194, 126, 44));
+					break;
+
+				case "ruin":
+					int changed = RuinedSurfaceSystem.ApplyRuinedSurface();
+					caller.Reply($"Ruined the remaining green surface ({changed:N0} tiles changed).", new Color(143, 94, 45));
+					break;
+
+				case "background":
+					RuinedBackgroundBiome biome = RuinedBackgroundSelectionSystem.DetectBiome(player);
+					int variant = RuinedBackgroundSelectionSystem.Instance.Cycle(biome);
+					caller.Reply($"{biome} background changed to seeded variant {variant + 1}.", new Color(194, 126, 44));
 					break;
 
 				case "kit":

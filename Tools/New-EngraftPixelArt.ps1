@@ -10,6 +10,7 @@ $palette = @{
     'C' = [System.Drawing.Color]::FromArgb(255, 54, 49, 48)   # charcoal fill
     'R' = [System.Drawing.Color]::FromArgb(255, 112, 48, 30)  # dried rust
     'A' = [System.Drawing.Color]::FromArgb(255, 185, 112, 24) # sickly amber
+    'O' = [System.Drawing.Color]::FromArgb(255, 132, 82, 24)  # dead ochre soil
     'L' = [System.Drawing.Color]::FromArgb(255, 246, 190, 71) # amber light
     'B' = [System.Drawing.Color]::FromArgb(255, 213, 193, 150)# bone
     'W' = [System.Drawing.Color]::FromArgb(255, 255, 228, 151)# hard highlight
@@ -35,10 +36,18 @@ function Save-Pattern {
 
 # Tiles: these must be exact native Terraria dimensions; their variation comes from world placement, not blur.
 Save-Pattern 'Content/Tiles/EngraftTurf.png' @(
-    'KKKKKKKKKKKKKKKK', 'KRRRARRRARRRARRK', 'KRCACCCACCCACCRK', 'KCCKCCCKCCCKCCCK',
-    'KCCCAACCCAAACCCK', 'KCKCCCCKCCCCKCCK', 'KCCCCCCCCCCCCCCK', 'KCCKCCKCCKCCKCCK',
-    'KCCCCCCCCCCCCCCK', 'KCKCCCCKCCCCKCCK', 'KCCCCCCCCCCCCCCK', 'KCCKCCKCCKCCKCCK',
-    'KCCCCCCCCCCCCCCK', 'KCKCCCCKCCCCKCCK', 'KCCCCCCCCCCCCCCK', 'KKKKKKKKKKKKKKKK'
+    'KOOOAAOOAOOAAOOK', 'KOOAOAOOOAAOOOOK', 'KOOKOOOKOOOKOOOK', 'KOOOOAOOOOAOOOOK',
+    'KOKOOOOAOOOOOKOK', 'KOOOOOOOOOOOOOOK', 'KOOOKOOOKOOOKOOK', 'KOOOOOOOOOOOOOOK',
+    'KOKOOOOOKOOOOOKK', 'KOOOOOOOOOOOOOOK', 'KOOOKOOOKOOOKOOK', 'KOOOOOOOOOOOOOOK',
+    'KOKOOOOOKOOOOOKK', 'KOOOOOOOOOOOOOOK', 'KOOOKOOOKOOOKOOK', 'KKKKKKKKKKKKKKKK'
+)
+
+Save-Pattern 'Content/Tiles/EngraftTuft.png' @(
+    '..................', '........A.........', '...R....A....R....', '....R...A...R.....',
+    '.....R.OAO.R......', '..A...ROAOR...A...', '...A...OAO...A....', '....A..OAO..A.....',
+    '.....A.OAO.A......', '......AOOOA.......', '.......OOO........', '.......OOO........',
+    '.......OOO........', '.......OOO........', '......KOOOK.......', '.....KKOOOKK......',
+    '..................', '..................'
 )
 
 Save-Pattern 'Content/Tiles/MawNode.png' @(
@@ -80,34 +89,6 @@ Save-Pattern 'Content/Items/Materials/MawFibre.png' @(
     '.....AKCAACKRA......','.....KCAWACKRA......','.....KCAAACKRA......','......KCRCCRA.......','.......KCCKRA.......',
     '........KCKRA.......','.........KR........','....................','....................','....................','....................',
     '....................','....................','....................','....................'
-)
-
-Save-Pattern 'Content/Items/Weapons/RendHook.png' @(
-    '....................','..............KK....','.............KAK....','............KAAK....','...........KAAK.....',
-    '..........KAAK......','.....KKK.KAAK.......','....KCCKKAAR........','....KCAAAAK.........','....KCAWAK..........',
-    '....KCAAACK.........','.....KCRK...........','......KK............','....................','....................',
-    '....................','....................','....................','....................','....................'
-)
-
-Save-Pattern 'Content/Items/Weapons/SinewBow.png' @(
-    '.............KK.....','............KAK.....','...........KA.K.....','..........KA..K.....','.........KA...K.....',
-    '........KA....K.....','.......KA.....K.....','......KA......K.....','.....KAK......K.....','....KAAK......K.....',
-    '....KAAK......K.....','.....KAK......K.....','......KA......K.....','.......KA.....K.....','........KA....K.....',
-    '.........KA...K.....','..........KA..K.....','...........KA.K.....','............KAK.....','.............KK.....'
-)
-
-Save-Pattern 'Content/Items/Weapons/AmberSiphon.png' @(
-    '....................','..........KK........','.........KAAK.......','........KAWAK.......','.......KAAAAK.......',
-    '......KAAKKAAK......','.....KAAK..KAAK.....','....KAAK....KAAK....','...KAAK......KAAK...','...KAK........KAK...',
-    '...KK..........KK...','....................','....................','....................','....................',
-    '....................','....................','....................','....................','....................'
-)
-
-Save-Pattern 'Content/Items/Weapons/MawEffigy.png' @(
-    '.........KK.........','........KAAK........','.......KAWAK.......','......KAAAAK........','......KAKKAK........',
-    '.....KAAKKAAK.......','.....KAK..KAK.......','......KK..KK........','.......K..K.........','.......K..K.........',
-    '.......K..K.........','.......K..K.........','......K....K........','.....K......K.......','....K........K......',
-    '....................','....................','....................','....................','....................'
 )
 
 Write-Host "Generated Engraft pixel assets in $Root"

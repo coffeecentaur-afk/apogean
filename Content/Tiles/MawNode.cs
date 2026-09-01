@@ -20,5 +20,12 @@ namespace apogean.Content.Tiles
 		}
 
 		public override void HitWire(int i, int j) { }
+
+		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
+		{
+			r = 0.34f;
+			g = 0.16f;
+			b = 0.025f;
+		}
 	}
 }
