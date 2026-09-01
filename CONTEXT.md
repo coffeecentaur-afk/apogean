@@ -28,6 +28,22 @@ _Avoid_: Boss summon, biome heart
 A reproductive structure whose destruction provokes the early Nest Warden. It does not control terrain spread.
 _Avoid_: Brood Cyst, Maw Node
 
+**Frayed growth**:
+The approachable outer Maw terrain that early tools can cut or mine. It communicates infestation without serving as a progression gate.
+_Avoid_: Mawstone, core membrane
+
+**Mawstone**:
+Hardened structural Maw terrain and bone that require approximately Platinum-tier pickaxe power or ordinary explosives.
+_Avoid_: Frayed growth, progression membrane
+
+**Core membrane**:
+An explicit biological progression gate that cannot be removed with ordinary pickaxes or explosives until its associated encounter unlocks it.
+_Avoid_: Mawstone, arbitrary unbreakable terrain
+
+**Digestive acid**:
+Localized luminous amber fluid produced in authored Maw chambers. It remains chemically hazardous during dormancy even when its light and movement diminish.
+_Avoid_: Ordinary water, universal Maw liquid
+
 **Maw dormancy**:
 The subdued state after MATRIARCH-7A-1 is defeated, when amber organs dim and biological activity falls to its minimum without erasing Maw terrain or passive growth.
 _Avoid_: Purification, destruction of the Maw
