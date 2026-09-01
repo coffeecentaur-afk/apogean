@@ -45,8 +45,8 @@ An explicit biological progression gate that cannot be removed with ordinary pic
 _Avoid_: Mawstone, arbitrary unbreakable terrain
 
 **Digestive acid**:
-Localized luminous amber fluid produced in authored Maw chambers. It remains chemically hazardous during dormancy even when its light and movement diminish.
-_Avoid_: Ordinary water, universal Maw liquid
+Localized luminous amber fluid produced in authored Maw chambers. It is represented by animated non-solid hazard tiles rather than a fifth physical liquid or biome-wide water recolor, and remains chemically hazardous during dormancy even when its light and movement diminish.
+_Avoid_: Ordinary water, universal Maw liquid, pressure system
 
 **Maw dormancy**:
 The subdued state after MATRIARCH-7A-1 is defeated, when amber organs dim and biological activity falls to its minimum without erasing Maw terrain or passive growth.
