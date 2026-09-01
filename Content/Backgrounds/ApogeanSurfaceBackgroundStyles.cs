@@ -1,5 +1,4 @@
 using System;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 using apogean.Content.Config;
@@ -23,12 +22,20 @@ namespace apogean.Content.Backgrounds
 		public override int ChooseFarTexture()
 		{
 			int variant = RuinedBackgroundSelectionSystem.Instance.GetVariant(Biome);
-			string lighting = Main.eclipse ? "Eclipse" : Main.dayTime ? "Day" : "Night";
-			return BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/{Biome}/V{variant}_{lighting}");
+			return BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/{Biome}/V{variant}_Far");
 		}
 
-		public override int ChooseMiddleTexture() => BackgroundTextureLoader.GetBackgroundSlot(Mod, "Content/Backgrounds/Transparent");
-		public override bool PreDrawCloseBackground(SpriteBatch spriteBatch) => false;
+		public override int ChooseMiddleTexture()
+		{
+			int variant = RuinedBackgroundSelectionSystem.Instance.GetVariant(Biome);
+			return BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/{Biome}/V{variant}_Mid");
+		}
+
+		public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b)
+		{
+			int variant = RuinedBackgroundSelectionSystem.Instance.GetVariant(Biome);
+			return BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/{Biome}/V{variant}_Close");
+		}
 	}
 
 	public sealed class ForestRuinedBackgroundStyle : ApogeanSurfaceBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Forest; }
@@ -60,6 +67,26 @@ namespace apogean.Content.Backgrounds
 				RuinedBackgroundBiome.Ocean => ModContent.GetInstance<OceanRuinedBackgroundStyle>().Slot,
 				RuinedBackgroundBiome.Engraft => ModContent.GetInstance<EngraftRuinedBackgroundStyle>().Slot,
 				_ => ModContent.GetInstance<ForestRuinedBackgroundStyle>().Slot
+			};
+		}
+
+		public override void ChooseUndergroundBackgroundStyle(ref int style)
+		{
+			if (Main.gameMenu || !ModContent.GetInstance<ApogeanWorldConfig>().RuinedBiomeBackgrounds) return;
+			Player player = Main.LocalPlayer;
+			if (player == null || !player.active || player.ZoneUnderworldHeight) return;
+
+			style = RuinedBackgroundSelectionSystem.DetectBiome(player) switch
+			{
+				RuinedBackgroundBiome.Desert => ModContent.GetInstance<DesertRuinedUndergroundStyle>().Slot,
+				RuinedBackgroundBiome.Jungle => ModContent.GetInstance<JungleRuinedUndergroundStyle>().Slot,
+				RuinedBackgroundBiome.Snow => ModContent.GetInstance<SnowRuinedUndergroundStyle>().Slot,
+				RuinedBackgroundBiome.Corruption => ModContent.GetInstance<CorruptionRuinedUndergroundStyle>().Slot,
+				RuinedBackgroundBiome.Crimson => ModContent.GetInstance<CrimsonRuinedUndergroundStyle>().Slot,
+				RuinedBackgroundBiome.Hallow => ModContent.GetInstance<HallowRuinedUndergroundStyle>().Slot,
+				RuinedBackgroundBiome.Ocean => ModContent.GetInstance<OceanRuinedUndergroundStyle>().Slot,
+				RuinedBackgroundBiome.Engraft => ModContent.GetInstance<EngraftRuinedUndergroundStyle>().Slot,
+				_ => ModContent.GetInstance<ForestRuinedUndergroundStyle>().Slot
 			};
 		}
 	}

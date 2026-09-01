@@ -13,6 +13,7 @@ namespace apogean.Content.Biomes
 		public override SceneEffectPriority Priority => SceneEffectPriority.BiomeLow;
 		public override int Music => MusicID.UndergroundCorruption;
 		public override ModSurfaceBackgroundStyle SurfaceBackgroundStyle => ModContent.GetInstance<EngraftRuinedBackgroundStyle>();
+		public override ModUndergroundBackgroundStyle UndergroundBackgroundStyle => ModContent.GetInstance<EngraftRuinedUndergroundStyle>();
 		public override string BestiaryIcon => "Terraria/Images/MapBG28";
 		public override string BackgroundPath => "Terraria/Images/MapBG28";
 		public override Color? BackgroundColor => new Color(47, 37, 25);

@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using apogean.Content.Buffs;
 using apogean.Content.Items.Materials;
 using apogean.Content.Projectiles;
 
@@ -16,8 +17,8 @@ namespace apogean.Content.Items.Weapons
 			Item.damage = 18;
 			Item.DamageType = DamageClass.Summon;
 			Item.mana = 10;
-			Item.width = 48;
-			Item.height = 48;
+			Item.width = 38;
+			Item.height = 38;
 			Item.useTime = 30;
 			Item.useAnimation = 30;
 			Item.useStyle = ItemUseStyleID.HoldUp;
@@ -33,6 +34,7 @@ namespace apogean.Content.Items.Weapons
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			player.UpdateMaxTurrets();
+			player.AddBuff(ModContent.BuffType<MawEffigyBuff>(), 18000);
 			Projectile.NewProjectile(source, player.Center + new Vector2(player.direction * 28f, -18f), Vector2.Zero, type, damage, knockback, player.whoAmI);
 			return false;
 		}

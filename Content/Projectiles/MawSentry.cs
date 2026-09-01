@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using apogean.Content.Buffs;
 
 namespace apogean.Content.Projectiles
 {
@@ -33,7 +34,8 @@ namespace apogean.Content.Projectiles
 		public override void AI()
 		{
 			Player owner = Main.player[Projectile.owner];
-			if (!owner.active || owner.dead) { Projectile.Kill(); return; }
+			if (!owner.active || owner.dead || !owner.HasBuff<MawEffigyBuff>()) { Projectile.Kill(); return; }
+			Projectile.timeLeft = 2;
 
 			NPC target = FindTarget(owner.Center);
 			Vector2 destination;

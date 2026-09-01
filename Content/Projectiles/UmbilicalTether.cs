@@ -13,7 +13,10 @@ namespace apogean.Content.Projectiles
 	{
 		public const float MaximumRange = 540f;
 		private const int ManaInterval = 30;
-		private const int HealInterval = 36;
+		private const int HealInterval = 30;
+		private const int HealAmount = 2;
+		private const int CordPixelSize = 3;
+		private const float CordSpacing = 2.5f;
 
 		private NPC Target => Projectile.ai[0] >= 0 && Projectile.ai[0] < Main.maxNPCs ? Main.npc[(int)Projectile.ai[0]] : null;
 
@@ -30,7 +33,7 @@ namespace apogean.Content.Projectiles
 			Projectile.ignoreWater = true;
 			Projectile.timeLeft = 2;
 			Projectile.usesLocalNPCImmunity = true;
-			Projectile.localNPCHitCooldown = 18;
+			Projectile.localNPCHitCooldown = 15;
 		}
 
 		public override bool ShouldUpdatePosition() => false;
@@ -71,7 +74,7 @@ namespace apogean.Content.Projectiles
 			if (Projectile.localAI[1] < HealInterval || owner.statLife >= owner.statLifeMax2) return;
 
 			Projectile.localAI[1] = 0f;
-			owner.Heal(1);
+			owner.Heal(HealAmount);
 		}
 
 		public override bool PreDraw(ref Color lightColor)
@@ -88,16 +91,20 @@ namespace apogean.Content.Projectiles
 
 			Vector2 direction = difference / length;
 			Vector2 normal = new(-direction.Y, direction.X);
-			const int segments = 20;
-			Vector2 previous = start;
-			for (int i = 1; i <= segments; i++)
+			int samples = System.Math.Max(2, (int)(length / CordSpacing));
+			for (int i = 0; i <= samples; i++)
 			{
-				float progress = i / (float)segments;
-				float wave = (float)System.Math.Sin(progress * MathHelper.Pi * 4f + Main.GlobalTimeWrappedHourly * 5f) * 3f * (float)System.Math.Sin(progress * MathHelper.Pi);
-				Vector2 current = Vector2.Lerp(start, end, progress) + normal * wave;
-				DrawSegment(previous, current, new Color(48, 22, 18), 5f);
-				DrawSegment(previous, current, new Color(183, 92, 28), 2f);
-				previous = current;
+				float progress = i / (float)samples;
+				float wave = (float)System.Math.Sin(progress * MathHelper.Pi * 3f + Main.GlobalTimeWrappedHourly * 4f) * 2f *
+					(float)System.Math.Sin(progress * MathHelper.Pi);
+				Vector2 point = Vector2.Lerp(start, end, progress) + normal * wave;
+				Rectangle outer = new((int)point.X - 1, (int)point.Y - 1, CordPixelSize, CordPixelSize);
+				Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, outer, new Color(55, 47, 24));
+				if (i % 2 == 0)
+				{
+					Rectangle core = new((int)point.X, (int)point.Y, 1, 1);
+					Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, core, new Color(218, 177, 52));
+				}
 			}
 
 			Texture2D texture = TextureAssets.Projectile[Type].Value;
@@ -107,11 +114,5 @@ namespace apogean.Content.Projectiles
 			return false;
 		}
 
-		private static void DrawSegment(Vector2 start, Vector2 end, Color color, float width)
-		{
-			Vector2 delta = end - start;
-			Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, start, null, color, delta.ToRotation(), Vector2.Zero,
-				new Vector2(delta.Length(), width), SpriteEffects.None);
-		}
 	}
 }

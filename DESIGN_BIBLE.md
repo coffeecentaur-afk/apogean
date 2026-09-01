@@ -14,7 +14,7 @@ This document is the binding creative and progression reference for the mod.  A 
 
 | Domain | Palette and silhouette | Do not use |
 | --- | --- | --- |
-| The Engraft / Broodmass | charcoal-black organic mass, sickly ochre and amber growth, rust-red wounds, pale bone, low predatory silhouettes | Corruption-purple as the dominant read; generic neon-green slime |
+| The Engraft / Broodmass | charcoal-black organic mass, sickly ochre and amber cords, dry stringy roots, pale bone, low predatory silhouettes; wet flesh is a restrained accent | Corruption-purple as the dominant read; generic neon-green slime; Crimson-like fields of exposed red meat |
 | Kessler Armaments | gunmetal, burnt red, signal orange, dense industrial geometry | clean sci-fi white, organic shapes |
 | Helix Genomics | sterile white, muted surgical gray, small toxic-green clinical indicators | warm wilderness growth as its default identity |
 | Sentrix Watch | black, cold cyan, blue-white scanning light, precise vertical forms | ragged improvised machinery |
@@ -33,7 +33,7 @@ The apocalypse is the world's baseline, not a single optional biome.
 - Corruption, Crimson, and Hallow remain immediately recognizable Terraria biomes. Their backgrounds show each force consuming or transforming the same ruined civilization instead of being replaced by the Engraft.
 - Concentrated Engraft regions are a second layer of danger: active, biological, ochre-and-charcoal territory growing through the already-dead world.
 
-Each surface biome has at least two authored background compositions. A world's seed selects one composition per biome and that choice remains stable. Day, night, and solar eclipse alter the lighting of the same composition so landmarks never jump when time changes. A later player-facing projector may deliberately cycle a biome's composition; random runtime cycling is forbidden.
+Each surface biome has at least two authored background compositions. Every composition is a matched transparent far/middle/close parallax set over Terraria's native sky—not a baked panorama. A world's seed selects one composition per biome and that choice remains stable. Terraria's sky and lighting move the same composition through day, night, and solar eclipse so landmarks never jump when time changes. Underground scenery follows tModLoader's separate four-texture transition/ground/rock contract. A later player-facing projector may deliberately cycle a biome's composition; random runtime cycling is forbidden.
 
 ## The Engraft
 

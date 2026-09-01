@@ -12,8 +12,8 @@ namespace apogean.Content.Items.Weapons
 		{
 			Item.damage = 20;
 			Item.DamageType = DamageClass.Ranged;
-			Item.width = 52;
-			Item.height = 52;
+			Item.width = 36;
+			Item.height = 36;
 			Item.useTime = 21;
 			Item.useAnimation = 21;
 			Item.useStyle = ItemUseStyleID.Shoot;

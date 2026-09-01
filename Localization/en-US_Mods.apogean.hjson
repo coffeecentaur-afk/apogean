@@ -112,6 +112,13 @@ Projectiles: {
 	RendHookLunge.DisplayName: Rend Hook
 }
 
+Buffs: {
+	MawEffigyBuff: {
+		DisplayName: Maw Effigy
+		Description: A hunting growth answers your movement
+	}
+}
+
 Dialogue: {
 	TestAmbassador: {
 		Speaker: Kessler Quartermaster
@@ -151,5 +158,21 @@ Biomes: {
 	EngraftBiome: {
 		DisplayName: The Engraft
 		TownNPCDialogueName: the Engraft
+	}
+}
+
+Configs: {
+	ApogeanWorldConfig: {
+		DisplayName: Apogean World Config
+
+		RuinedSurface: {
+			Label: Ruined Surface
+			Tooltip: ""
+		}
+
+		RuinedBiomeBackgrounds: {
+			Label: Ruined Biome Backgrounds
+			Tooltip: ""
+		}
 	}
 }

@@ -18,8 +18,8 @@ namespace apogean.Content.Items.Weapons
 			Item.damage = 14;
 			Item.DamageType = DamageClass.Magic;
 			Item.mana = 2;
-			Item.width = 52;
-			Item.height = 52;
+			Item.width = 36;
+			Item.height = 36;
 			Item.useTime = 18;
 			Item.useAnimation = 18;
 			Item.useStyle = ItemUseStyleID.Shoot;
