@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using apogean.Content.Config;
 using apogean.Content.Tiles;
+using apogean.Content.Walls;
 
 namespace apogean.Content.World
 {
@@ -35,12 +36,30 @@ namespace apogean.Content.World
 		{
 			int changed = 0;
 			int deadGrass = ModContent.TileType<DeadGrass>();
-			int maximumY = Math.Min(Main.maxTilesY - 20, (int)Main.worldSurface + 80);
+			int deadGrassWall = ModContent.WallType<DeadGrassWallUnsafe>();
+			int deadFlowerWall = ModContent.WallType<DeadFlowerWallUnsafe>();
+			int maximumY = Math.Min(Main.maxTilesY - 20, (int)Main.rockLayer + 100);
 			for (int x = 30; x < Main.maxTilesX - 30; x++)
 			{
 				for (int y = 30; y < maximumY; y++)
 				{
 					Tile tile = Framing.GetTileSafely(x, y);
+					switch (tile.WallType)
+					{
+						case WallID.GrassUnsafe:
+							tile.WallType = (ushort)deadGrassWall;
+							changed++;
+							break;
+						case WallID.FlowerUnsafe:
+							tile.WallType = (ushort)deadFlowerWall;
+							changed++;
+							break;
+						case WallID.LivingLeaf:
+							tile.WallType = WallID.None;
+							changed++;
+							break;
+					}
+
 					if (!tile.HasTile) continue;
 
 					switch (tile.TileType)
@@ -56,12 +75,19 @@ namespace apogean.Content.World
 							WorldGen.KillTile(x, y, noItem: true);
 							changed++;
 							break;
-					}
-
-					if (tile.HasTile && TileID.Sets.IsATreeTrunk[tile.TileType] && IsForestTreeColumn(x, y, deadGrass))
-					{
-						WorldGen.KillTile(x, y, noItem: true);
-						changed++;
+						case TileID.VanityTreeSakura:
+						case TileID.VanityTreeYellowWillow:
+							// Vanity trees do not share TileID.Trees. Convert their trunks so the
+							// DeadForestTree registered for DeadGrass can render and regrow them.
+							tile.TileType = TileID.Trees;
+							changed++;
+							break;
+						case TileID.LeafBlock:
+							// Living Trees keep their wood, rooms, roots, and loot, but lose the
+							// serene green canopy and its falling-leaf emitter.
+							tile.ClearTile();
+							changed++;
+							break;
 					}
 				}
 			}
@@ -70,21 +96,9 @@ namespace apogean.Content.World
 			return changed;
 		}
 
-		private static bool IsForestTreeColumn(int x, int y, int deadGrass)
-		{
-			for (int checkY = y; checkY < Math.Min(Main.maxTilesY - 10, y + 80); checkY++)
-			{
-				Tile check = Framing.GetTileSafely(x, checkY);
-				if (check.HasTile && TileID.Sets.IsATreeTrunk[check.TileType]) continue;
-				return check.HasTile && check.TileType is TileID.Grass || check.HasTile && check.TileType == deadGrass;
-			}
-			return false;
-		}
-
 		private static void PlantDeadSurface(int deadGrass, int maximumY)
 		{
 			int deadTuft = ModContent.TileType<DeadTuft>();
-			int deadTree = ModContent.TileType<DeadTree>();
 			for (int x = 35; x < Main.maxTilesX - 35; x++)
 			{
 				for (int y = 40; y < maximumY; y++)
@@ -96,25 +110,9 @@ namespace apogean.Content.World
 					{
 						WorldGen.PlaceTile(x, y - 1, deadTuft, mute: true, forced: true);
 					}
-					else if (x % 43 == 0 && IsClearForTree(x, y))
-					{
-						WorldGen.PlaceObject(x, y - 1, deadTree, mute: true);
-					}
 					break;
 				}
 			}
-		}
-
-		private static bool IsClearForTree(int x, int groundY)
-		{
-			for (int checkX = x - 1; checkX <= x + 1; checkX++)
-			{
-				for (int checkY = groundY - 4; checkY < groundY; checkY++)
-				{
-					if (Framing.GetTileSafely(checkX, checkY).HasTile) return false;
-				}
-			}
-			return true;
 		}
 	}
 }

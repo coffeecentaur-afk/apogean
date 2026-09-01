@@ -76,6 +76,11 @@ namespace apogean.Content.Backgrounds
 			Player player = Main.LocalPlayer;
 			if (player == null || !player.active || player.ZoneUnderworldHeight) return;
 
+			// Do not replace underground scenes that do not yet have an authored
+			// Apogean set. Falling back to Forest here erased the mushroom biome's
+			// visual identity. These receive dedicated ruined sets in a later slice.
+			if (player.ZoneGlowshroom || player.ZoneDungeon) return;
+
 			style = RuinedBackgroundSelectionSystem.DetectBiome(player) switch
 			{
 				RuinedBackgroundBiome.Desert => ModContent.GetInstance<DesertRuinedUndergroundStyle>().Slot,

@@ -35,6 +35,22 @@ The apocalypse is the world's baseline, not a single optional biome.
 
 Each surface biome has at least two authored background compositions. Every composition is a matched transparent far/middle/close parallax set over Terraria's native sky—not a baked panorama. A world's seed selects one composition per biome and that choice remains stable. Terraria's sky and lighting move the same composition through day, night, and solar eclipse so landmarks never jump when time changes. Underground scenery follows tModLoader's separate four-texture transition/ground/rock contract. A later player-facing projector may deliberately cycle a biome's composition; random runtime cycling is forbidden.
 
+### Ruined forest ecology
+
+The ordinary ruined forest must remain a complete Terraria building biome rather than a set dressing pass.
+
+- Naturally generated forest grass is converted to separate dead grass. Vanilla green grass, grass walls, flower walls, seeds, and related restoration tools remain obtainable and placeable.
+- Dead forest trees are real trees: they can be chopped, shaken, planted with acorns, regrown, painted, and harvested for ordinary Wood. Their leafless canopy does not emit peaceful falling leaves.
+- Living Trees retain their wood, roots, rooms, doors, chests, and traversal. World generation removes or replaces their green leaf canopy rather than deleting the structure.
+- Naturally generated unsafe grass and flower walls receive ruined variants. Player-built safe walls and restored green terrain are never globally rewritten after world generation.
+- Spawn remains mechanically safe even though its palette and ecology communicate a dead world.
+
+### Underground and Underworld scenery
+
+Underground backgrounds are routed by both biome and depth. Forest, desert, snow, jungle, Glowing Mushroom, Dungeon, evil biomes, Hallow, concentrated Engraft, and the Underworld never silently fall back to one generic cave set. Each authored set may include ruined mining camps, rails, shelters, research remains, or military infrastructure appropriate to that biome. Until a dedicated ruined set exists, preserving the recognizable vanilla background is preferable to applying the wrong Apogee background.
+
+Surface compositions may crossfade through their parallax layers. Underground backgrounds use hard texture-set selection, so visible borders require authored transition bands, neutral seam textures, or bounded biome hysteresis rather than random switching.
+
 ## The Engraft
 
 The Engraft is a distributed Broodmass ecosystem, not a recolored Corruption.
@@ -42,7 +58,8 @@ The Engraft is a distributed Broodmass ecosystem, not a recolored Corruption.
 - **Maw Nodes** are visible, destructible growth sources. They thicken local contamination and enemy activity.
 - **Maw Ruptures** are large, persistent collapsed hollows where players can build their own boss arenas.
 - **The Deep Maw** is the later, endgame hive domain.
-- New worlds receive one major rupture and smaller outgrowths away from spawn. Ruptures penetrate natural surface and underground terrain rather than repainting only the first soil row. Growth is slow before Hardmode and bounded thereafter.
+- New worlds receive one major rupture and smaller outgrowths away from spawn. The major rupture is an authored vertical scar that penetrates natural surface, underground, cavern, and Underworld terrain rather than repainting only the first soil row. Its terrain, walls, hazards, and scenery change with depth while remaining one continuous landmark. Growth is slow before Hardmode and bounded thereafter.
+- Where the major rupture enters the Underworld, it creates a distinct Engraft-Underworld sub-biome rather than globally replacing Hell. This terminus is reserved for a deliberate progression encounter; assigning an existing boss to it requires a separate progression decision.
 - It consumes natural terrain only. Player structures, chests, housing, and protected sites are never conversion targets.
 - Ordinary Engraft turf does not glow. Amber cysts, Maw Nodes, active organs, and other explicit energy-bearing growths may emit amber light.
 - Corruption and Crimson are consumed at a frontier; Hallow pushes back and slows Engraft growth.
