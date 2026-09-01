@@ -43,6 +43,13 @@ The Wastes must remain a complete Terraria building biome rather than a set dres
 - Dead forest trees are real trees: they can be chopped, shaken, planted with acorns, regrown, painted, and harvested for ordinary Wood. Their leafless canopy does not emit peaceful falling leaves.
 - Living Trees retain their wood, roots, rooms, doors, chests, and traversal. World generation removes or replaces their green leaf canopy rather than deleting the structure.
 - Naturally generated unsafe grass and flower walls receive ruined variants. Player-built safe walls and restored green terrain are never globally rewritten after world generation.
+
+### Spawn sanctuary
+
+- New worlds reserve a sanctuary centered on Terraria's final spawn point, initially 110 tiles horizontally and 70 tiles vertically in each direction. It is an Apogee world-edit exclusion, not a peace-zone buff.
+- The sanctuary still becomes neutral Wastes and may contain safe cosmetic ruins. Maw generation, Maw spread, Maw outgrowths, and corporate compounds cannot enter it.
+- Ordinary Terraria enemies, invasions, blood moons, eclipses, player-summoned bosses, and other normal events remain allowed. The sanctuary never suppresses vanilla spawning or prevents a player from building an arena at spawn.
+- Legacy worlds receive the same implicit safety rule without silently generating a new Maw or moving existing terrain. A forced debug command may bypass the rule only for explicit playtesting.
 - Spawn remains mechanically safe even though its palette and ecology communicate a dead world.
 
 ### Underground and Underworld scenery

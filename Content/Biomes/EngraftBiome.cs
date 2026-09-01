@@ -2,8 +2,8 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using apogean.Common.Biomes;
 using apogean.Content.Backgrounds;
-using apogean.Content.World;
 
 namespace apogean.Content.Biomes
 {
@@ -18,6 +18,7 @@ namespace apogean.Content.Biomes
 		public override string BackgroundPath => "Terraria/Images/MapBG28";
 		public override Color? BackgroundColor => new Color(47, 37, 25);
 
-		public override bool IsBiomeActive(Player player) => EngraftSystem.IsInEngraft(player.Center);
+		public override bool IsBiomeActive(Player player) =>
+			ModContent.GetInstance<MawTileCountSystem>().MawTileCount >= MawTileCountSystem.BiomeActivationCount;
 	}
 }

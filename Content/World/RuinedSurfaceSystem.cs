@@ -6,6 +6,7 @@ using Terraria.ID;
 using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
+using apogean.Common.WorldGeneration;
 using apogean.Content.Config;
 using apogean.Content.Tiles;
 using apogean.Content.Walls;
@@ -18,15 +19,7 @@ namespace apogean.Content.World
 	/// </summary>
 	public sealed class RuinedSurfaceSystem : ModSystem
 	{
-		public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
-		{
-			if (!ModContent.GetInstance<ApogeanWorldConfig>().RuinedSurface) return;
-			int trees = tasks.FindIndex(pass => pass.Name.Equals("Planting Trees", StringComparison.OrdinalIgnoreCase));
-			int insertAt = trees >= 0 ? trees + 1 : Math.Max(0, tasks.Count - 1);
-			tasks.Insert(insertAt, new PassLegacy("A World Picked Clean", GenerateRuinedSurface));
-		}
-
-		private static void GenerateRuinedSurface(GenerationProgress progress, GameConfiguration config)
+		internal static void GenerateWorld(GenerationProgress progress, GameConfiguration config)
 		{
 			progress.Message = "Remembering the world that was...";
 			ApplyRuinedSurface();
@@ -43,6 +36,7 @@ namespace apogean.Content.World
 			{
 				for (int y = 30; y < maximumY; y++)
 				{
+					if (!ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, WorldEditIntent.WastesConversion)) continue;
 					Tile tile = Framing.GetTileSafely(x, y);
 					switch (tile.WallType)
 					{
@@ -103,6 +97,7 @@ namespace apogean.Content.World
 			{
 				for (int y = 40; y < maximumY; y++)
 				{
+					if (!ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, WorldEditIntent.WastesConversion)) continue;
 					Tile ground = Framing.GetTileSafely(x, y);
 					if (!ground.HasTile || ground.TileType != deadGrass || Framing.GetTileSafely(x, y - 1).HasTile) continue;
 

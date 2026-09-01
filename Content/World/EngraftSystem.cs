@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Chat;
@@ -11,6 +12,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
+using apogean.Common.WorldGeneration;
 using apogean.Content.Tiles;
 
 namespace apogean.Content.World
@@ -21,8 +23,6 @@ namespace apogean.Content.World
 	/// </summary>
 	public sealed class EngraftSystem : ModSystem
 	{
-		private const int InitialRadiusX = 160;
-		private const int InitialRadiusY = 70;
 		private const int BiomeRadiusX = 86;
 		private const int BiomeRadiusY = 48;
 		private const int MaxTotalNodes = 7;
@@ -43,41 +43,16 @@ namespace apogean.Content.World
 			nodes.Clear();
 		}
 
-		public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
-		{
-			int jungle = tasks.FindIndex(pass => pass.Name.Equals("Jungle", StringComparison.OrdinalIgnoreCase));
-			int insertAt = jungle >= 0 ? jungle + 1 : Math.Max(0, tasks.Count - 1);
-			tasks.Insert(insertAt, new PassLegacy("The Engraft", GenerateEngraft));
-		}
-
-		private void GenerateEngraft(GenerationProgress progress, GameConfiguration config)
+		internal void GenerateWorld(GenerationProgress progress, GameConfiguration config)
 		{
 			progress.Message = "Something is taking root...";
-			int spawn = Main.spawnTileX;
-			int minimumDistance = Math.Max(420, Main.maxTilesX / 7);
-			int x = spawn;
-			for (int attempts = 0; attempts < 300; attempts++)
+			ApogeanWorldPlan plan = ApogeanWorldPlanSystem.Instance.CreateWorldGenPlan(WorldGen.genRand, FindSurface);
+			for (int i = 0; i < plan.MawRuptures.Count; i++)
 			{
-				int candidate = WorldGen.genRand.Next(280, Main.maxTilesX - 280);
-				if (Math.Abs(candidate - spawn) >= minimumDistance)
-				{
-					x = candidate;
-					break;
-				}
-			}
-
-			int y = FindSurface(x);
-			CreateRupture(new Point16(x, y), InitialRadiusX, InitialRadiusY, WorldGen.genRand);
-			RegisterNode(new Point16(x, Math.Max(10, y - 3)));
-
-			// Two weaker outgrowths give early exploration hooks without turning half a new world hostile.
-			for (int i = 0; i < 2; i++)
-			{
-				int offset = WorldGen.genRand.NextBool() ? WorldGen.genRand.Next(180, 360) : -WorldGen.genRand.Next(180, 360);
-				int outgrowthX = Utils.Clamp(x + offset, 220, Main.maxTilesX - 220);
-				int outgrowthY = FindSurface(outgrowthX);
-				CreateRupture(new Point16(outgrowthX, outgrowthY), 60, 35, WorldGen.genRand);
-				RegisterNode(new Point16(outgrowthX, Math.Max(10, outgrowthY - 3)));
+				MawRupturePlan rupture = plan.MawRuptures[i];
+				int ruptureSeed = unchecked(plan.PlanSeed ^ ((i + 1) * 73856093));
+				CreateRupture(rupture.SurfaceCenter, rupture.RadiusX, rupture.RadiusY, new UnifiedRandom(ruptureSeed), WorldEditIntent.MawGeneration);
+				RegisterNode(new Point16(rupture.SurfaceCenter.X, Math.Max(10, rupture.SurfaceCenter.Y - 3)));
 			}
 		}
 
@@ -90,36 +65,47 @@ namespace apogean.Content.World
 			return (int)Main.worldSurface;
 		}
 
-		private static void CreateRupture(Point16 center, int radiusX, int radiusY, UnifiedRandom random)
+		private static void CreateRupture(
+			Point16 center,
+			int radiusX,
+			int radiusY,
+			UnifiedRandom random,
+			WorldEditIntent intent)
 		{
 			int turf = ModContent.TileType<EngraftTurf>();
 			for (int x = center.X - radiusX; x <= center.X + radiusX; x++)
 			{
 				for (int y = center.Y - radiusY; y <= center.Y + radiusY; y++)
 				{
-					if (!WorldGen.InWorld(x, y, 12)) continue;
+					if (!WorldGen.InWorld(x, y, 12) || !ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, intent)) continue;
 					float dx = (x - center.X) / (float)radiusX;
 					float dy = (y - center.Y) / (float)radiusY;
 					if (dx * dx + dy * dy > 1f + random.NextFloat(-0.14f, 0.12f)) continue;
 
 					Tile tile = Framing.GetTileSafely(x, y);
-					if (!IsConvertibleTerrain(tile)) continue;
+					if (!IsConvertibleTerrain(x, y, tile, intent)) continue;
 					tile.HasTile = true;
 					tile.TileType = (ushort)turf;
 				}
 			}
 
-			MutateSurfaceGrowth(center, radiusX, radiusY, random);
+			MutateSurfaceGrowth(center, radiusX, radiusY, random, intent);
 		}
 
-		private static bool IsConvertibleTerrain(Tile tile)
+		private static bool IsConvertibleTerrain(int x, int y, Tile tile, WorldEditIntent intent)
 		{
+			if (!ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, intent)) return false;
 			if (!tile.HasTile || (tile.WallType > WallID.None && Main.wallHouse[tile.WallType])) return false;
 			return tile.TileType is TileID.Dirt or TileID.Grass or TileID.Stone or TileID.ClayBlock or TileID.Mud or
 				TileID.Sand or TileID.HardenedSand or TileID.Sandstone;
 		}
 
-		private static void MutateSurfaceGrowth(Point16 center, int radiusX, int radiusY, UnifiedRandom random)
+		private static void MutateSurfaceGrowth(
+			Point16 center,
+			int radiusX,
+			int radiusY,
+			UnifiedRandom random,
+			WorldEditIntent intent)
 		{
 			int turf = ModContent.TileType<EngraftTurf>();
 			int tuft = ModContent.TileType<EngraftTuft>();
@@ -132,6 +118,7 @@ namespace apogean.Content.World
 			{
 				for (int y = minY; y <= maxY; y++)
 				{
+					if (!ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, intent)) continue;
 					Tile ground = Framing.GetTileSafely(x, y);
 					if (!ground.HasTile || ground.TileType != turf) continue;
 
@@ -187,7 +174,7 @@ namespace apogean.Content.World
 				int y = node.Y + Main.rand.Next(-28, 29);
 				if (!WorldGen.InWorld(x, y, 12)) continue;
 				Tile tile = Framing.GetTileSafely(x, y);
-				if (!IsConvertibleTerrain(tile)) continue;
+				if (!IsConvertibleTerrain(x, y, tile, WorldEditIntent.MawSpread)) continue;
 				tile.TileType = (ushort)turf;
 				NetMessage.SendTileSquare(-1, x, y);
 				return;
@@ -197,11 +184,20 @@ namespace apogean.Content.World
 		/// <summary>Called only when a Hardmode altar breaks. At most four new regions are created after the three worldgen nodes.</summary>
 		public void SeedFromDestroyedAltar()
 		{
-			if (!NPC.downedBoss3 || nodes.Count >= MaxTotalNodes) return;
-			int x = Main.rand.Next(300, Main.maxTilesX - 300);
-			int y = FindSurface(x);
-			CreateRupture(new Point16(x, y), 48, 28, Main.rand);
-			RegisterNode(new Point16(x, Math.Max(10, y - 3)));
+			if (!Main.hardMode || nodes.Count >= MaxTotalNodes) return;
+			int preferredX = Main.rand.Next(300, Main.maxTilesX - 300);
+			if (!ApogeanWorldPlanSystem.Instance.TryAddRuntimeRupture(
+				preferredX,
+				48,
+				28,
+				bypassProtection: false,
+				FindSurface,
+				Main.rand,
+				out MawRupturePlan rupture) || rupture is null)
+				return;
+
+			CreateRupture(rupture.SurfaceCenter, rupture.RadiusX, rupture.RadiusY, Main.rand, WorldEditIntent.MawGeneration);
+			RegisterNode(new Point16(rupture.SurfaceCenter.X, Math.Max(10, rupture.SurfaceCenter.Y - 3)));
 			ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("The Engraft stirs beneath the broken altar."), new Color(194, 126, 44));
 		}
 
@@ -220,13 +216,38 @@ namespace apogean.Content.World
 				!Framing.GetTileSafely(point.X, point.Y).HasTile || Framing.GetTileSafely(point.X, point.Y).TileType != nodeType);
 		}
 
-		/// <summary>Playtest-only world mutation used by /apogean engraft. It never overwrites protected walls or furniture.</summary>
-		public void CreateDebugRupture(Player player)
+		/// <summary>Playtest-only world mutation used by /apogean engraft.</summary>
+		public bool TryCreateDebugRupture(Player player, bool bypassProtection, out string failureReason)
 		{
-			int x = (int)(player.Center.X / 16f);
-			int y = FindSurface(x);
-			CreateRupture(new Point16(x, y), 90, 45, Main.rand);
-			RegisterNode(new Point16(x, Math.Max(10, y - 3)));
+			if (Main.netMode == NetmodeID.MultiplayerClient)
+			{
+				failureReason = "World-generation debug edits must be run by the server or in single player.";
+				return false;
+			}
+
+			int preferredX = (int)(player.Center.X / 16f);
+			if (!ApogeanWorldPlanSystem.Instance.TryAddRuntimeRupture(
+				preferredX,
+				90,
+				45,
+				bypassProtection,
+				FindSurface,
+				Main.rand,
+				out MawRupturePlan rupture) || rupture is null)
+			{
+				failureReason = "No safe Maw site was found nearby. Move away from spawn and protected landmarks, or use /apogean engraft force.";
+				return false;
+			}
+
+			CreateRupture(
+				rupture.SurfaceCenter,
+				rupture.RadiusX,
+				rupture.RadiusY,
+				Main.rand,
+				bypassProtection ? WorldEditIntent.None : WorldEditIntent.MawGeneration);
+			RegisterNode(new Point16(rupture.SurfaceCenter.X, Math.Max(10, rupture.SurfaceCenter.Y - 3)));
+			failureReason = string.Empty;
+			return true;
 		}
 
 		public override void SaveWorldData(TagCompound tag)
@@ -246,6 +267,24 @@ namespace apogean.Content.World
 			{
 				nodes.Add(new Point16(saved.GetInt("x"), saved.GetInt("y")));
 			}
+		}
+
+		public override void NetSend(BinaryWriter writer)
+		{
+			writer.Write((byte)nodes.Count);
+			for (int i = 0; i < nodes.Count; i++)
+			{
+				writer.Write(nodes[i].X);
+				writer.Write(nodes[i].Y);
+			}
+		}
+
+		public override void NetReceive(BinaryReader reader)
+		{
+			nodes.Clear();
+			int count = reader.ReadByte();
+			for (int i = 0; i < count; i++)
+				nodes.Add(new Point16(reader.ReadInt16(), reader.ReadInt16()));
 		}
 	}
 }

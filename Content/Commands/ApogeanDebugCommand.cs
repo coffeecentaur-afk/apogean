@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using apogean.Common.WorldGeneration;
 using apogean.Content.Backgrounds;
 using apogean.Content.Factions;
 using apogean.Content.Items.Consumables;
@@ -23,7 +24,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft|ruin|background|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -57,8 +58,31 @@ namespace apogean.Content.Commands
 					break;
 
 				case "engraft":
-					EngraftSystem.Instance.CreateDebugRupture(player);
-					caller.Reply("Created a playtest Maw Rupture at the local surface.", new Color(194, 126, 44));
+					bool force = args.Length > 1 && args[1].Equals("force", System.StringComparison.OrdinalIgnoreCase);
+					if (EngraftSystem.Instance.TryCreateDebugRupture(player, force, out string failureReason))
+						caller.Reply("Created a protected-plan-aware playtest Maw Rupture at the local surface.", new Color(194, 126, 44));
+					else
+						caller.Reply(failureReason, Color.OrangeRed);
+					break;
+
+				case "plan":
+					ApogeanWorldPlanSystem worldPlan = ApogeanWorldPlanSystem.Instance;
+					if (worldPlan.Plan is null)
+					{
+						caller.Reply("This legacy world does not yet have a saved Apogean world plan.", Color.Orange);
+						break;
+					}
+					caller.Reply($"World plan v{worldPlan.Plan.SchemaVersion}; hash {worldPlan.Plan.StableHash():X8}; ruptures {worldPlan.Plan.MawRuptures.Count}; protected regions {worldPlan.ProtectedRegions.Count}.", Info);
+					Microsoft.Xna.Framework.Rectangle sanctuary = worldPlan.Plan.SpawnSanctuary;
+					caller.Reply($"Spawn sanctuary: X {sanctuary.Left}–{sanctuary.Right - 1}, Y {sanctuary.Top}–{sanctuary.Bottom - 1}. It blocks Maw/corporate edits, not ordinary events or boss summons.", Info);
+					MawRupturePlan major = worldPlan.Plan.GetMajorRupture();
+					if (major is not null)
+						caller.Reply($"Major Maw anchor: {major.SurfaceCenter.X}, {major.SurfaceCenter.Y}.", new Color(194, 126, 44));
+					System.Collections.Generic.IReadOnlyList<string> failures = worldPlan.Validate();
+					if (failures.Count == 0)
+						caller.Reply("World-plan validation passed.", Color.LightGreen);
+					else
+						foreach (string failure in failures) caller.Reply(failure, Color.OrangeRed);
 					break;
 
 				case "ruin":

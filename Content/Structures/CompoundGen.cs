@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Generation;
@@ -7,6 +8,7 @@ using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.WorldBuilding;
+using apogean.Common.WorldGeneration;
 using apogean.Content.Factions;
 using apogean.Content.Tiles;
 
@@ -24,30 +26,55 @@ namespace apogean.Content.Structures
 
 		private readonly Dictionary<ApogeanFaction, Point16> compoundLocations = new();
 
-		public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
-		{
-			int dungeonIndex = tasks.FindIndex(pass => pass.Name.Equals("Dungeon"));
-			int insertAt = dungeonIndex >= 0 ? dungeonIndex + 1 : tasks.Count;
-			tasks.Insert(insertAt, new PassLegacy("Apogean Compounds", GenerateCompounds));
-		}
+		public override void OnWorldLoad() => compoundLocations.Clear();
 
-		private void GenerateCompounds(GenerationProgress progress, GameConfiguration config)
+		public override void OnWorldUnload() => compoundLocations.Clear();
+
+		internal void GenerateWorld(GenerationProgress progress, GameConfiguration config)
 		{
 			progress.Message = "Sealing corporate compounds...";
 
 			foreach (ApogeanFaction faction in FactionProgression.CorpFactions)
 			{
-				Point16 location = PickCompoundLocation();
+				if (!TryPickCompoundLocation(out Point16 location))
+				{
+					Mod.Logger.Warn($"Skipped placeholder {faction} compound after 240 bounded placement attempts.");
+					continue;
+				}
 				compoundLocations[faction] = location;
 				PlaceSealedCompound(location);
 			}
 		}
 
-		private static Point16 PickCompoundLocation()
+		private bool TryPickCompoundLocation(out Point16 location)
 		{
-			int x = Terraria.WorldGen.genRand.Next((int)(Main.maxTilesX * 0.1), (int)(Main.maxTilesX * 0.9));
-			int y = Terraria.WorldGen.genRand.Next((int)Main.worldSurface + 50, (int)Main.rockLayer + 200);
-			return new Point16(x, y);
+			for (int attempt = 0; attempt < 240; attempt++)
+			{
+				int x = Terraria.WorldGen.genRand.Next((int)(Main.maxTilesX * 0.1), (int)(Main.maxTilesX * 0.9));
+				int y = Terraria.WorldGen.genRand.Next((int)Main.worldSurface + 50, (int)Main.rockLayer + 200);
+				Rectangle bounds = new(x, y, CompoundSize, CompoundSize);
+				if (!ApogeanWorldPlanSystem.Instance.CanPlace(bounds, WorldEditIntent.CorporateStructure) || IntersectsExistingCompound(bounds))
+					continue;
+
+				location = new Point16(x, y);
+				return true;
+			}
+
+			location = default;
+			return false;
+		}
+
+		private bool IntersectsExistingCompound(Rectangle candidate)
+		{
+			foreach (Point16 origin in compoundLocations.Values)
+			{
+				Rectangle existing = new(origin.X, origin.Y, CompoundSize, CompoundSize);
+				existing.Inflate(20, 20);
+				if (existing.Intersects(candidate))
+					return true;
+			}
+
+			return false;
 		}
 
 		private static void PlaceSealedCompound(Point16 origin)
@@ -117,6 +144,7 @@ namespace apogean.Content.Structures
 
 		public override void LoadWorldData(TagCompound tag)
 		{
+			compoundLocations.Clear();
 			foreach (ApogeanFaction faction in FactionProgression.CorpFactions)
 			{
 				string xKey = $"compound_{faction}_x";
