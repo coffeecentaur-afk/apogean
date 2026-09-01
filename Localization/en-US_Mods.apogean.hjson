@@ -1,0 +1,145 @@
+# This file will automatically update with entries for new content after a build and reload.
+# Please read https://github.com/tModLoader/tModLoader/wiki/Localization to learn more about localization and these files.
+
+Matriarch: {
+	Adapt: {
+		# Read as the Helix serial plate reporting, not the creature talking - she has no voice,
+		# the corporate hardware bolted to her does.
+		Melee: HELIX 7A-1 — iterating: kinetic trauma tolerance raised.
+		Ranged: HELIX 7A-1 — iterating: ballistic trauma tolerance raised.
+		Magic: HELIX 7A-1 — iterating: arcane flux tolerance raised.
+		Summon: HELIX 7A-1 — iterating: proxy assault tolerance raised.
+	}
+
+	Reclamation: {
+		Start: HELIX 7A-1 — reclaiming biomass.
+		Denied: HELIX 7A-1 — reclamation failed. No viable biomass.
+	}
+
+	Territory.Enraged: HELIX 7A-1 — territorial breach. Growth node entering escape response.
+}
+
+Bestiary: {
+	Matriarch:
+		'''
+		Helix catalogued her as a growth-rate test article and wrote her off when containment
+		failed. Two hundred years of breeding later, the Broodmass has something it never had
+		before: an intention.
+		'''
+	Broodling:
+		'''
+		Barely a creature - a delivery mechanism with teeth. The Matriarch makes them faster
+		than you can kill them, and she knows it.
+		'''
+	EggPod:
+		'''
+		Seeded rather than birthed. Helix designed the pod to survive conditions the parent
+		organism could not, which is exactly why the Broodmass outlasted the company.
+		'''
+}
+
+NPCs: {
+	Matriarch.DisplayName: MATRIARCH-7A-1
+	Broodling.DisplayName: Broodling
+	EggPod.DisplayName: Brood Pod
+	GraftHound.DisplayName: Graft Hound
+	Mawling.DisplayName: Mawling
+	CarrionKite.DisplayName: Carrion Kite
+	TestAmbassador.DisplayName: "[DEBUG] Kessler Quartermaster"
+}
+
+Items: {
+	PheromoneLure: {
+		DisplayName: Pheromone Lure
+		Tooltip:
+			'''
+			Summons the Matriarch
+			She will come for what you took from her brood
+			'''
+	}
+
+	MutagenGland: {
+		DisplayName: Mutagen Gland
+		Tooltip: Still warm. Still dividing.
+	}
+
+	MawFibre: {
+		DisplayName: Maw Fibre
+		Tooltip: A living thread that recoils from clean steel.
+	}
+
+	RendHook: {
+		DisplayName: Rend Hook
+		Tooltip: A pouncer's limb given a handle.
+	}
+
+	SinewBow: {
+		DisplayName: Sinew Bow
+		Tooltip: It flexes after the string is released.
+	}
+
+	AmberSiphon: {
+		DisplayName: Amber Siphon
+		Tooltip: Coaxes a warm bolt from a dead growth.
+	}
+
+	MawEffigy: {
+		DisplayName: Maw Effigy
+		Tooltip: Summons a temporary hunting growth.
+	}
+
+	MatriarchBag: {
+		DisplayName: Treasure Bag
+		Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+	}
+}
+
+Projectiles: {
+	AcidGlob.DisplayName: Acid Glob
+	SporeBurst.DisplayName: Spore Burst
+	ContainmentPulse.DisplayName: Containment Pulse
+	AmberBolt.DisplayName: Amber Bolt
+	MawSentry.DisplayName: Maw Sentry
+}
+
+Dialogue: {
+	TestAmbassador: {
+		Speaker: Kessler Quartermaster
+		Root:
+			'''
+			Requisition channel open. You are not on any manifest I recognize, which makes you
+			either a contractor or a target. The Arsenal is willing to treat you as the former,
+			for now.
+			'''
+		OptionJob: "[Work] What needs killing?"
+		OptionScam: "[Deceive] My manifest was lost in the drop. You owe me back pay."
+		OptionHardmode: "[Hardmode] Your orbital strike corridors are still burning."
+		OptionLeave: "[Leave] Nothing right now."
+		Job:
+			'''
+			Standing order, unchanged for two hundred years: reduce hostile biomass. The
+			Broodmass qualifies. Payment on delivery, in whatever scrip still moves down here.
+			'''
+		OptionTakePay: "[Take the advance] I'll take payment up front."
+		OptionBack: "[Back] Something else."
+		Scam:
+			'''
+			Cross-referencing... no manifest, no contract, no back pay. The quartermaster AI
+			notes your attempt without emotion. Try that again and the requisition channel
+			closes permanently.
+			'''
+		Hardmode:
+			'''
+			They are. The board authorized a live demonstration and never authorized a
+			ceasefire. I am still executing the order. You are welcome to help me find
+			something left worth shooting.
+			'''
+	}
+}
+
+Biomes: {
+	EngraftBiome: {
+		DisplayName: Engraft Biome
+		TownNPCDialogueName: the Engraft Biome
+	}
+}

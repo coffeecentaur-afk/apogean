@@ -1,0 +1,3 @@
+displayName = apogean
+author = max
+version = 0.1

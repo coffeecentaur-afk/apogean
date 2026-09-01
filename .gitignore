@@ -427,3 +427,10 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# tModLoader packaging artifacts
+*.tmod
+
+# OneDrive and OS metadata
+Thumbs.db
+Desktop.ini
