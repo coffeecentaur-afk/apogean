@@ -13,7 +13,11 @@ namespace apogean.Common.Biomes
 
 		public override void TileCountsAvailable(ReadOnlySpan<int> tileCounts)
 		{
-			MawTileCount = tileCounts[ModContent.TileType<EngraftTurf>()];
+				MawTileCount =
+				tileCounts[ModContent.TileType<EngraftTurf>()] +
+				tileCounts[ModContent.TileType<Mawstone>()] +
+				tileCounts[ModContent.TileType<OssuaryBone>()] +
+				tileCounts[ModContent.TileType<MawAcidPool>()];
 		}
 	}
 }

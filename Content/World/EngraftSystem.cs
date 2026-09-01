@@ -13,12 +13,13 @@ using Terraria.ModLoader.IO;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 using apogean.Common.WorldGeneration;
+using apogean.Common.Maw;
 using apogean.Content.Tiles;
 
 namespace apogean.Content.World
 {
 	/// <summary>
-	/// Owns Engraft geography. Nodes are finite and saved; they only convert plain, un-walled natural-looking terrain,
+	/// Owns Maw geography. Nodes are finite and saved; they only convert plain, un-walled natural-looking terrain,
 	/// deliberately leaving housing, chests and authored structures alone.
 	/// </summary>
 	public sealed class EngraftSystem : ModSystem
@@ -51,7 +52,7 @@ namespace apogean.Content.World
 			{
 				MawRupturePlan rupture = plan.MawRuptures[i];
 				int ruptureSeed = unchecked(plan.PlanSeed ^ ((i + 1) * 73856093));
-				CreateRupture(rupture.SurfaceCenter, rupture.RadiusX, rupture.RadiusY, new UnifiedRandom(ruptureSeed), WorldEditIntent.MawGeneration);
+				MawRuptureGenerator.Generate(rupture, ruptureSeed, WorldEditIntent.MawGeneration);
 				RegisterNode(new Point16(rupture.SurfaceCenter.X, Math.Max(10, rupture.SurfaceCenter.Y - 3)));
 			}
 		}
@@ -65,101 +66,36 @@ namespace apogean.Content.World
 			return (int)Main.worldSurface;
 		}
 
-		private static void CreateRupture(
-			Point16 center,
-			int radiusX,
-			int radiusY,
-			UnifiedRandom random,
-			WorldEditIntent intent)
-		{
-			int turf = ModContent.TileType<EngraftTurf>();
-			for (int x = center.X - radiusX; x <= center.X + radiusX; x++)
-			{
-				for (int y = center.Y - radiusY; y <= center.Y + radiusY; y++)
-				{
-					if (!WorldGen.InWorld(x, y, 12) || !ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, intent)) continue;
-					float dx = (x - center.X) / (float)radiusX;
-					float dy = (y - center.Y) / (float)radiusY;
-					if (dx * dx + dy * dy > 1f + random.NextFloat(-0.14f, 0.12f)) continue;
-
-					Tile tile = Framing.GetTileSafely(x, y);
-					if (!IsConvertibleTerrain(x, y, tile, intent)) continue;
-					tile.HasTile = true;
-					tile.TileType = (ushort)turf;
-				}
-			}
-
-			MutateSurfaceGrowth(center, radiusX, radiusY, random, intent);
-		}
-
-		private static bool IsConvertibleTerrain(int x, int y, Tile tile, WorldEditIntent intent)
-		{
-			if (!ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, intent)) return false;
-			if (!tile.HasTile || (tile.WallType > WallID.None && Main.wallHouse[tile.WallType])) return false;
-			return tile.TileType is TileID.Dirt or TileID.Grass or TileID.Stone or TileID.ClayBlock or TileID.Mud or
-				TileID.Sand or TileID.HardenedSand or TileID.Sandstone;
-		}
-
-		private static void MutateSurfaceGrowth(
-			Point16 center,
-			int radiusX,
-			int radiusY,
-			UnifiedRandom random,
-			WorldEditIntent intent)
-		{
-			int turf = ModContent.TileType<EngraftTurf>();
-			int tuft = ModContent.TileType<EngraftTuft>();
-			int minX = Math.Max(12, center.X - radiusX);
-			int maxX = Math.Min(Main.maxTilesX - 12, center.X + radiusX);
-			int minY = Math.Max(12, center.Y - radiusY);
-			int maxY = Math.Min(Main.maxTilesY - 12, center.Y + radiusY);
-
-			for (int x = minX; x <= maxX; x++)
-			{
-				for (int y = minY; y <= maxY; y++)
-				{
-					if (!ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, intent)) continue;
-					Tile ground = Framing.GetTileSafely(x, y);
-					if (!ground.HasTile || ground.TileType != turf) continue;
-
-					Tile above = Framing.GetTileSafely(x, y - 1);
-					if (above.HasTile && above.TileType is TileID.Plants or TileID.Plants2 or TileID.Vines or TileID.Saplings or TileID.Trees)
-					{
-						WorldGen.KillTile(x, y - 1, noItem: true);
-						above = Framing.GetTileSafely(x, y - 1);
-					}
-
-					if (!above.HasTile && ground.Slope == SlopeType.Solid && !ground.IsHalfBlock && random.NextBool(7))
-					{
-						WorldGen.PlaceTile(x, y - 1, tuft, mute: true, forced: true);
-					}
-				}
-			}
-		}
-
 		public static bool IsInEngraft(Vector2 worldPosition)
 		{
 			int centerX = (int)(worldPosition.X / 16f);
 			int centerY = (int)(worldPosition.Y / 16f);
-			int turf = ModContent.TileType<EngraftTurf>();
 			int found = 0;
 			for (int x = centerX - BiomeRadiusX; x <= centerX + BiomeRadiusX; x += 4)
 			{
 				for (int y = centerY - BiomeRadiusY; y <= centerY + BiomeRadiusY; y += 4)
 				{
 					if (!WorldGen.InWorld(x, y, 2)) continue;
-					if (Framing.GetTileSafely(x, y).TileType == turf && ++found >= 52) return true;
+					ushort tileType = Framing.GetTileSafely(x, y).TileType;
+					if (IsMawTerrain(tileType) && ++found >= 52) return true;
 				}
 			}
 			return false;
 		}
+
+		private static bool IsMawTerrain(ushort tileType) =>
+			tileType == ModContent.TileType<EngraftTurf>() ||
+			tileType == ModContent.TileType<Mawstone>() ||
+			tileType == ModContent.TileType<OssuaryBone>() ||
+			tileType == ModContent.TileType<MawAcidPool>();
 
 		public override void PostUpdateWorld()
 		{
 			if (Main.netMode == NetmodeID.MultiplayerClient) return;
 			RemoveBrokenNodes();
 
-			if (Main.GameUpdateCount - lastGrowthTick < 900 || nodes.Count == 0) return;
+			ulong growthInterval = MawActivityState.IsDormant ? 5400UL : 900UL;
+			if (Main.GameUpdateCount - lastGrowthTick < growthInterval || nodes.Count == 0) return;
 			lastGrowthTick = Main.GameUpdateCount;
 			SpreadOnce();
 		}
@@ -174,7 +110,7 @@ namespace apogean.Content.World
 				int y = node.Y + Main.rand.Next(-28, 29);
 				if (!WorldGen.InWorld(x, y, 12)) continue;
 				Tile tile = Framing.GetTileSafely(x, y);
-				if (!IsConvertibleTerrain(x, y, tile, WorldEditIntent.MawSpread)) continue;
+				if (!MawTerrainRules.CanConvert(x, y, WorldEditIntent.MawSpread)) continue;
 				tile.TileType = (ushort)turf;
 				NetMessage.SendTileSquare(-1, x, y);
 				return;
@@ -196,9 +132,10 @@ namespace apogean.Content.World
 				out MawRupturePlan rupture) || rupture is null)
 				return;
 
-			CreateRupture(rupture.SurfaceCenter, rupture.RadiusX, rupture.RadiusY, Main.rand, WorldEditIntent.MawGeneration);
+			MawRuptureGenerator.Generate(rupture, Main.rand.Next(), WorldEditIntent.MawGeneration);
 			RegisterNode(new Point16(rupture.SurfaceCenter.X, Math.Max(10, rupture.SurfaceCenter.Y - 3)));
-			ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("The Engraft stirs beneath the broken altar."), new Color(194, 126, 44));
+			SyncRuntimeRupture(rupture);
+			ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("The Maw stirs beneath the broken altar."), new Color(194, 126, 44));
 		}
 
 		private void RegisterNode(Point16 location)
@@ -239,15 +176,22 @@ namespace apogean.Content.World
 				return false;
 			}
 
-			CreateRupture(
-				rupture.SurfaceCenter,
-				rupture.RadiusX,
-				rupture.RadiusY,
-				Main.rand,
+			MawRuptureGenerator.Generate(
+				rupture,
+				Main.rand.Next(),
 				bypassProtection ? WorldEditIntent.None : WorldEditIntent.MawGeneration);
 			RegisterNode(new Point16(rupture.SurfaceCenter.X, Math.Max(10, rupture.SurfaceCenter.Y - 3)));
+			SyncRuntimeRupture(rupture);
 			failureReason = string.Empty;
 			return true;
+		}
+
+		private static void SyncRuntimeRupture(MawRupturePlan rupture)
+		{
+			if (Main.netMode != NetmodeID.Server)
+				return;
+			int size = Math.Max(rupture.GenerationBounds.Width, rupture.GenerationBounds.Height) + 8;
+			NetMessage.SendTileSquare(-1, rupture.SurfaceCenter.X, rupture.SurfaceCenter.Y, size);
 		}
 
 		public override void SaveWorldData(TagCompound tag)

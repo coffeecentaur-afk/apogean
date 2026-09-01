@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using apogean.Content.Structures;
@@ -40,8 +42,14 @@ namespace apogean.Content.Factions
 
 		public static void SetMatriarchDowned()
 		{
-			ModContent.GetInstance<FactionProgression>().MatriarchDowned = true;
+			FactionProgression progression = ModContent.GetInstance<FactionProgression>();
+			progression.MatriarchDowned = true;
+			progression.SyncWorldState();
 		}
+
+		public override void OnWorldLoad() => ResetState();
+
+		public override void OnWorldUnload() => ResetState();
 
 		public void RegisterInvasionKill(ApogeanFaction faction)
 		{
@@ -80,6 +88,7 @@ namespace apogean.Content.Factions
 					CompoundGen.ReArmCompound(faction);
 				}
 			}
+			SyncWorldState();
 		}
 
 		private void SetHostile(ApogeanFaction faction)
@@ -87,17 +96,22 @@ namespace apogean.Content.Factions
 			if (GetRelation(faction) != FactionRelation.Dormant) return;
 			relations[faction] = FactionRelation.Hostile;
 			invasionKillsRemaining[faction] = InvasionKillQuota;
+			SyncWorldState();
 		}
 
 		private void SetContactable(ApogeanFaction faction)
 		{
 			relations[faction] = FactionRelation.Contactable;
 			CompoundGen.UnsealCompound(faction);
+			SyncWorldState();
 		}
 
 		public override void PostUpdateWorld()
 		{
-			if (GetRelation(ApogeanFaction.Kessler) == FactionRelation.Dormant && NPC.downedBoss3)
+			if (Main.netMode == NetmodeID.MultiplayerClient)
+				return;
+
+			if (GetRelation(ApogeanFaction.Kessler) == FactionRelation.Dormant && Main.hardMode)
 			{
 				SetHostile(ApogeanFaction.Kessler);
 			}
@@ -128,6 +142,7 @@ namespace apogean.Content.Factions
 
 		public override void LoadWorldData(TagCompound tag)
 		{
+			ResetState();
 			MatriarchDowned = tag.GetBool("matriarchDowned");
 			int alliance = tag.GetInt("chosenAlliance");
 			ChosenAlliance = alliance < 0 ? null : (ApogeanFaction)alliance;
@@ -145,6 +160,45 @@ namespace apogean.Content.Factions
 					invasionKillsRemaining[faction] = tag.GetInt(quotaKey);
 				}
 			}
+		}
+
+		public override void NetSend(BinaryWriter writer)
+		{
+			writer.Write(MatriarchDowned);
+			writer.Write((sbyte)(ChosenAlliance.HasValue ? (int)ChosenAlliance.Value : -1));
+			foreach (ApogeanFaction faction in CorpFactions)
+			{
+				writer.Write((byte)GetRelation(faction));
+				writer.Write(invasionKillsRemaining.TryGetValue(faction, out int remaining) ? remaining : 0);
+			}
+		}
+
+		public override void NetReceive(BinaryReader reader)
+		{
+			ResetState();
+			MatriarchDowned = reader.ReadBoolean();
+			int alliance = reader.ReadSByte();
+			ChosenAlliance = alliance < 0 ? null : (ApogeanFaction)alliance;
+			foreach (ApogeanFaction faction in CorpFactions)
+			{
+				relations[faction] = (FactionRelation)reader.ReadByte();
+				invasionKillsRemaining[faction] = reader.ReadInt32();
+			}
+		}
+
+		private void ResetState()
+		{
+			MatriarchDowned = false;
+			ChosenAlliance = null;
+			invasionKillsRemaining.Clear();
+			foreach (ApogeanFaction faction in CorpFactions)
+				relations[faction] = FactionRelation.Dormant;
+		}
+
+		private void SyncWorldState()
+		{
+			if (Main.netMode == NetmodeID.Server)
+				NetMessage.SendData(MessageID.WorldData);
 		}
 	}
 }

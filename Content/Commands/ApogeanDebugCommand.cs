@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using apogean.Common.Maw;
 using apogean.Common.WorldGeneration;
 using apogean.Content.Backgrounds;
 using apogean.Content.Factions;
@@ -24,7 +25,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|acid|plan|ruin|background|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -85,6 +86,13 @@ namespace apogean.Content.Commands
 						foreach (string failure in failures) caller.Reply(failure, Color.OrangeRed);
 					break;
 
+				case "acid":
+					if (MawAcidDebugBuilder.TryPlace(player, out string acidFailure))
+						caller.Reply("Created a bounded Maw acid test basin below you.", new Color(220, 183, 42));
+					else
+						caller.Reply(acidFailure, Color.OrangeRed);
+					break;
+
 				case "ruin":
 					int changed = RuinedSurfaceSystem.ApplyRuinedSurface();
 					caller.Reply($"Ruined the remaining green surface ({changed:N0} tiles changed).", new Color(143, 94, 45));
@@ -101,7 +109,7 @@ namespace apogean.Content.Commands
 					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ModContent.ItemType<SinewBow>());
 					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ModContent.ItemType<AmberSiphon>());
 					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ModContent.ItemType<MawEffigy>());
-					caller.Reply("Gave the Act 1 Engraft playtest weapon set.", new Color(194, 126, 44));
+					caller.Reply("Gave the Act 1 Maw playtest weapon set.", new Color(194, 126, 44));
 					break;
 
 				case "npc":

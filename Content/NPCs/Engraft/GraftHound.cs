@@ -81,7 +81,7 @@ namespace apogean.Content.NPCs.Engraft
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
-			bestiaryEntry.Info.Add(new FlavorTextBestiaryInfoElement("A colony hound, after the Engraft found a use for every bone it had."));
+			bestiaryEntry.Info.Add(new FlavorTextBestiaryInfoElement("A colony hound, after the Maw found a use for every bone it had."));
 		}
 	}
 }

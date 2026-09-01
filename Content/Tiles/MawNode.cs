@@ -2,10 +2,11 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using apogean.Common.Maw;
 
 namespace apogean.Content.Tiles
 {
-	/// <summary>A visible local source of Engraft pressure. Destroying it removes one spread source from the world.</summary>
+	/// <summary>A visible local amplifier of Maw pressure. Destroying it reduces local activity without killing the biome.</summary>
 	public sealed class MawNode : ModTile
 	{
 		public override void SetStaticDefaults()
@@ -23,9 +24,10 @@ namespace apogean.Content.Tiles
 
 		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 		{
-			r = 0.34f;
-			g = 0.16f;
-			b = 0.025f;
+			float activity = MawActivityState.IsDormant ? 0.32f : 1f;
+			r = 0.34f * activity;
+			g = 0.16f * activity;
+			b = 0.025f * activity;
 		}
 	}
 }
