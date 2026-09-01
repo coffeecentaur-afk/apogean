@@ -131,6 +131,16 @@ namespace apogean.Common.WorldGeneration
 			IReadOnlyList<string> failures = Validate();
 			for (int i = 0; i < failures.Count; i++)
 				Mod.Logger.Warn($"World-plan validation: {failures[i]}");
+
+			MawRupturePlan major = plan?.GetMajorRupture();
+			if (major is not null && major.IsMajor)
+			{
+				MawRuptureValidationReport report = MawRuptureValidation.Inspect(major);
+				if (report.Passed)
+					Mod.Logger.Info($"Maw-route validation passed: {report}");
+				else
+					Mod.Logger.Warn($"Maw-route validation failed: {report}");
+			}
 		}
 
 		public override void SaveWorldData(TagCompound tag)

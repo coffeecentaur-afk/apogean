@@ -1,5 +1,7 @@
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
+using apogean.Content.Tiles;
 
 namespace apogean.Common.WorldGeneration
 {
@@ -22,7 +24,7 @@ namespace apogean.Common.WorldGeneration
 			Tile tile = Framing.GetTileSafely(x, y);
 			if (HasProtectedWall(tile) || HasNearbyFrameImportantTile(x, y, 1))
 				return false;
-			return !tile.HasTile || IsNaturalTerrain(tile.TileType);
+			return !tile.HasTile || IsNaturalTerrain(tile.TileType) || IsMawStructure(tile.TileType);
 		}
 
 		public static bool CanPlaceShell(int x, int y, WorldEditIntent intent)
@@ -89,5 +91,9 @@ namespace apogean.Common.WorldGeneration
 			TileID.MarbleBlock or
 			TileID.Ash or
 			TileID.Hellstone;
+
+		private static bool IsMawStructure(ushort type) =>
+			type == ModContent.TileType<Mawstone>() ||
+			type == ModContent.TileType<OssuaryBone>();
 	}
 }
