@@ -1,7 +1,7 @@
 # Research: Project-wide Wayfinder star chart
 
-**Target:** [coffeecentaur-afk/apogean issue #14, “Prototype a project-wide Wayfinder star chart”](https://github.com/coffeecentaur-afk/apogean/issues/14)  
-**Research date:** 2026-09-01  
+**Target:** [coffeecentaur-afk/apogean issue #14, “Prototype a project-wide Wayfinder star chart”](https://github.com/coffeecentaur-afk/apogean/issues/14)
+**Research date:** 2026-09-01
 **Scope:** Read-only visualization research. This report does not implement a UI, change project code or assets, mutate issues, commit, or push.
 
 ## Executive conclusion

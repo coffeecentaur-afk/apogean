@@ -1,6 +1,6 @@
 # HD Terraria Backgrounds: Visual and Technical Benchmark for Apogean
 
-Research date: 2026-09-01  
+Research date: 2026-09-01
 Wayfinder ticket: `coffeecentaur-afk/apogean#7` — “Study HD Backgrounds and comparable panorama art”
 
 ## Executive conclusion
