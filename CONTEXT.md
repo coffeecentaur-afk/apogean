@@ -24,6 +24,10 @@ _Avoid_: Engraft scar, generic Maw biome
 A feeding and amplification organ extended by the Broodmass into a Maw region. It accelerates local spread and hostility but does not sustain the Maw's intrinsic life or passive growth.
 _Avoid_: Boss summon, biome heart
 
+**Ossamber**:
+Amber-yellow mineralized Broodmass tissue condensed when a cauterized Maw Node retracts. Raw Ossamber supports Warden-era equipment; MATRIARCH-7A-1 Mutagen Cells stabilize selected recipes at the final pre-Hardmode power ceiling.
+_Avoid_: Generic metal ore, faction-specific Hardmode ore
+
 **Brood Nest**:
 A reproductive structure whose destruction provokes the early Nest Warden. It does not control terrain spread.
 _Avoid_: Brood Cyst, Maw Node
