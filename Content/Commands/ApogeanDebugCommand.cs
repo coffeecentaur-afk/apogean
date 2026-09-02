@@ -25,7 +25,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|tilelab|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|tilelab|exportatlases|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -122,6 +122,16 @@ namespace apogean.Content.Commands
 					}
 					Rectangle tileLab = TileLabGallery.Build(player);
 					caller.Reply($"Built the isolated Tile Lab at X {tileLab.Left}-{tileLab.Right - 1}, Y {tileLab.Top}-{tileLab.Bottom - 1}.", Color.LightGreen);
+					break;
+
+				case "exportatlases":
+					if (Main.dedServ)
+					{
+						caller.Reply("Atlas export requires a graphics client.", Color.OrangeRed);
+						break;
+					}
+					string atlasDirectory = VanillaAtlasExporter.ExportTileLabReferences();
+					caller.Reply($"Exported vanilla Tile Lab references to {atlasDirectory}.", Color.LightGreen);
 					break;
 
 				case "kit":

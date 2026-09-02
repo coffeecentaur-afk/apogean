@@ -66,6 +66,16 @@ namespace apogean.Content.Diagnostics
 			Main.NewText($"Tile Lab rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}. Press F8 to reset it.", Color.LightGreen);
 			if (scheduleCaptureProbe)
 			{
+				try
+				{
+					string referenceDirectory = VanillaAtlasExporter.ExportTileLabReferences();
+					Mod.Logger.Info($"TILE LAB REFERENCES EXPORTED: {referenceDirectory}");
+				}
+				catch (System.Exception exception)
+				{
+					Mod.Logger.Error("TILE LAB REFERENCE EXPORT FAILED", exception);
+					Main.NewText("Tile Lab built, but the optional vanilla-atlas export failed. See client.log.", Color.OrangeRed);
+				}
 				_captureProbeBounds = bounds;
 				_captureProbeDelay = 180;
 			}

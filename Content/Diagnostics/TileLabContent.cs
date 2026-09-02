@@ -36,6 +36,42 @@ namespace apogean.Content.Diagnostics
 		}
 	}
 
+	/// <summary>
+	/// A Wastes material candidate kept out of world generation until it passes the
+	/// Tile Lab's framing, merge, slope, liquid, and dense-field checks.
+	/// </summary>
+	public sealed class WastesSoilCandidate : ModTile
+	{
+		public override string Texture => "apogean/Content/Tiles/Diagnostics/WastesSoilCandidate";
+
+		public override void SetStaticDefaults()
+		{
+			Main.tileSolid[Type] = true;
+			Main.tileMergeDirt[Type] = true;
+			Main.tileBlockLight[Type] = true;
+			TileID.Sets.ChecksForMerge[Type] = true;
+			Main.tileMerge[Type][TileID.Dirt] = true;
+			Main.tileMerge[TileID.Dirt][Type] = true;
+			DustType = DustID.Dirt;
+			HitSound = SoundID.Dig;
+			MineResist = 0.65f;
+			AddMapEntry(new Color(101, 74, 48), CreateMapEntryName());
+		}
+	}
+
+	/// <summary>A natural-wall candidate paired with <see cref="WastesSoilCandidate"/>.</summary>
+	public sealed class WastesDirtWallCandidate : ModWall
+	{
+		public override string Texture => "apogean/Content/Walls/Diagnostics/WastesDirtWallCandidate";
+
+		public override void SetStaticDefaults()
+		{
+			Main.wallHouse[Type] = false;
+			DustType = DustID.Dirt;
+			AddMapEntry(new Color(67, 49, 33), CreateMapEntryName());
+		}
+	}
+
 	public sealed class TileLabKeybindSystem : ModSystem
 	{
 		internal static ModKeybind BuildTileLab { get; private set; }
