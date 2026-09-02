@@ -1,4 +1,5 @@
 using System.IO;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
@@ -7,10 +8,16 @@ namespace apogean.Common.WorldGeneration
 {
 	public sealed class MawRupturePlan
 	{
+		private readonly List<Point16> navigationSpine;
+
 		public Point16 SurfaceCenter { get; }
 		public int RadiusX { get; }
 		public int RadiusY { get; }
 		public bool IsMajor { get; }
+		public bool IsCompact { get; }
+		public Point16 MatriarchCenter { get; }
+		public IReadOnlyList<Point16> NavigationSpine => navigationSpine;
+		public bool HasNavigationSpine => navigationSpine.Count > 0;
 
 		public Rectangle GenerationBounds => new(
 			SurfaceCenter.X - RadiusX,
@@ -29,34 +36,95 @@ namespace apogean.Common.WorldGeneration
 					return local;
 				}
 
-				int x = SurfaceCenter.X - RadiusX - 40;
-				int y = System.Math.Max(20, SurfaceCenter.Y - RadiusY - 24);
-				return new Rectangle(x, y, (RadiusX + 40) * 2 + 1, Terraria.Main.maxTilesY - y - 140);
+				int left = SurfaceCenter.X - RadiusX - 40;
+				int right = SurfaceCenter.X + RadiusX + 41;
+				for (int i = 0; i < navigationSpine.Count; i++)
+				{
+					left = System.Math.Min(left, navigationSpine[i].X - 32);
+					right = System.Math.Max(right, navigationSpine[i].X + 33);
+				}
+
+				if (MatriarchCenter.X > 0)
+				{
+					left = System.Math.Min(left, MatriarchCenter.X - 112);
+					right = System.Math.Max(right, MatriarchCenter.X + 113);
+				}
+
+				int top = System.Math.Max(20, SurfaceCenter.Y - RadiusY - 24);
+				int bottom = MatriarchCenter.Y > 0
+					? System.Math.Min(Terraria.Main.maxTilesY - 20, MatriarchCenter.Y + 72)
+					: Terraria.Main.maxTilesY - 140;
+				return new Rectangle(left, top, right - left, bottom - top);
 			}
 		}
 
 		public MawRupturePlan(Point16 surfaceCenter, int radiusX, int radiusY, bool isMajor)
+			: this(surfaceCenter, radiusX, radiusY, isMajor, false, default, null)
+		{
+		}
+
+		public MawRupturePlan(
+			Point16 surfaceCenter,
+			int radiusX,
+			int radiusY,
+			bool isMajor,
+			bool isCompact,
+			Point16 matriarchCenter,
+			IEnumerable<Point16> navigationSpine)
 		{
 			SurfaceCenter = surfaceCenter;
 			RadiusX = radiusX;
 			RadiusY = radiusY;
 			IsMajor = isMajor;
+			IsCompact = isCompact;
+			MatriarchCenter = matriarchCenter;
+			this.navigationSpine = navigationSpine is null ? new List<Point16>() : new List<Point16>(navigationSpine);
 		}
 
-		internal TagCompound Save() => new()
+		internal TagCompound Save()
 		{
-			["x"] = (int)SurfaceCenter.X,
-			["y"] = (int)SurfaceCenter.Y,
-			["radiusX"] = RadiusX,
-			["radiusY"] = RadiusY,
-			["major"] = IsMajor
-		};
+			List<TagCompound> savedSpine = new();
+			for (int i = 0; i < navigationSpine.Count; i++)
+			{
+				savedSpine.Add(new TagCompound
+				{
+					["x"] = (int)navigationSpine[i].X,
+					["y"] = (int)navigationSpine[i].Y
+				});
+			}
 
-		internal static MawRupturePlan Load(TagCompound tag) => new(
-			new Point16(tag.GetInt("x"), tag.GetInt("y")),
-			tag.GetInt("radiusX"),
-			tag.GetInt("radiusY"),
-			tag.GetBool("major"));
+			return new TagCompound
+			{
+				["x"] = (int)SurfaceCenter.X,
+				["y"] = (int)SurfaceCenter.Y,
+				["radiusX"] = RadiusX,
+				["radiusY"] = RadiusY,
+				["major"] = IsMajor,
+				["compact"] = IsCompact,
+				["rootX"] = (int)MatriarchCenter.X,
+				["rootY"] = (int)MatriarchCenter.Y,
+				["spine"] = savedSpine
+			};
+		}
+
+		internal static MawRupturePlan Load(TagCompound tag)
+		{
+			List<Point16> spine = new();
+			if (tag.ContainsKey("spine"))
+			{
+				foreach (TagCompound point in tag.GetList<TagCompound>("spine"))
+					spine.Add(new Point16(point.GetInt("x"), point.GetInt("y")));
+			}
+
+			return new MawRupturePlan(
+				new Point16(tag.GetInt("x"), tag.GetInt("y")),
+				tag.GetInt("radiusX"),
+				tag.GetInt("radiusY"),
+				tag.GetBool("major"),
+				tag.ContainsKey("compact") && tag.GetBool("compact"),
+				new Point16(tag.ContainsKey("rootX") ? tag.GetInt("rootX") : 0, tag.ContainsKey("rootY") ? tag.GetInt("rootY") : 0),
+				spine);
+		}
 
 		internal void NetSend(BinaryWriter writer)
 		{
@@ -65,12 +133,30 @@ namespace apogean.Common.WorldGeneration
 			writer.Write((short)RadiusX);
 			writer.Write((short)RadiusY);
 			writer.Write(IsMajor);
+			writer.Write(IsCompact);
+			writer.Write(MatriarchCenter.X);
+			writer.Write(MatriarchCenter.Y);
+			writer.Write((ushort)navigationSpine.Count);
+			for (int i = 0; i < navigationSpine.Count; i++)
+			{
+				writer.Write(navigationSpine[i].X);
+				writer.Write(navigationSpine[i].Y);
+			}
 		}
 
-		internal static MawRupturePlan NetReceive(BinaryReader reader) => new(
-			new Point16(reader.ReadInt16(), reader.ReadInt16()),
-			reader.ReadInt16(),
-			reader.ReadInt16(),
-			reader.ReadBoolean());
+		internal static MawRupturePlan NetReceive(BinaryReader reader)
+		{
+			Point16 surface = new(reader.ReadInt16(), reader.ReadInt16());
+			int radiusX = reader.ReadInt16();
+			int radiusY = reader.ReadInt16();
+			bool major = reader.ReadBoolean();
+			bool compact = reader.ReadBoolean();
+			Point16 root = new(reader.ReadInt16(), reader.ReadInt16());
+			int count = reader.ReadUInt16();
+			List<Point16> spine = new(count);
+			for (int i = 0; i < count; i++)
+				spine.Add(new Point16(reader.ReadInt16(), reader.ReadInt16()));
+			return new MawRupturePlan(surface, radiusX, radiusY, major, compact, root, spine);
+		}
 	}
 }

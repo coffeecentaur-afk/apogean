@@ -31,6 +31,12 @@ namespace apogean.Common.WorldGeneration
 			int seed,
 			WorldEditIntent intent)
 		{
+			if (rupture.HasNavigationSpine)
+			{
+				GeneratePlannedFeedingWound(rupture, random, seed, intent);
+				return;
+			}
+
 			GenerateOutgrowth(rupture, random, intent);
 
 			int wallType = ModContent.WallType<MawWallUnsafe>();
@@ -67,14 +73,77 @@ namespace apogean.Common.WorldGeneration
 					int chamberRadiusY = random.Next(14, 22);
 					CarveTunnel((int)currentX, y, chamberX, chamberY, 6, wallType, seed, intent);
 					CarveEllipse(chamberX, chamberY, chamberRadiusX, chamberRadiusY, wallType, seed ^ chamberY, intent, boneShell: true, openToSky: false);
-					if (random.NextBool(3))
-						PlaceAcidBasin(chamberX, chamberY + chamberRadiusY - 2, chamberRadiusX - 7, random.Next(2, 4), intent);
 					chamberSide *= -1;
 					chamberCountdown = random.Next(92, 151);
 				}
 			}
 
 			GenerateBurningRoot((int)currentX, endY, random, wallType, seed, intent);
+		}
+
+		private static void GeneratePlannedFeedingWound(
+			MawRupturePlan rupture,
+			UnifiedRandom random,
+			int seed,
+			WorldEditIntent intent)
+		{
+			GenerateOutgrowth(rupture, random, intent);
+			int wallType = ModContent.WallType<MawWallUnsafe>();
+			CarveEllipse(
+				rupture.SurfaceCenter.X,
+				rupture.SurfaceCenter.Y - 1,
+				44,
+				22,
+				wallType,
+				seed,
+				intent,
+				boneShell: true,
+				openToSky: true);
+
+			int chamberCountdown = random.Next(84, 126);
+			int chamberSide = random.NextBool() ? 1 : -1;
+			for (int i = 0; i < rupture.NavigationSpine.Count; i++)
+			{
+				Point16 point = rupture.NavigationSpine[i];
+				if (i > 0)
+				{
+					Point16 previous = rupture.NavigationSpine[i - 1];
+					CarveTunnel(previous.X, previous.Y, point.X, point.Y, 8, wallType, seed ^ (i * 104729), intent);
+				}
+				float depth = i / (float)Math.Max(1, rupture.NavigationSpine.Count - 1);
+				int radiusX = 11 + (int)(depth * 5f) + random.Next(-1, 2);
+				int radiusY = 9 + random.Next(0, 3);
+				bool boneBand = i % 11 is 0 or 1;
+				CarveEllipse(point.X, point.Y, radiusX, radiusY, wallType, seed ^ (i * 7919), intent, boneBand, openToSky: false);
+
+				chamberCountdown -= i == 0 ? 0 : point.Y - rupture.NavigationSpine[i - 1].Y;
+				if (chamberCountdown > 0 || depth > 0.86f)
+					continue;
+
+				int chamberX = point.X + chamberSide * random.Next(34, 51);
+				int chamberY = point.Y + random.Next(-7, 8);
+				int chamberRadiusX = random.Next(25, 38);
+				int chamberRadiusY = random.Next(15, 23);
+				Rectangle chamberBounds = new(
+					chamberX - chamberRadiusX - 4,
+					chamberY - chamberRadiusY - 4,
+					(chamberRadiusX + 4) * 2 + 1,
+					(chamberRadiusY + 4) * 2 + 1);
+				if (!ContainsHardObstacle(chamberBounds))
+				{
+					CarveTunnel(point.X, point.Y, chamberX, chamberY, 6, wallType, seed ^ chamberX, intent);
+					CarveEllipse(chamberX, chamberY, chamberRadiusX, chamberRadiusY, wallType, seed ^ chamberY, intent, boneShell: true, openToSky: false);
+				}
+
+				chamberSide *= -1;
+				chamberCountdown = random.Next(96, 145);
+			}
+
+			Point16 root = rupture.MatriarchCenter.X > 0
+				? rupture.MatriarchCenter
+				: rupture.NavigationSpine[rupture.NavigationSpine.Count - 1];
+			GenerateBurningRoot(root.X, root.Y, random, wallType, seed, intent);
+			ClearNavigationSpine(rupture, wallType, intent);
 		}
 
 		private static void GenerateOutgrowth(MawRupturePlan rupture, UnifiedRandom random, WorldEditIntent intent)
@@ -136,13 +205,58 @@ namespace apogean.Common.WorldGeneration
 			int seed,
 			WorldEditIntent intent)
 		{
-			CarveEllipse(centerX, centerY, 58, 30, wallType, seed ^ 0x51A7, intent, boneShell: true, openToSky: false);
+			// Keep the arena envelope consistent with the planner's protected reservation.
+			// Edge noise and the three roots still make each seed's silhouette distinct.
+			CarveEllipse(centerX, centerY, 94, 48, wallType, seed ^ 0x51A7, intent, boneShell: true, openToSky: false);
 			for (int branch = -1; branch <= 1; branch++)
 			{
 				int targetX = centerX + branch * random.Next(45, 76);
-				int targetY = Math.Min(Main.maxTilesY - 155, centerY + random.Next(25, 51));
+				int targetY = Math.Min(centerY + random.Next(25, 51), Main.maxTilesY - 22);
 				CarveTunnel(centerX, centerY + 8, targetX, targetY, random.Next(5, 8), wallType, seed ^ targetX, intent);
 			}
+		}
+
+		private static void ClearNavigationSpine(MawRupturePlan rupture, int wallType, WorldEditIntent intent)
+		{
+			// Re-open every connector after side chambers and shell decoration have finished. Clearing
+			// only the sampled waypoints can leave a one-tile plug between two otherwise open points.
+			for (int pointIndex = 1; pointIndex < rupture.NavigationSpine.Count; pointIndex++)
+			{
+				Point16 previous = rupture.NavigationSpine[pointIndex - 1];
+				Point16 point = rupture.NavigationSpine[pointIndex];
+				CarveTunnel(previous.X, previous.Y, point.X, point.Y, 8, wallType, pointIndex * 104729, intent);
+			}
+
+			for (int pointIndex = 0; pointIndex < rupture.NavigationSpine.Count; pointIndex++)
+			{
+				Point16 point = rupture.NavigationSpine[pointIndex];
+				for (int x = point.X - 2; x <= point.X + 2; x++)
+				{
+					for (int y = point.Y - 4; y <= point.Y + 4; y++)
+					{
+						if (!MawTerrainRules.CanCarve(x, y, intent))
+							continue;
+						Tile tile = Framing.GetTileSafely(x, y);
+						tile.ClearTile();
+						tile.LiquidAmount = 0;
+						tile.WallType = (ushort)wallType;
+					}
+				}
+			}
+		}
+
+		private static bool ContainsHardObstacle(Rectangle bounds)
+		{
+			for (int x = bounds.Left; x < bounds.Right; x += 2)
+			{
+				for (int y = bounds.Top; y < bounds.Bottom; y += 2)
+				{
+					if (MawTerrainRules.IsHardGenerationObstacle(x, y))
+						return true;
+				}
+			}
+
+			return false;
 		}
 
 		private static void CarveTunnel(
@@ -162,7 +276,17 @@ namespace apogean.Common.WorldGeneration
 				float amount = step / (float)steps;
 				int x = (int)MathHelper.Lerp(startX, endX, amount);
 				int y = (int)MathHelper.Lerp(startY, endY, amount);
-				CarveEllipse(x, y, radius, radius - 1, wallType, seed + step, intent, boneShell: false, openToSky: false);
+				CarveEllipse(
+					x,
+					y,
+					radius,
+					radius - 1,
+					wallType,
+					seed + step,
+					intent,
+					boneShell: false,
+					openToSky: false,
+					placeShell: false);
 			}
 		}
 
@@ -175,7 +299,8 @@ namespace apogean.Common.WorldGeneration
 			int seed,
 			WorldEditIntent intent,
 			bool boneShell,
-			bool openToSky)
+			bool openToSky,
+			bool placeShell = true)
 		{
 			int mawstone = ModContent.TileType<Mawstone>();
 			int bone = ModContent.TileType<OssuaryBone>();
@@ -203,7 +328,7 @@ namespace apogean.Common.WorldGeneration
 						else
 							tile.WallType = (ushort)wallType;
 					}
-					else if (distance <= 1.34f + noise && MawTerrainRules.CanPlaceShell(x, y, intent))
+					else if (placeShell && distance <= 1.34f + noise && MawTerrainRules.CanPlaceShell(x, y, intent))
 					{
 						bool useBone = boneShell && EdgeNoise(x, y, seed ^ 0x2C13) > 0.18f;
 						SetSolidTile(x, y, useBone ? bone : mawstone);
@@ -218,28 +343,6 @@ namespace apogean.Common.WorldGeneration
 			value = (value ^ (value >> 13)) * 1274126177u;
 			value ^= value >> 16;
 			return (value / (float)uint.MaxValue) * 2f - 1f;
-		}
-
-		private static void PlaceAcidBasin(int centerX, int bottomY, int halfWidth, int depth, WorldEditIntent intent)
-		{
-			int acidType = ModContent.TileType<MawAcidPool>();
-			for (int x = centerX - halfWidth; x <= centerX + halfWidth; x++)
-			{
-				float edge = Math.Abs(x - centerX) / (float)Math.Max(1, halfWidth);
-				int localDepth = Math.Max(1, depth - (int)(edge * depth));
-				for (int y = bottomY - localDepth + 1; y <= bottomY; y++)
-				{
-					if (!WorldGen.InWorld(x, y, 12) || !MawTerrainRules.CanCarve(x, y, intent))
-						continue;
-					Tile tile = Framing.GetTileSafely(x, y);
-					tile.ClearTile();
-					tile.HasTile = true;
-					tile.TileType = (ushort)acidType;
-					tile.Slope = SlopeType.Solid;
-					tile.IsHalfBlock = false;
-					tile.LiquidAmount = 0;
-				}
-			}
 		}
 
 		private static void SetSolidTile(int x, int y, int tileType)

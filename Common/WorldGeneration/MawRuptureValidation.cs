@@ -67,14 +67,121 @@ namespace apogean.Common.WorldGeneration
 				TryVisit(point.X, point.Y + 1, bounds, visited, frontier, mawWall, rupture);
 			}
 
-			int requiredDepth = Main.maxTilesY - 205;
+			int requiredDepth = rupture.MatriarchCenter.Y > 0
+				? rupture.MatriarchCenter.Y - 8
+				: Main.maxTilesY - 205;
+			bool allSpinePointsReached = AreAllSpinePointsReached(bounds, visited, rupture);
+			bool hasContinuousRoute = deepestReachableY >= requiredDepth && allSpinePointsReached;
+			string obstruction = hasContinuousRoute
+				? "all-spine-waypoints-reached"
+				: DescribeObstruction(bounds, visited, deepestReachableY, mawWall, rupture);
 			return new MawRuptureValidationReport(
-				deepestReachableY >= requiredDepth,
+				hasContinuousRoute,
 				deepestReachableY,
 				requiredDepth,
 				visitedCells,
 				legacyAcidTiles,
-				vanillaLiquidTiles);
+				vanillaLiquidTiles,
+				obstruction);
+		}
+
+		private static bool AreAllSpinePointsReached(Rectangle bounds, bool[] visited, MawRupturePlan rupture)
+		{
+			for (int i = 0; i < rupture.NavigationSpine.Count; i++)
+			{
+				Terraria.DataStructures.Point16 point = rupture.NavigationSpine[i];
+				int left = point.X - 1;
+				int top = point.Y - 2;
+				if (!bounds.Contains(left, top))
+					return false;
+				int index = (top - bounds.Top) * bounds.Width + left - bounds.Left;
+				if (!visited[index])
+					return false;
+			}
+
+			return true;
+		}
+
+		private static string DescribeObstruction(
+			Rectangle bounds,
+			bool[] visited,
+			int deepestY,
+			int mawWall,
+			MawRupturePlan rupture)
+		{
+			int frontierX = rupture.SurfaceCenter.X;
+			for (int x = bounds.Left; x < bounds.Right; x++)
+			{
+				int index = (deepestY - bounds.Top) * bounds.Width + x - bounds.Left;
+				if (index >= 0 && index < visited.Length && visited[index])
+				{
+					frontierX = x;
+					break;
+				}
+			}
+
+			int blockedY = deepestY + 1;
+			string footprint = "missing-maw-interior";
+			for (int x = frontierX; x <= frontierX + 1; x++)
+			{
+				for (int y = blockedY; y <= blockedY + 2; y++)
+				{
+					Tile tile = Framing.GetTileSafely(x, y);
+					if (tile.HasTile && !tile.IsActuated && Main.tileSolid[tile.TileType] && !Main.tileSolidTop[tile.TileType])
+					{
+						ModTile modTile = TileLoader.GetTile(tile.TileType);
+						string tileName = modTile?.FullName ?? "vanilla";
+						footprint = $"solid tile={tile.TileType} ({tileName}) wall={tile.WallType} at {x},{y}";
+					}
+				}
+			}
+
+			int nearestIndex = -1;
+			int nearestDistance = int.MaxValue;
+			for (int i = 0; i < rupture.NavigationSpine.Count; i++)
+			{
+				int distance = Math.Abs(rupture.NavigationSpine[i].Y - deepestY);
+				if (distance >= nearestDistance)
+					continue;
+				nearestDistance = distance;
+				nearestIndex = i;
+			}
+
+			if (nearestIndex < 0)
+				return $"frontier={frontierX},{deepestY}; {footprint}; no-spine";
+
+			Terraria.DataStructures.Point16 spine = rupture.NavigationSpine[nearestIndex];
+			bool spineOpen = CanOccupy(spine.X - 1, spine.Y - 2, mawWall, rupture, requireMawInterior: true);
+			string firstUnreached = DescribeFirstUnreachedSpinePoint(bounds, visited, mawWall, rupture);
+			return $"frontier={frontierX},{deepestY}; {footprint}; spine[{nearestIndex}]={spine.X},{spine.Y} open={spineOpen}; {firstUnreached}";
+		}
+
+		private static string DescribeFirstUnreachedSpinePoint(
+			Rectangle bounds,
+			bool[] visited,
+			int mawWall,
+			MawRupturePlan rupture)
+		{
+			for (int i = 0; i < rupture.NavigationSpine.Count; i++)
+			{
+				Terraria.DataStructures.Point16 point = rupture.NavigationSpine[i];
+				int left = point.X - 1;
+				int top = point.Y - 2;
+				if (!bounds.Contains(left, top))
+					return $"first-unreached-spine[{i}]={point.X},{point.Y} outside-validation-bounds";
+
+				int index = (top - bounds.Top) * bounds.Width + left - bounds.Left;
+				if (visited[index])
+					continue;
+
+				bool open = CanOccupy(left, top, mawWall, rupture, requireMawInterior: true);
+				Tile center = Framing.GetTileSafely(point.X, point.Y);
+				ModTile modTile = center.HasTile ? TileLoader.GetTile(center.TileType) : null;
+				string centerName = center.HasTile ? modTile?.FullName ?? "vanilla" : "empty";
+				return $"first-unreached-spine[{i}]={point.X},{point.Y} open={open} center={center.TileType} ({centerName}) wall={center.WallType}";
+			}
+
+			return "all-spine-waypoints-reached";
 		}
 
 		private static void TryVisit(
@@ -143,12 +250,13 @@ namespace apogean.Common.WorldGeneration
 		int RequiredDepth,
 		int ReachableCells,
 		int LegacyAcidTiles,
-		int VanillaLiquidTiles)
+		int VanillaLiquidTiles,
+		string Obstruction)
 	{
 		public bool Passed => HasContinuousRoute && LegacyAcidTiles == 0;
 
 		public override string ToString() =>
 			$"route={(HasContinuousRoute ? "pass" : "blocked")} depth={DeepestReachableY}/{RequiredDepth}; " +
-			$"reachable={ReachableCells}; legacy-acid={LegacyAcidTiles}; maw-water={VanillaLiquidTiles}";
+			$"reachable={ReachableCells}; legacy-acid={LegacyAcidTiles}; maw-water={VanillaLiquidTiles}; {Obstruction}";
 	}
 }

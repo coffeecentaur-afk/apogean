@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using apogean.Common.Maw;
 using apogean.Common.WorldGeneration;
 using apogean.Content.Backgrounds;
 using apogean.Content.Factions;
@@ -25,7 +24,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|acid|plan|ruin|background|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -73,24 +72,22 @@ namespace apogean.Content.Commands
 						caller.Reply("This legacy world does not yet have a saved Apogean world plan.", Color.Orange);
 						break;
 					}
-					caller.Reply($"World plan v{worldPlan.Plan.SchemaVersion}; hash {worldPlan.Plan.StableHash():X8}; ruptures {worldPlan.Plan.MawRuptures.Count}; protected regions {worldPlan.ProtectedRegions.Count}.", Info);
+					caller.Reply($"World plan v{worldPlan.Plan.SchemaVersion}; hash {worldPlan.Plan.StableHash():X8}; ruptures {worldPlan.Plan.MawRuptures.Count}; landmarks {worldPlan.Plan.Landmarks.Count}; protected regions {worldPlan.ProtectedRegions.Count}.", Info);
 					Microsoft.Xna.Framework.Rectangle sanctuary = worldPlan.Plan.SpawnSanctuary;
 					caller.Reply($"Spawn sanctuary: X {sanctuary.Left}–{sanctuary.Right - 1}, Y {sanctuary.Top}–{sanctuary.Bottom - 1}. It blocks Maw/corporate edits, not ordinary events or boss summons.", Info);
 					MawRupturePlan major = worldPlan.Plan.GetMajorRupture();
 					if (major is not null)
-						caller.Reply($"Major Maw anchor: {major.SurfaceCenter.X}, {major.SurfaceCenter.Y}.", new Color(194, 126, 44));
+						caller.Reply($"Major Maw: mouth {major.SurfaceCenter.X}, {major.SurfaceCenter.Y}; root {major.MatriarchCenter.X}, {major.MatriarchCenter.Y}; spine points {major.NavigationSpine.Count}.", new Color(194, 126, 44));
+					for (int i = 0; i < worldPlan.Plan.Landmarks.Count; i++)
+					{
+						ApogeanLandmarkPlan landmark = worldPlan.Plan.Landmarks[i];
+						caller.Reply($"{landmark.Kind}: X {landmark.Bounds.Left}–{landmark.Bounds.Right - 1}, Y {landmark.Bounds.Top}–{landmark.Bounds.Bottom - 1}.", Info);
+					}
 					System.Collections.Generic.IReadOnlyList<string> failures = worldPlan.Validate();
 					if (failures.Count == 0)
 						caller.Reply("World-plan validation passed.", Color.LightGreen);
 					else
 						foreach (string failure in failures) caller.Reply(failure, Color.OrangeRed);
-					break;
-
-				case "acid":
-					if (MawAcidDebugBuilder.TryPlace(player, out string acidFailure))
-						caller.Reply("Created a bounded Maw acid test basin below you.", new Color(220, 183, 42));
-					else
-						caller.Reply(acidFailure, Color.OrangeRed);
 					break;
 
 				case "ruin":

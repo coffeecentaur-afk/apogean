@@ -7,6 +7,7 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.Utilities;
+using Terraria.WorldBuilding;
 
 namespace apogean.Common.WorldGeneration
 {
@@ -39,8 +40,11 @@ namespace apogean.Common.WorldGeneration
 
 		public ApogeanWorldPlan CreateWorldGenPlan(UnifiedRandom worldRandom, Func<int, int> findSurface)
 		{
+			bool created = plan is null;
 			plan ??= ApogeanWorldPlan.CreateWorldGenPlan(worldRandom, findSurface);
 			RebuildProtections();
+			if (created)
+				RegisterWithWorldGenerator();
 			return plan;
 		}
 
@@ -113,6 +117,8 @@ namespace apogean.Common.WorldGeneration
 				failures.Add("Spawn sanctuary has invalid dimensions.");
 			if (!plan.IsLegacySafetyPlan && plan.GetMajorRupture() is null)
 				failures.Add("A generated Apogean world has no major Maw Rupture.");
+			if (!plan.IsLegacySafetyPlan && (Main.maxTilesX < 8400 || Main.maxTilesY < 2400))
+				failures.Add("The full Apogee campaign was generated on an unsupported non-Large world.");
 
 			for (int i = 0; i < plan.MawRuptures.Count; i++)
 			{
@@ -121,6 +127,38 @@ namespace apogean.Common.WorldGeneration
 					failures.Add($"Maw Rupture {i} intersects the spawn sanctuary.");
 				if (rupture.GenerationBounds.Left < 10 || rupture.GenerationBounds.Right >= Main.maxTilesX - 10)
 					failures.Add($"Maw Rupture {i} crosses a horizontal world edge.");
+				if (rupture.IsMajor && plan.SchemaVersion >= 2 && !rupture.HasNavigationSpine)
+					failures.Add("The major Maw Rupture has no saved navigation spine.");
+			}
+
+			int outgrowths = 0;
+			for (int i = 0; i < plan.MawRuptures.Count; i++)
+				if (!plan.MawRuptures[i].IsMajor)
+					outgrowths++;
+			if (!plan.IsLegacySafetyPlan && outgrowths is < 1 or > 2)
+				failures.Add($"Expected one guaranteed and at most one optional Maw Outgrowth; found {outgrowths}.");
+
+			if (!plan.IsLegacySafetyPlan && plan.SchemaVersion >= 2)
+			{
+				foreach (ApogeanLandmarkKind kind in Enum.GetValues<ApogeanLandmarkKind>())
+				{
+					int count = 0;
+					for (int i = 0; i < plan.Landmarks.Count; i++)
+						if (plan.Landmarks[i].Kind == kind)
+							count++;
+					if (count != 1)
+						failures.Add($"Expected exactly one {kind} landmark; found {count}.");
+				}
+
+				for (int i = 0; i < plan.Landmarks.Count; i++)
+				{
+					ApogeanLandmarkPlan landmark = plan.Landmarks[i];
+					if (landmark.ReservedBounds.Intersects(plan.SpawnSanctuary))
+						failures.Add($"{landmark.Kind} intersects the spawn sanctuary.");
+					for (int other = i + 1; other < plan.Landmarks.Count; other++)
+						if (landmark.ReservedBounds.Intersects(plan.Landmarks[other].ReservedBounds))
+							failures.Add($"{landmark.Kind} intersects {plan.Landmarks[other].Kind}.");
+				}
 			}
 
 			return failures;
@@ -131,6 +169,12 @@ namespace apogean.Common.WorldGeneration
 			IReadOnlyList<string> failures = Validate();
 			for (int i = 0; i < failures.Count; i++)
 				Mod.Logger.Warn($"World-plan validation: {failures[i]}");
+			if (failures.Count == 0 && plan is not null)
+			{
+				Mod.Logger.Info(
+					$"World-plan validation passed: schema={plan.SchemaVersion}; hash={plan.StableHash():X8}; " +
+					$"ruptures={plan.MawRuptures.Count}; landmarks={plan.Landmarks.Count}");
+			}
 
 			MawRupturePlan major = plan?.GetMajorRupture();
 			if (major is not null && major.IsMajor)
@@ -198,6 +242,29 @@ namespace apogean.Common.WorldGeneration
 					WorldEditIntent.CorporateStructure |
 					WorldEditIntent.RuinStructure);
 			}
+
+			for (int i = 0; i < plan.Landmarks.Count; i++)
+			{
+				ApogeanLandmarkPlan landmark = plan.Landmarks[i];
+				WorldEditIntent blocked = WorldEditIntent.MawGeneration |
+					WorldEditIntent.MawSpread |
+					WorldEditIntent.MawOutgrowth |
+					WorldEditIntent.CorporateStructure |
+					WorldEditIntent.RuinStructure;
+				protections.Reserve($"landmark-{landmark.Kind}", landmark.ReservedBounds, blocked);
+			}
+		}
+
+		private void RegisterWithWorldGenerator()
+		{
+			if (plan is null)
+				return;
+
+			GenVars.structures.AddProtectedStructure(plan.SpawnSanctuary, 8);
+			for (int i = 0; i < plan.MawRuptures.Count; i++)
+				GenVars.structures.AddProtectedStructure(plan.MawRuptures[i].ReservedBounds, 8);
+			for (int i = 0; i < plan.Landmarks.Count; i++)
+				GenVars.structures.AddProtectedStructure(plan.Landmarks[i].Bounds, plan.Landmarks[i].Padding);
 		}
 
 		private static bool BlocksSpawnIntent(WorldEditIntent intent) =>

@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Generation;
 using Terraria.ID;
 using Terraria.IO;
@@ -15,144 +15,241 @@ using apogean.Content.Tiles;
 namespace apogean.Content.Structures
 {
 	/// <summary>
-	/// Places one sealed compound per corp faction during world generation - visible but
-	/// inert, the same "there but not accessible yet" treatment vanilla gives the Jungle
-	/// Temple before Plantera. FactionProgression calls UnsealCompound/ReArmCompound once a
-	/// faction's invasion is cleared or it turns Enemy late-game.
+	/// Builds the day-one Campus silhouettes inside locations owned by the saved world atlas.
+	/// Production room modules and art can replace this shell language without changing placement,
+	/// access, or save data.
 	/// </summary>
-	public class CompoundGen : ModSystem
+	public sealed class CompoundGen : ModSystem
 	{
-		private const int CompoundSize = 9;
+		private readonly Dictionary<ApogeanFaction, Rectangle> compoundBounds = new();
 
-		private readonly Dictionary<ApogeanFaction, Point16> compoundLocations = new();
-
-		public override void OnWorldLoad() => compoundLocations.Clear();
-
-		public override void OnWorldUnload() => compoundLocations.Clear();
+		public override void OnWorldLoad() => compoundBounds.Clear();
+		public override void OnWorldUnload() => compoundBounds.Clear();
 
 		internal void GenerateWorld(GenerationProgress progress, GameConfiguration config)
 		{
-			progress.Message = "Sealing corporate compounds...";
+			progress.Message = "Sealing the old corporate territories...";
+			ApogeanWorldPlan plan = ApogeanWorldPlanSystem.Instance.Plan;
+			if (plan is null)
+				return;
 
-			foreach (ApogeanFaction faction in FactionProgression.CorpFactions)
+			for (int i = 0; i < plan.Landmarks.Count; i++)
 			{
-				if (!TryPickCompoundLocation(out Point16 location))
-				{
-					Mod.Logger.Warn($"Skipped placeholder {faction} compound after 240 bounded placement attempts.");
-					continue;
-				}
-				compoundLocations[faction] = location;
-				PlaceSealedCompound(location);
-			}
-		}
-
-		private bool TryPickCompoundLocation(out Point16 location)
-		{
-			for (int attempt = 0; attempt < 240; attempt++)
-			{
-				int x = Terraria.WorldGen.genRand.Next((int)(Main.maxTilesX * 0.1), (int)(Main.maxTilesX * 0.9));
-				int y = Terraria.WorldGen.genRand.Next((int)Main.worldSurface + 50, (int)Main.rockLayer + 200);
-				Rectangle bounds = new(x, y, CompoundSize, CompoundSize);
-				if (!ApogeanWorldPlanSystem.Instance.CanPlace(bounds, WorldEditIntent.CorporateStructure) || IntersectsExistingCompound(bounds))
+				ApogeanLandmarkPlan landmark = plan.Landmarks[i];
+				if (!TryGetFaction(landmark.Kind, out ApogeanFaction faction))
 					continue;
 
-				location = new Point16(x, y);
-				return true;
+				compoundBounds[faction] = landmark.Bounds;
+				PlaceCampus(landmark);
 			}
-
-			location = default;
-			return false;
 		}
 
-		private bool IntersectsExistingCompound(Rectangle candidate)
+		private static void PlaceCampus(ApogeanLandmarkPlan landmark)
 		{
-			foreach (Point16 origin in compoundLocations.Values)
+			switch (landmark.Kind)
 			{
-				Rectangle existing = new(origin.X, origin.Y, CompoundSize, CompoundSize);
-				existing.Inflate(20, 20);
-				if (existing.Intersects(candidate))
-					return true;
+				case ApogeanLandmarkKind.KesslerCampus:
+					PlaceKesslerCampus(landmark.Bounds);
+					break;
+				case ApogeanLandmarkKind.HelixCampus:
+					PlaceHelixCampus(landmark.Bounds);
+					break;
+				case ApogeanLandmarkKind.SentrixCampus:
+					PlaceSentrixCampus(landmark.Bounds);
+					break;
 			}
-
-			return false;
 		}
 
-		private static void PlaceSealedCompound(Point16 origin)
+		private static void PlaceKesslerCampus(Rectangle bounds)
 		{
-			int bulkheadType = ModContent.TileType<LockedBulkhead>();
+			int bulkhead = ModContent.TileType<LockedBulkhead>();
+			int surface = bounds.Top + 70;
+			Rectangle bunker = new(bounds.Center.X - 55, surface - 31, 111, 36);
+			ClearNaturalInterior(new Rectangle(bounds.Left + 7, surface - 46, bounds.Width - 14, 52));
+			PlaceOutline(bunker, bulkhead, 2);
 
-			for (int x = origin.X; x < origin.X + CompoundSize; x++)
+			for (int x = bounds.Left + 8; x < bounds.Right - 8; x++)
+				for (int y = surface + 3; y <= surface + 5; y++)
+					SetSolidTile(x, y, bulkhead);
+
+			PlaceTower(new Rectangle(bounds.Left + 12, surface - 43, 18, 48), bulkhead);
+			PlaceTower(new Rectangle(bounds.Right - 30, surface - 43, 18, 48), bulkhead);
+			PlaceHorizontalRun(bounds.Left + 28, bounds.Center.X - 64, surface - 17, bulkhead, 2);
+			PlaceHorizontalRun(bounds.Center.X + 64, bounds.Right - 28, surface - 17, bulkhead, 2);
+			SetDoor(GetDoorBounds(ApogeanFaction.Kessler, bounds), sealedShut: true);
+		}
+
+		private static void PlaceHelixCampus(Rectangle bounds)
+		{
+			int bulkhead = ModContent.TileType<LockedBulkhead>();
+			int surface = bounds.Top + 45;
+			int centerX = bounds.Center.X;
+			ClearNaturalInterior(new Rectangle(bounds.Left + 20, bounds.Top + 6, bounds.Width - 40, bounds.Height - 18));
+
+			for (int x = centerX - 92; x <= centerX + 92; x++)
 			{
-				for (int y = origin.Y; y < origin.Y + CompoundSize; y++)
+				float normalized = (x - centerX) / 92f;
+				int domeY = surface - (int)(MathF.Sqrt(MathF.Max(0f, 1f - normalized * normalized)) * 40f);
+				SetSolidTile(x, domeY, bulkhead);
+				SetSolidTile(x, domeY + 1, bulkhead);
+			}
+
+			Rectangle lab = new(bounds.Left + 25, surface + 4, bounds.Width - 50, bounds.Bottom - surface - 16);
+			PlaceOutline(lab, bulkhead, 2);
+			for (int y = lab.Top + 30; y < lab.Bottom - 10; y += 31)
+				PlaceHorizontalRun(lab.Left + 2, lab.Right - 2, y, bulkhead, 2);
+			SetDoor(GetDoorBounds(ApogeanFaction.Helix, bounds), sealedShut: true);
+		}
+
+		private static void PlaceSentrixCampus(Rectangle bounds)
+		{
+			int bulkhead = ModContent.TileType<LockedBulkhead>();
+			int centerX = bounds.Center.X;
+			Rectangle spire = new(centerX - 18, bounds.Top + 8, 37, bounds.Height - 16);
+			PlaceOutline(spire, bulkhead, 2);
+			for (int y = bounds.Top + 42, pad = 0; y < bounds.Bottom - 24; y += 42, pad++)
+			{
+				bool left = pad % 2 == 0;
+				int startX = left ? centerX - 86 : centerX + 18;
+				int endX = left ? centerX - 18 : centerX + 86;
+				PlaceHorizontalRun(startX, endX, y, bulkhead, 3);
+			}
+			SetDoor(GetDoorBounds(ApogeanFaction.Sentrix, bounds), sealedShut: true);
+		}
+
+		private static void PlaceTower(Rectangle bounds, int tileType)
+		{
+			ClearNaturalInterior(bounds);
+			PlaceOutline(bounds, tileType, 2);
+		}
+
+		private static void PlaceOutline(Rectangle bounds, int tileType, int thickness)
+		{
+			for (int x = bounds.Left; x < bounds.Right; x++)
+			{
+				for (int y = bounds.Top; y < bounds.Bottom; y++)
 				{
-					if (IsEdge(origin, x, y))
-					{
-						Terraria.WorldGen.PlaceTile(x, y, bulkheadType, mute: true, forced: true);
-					}
-					else
-					{
-						Terraria.WorldGen.KillTile(x, y, noItem: true);
-					}
+					if (x < bounds.Left + thickness || x >= bounds.Right - thickness ||
+						y < bounds.Top + thickness || y >= bounds.Bottom - thickness)
+						SetSolidTile(x, y, tileType);
 				}
 			}
 		}
 
-		private static bool IsEdge(Point16 origin, int x, int y) =>
-			x == origin.X || x == origin.X + CompoundSize - 1 ||
-			y == origin.Y || y == origin.Y + CompoundSize - 1;
+		private static void PlaceHorizontalRun(int startX, int endX, int y, int tileType, int thickness)
+		{
+			if (startX > endX)
+				(startX, endX) = (endX, startX);
+			for (int x = startX; x <= endX; x++)
+				for (int row = 0; row < thickness; row++)
+					SetSolidTile(x, y + row, tileType);
+		}
 
-		/// <summary>Called on invasion victory: opens the compound and lets an ambassador move in.</summary>
+		private static void ClearNaturalInterior(Rectangle bounds)
+		{
+			for (int x = bounds.Left; x < bounds.Right; x++)
+			{
+				for (int y = bounds.Top; y < bounds.Bottom; y++)
+				{
+					if (!WorldGen.InWorld(x, y, 10))
+						continue;
+					Tile tile = Framing.GetTileSafely(x, y);
+					if (tile.HasTile && !WorldAtlasPlanner.CanReplaceForLandmark(tile.TileType))
+						continue;
+					tile.ClearTile();
+					tile.LiquidAmount = 0;
+				}
+			}
+		}
+
+		private static void SetSolidTile(int x, int y, int tileType)
+		{
+			if (!WorldGen.InWorld(x, y, 10))
+				return;
+			Tile tile = Framing.GetTileSafely(x, y);
+			tile.HasTile = true;
+			tile.TileType = (ushort)tileType;
+			tile.Slope = SlopeType.Solid;
+			tile.IsHalfBlock = false;
+			tile.LiquidAmount = 0;
+		}
+
 		public static void UnsealCompound(ApogeanFaction faction) => SetCompoundSealed(faction, sealedShut: false);
 
-		/// <summary>Called when a faction turns Enemy late-game: re-arms the compound into a gauntlet entrance.</summary>
 		public static void ReArmCompound(ApogeanFaction faction) => SetCompoundSealed(faction, sealedShut: true);
 
 		private static void SetCompoundSealed(ApogeanFaction faction, bool sealedShut)
 		{
 			CompoundGen instance = ModContent.GetInstance<CompoundGen>();
-			if (!instance.compoundLocations.TryGetValue(faction, out Point16 origin)) return;
+			if (!instance.compoundBounds.TryGetValue(faction, out Rectangle bounds))
+				return;
 
-			int bulkheadType = ModContent.TileType<LockedBulkhead>();
-			// TODO: swap for a proper faction-themed door/hazard tile once that art exists.
-			int openTileType = TileID.PlatinumBrick;
+			Rectangle door = GetDoorBounds(faction, bounds);
+			SetDoor(door, sealedShut);
+			NetMessage.SendTileSquare(-1, door.Center.X, door.Center.Y, Math.Max(door.Width, door.Height) + 4);
+		}
 
-			for (int x = origin.X; x < origin.X + CompoundSize; x++)
+		private static Rectangle GetDoorBounds(ApogeanFaction faction, Rectangle bounds)
+		{
+			return faction switch
 			{
-				for (int y = origin.Y; y < origin.Y + CompoundSize; y++)
-				{
-					if (!IsEdge(origin, x, y)) continue;
+				ApogeanFaction.Kessler => new Rectangle(bounds.Center.X - 3, bounds.Top + 62, 7, 9),
+				ApogeanFaction.Helix => new Rectangle(bounds.Center.X - 3, bounds.Top + 37, 7, 10),
+				ApogeanFaction.Sentrix => new Rectangle(bounds.Center.X + 16, bounds.Top + 37, 5, 9),
+				_ => Rectangle.Empty
+			};
+		}
 
-					Terraria.WorldGen.KillTile(x, y, noItem: true);
-					Terraria.WorldGen.PlaceTile(x, y, sealedShut ? bulkheadType : openTileType, mute: true, forced: true);
+		private static void SetDoor(Rectangle door, bool sealedShut)
+		{
+			int bulkhead = ModContent.TileType<LockedBulkhead>();
+			for (int x = door.Left; x < door.Right; x++)
+			{
+				for (int y = door.Top; y < door.Bottom; y++)
+				{
+					if (sealedShut)
+						SetSolidTile(x, y, bulkhead);
+					else
+						Framing.GetTileSafely(x, y).ClearTile();
 				}
 			}
+		}
 
-			NetMessage.SendTileSquare(-1, origin.X, origin.Y, CompoundSize);
+		private static bool TryGetFaction(ApogeanLandmarkKind kind, out ApogeanFaction faction)
+		{
+			faction = kind switch
+			{
+				ApogeanLandmarkKind.KesslerCampus => ApogeanFaction.Kessler,
+				ApogeanLandmarkKind.HelixCampus => ApogeanFaction.Helix,
+				ApogeanLandmarkKind.SentrixCampus => ApogeanFaction.Sentrix,
+				_ => ApogeanFaction.None
+			};
+			return faction != ApogeanFaction.None;
 		}
 
 		public override void SaveWorldData(TagCompound tag)
 		{
-			foreach (ApogeanFaction faction in FactionProgression.CorpFactions)
+			foreach ((ApogeanFaction faction, Rectangle bounds) in compoundBounds)
 			{
-				if (compoundLocations.TryGetValue(faction, out Point16 location))
-				{
-					tag[$"compound_{faction}_x"] = (int)location.X;
-					tag[$"compound_{faction}_y"] = (int)location.Y;
-				}
+				tag[$"compound_{faction}_x"] = bounds.X;
+				tag[$"compound_{faction}_y"] = bounds.Y;
+				tag[$"compound_{faction}_width"] = bounds.Width;
+				tag[$"compound_{faction}_height"] = bounds.Height;
 			}
 		}
 
 		public override void LoadWorldData(TagCompound tag)
 		{
-			compoundLocations.Clear();
+			compoundBounds.Clear();
 			foreach (ApogeanFaction faction in FactionProgression.CorpFactions)
 			{
 				string xKey = $"compound_{faction}_x";
 				string yKey = $"compound_{faction}_y";
-				if (tag.ContainsKey(xKey) && tag.ContainsKey(yKey))
-				{
-					compoundLocations[faction] = new Point16(tag.GetInt(xKey), tag.GetInt(yKey));
-				}
+				if (!tag.ContainsKey(xKey) || !tag.ContainsKey(yKey))
+					continue;
+				int width = tag.ContainsKey($"compound_{faction}_width") ? tag.GetInt($"compound_{faction}_width") : 9;
+				int height = tag.ContainsKey($"compound_{faction}_height") ? tag.GetInt($"compound_{faction}_height") : 9;
+				compoundBounds[faction] = new Rectangle(tag.GetInt(xKey), tag.GetInt(yKey), width, height);
 			}
 		}
 	}

@@ -61,7 +61,14 @@ namespace apogean.Content.World
 		{
 			for (int y = 80; y < Main.worldSurface + 80; y++)
 			{
-				if (WorldGen.SolidTile(x, y)) return y;
+				Tile tile = Framing.GetTileSafely(x, y);
+				if (!tile.HasTile || !Main.tileSolid[tile.TileType] || Main.tileSolidTop[tile.TileType])
+					continue;
+				if (tile.TileType < TileID.Sets.IsATreeTrunk.Length && TileID.Sets.IsATreeTrunk[tile.TileType])
+					continue;
+				if (Main.tileFrameImportant[tile.TileType] || tile.TileType == TileID.Cactus)
+					continue;
+				return y;
 			}
 			return (int)Main.worldSurface;
 		}

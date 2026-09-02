@@ -4,24 +4,28 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader.IO;
 using Terraria.Utilities;
+using Terraria.WorldBuilding;
 
 namespace apogean.Common.WorldGeneration
 {
 	public sealed class ApogeanWorldPlan
 	{
-		public const int CurrentSchemaVersion = 1;
+		public const int CurrentSchemaVersion = 2;
 		public const int SpawnSanctuaryRadiusX = 110;
 		public const int SpawnSanctuaryRadiusY = 70;
 
 		private readonly List<MawRupturePlan> mawRuptures = new();
+		private readonly List<ApogeanLandmarkPlan> landmarks = new();
 
 		public int SchemaVersion { get; }
 		public int PlanSeed { get; }
 		public Rectangle SpawnSanctuary { get; }
 		public bool IsLegacySafetyPlan { get; }
 		public IReadOnlyList<MawRupturePlan> MawRuptures => mawRuptures;
+		public IReadOnlyList<ApogeanLandmarkPlan> Landmarks => landmarks;
 
 		private ApogeanWorldPlan(int schemaVersion, int planSeed, Rectangle spawnSanctuary, bool isLegacySafetyPlan)
 		{
@@ -33,6 +37,13 @@ namespace apogean.Common.WorldGeneration
 
 		internal static ApogeanWorldPlan CreateWorldGenPlan(UnifiedRandom worldRandom, Func<int, int> findSurface)
 		{
+			if (Main.maxTilesX < 8400 || Main.maxTilesY < 2400)
+			{
+				throw new InvalidOperationException(
+					"The full Apogee campaign currently requires a standard Large world (8400 x 2400 tiles). " +
+					"Medium compact support is planned, but incomplete campaign worlds are not generated silently.");
+			}
+
 			int planSeed = worldRandom.Next();
 			UnifiedRandom random = new(planSeed);
 			int spawnX = ValidSpawnX(Main.spawnTileX) ? Main.spawnTileX : Main.maxTilesX / 2;
@@ -46,13 +57,22 @@ namespace apogean.Common.WorldGeneration
 			ApogeanWorldPlan plan = new(CurrentSchemaVersion, planSeed, sanctuary, false);
 			List<Rectangle> occupied = new() { sanctuary };
 
-			MawRupturePlan major = FindRuptureSite(random, findSurface, occupied, 170, 76, true);
+			MawRupturePlan major = FindRuptureSite(random, findSurface, occupied, 200, 78, true, planSeed);
+			if (major is null)
+				throw new InvalidOperationException($"Apogee could not place a protected, traversable Maw Rupture on this seed; {MawNavigationPlanner.LastFailureReason}.");
 			plan.mawRuptures.Add(major);
 			occupied.Add(major.ReservedBounds);
+			plan.landmarks.AddRange(WorldAtlasPlanner.PlaceLandmarks(random, findSurface, major, occupied));
 
 			for (int i = 0; i < 2; i++)
 			{
-				MawRupturePlan outgrowth = FindRuptureSite(random, findSurface, occupied, 62, 36, false);
+				MawRupturePlan outgrowth = FindRuptureSite(random, findSurface, occupied, random.Next(30, 46), random.Next(15, 26), false, planSeed ^ (i + 1) * 104729);
+				if (outgrowth is null)
+				{
+					if (i == 0)
+						throw new InvalidOperationException("Apogee could not place the guaranteed Maw Outgrowth on this seed.");
+					break;
+				}
 				plan.mawRuptures.Add(outgrowth);
 				occupied.Add(outgrowth.ReservedBounds);
 			}
@@ -78,33 +98,92 @@ namespace apogean.Common.WorldGeneration
 			IReadOnlyList<Rectangle> occupied,
 			int radiusX,
 			int radiusY,
-			bool major)
+			bool major,
+			int routeSeed)
 		{
 			int edgePadding = major ? 440 : 300;
 			int spawnX = ValidSpawnX(Main.spawnTileX) ? Main.spawnTileX : Main.maxTilesX / 2;
-			int minimumSpawnDistance = major ? Math.Max(620, Main.maxTilesX / 7) : 360;
+			int minimumSpawnDistance = major ? 900 : 360;
 
 			for (int attempt = 0; attempt < 320; attempt++)
 			{
-				int x = random.Next(edgePadding, Main.maxTilesX - edgePadding);
+				int x;
+				if (major)
+				{
+					int side = random.NextBool() ? 1 : -1;
+					x = spawnX + side * random.Next(900, 1401);
+				}
+				else
+				{
+					x = random.Next(edgePadding, Main.maxTilesX - edgePadding);
+				}
+
+				x = Utils.Clamp(x, edgePadding, Main.maxTilesX - edgePadding);
 				if (Math.Abs(x - spawnX) < minimumSpawnDistance)
 					continue;
 				if (Main.dungeonX > 0 && Math.Abs(x - Main.dungeonX) < (major ? 520 : 280))
 					continue;
 
 				int y = findSurface(x);
-				MawRupturePlan candidate = new(new Point16(x, y), radiusX, radiusY, major);
+				if (!IsNeutralSurfaceSite(x, y, radiusX))
+					continue;
+
+				MawRupturePlan candidate;
+				if (major)
+				{
+					if (!MawNavigationPlanner.TryCreate(
+						x,
+						y,
+						320,
+						unchecked(routeSeed ^ x * 397 ^ attempt * 7919),
+						out List<Point16> spine,
+						out Point16 matriarchCenter))
+						continue;
+
+					candidate = new MawRupturePlan(new Point16(x, y), radiusX, radiusY, true, false, matriarchCenter, spine);
+				}
+				else
+				{
+					candidate = new MawRupturePlan(new Point16(x, y), radiusX, radiusY, false);
+				}
+
 				if (IntersectsAny(candidate.ReservedBounds, occupied))
+					continue;
+				if (!major && !WorldAtlasPlanner.CanReserve(candidate.ReservedBounds, 12))
 					continue;
 
 				return candidate;
 			}
 
-			int fallbackX = spawnX < Main.maxTilesX / 2
-				? Main.maxTilesX - edgePadding - radiusX
-				: edgePadding + radiusX;
-			fallbackX = Utils.Clamp(fallbackX, edgePadding, Main.maxTilesX - edgePadding);
-			return new MawRupturePlan(new Point16(fallbackX, findSurface(fallbackX)), radiusX, radiusY, major);
+			return null;
+		}
+
+		private static bool IsNeutralSurfaceSite(int centerX, int centerY, int radiusX)
+		{
+			int evilTiles = 0;
+			int jungleTiles = 0;
+			int desertTiles = 0;
+			int samples = 0;
+			for (int x = centerX - radiusX; x <= centerX + radiusX; x += 8)
+			{
+				for (int y = Math.Max(20, centerY - 28); y <= Math.Min(Main.maxTilesY - 20, centerY + 42); y += 6)
+				{
+					Tile tile = Framing.GetTileSafely(x, y);
+					if (!tile.HasTile)
+						continue;
+					samples++;
+					if (tile.TileType is TileID.Ebonstone or TileID.Crimstone or TileID.CorruptGrass or TileID.CrimsonGrass or TileID.Ebonsand or TileID.Crimsand)
+						evilTiles++;
+					if (tile.TileType is TileID.JungleGrass or TileID.Mud)
+						jungleTiles++;
+					if (tile.TileType is TileID.Sand or TileID.HardenedSand or TileID.Sandstone)
+						desertTiles++;
+				}
+			}
+
+			if (samples == 0)
+				return false;
+			return evilTiles * 25 < samples && jungleTiles * 8 < samples && desertTiles * 6 < samples;
 		}
 
 		private static bool IntersectsAny(Rectangle candidate, IReadOnlyList<Rectangle> occupied)
@@ -143,6 +222,14 @@ namespace apogean.Common.WorldGeneration
 			return null;
 		}
 
+		public ApogeanLandmarkPlan GetLandmark(ApogeanLandmarkKind kind)
+		{
+			for (int i = 0; i < landmarks.Count; i++)
+				if (landmarks[i].Kind == kind)
+					return landmarks[i];
+			return null;
+		}
+
 		public uint StableHash()
 		{
 			uint hash = 2166136261;
@@ -160,6 +247,24 @@ namespace apogean.Common.WorldGeneration
 				Mix(ref hash, rupture.RadiusX);
 				Mix(ref hash, rupture.RadiusY);
 				Mix(ref hash, rupture.IsMajor ? 1 : 0);
+				Mix(ref hash, rupture.IsCompact ? 1 : 0);
+				Mix(ref hash, rupture.MatriarchCenter.X);
+				Mix(ref hash, rupture.MatriarchCenter.Y);
+				for (int point = 0; point < rupture.NavigationSpine.Count; point++)
+				{
+					Mix(ref hash, rupture.NavigationSpine[point].X);
+					Mix(ref hash, rupture.NavigationSpine[point].Y);
+				}
+			}
+			for (int i = 0; i < landmarks.Count; i++)
+			{
+				ApogeanLandmarkPlan landmark = landmarks[i];
+				Mix(ref hash, (int)landmark.Kind);
+				Mix(ref hash, landmark.Bounds.X);
+				Mix(ref hash, landmark.Bounds.Y);
+				Mix(ref hash, landmark.Bounds.Width);
+				Mix(ref hash, landmark.Bounds.Height);
+				Mix(ref hash, landmark.Padding);
 			}
 
 			return hash;
@@ -176,6 +281,9 @@ namespace apogean.Common.WorldGeneration
 			List<TagCompound> savedRuptures = new();
 			for (int i = 0; i < mawRuptures.Count; i++)
 				savedRuptures.Add(mawRuptures[i].Save());
+			List<TagCompound> savedLandmarks = new();
+			for (int i = 0; i < landmarks.Count; i++)
+				savedLandmarks.Add(landmarks[i].Save());
 
 			return new TagCompound
 			{
@@ -186,7 +294,8 @@ namespace apogean.Common.WorldGeneration
 				["spawnWidth"] = SpawnSanctuary.Width,
 				["spawnHeight"] = SpawnSanctuary.Height,
 				["legacy"] = IsLegacySafetyPlan,
-				["ruptures"] = savedRuptures
+				["ruptures"] = savedRuptures,
+				["landmarks"] = savedLandmarks
 			};
 		}
 
@@ -200,6 +309,11 @@ namespace apogean.Common.WorldGeneration
 			ApogeanWorldPlan plan = new(tag.GetInt("schema"), tag.GetInt("seed"), sanctuary, tag.GetBool("legacy"));
 			foreach (TagCompound savedRupture in tag.GetList<TagCompound>("ruptures"))
 				plan.mawRuptures.Add(MawRupturePlan.Load(savedRupture));
+			if (tag.ContainsKey("landmarks"))
+			{
+				foreach (TagCompound savedLandmark in tag.GetList<TagCompound>("landmarks"))
+					plan.landmarks.Add(ApogeanLandmarkPlan.Load(savedLandmark));
+			}
 			return plan;
 		}
 
@@ -215,6 +329,9 @@ namespace apogean.Common.WorldGeneration
 			writer.Write((byte)mawRuptures.Count);
 			for (int i = 0; i < mawRuptures.Count; i++)
 				mawRuptures[i].NetSend(writer);
+			writer.Write((byte)landmarks.Count);
+			for (int i = 0; i < landmarks.Count; i++)
+				landmarks[i].NetSend(writer);
 		}
 
 		internal static ApogeanWorldPlan NetReceive(BinaryReader reader)
@@ -230,6 +347,9 @@ namespace apogean.Common.WorldGeneration
 			int count = reader.ReadByte();
 			for (int i = 0; i < count; i++)
 				plan.mawRuptures.Add(MawRupturePlan.NetReceive(reader));
+			int landmarkCount = reader.ReadByte();
+			for (int i = 0; i < landmarkCount; i++)
+				plan.landmarks.Add(ApogeanLandmarkPlan.NetReceive(reader));
 			return plan;
 		}
 	}

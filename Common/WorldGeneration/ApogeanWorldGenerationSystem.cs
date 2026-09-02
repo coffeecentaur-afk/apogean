@@ -26,11 +26,14 @@ namespace apogean.Common.WorldGeneration
 			tasks.Insert(mawIndex + 1, new PassLegacy(
 				"Apogean Compounds",
 				ModContent.GetInstance<CompoundGen>().GenerateWorld));
+			tasks.Insert(mawIndex + 2, new PassLegacy(
+				"Apogean Ruins",
+				ModContent.GetInstance<RuinGen>().GenerateWorld));
 
 			if (ModContent.GetInstance<ApogeanWorldConfig>().RuinedSurface)
 			{
 				int treesIndex = FindPass(tasks, "Planting Trees");
-				int wastesIndex = treesIndex >= 0 ? treesIndex + 1 : Math.Min(tasks.Count, mawIndex + 2);
+				int wastesIndex = treesIndex >= 0 ? treesIndex + 1 : Math.Min(tasks.Count, mawIndex + 3);
 				tasks.Insert(wastesIndex, new PassLegacy("A World Picked Clean", RuinedSurfaceSystem.GenerateWorld));
 			}
 		}
