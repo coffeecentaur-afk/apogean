@@ -30,8 +30,6 @@ namespace apogean.Content.NPCs.Engraft
 			NPC.noTileCollide = true;
 			NPC.HitSound = SoundID.NPCHit13 with { Pitch = 0.25f, PitchVariance = 0.2f };
 			NPC.DeathSound = SoundID.NPCDeath1 with { Pitch = 0.35f };
-			Banner = Item.NPCtoBanner(Type);
-			BannerItem = Item.BannerToItem(Banner);
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) => spawnInfo.Player.InModBiome<EngraftBiome>() ? 0.25f : 0f;

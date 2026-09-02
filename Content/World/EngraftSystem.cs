@@ -92,9 +92,7 @@ namespace apogean.Content.World
 		}
 
 		private static bool IsMawTerrain(ushort tileType) =>
-			tileType == ModContent.TileType<EngraftTurf>() ||
-			tileType == ModContent.TileType<Mawstone>() ||
-			tileType == ModContent.TileType<OssuaryBone>() ||
+			MawConversionSystem.IsMawTerrain(tileType) ||
 			tileType == ModContent.TileType<MawAcidPool>();
 
 		public override void PostUpdateWorld()
@@ -111,17 +109,19 @@ namespace apogean.Content.World
 		private void SpreadOnce()
 		{
 			Point16 node = nodes[Main.rand.Next(nodes.Count)];
-			int turf = ModContent.TileType<EngraftTurf>();
 			for (int attempt = 0; attempt < 30; attempt++)
 			{
 				int x = node.X + Main.rand.Next(-54, 55);
 				int y = node.Y + Main.rand.Next(-28, 29);
 				if (!WorldGen.InWorld(x, y, 12)) continue;
-				Tile tile = Framing.GetTileSafely(x, y);
-				if (!MawTerrainRules.CanConvert(x, y, WorldEditIntent.MawSpread)) continue;
-				tile.TileType = (ushort)turf;
-				NetMessage.SendTileSquare(-1, x, y);
-				return;
+				bool convertTile = MawTerrainRules.CanConvert(x, y, WorldEditIntent.MawSpread);
+				bool convertWall = MawTerrainRules.CanConvertWall(x, y, WorldEditIntent.MawSpread);
+				if (!convertTile && !convertWall) continue;
+				if (MawConversionSystem.ConvertAt(x, y, convertTile, convertWall))
+				{
+					NetMessage.SendTileSquare(-1, x, y);
+					return;
+				}
 			}
 		}
 

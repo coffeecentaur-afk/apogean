@@ -17,6 +17,8 @@ namespace apogean.Content.Backgrounds
 		Crimson,
 		Hallow,
 		Ocean,
+		Mushroom,
+		Underworld,
 		Engraft,
 		Count
 	}
@@ -68,6 +70,8 @@ namespace apogean.Content.Backgrounds
 		public static RuinedBackgroundBiome DetectBiome(Player player)
 		{
 			if (player.InModBiome<EngraftBiome>()) return RuinedBackgroundBiome.Engraft;
+			if (player.ZoneUnderworldHeight) return RuinedBackgroundBiome.Underworld;
+			if (player.ZoneGlowshroom) return RuinedBackgroundBiome.Mushroom;
 			if (player.ZoneBeach) return RuinedBackgroundBiome.Ocean;
 			if (player.ZoneHallow) return RuinedBackgroundBiome.Hallow;
 			if (player.ZoneCrimson) return RuinedBackgroundBiome.Crimson;

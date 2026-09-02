@@ -1,29 +1,31 @@
 # Fixed 192x184 Helix campus. Surface baseline is y=45; the laboratory descends below it.
 size 192 184
+surface 45
 entrance 93 37 7 11
-clear 0 0 192 184
+clear 5 8 182 39
+clear 14 45 164 136
 
 # Cracked stepped biodome and reception crown.
 wall HelixObservationWall 32 17 128 30
-fill HelixContainmentPanel 48 8 96 2
-fill HelixContainmentPanel 48 8 2 5
-fill HelixContainmentPanel 142 8 2 5
-fill HelixContainmentPanel 32 11 128 2
-fill HelixContainmentPanel 32 11 2 6
-fill HelixContainmentPanel 158 11 2 6
-fill HelixContainmentPanel 20 15 152 2
-fill HelixContainmentPanel 20 15 2 8
-fill HelixContainmentPanel 170 15 2 8
-fill HelixContainmentPanel 12 21 168 2
-fill HelixContainmentPanel 12 21 2 10
-fill HelixContainmentPanel 178 21 2 10
-fill HelixContainmentPanel 7 29 178 2
-fill HelixContainmentPanel 7 29 2 10
-fill HelixContainmentPanel 183 29 2 10
-fill HelixContainmentPanel 5 37 182 3
-fill HelixContainmentPanel 5 30 3 17
-fill HelixContainmentPanel 184 30 3 17
-frame HelixContainmentPanel 70 18 52 30 2
+fill HelixTrim 48 8 96 2
+fill HelixBeam 48 8 2 5
+fill HelixBeam 142 8 2 5
+fill HelixTrim 32 11 128 2
+fill HelixBeam 32 11 2 6
+fill HelixBeam 158 11 2 6
+fill HelixTrim 20 15 152 2
+fill HelixBeam 20 15 2 8
+fill HelixBeam 170 15 2 8
+fill HelixTrim 12 21 168 2
+fill HelixBeam 12 21 2 10
+fill HelixBeam 178 21 2 10
+fill HelixTrim 7 29 178 2
+fill HelixBeam 7 29 2 10
+fill HelixBeam 183 29 2 10
+fill HelixFloor 5 37 182 3
+fill HelixBlock 5 30 3 17
+fill HelixBlock 184 30 3 17
+frame HelixGlass 70 18 52 30 2
 object HelixConsole 78 43 3 2
 object HelixTable 105 43 3 2
 object HelixChair 103 43 1 2 0
@@ -32,19 +34,19 @@ object HelixLight 113 23 1 1
 
 # Main descending laboratory shell and four sealed decks.
 wall HelixLaboratoryWall 17 48 158 127
-frame HelixContainmentPanel 14 45 164 136 3
-fill HelixContainmentPanel 17 76 158 3
-fill HelixContainmentPanel 17 106 158 3
-fill HelixContainmentPanel 17 136 158 3
-fill HelixContainmentPanel 17 166 158 3
+frame HelixBlock 14 45 164 136 3
+fill HelixFloor 17 76 158 3
+fill HelixFloor 17 106 158 3
+fill HelixFloor 17 136 158 3
+fill HelixFloor 17 166 158 3
 platform HelixPlatform 21 74 150
 platform HelixPlatform 21 104 150
 platform HelixPlatform 21 134 150
 platform HelixPlatform 21 164 150
 
 # Central decontamination and lift spine.
-fill HelixContainmentPanel 88 48 3 118
-fill HelixContainmentPanel 101 48 3 118
+fill HelixBeam 88 48 3 118
+fill HelixBeam 101 48 3 118
 wall HelixObservationWall 91 51 10 113
 platform HelixPlatform 91 68 10
 platform HelixPlatform 91 98 10

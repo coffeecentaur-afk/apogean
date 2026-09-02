@@ -39,7 +39,8 @@ Each surface biome has at least two authored background compositions. Every comp
 
 The Wastes must remain a complete Terraria building biome rather than a set dressing pass.
 
-- Naturally generated forest grass is converted to separate dead grass. Vanilla green grass, grass walls, flower walls, seeds, and related restoration tools remain obtainable and placeable.
+- Naturally generated forest terrain is converted to a separate Wastes family: soil, stone, grass, sand, ice, snow, mud, unsafe background walls, dead trees, and dry surface growth. Vanilla green grass, walls, seeds, and related restoration tools remain obtainable and placeable.
+- Restoration is deliberately two-step. Purity converts hostile Maw terrain and unsafe walls into neutral Wastes; a second purity pass converts Wastes into the corresponding vanilla dirt, stone, grass, sand, ice, snow, mud, and natural wall family.
 - Dead forest trees are real trees: they can be chopped, shaken, planted with acorns, regrown, painted, and harvested for ordinary Wood. Their leafless canopy does not emit peaceful falling leaves.
 - Living Trees retain their wood, roots, rooms, doors, chests, and traversal. World generation removes or replaces their green leaf canopy rather than deleting the structure.
 - Naturally generated unsafe grass and flower walls receive ruined variants. Player-built safe walls and restored green terrain are never globally rewritten after world generation.
@@ -61,6 +62,8 @@ The Wastes must remain a complete Terraria building biome rather than a set dres
 - Kessler occupies a fortified surface Campus, Helix uses a surface biodome over a larger underground laboratory near but outside the Maw, and Sentrix occupies a sealed floating spire. Their horizontal sides are selected per seed by safety scoring rather than fixed left/right assignments.
 - Each Campus is one authored whole-building blueprint placed without stretching inside its saved atlas reservation. Its silhouette, decks, walls, public frontage, progression entrance, reusable arena, and furniture layout are stable across seeds; only its world location and bounded terrain skirt vary.
 - Corporate interiors use complete native-scale tile families rather than generic block recolors: structure panel, technical/window wall, platform, chair, table, functional workbench, light, console, storage, and faction-signature animated machinery. Kessler reads as fortified armory infrastructure, Helix as clinical containment, and Sentrix as surveillance/data architecture.
+- Every auto-framed solid and wall atlas uses Terraria's real edge/corner/isolated framing topology. A filled grid of repeated 16-pixel squares is invalid even when the canvas dimensions are correct. Apogean bundles these textures directly; a separate resource pack is neither required nor accepted as a substitute.
+- Ground Campus blueprints mutate only explicitly authored clear/tile/wall/object cells. Empty reservation cells preserve host terrain, Kessler seals a compact authored footing into the surface, and Helix anchors its walkable dome at the sampled surface while the laboratory extends below. Sentrix alone may clear its full reservation because it is deliberately floating.
 - Every supported world guarantees one abandoned outpost for each corporation, one neutral pre-war settlement or transit ruin, and one independent Maw research site. Additional small ruins are opportunistic and never displace critical Terraria or third-party content.
 
 ### Underground and Underworld scenery
@@ -107,6 +110,7 @@ The Maw is the hostile biome created by the distributed Broodmass organism, not 
 - MATRIARCH-7A-1's defeat forces the network into visible dormancy: amber lighting dims and biological motion and spread fall to their minimum. Wall of Flesh and Hardmode awaken the network again; dormancy never purifies existing Maw terrain.
 - The Wall of Flesh is provisionally understood as an ancient planetary immune barrier partially infected by the Broodmass. It remains recognizably the classic horizontal Underworld guardian; its later resprite and attack redesign must preserve that identity while explaining the Maw's Hardmode reawakening.
 - Corruption and Crimson are consumed at a frontier; Hallow pushes back and slows Maw growth.
+- Maw conversion is an explicit allowlist shared by initial generation and runtime spread. It preserves ores, player housing walls, chests, furniture, Dungeon, Temple, hive, corporate structures, and unknown modded terrain by default while converting natural dirt/stone/grass/jungle/mushroom/ash/sand/ice/snow/mud/clay/silt/slush/moss/fossil/marble/granite/living-wood/leaf/thorn families and their unsafe walls into authored Maw counterparts.
 - The Maw is frightening through pounces, larvae, tethers, burrows, and overlapping terrain pressure—not unreasonably large stats.
 
 ## Act 1 Progression

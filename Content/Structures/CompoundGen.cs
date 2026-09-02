@@ -110,9 +110,9 @@ namespace apogean.Content.Structures
 
 		private static int GetCampusTile(ApogeanFaction faction) => faction switch
 		{
-			ApogeanFaction.Kessler => ModContent.TileType<KesslerPlating>(),
-			ApogeanFaction.Helix => ModContent.TileType<HelixContainmentPanel>(),
-			ApogeanFaction.Sentrix => ModContent.TileType<SentrixPanel>(),
+			ApogeanFaction.Kessler => ModContent.TileType<KesslerBlock>(),
+			ApogeanFaction.Helix => ModContent.TileType<HelixBlock>(),
+			ApogeanFaction.Sentrix => ModContent.TileType<SentrixBlock>(),
 			_ => ModContent.TileType<LockedBulkhead>()
 		};
 

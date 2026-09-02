@@ -28,30 +28,45 @@ namespace apogean.Content.World
 		public static int ApplyRuinedSurface()
 		{
 			int changed = 0;
-			int deadGrass = ModContent.TileType<DeadGrass>();
-			int deadGrassWall = ModContent.WallType<DeadGrassWallUnsafe>();
-			int deadFlowerWall = ModContent.WallType<DeadFlowerWallUnsafe>();
+			int wastesGrass = ModContent.TileType<WastesGrass>();
+			int wastesSoil = ModContent.TileType<WastesSoil>();
+			int wastesStone = ModContent.TileType<WastesStone>();
+			int wastesSand = ModContent.TileType<WastesSand>();
+			int deadGrassWall = ModContent.WallType<WastesGrassWallUnsafe>();
+			int deadFlowerWall = ModContent.WallType<WastesGrassWallUnsafe>();
 			int maximumY = Math.Min(Main.maxTilesY - 20, (int)Main.rockLayer + 100);
+			bool[] wastesColumn = new bool[Main.maxTilesX];
+			int[] surfaceY = new int[Main.maxTilesX];
+			for (int x = 30; x < Main.maxTilesX - 30; x++)
+			{
+				surfaceY[x] = FindForestSurface(x, maximumY);
+				wastesColumn[x] = surfaceY[x] > 0;
+			}
+
 			for (int x = 30; x < Main.maxTilesX - 30; x++)
 			{
 				for (int y = 30; y < maximumY; y++)
 				{
 					if (!ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, WorldEditIntent.WastesConversion)) continue;
 					Tile tile = Framing.GetTileSafely(x, y);
-					switch (tile.WallType)
+					if (wastesColumn[x])
 					{
-						case WallID.GrassUnsafe:
-							tile.WallType = (ushort)deadGrassWall;
-							changed++;
-							break;
-						case WallID.FlowerUnsafe:
-							tile.WallType = (ushort)deadFlowerWall;
-							changed++;
-							break;
-						case WallID.LivingLeaf:
-							tile.WallType = WallID.None;
-							changed++;
-							break;
+						switch (tile.WallType)
+						{
+							case WallID.GrassUnsafe:
+								tile.WallType = (ushort)deadGrassWall;
+								changed++;
+								break;
+							case WallID.FlowerUnsafe:
+								tile.WallType = (ushort)deadFlowerWall;
+								changed++;
+								break;
+						}
+					}
+					if (tile.WallType == WallID.LivingLeaf)
+					{
+						tile.WallType = WallID.None;
+						changed++;
 					}
 
 					if (!tile.HasTile) continue;
@@ -59,13 +74,34 @@ namespace apogean.Content.World
 					switch (tile.TileType)
 					{
 						case TileID.Grass:
-							tile.TileType = (ushort)deadGrass;
+							if (!wastesColumn[x]) break;
+							tile.TileType = (ushort)wastesGrass;
+							tile.TileColor = PaintID.None;
+							changed++;
+							break;
+						case TileID.Dirt:
+						case TileID.ClayBlock:
+							if (!wastesColumn[x] || y > surfaceY[x] + 52) break;
+							tile.TileType = (ushort)wastesSoil;
+							tile.TileColor = PaintID.None;
+							changed++;
+							break;
+						case TileID.Stone:
+							if (!wastesColumn[x] || y > surfaceY[x] + 68) break;
+							tile.TileType = (ushort)wastesStone;
+							tile.TileColor = PaintID.None;
+							changed++;
+							break;
+						case TileID.Sand:
+							if (!wastesColumn[x] || y > surfaceY[x] + 40) break;
+							tile.TileType = (ushort)wastesSand;
 							tile.TileColor = PaintID.None;
 							changed++;
 							break;
 						case TileID.Plants:
 						case TileID.Plants2:
 						case TileID.Vines:
+							if (!wastesColumn[x]) break;
 							WorldGen.KillTile(x, y, noItem: true);
 							changed++;
 							break;
@@ -86,8 +122,26 @@ namespace apogean.Content.World
 				}
 			}
 
-			PlantDeadSurface(deadGrass, maximumY);
+			PlantDeadSurface(wastesGrass, maximumY);
 			return changed;
+		}
+
+		private static int FindForestSurface(int x, int maximumY)
+		{
+			for (int y = 35; y < Math.Min(maximumY, Main.worldSurface + 100); y++)
+			{
+				Tile tile = Framing.GetTileSafely(x, y);
+				if (!tile.HasTile)
+					continue;
+				if (tile.TileType == TileID.Grass || tile.TileType == ModContent.TileType<DeadGrass>() ||
+					tile.TileType == ModContent.TileType<WastesGrass>())
+					return y;
+				if (tile.TileType < TileID.Sets.IsATreeTrunk.Length && TileID.Sets.IsATreeTrunk[tile.TileType])
+					continue;
+				if (Main.tileSolid[tile.TileType] && !Main.tileSolidTop[tile.TileType])
+					return 0;
+			}
+			return 0;
 		}
 
 		private static void PlantDeadSurface(int deadGrass, int maximumY)

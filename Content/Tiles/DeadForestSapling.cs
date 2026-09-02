@@ -11,7 +11,7 @@ using Terraria.ObjectData;
 
 namespace apogean.Content.Tiles
 {
-	/// <summary>A wind-bent acorn sapling that grows DeadForestTree on DeadGrass.</summary>
+	/// <summary>A wind-bent acorn sapling that grows DeadForestTree on Wastes grass.</summary>
 	public sealed class DeadForestSapling : ModTile
 	{
 		public override void SetStaticDefaults()
@@ -28,7 +28,11 @@ namespace apogean.Content.Tiles
 			TileObjectData.newTile.CoordinateHeights = new[] { 16, 18 };
 			TileObjectData.newTile.CoordinateWidth = 16;
 			TileObjectData.newTile.CoordinatePadding = 2;
-			TileObjectData.newTile.AnchorValidTiles = new[] { ModContent.TileType<DeadGrass>() };
+			TileObjectData.newTile.AnchorValidTiles = new[]
+			{
+				ModContent.TileType<WastesGrass>(),
+				ModContent.TileType<DeadGrass>()
+			};
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.DrawFlipHorizontal = true;
 			TileObjectData.newTile.WaterPlacement = LiquidPlacement.NotAllowed;

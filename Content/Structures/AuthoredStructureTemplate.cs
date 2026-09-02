@@ -22,6 +22,7 @@ namespace apogean.Content.Structures
 
 		public int Width { get; private set; }
 		public int Height { get; private set; }
+		public int SurfaceBaseline { get; private set; } = -1;
 		public Rectangle Entrance { get; private set; }
 
 		public static AuthoredStructureTemplate Load(Mod mod, string assetPath)
@@ -46,6 +47,9 @@ namespace apogean.Content.Structures
 							break;
 						case "entrance":
 							template.Entrance = Rect(parts, 1);
+							break;
+						case "surface":
+							template.SurfaceBaseline = Number(parts[1]);
 							break;
 						case "clear":
 						case "erase":
@@ -94,7 +98,8 @@ namespace apogean.Content.Structures
 			FrameRegion(worldBounds);
 			Rectangle entrance = Entrance;
 			entrance.Offset(origin);
-			return new AuthoredStructurePlacement(worldBounds, entrance);
+			int surfaceY = SurfaceBaseline >= 0 ? originY + SurfaceBaseline : -1;
+			return new AuthoredStructurePlacement(worldBounds, entrance, surfaceY);
 		}
 
 		public AuthoredStructurePlacement GetPlacement(Rectangle atlasBounds, bool centerVertically)
@@ -103,7 +108,8 @@ namespace apogean.Content.Structures
 			int originY = centerVertically ? atlasBounds.Center.Y - Height / 2 : atlasBounds.Top;
 			Rectangle entrance = Entrance;
 			entrance.Offset(originX, originY);
-			return new AuthoredStructurePlacement(new Rectangle(originX, originY, Width, Height), entrance);
+			int surfaceY = SurfaceBaseline >= 0 ? originY + SurfaceBaseline : -1;
+			return new AuthoredStructurePlacement(new Rectangle(originX, originY, Width, Height), entrance, surfaceY);
 		}
 
 		private static void Execute(StructureCommand command, Point origin)
@@ -219,6 +225,21 @@ namespace apogean.Content.Structures
 
 		private static int ResolveTile(string name) => name switch
 		{
+			nameof(KesslerBlock) => ModContent.TileType<KesslerBlock>(),
+			nameof(KesslerTrim) => ModContent.TileType<KesslerTrim>(),
+			nameof(KesslerFloor) => ModContent.TileType<KesslerFloor>(),
+			nameof(KesslerGlass) => ModContent.TileType<KesslerGlass>(),
+			nameof(KesslerBeam) => ModContent.TileType<KesslerBeam>(),
+			nameof(HelixBlock) => ModContent.TileType<HelixBlock>(),
+			nameof(HelixTrim) => ModContent.TileType<HelixTrim>(),
+			nameof(HelixFloor) => ModContent.TileType<HelixFloor>(),
+			nameof(HelixGlass) => ModContent.TileType<HelixGlass>(),
+			nameof(HelixBeam) => ModContent.TileType<HelixBeam>(),
+			nameof(SentrixBlock) => ModContent.TileType<SentrixBlock>(),
+			nameof(SentrixTrim) => ModContent.TileType<SentrixTrim>(),
+			nameof(SentrixFloor) => ModContent.TileType<SentrixFloor>(),
+			nameof(SentrixGlass) => ModContent.TileType<SentrixGlass>(),
+			nameof(SentrixBeam) => ModContent.TileType<SentrixBeam>(),
 			nameof(KesslerPlating) => ModContent.TileType<KesslerPlating>(),
 			nameof(HelixContainmentPanel) => ModContent.TileType<HelixContainmentPanel>(),
 			nameof(SentrixPanel) => ModContent.TileType<SentrixPanel>(),
@@ -268,14 +289,19 @@ namespace apogean.Content.Structures
 		private readonly record struct StructureCommand(string Operation, string Asset, Rectangle Area, int Argument, int Style);
 	}
 
-	internal readonly record struct AuthoredStructurePlacement(Rectangle Bounds, Rectangle Entrance);
+	internal readonly record struct AuthoredStructurePlacement(Rectangle Bounds, Rectangle Entrance, int SurfaceY);
 
 	internal static class CorporateCampusBlueprints
 	{
 		private static readonly Dictionary<ApogeanFaction, AuthoredStructureTemplate> Templates = new();
 
-		public static AuthoredStructurePlacement Place(Mod mod, ApogeanFaction faction, Rectangle atlasBounds) =>
-			Get(mod, faction).Place(atlasBounds, faction == ApogeanFaction.Sentrix);
+		public static AuthoredStructurePlacement Place(Mod mod, ApogeanFaction faction, Rectangle atlasBounds)
+		{
+			AuthoredStructurePlacement placement = Get(mod, faction).Place(atlasBounds, faction == ApogeanFaction.Sentrix);
+			if (faction is ApogeanFaction.Kessler or ApogeanFaction.Helix)
+				CorporateTerrainIntegration.BlendGroundCampus(faction, placement);
+			return placement;
+		}
 
 		public static AuthoredStructurePlacement GetPlacement(Mod mod, ApogeanFaction faction, Rectangle atlasBounds) =>
 			Get(mod, faction).GetPlacement(atlasBounds, faction == ApogeanFaction.Sentrix);

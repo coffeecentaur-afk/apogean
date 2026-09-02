@@ -46,6 +46,7 @@ namespace apogean.Content.Backgrounds
 	public sealed class CrimsonRuinedBackgroundStyle : ApogeanSurfaceBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Crimson; }
 	public sealed class HallowRuinedBackgroundStyle : ApogeanSurfaceBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Hallow; }
 	public sealed class OceanRuinedBackgroundStyle : ApogeanSurfaceBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Ocean; }
+	public sealed class MushroomRuinedBackgroundStyle : ApogeanSurfaceBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Mushroom; }
 	public sealed class EngraftRuinedBackgroundStyle : ApogeanSurfaceBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Engraft; }
 
 	public sealed class RuinedGlobalBackgroundStyle : GlobalBackgroundStyle
@@ -65,6 +66,7 @@ namespace apogean.Content.Backgrounds
 				RuinedBackgroundBiome.Crimson => ModContent.GetInstance<CrimsonRuinedBackgroundStyle>().Slot,
 				RuinedBackgroundBiome.Hallow => ModContent.GetInstance<HallowRuinedBackgroundStyle>().Slot,
 				RuinedBackgroundBiome.Ocean => ModContent.GetInstance<OceanRuinedBackgroundStyle>().Slot,
+				RuinedBackgroundBiome.Mushroom => ModContent.GetInstance<MushroomRuinedBackgroundStyle>().Slot,
 				RuinedBackgroundBiome.Engraft => ModContent.GetInstance<EngraftRuinedBackgroundStyle>().Slot,
 				_ => ModContent.GetInstance<ForestRuinedBackgroundStyle>().Slot
 			};
@@ -74,15 +76,14 @@ namespace apogean.Content.Backgrounds
 		{
 			if (Main.gameMenu || !ModContent.GetInstance<ApogeanWorldConfig>().RuinedBiomeBackgrounds) return;
 			Player player = Main.LocalPlayer;
-			if (player == null || !player.active || player.ZoneUnderworldHeight) return;
+			if (player == null || !player.active) return;
 
-			// Do not replace underground scenes that do not yet have an authored
-			// Apogean set. Falling back to Forest here erased the mushroom biome's
-			// visual identity. These receive dedicated ruined sets in a later slice.
-			if (player.ZoneGlowshroom || player.ZoneDungeon) return;
+			if (player.ZoneDungeon) return;
 
 			style = RuinedBackgroundSelectionSystem.DetectBiome(player) switch
 			{
+				RuinedBackgroundBiome.Underworld => ModContent.GetInstance<UnderworldRuinedUndergroundStyle>().Slot,
+				RuinedBackgroundBiome.Mushroom => ModContent.GetInstance<MushroomRuinedUndergroundStyle>().Slot,
 				RuinedBackgroundBiome.Desert => ModContent.GetInstance<DesertRuinedUndergroundStyle>().Slot,
 				RuinedBackgroundBiome.Jungle => ModContent.GetInstance<JungleRuinedUndergroundStyle>().Slot,
 				RuinedBackgroundBiome.Snow => ModContent.GetInstance<SnowRuinedUndergroundStyle>().Slot,

@@ -30,8 +30,6 @@ namespace apogean.Content.NPCs.Engraft
 			NPC.noTileCollide = true;
 			NPC.HitSound = SoundID.NPCHit5 with { Pitch = -0.45f };
 			NPC.DeathSound = SoundID.NPCDeath1 with { Pitch = 0.1f };
-			Banner = Item.NPCtoBanner(Type);
-			BannerItem = Item.BannerToItem(Banner);
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo) =>

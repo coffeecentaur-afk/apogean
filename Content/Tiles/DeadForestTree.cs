@@ -31,7 +31,11 @@ namespace apogean.Content.Tiles
 
 		public override void SetStaticDefaults()
 		{
-			GrowsOnTileId = new[] { ModContent.TileType<DeadGrass>() };
+			GrowsOnTileId = new[]
+			{
+				ModContent.TileType<WastesGrass>(),
+				ModContent.TileType<DeadGrass>()
+			};
 			trunkTexture = ModContent.Request<Texture2D>("apogean/Content/Tiles/DeadForestTree");
 			branchTexture = ModContent.Request<Texture2D>("apogean/Content/Tiles/DeadForestTree_Branches");
 			topTexture = ModContent.Request<Texture2D>("apogean/Content/Tiles/DeadForestTree_Tops");

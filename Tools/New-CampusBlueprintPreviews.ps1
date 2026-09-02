@@ -7,10 +7,13 @@ Add-Type -AssemblyName System.Drawing
 function C([string]$hex) { [System.Drawing.ColorTranslator]::FromHtml($hex) }
 
 $colors = @{
+    KesslerBlock=(C '#4a4f50'); KesslerTrim=(C '#8d8b7f'); KesslerFloor=(C '#34393c'); KesslerGlass=(C '#6b6d68'); KesslerBeam=(C '#24282b')
     KesslerPlating=(C '#59504a'); KesslerPlatform=(C '#aa572f'); KesslerBulkheadWall=(C '#29282a'); KesslerWindowWall=(C '#46342e')
     KesslerChair=(C '#c26733'); KesslerTable=(C '#b55e31'); KesslerWorkbench=(C '#d06b31'); KesslerLight=(C '#ff512d'); KesslerConsole=(C '#e84428'); KesslerLocker=(C '#72574a'); KesslerPowerArmorRack=(C '#ef7a37')
+    HelixBlock=(C '#7a8175'); HelixTrim=(C '#d2d1bf'); HelixFloor=(C '#555d54'); HelixGlass=(C '#587360'); HelixBeam=(C '#343a35')
     HelixContainmentPanel=(C '#cbd2ca'); HelixPlatform=(C '#8eb39a'); HelixLaboratoryWall=(C '#3a4542'); HelixObservationWall=(C '#315944')
     HelixChair=(C '#d9ddd6'); HelixTable=(C '#b8c4ba'); HelixWorkbench=(C '#a9b9ad'); HelixLight=(C '#68dc78'); HelixConsole=(C '#55b967'); HelixLocker=(C '#778b81'); HelixSymbioteTank=(C '#d6a33e')
+    SentrixBlock=(C '#203b4d'); SentrixTrim=(C '#65abc2'); SentrixFloor=(C '#172734'); SentrixGlass=(C '#397a96'); SentrixBeam=(C '#101820')
     SentrixPanel=(C '#254b61'); SentrixPlatform=(C '#2c91b8'); SentrixDataWall=(C '#102838'); SentrixWindowWall=(C '#16475d')
     SentrixChair=(C '#4fc5e8'); SentrixTable=(C '#328baa'); SentrixWorkbench=(C '#3b9dbd'); SentrixLight=(C '#87ebff'); SentrixConsole=(C '#49c8ef'); SentrixLocker=(C '#315f75'); SentrixHologramCore=(C '#b0f3ff')
 }
@@ -23,7 +26,7 @@ function Parse-Blueprint([string]$path) {
         if ($line.Length -eq 0 -or $line.StartsWith('#')) { continue }
         $parts = $line -split '\s+'
         if ($parts[0] -eq 'size') { $width=[int]$parts[1]; $height=[int]$parts[2]; continue }
-        if ($parts[0] -eq 'entrance') { continue }
+        if ($parts[0] -eq 'entrance' -or $parts[0] -eq 'surface') { continue }
         $commands.Add($parts)
     }
     return @{ Width=$width; Height=$height; Commands=$commands }

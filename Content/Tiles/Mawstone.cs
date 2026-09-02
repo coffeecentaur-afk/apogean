@@ -6,19 +6,19 @@ using Terraria.ModLoader;
 namespace apogean.Content.Tiles
 {
 	/// <summary>Hardened structural tissue framing the Gullet and Stomach.</summary>
-	public sealed class Mawstone : ModTile
+	public sealed class Mawstone : MawNaturalTile
 	{
+		protected override Color MapColor => new(91, 73, 44);
+		protected override int PurifiedTile => ModContent.TileType<WastesStone>();
+		protected override int ItemDrop => ItemID.StoneBlock;
+		protected override float Resistance => 2.4f;
+
 		public override void SetStaticDefaults()
 		{
-			Main.tileSolid[Type] = true;
-			Main.tileBlockLight[Type] = true;
-			Main.tileMergeDirt[Type] = true;
+			base.SetStaticDefaults();
 			Main.tileMerge[Type][ModContent.TileType<EngraftTurf>()] = true;
 			Main.tileMerge[ModContent.TileType<EngraftTurf>()][Type] = true;
-			DustType = DustID.AmberBolt;
-			MineResist = 2.4f;
 			MinPick = 59;
-			AddMapEntry(new Color(93, 74, 39));
 		}
 
 		public override bool CanExplode(int i, int j) => true;

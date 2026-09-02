@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using apogean.Content.Tiles;
 using apogean.Content.Walls;
+using apogean.Content.World;
 
 namespace apogean.Common.WorldGeneration
 {
@@ -149,13 +150,12 @@ namespace apogean.Common.WorldGeneration
 
 		private static void GenerateOutgrowth(MawRupturePlan rupture, UnifiedRandom random, WorldEditIntent intent)
 		{
-			int turf = ModContent.TileType<EngraftTurf>();
 			Point16 center = rupture.SurfaceCenter;
 			for (int x = center.X - rupture.RadiusX; x <= center.X + rupture.RadiusX; x++)
 			{
 				for (int y = center.Y - rupture.RadiusY; y <= center.Y + rupture.RadiusY; y++)
 				{
-					if (!WorldGen.InWorld(x, y, 12) || !MawTerrainRules.CanConvert(x, y, intent))
+					if (!WorldGen.InWorld(x, y, 12))
 						continue;
 
 					float dx = (x - center.X) / (float)rupture.RadiusX;
@@ -163,7 +163,10 @@ namespace apogean.Common.WorldGeneration
 					if (dx * dx + dy * dy > 1f + random.NextFloat(-0.14f, 0.12f))
 						continue;
 
-					SetSolidTile(x, y, turf);
+					bool convertTile = MawTerrainRules.CanConvert(x, y, intent);
+					bool convertWall = MawTerrainRules.CanConvertWall(x, y, intent);
+					if (convertTile || convertWall)
+						MawConversionSystem.ConvertAt(x, y, convertTile, convertWall);
 				}
 			}
 
@@ -172,7 +175,6 @@ namespace apogean.Common.WorldGeneration
 
 		private static void MutateSurfaceGrowth(MawRupturePlan rupture, UnifiedRandom random, WorldEditIntent intent)
 		{
-			int turf = ModContent.TileType<EngraftTurf>();
 			int tuft = ModContent.TileType<EngraftTuft>();
 			Rectangle bounds = rupture.GenerationBounds;
 			for (int x = Math.Max(12, bounds.Left); x < Math.Min(Main.maxTilesX - 12, bounds.Right); x++)
@@ -182,7 +184,7 @@ namespace apogean.Common.WorldGeneration
 					if (!ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, intent))
 						continue;
 					Tile ground = Framing.GetTileSafely(x, y);
-					if (!ground.HasTile || ground.TileType != turf)
+					if (!ground.HasTile || !MawConversionSystem.IsMawTerrain(ground.TileType))
 						continue;
 
 					Tile above = Framing.GetTileSafely(x, y - 1);

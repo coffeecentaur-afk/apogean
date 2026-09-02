@@ -1,45 +1,49 @@
 # Fixed 208x96 Kessler surface campus. Surface baseline is y=70.
 size 208 96
+surface 70
 entrance 101 63 7 9
-clear 0 0 208 96
+clear 2 32 30 46
+clear 176 32 30 46
+clear 32 8 144 66
 
 # Compacted foundation and perimeter defenses.
-fill KesslerPlating 0 72 208 6
-fill KesslerPlating 8 78 18 8
-fill KesslerPlating 182 78 18 8
-frame KesslerPlating 2 48 30 30 3
-frame KesslerPlating 176 48 30 30 3
+fill KesslerFloor 0 70 208 2
+fill KesslerBlock 0 72 208 6
+fill KesslerBlock 8 78 18 8
+fill KesslerBlock 182 78 18 8
+frame KesslerBlock 2 48 30 30 3
+frame KesslerBlock 176 48 30 30 3
 wall KesslerBulkheadWall 5 51 24 21
 wall KesslerBulkheadWall 179 51 24 21
 wall KesslerWindowWall 10 54 14 7
 wall KesslerWindowWall 184 54 14 7
 platform KesslerPlatform 2 45 30
 platform KesslerPlatform 176 45 30
-fill KesslerPlating 14 35 6 13
-fill KesslerPlating 188 35 6 13
-fill KesslerPlating 10 32 14 3
-fill KesslerPlating 184 32 14 3
+fill KesslerBeam 14 35 6 13
+fill KesslerBeam 188 35 6 13
+fill KesslerTrim 10 32 14 3
+fill KesslerTrim 184 32 14 3
 object KesslerLight 16 39 1 1
 object KesslerLight 191 39 1 1
 
 # Headquarters shell, armored roofline, and two interior decks.
 wall KesslerBulkheadWall 35 23 138 49
-frame KesslerPlating 32 20 144 54 3
-fill KesslerPlating 42 16 34 4
-fill KesslerPlating 132 16 34 4
-fill KesslerPlating 86 12 36 8
-fill KesslerPlating 96 8 16 4
-fill KesslerPlating 104 3 2 5
-fill KesslerPlating 34 45 140 3
-fill KesslerPlating 34 70 140 2
+frame KesslerBlock 32 20 144 54 3
+fill KesslerTrim 42 16 34 4
+fill KesslerTrim 132 16 34 4
+fill KesslerBlock 86 12 36 8
+fill KesslerTrim 96 8 16 4
+fill KesslerBeam 104 3 2 5
+fill KesslerFloor 34 45 140 3
+fill KesslerFloor 34 70 140 2
 platform KesslerPlatform 38 43 132
 platform KesslerPlatform 38 68 132
 
 # Room partitions: armory, command, maintenance, and test bay.
-fill KesslerPlating 64 23 2 22
-fill KesslerPlating 139 23 2 22
-fill KesslerPlating 76 48 2 22
-fill KesslerPlating 127 48 2 22
+fill KesslerBeam 64 23 2 22
+fill KesslerBeam 139 23 2 22
+fill KesslerBeam 76 48 2 22
+fill KesslerBeam 127 48 2 22
 wall KesslerWindowWall 69 25 66 11
 wall KesslerWindowWall 81 52 42 8
 
@@ -78,8 +82,8 @@ object KesslerLight 119 52 1 1
 object KesslerLight 158 52 1 1
 
 # Exterior warning pylons and landing strip details.
-fill KesslerPlating 0 66 32 3
-fill KesslerPlating 176 66 32 3
+fill KesslerTrim 0 66 32 3
+fill KesslerTrim 176 66 32 3
 platform KesslerPlatform 32 68 42
 platform KesslerPlatform 132 68 44
 object KesslerConsole 20 69 3 2

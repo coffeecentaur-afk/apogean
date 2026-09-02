@@ -5,7 +5,7 @@ $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
 
 function C([string]$hex) { [System.Drawing.ColorTranslator]::FromHtml($hex) }
-$p = @((C '#171313'), (C '#2b201b'), (C '#493326'), (C '#684a2e'), (C '#8b6638'), (C '#c7ad78'), (C '#ead6a3'), (C '#b97818'), (C '#e0a126'))
+$p = @((C '#211916'), (C '#35261f'), (C '#523827'), (C '#735033'), (C '#967041'), (C '#ccb17d'), (C '#efdbae'), (C '#9f5d13'), (C '#d18a20'))
 
 function New-Canvas([int]$width, [int]$height) {
     $bitmap = [System.Drawing.Bitmap]::new($width, $height, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)

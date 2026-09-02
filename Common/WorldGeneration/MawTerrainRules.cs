@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using apogean.Content.Tiles;
+using apogean.Content.World;
 
 namespace apogean.Common.WorldGeneration
 {
@@ -14,6 +15,15 @@ namespace apogean.Common.WorldGeneration
 
 			Tile tile = Framing.GetTileSafely(x, y);
 			return tile.HasTile && IsNaturalTerrain(tile.TileType) && !HasProtectedWall(tile);
+		}
+
+		public static bool CanConvertWall(int x, int y, WorldEditIntent intent)
+		{
+			if (!ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, intent))
+				return false;
+
+			Tile tile = Framing.GetTileSafely(x, y);
+			return tile.WallType != WallID.None && IsNaturalWall(tile.WallType) && !HasNearbyFrameImportantTile(x, y, 1);
 		}
 
 		public static bool CanCarve(int x, int y, WorldEditIntent intent)
@@ -131,31 +141,19 @@ namespace apogean.Common.WorldGeneration
 			TileID.LihzahrdBrick or
 			TileID.Hive;
 
-		private static bool IsNaturalTerrain(ushort type) => type is
-			TileID.Dirt or
-			TileID.Grass or
-			TileID.Stone or
-			TileID.ClayBlock or
-			TileID.Mud or
-			TileID.JungleGrass or
-			TileID.MushroomGrass or
-			TileID.Sand or
-			TileID.HardenedSand or
-			TileID.Sandstone or
-			TileID.SnowBlock or
-			TileID.IceBlock or
-			TileID.CorruptIce or
-			TileID.FleshIce or
-			TileID.Ebonstone or
-			TileID.Crimstone or
-			TileID.Ebonsand or
-			TileID.Crimsand or
-			TileID.CorruptGrass or
-			TileID.CrimsonGrass or
-			TileID.GraniteBlock or
-			TileID.MarbleBlock or
-			TileID.Ash or
-			TileID.Hellstone;
+		internal static bool IsNaturalTerrain(ushort type) =>
+			MawConversionSystem.IsConvertibleNaturalTile(type) ||
+			MawConversionSystem.IsMawTerrain(type) ||
+			type == ModContent.TileType<WastesSoil>() ||
+			type == ModContent.TileType<WastesStone>() ||
+			type == ModContent.TileType<WastesGrass>() ||
+			type == ModContent.TileType<WastesSand>() ||
+			type == ModContent.TileType<WastesIce>() ||
+			type == ModContent.TileType<WastesSnow>() ||
+			type == ModContent.TileType<WastesMud>() ||
+			type == ModContent.TileType<DeadGrass>();
+
+		private static bool IsNaturalWall(ushort type) => MawConversionSystem.IsConvertibleNaturalWall(type);
 
 		private static bool IsNaturalCaveClutter(ushort type) => type is
 			TileID.BreakableIce or
@@ -178,11 +176,9 @@ namespace apogean.Common.WorldGeneration
 			TileID.RainbowMoss;
 
 		private static bool IsMawStructure(ushort type) =>
-			type == ModContent.TileType<EngraftTurf>() ||
+			MawConversionSystem.IsMawTerrain(type) ||
 			type == ModContent.TileType<EngraftTuft>() ||
 			type == ModContent.TileType<MawNode>() ||
-			type == ModContent.TileType<MawAcidPool>() ||
-			type == ModContent.TileType<Mawstone>() ||
-			type == ModContent.TileType<OssuaryBone>();
+			type == ModContent.TileType<MawAcidPool>();
 	}
 }

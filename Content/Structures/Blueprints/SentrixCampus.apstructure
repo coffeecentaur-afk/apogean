@@ -5,37 +5,37 @@ clear 0 0 176 160
 
 # Central intelligence spire shell and deck bands.
 wall SentrixDataWall 57 10 62 140
-frame SentrixPanel 54 7 68 146 3
-fill SentrixPanel 57 36 62 3
-fill SentrixPanel 57 65 62 3
-fill SentrixPanel 57 94 62 3
-fill SentrixPanel 57 123 62 3
+frame SentrixBlock 54 7 68 146 3
+fill SentrixFloor 57 36 62 3
+fill SentrixFloor 57 65 62 3
+fill SentrixFloor 57 94 62 3
+fill SentrixFloor 57 123 62 3
 platform SentrixPlatform 60 34 56
 platform SentrixPlatform 60 63 56
 platform SentrixPlatform 60 92 56
 platform SentrixPlatform 60 121 56
 
 # Alternating helipad arms and reinforced landing discs.
-fill SentrixPanel 16 27 38 3
-fill SentrixPanel 122 56 38 3
-fill SentrixPanel 16 85 38 3
-fill SentrixPanel 122 114 38 3
+fill SentrixBeam 16 27 38 3
+fill SentrixBeam 122 56 38 3
+fill SentrixBeam 16 85 38 3
+fill SentrixBeam 122 114 38 3
 platform SentrixPlatform 4 24 50
 platform SentrixPlatform 122 53 50
 platform SentrixPlatform 4 82 50
 platform SentrixPlatform 122 111 50
-frame SentrixPanel 4 17 45 10 2
-frame SentrixPanel 127 46 45 10 2
-frame SentrixPanel 4 75 45 10 2
-frame SentrixPanel 127 104 45 10 2
-fill SentrixPanel 4 25 4 8
-fill SentrixPanel 168 54 4 8
-fill SentrixPanel 4 83 4 8
-fill SentrixPanel 168 112 4 8
-fill SentrixPanel 28 30 3 12
-fill SentrixPanel 145 59 3 12
-fill SentrixPanel 28 88 3 12
-fill SentrixPanel 145 117 3 12
+frame SentrixTrim 4 17 45 10 2
+frame SentrixTrim 127 46 45 10 2
+frame SentrixTrim 4 75 45 10 2
+frame SentrixTrim 127 104 45 10 2
+fill SentrixBeam 4 25 4 8
+fill SentrixBeam 168 54 4 8
+fill SentrixBeam 4 83 4 8
+fill SentrixBeam 168 112 4 8
+fill SentrixBeam 28 30 3 12
+fill SentrixBeam 145 59 3 12
+fill SentrixBeam 28 88 3 12
+fill SentrixBeam 145 117 3 12
 object SentrixLight 9 20 1 1
 object SentrixLight 166 49 1 1
 object SentrixLight 9 78 1 1
@@ -90,9 +90,9 @@ object SentrixWorkbench 78 150 2 1
 object SentrixConsole 88 148 3 2
 object SentrixTable 103 148 3 2
 object SentrixChair 107 148 1 2 1
-fill SentrixPanel 66 153 12 5
-fill SentrixPanel 99 153 12 5
-fill SentrixPanel 72 158 4 2
-fill SentrixPanel 101 158 4 2
+fill SentrixTrim 66 153 12 5
+fill SentrixTrim 99 153 12 5
+fill SentrixBeam 72 158 4 2
+fill SentrixBeam 101 158 4 2
 object SentrixLight 65 129 1 1
 object SentrixLight 110 129 1 1

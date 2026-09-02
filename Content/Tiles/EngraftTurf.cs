@@ -6,18 +6,17 @@ using Terraria.ModLoader;
 namespace apogean.Content.Tiles
 {
 	/// <summary>Ochre soil sealed by dark living fibres. Ordinary turf is deliberately non-luminous.</summary>
-	public sealed class EngraftTurf : ModTile
+	public sealed class EngraftTurf : MawNaturalTile
 	{
+		protected override Color MapColor => new(137, 91, 31);
+		protected override int PurifiedTile => ModContent.TileType<WastesGrass>();
+
 		public override void SetStaticDefaults()
 		{
-			Main.tileSolid[Type] = true;
-			Main.tileBlockLight[Type] = true;
-			Main.tileMergeDirt[Type] = true;
+			base.SetStaticDefaults();
 			Main.tileMerge[Type][TileID.Dirt] = true;
 			Main.tileMerge[TileID.Dirt][Type] = true;
-			DustType = DustID.Dirt;
-			MineResist = 1.1f;
-			AddMapEntry(new Color(137, 91, 31));
+			TileID.Sets.Conversion.Grass[Type] = true;
 		}
 	}
 }

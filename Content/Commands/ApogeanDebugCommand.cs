@@ -24,7 +24,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -99,6 +99,18 @@ namespace apogean.Content.Commands
 					RuinedBackgroundBiome biome = RuinedBackgroundSelectionSystem.DetectBiome(player);
 					int variant = RuinedBackgroundSelectionSystem.Instance.Cycle(biome);
 					caller.Reply($"{biome} background changed to seeded variant {variant + 1}.", new Color(194, 126, 44));
+					break;
+
+				case "gallery":
+					if (Main.netMode == NetmodeID.MultiplayerClient)
+					{
+						caller.Reply("The destructive visual gallery helper is single-player/server-host only.", Color.OrangeRed);
+						break;
+					}
+					Rectangle gallery = VisualIntegrityGallery.Build(player, out System.Collections.Generic.IReadOnlyList<string> rows);
+					caller.Reply($"Built the native material gallery at X {gallery.Left}–{gallery.Right - 1}, Y {gallery.Top}–{gallery.Bottom - 1}. It intentionally clears that debug rectangle.", Color.LightGreen);
+					foreach (string row in rows)
+						caller.Reply(row, Info);
 					break;
 
 				case "kit":

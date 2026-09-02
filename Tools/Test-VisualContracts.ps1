@@ -100,7 +100,7 @@ $layerSpecs = @{
     'Close' = @(952, 480)
 }
 
-foreach ($biome in @('Forest', 'Desert', 'Jungle', 'Snow', 'Corruption', 'Crimson', 'Hallow', 'Ocean', 'Engraft')) {
+foreach ($biome in @('Forest', 'Desert', 'Jungle', 'Snow', 'Corruption', 'Crimson', 'Hallow', 'Ocean', 'Mushroom', 'Underworld', 'Engraft')) {
     foreach ($variant in 0..1) {
         foreach ($layer in $layerSpecs.Keys) {
             $spec = $layerSpecs[$layer]
@@ -167,7 +167,7 @@ foreach ($tileSheet in @(
     'PrewarConcrete',
     'MawResearchBlock'
 )) {
-    Test-PixelSheet -Path (Join-Path $projectRoot "Content/Tiles/$tileSheet.png") -ExpectedWidth 234 -ExpectedHeight 270 -MaximumOpaqueColors 12
+    Test-PixelSheet -Path (Join-Path $projectRoot "Content/Tiles/$tileSheet.png") -ExpectedWidth 288 -ExpectedHeight 270 -MaximumOpaqueColors 12
 }
 
 foreach ($fixtureSheet in @('KesslerPowerArmorRack', 'HelixSymbioteTank', 'SentrixHologramCore')) {
@@ -190,7 +190,7 @@ foreach ($faction in @('Kessler', 'Helix', 'Sentrix')) {
     }
 }
 foreach ($wall in @('KesslerBulkheadWall','KesslerWindowWall','HelixLaboratoryWall','HelixObservationWall','SentrixDataWall','SentrixWindowWall')) {
-    Test-PixelSheet -Path (Join-Path $projectRoot "Content/Walls/$wall.png") -ExpectedWidth 32 -ExpectedHeight 32 -MaximumOpaqueColors 12
+    Test-PixelSheet -Path (Join-Path $projectRoot "Content/Walls/$wall.png") -ExpectedWidth 468 -ExpectedHeight 180 -MaximumOpaqueColors 12
 }
 
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree.png') -ExpectedWidth 176 -ExpectedHeight 264 -MaximumOpaqueColors 12
