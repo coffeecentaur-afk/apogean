@@ -1,5 +1,7 @@
 # Remnants World-Generation Architecture Audit
 
+> **Implementation decision updated 2026-09-01.** The planning findings remain binding. The accepted atlas removes fake acid tiles but defers actual styled-water basins to an optional locality prototype; dry basin geometry is sufficient for Environmental Alpha.
+
 Date: 2026-09-01
 
 Audited project: [lazy-wombat/Remnants](https://github.com/lazy-wombat/Remnants)

@@ -1,5 +1,7 @@
 # Calamity Sulphurous Sea: Acid Water, Breath, and Abyss Pressure
 
+> **Decision superseded 2026-09-01.** The source findings remain valid, but the earlier custom acid-tile recommendation is no longer binding. `WORLD_PLACEMENT_ATLAS.md` removes fake acid tiles from normal world generation and treats any real-water acid basin as an optional locality prototype.
+
 ## Scope and evidence baseline
 
 **Proven — versions audited.** Calamity findings are pinned to the official `CalamityTeam/CalamityModPublic` `1.4.4` branch at commit [`1a8cebd27ec5615316b78f71973446b5528d2b78`](https://github.com/CalamityTeam/CalamityModPublic/commit/1a8cebd27ec5615316b78f71973446b5528d2b78). tModLoader API findings are pinned to the locally installed build's official source commit [`666f69962d3bdffde54fc14025f02634965b4e7c`](https://github.com/tModLoader/tModLoader/commit/666f69962d3bdffde54fc14025f02634965b4e7c). No community wiki or third-party explanation is used.

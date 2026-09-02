@@ -20,6 +20,10 @@ _Avoid_: The Maw when referring to the organism itself
 The major continuous planetary scar connecting the surface, underground, caverns, and an infected region of the Underworld.
 _Avoid_: Engraft scar, generic Maw biome
 
+**Maw Outgrowth**:
+A small secondary patch of Maw contamination outside the primary Rupture. An Outgrowth may contain enemies and a Maw Node, but it is not a second Gullet and never owns required Brood Nests.
+_Avoid_: Secondary Maw, Brood Nest, minor Rupture
+
 **Maw Node**:
 A feeding and amplification organ extended by the Broodmass into a Maw region. It accelerates local spread and hostility but does not sustain the Maw's intrinsic life or passive growth.
 _Avoid_: Boss summon, biome heart
@@ -44,9 +48,9 @@ _Avoid_: Frayed growth, progression membrane
 An explicit biological progression gate that cannot be removed with ordinary pickaxes or explosives until its associated encounter unlocks it.
 _Avoid_: Mawstone, arbitrary unbreakable terrain
 
-**Digestive acid**:
-Localized luminous amber fluid produced in authored Maw chambers. It is represented by animated non-solid hazard tiles rather than a fifth physical liquid or biome-wide water recolor, and remains chemically hazardous during dormancy even when its light and movement diminish.
-_Avoid_: Ordinary water, universal Maw liquid, pressure system
+**Digestive basin**:
+A reserved depression in an authored Maw chamber for an optional later prototype of localized amber digestive fluid. Environmental Alpha never fills it with fake solid acid tiles, and neither the basin nor any future liquid is required for progression.
+_Avoid_: Acid block, universal Maw water, pressure system
 
 **Maw dormancy**:
 The subdued state after MATRIARCH-7A-1 is defeated, when amber organs dim and biological activity falls to its minimum without erasing Maw terrain or passive growth.
@@ -59,3 +63,21 @@ _Avoid_: Maw Rupture
 **Restored wilds**:
 Vanilla living grass, plants, and trees deliberately recovered from the Wastes by the player. It is a restoration state, not the default condition of a new Apogee world.
 _Avoid_: Purity when referring to untouched world generation
+
+## Corporate geography
+
+**Corporate Campus**:
+One permanent, faction-specific headquarters landmark generated with the world and reused for contact, contracts, testing, the company war, and later salvage. Arrival changes its occupants and access state rather than creating the structure.
+_Avoid_: Temporary faction base, ambassador camp
+
+**Public frontage**:
+The exterior approach, reception area, or service post that players may reach before a Campus fully opens. It provides presence and limited salvage without granting access to protected corporate interiors.
+_Avoid_: Entire Campus, raid entrance
+
+**Corporate territory**:
+The bounded ground or structure claimed by a Campus, beginning at its explicit threshold such as Kessler's perimeter gate. Territory state may affect trespass and conversion resistance without forbidding ordinary building outside its narrow envelope.
+_Avoid_: Whole biome, permanent no-build zone
+
+**Orbital omen**:
+A temporary spacecraft or signal visible in the upper sky after a corporation's progression prerequisite and before its arrival event. It activates an existing Campus; it does not generate a new headquarters.
+_Avoid_: Orbital headquarters, new world-generation pass

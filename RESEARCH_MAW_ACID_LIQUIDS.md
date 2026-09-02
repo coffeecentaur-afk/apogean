@@ -1,5 +1,7 @@
 # Wayfinder Issue 22 — Maw Acid Pools and Custom-Liquid Limits
 
+> **Decision superseded 2026-09-01.** The technical liquid-limit findings remain valid, but Apogee no longer approves fake acid tiles for normal world generation. `WORLD_PLACEMENT_ATLAS.md` reserves dry digestive-basin geometry and permits a later real-water prototype only if it can remain local; acid is not required for Environmental Alpha or progression.
+
 ## Scope and evidence baseline
 
 **Proven — version audited.** This report is tied to the locally installed stable build `tModLoader 2026.07.3.0`, product version `1.4.4.9+2026.07.3.0`, commit `666f69962d3bdffde54fc14025f02634965b4e7c`. The audit used the installed `tModLoader.dll` and `tModLoader.xml`, the official ExampleMod at that exact commit, and the corresponding Terraria/tModLoader source patches. Links below are pinned to that commit rather than to a moving branch.
