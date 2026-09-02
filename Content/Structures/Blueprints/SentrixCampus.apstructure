@@ -1,0 +1,98 @@
+# Fixed 176x160 Sentrix sky campus, centered vertically inside its atlas reservation.
+size 176 160
+entrance 104 32 5 9
+clear 0 0 176 160
+
+# Central intelligence spire shell and deck bands.
+wall SentrixDataWall 57 10 62 140
+frame SentrixPanel 54 7 68 146 3
+fill SentrixPanel 57 36 62 3
+fill SentrixPanel 57 65 62 3
+fill SentrixPanel 57 94 62 3
+fill SentrixPanel 57 123 62 3
+platform SentrixPlatform 60 34 56
+platform SentrixPlatform 60 63 56
+platform SentrixPlatform 60 92 56
+platform SentrixPlatform 60 121 56
+
+# Alternating helipad arms and reinforced landing discs.
+fill SentrixPanel 16 27 38 3
+fill SentrixPanel 122 56 38 3
+fill SentrixPanel 16 85 38 3
+fill SentrixPanel 122 114 38 3
+platform SentrixPlatform 4 24 50
+platform SentrixPlatform 122 53 50
+platform SentrixPlatform 4 82 50
+platform SentrixPlatform 122 111 50
+frame SentrixPanel 4 17 45 10 2
+frame SentrixPanel 127 46 45 10 2
+frame SentrixPanel 4 75 45 10 2
+frame SentrixPanel 127 104 45 10 2
+fill SentrixPanel 4 25 4 8
+fill SentrixPanel 168 54 4 8
+fill SentrixPanel 4 83 4 8
+fill SentrixPanel 168 112 4 8
+fill SentrixPanel 28 30 3 12
+fill SentrixPanel 145 59 3 12
+fill SentrixPanel 28 88 3 12
+fill SentrixPanel 145 117 3 12
+object SentrixLight 9 20 1 1
+object SentrixLight 166 49 1 1
+object SentrixLight 9 78 1 1
+object SentrixLight 166 107 1 1
+
+# Surveillance and drone command deck.
+wall SentrixWindowWall 61 12 54 17
+object SentrixConsole 63 32 3 2
+object SentrixConsole 73 32 3 2
+object SentrixTable 86 32 3 2
+object SentrixChair 90 32 1 2 1
+object SentrixLocker 108 31 2 3
+object SentrixLight 66 13 1 1
+object SentrixLight 110 13 1 1
+
+# Server vault and drone berth.
+object SentrixLocker 62 60 2 3
+object SentrixLocker 67 60 2 3
+object SentrixLocker 72 60 2 3
+object SentrixConsole 82 61 3 2
+object SentrixTable 98 61 3 2
+object SentrixChair 102 61 1 2 1
+object SentrixWorkbench 110 62 2 1
+object SentrixLight 65 42 1 1
+object SentrixLight 110 42 1 1
+
+# Hologram analysis chamber and data archive.
+wall SentrixWindowWall 62 71 52 16
+object SentrixHologramCore 72 88 3 4
+object SentrixConsole 62 90 3 2
+object SentrixConsole 84 90 3 2
+object SentrixTable 99 90 3 2
+object SentrixChair 103 90 1 2 1
+object SentrixLocker 111 89 2 3
+object SentrixLight 65 71 1 1
+object SentrixLight 110 71 1 1
+
+# Combat-test chamber and sealed AI core.
+wall SentrixWindowWall 61 100 54 17
+object SentrixConsole 63 119 3 2
+object SentrixTable 76 119 3 2
+object SentrixChair 80 119 1 2 1
+object SentrixHologramCore 95 117 3 4
+object SentrixConsole 108 119 3 2
+object SentrixLight 65 100 1 1
+object SentrixLight 110 100 1 1
+
+# Lower archive and propulsion collar.
+object SentrixLocker 62 148 2 3
+object SentrixLocker 68 148 2 3
+object SentrixWorkbench 78 150 2 1
+object SentrixConsole 88 148 3 2
+object SentrixTable 103 148 3 2
+object SentrixChair 107 148 1 2 1
+fill SentrixPanel 66 153 12 5
+fill SentrixPanel 99 153 12 5
+fill SentrixPanel 72 158 4 2
+fill SentrixPanel 101 158 4 2
+object SentrixLight 65 129 1 1
+object SentrixLight 110 129 1 1

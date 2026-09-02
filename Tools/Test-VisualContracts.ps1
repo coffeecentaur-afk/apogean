@@ -174,6 +174,47 @@ foreach ($fixtureSheet in @('KesslerPowerArmorRack', 'HelixSymbioteTank', 'Sentr
     Test-PixelSheet -Path (Join-Path $projectRoot "Content/Tiles/$fixtureSheet.png") -ExpectedWidth 54 -ExpectedHeight 288 -MaximumOpaqueColors 16
 }
 
+$corporateFurniture = @{
+    'Platform' = @(486, 18)
+    'Chair' = @(36, 40)
+    'Table' = @(54, 36)
+    'Workbench' = @(36, 20)
+    'Light' = @(18, 18)
+    'Console' = @(54, 36)
+    'Locker' = @(36, 54)
+}
+foreach ($faction in @('Kessler', 'Helix', 'Sentrix')) {
+    foreach ($family in $corporateFurniture.Keys) {
+        $dimensions = $corporateFurniture[$family]
+        Test-PixelSheet -Path (Join-Path $projectRoot "Content/Tiles/$faction$family.png") -ExpectedWidth $dimensions[0] -ExpectedHeight $dimensions[1] -MaximumOpaqueColors 12
+    }
+}
+foreach ($wall in @('KesslerBulkheadWall','KesslerWindowWall','HelixLaboratoryWall','HelixObservationWall','SentrixDataWall','SentrixWindowWall')) {
+    Test-PixelSheet -Path (Join-Path $projectRoot "Content/Walls/$wall.png") -ExpectedWidth 32 -ExpectedHeight 32 -MaximumOpaqueColors 12
+}
+
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree.png') -ExpectedWidth 176 -ExpectedHeight 264 -MaximumOpaqueColors 12
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree_Branches.png') -ExpectedWidth 84 -ExpectedHeight 126 -MaximumOpaqueColors 12
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree_Tops.png') -ExpectedWidth 246 -ExpectedHeight 82 -MaximumOpaqueColors 12
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadTuft.png') -ExpectedWidth 54 -ExpectedHeight 18 -MaximumOpaqueColors 12
+
+foreach ($blueprint in @('KesslerCampus','HelixCampus','SentrixCampus')) {
+    $path = Join-Path $projectRoot "Content/Structures/Blueprints/$blueprint.apstructure"
+    if (-not (Test-Path -LiteralPath $path)) {
+        Add-Failure "Missing authored Campus blueprint: $blueprint"
+        continue
+    }
+    $source = Get-Content -Raw -LiteralPath $path
+    if ($source -notmatch '(?m)^size\s+\d+\s+\d+\s*$') { Add-Failure "$blueprint has no fixed size" }
+    if ($source -notmatch '(?m)^entrance\s+\d+\s+\d+\s+\d+\s+\d+\s*$') { Add-Failure "$blueprint has no semantic entrance" }
+    if (($source | Select-String -Pattern '(?m)^object\s+' -AllMatches).Matches.Count -lt 16) { Add-Failure "$blueprint has too little authored furniture" }
+    if (($source | Select-String -Pattern '(?m)^wall\s+' -AllMatches).Matches.Count -lt 2) { Add-Failure "$blueprint has no complete wall program" }
+}
+
+$compoundSource = Get-Content -Raw (Join-Path $projectRoot 'Content/Structures/CompoundGen.cs')
+if ($compoundSource -notmatch 'CorporateCampusBlueprints\.Place') { Add-Failure 'Campus generation does not place immutable authored blueprints' }
+if ($compoundSource -match 'PlaceOutline|PlaceHorizontalRun|PlaceTower') { Add-Failure 'Campus generation still contains procedural shell construction' }
+
 $tetherSource = Get-Content -Raw (Join-Path $projectRoot 'Content/Projectiles/UmbilicalTether.cs')
 if ($tetherSource -match 'DrawSegment') { Add-Failure 'Umbilical tether still uses long scaled line primitives' }
 if ($tetherSource -notmatch 'CordPixelSize\s*=\s*3') { Add-Failure 'Umbilical tether does not enforce a three-pixel visual thickness' }

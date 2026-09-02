@@ -62,7 +62,9 @@ namespace apogean.Content.Structures
 			int tileType = ModContent.TileType<KesslerRuinBlock>();
 			Rectangle work = new(bounds.Left + 4, bounds.Top + 4, bounds.Width - 8, bounds.Height - 8);
 			ClearNaturalInterior(work);
-			int floorY = work.Bottom - 4;
+			// Surface landmarks use the same above-surface offset as their atlas reservation. Keeping
+			// the floor on that datum prevents a bunker-shaped ruin from appearing mysteriously buried.
+			int floorY = bounds.Top + 22;
 			int roofY = Math.Max(work.Top + 4, floorY - 20);
 			PlaceHorizontalRun(work.Left + 2, work.Right - 3, floorY, tileType, 2);
 			PlaceVerticalRun(work.Left + 3, roofY, floorY, tileType, 2);
@@ -97,14 +99,15 @@ namespace apogean.Content.Structures
 			ClearNaturalInterior(work);
 			int leftX = work.Left + 3;
 			int rightX = work.Right - 4;
-			int leftY = work.Bottom - 5;
+			int surfaceY = bounds.Top + 24;
+			int leftY = surfaceY - 2;
 			int rightY = work.Top + 8;
 			PlaceThickLine(leftX, leftY, rightX, rightY, tileType, 2);
 			PlaceThickLine(leftX + 4, leftY, rightX, rightY + 6, tileType, 1);
 
 			Rectangle relayPod = new(work.Center.X - 9, work.Center.Y - 5, 18, 13);
 			PlaceBrokenOutline(relayPod, tileType, random, 0.28f);
-			int padY = work.Bottom - 4;
+			int padY = surfaceY;
 			PlaceHorizontalRun(work.Center.X - 14, work.Center.X + 14, padY, tileType, 2);
 			PlaceFixture3x4(work.Center.X - 1, padY - 4, ModContent.TileType<SentrixHologramCore>());
 		}
@@ -114,7 +117,7 @@ namespace apogean.Content.Structures
 			int tileType = ModContent.TileType<PrewarConcrete>();
 			Rectangle work = new(bounds.Left + 4, bounds.Top + 4, bounds.Width - 8, bounds.Height - 8);
 			ClearNaturalInterior(work);
-			int platformY = work.Bottom - 6;
+			int platformY = bounds.Top + 26;
 			PlaceBrokenRun(work.Left + 2, work.Right - 3, platformY, tileType, 3, random, 0.08f);
 			int canopyY = Math.Max(work.Top + 5, platformY - 18);
 			for (int x = work.Left + 9; x < work.Right - 7; x += 22)

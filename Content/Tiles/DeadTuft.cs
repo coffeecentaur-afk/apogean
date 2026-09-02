@@ -22,6 +22,8 @@ namespace apogean.Content.Tiles
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
 			TileObjectData.newTile.Origin = Point16.Zero;
 			TileObjectData.newTile.AnchorValidTiles = new[] { ModContent.TileType<DeadGrass>(), TileID.Dirt };
+			TileObjectData.newTile.StyleHorizontal = true;
+			TileObjectData.newTile.RandomStyleRange = 3;
 			TileObjectData.addTile(Type);
 		}
 	}

@@ -237,6 +237,8 @@ The implementation is split into explicit phases after vanilla's `Final Cleanup`
 
 No phase receives permission to erase an unknown container, framed structure, protected wall, Dungeon, Temple, hive, living tree, or third-party landmark merely because it intersects a preferred candidate.
 
+The three Campuses are fixed whole-building blueprints sized to their compact envelopes (Kessler 208 × 96, Helix 192 × 184, Sentrix 176 × 160). Full envelopes center the same authored building and preserve extra exterior space; they never scale or procedurally stretch the architecture. Smaller repeatable ruins may use authored modules with deterministic damage masks, but their surveyed surface datum must remain explicit so an above-ground outpost or transit platform cannot drift underground.
+
 ## 12. Acceptance gates
 
 A generated campaign world passes only when all of the following are true:

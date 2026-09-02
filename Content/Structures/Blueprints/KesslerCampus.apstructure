@@ -1,0 +1,86 @@
+# Fixed 208x96 Kessler surface campus. Surface baseline is y=70.
+size 208 96
+entrance 101 63 7 9
+clear 0 0 208 96
+
+# Compacted foundation and perimeter defenses.
+fill KesslerPlating 0 72 208 6
+fill KesslerPlating 8 78 18 8
+fill KesslerPlating 182 78 18 8
+frame KesslerPlating 2 48 30 30 3
+frame KesslerPlating 176 48 30 30 3
+wall KesslerBulkheadWall 5 51 24 21
+wall KesslerBulkheadWall 179 51 24 21
+wall KesslerWindowWall 10 54 14 7
+wall KesslerWindowWall 184 54 14 7
+platform KesslerPlatform 2 45 30
+platform KesslerPlatform 176 45 30
+fill KesslerPlating 14 35 6 13
+fill KesslerPlating 188 35 6 13
+fill KesslerPlating 10 32 14 3
+fill KesslerPlating 184 32 14 3
+object KesslerLight 16 39 1 1
+object KesslerLight 191 39 1 1
+
+# Headquarters shell, armored roofline, and two interior decks.
+wall KesslerBulkheadWall 35 23 138 49
+frame KesslerPlating 32 20 144 54 3
+fill KesslerPlating 42 16 34 4
+fill KesslerPlating 132 16 34 4
+fill KesslerPlating 86 12 36 8
+fill KesslerPlating 96 8 16 4
+fill KesslerPlating 104 3 2 5
+fill KesslerPlating 34 45 140 3
+fill KesslerPlating 34 70 140 2
+platform KesslerPlatform 38 43 132
+platform KesslerPlatform 38 68 132
+
+# Room partitions: armory, command, maintenance, and test bay.
+fill KesslerPlating 64 23 2 22
+fill KesslerPlating 139 23 2 22
+fill KesslerPlating 76 48 2 22
+fill KesslerPlating 127 48 2 22
+wall KesslerWindowWall 69 25 66 11
+wall KesslerWindowWall 81 52 42 8
+
+# Upper armory and command deck.
+object KesslerLocker 39 40 2 3
+object KesslerLocker 44 40 2 3
+object KesslerPowerArmorRack 51 39 3 4
+object KesslerConsole 86 41 3 2
+object KesslerTable 98 41 3 2
+object KesslerChair 96 41 1 2 0
+object KesslerChair 102 41 1 2 1
+object KesslerConsole 118 41 3 2
+object KesslerLocker 146 40 2 3
+object KesslerLocker 151 40 2 3
+object KesslerLocker 156 40 2 3
+object KesslerLight 48 27 1 1
+object KesslerLight 84 27 1 1
+object KesslerLight 121 27 1 1
+object KesslerLight 158 27 1 1
+
+# Ground deck: public quartermaster vestibule, maintenance, and armor test cells.
+object KesslerWorkbench 40 67 2 1
+object KesslerTable 50 66 3 2
+object KesslerChair 48 66 1 2 0
+object KesslerPowerArmorRack 64 64 3 4
+object KesslerConsole 87 66 3 2
+object KesslerTable 94 66 3 2
+object KesslerChair 98 66 1 2 1
+object KesslerPowerArmorRack 134 64 3 4
+object KesslerLocker 146 65 2 3
+object KesslerLocker 151 65 2 3
+object KesslerWorkbench 160 67 2 1
+object KesslerLight 48 52 1 1
+object KesslerLight 88 52 1 1
+object KesslerLight 119 52 1 1
+object KesslerLight 158 52 1 1
+
+# Exterior warning pylons and landing strip details.
+fill KesslerPlating 0 66 32 3
+fill KesslerPlating 176 66 32 3
+platform KesslerPlatform 32 68 42
+platform KesslerPlatform 132 68 44
+object KesslerConsole 20 69 3 2
+object KesslerConsole 185 69 3 2
