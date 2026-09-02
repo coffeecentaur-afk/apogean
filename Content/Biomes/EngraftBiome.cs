@@ -12,7 +12,9 @@ namespace apogean.Content.Biomes
 	{
 		public override SceneEffectPriority Priority => SceneEffectPriority.BiomeLow;
 		public override int Music => MusicID.UndergroundCorruption;
-		public override ModSurfaceBackgroundStyle SurfaceBackgroundStyle => ModContent.GetInstance<EngraftRuinedBackgroundStyle>();
+		// RuinedGlobalBackgroundStyle already selects the Maw surface art. Do not also bind it
+		// through ModBiome until the Maw owns a real ModWaterStyle: tModLoader's capture camera
+		// otherwise receives water style -1 and indexes outside its liquid texture array.
 		public override ModUndergroundBackgroundStyle UndergroundBackgroundStyle => ModContent.GetInstance<EngraftRuinedUndergroundStyle>();
 		public override string BestiaryIcon => "Terraria/Images/MapBG28";
 		public override string BackgroundPath => "Terraria/Images/MapBG28";

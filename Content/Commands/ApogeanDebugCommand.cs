@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using apogean.Common.WorldGeneration;
 using apogean.Content.Backgrounds;
+using apogean.Content.Diagnostics;
 using apogean.Content.Factions;
 using apogean.Content.Items.Consumables;
 using apogean.Content.Items.Materials;
@@ -24,7 +25,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|tilelab|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -111,6 +112,16 @@ namespace apogean.Content.Commands
 					caller.Reply($"Built the native material gallery at X {gallery.Left}–{gallery.Right - 1}, Y {gallery.Top}–{gallery.Bottom - 1}. It intentionally clears that debug rectangle.", Color.LightGreen);
 					foreach (string row in rows)
 						caller.Reply(row, Info);
+					break;
+
+				case "tilelab":
+					if (Main.netMode == NetmodeID.MultiplayerClient)
+					{
+						caller.Reply("The destructive Tile Lab is single-player/server-host only.", Color.OrangeRed);
+						break;
+					}
+					Rectangle tileLab = TileLabGallery.Build(player);
+					caller.Reply($"Built the isolated Tile Lab at X {tileLab.Left}-{tileLab.Right - 1}, Y {tileLab.Top}-{tileLab.Bottom - 1}.", Color.LightGreen);
 					break;
 
 				case "kit":
