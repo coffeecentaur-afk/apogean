@@ -40,11 +40,11 @@ namespace apogean.Common.WorldGeneration
 
 		public ApogeanWorldPlan CreateWorldGenPlan(UnifiedRandom worldRandom, Func<int, int> findSurface)
 		{
-			bool created = plan is null;
-			plan ??= ApogeanWorldPlan.CreateWorldGenPlan(worldRandom, findSurface);
+			// World creation can run repeatedly from the server menu without a matching world-unload
+			// callback. A generated atlas always belongs to the world currently being created.
+			plan = ApogeanWorldPlan.CreateWorldGenPlan(worldRandom, findSurface);
 			RebuildProtections();
-			if (created)
-				RegisterWithWorldGenerator();
+			RegisterWithWorldGenerator();
 			return plan;
 		}
 

@@ -47,6 +47,7 @@ namespace apogean.Content.World
 		internal void GenerateWorld(GenerationProgress progress, GameConfiguration config)
 		{
 			progress.Message = "Something is taking root...";
+			nodes.Clear();
 			ApogeanWorldPlan plan = ApogeanWorldPlanSystem.Instance.CreateWorldGenPlan(WorldGen.genRand, FindSurface);
 			for (int i = 0; i < plan.MawRuptures.Count; i++)
 			{

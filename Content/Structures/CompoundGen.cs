@@ -29,6 +29,7 @@ namespace apogean.Content.Structures
 		internal void GenerateWorld(GenerationProgress progress, GameConfiguration config)
 		{
 			progress.Message = "Sealing the old corporate territories...";
+			compoundBounds.Clear();
 			ApogeanWorldPlan plan = ApogeanWorldPlanSystem.Instance.Plan;
 			if (plan is null)
 				return;
