@@ -50,6 +50,50 @@ function Test-Layer {
     }
 }
 
+function Test-PixelSheet {
+    param(
+        [string]$Path,
+        [int]$ExpectedWidth,
+        [int]$ExpectedHeight,
+        [int]$MaximumOpaqueColors
+    )
+
+    if (-not (Test-Path -LiteralPath $Path)) {
+        Add-Failure "Missing pixel sheet: $Path"
+        return
+    }
+
+    $bitmap = [System.Drawing.Bitmap]::new($Path)
+    try {
+        if ($bitmap.Width -ne $ExpectedWidth -or $bitmap.Height -ne $ExpectedHeight) {
+            Add-Failure "Wrong pixel-sheet dimensions: $Path is $($bitmap.Width)x$($bitmap.Height), expected ${ExpectedWidth}x${ExpectedHeight}"
+        }
+
+        $colors = [System.Collections.Generic.HashSet[int]]::new()
+        $hasSoftAlpha = $false
+        $opaquePixels = 0
+        for ($y = 0; $y -lt $bitmap.Height; $y++) {
+            for ($x = 0; $x -lt $bitmap.Width; $x++) {
+                $pixel = $bitmap.GetPixel($x, $y)
+                if ($pixel.A -gt 0 -and $pixel.A -lt 255) { $hasSoftAlpha = $true }
+                if ($pixel.A -eq 255) {
+                    [void]$colors.Add($pixel.ToArgb())
+                    $opaquePixels++
+                }
+            }
+        }
+
+        if ($opaquePixels -eq 0) { Add-Failure "Pixel sheet is empty: $Path" }
+        if ($colors.Count -gt $MaximumOpaqueColors) {
+            Add-Failure "Pixel sheet uses $($colors.Count) opaque colors; maximum is $MaximumOpaqueColors`: $Path"
+        }
+        if ($hasSoftAlpha) { Add-Failure "Pixel sheet contains soft alpha: $Path" }
+    }
+    finally {
+        $bitmap.Dispose()
+    }
+}
+
 $layerSpecs = @{
     'Far' = @(1024, 408)
     'Mid' = @(1024, 600)
@@ -109,6 +153,25 @@ foreach ($sprite in @('RendHook', 'AmberSiphon', 'SinewBow', 'MawEffigy')) {
     finally {
         $bitmap.Dispose()
     }
+}
+
+foreach ($tileSheet in @(
+    'Mawstone',
+    'OssuaryBone',
+    'KesslerPlating',
+    'HelixContainmentPanel',
+    'SentrixPanel',
+    'KesslerRuinBlock',
+    'HelixRuinBlock',
+    'SentrixRuinBlock',
+    'PrewarConcrete',
+    'MawResearchBlock'
+)) {
+    Test-PixelSheet -Path (Join-Path $projectRoot "Content/Tiles/$tileSheet.png") -ExpectedWidth 234 -ExpectedHeight 270 -MaximumOpaqueColors 12
+}
+
+foreach ($fixtureSheet in @('KesslerPowerArmorRack', 'HelixSymbioteTank', 'SentrixHologramCore')) {
+    Test-PixelSheet -Path (Join-Path $projectRoot "Content/Tiles/$fixtureSheet.png") -ExpectedWidth 54 -ExpectedHeight 288 -MaximumOpaqueColors 16
 }
 
 $tetherSource = Get-Content -Raw (Join-Path $projectRoot 'Content/Projectiles/UmbilicalTether.cs')

@@ -58,6 +58,23 @@ namespace apogean.Common.WorldGeneration
 			}
 		}
 
+		/// <summary>
+		/// The Stomach's narrow continuation through Hell is reserved separately so the broad
+		/// Gullet envelope does not monopolize a large slice of the Underworld.
+		/// </summary>
+		public Rectangle IntestinalDescentBounds
+		{
+			get
+			{
+				if (!IsMajor || MatriarchCenter.X <= 0 || MatriarchCenter.Y <= 0)
+					return Rectangle.Empty;
+
+				int top = MatriarchCenter.Y + 42;
+				int bottom = Terraria.Main.maxTilesY - 14;
+				return new Rectangle(MatriarchCenter.X - 28, top, 57, System.Math.Max(1, bottom - top));
+			}
+		}
+
 		public MawRupturePlan(Point16 surfaceCenter, int radiusX, int radiusY, bool isMajor)
 			: this(surfaceCenter, radiusX, radiusY, isMajor, false, default, null)
 		{

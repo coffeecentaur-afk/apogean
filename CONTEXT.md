@@ -52,6 +52,14 @@ _Avoid_: Mawstone, arbitrary unbreakable terrain
 A reserved depression in an authored Maw chamber for an optional later prototype of localized amber digestive fluid. Environmental Alpha never fills it with fake solid acid tiles, and neither the basin nor any future liquid is required for progression.
 _Avoid_: Acid block, universal Maw water, pressure system
 
+**The Stomach**:
+The broad pre-Hardmode Matriarch arena suspended immediately above the Underworld inside the Burning Root. It ends the Gullet and is not itself an open entrance into Hell.
+_Avoid_: Burning Root when referring only to the arena, Matriarch box
+
+**Intestinal descent**:
+A narrow, enclosed Maw organ continuing from the sealed floor of the Stomach through the Underworld toward the world floor. Players must deliberately breach its Mawstone wall to enter ordinary Hell terrain.
+_Avoid_: Open Hell chute, second Gullet
+
 **Maw dormancy**:
 The subdued state after MATRIARCH-7A-1 is defeated, when amber organs dim and biological activity falls to its minimum without erasing Maw terrain or passive growth.
 _Avoid_: Purification, destruction of the Maw

@@ -5,11 +5,9 @@ using Terraria.ModLoader;
 
 namespace apogean.Content.Tiles
 {
-	/// <summary>Hardened structural tissue. Placeholder art reuses Engraft turf until geometry is approved.</summary>
+	/// <summary>Hardened structural tissue framing the Gullet and Stomach.</summary>
 	public sealed class Mawstone : ModTile
 	{
-		public override string Texture => "apogean/Content/Tiles/EngraftTurf";
-
 		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[Type] = true;

@@ -63,7 +63,7 @@ namespace apogean.Content.Structures
 
 		private static void PlaceKesslerCampus(Rectangle bounds)
 		{
-			int bulkhead = ModContent.TileType<LockedBulkhead>();
+			int bulkhead = GetCampusTile(ApogeanFaction.Kessler);
 			int surface = bounds.Top + 70;
 			Rectangle bunker = new(bounds.Center.X - 55, surface - 31, 111, 36);
 			ClearNaturalInterior(new Rectangle(bounds.Left + 7, surface - 46, bounds.Width - 14, 52));
@@ -77,12 +77,14 @@ namespace apogean.Content.Structures
 			PlaceTower(new Rectangle(bounds.Right - 30, surface - 43, 18, 48), bulkhead);
 			PlaceHorizontalRun(bounds.Left + 28, bounds.Center.X - 64, surface - 17, bulkhead, 2);
 			PlaceHorizontalRun(bounds.Center.X + 64, bounds.Right - 28, surface - 17, bulkhead, 2);
-			SetDoor(GetDoorBounds(ApogeanFaction.Kessler, bounds), sealedShut: true);
+			PlaceFixture3x4(bounds.Center.X - 28, surface - 1, ModContent.TileType<KesslerPowerArmorRack>());
+			PlaceFixture3x4(bounds.Center.X + 24, surface - 1, ModContent.TileType<KesslerPowerArmorRack>());
+			SetDoor(ApogeanFaction.Kessler, GetDoorBounds(ApogeanFaction.Kessler, bounds), sealedShut: true);
 		}
 
 		private static void PlaceHelixCampus(Rectangle bounds)
 		{
-			int bulkhead = ModContent.TileType<LockedBulkhead>();
+			int bulkhead = GetCampusTile(ApogeanFaction.Helix);
 			int surface = bounds.Top + 45;
 			int centerX = bounds.Center.X;
 			ClearNaturalInterior(new Rectangle(bounds.Left + 20, bounds.Top + 6, bounds.Width - 40, bounds.Height - 18));
@@ -97,14 +99,18 @@ namespace apogean.Content.Structures
 
 			Rectangle lab = new(bounds.Left + 25, surface + 4, bounds.Width - 50, bounds.Bottom - surface - 16);
 			PlaceOutline(lab, bulkhead, 2);
-			for (int y = lab.Top + 30; y < lab.Bottom - 10; y += 31)
+			for (int y = lab.Top + 30, floor = 0; y < lab.Bottom - 10; y += 31, floor++)
+			{
 				PlaceHorizontalRun(lab.Left + 2, lab.Right - 2, y, bulkhead, 2);
-			SetDoor(GetDoorBounds(ApogeanFaction.Helix, bounds), sealedShut: true);
+				int fixtureX = floor % 2 == 0 ? lab.Left + 13 : lab.Right - 16;
+				PlaceFixture3x4(fixtureX, y - 4, ModContent.TileType<HelixSymbioteTank>());
+			}
+			SetDoor(ApogeanFaction.Helix, GetDoorBounds(ApogeanFaction.Helix, bounds), sealedShut: true);
 		}
 
 		private static void PlaceSentrixCampus(Rectangle bounds)
 		{
-			int bulkhead = ModContent.TileType<LockedBulkhead>();
+			int bulkhead = GetCampusTile(ApogeanFaction.Sentrix);
 			int centerX = bounds.Center.X;
 			Rectangle spire = new(centerX - 18, bounds.Top + 8, 37, bounds.Height - 16);
 			PlaceOutline(spire, bulkhead, 2);
@@ -115,7 +121,13 @@ namespace apogean.Content.Structures
 				int endX = left ? centerX - 18 : centerX + 86;
 				PlaceHorizontalRun(startX, endX, y, bulkhead, 3);
 			}
-			SetDoor(GetDoorBounds(ApogeanFaction.Sentrix, bounds), sealedShut: true);
+			for (int y = spire.Top + 30, floor = 0; y < spire.Bottom - 4; y += 28, floor++)
+			{
+				PlaceHorizontalRun(spire.Left + 2, spire.Right - 2, y, bulkhead, 2);
+				if (floor % 2 == 0)
+					PlaceFixture3x4(centerX - 1, y - 4, ModContent.TileType<SentrixHologramCore>());
+			}
+			SetDoor(ApogeanFaction.Sentrix, GetDoorBounds(ApogeanFaction.Sentrix, bounds), sealedShut: true);
 		}
 
 		private static void PlaceTower(Rectangle bounds, int tileType)
@@ -186,7 +198,7 @@ namespace apogean.Content.Structures
 				return;
 
 			Rectangle door = GetDoorBounds(faction, bounds);
-			SetDoor(door, sealedShut);
+			SetDoor(faction, door, sealedShut);
 			NetMessage.SendTileSquare(-1, door.Center.X, door.Center.Y, Math.Max(door.Width, door.Height) + 4);
 		}
 
@@ -201,9 +213,9 @@ namespace apogean.Content.Structures
 			};
 		}
 
-		private static void SetDoor(Rectangle door, bool sealedShut)
+		private static void SetDoor(ApogeanFaction faction, Rectangle door, bool sealedShut)
 		{
-			int bulkhead = ModContent.TileType<LockedBulkhead>();
+			int bulkhead = GetCampusTile(faction);
 			for (int x = door.Left; x < door.Right; x++)
 			{
 				for (int y = door.Top; y < door.Bottom; y++)
@@ -212,6 +224,36 @@ namespace apogean.Content.Structures
 						SetSolidTile(x, y, bulkhead);
 					else
 						Framing.GetTileSafely(x, y).ClearTile();
+				}
+			}
+		}
+
+		private static int GetCampusTile(ApogeanFaction faction) => faction switch
+		{
+			ApogeanFaction.Kessler => ModContent.TileType<KesslerPlating>(),
+			ApogeanFaction.Helix => ModContent.TileType<HelixContainmentPanel>(),
+			ApogeanFaction.Sentrix => ModContent.TileType<SentrixPanel>(),
+			_ => ModContent.TileType<LockedBulkhead>()
+		};
+
+		private static void PlaceFixture3x4(int topLeftX, int topLeftY, int tileType)
+		{
+			for (int column = 0; column < 3; column++)
+			{
+				for (int row = 0; row < 4; row++)
+				{
+					int x = topLeftX + column;
+					int y = topLeftY + row;
+					if (!WorldGen.InWorld(x, y, 10))
+						continue;
+					Tile tile = Framing.GetTileSafely(x, y);
+					tile.HasTile = true;
+					tile.TileType = (ushort)tileType;
+					tile.TileFrameX = (short)(column * 18);
+					tile.TileFrameY = (short)(row * 18);
+					tile.Slope = SlopeType.Solid;
+					tile.IsHalfBlock = false;
+					tile.LiquidAmount = 0;
 				}
 			}
 		}

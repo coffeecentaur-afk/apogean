@@ -78,7 +78,7 @@ namespace apogean.Common.WorldGeneration
 				}
 			}
 
-			GenerateBurningRoot((int)currentX, endY, random, wallType, seed, intent);
+			GenerateStomachAndIntestinalDescent((int)currentX, endY, random, wallType, seed, intent);
 		}
 
 		private static void GeneratePlannedFeedingWound(
@@ -142,8 +142,9 @@ namespace apogean.Common.WorldGeneration
 			Point16 root = rupture.MatriarchCenter.X > 0
 				? rupture.MatriarchCenter
 				: rupture.NavigationSpine[rupture.NavigationSpine.Count - 1];
-			GenerateBurningRoot(root.X, root.Y, random, wallType, seed, intent);
+			GenerateStomachAndIntestinalDescent(root.X, root.Y, random, wallType, seed, intent);
 			ClearNavigationSpine(rupture, wallType, intent);
+			PlaceGulletShelves(rupture, wallType, intent);
 		}
 
 		private static void GenerateOutgrowth(MawRupturePlan rupture, UnifiedRandom random, WorldEditIntent intent)
@@ -197,7 +198,7 @@ namespace apogean.Common.WorldGeneration
 			}
 		}
 
-		private static void GenerateBurningRoot(
+		private static void GenerateStomachAndIntestinalDescent(
 			int centerX,
 			int centerY,
 			UnifiedRandom random,
@@ -205,14 +206,122 @@ namespace apogean.Common.WorldGeneration
 			int seed,
 			WorldEditIntent intent)
 		{
-			// Keep the arena envelope consistent with the planner's protected reservation.
-			// Edge noise and the three roots still make each seed's silhouette distinct.
+			// The broad Stomach remains a natural player-built arena. It sits above Hell so the
+			// Gullet cannot erase a Wall of Flesh runway or become a free elevator into it.
 			CarveEllipse(centerX, centerY, 94, 48, wallType, seed ^ 0x51A7, intent, boneShell: true, openToSky: false);
 			for (int branch = -1; branch <= 1; branch++)
 			{
 				int targetX = centerX + branch * random.Next(45, 76);
-				int targetY = Math.Min(centerY + random.Next(25, 51), Main.maxTilesY - 22);
+				int targetY = Math.Min(centerY + random.Next(18, 35), (int)Main.UnderworldLayer - 14);
 				CarveTunnel(centerX, centerY + 8, targetX, targetY, random.Next(5, 8), wallType, seed ^ targetX, intent);
+			}
+
+			GenerateIntestinalDescent(centerX, centerY + 43, random, wallType, seed ^ 0x7717, intent);
+			SealStomachOutlet(centerX, centerY + 43);
+		}
+
+		private static void GenerateIntestinalDescent(
+			int centerX,
+			int startY,
+			UnifiedRandom random,
+			int wallType,
+			int seed,
+			WorldEditIntent intent)
+		{
+			int currentX = centerX;
+			int previousY = startY;
+			int endY = Main.maxTilesY - 18;
+			for (int y = startY; y <= endY; y += 6)
+			{
+				if (!TryChooseIntestineStep(centerX, currentX, y, random, out int nextX))
+					break;
+
+				CarveTunnel(currentX, previousY, nextX, y, 7, wallType, seed ^ y, intent);
+				bool boneBand = ((y - startY) / 6) % 10 == 0;
+				CarveEllipse(nextX, y, 8, 7, wallType, seed ^ (y * 397), intent, boneBand, openToSky: false);
+				currentX = nextX;
+				previousY = y;
+			}
+		}
+
+		private static bool TryChooseIntestineStep(
+			int originX,
+			int currentX,
+			int y,
+			UnifiedRandom random,
+			out int chosenX)
+		{
+			int direction = random.NextBool() ? 1 : -1;
+			int[] offsets = { 0, 4 * direction, -4 * direction, 8 * direction, -8 * direction, 12 * direction, -12 * direction };
+			for (int i = 0; i < offsets.Length; i++)
+			{
+				int candidateX = currentX + offsets[i];
+				if (Math.Abs(candidateX - originX) > 18)
+					continue;
+				Rectangle clearance = new(candidateX - 11, y - 8, 23, 17);
+				if (ContainsHardObstacle(clearance))
+					continue;
+				chosenX = candidateX;
+				return true;
+			}
+
+			chosenX = currentX;
+			return false;
+		}
+
+		private static void SealStomachOutlet(int centerX, int outletY)
+		{
+			int mawstone = ModContent.TileType<Mawstone>();
+			for (int x = centerX - 8; x <= centerX + 8; x++)
+			{
+				for (int y = outletY - 1; y <= outletY + 3; y++)
+					SetSolidTile(x, y, mawstone);
+			}
+		}
+
+		private static void PlaceGulletShelves(MawRupturePlan rupture, int wallType, WorldEditIntent intent)
+		{
+			if (!rupture.HasNavigationSpine)
+				return;
+
+			int nextShelfY = rupture.SurfaceCenter.Y + 32;
+			int side = (rupture.SurfaceCenter.X & 1) == 0 ? -1 : 1;
+			for (int i = 0; i < rupture.NavigationSpine.Count; i++)
+			{
+				Point16 point = rupture.NavigationSpine[i];
+				if (point.Y < nextShelfY || point.Y >= rupture.MatriarchCenter.Y - 66)
+					continue;
+
+				float depth = i / (float)Math.Max(1, rupture.NavigationSpine.Count - 1);
+				int halfWidth = 11 + (int)(depth * 5f);
+				PlaceGulletShelf(point.X, point.Y + 4, halfWidth, side, wallType, intent);
+				side *= -1;
+				nextShelfY = point.Y + 28;
+			}
+		}
+
+		private static void PlaceGulletShelf(
+			int centerX,
+			int y,
+			int halfWidth,
+			int side,
+			int wallType,
+			WorldEditIntent intent)
+		{
+			int bone = ModContent.TileType<OssuaryBone>();
+			int startX = side < 0 ? centerX - halfWidth + 2 : centerX;
+			int endX = side < 0 ? centerX : centerX + halfWidth - 2;
+			for (int x = startX; x <= endX; x++)
+			{
+				// Alternating wall-grown shelves force lateral corrections and expose the bone
+				// palette without creating a fragile full-width gate in a bending tunnel.
+				for (int row = 0; row < 1; row++)
+				{
+					Tile tile = Framing.GetTileSafely(x, y + row);
+					if (tile.HasTile || tile.WallType != wallType || !MawTerrainRules.CanPlaceShell(x, y + row, intent))
+						continue;
+					SetSolidTile(x, y + row, bone);
+				}
 			}
 		}
 

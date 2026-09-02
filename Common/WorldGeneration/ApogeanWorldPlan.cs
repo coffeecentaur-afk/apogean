@@ -37,6 +37,11 @@ namespace apogean.Common.WorldGeneration
 
 		internal static ApogeanWorldPlan CreateWorldGenPlan(UnifiedRandom worldRandom, Func<int, int> findSurface)
 		{
+			return CreateWorldGenPlanFromSeed(worldRandom.Next(), findSurface);
+		}
+
+		internal static ApogeanWorldPlan CreateWorldGenPlanFromSeed(int planSeed, Func<int, int> findSurface)
+		{
 			if (Main.maxTilesX < 8400 || Main.maxTilesY < 2400)
 			{
 				throw new InvalidOperationException(
@@ -44,7 +49,6 @@ namespace apogean.Common.WorldGeneration
 					"Medium compact support is planned, but incomplete campaign worlds are not generated silently.");
 			}
 
-			int planSeed = worldRandom.Next();
 			UnifiedRandom random = new(planSeed);
 			int spawnX = ValidSpawnX(Main.spawnTileX) ? Main.spawnTileX : Main.maxTilesX / 2;
 			int spawnY = ValidSpawnY(Main.spawnTileY) ? Main.spawnTileY : findSurface(spawnX);

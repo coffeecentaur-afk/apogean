@@ -235,12 +235,23 @@ namespace apogean.Common.WorldGeneration
 
 			for (int i = 0; i < plan.MawRuptures.Count; i++)
 			{
+				MawRupturePlan rupture = plan.MawRuptures[i];
 				protections.Reserve(
 					$"maw-rupture-{i}",
-					plan.MawRuptures[i].ReservedBounds,
+					rupture.ReservedBounds,
 					WorldEditIntent.MawOutgrowth |
 					WorldEditIntent.CorporateStructure |
 					WorldEditIntent.RuinStructure);
+
+				if (rupture.IntestinalDescentBounds != Rectangle.Empty)
+				{
+					protections.Reserve(
+						$"maw-intestinal-descent-{i}",
+						rupture.IntestinalDescentBounds,
+						WorldEditIntent.MawOutgrowth |
+						WorldEditIntent.CorporateStructure |
+						WorldEditIntent.RuinStructure);
+				}
 			}
 
 			for (int i = 0; i < plan.Landmarks.Count; i++)
@@ -262,7 +273,12 @@ namespace apogean.Common.WorldGeneration
 
 			GenVars.structures.AddProtectedStructure(plan.SpawnSanctuary, 8);
 			for (int i = 0; i < plan.MawRuptures.Count; i++)
-				GenVars.structures.AddProtectedStructure(plan.MawRuptures[i].ReservedBounds, 8);
+			{
+				MawRupturePlan rupture = plan.MawRuptures[i];
+				GenVars.structures.AddProtectedStructure(rupture.ReservedBounds, 8);
+				if (rupture.IntestinalDescentBounds != Rectangle.Empty)
+					GenVars.structures.AddProtectedStructure(rupture.IntestinalDescentBounds, 6);
+			}
 			for (int i = 0; i < plan.Landmarks.Count; i++)
 				GenVars.structures.AddProtectedStructure(plan.Landmarks[i].Bounds, plan.Landmarks[i].Padding);
 		}

@@ -17,25 +17,21 @@ namespace apogean.Common.WorldGeneration
 	{
 		public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
 		{
-			int spawnIndex = FindPass(tasks, "Spawn Point");
-			if (spawnIndex < 0)
-				spawnIndex = FindPass(tasks, "Jungle");
-			int mawIndex = spawnIndex >= 0 ? Math.Min(tasks.Count, spawnIndex + 1) : tasks.Count;
-			tasks.Insert(mawIndex, new PassLegacy("The Maw", EngraftSystem.Instance.GenerateWorld));
-
-			tasks.Insert(mawIndex + 1, new PassLegacy(
+			// Apogee is an additive overhaul, not a Remnants-style replacement of vanilla producers.
+			// Plan against the completed vanilla world: the bounded planner can then route around every
+			// actual chest, micro-biome, Temple, Dungeon, hive, and Hell building before carving once.
+			int finalCleanupIndex = FindPass(tasks, "Final Cleanup");
+			int finalizationIndex = finalCleanupIndex >= 0 ? finalCleanupIndex + 1 : tasks.Count;
+			tasks.Insert(finalizationIndex++, new PassLegacy("The Maw", EngraftSystem.Instance.GenerateWorld));
+			tasks.Insert(finalizationIndex++, new PassLegacy(
 				"Apogean Compounds",
 				ModContent.GetInstance<CompoundGen>().GenerateWorld));
-			tasks.Insert(mawIndex + 2, new PassLegacy(
+			tasks.Insert(finalizationIndex++, new PassLegacy(
 				"Apogean Ruins",
 				ModContent.GetInstance<RuinGen>().GenerateWorld));
 
 			if (ModContent.GetInstance<ApogeanWorldConfig>().RuinedSurface)
-			{
-				int treesIndex = FindPass(tasks, "Planting Trees");
-				int wastesIndex = treesIndex >= 0 ? treesIndex + 1 : Math.Min(tasks.Count, mawIndex + 3);
-				tasks.Insert(wastesIndex, new PassLegacy("A World Picked Clean", RuinedSurfaceSystem.GenerateWorld));
-			}
+				tasks.Insert(finalizationIndex, new PassLegacy("A World Picked Clean", RuinedSurfaceSystem.GenerateWorld));
 		}
 
 		private static int FindPass(IReadOnlyList<GenPass> tasks, string name)

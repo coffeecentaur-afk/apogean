@@ -33,6 +33,8 @@ namespace apogean.Common.WorldGeneration
 
 			List<ApogeanLandmarkPlan> kesslerCandidates = FindSurfaceCampusCandidates(
 				ApogeanLandmarkKind.KesslerCampus,
+				// Helix's cracked dome and descending laboratory can bridge severe surface relief.
+				// Structural tiles and protected regions remain hard exclusions below.
 				260,
 				120,
 				208,
@@ -56,7 +58,7 @@ namespace apogean.Common.WorldGeneration
 				majorRupture.SurfaceCenter.X + mawSide * 680,
 				1050,
 				45,
-				180,
+				260,
 				occupied,
 				random,
 				findSurface);
@@ -65,7 +67,7 @@ namespace apogean.Common.WorldGeneration
 			{
 				throw new InvalidOperationException(
 					$"Apogee could not fit a non-overlapping Kessler/Helix Campus pair on this seed " +
-					$"(Kessler candidates={kesslerCandidates.Count}, Helix candidates={helixCandidates.Count}).");
+					$"(Kessler candidates={kesslerCandidates.Count}, Helix candidates={helixCandidates.Count}); {lastFailureReason}.");
 			}
 			AddRequired(landmarks, occupied, kessler);
 			AddRequired(landmarks, occupied, helix);

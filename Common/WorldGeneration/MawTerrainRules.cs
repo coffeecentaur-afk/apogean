@@ -24,7 +24,8 @@ namespace apogean.Common.WorldGeneration
 			Tile tile = Framing.GetTileSafely(x, y);
 			if (IsProtectedStructureObstacle(x, y))
 				return false;
-			if (!tile.HasTile || IsNaturalTerrain(tile.TileType) || IsMawStructure(tile.TileType))
+			if (!tile.HasTile || IsNaturalTerrain(tile.TileType) || IsMawStructure(tile.TileType) ||
+				CanReplaceTileType(tile.TileType) || IsNaturalCaveClutter(tile.TileType))
 				return true;
 
 			// During world creation, loose cave clutter must not turn into route-blocking islands.
@@ -155,6 +156,26 @@ namespace apogean.Common.WorldGeneration
 			TileID.MarbleBlock or
 			TileID.Ash or
 			TileID.Hellstone;
+
+		private static bool IsNaturalCaveClutter(ushort type) => type is
+			TileID.BreakableIce or
+			TileID.Pots or
+			TileID.PotsSuspended or
+			TileID.PotsEcho or
+			TileID.Stalactite or
+			TileID.ExposedGems or
+			TileID.GreenMoss or
+			TileID.BrownMoss or
+			TileID.RedMoss or
+			TileID.BlueMoss or
+			TileID.PurpleMoss or
+			TileID.LongMoss or
+			TileID.LavaMoss or
+			TileID.KryptonMoss or
+			TileID.XenonMoss or
+			TileID.ArgonMoss or
+			TileID.VioletMoss or
+			TileID.RainbowMoss;
 
 		private static bool IsMawStructure(ushort type) =>
 			type == ModContent.TileType<EngraftTurf>() ||

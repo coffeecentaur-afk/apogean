@@ -34,10 +34,12 @@ namespace apogean.Common.WorldGeneration
 			spine = new List<Point16>();
 			matriarchCenter = default;
 			UnifiedRandom random = new(seed);
-			int preferredRootY = Utils.Clamp((int)Main.UnderworldLayer + 40, surfaceY + 420, Main.maxTilesY - RootHalfHeight - 14);
+			// The Stomach ends the open Gullet above Hell. A separate narrow intestinal descent
+			// continues below it, so the Matriarch arena never consumes the Wall of Flesh runway.
+			int preferredRootY = Utils.Clamp((int)Main.UnderworldLayer - 95, surfaceY + 420, Main.maxTilesY - RootHalfHeight - 14);
 			if (!TryFindRootCenter(surfaceX, preferredRootY, horizontalLeash, random, out int rootX, out int rootY))
 			{
-				LastFailureReason = $"no protected 188x96 Burning Root cavity was available within the route leash and Underworld depth band ({rootFailureDetail})";
+				LastFailureReason = $"no protected 188x96 Stomach cavity was available within the route leash above the Underworld ceiling ({rootFailureDetail})";
 				return false;
 			}
 
@@ -74,8 +76,10 @@ namespace apogean.Common.WorldGeneration
 		{
 			rootFailureDetail = "no candidate inspected";
 			int[] offsets = BuildShuffledOffsets(horizontalLeash - 18, 12, random);
-			int minimumRootY = Math.Max(420, (int)Main.UnderworldLayer - 140);
-			int maximumRootY = Math.Max(minimumRootY, Main.maxTilesY - RootHalfHeight - 14);
+			int minimumRootY = Math.Max(420, (int)Main.UnderworldLayer - 105);
+			int maximumRootY = Math.Min(
+				Main.maxTilesY - RootHalfHeight - 14,
+				Math.Max(minimumRootY, (int)Main.UnderworldLayer - 85));
 			int[] depthOffsets = BuildDepthOffsets(preferredRootY, minimumRootY, maximumRootY, 12);
 			int bestScore = int.MaxValue;
 			int bestX = 0;
@@ -92,6 +96,17 @@ namespace apogean.Common.WorldGeneration
 					if (ContainsProtectedStructure(cavity, out string detail))
 					{
 						rootFailureDetail = detail;
+						continue;
+					}
+
+					Rectangle intestinalDescent = new(
+						x - 28,
+						candidateY + 42,
+						57,
+						Main.maxTilesY - candidateY - 56);
+					if (!WithinWorld(intestinalDescent) || ContainsProtectedStructure(intestinalDescent, out detail))
+					{
+						rootFailureDetail = $"intestinal descent: {detail}";
 						continue;
 					}
 

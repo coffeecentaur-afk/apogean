@@ -79,7 +79,7 @@ Critical landmarks are solved as one atlas rather than placed greedily.
 3. Reject every candidate that violates a hard exclusion.
 4. Score combinations rather than individual points.
 5. Select the highest-scoring deterministic combination for the world seed.
-6. Register physical envelopes plus generation padding in both Apogee's registry and `GenVars.structures` before cooperating detail/structure passes.
+6. Register physical envelopes plus generation padding in both Apogee's registry and `GenVars.structures` before Apogee constructs any landmark.
 7. Save the selected atlas and its stable hash in world data.
 
 Soft preferences never override safety:
@@ -104,11 +104,11 @@ If no full combination exists, the solver tries compact Maw and Campus envelopes
 | Expanded bends | 35–50 tiles |
 | Side chambers | 50–90 tiles wide |
 | Maximum uninterrupted vertical fall | 40–55 tiles |
-| Burning Root cavity | 180–240 wide, 90–130 high |
+| Stomach cavity in the Burning Root | 180–240 wide, 90–130 high; lowest shell 30–60 tiles above the Underworld ceiling, targeting about 40 |
 
 The route is a saved curved navigation spine with ledges, shelves, direction changes, shell bounds, side-chamber anchors, and optional digestive-basin envelopes. Decorative teeth, bones, glands, loose terrain, and later ore placement never own the route.
 
-The Burning Root penetrates a localized part of the Underworld. Its Matriarch cavity is a broad natural hollow with no generated platforms and no mandatory repair objective. Players prepare it with ordinary Terraria building tools.
+The Burning Root approaches a localized part of the Underworld. Its Stomach is a broad natural Matriarch hollow with no generated platforms and no mandatory repair objective. The Stomach ends the open Gullet above Hell; a narrow, enclosed intestinal descent continues toward the world floor and must be deliberately breached to enter ordinary Underworld terrain.
 
 ### Compact Rupture
 
@@ -224,11 +224,11 @@ Orbital headquarters and star-chart destinations are separate later worlds. Only
 
 ## 11. Generation passes
 
-The implementation is split into explicit phases:
+The implementation is split into explicit phases after vanilla's `Final Cleanup` pass. This additive compatibility mode deliberately surveys the finished world rather than replacing Terraria's producer pipeline:
 
 1. **Macro survey:** collect final spawn, layer boundaries, vanilla macro-biomes, loaded compatibility profiles, and existing shared reservations.
 2. **Atlas solve:** generate and jointly score critical candidate combinations.
-3. **Early reservation:** register the chosen Maw spine/chambers and Campus/ruin envelopes.
+3. **Atlas reservation:** register the chosen Maw spine/chambers and Campus/ruin envelopes before any Apogee construction.
 4. **Maw terrain:** construct shell, route, chambers, walls, teeth, glands, and dry basin geometry from the saved plan.
 5. **Authored structures:** place Campuses and guaranteed ruins from modules inside their reservations.
 6. **Optional details:** attempt second Outgrowth and optional ruins without displacing protected content.
@@ -258,4 +258,4 @@ A generated campaign world passes only when all of the following are true:
 - ordinary Wastes terrain and enough unreserved surface remain available for player building;
 - vanilla-only and Calamity compatibility profiles complete without critical omission.
 
-`RESEARCH_REMNANTS_WORLDGEN_ARCHITECTURE.md` explains why this atlas uses early ownership and reservations without adopting Remnants' total world-generation replacement model.
+`RESEARCH_REMNANTS_WORLDGEN_ARCHITECTURE.md` explains the producer/consumer distinction that informed this atlas. ADR 0002 records why Apogee currently uses a bounded post-cleanup additive pass instead of adopting Remnants' total world-generation replacement model.

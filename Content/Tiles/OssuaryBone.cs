@@ -8,8 +8,6 @@ namespace apogean.Content.Tiles
 	/// <summary>Safe structural bone. Animated barbs will be separate hazard tiles.</summary>
 	public sealed class OssuaryBone : ModTile
 	{
-		public override string Texture => "apogean/Content/Tiles/EngraftTurf";
-
 		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[Type] = true;
