@@ -94,6 +94,37 @@ function Test-PixelSheet {
     }
 }
 
+function Test-TransparentSheet {
+    param(
+        [string]$Path,
+        [int]$ExpectedWidth,
+        [int]$ExpectedHeight
+    )
+
+    if (-not (Test-Path -LiteralPath $Path)) {
+        Add-Failure "Missing transparent renderer sheet: $Path"
+        return
+    }
+
+    $bitmap = [System.Drawing.Bitmap]::new($Path)
+    try {
+        if ($bitmap.Width -ne $ExpectedWidth -or $bitmap.Height -ne $ExpectedHeight) {
+            Add-Failure "Wrong transparent-sheet dimensions: $Path is $($bitmap.Width)x$($bitmap.Height), expected ${ExpectedWidth}x${ExpectedHeight}"
+        }
+        for ($y = 0; $y -lt $bitmap.Height; $y++) {
+            for ($x = 0; $x -lt $bitmap.Width; $x++) {
+                if ($bitmap.GetPixel($x, $y).A -ne 0) {
+                    Add-Failure "Transparent renderer sheet leaks visible pixels: $Path at $x,$y"
+                    return
+                }
+            }
+        }
+    }
+    finally {
+        $bitmap.Dispose()
+    }
+}
+
 $layerSpecs = @{
     'Far' = @(1024, 408)
     'Mid' = @(1024, 600)
@@ -196,6 +227,10 @@ foreach ($wall in @('KesslerBulkheadWall','KesslerWindowWall','HelixLaboratoryWa
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree.png') -ExpectedWidth 176 -ExpectedHeight 264 -MaximumOpaqueColors 12
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree_Branches.png') -ExpectedWidth 84 -ExpectedHeight 126 -MaximumOpaqueColors 12
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree_Tops.png') -ExpectedWidth 246 -ExpectedHeight 82 -MaximumOpaqueColors 12
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTreeOverlay.png') -ExpectedWidth 128 -ExpectedHeight 272 -MaximumOpaqueColors 10
+Test-TransparentSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTreeHidden.png') -ExpectedWidth 176 -ExpectedHeight 264
+Test-TransparentSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTreeHidden_Branches.png') -ExpectedWidth 84 -ExpectedHeight 126
+Test-TransparentSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTreeHidden_Tops.png') -ExpectedWidth 246 -ExpectedHeight 82
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadTuft.png') -ExpectedWidth 144 -ExpectedHeight 18 -MaximumOpaqueColors 7
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesBristle.png') -ExpectedWidth 108 -ExpectedHeight 54 -MaximumOpaqueColors 7
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesRootShrub.png') -ExpectedWidth 162 -ExpectedHeight 36 -MaximumOpaqueColors 7

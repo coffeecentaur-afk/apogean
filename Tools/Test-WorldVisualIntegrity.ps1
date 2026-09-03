@@ -54,6 +54,29 @@ function Require-PngContract([string]$relativePath, [int]$width, [int]$height, [
     finally { $bitmap.Dispose() }
 }
 
+function Require-TransparentPng([string]$relativePath, [int]$width, [int]$height) {
+    $path = Join-Path $root $relativePath
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+        $failures.Add("Missing transparent renderer asset: $relativePath")
+        return
+    }
+    $bitmap = [System.Drawing.Bitmap]::new($path)
+    try {
+        if ($bitmap.Width -ne $width -or $bitmap.Height -ne $height) {
+            $failures.Add("$relativePath is $($bitmap.Width)x$($bitmap.Height); expected $($width)x$($height)")
+        }
+        for ($y = 0; $y -lt $bitmap.Height; $y++) {
+            for ($x = 0; $x -lt $bitmap.Width; $x++) {
+                if ($bitmap.GetPixel($x, $y).A -ne 0) {
+                    $failures.Add("$relativePath leaks visible native-tree pixels at $x,$y")
+                    return
+                }
+            }
+        }
+    }
+    finally { $bitmap.Dispose() }
+}
+
 # Corporate campuses need structural materials, not one repeated shell block.
 $corporateFamilies = @('Kessler', 'Helix', 'Sentrix')
 $corporateParts = @('Block', 'Trim', 'Floor', 'Glass', 'Beam')
@@ -123,8 +146,16 @@ foreach ($treeAsset in @(
 Require-PngContract 'Content/Tiles/DeadForestTree.png' 176 264 8
 Require-PngContract 'Content/Tiles/DeadForestTree_Branches.png' 84 126 6
 Require-PngContract 'Content/Tiles/DeadForestTree_Tops.png' 246 82 6
+Require-PngContract 'Content/Tiles/DeadForestTreeOverlay.png' 128 272 8
+Require-TransparentPng 'Content/Tiles/DeadForestTreeHidden.png' 176 264
+Require-TransparentPng 'Content/Tiles/DeadForestTreeHidden_Branches.png' 84 126
+Require-TransparentPng 'Content/Tiles/DeadForestTreeHidden_Tops.png' 246 82
 Require-SourceContract 'Content/Tiles/DeadForestTree.cs' @(
-    'GetTexture', 'GetBranchTextures', 'GetTopTextures'
+    'GetTexture', 'GetBranchTextures', 'GetTopTextures',
+    'DeadForestTreeHidden', 'DeadForestTreeHidden_Branches', 'DeadForestTreeHidden_Tops'
+)
+Require-SourceContract 'Content/Tiles/DeadForestTreeOverlaySystem.cs' @(
+    'GlobalTile', 'PostDraw', 'DeadForestTreeOverlay', 'Main.drawToScreen', 'Main.offScreenRange'
 )
 
 foreach ($blueprint in @('KesslerCampus','HelixCampus','SentrixCampus')) {

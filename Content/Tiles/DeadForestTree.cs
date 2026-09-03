@@ -36,9 +36,12 @@ namespace apogean.Content.Tiles
 				ModContent.TileType<WastesGrass>(),
 				ModContent.TileType<DeadGrass>()
 			};
-			trunkTexture = ModContent.Request<Texture2D>("apogean/Content/Tiles/DeadForestTree");
-			branchTexture = ModContent.Request<Texture2D>("apogean/Content/Tiles/DeadForestTree_Branches");
-			topTexture = ModContent.Request<Texture2D>("apogean/Content/Tiles/DeadForestTree_Tops");
+			// Terraria owns the tree's gameplay tiles; the wide reference silhouette
+			// is rendered by DeadForestTreeRenderer. These native atlases remain
+			// transparent so vanilla branch ornaments cannot leak around that sprite.
+			trunkTexture = ModContent.Request<Texture2D>("apogean/Content/Tiles/DeadForestTreeHidden");
+			branchTexture = ModContent.Request<Texture2D>("apogean/Content/Tiles/DeadForestTreeHidden_Branches");
+			topTexture = ModContent.Request<Texture2D>("apogean/Content/Tiles/DeadForestTreeHidden_Tops");
 		}
 
 		public override Asset<Texture2D> GetTexture() => trunkTexture;

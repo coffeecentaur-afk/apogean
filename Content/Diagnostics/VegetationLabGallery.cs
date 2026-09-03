@@ -62,13 +62,13 @@ namespace apogean.Content.Diagnostics
 		private static void PlaceTrees(int left, int floorY)
 		{
 			int sapling = ModContent.TileType<DeadForestSapling>();
-			foreach (int x in new[] { left + 106, left + 121, left + 136 })
-			{
-				if (!WorldGen.PlaceObject(x, floorY - 1, sapling, mute: true))
-					throw new InvalidOperationException($"Vegetation Lab could not place a dead-tree sapling at {x},{floorY - 1}.");
-				if (!WorldGen.GrowTree(x, floorY - 1))
-					throw new InvalidOperationException($"Vegetation Lab could not grow a dead forest tree at {x},{floorY - 1}.");
-			}
+			// Keep this gate to one isolated tree until its silhouette is approved.
+			// Multiple wide overlays obscure roots and make comparison misleading.
+			int x = left + 121;
+			if (!WorldGen.PlaceObject(x, floorY - 1, sapling, mute: true))
+				throw new InvalidOperationException($"Vegetation Lab could not place a dead-tree sapling at {x},{floorY - 1}.");
+			if (!WorldGen.GrowTree(x, floorY - 1))
+				throw new InvalidOperationException($"Vegetation Lab could not grow a dead forest tree at {x},{floorY - 1}.");
 		}
 
 		private static void RequireObject(int x, int y, int type, int randomStyle, string label)

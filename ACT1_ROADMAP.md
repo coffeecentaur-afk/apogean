@@ -3,7 +3,8 @@
 ## Shipped foundation
 
 - Faction relation scaffold, sealed compounds, dialogue UI, and a playable Matriarch prototype.
-- Renderer-gated Wastes material pipeline: disposable tile, grass, and vegetation galleries; local native-atlas export; cold client capture; and validated soil, grass, ground-cover, and continuous-bark dead-tree families.
+- Renderer-gated Wastes material pipeline: disposable tile, grass, and vegetation galleries; local native-atlas export; cold client capture; and validated soil, grass, and ground-cover families.
+- First reference-driven dead-tree overlay is integrated through the tile renderer and passes build/static/capture checks; its isolated in-game silhouette is awaiting visual approval before the remaining tree variants are authored.
 
 ## Current environmental gate
 
