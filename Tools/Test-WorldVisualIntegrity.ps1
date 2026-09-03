@@ -142,15 +142,17 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 	'case "conversion"',
 	'case "desert-background"',
 	'case "jungle-background"',
+	'case "snow-background"',
 	'BuildMawConversionAndReport(scheduleCaptureProbe: true)',
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Desert, scheduleCaptureProbe: true)',
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Jungle, scheduleCaptureProbe: true)',
+	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Snow, scheduleCaptureProbe: true)',
 	'LIVE VALIDATION REQUEST CONSUMED',
 	'LIVE VALIDATION REQUEST FAILED'
 )
 
 Require-SourceContract 'Tools/Request-LiveValidation.ps1' @(
-	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'jungle-background', 'kessler-campus')]",
+	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'jungle-background', 'snow-background', 'kessler-campus')]",
 	'ApogeanLiveValidation.request',
 	'Set-Content -LiteralPath $requestPath'
 )
