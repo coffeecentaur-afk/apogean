@@ -173,9 +173,9 @@ Test-NormalizedCopy 'Content/Tiles/Diagnostics/WastesSoilCandidate.png' 'Content
 Test-NormalizedCopy 'Content/Walls/Diagnostics/WastesDirtWallCandidate.png' 'Content/Walls/WastesDirtWallUnsafe.png' $false
 Test-NormalizedCopy 'Content/Tiles/Diagnostics/WastesGrassCandidate.png' 'Content/Tiles/WastesGrass.png' $false
 Test-NormalizedCopy 'Content/Walls/Diagnostics/WastesGrassWallCandidate.png' 'Content/Walls/WastesGrassWallUnsafe.png' $false
-Test-FixedAtlasContract 'Content/Tiles/DeadTuft.png' 72 18 7 433 '613CAA933231A9504CA88022F69B889F1110BAA6A35E84AC1D5E90F76FD17FBA'
-Test-FixedAtlasContract 'Content/Tiles/WastesBristle.png' 54 36 7 460 'A0AF72CC625947E566E34ABA0D69588434B857877B21818702C4BFFA02B614A2'
-Test-FixedAtlasContract 'Content/Tiles/WastesRootShrub.png' 108 36 7 1207 '0275AC11184C2B06D70A6BEDC61960037812C3F9D014B60AA90C78BCB57D3552'
+Test-FixedAtlasContract 'Content/Tiles/DeadTuft.png' 144 18 7 964 '902D24197188F5057CE119DF61353D2D6263ED7A410E494A49003F49EAD171B3'
+Test-FixedAtlasContract 'Content/Tiles/WastesBristle.png' 108 54 7 2385 'D7E04DA3EAEC618259AB8A47CFE1BD6166209B712F7825017DBD3096672393D3'
+Test-FixedAtlasContract 'Content/Tiles/WastesRootShrub.png' 162 36 7 2811 '1C3FC10C9D52C9161914F32D28C6645541225F9A5CA3D5F00680C3BAC11E5243'
 
 foreach ($required in @(
 	'Content/Diagnostics/TileLabContent.cs',
@@ -188,7 +188,8 @@ foreach ($required in @(
 	'Tools/New-WastesGrassCandidate.ps1',
 	'Tools/New-WastesGroundCover.ps1',
 	'Content/Tiles/WastesGroundCoverTiles.cs',
-	'Art/Reference/WastesGroundCover-reference-v1.png'
+	'Art/Reference/WastesGroundCover-reference-v1.png',
+	'Art/Reference/WastesGroundCover-reference-v2.png'
 )) {
     if (-not (Test-Path -LiteralPath (Join-Path $Root $required))) {
         Add-Failure "Missing Tile Lab source: $required"

@@ -4,10 +4,13 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
 
-function Convert-HexColor([string]$hex) {
-    [System.Drawing.ColorTranslator]::FromHtml($hex)
+function Convert-HexColor([string]$Hex) {
+    [System.Drawing.ColorTranslator]::FromHtml($Hex)
 }
 
+# This exporter intentionally derives the native sprites from the approved
+# concept sheet. It preserves those silhouettes instead of approximating them
+# with vector-like line primitives.
 $outline = Convert-HexColor '#211916'
 $shadow = Convert-HexColor '#35261F'
 $wood = Convert-HexColor '#59402A'
@@ -16,149 +19,183 @@ $straw = Convert-HexColor '#B9924E'
 $pale = Convert-HexColor '#D0B66F'
 $amber = Convert-HexColor '#D78A19'
 
-function New-Canvas([int]$width, [int]$height) {
-    $bitmap = [System.Drawing.Bitmap]::new($width, $height, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
-    $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
-    $graphics.Clear([System.Drawing.Color]::Transparent)
-    $graphics.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::None
-    $graphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::NearestNeighbor
-    $graphics.PixelOffsetMode = [System.Drawing.Drawing2D.PixelOffsetMode]::Half
-    return @{ Bitmap = $bitmap; Graphics = $graphics }
+function New-TransparentBitmap([int]$Width, [int]$Height) {
+    $bitmap = [System.Drawing.Bitmap]::new($Width, $Height, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+    for ($y = 0; $y -lt $Height; $y++) {
+        for ($x = 0; $x -lt $Width; $x++) {
+            $bitmap.SetPixel($x, $y, [System.Drawing.Color]::Transparent)
+        }
+    }
+    $bitmap
 }
 
-function Save-Canvas($canvas, [string]$relativePath) {
-    $path = Join-Path $Root $relativePath
-    $directory = Split-Path -Parent $path
-    if (-not (Test-Path -LiteralPath $directory)) {
-        New-Item -ItemType Directory -Path $directory -Force | Out-Null
-    }
-    try {
-        $canvas.Bitmap.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
-    }
-    finally {
-        $canvas.Graphics.Dispose()
-        $canvas.Bitmap.Dispose()
-    }
+function Test-IsConceptPixel([System.Drawing.Color]$Color) {
+    # The generated reference has a baked white/light-gray checkerboard. All
+    # intended roots, outlines, and amber pods sit safely below this threshold.
+    $Color.A -gt 0 -and -not ($Color.R -ge 190 -and $Color.G -ge 170 -and $Color.B -ge 150)
 }
 
-function Draw-Twig(
-    [System.Drawing.Graphics]$graphics,
-    [System.Drawing.Point[]]$points,
-    [int]$bodyWidth = 1,
-    [System.Drawing.Color]$bodyColor = $wood,
-    [switch]$Highlight
+function Get-PaletteColor([int]$R, [int]$G, [int]$B) {
+    if ($R -gt 105 -and $R -gt ($G * 1.42) -and $G -lt 125) {
+        return $amber
+    }
+
+    $luminance = (0.299 * $R) + (0.587 * $G) + (0.114 * $B)
+    if ($luminance -lt 48) { return $outline }
+    if ($luminance -lt 70) { return $shadow }
+    if ($luminance -lt 95) { return $wood }
+    if ($luminance -lt 124) { return $ochre }
+    if ($luminance -lt 154) { return $straw }
+    return $pale
+}
+
+function New-NativeSprite(
+    [System.Drawing.Bitmap]$Reference,
+    [System.Drawing.Rectangle]$Crop,
+    [int]$OutputWidth,
+    [int]$OutputHeight
 ) {
-    $edgePen = [System.Drawing.Pen]::new($outline, $bodyWidth + 2)
-    $bodyPen = [System.Drawing.Pen]::new($bodyColor, $bodyWidth)
+    $bitmap = New-TransparentBitmap $OutputWidth $OutputHeight
+    $scale = [Math]::Min(($OutputWidth - 2.0) / $Crop.Width, ($OutputHeight - 2.0) / $Crop.Height)
+    $drawWidth = [Math]::Max(1, [Math]::Floor($Crop.Width * $scale))
+    $drawHeight = [Math]::Max(1, [Math]::Floor($Crop.Height * $scale))
+    $left = [Math]::Floor(($OutputWidth - $drawWidth) / 2.0)
+    $top = $OutputHeight - $drawHeight
+
+    for ($dy = 0; $dy -lt $drawHeight; $dy++) {
+        for ($dx = 0; $dx -lt $drawWidth; $dx++) {
+            $sourceLeft = $Crop.X + [Math]::Floor(($dx * $Crop.Width) / $drawWidth)
+            $sourceRight = $Crop.X + [Math]::Ceiling((($dx + 1) * $Crop.Width) / $drawWidth) - 1
+            $sourceTop = $Crop.Y + [Math]::Floor(($dy * $Crop.Height) / $drawHeight)
+            $sourceBottom = $Crop.Y + [Math]::Ceiling((($dy + 1) * $Crop.Height) / $drawHeight) - 1
+
+            $sampleCount = 0
+            $rootCount = 0
+            $red = 0L
+            $green = 0L
+            $blue = 0L
+            for ($sy = $sourceTop; $sy -le $sourceBottom; $sy++) {
+                for ($sx = $sourceLeft; $sx -le $sourceRight; $sx++) {
+                    $sampleCount++
+                    $pixel = $Reference.GetPixel($sx, $sy)
+                    if (-not (Test-IsConceptPixel $pixel)) { continue }
+                    $rootCount++
+                    $red += $pixel.R
+                    $green += $pixel.G
+                    $blue += $pixel.B
+                }
+            }
+
+            # Low enough to retain tapered tips; high enough to reject the
+            # concept image's anti-aliased fringe and checkerboard.
+            if ($rootCount -eq 0 -or ($rootCount / [double]$sampleCount) -lt 0.18) { continue }
+            $color = Get-PaletteColor ([Math]::Round($red / $rootCount)) ([Math]::Round($green / $rootCount)) ([Math]::Round($blue / $rootCount))
+            $bitmap.SetPixel($left + $dx, $top + $dy, $color)
+        }
+    }
+
+    # Grow a one-pixel outline outside the concept silhouette, then restore the
+    # quantized interior. Replacing edge pixels made narrow roots turn entirely
+    # black; growing outward keeps their ochre mass and improves readability.
+    $outlined = New-TransparentBitmap $OutputWidth $OutputHeight
+    for ($y = 0; $y -lt $OutputHeight; $y++) {
+        for ($x = 0; $x -lt $OutputWidth; $x++) {
+            $pixel = $bitmap.GetPixel($x, $y)
+            if ($pixel.A -eq 0) { continue }
+            foreach ($offset in @(@(-1, -1), @(0, -1), @(1, -1), @(-1, 0), @(1, 0), @(-1, 1), @(0, 1), @(1, 1))) {
+                $neighborX = $x + $offset[0]
+                $neighborY = $y + $offset[1]
+                if ($neighborX -ge 0 -and $neighborY -ge 0 -and $neighborX -lt $OutputWidth -and $neighborY -lt $OutputHeight) {
+                    $outlined.SetPixel($neighborX, $neighborY, $outline)
+                }
+            }
+        }
+    }
+    for ($y = 0; $y -lt $OutputHeight; $y++) {
+        for ($x = 0; $x -lt $OutputWidth; $x++) {
+            $pixel = $bitmap.GetPixel($x, $y)
+            if ($pixel.A -gt 0) {
+                $outlined.SetPixel($x, $y, $pixel)
+            }
+        }
+    }
+    $bitmap.Dispose()
+    $outlined
+}
+
+function Copy-LogicalSprite($Source, $Atlas, [int]$StyleIndex, [int]$StyleStride) {
+    # tModLoader's object atlas reserves a hidden two-pixel gutter after each
+    # 16px tile cell. Packing around it prevents cross-tile branches vanishing.
+    for ($y = 0; $y -lt $Source.Height; $y++) {
+        for ($x = 0; $x -lt $Source.Width; $x++) {
+            $color = $Source.GetPixel($x, $y)
+            if ($color.A -eq 0) { continue }
+            $atlasX = ($StyleIndex * $StyleStride) + $x + (2 * [Math]::Floor($x / 16))
+            $atlasY = $y + (2 * [Math]::Floor($y / 16))
+            $Atlas.SetPixel($atlasX, $atlasY, $color)
+        }
+    }
+}
+
+function Export-Family(
+    [System.Drawing.Bitmap]$Reference,
+    [System.Drawing.Rectangle[]]$Crops,
+    [int]$LogicalWidth,
+    [int]$LogicalHeight,
+    [int]$StyleStride,
+    [int]$AtlasHeight,
+    [string]$RelativePath
+) {
+    $atlas = New-TransparentBitmap ($Crops.Length * $StyleStride) $AtlasHeight
     try {
-        foreach ($pen in @($edgePen, $bodyPen)) {
-            $pen.StartCap = [System.Drawing.Drawing2D.LineCap]::Flat
-            $pen.EndCap = [System.Drawing.Drawing2D.LineCap]::Flat
-            $pen.LineJoin = [System.Drawing.Drawing2D.LineJoin]::Miter
-            $graphics.DrawLines($pen, $points)
+        for ($style = 0; $style -lt $Crops.Length; $style++) {
+            $sprite = New-NativeSprite $Reference $Crops[$style] $LogicalWidth $LogicalHeight
+            try { Copy-LogicalSprite $sprite $atlas $style $StyleStride }
+            finally { $sprite.Dispose() }
         }
-        if ($Highlight -and $points.Length -ge 2) {
-            $highlightPen = [System.Drawing.Pen]::new($straw, 1)
-            try {
-                $highlightPen.StartCap = [System.Drawing.Drawing2D.LineCap]::Flat
-                $highlightPen.EndCap = [System.Drawing.Drawing2D.LineCap]::Flat
-                $graphics.DrawLine($highlightPen, $points[0], $points[1])
-            }
-            finally {
-                $highlightPen.Dispose()
-            }
+
+        $path = Join-Path $Root $RelativePath
+        $directory = Split-Path -Parent $path
+        if (-not (Test-Path -LiteralPath $directory)) {
+            New-Item -ItemType Directory -Path $directory -Force | Out-Null
         }
+        $atlas.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
     }
     finally {
-        $edgePen.Dispose()
-        $bodyPen.Dispose()
+        $atlas.Dispose()
     }
 }
 
-function Draw-Pod([System.Drawing.Graphics]$graphics, [int]$x, [int]$y) {
-    $edgeBrush = [System.Drawing.SolidBrush]::new($outline)
-    $podBrush = [System.Drawing.SolidBrush]::new($amber)
-    $shineBrush = [System.Drawing.SolidBrush]::new($pale)
-    try {
-        $graphics.FillRectangle($edgeBrush, $x - 1, $y - 1, 5, 6)
-        $graphics.FillRectangle($podBrush, $x, $y, 3, 4)
-        $graphics.FillRectangle($shineBrush, $x, $y, 1, 1)
-    }
-    finally {
-        $edgeBrush.Dispose()
-        $podBrush.Dispose()
-        $shineBrush.Dispose()
-    }
+$referencePath = Join-Path $Root 'Art/Reference/WastesGroundCover-reference-v2.png'
+if (-not (Test-Path -LiteralPath $referencePath)) {
+    throw "Missing approved ground-cover reference: $referencePath"
 }
 
-function New-RootTufts {
-    $canvas = New-Canvas 72 18
-    $g = $canvas.Graphics
-    for ($variant = 0; $variant -lt 4; $variant++) {
-        $left = $variant * 18
-        $baseX = $left + @(8, 9, 7, 10)[$variant]
-        $tipY = @(5, 3, 6, 4)[$variant]
-        Draw-Twig $g @([System.Drawing.Point]::new($baseX, 16), [System.Drawing.Point]::new($baseX - 2, 10), [System.Drawing.Point]::new($left + 3, $tipY)) 1 $ochre -Highlight
-        Draw-Twig $g @([System.Drawing.Point]::new($baseX, 16), [System.Drawing.Point]::new($baseX + 2, 10), [System.Drawing.Point]::new($left + 15, $tipY + 2)) 1 $wood
-        Draw-Twig $g @([System.Drawing.Point]::new($baseX - 1, 16), [System.Drawing.Point]::new($left + 2, 13)) 1 $shadow
-        Draw-Twig $g @([System.Drawing.Point]::new($baseX + 1, 16), [System.Drawing.Point]::new($left + 16, 14)) 1 $shadow
-        if ($variant -eq 1) {
-            Draw-Twig $g @([System.Drawing.Point]::new($baseX - 1, 11), [System.Drawing.Point]::new($baseX + 1, 5)) 1 $straw
-        }
-        if ($variant -eq 3) {
-            Draw-Pod $g ($left + 13) 8
-        }
-    }
-    Save-Canvas $canvas 'Content/Tiles/DeadTuft.png'
+$reference = [System.Drawing.Bitmap]::new($referencePath)
+try {
+    $tufts = @(
+        [System.Drawing.Rectangle]::new(62, 88, 285, 166),
+        [System.Drawing.Rectangle]::new(405, 60, 277, 195),
+        [System.Drawing.Rectangle]::new(719, 78, 287, 177),
+        [System.Drawing.Rectangle]::new(982, 106, 356, 149)
+    )
+    $bristles = @(
+        [System.Drawing.Rectangle]::new(132, 303, 258, 403),
+        [System.Drawing.Rectangle]::new(554, 315, 242, 388),
+        [System.Drawing.Rectangle]::new(943, 303, 250, 400)
+    )
+    $shrubs = @(
+        [System.Drawing.Rectangle]::new(44, 749, 408, 311),
+        [System.Drawing.Rectangle]::new(486, 748, 454, 318),
+        [System.Drawing.Rectangle]::new(926, 755, 432, 317)
+    )
+
+    Export-Family $reference $tufts 32 16 36 18 'Content/Tiles/DeadTuft.png'
+    Export-Family $reference $bristles 32 48 36 54 'Content/Tiles/WastesBristle.png'
+    Export-Family $reference $shrubs 48 32 54 36 'Content/Tiles/WastesRootShrub.png'
+}
+finally {
+    $reference.Dispose()
 }
 
-function New-Bristles {
-    $canvas = New-Canvas 54 36
-    $g = $canvas.Graphics
-    for ($variant = 0; $variant -lt 3; $variant++) {
-        $left = $variant * 18
-        $baseX = $left + @(8, 9, 7)[$variant]
-        $lean = @(-2, 1, 3)[$variant]
-        Draw-Twig $g @([System.Drawing.Point]::new($baseX, 34), [System.Drawing.Point]::new($baseX + $lean, 20), [System.Drawing.Point]::new($baseX + $lean, 6)) 1 $ochre -Highlight
-        Draw-Twig $g @([System.Drawing.Point]::new($baseX + $lean, 14), [System.Drawing.Point]::new($left + 3, 9 - $variant)) 1 $wood
-        Draw-Twig $g @([System.Drawing.Point]::new($baseX + $lean, 20), [System.Drawing.Point]::new($left + 14, 15 + $variant)) 1 $straw
-        Draw-Twig $g @([System.Drawing.Point]::new($baseX, 34), [System.Drawing.Point]::new($left + 3, 31)) 1 $shadow
-        Draw-Twig $g @([System.Drawing.Point]::new($baseX, 34), [System.Drawing.Point]::new($left + 14, 32)) 1 $shadow
-        if ($variant -eq 2) {
-            Draw-Twig $g @([System.Drawing.Point]::new($left + 13, 16), [System.Drawing.Point]::new($left + 15, 10)) 1 $pale
-        }
-    }
-    Save-Canvas $canvas 'Content/Tiles/WastesBristle.png'
-}
-
-function New-RootShrubs {
-    $canvas = New-Canvas 108 36
-    $g = $canvas.Graphics
-    for ($variant = 0; $variant -lt 3; $variant++) {
-        $left = $variant * 36
-        $center = $left + @(17, 18, 16)[$variant]
-        Draw-Twig $g @([System.Drawing.Point]::new($center, 33), [System.Drawing.Point]::new($center - 8, 25), [System.Drawing.Point]::new($left + 4, 32)) 2 $wood -Highlight
-        Draw-Twig $g @([System.Drawing.Point]::new($center, 33), [System.Drawing.Point]::new($center + 8, 25), [System.Drawing.Point]::new($left + 32, 32)) 2 $wood
-        Draw-Twig $g @([System.Drawing.Point]::new($center - 7, 27), [System.Drawing.Point]::new($left + 8, 34)) 1 $ochre
-        Draw-Twig $g @([System.Drawing.Point]::new($center + 7, 27), [System.Drawing.Point]::new($left + 27, 34)) 1 $ochre
-        Draw-Twig $g @([System.Drawing.Point]::new($center, 30), [System.Drawing.Point]::new($center - 3, 18), [System.Drawing.Point]::new($left + 9, 8 + $variant)) 2 $ochre -Highlight
-        Draw-Twig $g @([System.Drawing.Point]::new($center - 3, 18), [System.Drawing.Point]::new($left + 4, 16)) 1 $wood
-        Draw-Twig $g @([System.Drawing.Point]::new($center - 1, 24), [System.Drawing.Point]::new($center + 9, 16), [System.Drawing.Point]::new($left + 30, 10 - $variant)) 2 $wood
-        Draw-Twig $g @([System.Drawing.Point]::new($center + 9, 16), [System.Drawing.Point]::new($left + 31, 18)) 1 $straw
-        if ($variant -eq 0) {
-            Draw-Pod $g ($left + 5) 12
-        }
-        elseif ($variant -eq 1) {
-            Draw-Pod $g ($left + 27) 7
-        }
-        else {
-            Draw-Pod $g ($left + 29) 13
-        }
-    }
-    Save-Canvas $canvas 'Content/Tiles/WastesRootShrub.png'
-}
-
-New-RootTufts
-New-Bristles
-New-RootShrubs
-Write-Host 'Generated three native-scale Wastes ground-cover sheets.' -ForegroundColor Green
+Write-Host 'Exported concept-derived, gutter-aware Wastes ground-cover sheets.' -ForegroundColor Green

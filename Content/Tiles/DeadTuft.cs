@@ -9,15 +9,16 @@ using Terraria.GameContent.Metadata;
 
 namespace apogean.Content.Tiles
 {
+	/// <summary>A low two-tile pile of dead Wastes roots. Four horizontal styles share one object sheet.</summary>
 	public sealed class DeadTuft : ModTile
 	{
 		public override void SetStaticDefaults()
 		{
 			WastesPlantRegistration.ApplyCommon(this, new Color(121, 91, 54), sways: true);
 
-			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
+			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x1);
 			TileObjectData.newTile.Origin = Point16.Zero;
-			TileObjectData.newTile.AnchorBottom = WastesPlantRegistration.GroundAnchor(1);
+			TileObjectData.newTile.AnchorBottom = WastesPlantRegistration.GroundAnchor(2);
 			TileObjectData.newTile.AnchorValidTiles = WastesPlantRegistration.ValidGround();
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.StyleMultiplier = 4;

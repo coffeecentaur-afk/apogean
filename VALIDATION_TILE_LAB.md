@@ -91,15 +91,15 @@ The grass increment below was kept isolated in the Tile Lab until it passed the 
 
 This slice proves atlas rendering and basic soil merging. Grass growth, spreading, conversion rules, paint/coating behavior, and world-generation replacement remain deliberately deferred to dedicated tests rather than being inferred from a good screenshot.
 
-## Wastes ground-cover slice — 2026-09-02
+## Wastes ground-cover slice — 2026-09-03
 
-- Added four 1x1 root-tuft variants, three 1x2 brittle-bristle variants, and three 2x2 skeletal-root-shrub variants.
-- Kept the engine sheets at exact native object dimensions: 72x18, 54x36, and 108x36. All pixels use hard alpha and no sheet exceeds seven opaque colors.
+- Rebuilt the first undersized pass as four 2x1 root-pile variants, three 2x3 tangled-root variants, and three 3x2 broad-root-mass variants. Their larger footprints preserve the concept art's arches, knots, and overlapping roots at normal game zoom.
+- Kept the engine sheets at exact native object dimensions: 144x18, 108x54, and 162x36. All pixels use hard alpha and no sheet exceeds seven opaque colors.
 - Registered each family as one tile style with explicit random placement variants. The first client pass exposed an incorrect `PlaceObject` style argument that pushed later variants beyond the sheet; the lab now selects those variants through the `random` argument, matching tModLoader's `StyleMultiplier` contract.
-- Rendered all ten variants simultaneously on production Wastes grass. Every variant anchored to the correct row, both multi-tile families assembled without seams or clipping, and no source-rectangle artifacts remained.
+- Packed each continuous logical drawing around tModLoader's hidden two-pixel cell gutters. Rendered all ten variants simultaneously on production Wastes grass; every variant anchored to the correct row and all multi-tile roots assembled without seams or clipping.
 - The capture camera wrote `Apogean Vegetation Lab Capture Probe.png` with entities excluded so dropped items, NPCs, and the player cannot obscure the tile evidence. The client log contained no vegetation-lab failure, exception, error, or fatal entry.
 - Integrated only this validated family into `RuinedSurfaceSystem`: approximately 70% of decoration attempts select low tufts, 22% select bristles, and 8% select shrubs. The existing overall sparse placement rate remains unchanged.
 
-The concept reference is `Art/Reference/WastesGroundCover-reference-v1.png`. It sets the dry-root silhouettes and charcoal/umber/ochre/amber palette; the deterministic PowerShell generator creates the exact engine sheets.
+The approved source is `Art/Reference/WastesGroundCover-reference-v2.png`. The deterministic exporter crops those exact silhouettes, downsamples them by coverage, maps them to a six-color charcoal/umber/ochre/amber ramp, grows a one-pixel exterior outline, and packs the result into the native tile atlases. This replaces the rejected line-and-disc approximation.
 
 The next safe increment is the Wastes tree trunk and canopy family. Broader terrain, structures, and Maw geometry remain frozen.

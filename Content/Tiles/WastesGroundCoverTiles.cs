@@ -31,18 +31,20 @@ namespace apogean.Content.Tiles
 		internal static int[] ValidGround() => [ModContent.TileType<WastesGrass>()];
 	}
 
-	/// <summary>A tall, brittle Wastes stalk. Three horizontal styles share one 1x2 object sheet.</summary>
+	/// <summary>A tall, tangled Wastes root. Three horizontal styles share one 2x3 object sheet.</summary>
 	public sealed class WastesBristle : ModTile
 	{
 		public override void SetStaticDefaults()
 		{
 			WastesPlantRegistration.ApplyCommon(this, new Color(143, 108, 61), sways: true);
 
-			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2);
-			TileObjectData.newTile.Origin = new Point16(0, 1);
-			TileObjectData.newTile.AnchorBottom = WastesPlantRegistration.GroundAnchor(1);
+			TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
+			TileObjectData.newTile.Width = 2;
+			TileObjectData.newTile.Height = 3;
+			TileObjectData.newTile.Origin = new Point16(0, 2);
+			TileObjectData.newTile.AnchorBottom = WastesPlantRegistration.GroundAnchor(2);
 			TileObjectData.newTile.AnchorValidTiles = WastesPlantRegistration.ValidGround();
-			TileObjectData.newTile.CoordinateHeights = [16, 18];
+			TileObjectData.newTile.CoordinateHeights = [16, 16, 18];
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.StyleMultiplier = 3;
 			TileObjectData.newTile.RandomStyleRange = 3;
@@ -53,17 +55,18 @@ namespace apogean.Content.Tiles
 		}
 	}
 
-	/// <summary>A two-tile root arch with a restrained amber seed pod. It is woody and does not sway.</summary>
+	/// <summary>A broad three-by-two root mass with restrained amber seed pods. It is woody and does not sway.</summary>
 	public sealed class WastesRootShrub : ModTile
 	{
 		public override void SetStaticDefaults()
 		{
 			WastesPlantRegistration.ApplyCommon(this, new Color(112, 82, 45), sways: false);
 
-			TileObjectData.newTile.Width = 2;
+			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
+			TileObjectData.newTile.Width = 3;
 			TileObjectData.newTile.Height = 2;
-			TileObjectData.newTile.Origin = new Point16(0, 1);
-			TileObjectData.newTile.AnchorBottom = WastesPlantRegistration.GroundAnchor(2);
+			TileObjectData.newTile.Origin = new Point16(1, 1);
+			TileObjectData.newTile.AnchorBottom = WastesPlantRegistration.GroundAnchor(3);
 			TileObjectData.newTile.AnchorValidTiles = WastesPlantRegistration.ValidGround();
 			TileObjectData.newTile.CoordinateWidth = 16;
 			TileObjectData.newTile.CoordinatePadding = 2;

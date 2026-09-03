@@ -196,9 +196,9 @@ foreach ($wall in @('KesslerBulkheadWall','KesslerWindowWall','HelixLaboratoryWa
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree.png') -ExpectedWidth 176 -ExpectedHeight 264 -MaximumOpaqueColors 12
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree_Branches.png') -ExpectedWidth 84 -ExpectedHeight 126 -MaximumOpaqueColors 12
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree_Tops.png') -ExpectedWidth 246 -ExpectedHeight 82 -MaximumOpaqueColors 12
-Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadTuft.png') -ExpectedWidth 72 -ExpectedHeight 18 -MaximumOpaqueColors 7
-Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesBristle.png') -ExpectedWidth 54 -ExpectedHeight 36 -MaximumOpaqueColors 7
-Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesRootShrub.png') -ExpectedWidth 108 -ExpectedHeight 36 -MaximumOpaqueColors 7
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadTuft.png') -ExpectedWidth 144 -ExpectedHeight 18 -MaximumOpaqueColors 7
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesBristle.png') -ExpectedWidth 108 -ExpectedHeight 54 -MaximumOpaqueColors 7
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesRootShrub.png') -ExpectedWidth 162 -ExpectedHeight 36 -MaximumOpaqueColors 7
 
 foreach ($blueprint in @('KesslerCampus','HelixCampus','SentrixCampus')) {
     $path = Join-Path $projectRoot "Content/Structures/Blueprints/$blueprint.apstructure"
