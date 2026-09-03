@@ -144,24 +144,49 @@ namespace apogean.Content.World
 			return 0;
 		}
 
-		private static void PlantDeadSurface(int deadGrass, int maximumY)
+		private static void PlantDeadSurface(int wastesGrass, int maximumY)
 		{
-			int deadTuft = ModContent.TileType<DeadTuft>();
+			int rootTuft = ModContent.TileType<DeadTuft>();
+			int bristle = ModContent.TileType<WastesBristle>();
+			int rootShrub = ModContent.TileType<WastesRootShrub>();
 			for (int x = 35; x < Main.maxTilesX - 35; x++)
 			{
 				for (int y = 40; y < maximumY; y++)
 				{
 					if (!ApogeanWorldPlanSystem.Instance.CanEditTile(x, y, WorldEditIntent.WastesConversion)) continue;
 					Tile ground = Framing.GetTileSafely(x, y);
-					if (!ground.HasTile || ground.TileType != deadGrass || Framing.GetTileSafely(x, y - 1).HasTile) continue;
+					if (!ground.HasTile || ground.TileType != wastesGrass || Framing.GetTileSafely(x, y - 1).HasTile) continue;
 
 					if (WorldGen.genRand.NextBool(11))
-					{
-						WorldGen.PlaceTile(x, y - 1, deadTuft, mute: true, forced: true);
-					}
+						TryPlaceWastesPlant(x, y - 1, rootTuft, bristle, rootShrub);
 					break;
 				}
 			}
+		}
+
+		private static void TryPlaceWastesPlant(int x, int y, int rootTuft, int bristle, int rootShrub)
+		{
+			int roll = WorldGen.genRand.Next(100);
+			int type;
+			int variants;
+
+			if (roll < 70)
+			{
+				type = rootTuft;
+				variants = 4;
+			}
+			else if (roll < 92)
+			{
+				type = bristle;
+				variants = 3;
+			}
+			else
+			{
+				type = rootShrub;
+				variants = 3;
+			}
+
+			WorldGen.PlaceObject(x, y, type, mute: true, style: 0, random: WorldGen.genRand.Next(variants));
 		}
 	}
 }

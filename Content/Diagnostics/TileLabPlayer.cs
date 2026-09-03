@@ -14,12 +14,14 @@ namespace apogean.Content.Diagnostics
 		private int _captureProbeDelay;
 		private Rectangle _captureProbeBounds;
 		private string _captureProbeName;
+		private bool _captureProbeEntities;
 
 		public override void Initialize()
 		{
 			_automaticBuildDelay = -1;
 			_captureProbeDelay = -1;
 			_captureProbeName = "Apogean Tile Lab Capture Probe";
+			_captureProbeEntities = true;
 		}
 
 		public override void OnEnterWorld()
@@ -40,12 +42,12 @@ namespace apogean.Content.Diagnostics
 					{
 						try
 						{
-							BuildGrassAndReport(scheduleCaptureProbe: true);
+							BuildVegetationAndReport(scheduleCaptureProbe: true);
 						}
 						catch (System.Exception exception)
 						{
-							Mod.Logger.Error("AUTOMATIC GRASS LAB BUILD FAILED", exception);
-							Main.NewText("Grass Lab failed to build. The world was left open; see client.log.", Color.OrangeRed);
+							Mod.Logger.Error("AUTOMATIC VEGETATION LAB BUILD FAILED", exception);
+							Main.NewText("Vegetation Lab failed to build. The world was left open; see client.log.", Color.OrangeRed);
 						}
 					}
 				}
@@ -90,6 +92,7 @@ namespace apogean.Content.Diagnostics
 				}
 				_captureProbeBounds = bounds;
 				_captureProbeName = "Apogean Tile Lab Capture Probe";
+				_captureProbeEntities = true;
 				_captureProbeDelay = 180;
 			}
 		}
@@ -103,6 +106,20 @@ namespace apogean.Content.Diagnostics
 
 			_captureProbeBounds = bounds;
 			_captureProbeName = "Apogean Grass Lab Capture Probe";
+			_captureProbeEntities = true;
+			_captureProbeDelay = 180;
+		}
+
+		internal void BuildVegetationAndReport(bool scheduleCaptureProbe)
+		{
+			Rectangle bounds = VegetationLabGallery.Build(Player);
+			Main.NewText($"Vegetation Lab rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Vegetation Lab Capture Probe";
+			_captureProbeEntities = false;
 			_captureProbeDelay = 180;
 		}
 
@@ -118,7 +135,7 @@ namespace apogean.Content.Diagnostics
 				Area = _captureProbeBounds,
 				Biome = biome,
 				CaptureBackground = true,
-				CaptureEntities = true,
+				CaptureEntities = _captureProbeEntities,
 				UseScaling = true,
 				OutputName = _captureProbeName
 			});

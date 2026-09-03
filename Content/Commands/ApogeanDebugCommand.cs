@@ -25,7 +25,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|tilelab|grasslab|exportatlases|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|tilelab|grasslab|vegetationlab|exportatlases|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -131,6 +131,15 @@ namespace apogean.Content.Commands
 						break;
 					}
 					player.GetModPlayer<TileLabPlayer>().BuildGrassAndReport(scheduleCaptureProbe: true);
+					break;
+
+				case "vegetationlab":
+					if (Main.netMode == NetmodeID.MultiplayerClient)
+					{
+						caller.Reply("The destructive Vegetation Lab is single-player/server-host only.", Color.OrangeRed);
+						break;
+					}
+					player.GetModPlayer<TileLabPlayer>().BuildVegetationAndReport(scheduleCaptureProbe: true);
 					break;
 
 				case "exportatlases":

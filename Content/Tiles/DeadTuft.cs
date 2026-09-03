@@ -4,6 +4,8 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using Terraria.Enums;
+using Terraria.GameContent.Metadata;
 
 namespace apogean.Content.Tiles
 {
@@ -11,19 +13,18 @@ namespace apogean.Content.Tiles
 	{
 		public override void SetStaticDefaults()
 		{
-			Main.tileFrameImportant[Type] = true;
-			Main.tileCut[Type] = true;
-			Main.tileNoAttach[Type] = true;
-			Main.tileLavaDeath[Type] = true;
-			HitSound = SoundID.Grass;
-			DustType = DustID.Dirt;
-			AddMapEntry(new Color(121, 91, 54));
+			WastesPlantRegistration.ApplyCommon(this, new Color(121, 91, 54), sways: true);
 
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
 			TileObjectData.newTile.Origin = Point16.Zero;
-			TileObjectData.newTile.AnchorValidTiles = new[] { ModContent.TileType<DeadGrass>(), TileID.Dirt };
+			TileObjectData.newTile.AnchorBottom = WastesPlantRegistration.GroundAnchor(1);
+			TileObjectData.newTile.AnchorValidTiles = WastesPlantRegistration.ValidGround();
 			TileObjectData.newTile.StyleHorizontal = true;
-			TileObjectData.newTile.RandomStyleRange = 3;
+			TileObjectData.newTile.StyleMultiplier = 4;
+			TileObjectData.newTile.RandomStyleRange = 4;
+			TileObjectData.newTile.DrawFlipHorizontal = true;
+			TileObjectData.newTile.WaterPlacement = LiquidPlacement.NotAllowed;
+			TileObjectData.newTile.LavaDeath = true;
 			TileObjectData.addTile(Type);
 		}
 	}

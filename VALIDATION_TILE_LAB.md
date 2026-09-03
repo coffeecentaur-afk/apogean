@@ -11,8 +11,9 @@ The fixture is intentionally small and destructive. Run it only in a disposable 
 - Press `F8` to rebuild the fixture around the local player.
 - Run `/apogean tilelab` as an alternative.
 - Run `/apogean grasslab` to rebuild the grass-specific side-by-side fixture.
+- Run `/apogean vegetationlab` to rebuild the Wastes ground-cover fixture.
 - Run `/apogean exportatlases` to export the currently installed vanilla dirt, grass, and natural-wall atlases into `Captures/ApogeanTileLabReferences`.
-- The disposable world named `Apogee Native Visual V3` currently rebuilds the grass fixture automatically and runs a capture-camera probe after three seconds.
+- The disposable world named `Apogee Native Visual V3` currently rebuilds the vegetation fixture automatically and runs a capture-camera probe after three seconds.
 
 ## What the fixture validates
 
@@ -90,4 +91,15 @@ The grass increment below was kept isolated in the Tile Lab until it passed the 
 
 This slice proves atlas rendering and basic soil merging. Grass growth, spreading, conversion rules, paint/coating behavior, and world-generation replacement remain deliberately deferred to dedicated tests rather than being inferred from a good screenshot.
 
-The next safe increment is the Wastes ground-plant family. Broad world-generation work remains frozen.
+## Wastes ground-cover slice — 2026-09-02
+
+- Added four 1x1 root-tuft variants, three 1x2 brittle-bristle variants, and three 2x2 skeletal-root-shrub variants.
+- Kept the engine sheets at exact native object dimensions: 72x18, 54x36, and 108x36. All pixels use hard alpha and no sheet exceeds seven opaque colors.
+- Registered each family as one tile style with explicit random placement variants. The first client pass exposed an incorrect `PlaceObject` style argument that pushed later variants beyond the sheet; the lab now selects those variants through the `random` argument, matching tModLoader's `StyleMultiplier` contract.
+- Rendered all ten variants simultaneously on production Wastes grass. Every variant anchored to the correct row, both multi-tile families assembled without seams or clipping, and no source-rectangle artifacts remained.
+- The capture camera wrote `Apogean Vegetation Lab Capture Probe.png` with entities excluded so dropped items, NPCs, and the player cannot obscure the tile evidence. The client log contained no vegetation-lab failure, exception, error, or fatal entry.
+- Integrated only this validated family into `RuinedSurfaceSystem`: approximately 70% of decoration attempts select low tufts, 22% select bristles, and 8% select shrubs. The existing overall sparse placement rate remains unchanged.
+
+The concept reference is `Art/Reference/WastesGroundCover-reference-v1.png`. It sets the dry-root silhouettes and charcoal/umber/ochre/amber palette; the deterministic PowerShell generator creates the exact engine sheets.
+
+The next safe increment is the Wastes tree trunk and canopy family. Broader terrain, structures, and Maw geometry remain frozen.
