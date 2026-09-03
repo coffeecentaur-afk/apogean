@@ -6,6 +6,7 @@ Validated 2026-09-01/02 against tModLoader `v2026.7.3.0` and Terraria `1.4.4.9`.
 
 - `Tools/Test-WorldVisualIntegrity.ps1`: PASS
 - `Tools/Test-VisualContracts.ps1`: PASS
+- `Tools/Test-SurfaceRegression.ps1`: PASS
 - `dotnet build --no-restore`: PASS, zero errors; the existing lowercase `apogean` class-name compiler warning remains.
 - Dedicated-server content load: PASS with no Apogean warnings or errors after removing invalid placeholder banner registrations.
 
@@ -39,3 +40,5 @@ Run `/apogean gallery` in a disposable single-player validation world. It clears
 - connected edges, corners, interior framing, half-blocks, and slopes.
 
 The atlases use the official tModLoader ExampleMod framing topology as an opaque/transparent mask. Every visible pixel, palette, material motif, ruin, amber vein, and corporate detail remains Apogean-authored. No Terraria resource pack is required.
+
+The automatic `Apogee Native Visual V3` fixture additionally grows four native ruined trees, performs a deterministic mid-trunk chop on the fourth tree, and fails immediately unless the canopy is removed while the stump remains. Its capture-camera probe resolves Apogean's post-arbitration global background slot explicitly, so the panorama and ordinary camera must show the same ruined Forest composition.

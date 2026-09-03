@@ -5,6 +5,7 @@ using Terraria.Graphics.Capture;
 using Terraria.ID;
 using Terraria.ModLoader;
 using apogean.Content.Backgrounds;
+using apogean.Content.Config;
 using apogean.Content.World;
 
 namespace apogean.Content.Diagnostics
@@ -212,6 +213,7 @@ namespace apogean.Content.Diagnostics
 		{
 			Rectangle bounds = VegetationLabGallery.Build(Player);
 			Main.NewText($"Vegetation Lab rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			Main.NewText("Runtime contract passed: a native mid-trunk chop removed the canopy and retained the stump.", Color.LightGreen);
 			if (!scheduleCaptureProbe)
 				return;
 
@@ -252,10 +254,27 @@ namespace apogean.Content.Diagnostics
 
 		private void RunCaptureProbe()
 		{
-			CaptureBiome biome = CaptureBiome.GetCaptureBiome(-1);
-			int sceneBackground = Main.LocalPlayer.CurrentSceneEffect.surfaceBackground.value;
-			int sceneWater = Main.LocalPlayer.CurrentSceneEffect.waterStyle.value;
-			Mod.Logger.Info($"TILE LAB CAPTURE PROBE: scene background={sceneBackground}; scene water={sceneWater}; main water={Main.waterStyle}; capture water={biome.WaterStyle}");
+			var sceneEffect = Main.LocalPlayer.CurrentSceneEffect;
+			int sceneBackground = sceneEffect.surfaceBackground.value;
+			int sceneWater = sceneEffect.waterStyle.value;
+			int captureBackground = sceneBackground;
+			if (ModContent.GetModSurfaceBackgroundStyle(sceneBackground) == null &&
+				ModContent.GetInstance<ApogeanWorldConfig>().RuinedBiomeBackgrounds)
+			{
+				// GlobalBackgroundStyle changes the live renderer after scene-effect
+				// arbitration, so CurrentSceneEffect still contains a vanilla slot. The
+				// capture camera only sees CurrentSceneEffect; resolve the same ruined
+				// slot explicitly so live and panorama validation cannot disagree.
+				captureBackground = RuinedGlobalBackgroundStyle.ResolveRuinedSurfaceStyle(Main.LocalPlayer);
+			}
+
+			// Some ModBiome combinations expose water style -1. CaptureBiome indexes
+			// the liquid texture array directly, so always pass a validated slot.
+			int captureWater = sceneWater >= 0 && sceneWater < Main.maxLiquidTypes
+				? sceneWater
+				: Main.waterStyle >= 0 && Main.waterStyle < Main.maxLiquidTypes ? Main.waterStyle : 0;
+			CaptureBiome biome = new(captureBackground, captureWater, sceneEffect.tileColorStyle);
+			Mod.Logger.Info($"TILE LAB CAPTURE PROBE: scene background={sceneBackground}; capture background={captureBackground}; scene water={sceneWater}; main water={Main.waterStyle}; capture water={biome.WaterStyle}");
 
 			CaptureManager.Instance.Capture(new CaptureSettings
 			{

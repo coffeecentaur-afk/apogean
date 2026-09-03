@@ -71,6 +71,15 @@ Reject-Match 'Content/Tiles/DeadForestTree.cs' 'DeadForestTreeHidden' 'DeadFores
 Require-Match 'Content/Tiles/DeadForestTree.cs' 'Content/Tiles/DeadForestTree"' 'DeadForestTree does not expose its visible trunk atlas'
 Reject-FileOrMatch 'Content/Tiles/DeadForestTreeOverlaySystem.cs' 'drawHeight\s*=|trunkTiles|SpriteBatch\.Draw' 'Whole-tree scaling overlay is still active and will shrink after chopping'
 Require-Match 'Content/Tiles/DeadForestTreeRootGlobalTile.cs' 'variant \* 48, 0, 48, 32' 'Dead tree root flare is not bounded to a fixed 48x32 base sprite'
+Require-Match 'Content/Diagnostics/VegetationLabGallery.cs' 'ValidateMidTrunkChop' 'Vegetation fixture does not exercise native mid-trunk chopping'
+Require-Match 'Content/Diagnostics/VegetationLabGallery.cs' 'unsupported\.HasTile.*TileID\.Trees' 'Vegetation fixture does not reject a floating canopy after chopping'
+
+# Global background overrides are applied after scene-effect arbitration, while CaptureBiome reads
+# CurrentSceneEffect. The validation panorama must resolve the same ruined slot explicitly and must
+# sanitize the ModBiome water style before the renderer indexes its liquid texture array.
+Require-Match 'Content/Backgrounds/ApogeanSurfaceBackgroundStyles.cs' 'ResolveRuinedSurfaceStyle' 'Ruined surface routing has no shared resolver for live and capture rendering'
+Require-Match 'Content/Diagnostics/TileLabPlayer.cs' 'new\(captureBackground, captureWater, sceneEffect\.tileColorStyle\)' 'Capture probe still relies on a vanilla CurrentSceneEffect background slot'
+Require-Match 'Content/Diagnostics/TileLabPlayer.cs' 'sceneWater\s*>=\s*0.*Main\.maxLiquidTypes' 'Capture probe does not reject invalid negative/out-of-range water styles'
 
 # Wide leafless trees need deliberate thinning after vanilla forest conversion, otherwise adjacent
 # roots become one unreadable copied grove.

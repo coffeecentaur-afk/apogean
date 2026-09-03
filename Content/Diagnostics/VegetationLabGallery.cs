@@ -65,14 +65,52 @@ namespace apogean.Content.Diagnostics
 		private static void PlaceTrees(int left, int floorY)
 		{
 			int sapling = ModContent.TileType<DeadForestSapling>();
-			// Three well-separated growth calls prove Terraria's native height, branch,
-			// and crown variation without recreating the production forest pileup.
-			foreach (int x in new[] { left + 109, left + 128, left + 147 })
+			// Four well-separated growth calls prove Terraria's native height, branch,
+			// and crown variation without recreating the production forest pileup. The
+			// last tree is sacrificed to a deterministic mid-trunk chopping assertion.
+			int[] treeX = { left + 105, left + 123, left + 141, left + 159 };
+			foreach (int x in treeX)
 			{
 				if (!WorldGen.PlaceObject(x, floorY - 1, sapling, mute: true))
 					throw new InvalidOperationException($"Vegetation Lab could not place a dead-tree sapling at {x},{floorY - 1}.");
 				if (!WorldGen.GrowTree(x, floorY - 1))
 					throw new InvalidOperationException($"Vegetation Lab could not grow a dead forest tree at {x},{floorY - 1}.");
+			}
+
+			ValidateMidTrunkChop(treeX[^1], floorY - 1);
+		}
+
+		private static void ValidateMidTrunkChop(int x, int rootY)
+		{
+			int topY = rootY;
+			while (topY > 10)
+			{
+				Tile candidate = Framing.GetTileSafely(x, topY - 1);
+				if (!candidate.HasTile || candidate.TileType != TileID.Trees)
+					break;
+				topY--;
+			}
+
+			int height = rootY - topY + 1;
+			if (height < 6)
+				throw new InvalidOperationException($"Vegetation Lab tree at {x},{rootY} was too short for a mid-trunk chop proof.");
+
+			int cutY = rootY - Math.Max(2, height / 2);
+			WorldGen.KillTile(x, cutY, noItem: true);
+
+			Tile removedSegment = Framing.GetTileSafely(x, cutY);
+			if (removedSegment.HasTile && removedSegment.TileType == TileID.Trees)
+				throw new InvalidOperationException($"Native tree segment at {x},{cutY} survived the chop proof.");
+
+			Tile stump = Framing.GetTileSafely(x, cutY + 1);
+			if (!stump.HasTile || stump.TileType != TileID.Trees)
+				throw new InvalidOperationException($"Dead tree chop proof removed the stump below {x},{cutY}.");
+
+			for (int y = topY; y < cutY; y++)
+			{
+				Tile unsupported = Framing.GetTileSafely(x, y);
+				if (unsupported.HasTile && unsupported.TileType == TileID.Trees)
+					throw new InvalidOperationException($"Dead tree chop proof left an unsupported trunk segment at {x},{y}.");
 			}
 		}
 

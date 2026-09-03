@@ -4,9 +4,10 @@
 
 - Faction relation scaffold, sealed compounds, dialogue UI, and a playable Matriarch prototype.
 - Renderer-gated Wastes material pipeline: disposable tile, grass, vegetation, terrain-family, and production-property galleries; local native-atlas export; cold client capture; and validated Soil, Grass, Stone, Sand, Ice, Snow, Mud, unsafe-wall, item, falling-projectile, and ground-cover families.
-- First reference-driven dead-tree overlay is integrated through the tile renderer and passes build/static/capture checks. Its flared roots and all ground-cover families now visibly enter the grass lip instead of floating.
+- Reference-driven dead trees now use Terraria's native segmented trunk, branch, and crown renderer with varied heights and branch placement. The rejected whole-tree overlay is gone; a live mid-trunk chop assertion proves that the canopy falls while the lower stump and bounded root flare remain. Tree spacing, rigid ground cover, and grass anchoring pass build/static/live/capture checks.
 - Renderer-gated Maw conversion pipeline: native-topology hostile Soil, Grass, Stone, Sand, Ice, Snow, Mud, and Clay families; custom drops and sand behavior; unsafe-wall conversion; and a live four-stage Wastes → Maw → Wastes → vanilla purification matrix.
 - First approved Wastes forest panorama: a native-sized, transparent far/middle/close parallax decomposition preserving the broadcast spire, ruined skyline, broken highway, settlement remains, and rooted foreground basin from the approved concept. It is live-rendered, seam-checked, and retained as seeded Forest composition V0.
+- Validation panoramas explicitly resolve the same global ruined-background slot used by ordinary play and sanitize invalid ModBiome water-style values before invoking Terraria's capture renderer. Live and panorama captures now agree without reintroducing the prior liquid-array crash.
 - First approved Wastes underground-depth set: four native-sized cave textures with an opaque, wrap-safe eroded-strata material, distinct shallow/deep palettes, and an in-engine lighting proof. Unique ruined mine landmarks are reserved for sparse world furniture so they do not repeat every 128 pixels.
 
 ## Current environmental gate

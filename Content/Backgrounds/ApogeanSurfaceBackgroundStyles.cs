@@ -62,23 +62,12 @@ namespace apogean.Content.Backgrounds
 
 	public sealed class RuinedGlobalBackgroundStyle : GlobalBackgroundStyle
 	{
-		public override void ChooseSurfaceBackgroundStyle(ref int style)
+		internal static int ResolveRuinedSurfaceStyle(Player player)
 		{
-			if (Main.gameMenu || !ModContent.GetInstance<ApogeanWorldConfig>().RuinedBiomeBackgrounds) return;
-			Player player = Main.LocalPlayer;
-			if (player == null || !player.active) return;
 			if (RuinedBackgroundSelectionSystem.Instance.ForestConceptRenderLabEnabled)
-			{
-				style = ModContent.GetInstance<ForestConceptRenderLabBackgroundStyle>().Slot;
-				return;
-			}
+				return ModContent.GetInstance<ForestConceptRenderLabBackgroundStyle>().Slot;
 
-			// The whole-world Wastes treatment replaces only Terraria's built-in
-			// panoramas. A third-party ModBiome has already won priority arbitration
-			// by this point and must keep its own background outside the Maw.
-			if (ModContent.GetModSurfaceBackgroundStyle(style) != null) return;
-
-			style = RuinedBackgroundSelectionSystem.DetectBiome(player) switch
+			return RuinedBackgroundSelectionSystem.DetectBiome(player) switch
 			{
 				RuinedBackgroundBiome.Desert => ModContent.GetInstance<DesertRuinedBackgroundStyle>().Slot,
 				RuinedBackgroundBiome.Jungle => ModContent.GetInstance<JungleRuinedBackgroundStyle>().Slot,
@@ -91,6 +80,25 @@ namespace apogean.Content.Backgrounds
 				RuinedBackgroundBiome.Engraft => ModContent.GetInstance<EngraftRuinedBackgroundStyle>().Slot,
 				_ => ModContent.GetInstance<ForestRuinedBackgroundStyle>().Slot
 			};
+		}
+
+		public override void ChooseSurfaceBackgroundStyle(ref int style)
+		{
+			if (Main.gameMenu || !ModContent.GetInstance<ApogeanWorldConfig>().RuinedBiomeBackgrounds) return;
+			Player player = Main.LocalPlayer;
+			if (player == null || !player.active) return;
+			if (RuinedBackgroundSelectionSystem.Instance.ForestConceptRenderLabEnabled)
+			{
+				style = ResolveRuinedSurfaceStyle(player);
+				return;
+			}
+
+			// The whole-world Wastes treatment replaces only Terraria's built-in
+			// panoramas. A third-party ModBiome has already won priority arbitration
+			// by this point and must keep its own background outside the Maw.
+			if (ModContent.GetModSurfaceBackgroundStyle(style) != null) return;
+
+			style = ResolveRuinedSurfaceStyle(player);
 		}
 
 		public override void ChooseUndergroundBackgroundStyle(ref int style)
