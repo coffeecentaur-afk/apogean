@@ -54,7 +54,7 @@ namespace apogean.Content.Tiles
 	public sealed class DeadForestTreeRenderer : GlobalTile
 	{
 		private const float TransparentBottomPadding = 4f;
-		private const float RootSinkPixels = 6f;
+		private const float RootSinkPixels = 9f;
 		private Asset<Texture2D> _treeTexture;
 
 		public override void Load()

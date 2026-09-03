@@ -173,23 +173,67 @@ Test-NormalizedCopy 'Content/Tiles/Diagnostics/WastesSoilCandidate.png' 'Content
 Test-NormalizedCopy 'Content/Walls/Diagnostics/WastesDirtWallCandidate.png' 'Content/Walls/WastesDirtWallUnsafe.png' $false
 Test-NormalizedCopy 'Content/Tiles/Diagnostics/WastesGrassCandidate.png' 'Content/Tiles/WastesGrass.png' $false
 Test-NormalizedCopy 'Content/Walls/Diagnostics/WastesGrassWallCandidate.png' 'Content/Walls/WastesGrassWallUnsafe.png' $false
+$terrainFamilyContracts = @(
+	@('Stone', 10, 44104, '0B36C6ACA6ACAB6A45422FB240F6527516C8B11C66A34404EACCB57609902EE6'),
+	@('Sand', 11, 44192, '71DC4A4E79B3E38A5BA27D771AD80C04CF6DE059FE7979EC958913539F928958'),
+	@('Ice', 11, 44036, 'DD70F89A74332CB985E3396A8827A36039B9D9890B86C7F20E6DB73E9D071360'),
+	@('Snow', 9, 44048, 'E5515B1CAE899864E7E53C22C12EA6F6E2790C9A69E45D0E7096F773C74379DE'),
+	@('Mud', 10, 44104, '0B36C6ACA6ACAB6A45422FB240F6527516C8B11C66A34404EACCB57609902EE6')
+)
+$wallFamilyContracts = @(
+	@('Stone', 6, 28864, '7873B1EA474A86161ECE424638475FC6644601B0A456A9E7C0AE2B9055305B6F'),
+	@('Sand', 5, 28864, '7873B1EA474A86161ECE424638475FC6644601B0A456A9E7C0AE2B9055305B6F'),
+	@('Ice', 6, 30528, 'B858C0628306DEEE27994AAECBDE924B587FA999342DC7F401713DC0D1F2B1F3'),
+	@('Snow', 5, 28864, '7873B1EA474A86161ECE424638475FC6644601B0A456A9E7C0AE2B9055305B6F'),
+	@('Mud', 6, 28864, '7873B1EA474A86161ECE424638475FC6644601B0A456A9E7C0AE2B9055305B6F')
+)
+foreach ($contract in $terrainFamilyContracts) {
+	$name = $contract[0]
+	Test-FixedAtlasContract "Content/Tiles/Diagnostics/Wastes${name}Candidate.png" 288 270 $contract[1] $contract[2] $contract[3]
+	Test-NormalizedCopy "Content/Tiles/Diagnostics/Wastes${name}Candidate.png" "Content/Tiles/Wastes${name}.png" $false
+}
+foreach ($contract in $wallFamilyContracts) {
+	$name = $contract[0]
+	Test-FixedAtlasContract "Content/Walls/Diagnostics/Wastes${name}WallCandidate.png" 468 180 $contract[1] $contract[2] $contract[3]
+	Test-NormalizedCopy "Content/Walls/Diagnostics/Wastes${name}WallCandidate.png" "Content/Walls/Wastes${name}WallUnsafe.png" $false
+}
 Test-FixedAtlasContract 'Content/Tiles/DeadTuft.png' 144 18 7 964 '902D24197188F5057CE119DF61353D2D6263ED7A410E494A49003F49EAD171B3'
 Test-FixedAtlasContract 'Content/Tiles/WastesBristle.png' 108 54 7 2385 'D7E04DA3EAEC618259AB8A47CFE1BD6166209B712F7825017DBD3096672393D3'
 Test-FixedAtlasContract 'Content/Tiles/WastesRootShrub.png' 162 36 7 2811 '1C3FC10C9D52C9161914F32D28C6645541225F9A5CA3D5F00680C3BAC11E5243'
+$terrainItemContracts = @(
+	@('Content/Items/Placeable/WastesSoilBlock.png', 16, 16, 6, 232, '0D1D9C3688390FD9FEA30D3A805AC89399C1B7A83CB515D4E65C6F9369AC55ED'),
+	@('Content/Items/Placeable/WastesStoneBlock.png', 16, 16, 6, 232, '9FA9DF1AE8557DF833F0FF9EEA1DF1572A8EEA392257C12062904F5A722E5FDC'),
+	@('Content/Items/Placeable/WastesSandBlock.png', 16, 16, 6, 232, '9FA9DF1AE8557DF833F0FF9EEA1DF1572A8EEA392257C12062904F5A722E5FDC'),
+	@('Content/Items/Placeable/WastesIceBlock.png', 16, 16, 6, 240, 'C2CC0456E15E9DE773A2A52B9D31449CAADD167F17923DC63AAB72A754305DF3'),
+	@('Content/Items/Placeable/WastesSnowBlock.png', 16, 16, 6, 200, '2B9CF230B5D40020620F8D114771461F2D92AD68F3642DCCDDE534DE5993AFC9'),
+	@('Content/Items/Placeable/WastesMudBlock.png', 16, 16, 6, 232, '0D1D9C3688390FD9FEA30D3A805AC89399C1B7A83CB515D4E65C6F9369AC55ED'),
+	@('Content/Projectiles/WastesSandBallProjectile.png', 14, 14, 6, 148, '97393CB66056628400FDAB6AE30B482031581B06D55DB21F6E26F3153050221D')
+)
+foreach ($contract in $terrainItemContracts) {
+	Test-FixedAtlasContract $contract[0] $contract[1] $contract[2] $contract[3] $contract[4] $contract[5]
+}
 
 foreach ($required in @(
 	'Content/Diagnostics/TileLabContent.cs',
 	'Content/Diagnostics/TileLabGallery.cs',
 	'Content/Diagnostics/GrassLabGallery.cs',
 	'Content/Diagnostics/VegetationLabGallery.cs',
+	'Content/Diagnostics/WastesTerrainFamilyGallery.cs',
+	'Content/Diagnostics/WastesTerrainPropertyGallery.cs',
+	'Content/Diagnostics/WastesTerrainLabContent.cs',
+	'Content/Projectiles/WastesSandBallFallingProjectile.cs',
+	'Content/Items/Placeable/WastesTerrainBlocks.cs',
 	'Content/Diagnostics/TileLabPlayer.cs',
 	'Content/Diagnostics/VanillaAtlasExporter.cs',
 	'Tools/New-WastesSoilCandidate.ps1',
 	'Tools/New-WastesGrassCandidate.ps1',
+	'Tools/New-WastesTerrainFamily.ps1',
+	'Tools/New-WastesTerrainItems.ps1',
 	'Tools/New-WastesGroundCover.ps1',
 	'Content/Tiles/WastesGroundCoverTiles.cs',
 	'Art/Reference/WastesGroundCover-reference-v1.png',
-	'Art/Reference/WastesGroundCover-reference-v2.png'
+	'Art/Reference/WastesGroundCover-reference-v2.png',
+	'Art/Reference/WastesTerrainFamily-reference-v1.png'
 )) {
     if (-not (Test-Path -LiteralPath (Join-Path $Root $required))) {
         Add-Failure "Missing Tile Lab source: $required"

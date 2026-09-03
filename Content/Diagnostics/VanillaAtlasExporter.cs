@@ -31,13 +31,40 @@ namespace apogean.Content.Diagnostics
 				Path.Combine(outputDirectory, "Vanilla-Grass-Tile.png"));
 			Export(Main.Assets.Request<Texture2D>($"Images/Wall_{WallID.GrassUnsafe}", AssetRequestMode.ImmediateLoad).Value,
 				Path.Combine(outputDirectory, "Vanilla-GrassUnsafe-Wall.png"));
+			ExportTerrainPair(outputDirectory, "Stone", TileID.Stone, "Stone", WallID.Stone);
+			ExportTerrainPair(outputDirectory, "Sand", TileID.Sand, "Sandstone", WallID.Sandstone);
+			ExportTerrainPair(outputDirectory, "Ice", TileID.IceBlock, "IceUnsafe", WallID.IceUnsafe);
+			ExportTerrainPair(outputDirectory, "Snow", TileID.SnowBlock, "SnowUnsafe", WallID.SnowWallUnsafe);
+			ExportTerrainPair(outputDirectory, "Mud", TileID.Mud, "MudUnsafe", WallID.MudUnsafe);
 			Export(Main.Assets.Request<Texture2D>($"Images/Tiles_{TileID.Trees}", AssetRequestMode.ImmediateLoad).Value,
 				Path.Combine(outputDirectory, "Vanilla-ForestTree-Trunk.png"));
 			Export(Main.Assets.Request<Texture2D>("Images/Tree_Branches_0", AssetRequestMode.ImmediateLoad).Value,
 				Path.Combine(outputDirectory, "Vanilla-ForestTree-Branches.png"));
 			Export(Main.Assets.Request<Texture2D>("Images/Tree_Tops_0", AssetRequestMode.ImmediateLoad).Value,
 				Path.Combine(outputDirectory, "Vanilla-ForestTree-Tops.png"));
+			ExportItem(outputDirectory, "DirtBlock", ItemID.DirtBlock);
+			ExportItem(outputDirectory, "StoneBlock", ItemID.StoneBlock);
+			ExportItem(outputDirectory, "SandBlock", ItemID.SandBlock);
+			ExportItem(outputDirectory, "IceBlock", ItemID.IceBlock);
+			ExportItem(outputDirectory, "SnowBlock", ItemID.SnowBlock);
+			ExportItem(outputDirectory, "MudBlock", ItemID.MudBlock);
+			Export(Main.Assets.Request<Texture2D>($"Images/Projectile_{ProjectileID.SandBallFalling}", AssetRequestMode.ImmediateLoad).Value,
+				Path.Combine(outputDirectory, "Vanilla-SandBall-Projectile.png"));
 			return outputDirectory;
+		}
+
+		private static void ExportTerrainPair(string outputDirectory, string tileName, int tileType, string wallName, int wallType)
+		{
+			Export(Main.Assets.Request<Texture2D>($"Images/Tiles_{tileType}", AssetRequestMode.ImmediateLoad).Value,
+				Path.Combine(outputDirectory, $"Vanilla-{tileName}-Tile.png"));
+			Export(Main.Assets.Request<Texture2D>($"Images/Wall_{wallType}", AssetRequestMode.ImmediateLoad).Value,
+				Path.Combine(outputDirectory, $"Vanilla-{wallName}-Wall.png"));
+		}
+
+		private static void ExportItem(string outputDirectory, string name, int itemType)
+		{
+			Export(Main.Assets.Request<Texture2D>($"Images/Item_{itemType}", AssetRequestMode.ImmediateLoad).Value,
+				Path.Combine(outputDirectory, $"Vanilla-{name}-Item.png"));
 		}
 
 		private static void Export(Texture2D texture, string path)

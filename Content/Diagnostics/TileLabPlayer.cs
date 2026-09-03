@@ -4,6 +4,7 @@ using Terraria.GameInput;
 using Terraria.Graphics.Capture;
 using Terraria.ID;
 using Terraria.ModLoader;
+using apogean.Content.World;
 
 namespace apogean.Content.Diagnostics
 {
@@ -42,12 +43,12 @@ namespace apogean.Content.Diagnostics
 					{
 						try
 						{
-							BuildVegetationAndReport(scheduleCaptureProbe: true);
+							BuildWastesTerrainPropertiesAndReport(scheduleCaptureProbe: true);
 						}
 						catch (System.Exception exception)
 						{
-							Mod.Logger.Error("AUTOMATIC VEGETATION LAB BUILD FAILED", exception);
-							Main.NewText("Vegetation Lab failed to build. The world was left open; see client.log.", Color.OrangeRed);
+							Mod.Logger.Error("AUTOMATIC WASTES TERRAIN LAB BUILD FAILED", exception);
+							Main.NewText("Wastes terrain lab failed to build. The world was left open; see client.log.", Color.OrangeRed);
 						}
 					}
 				}
@@ -107,6 +108,70 @@ namespace apogean.Content.Diagnostics
 			_captureProbeBounds = bounds;
 			_captureProbeName = "Apogean Grass Lab Capture Probe";
 			_captureProbeEntities = true;
+			_captureProbeDelay = 180;
+		}
+
+		internal void BuildMaterialGalleryAndReport(bool scheduleCaptureProbe)
+		{
+			Rectangle bounds = VisualIntegrityGallery.Build(Player, out System.Collections.Generic.IReadOnlyList<string> rows);
+			Main.NewText($"Material gallery rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			foreach (string row in rows)
+				Main.NewText(row, new Color(150, 90, 170));
+			if (!scheduleCaptureProbe)
+				return;
+
+			try
+			{
+				string referenceDirectory = VanillaAtlasExporter.ExportTileLabReferences();
+				Mod.Logger.Info($"MATERIAL GALLERY REFERENCES EXPORTED: {referenceDirectory}");
+			}
+			catch (System.Exception exception)
+			{
+				Mod.Logger.Error("MATERIAL GALLERY REFERENCE EXPORT FAILED", exception);
+			}
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Material Gallery Capture Probe";
+			_captureProbeEntities = false;
+			_captureProbeDelay = 180;
+		}
+
+		internal void BuildWastesTerrainAndReport(bool scheduleCaptureProbe)
+		{
+			Rectangle bounds = WastesTerrainFamilyGallery.Build(Player, out System.Collections.Generic.IReadOnlyList<string> labels);
+			Main.NewText($"Wastes terrain lab rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			Main.NewText(string.Join(" | ", labels), new Color(150, 90, 170));
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Wastes Terrain Family Capture Probe";
+			_captureProbeEntities = false;
+			_captureProbeDelay = 180;
+		}
+
+		internal void BuildWastesTerrainPropertiesAndReport(bool scheduleCaptureProbe)
+		{
+			Rectangle bounds = WastesTerrainPropertyGallery.Build(Player, out System.Collections.Generic.IReadOnlyList<string> labels);
+			Main.NewText($"Wastes production property lab rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			Main.NewText(string.Join(" | ", labels), new Color(194, 126, 44));
+			Main.NewText("Runtime contracts passed: framing, native drops, sand/falling/ammo identity, ice/snow identity, and neutral spread state.", Color.LightGreen);
+			if (!scheduleCaptureProbe)
+				return;
+
+			try
+			{
+				string referenceDirectory = VanillaAtlasExporter.ExportTileLabReferences();
+				Mod.Logger.Info($"WASTES TERRAIN REFERENCES EXPORTED: {referenceDirectory}");
+			}
+			catch (System.Exception exception)
+			{
+				Mod.Logger.Error("WASTES TERRAIN REFERENCE EXPORT FAILED", exception);
+			}
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Wastes Terrain Properties Capture Probe";
+			_captureProbeEntities = false;
 			_captureProbeDelay = 180;
 		}
 

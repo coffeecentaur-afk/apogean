@@ -8,6 +8,7 @@ using apogean.Content.Diagnostics;
 using apogean.Content.Factions;
 using apogean.Content.Items.Consumables;
 using apogean.Content.Items.Materials;
+using apogean.Content.Items.Placeable;
 using apogean.Content.Items.Weapons;
 using apogean.Content.NPCs.Broodmass;
 using apogean.Content.NPCs.Debug;
@@ -25,7 +26,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|tilelab|grasslab|vegetationlab|exportatlases|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|tilelab|grasslab|vegetationlab|terrainlab|terrainproperties|terrainitems|exportatlases|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -108,10 +109,8 @@ namespace apogean.Content.Commands
 						caller.Reply("The destructive visual gallery helper is single-player/server-host only.", Color.OrangeRed);
 						break;
 					}
-					Rectangle gallery = VisualIntegrityGallery.Build(player, out System.Collections.Generic.IReadOnlyList<string> rows);
-					caller.Reply($"Built the native material gallery at X {gallery.Left}–{gallery.Right - 1}, Y {gallery.Top}–{gallery.Bottom - 1}. It intentionally clears that debug rectangle.", Color.LightGreen);
-					foreach (string row in rows)
-						caller.Reply(row, Info);
+					player.GetModPlayer<TileLabPlayer>().BuildMaterialGalleryAndReport(scheduleCaptureProbe: true);
+					caller.Reply("Built the native material gallery and scheduled its capture-camera probe. It intentionally clears that debug rectangle.", Color.LightGreen);
 					break;
 
 				case "tilelab":
@@ -140,6 +139,35 @@ namespace apogean.Content.Commands
 						break;
 					}
 					player.GetModPlayer<TileLabPlayer>().BuildVegetationAndReport(scheduleCaptureProbe: true);
+					break;
+
+				case "terrainlab":
+					if (Main.netMode == NetmodeID.MultiplayerClient)
+					{
+						caller.Reply("The destructive Wastes Terrain Lab is single-player/server-host only.", Color.OrangeRed);
+						break;
+					}
+					player.GetModPlayer<TileLabPlayer>().BuildWastesTerrainAndReport(scheduleCaptureProbe: true);
+					break;
+
+				case "terrainproperties":
+					if (Main.netMode == NetmodeID.MultiplayerClient)
+					{
+						caller.Reply("The destructive Wastes Terrain Property Lab is single-player/server-host only.", Color.OrangeRed);
+						break;
+					}
+					player.GetModPlayer<TileLabPlayer>().BuildWastesTerrainPropertiesAndReport(scheduleCaptureProbe: true);
+					break;
+
+				case "terrainitems":
+					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ModContent.ItemType<WastesSoilBlock>(), 100);
+					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ModContent.ItemType<WastesStoneBlock>(), 100);
+					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ModContent.ItemType<WastesSandBlock>(), 100);
+					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ModContent.ItemType<WastesIceBlock>(), 100);
+					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ModContent.ItemType<WastesSnowBlock>(), 100);
+					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ModContent.ItemType<WastesMudBlock>(), 100);
+					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ItemID.Sandgun);
+					caller.Reply("Gave the six Wastes terrain blocks and a Sandgun for placement, mining, and ammo checks.", Color.LightGreen);
 					break;
 
 				case "exportatlases":
