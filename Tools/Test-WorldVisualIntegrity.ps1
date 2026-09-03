@@ -66,7 +66,8 @@ foreach ($family in $corporateFamilies) {
 # The neutral Wastes and hostile Maw must be visually separate tile families.
 $wastesTiles = @('WastesSoil', 'WastesStone', 'WastesGrass', 'WastesSand', 'WastesIce', 'WastesSnow', 'WastesMud')
 foreach ($tile in $wastesTiles) {
-    Require-PngContract "Content/Tiles/$tile.png" 288 270 5
+    $height = if ($tile -eq 'WastesGrass') { 1980 } else { 270 }
+    Require-PngContract "Content/Tiles/$tile.png" 288 $height 5
 }
 
 $mawTiles = @('MawDirt', 'Mawstone', 'MawGrass', 'MawSand', 'MawIce', 'MawSnow', 'MawMud', 'MawClay')

@@ -31,6 +31,12 @@ namespace apogean.Content.Diagnostics
 				Path.Combine(outputDirectory, "Vanilla-Grass-Tile.png"));
 			Export(Main.Assets.Request<Texture2D>($"Images/Wall_{WallID.GrassUnsafe}", AssetRequestMode.ImmediateLoad).Value,
 				Path.Combine(outputDirectory, "Vanilla-GrassUnsafe-Wall.png"));
+			Export(Main.Assets.Request<Texture2D>($"Images/Tiles_{TileID.Trees}", AssetRequestMode.ImmediateLoad).Value,
+				Path.Combine(outputDirectory, "Vanilla-ForestTree-Trunk.png"));
+			Export(Main.Assets.Request<Texture2D>("Images/Tree_Branches_0", AssetRequestMode.ImmediateLoad).Value,
+				Path.Combine(outputDirectory, "Vanilla-ForestTree-Branches.png"));
+			Export(Main.Assets.Request<Texture2D>("Images/Tree_Tops_0", AssetRequestMode.ImmediateLoad).Value,
+				Path.Combine(outputDirectory, "Vanilla-ForestTree-Tops.png"));
 			return outputDirectory;
 		}
 

@@ -1,4 +1,7 @@
-param([string]$Root = (Split-Path -Parent $PSScriptRoot))
+param(
+    [string]$Root = (Split-Path -Parent $PSScriptRoot),
+    [string]$CaptureRoot = (Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games/Terraria/tModLoader/Captures/ApogeanTileLabReferences')
+)
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -38,6 +41,63 @@ function Draw-Path([System.Drawing.Graphics]$g, [System.Drawing.Point[]]$points,
     } finally { $outline.Dispose(); $body.Dispose(); $highlight.Dispose() }
 }
 
+function Draw-TaperedLimb(
+    [System.Drawing.Graphics]$g,
+    [System.Drawing.Point[]]$points,
+    [int]$baseWidth,
+    [int]$tipWidth = 1,
+    [switch]$Bone
+) {
+    if ($points.Count -lt 2) { return }
+    $outlineBrush = [System.Drawing.SolidBrush]::new($p[0])
+    $bodyBrush = [System.Drawing.SolidBrush]::new($(if ($Bone) { $p[5] } else { $p[3] }))
+    $shadowBrush = [System.Drawing.SolidBrush]::new($(if ($Bone) { $p[4] } else { $p[2] }))
+    $lightBrush = [System.Drawing.SolidBrush]::new($(if ($Bone) { $p[6] } else { $p[4] }))
+    try {
+        foreach ($pass in @(
+            @{ Brush = $outlineBrush; Extra = 4 },
+            @{ Brush = $bodyBrush; Extra = 0 }
+        )) {
+            for ($i = 0; $i -lt $points.Count - 1; $i++) {
+                $a = $points[$i]; $b = $points[$i + 1]
+                $dx = [double]($b.X - $a.X); $dy = [double]($b.Y - $a.Y)
+                $length = [Math]::Max(1.0, [Math]::Sqrt($dx * $dx + $dy * $dy))
+                $progressA = $i / [double]($points.Count - 1)
+                $progressB = ($i + 1) / [double]($points.Count - 1)
+                $widthA = [Math]::Max(1, [int][Math]::Round($baseWidth + ($tipWidth - $baseWidth) * $progressA) + $pass.Extra)
+                $widthB = [Math]::Max(1, [int][Math]::Round($baseWidth + ($tipWidth - $baseWidth) * $progressB) + $pass.Extra)
+                $px = -$dy / $length; $py = $dx / $length
+                $quad = [System.Drawing.Point[]]@(
+                    [System.Drawing.Point]::new([int][Math]::Round($a.X + $px * $widthA / 2), [int][Math]::Round($a.Y + $py * $widthA / 2)),
+                    [System.Drawing.Point]::new([int][Math]::Round($a.X - $px * $widthA / 2), [int][Math]::Round($a.Y - $py * $widthA / 2)),
+                    [System.Drawing.Point]::new([int][Math]::Round($b.X - $px * $widthB / 2), [int][Math]::Round($b.Y - $py * $widthB / 2)),
+                    [System.Drawing.Point]::new([int][Math]::Round($b.X + $px * $widthB / 2), [int][Math]::Round($b.Y + $py * $widthB / 2))
+                )
+                $g.FillPolygon($pass.Brush, $quad)
+                $joint = [Math]::Max(1, $widthB)
+                $g.FillEllipse($pass.Brush, $b.X - [int]($joint / 2), $b.Y - [int]($joint / 2), $joint, $joint)
+            }
+        }
+
+        # Broken bark bands follow the mass instead of tracing a ruler-straight centerline.
+        for ($i = 1; $i -lt $points.Count - 1; $i++) {
+            $point = $points[$i]
+            $g.FillRectangle($(if ($i % 2) { $shadowBrush } else { $lightBrush }), $point.X - 1, $point.Y - 1, 3, 2)
+        }
+    }
+    finally {
+        $outlineBrush.Dispose(); $bodyBrush.Dispose(); $shadowBrush.Dispose(); $lightBrush.Dispose()
+    }
+}
+
+function Add-Knot([System.Drawing.Graphics]$g, [int]$x, [int]$y, [int]$size = 5) {
+    $outline = [System.Drawing.SolidBrush]::new($p[0]); $hollow = [System.Drawing.SolidBrush]::new($p[1])
+    try {
+        $g.FillEllipse($outline, $x - [int]($size / 2), $y - [int]($size / 2), $size, $size)
+        $g.FillRectangle($hollow, $x - 1, $y - 1, 2, 2)
+    } finally { $outline.Dispose(); $hollow.Dispose() }
+}
+
 function Add-AmberStrand([System.Drawing.Graphics]$g, [int]$x, [int]$y, [int]$length) {
     $pen = [System.Drawing.Pen]::new($p[7], 2)
     $tip = [System.Drawing.SolidBrush]::new($p[8])
@@ -50,29 +110,39 @@ function Add-AmberStrand([System.Drawing.Graphics]$g, [int]$x, [int]$y, [int]$le
 function New-TrunkSheet {
     $path = Join-Path $Root 'Content/Tiles/DeadForestTree.png'
     $temporaryPath = Join-Path $Root 'Content/Tiles/DeadForestTree.generated.png'
-    $mask = [System.Drawing.Bitmap]::new($path)
-    $out = [System.Drawing.Bitmap]::new($mask.Width, $mask.Height, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+    $referencePath = Join-Path $CaptureRoot 'Vanilla-ForestTree-Trunk.png'
+    if (-not (Test-Path -LiteralPath $referencePath)) {
+        throw "Missing renderer-exported native tree atlas: $referencePath"
+    }
+    $reference = [System.Drawing.Bitmap]::new($referencePath)
+    $out = [System.Drawing.Bitmap]::new(176, 264, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
     try {
-        for ($y = 0; $y -lt $mask.Height; $y++) {
-            for ($x = 0; $x -lt $mask.Width; $x++) {
-                if ($mask.GetPixel($x, $y).A -eq 0) { continue }
-                $edge = $false
-                foreach ($offset in @(@(-1,0),@(1,0),@(0,-1),@(0,1))) {
-                    $nx = $x + $offset[0]; $ny = $y + $offset[1]
-                    if ($nx -lt 0 -or $ny -lt 0 -or $nx -ge $mask.Width -or $ny -ge $mask.Height -or $mask.GetPixel($nx,$ny).A -eq 0) { $edge = $true; break }
-                }
+        if ($reference.Width -lt $out.Width -or $reference.Height -ne $out.Height) {
+            throw "Native tree atlas is $($reference.Width)x$($reference.Height); expected at least 176x264."
+        }
+        for ($y = 0; $y -lt $out.Height; $y++) {
+            for ($x = 0; $x -lt $out.Width; $x++) {
+                $source = $reference.GetPixel($x, $y)
+                if ($source.A -eq 0) { continue }
                 $frameX = [int]($x / 22); $frameY = [int]($y / 22)
                 $localX = $x % 22; $localY = $y % 22
                 $hash = [Math]::Abs((($x + 7) * 73856093) -bxor (($y + 11) * 19349663))
-                $color = if ($edge) { $p[0] } elseif ($hash % 13 -lt 3) { $p[2] } elseif ($hash % 11 -lt 2) { $p[4] } else { $p[3] }
-                if ((($frameX + $frameY * 3) % 6) -eq 0 -and $localX -ge 7 -and $localX -le 9 -and $localY -ge 5 -and $localY -le 14) { $color = $p[5 + (($localY + $frameX) % 2)] }
-                if ((($frameX * 5 + $frameY) % 9) -eq 0 -and $localX -eq 12 -and $localY -ge 9 -and $localY -le 14) { $color = $p[7 + ($localY % 2)] }
-                if ((($frameX + $frameY) % 7) -eq 0 -and $localX -ge 5 -and $localX -le 10 -and $localY -ge 7 -and $localY -le 10) { $color = $p[1] }
+                $luminance = (0.299 * $source.R) + (0.587 * $source.G) + (0.114 * $source.B)
+                $color = if ($luminance -lt 35) { $p[0] } elseif ($luminance -lt 62) { $p[1] } elseif ($luminance -lt 88) { $p[2] } elseif ($luminance -lt 116) { $p[3] } elseif ($luminance -lt 150) { $p[4] } else { $p[5] }
+
+                # A few frames carry pale exposed wood or an amber graft seam.
+                # They follow existing opaque bark pixels, so tile seams remain native-clean.
+                if ((($frameX + $frameY * 3) % 11) -eq 0 -and $localX -ge 8 -and $localX -le 10 -and $localY -ge 5 -and $localY -le 13 -and $luminance -gt 82) {
+                    $color = $p[5 + (($localY + $frameX) % 2)]
+                }
+                if ((($frameX * 5 + $frameY) % 17) -eq 0 -and $localX -ge 11 -and $localX -le 12 -and $localY -ge 9 -and $localY -le 13 -and $hash % 3 -ne 0) {
+                    $color = $p[7 + ($localY % 2)]
+                }
                 $out.SetPixel($x, $y, $color)
             }
         }
         $out.Save($temporaryPath, [System.Drawing.Imaging.ImageFormat]::Png)
-    } finally { $mask.Dispose(); $out.Dispose() }
+    } finally { $reference.Dispose(); $out.Dispose() }
     Move-Item -LiteralPath $temporaryPath -Destination $path -Force
 }
 
@@ -80,16 +150,19 @@ function New-TreeTops {
     $canvas = New-Canvas 246 82
     $g = $canvas.Graphics
     for ($variant = 0; $variant -lt 3; $variant++) {
-        $left = $variant * 82; $center = $left + 41; $lean = @(-5, 2, 6)[$variant]
-        Draw-Path $g @([System.Drawing.Point]::new($center,81),[System.Drawing.Point]::new($center+$lean,55),[System.Drawing.Point]::new($center+$lean-2,31),[System.Drawing.Point]::new($center+$lean+4,8)) 7
-        Draw-Path $g @([System.Drawing.Point]::new($center+$lean,58),[System.Drawing.Point]::new($center-18,45),[System.Drawing.Point]::new($center-31,29),[System.Drawing.Point]::new($center-36,12)) 5
-        Draw-Path $g @([System.Drawing.Point]::new($center-19,44),[System.Drawing.Point]::new($center-35,47),[System.Drawing.Point]::new($center-39,40)) 3
-        Draw-Path $g @([System.Drawing.Point]::new($center+$lean,48),[System.Drawing.Point]::new($center+20,39),[System.Drawing.Point]::new($center+33,23),[System.Drawing.Point]::new($center+35,9)) 5
-        Draw-Path $g @([System.Drawing.Point]::new($center+20,39),[System.Drawing.Point]::new($center+37,43),[System.Drawing.Point]::new($center+40,35)) 3
-        if ($variant -eq 1) { Draw-Path $g @([System.Drawing.Point]::new($center+$lean,33),[System.Drawing.Point]::new($center-5,17),[System.Drawing.Point]::new($center-13,7)) 4 -Bone }
-        if ($variant -eq 2) { Draw-Path $g @([System.Drawing.Point]::new($center-17,45),[System.Drawing.Point]::new($center-26,31),[System.Drawing.Point]::new($center-22,18)) 3 -Bone }
-        Add-AmberStrand $g ($center - 31) (29 + $variant) (8 + $variant * 2)
-        Add-AmberStrand $g ($center + 33) (24 + $variant) (12 - $variant)
+        $left = $variant * 82; $center = $left + 41
+        $lean = @(-5, 1, 5)[$variant]
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-6,81),[System.Drawing.Point]::new($center-3,66),[System.Drawing.Point]::new($center+$lean-5,49),[System.Drawing.Point]::new($center+$lean,30),[System.Drawing.Point]::new($center+$lean+5,7)) 15 4
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+5,81),[System.Drawing.Point]::new($center+2,68),[System.Drawing.Point]::new($center+$lean+5,51)) 10 4
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean-3,55),[System.Drawing.Point]::new($center-15,48),[System.Drawing.Point]::new($center-27,35),[System.Drawing.Point]::new($center-34,17),[System.Drawing.Point]::new($center-32,7)) 9 2
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-23,39),[System.Drawing.Point]::new($center-37,42),[System.Drawing.Point]::new($center-40,35)) 5 1
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean+1,46),[System.Drawing.Point]::new($center+17,40),[System.Drawing.Point]::new($center+29,27),[System.Drawing.Point]::new($center+35,10)) 8 2
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+17,40),[System.Drawing.Point]::new($center+34,45),[System.Drawing.Point]::new($center+40,38)) 5 1
+        if ($variant -eq 1) { Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean,31),[System.Drawing.Point]::new($center-7,18),[System.Drawing.Point]::new($center-13,5)) 6 2 -Bone }
+        if ($variant -eq 2) { Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-17,47),[System.Drawing.Point]::new($center-25,32),[System.Drawing.Point]::new($center-22,18)) 5 2 -Bone }
+        Add-Knot $g ($center+$lean-3) 48 6
+        Add-AmberStrand $g ($center - 30) (31 + $variant) (7 + $variant * 2)
+        Add-AmberStrand $g ($center + 29) (29 + $variant) (10 - $variant)
     }
     Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/DeadForestTree_Tops.png')
 }
@@ -99,11 +172,13 @@ function New-TreeBranches {
     $g = $canvas.Graphics
     for ($row = 0; $row -lt 3; $row++) {
         $top = $row * 42
-        Draw-Path $g @([System.Drawing.Point]::new(40,$top+37),[System.Drawing.Point]::new(27,$top+29),[System.Drawing.Point]::new(14,$top+17),[System.Drawing.Point]::new(7,$top+5+$row*2)) 4
-        Draw-Path $g @([System.Drawing.Point]::new(27,$top+29),[System.Drawing.Point]::new(12,$top+31),[System.Drawing.Point]::new(7,$top+25)) 2
-        Draw-Path $g @([System.Drawing.Point]::new(44,$top+37),[System.Drawing.Point]::new(57,$top+29),[System.Drawing.Point]::new(70,$top+17),[System.Drawing.Point]::new(77,$top+5+$row*2)) 4
-        Draw-Path $g @([System.Drawing.Point]::new(57,$top+29),[System.Drawing.Point]::new(72,$top+31),[System.Drawing.Point]::new(77,$top+25)) 2
-        if ($row -eq 1) { Draw-Path $g @([System.Drawing.Point]::new(57,$top+29),[System.Drawing.Point]::new(68,$top+18)) 2 -Bone }
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new(40,$top+38),[System.Drawing.Point]::new(29,$top+31),[System.Drawing.Point]::new(17,$top+21),[System.Drawing.Point]::new(8,$top+7+$row)) 8 2
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new(27,$top+30),[System.Drawing.Point]::new(13,$top+33),[System.Drawing.Point]::new(6,$top+27)) 5 1
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new(44,$top+38),[System.Drawing.Point]::new(55,$top+31),[System.Drawing.Point]::new(67,$top+21),[System.Drawing.Point]::new(76,$top+7+$row)) 8 2
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new(57,$top+30),[System.Drawing.Point]::new(71,$top+33),[System.Drawing.Point]::new(78,$top+27)) 5 1
+        if ($row -eq 1) { Draw-TaperedLimb $g @([System.Drawing.Point]::new(57,$top+30),[System.Drawing.Point]::new(68,$top+18)) 5 1 -Bone }
+        Add-Knot $g 28 ($top+30) 4
+        Add-Knot $g 56 ($top+30) 4
         Add-AmberStrand $g (11 + $row * 2) ($top + 17) (5 + $row)
     }
     Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/DeadForestTree_Branches.png')
@@ -140,6 +215,4 @@ function New-RootWall {
 New-TrunkSheet
 New-TreeTops
 New-TreeBranches
-New-DeadTufts
-New-RootWall
-Write-Host 'Generated native-scale Wastes trunks, crowns, branches, root tufts, and tangled root walls.'
+Write-Host 'Generated native-scale Wastes tree trunks, crowns, and branches.'

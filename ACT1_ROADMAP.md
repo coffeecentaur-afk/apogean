@@ -3,6 +3,14 @@
 ## Shipped foundation
 
 - Faction relation scaffold, sealed compounds, dialogue UI, and a playable Matriarch prototype.
+- Renderer-gated Wastes material pipeline: disposable tile, grass, and vegetation galleries; local native-atlas export; cold client capture; and validated soil, grass, ground-cover, and continuous-bark dead-tree families.
+
+## Current environmental gate
+
+1. Validate the remaining Wastes tile, wall, vegetation, and multitile families in small renderer-lab batches.
+2. Confirm their placement, framing, merge, slope, paint, mining, light, liquid, drop, save/load, and synchronization properties.
+3. Implement the explicit Purity/Wastes/Maw/Corruption/Crimson/Hallow conversion matrix only after the neutral families pass.
+4. Proceed to biome/depth backgrounds, then faction construction sets, the animated Kessler flag, and faction furniture.
 
 ## Vertical slices
 

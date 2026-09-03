@@ -10,8 +10,8 @@ namespace apogean.Content.Diagnostics
 	/// <summary>Destructive renderer fixture for the complete Wastes ground-cover family.</summary>
 	internal static class VegetationLabGallery
 	{
-		private const int Width = 108;
-		private const int Height = 28;
+		private const int Width = 142;
+		private const int Height = 38;
 
 		internal static Rectangle Build(Player player)
 		{
@@ -24,6 +24,7 @@ namespace apogean.Content.Diagnostics
 			Clear(bounds);
 			PlaceFloor(bounds, floorY);
 			PlaceFamilies(left, floorY);
+			PlaceTrees(left, floorY);
 			Frame(bounds);
 			Lighting.Clear();
 			player.Teleport(new Vector2((left + Width / 2) * 16f, (floorY - 5) * 16f), TeleportationStyleID.RodOfDiscord);
@@ -56,6 +57,18 @@ namespace apogean.Content.Diagnostics
 
 			for (int style = 0; style < 3; style++)
 				RequireObject(left + 71 + style * 11, floorY - 1, shrub, style, "root shrub");
+		}
+
+		private static void PlaceTrees(int left, int floorY)
+		{
+			int sapling = ModContent.TileType<DeadForestSapling>();
+			foreach (int x in new[] { left + 106, left + 121, left + 136 })
+			{
+				if (!WorldGen.PlaceObject(x, floorY - 1, sapling, mute: true))
+					throw new InvalidOperationException($"Vegetation Lab could not place a dead-tree sapling at {x},{floorY - 1}.");
+				if (!WorldGen.GrowTree(x, floorY - 1))
+					throw new InvalidOperationException($"Vegetation Lab could not grow a dead forest tree at {x},{floorY - 1}.");
+			}
 		}
 
 		private static void RequireObject(int x, int y, int type, int randomStyle, string label)

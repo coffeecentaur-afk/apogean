@@ -117,6 +117,16 @@ namespace apogean.Content.Diagnostics
 			if (!scheduleCaptureProbe)
 				return;
 
+			try
+			{
+				string referenceDirectory = VanillaAtlasExporter.ExportTileLabReferences();
+				Mod.Logger.Info($"VEGETATION LAB REFERENCES EXPORTED: {referenceDirectory}");
+			}
+			catch (System.Exception exception)
+			{
+				Mod.Logger.Error("VEGETATION LAB REFERENCE EXPORT FAILED", exception);
+			}
+
 			_captureProbeBounds = bounds;
 			_captureProbeName = "Apogean Vegetation Lab Capture Probe";
 			_captureProbeEntities = false;

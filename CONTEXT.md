@@ -2,6 +2,11 @@
 
 This glossary defines the setting-specific language shared by world generation, progression, art, dialogue, and documentation. Player-facing systems use these terms consistently.
 
+## Implementation discipline
+
+**Renderer-validated asset**:
+A tile, wall, tree, furniture object, or background that has passed its static atlas contract, a clean build, and inspection in a disposable in-game capture at useful scale. A PNG that looks correct outside Terraria is not complete until its framing, seams, anchors, and gameplay rendering pass this gate.
+
 ## World ecology
 
 **The Wastes**:
