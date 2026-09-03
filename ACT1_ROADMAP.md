@@ -17,7 +17,7 @@
 ## Current environmental gate
 
 1. Continue confirming paint, save/load, and multiplayer synchronization properties in focused client fixtures; placement, framing, merge, slope, mining, light, liquid, drops, and native tree chopping have live proofs.
-2. Expand the proven surface Forest/Desert/Jungle/Snow/Corruption V0 and underground Forest V0 contracts across the remaining biome matrix one bounded composition at a time.
+2. Expand the proven surface Forest/Desert/Jungle/Snow/Corruption/Crimson V0 and underground Forest V0 contracts across the remaining biome matrix one bounded composition at a time.
 3. After the background contract is stable, validate faction construction sets, the animated Kessler flag, and faction furniture in dedicated galleries before placing them in world generation.
 
 ## Vertical slices

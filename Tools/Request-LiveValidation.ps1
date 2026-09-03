@@ -1,6 +1,6 @@
 param(
 	[Parameter(Mandatory = $true)]
-	[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'jungle-background', 'snow-background', 'corruption-background', 'kessler-campus')]
+	[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'jungle-background', 'snow-background', 'corruption-background', 'crimson-background', 'kessler-campus')]
 	[string]$Fixture,
 	[string]$TModLoaderRoot = (Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games/Terraria/tModLoader')
 )

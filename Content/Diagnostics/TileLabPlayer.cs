@@ -133,6 +133,9 @@ namespace apogean.Content.Diagnostics
 					case "corruption-background":
 						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Corruption, scheduleCaptureProbe: true);
 						break;
+					case "crimson-background":
+						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Crimson, scheduleCaptureProbe: true);
+						break;
 					case "kessler-campus":
 						BuildKesslerCampusAndReport(scheduleCaptureProbe: true);
 						break;
@@ -320,7 +323,7 @@ namespace apogean.Content.Diagnostics
 
 		internal void BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome biome, bool scheduleCaptureProbe)
 		{
-			if (biome is not (RuinedBackgroundBiome.Forest or RuinedBackgroundBiome.Desert or RuinedBackgroundBiome.Jungle or RuinedBackgroundBiome.Snow or RuinedBackgroundBiome.Corruption))
+			if (biome is not (RuinedBackgroundBiome.Forest or RuinedBackgroundBiome.Desert or RuinedBackgroundBiome.Jungle or RuinedBackgroundBiome.Snow or RuinedBackgroundBiome.Corruption or RuinedBackgroundBiome.Crimson))
 				throw new System.InvalidOperationException($"{biome} has no renderer-approved diagnostic surface set.");
 
 			RuinedBackgroundSelectionSystem.Instance.ToggleSurfaceConceptRenderLab(biome, true);
