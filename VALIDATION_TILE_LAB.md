@@ -10,8 +10,9 @@ The fixture is intentionally small and destructive. Run it only in a disposable 
 
 - Press `F8` to rebuild the fixture around the local player.
 - Run `/apogean tilelab` as an alternative.
-- Run `/apogean exportatlases` to export the currently installed vanilla dirt tile and natural-wall atlases into `Captures/ApogeanTileLabReferences`.
-- The disposable world named `Apogee Native Visual V3` rebuilds it automatically and runs a capture-camera probe after three seconds.
+- Run `/apogean grasslab` to rebuild the grass-specific side-by-side fixture.
+- Run `/apogean exportatlases` to export the currently installed vanilla dirt, grass, and natural-wall atlases into `Captures/ApogeanTileLabReferences`.
+- The disposable world named `Apogee Native Visual V3` currently rebuilds the grass fixture automatically and runs a capture-camera probe after three seconds.
 
 ## What the fixture validates
 
@@ -75,4 +76,18 @@ No terrain atlas, wall atlas, furniture sheet, or structure palette may enter wo
 4. Passes slopes, merges, paint/coating, lighting, water, map, and capture-camera cases that apply to it.
 5. Receives an archived client screenshot and a short written result.
 
-The next safe increment is Wastes grass edging over this proven soil base. It must remain isolated in the Tile Lab until it passes the same gate. Broad world-generation work remains frozen.
+The grass increment below was kept isolated in the Tile Lab until it passed the same gate. Broad world-generation work remains frozen.
+
+## Wastes grass slice — 2026-09-02
+
+- Exported the live `Images/Tiles_2` grass atlas and `Images/Wall_63` natural grass-wall atlas from tModLoader.
+- Identified the old grass asset's core defect: it used a generic 288x270 terrain sheet, while Terraria grass uses a specialized 288x1980 atlas with many additional exposed-edge and merge frames.
+- Recolored the complete live grass topology rather than drawing bordered 16x16 cells. Engine mask pixels remain intact and all alpha is hard-edged.
+- Matched the approved Wastes soil colors beneath a separate dry root/straw ramp; no green, purple, flesh, glow, or white-mask leakage remains in the Wastes candidate.
+- Rendered vanilla and Wastes suites side-by-side at normal game zoom. Dense fields, enclosed openings, flat caps over soil, side fringe, stair steps, half-blocks, and all four slopes selected coherent frames with no graph-paper repetition.
+- The capture camera completed and wrote `Apogean Grass Lab Capture Probe.png`; the client remained in-world and logged no exception or fatal error.
+- Promoted `WastesGrass.png` and `WastesGrassWallUnsafe.png` only after the live pass. The static contract now requires both production files to remain pixel-identical to those tested candidates.
+
+This slice proves atlas rendering and basic soil merging. Grass growth, spreading, conversion rules, paint/coating behavior, and world-generation replacement remain deliberately deferred to dedicated tests rather than being inferred from a good screenshot.
+
+The next safe increment is the Wastes ground-plant family. Broad world-generation work remains frozen.

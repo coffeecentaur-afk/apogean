@@ -72,6 +72,47 @@ namespace apogean.Content.Diagnostics
 		}
 	}
 
+	/// <summary>
+	/// A dry grass-edge candidate that uses Terraria's complete grass atlas topology.
+	/// It is deliberately non-spreading; this fixture validates drawing and merging only.
+	/// </summary>
+	public sealed class WastesGrassCandidate : ModTile
+	{
+		public override string Texture => "apogean/Content/Tiles/Diagnostics/WastesGrassCandidate";
+
+		public override void SetStaticDefaults()
+		{
+			Main.tileSolid[Type] = true;
+			Main.tileMergeDirt[Type] = true;
+			Main.tileBlockLight[Type] = true;
+			TileID.Sets.ChecksForMerge[Type] = true;
+			TileID.Sets.Grass[Type] = true;
+			TileID.Sets.Conversion.Grass[Type] = true;
+			Main.tileMerge[Type][TileID.Dirt] = true;
+			Main.tileMerge[TileID.Dirt][Type] = true;
+			int wastesSoil = ModContent.TileType<WastesSoilCandidate>();
+			Main.tileMerge[Type][wastesSoil] = true;
+			Main.tileMerge[wastesSoil][Type] = true;
+			DustType = DustID.Dirt;
+			HitSound = SoundID.Dig;
+			MineResist = 0.65f;
+			AddMapEntry(new Color(139, 101, 44), CreateMapEntryName());
+		}
+	}
+
+	/// <summary>A natural dry-grass wall paired with <see cref="WastesGrassCandidate"/>.</summary>
+	public sealed class WastesGrassWallCandidate : ModWall
+	{
+		public override string Texture => "apogean/Content/Walls/Diagnostics/WastesGrassWallCandidate";
+
+		public override void SetStaticDefaults()
+		{
+			Main.wallHouse[Type] = false;
+			DustType = DustID.Dirt;
+			AddMapEntry(new Color(78, 59, 31), CreateMapEntryName());
+		}
+	}
+
 	public sealed class TileLabKeybindSystem : ModSystem
 	{
 		internal static ModKeybind BuildTileLab { get; private set; }

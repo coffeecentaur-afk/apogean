@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
+using Terraria.ID;
 
 namespace apogean.Content.Diagnostics
 {
@@ -26,6 +27,10 @@ namespace apogean.Content.Diagnostics
 				Path.Combine(outputDirectory, "Vanilla-Dirt-Tile.png"));
 			Export(Main.Assets.Request<Texture2D>("Images/Wall_2", AssetRequestMode.ImmediateLoad).Value,
 				Path.Combine(outputDirectory, "Vanilla-DirtUnsafe-Wall.png"));
+			Export(Main.Assets.Request<Texture2D>($"Images/Tiles_{TileID.Grass}", AssetRequestMode.ImmediateLoad).Value,
+				Path.Combine(outputDirectory, "Vanilla-Grass-Tile.png"));
+			Export(Main.Assets.Request<Texture2D>($"Images/Wall_{WallID.GrassUnsafe}", AssetRequestMode.ImmediateLoad).Value,
+				Path.Combine(outputDirectory, "Vanilla-GrassUnsafe-Wall.png"));
 			return outputDirectory;
 		}
 

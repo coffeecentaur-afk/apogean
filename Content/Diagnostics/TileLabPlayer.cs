@@ -13,17 +13,19 @@ namespace apogean.Content.Diagnostics
 		private int _automaticBuildDelay;
 		private int _captureProbeDelay;
 		private Rectangle _captureProbeBounds;
+		private string _captureProbeName;
 
 		public override void Initialize()
 		{
 			_automaticBuildDelay = -1;
 			_captureProbeDelay = -1;
+			_captureProbeName = "Apogean Tile Lab Capture Probe";
 		}
 
 		public override void OnEnterWorld()
 		{
 			// This existing disposable validation world is our deterministic client-render harness.
-			// Delaying one second lets the player and camera finish settling before the fixture is built.
+			// Delaying one second lets the player and camera finish settling before the active fixture is built.
 			_automaticBuildDelay = Main.ActiveWorldFileData?.Name == AutomaticWorldName ? 60 : -1;
 		}
 
@@ -35,7 +37,17 @@ namespace apogean.Content.Diagnostics
 				{
 					_automaticBuildDelay = -1;
 					if (Main.netMode != NetmodeID.MultiplayerClient)
-						BuildAndReport(scheduleCaptureProbe: true);
+					{
+						try
+						{
+							BuildGrassAndReport(scheduleCaptureProbe: true);
+						}
+						catch (System.Exception exception)
+						{
+							Mod.Logger.Error("AUTOMATIC GRASS LAB BUILD FAILED", exception);
+							Main.NewText("Grass Lab failed to build. The world was left open; see client.log.", Color.OrangeRed);
+						}
+					}
 				}
 			}
 
@@ -77,8 +89,21 @@ namespace apogean.Content.Diagnostics
 					Main.NewText("Tile Lab built, but the optional vanilla-atlas export failed. See client.log.", Color.OrangeRed);
 				}
 				_captureProbeBounds = bounds;
+				_captureProbeName = "Apogean Tile Lab Capture Probe";
 				_captureProbeDelay = 180;
 			}
+		}
+
+		internal void BuildGrassAndReport(bool scheduleCaptureProbe)
+		{
+			Rectangle bounds = GrassLabGallery.Build(Player);
+			Main.NewText($"Grass Lab rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Grass Lab Capture Probe";
+			_captureProbeDelay = 180;
 		}
 
 		private void RunCaptureProbe()
@@ -95,7 +120,7 @@ namespace apogean.Content.Diagnostics
 				CaptureBackground = true,
 				CaptureEntities = true,
 				UseScaling = true,
-				OutputName = "Apogean Tile Lab Capture Probe"
+				OutputName = _captureProbeName
 			});
 			Main.NewText("Tile Lab capture-camera probe started.", Color.LightSkyBlue);
 		}

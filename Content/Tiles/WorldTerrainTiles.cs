@@ -45,6 +45,7 @@ namespace apogean.Content.Tiles
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
+			TileID.Sets.Grass[Type] = true;
 			TileID.Sets.Conversion.Grass[Type] = true;
 			Main.tileMerge[Type][ModContent.TileType<WastesSoil>()] = true;
 			Main.tileMerge[ModContent.TileType<WastesSoil>()][Type] = true;
