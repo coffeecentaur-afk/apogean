@@ -140,15 +140,27 @@ Require-SourceContract 'Content/Diagnostics/MawConversionGallery.cs' @(
 Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 	'ApogeanLiveValidation.request',
 	'case "conversion"',
+	'case "desert-background"',
 	'BuildMawConversionAndReport(scheduleCaptureProbe: true)',
+	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Desert, scheduleCaptureProbe: true)',
 	'LIVE VALIDATION REQUEST CONSUMED',
 	'LIVE VALIDATION REQUEST FAILED'
 )
 
 Require-SourceContract 'Tools/Request-LiveValidation.ps1' @(
-	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'kessler-campus')]",
+	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'kessler-campus')]",
 	'ApogeanLiveValidation.request',
 	'Set-Content -LiteralPath $requestPath'
+)
+
+Require-SourceContract 'Content/Backgrounds/RuinedBackgroundSelectionSystem.cs' @(
+	'SurfaceRenderLabBiome',
+	'ToggleSurfaceConceptRenderLab'
+)
+Require-SourceContract 'Content/Diagnostics/SurfaceBackgroundLabGallery.cs' @(
+	'WastesSandCandidate',
+	'ClearEverything',
+	'Teleport'
 )
 
 # Fixed structures need explicit terrain integration rather than a cleared air moat.

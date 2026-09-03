@@ -121,6 +121,9 @@ namespace apogean.Content.Diagnostics
 					case "grass":
 						BuildGrassAndReport(scheduleCaptureProbe: true);
 						break;
+					case "desert-background":
+						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Desert, scheduleCaptureProbe: true);
+						break;
 					case "kessler-campus":
 						BuildKesslerCampusAndReport(scheduleCaptureProbe: true);
 						break;
@@ -302,6 +305,23 @@ namespace apogean.Content.Diagnostics
 
 			_captureProbeBounds = bounds;
 			_captureProbeName = "Apogean Kessler Campus Capture Probe";
+			_captureProbeEntities = false;
+			_captureProbeDelay = 180;
+		}
+
+		internal void BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome biome, bool scheduleCaptureProbe)
+		{
+			if (biome is not (RuinedBackgroundBiome.Forest or RuinedBackgroundBiome.Desert))
+				throw new System.InvalidOperationException($"{biome} has no renderer-approved diagnostic surface set.");
+
+			RuinedBackgroundSelectionSystem.Instance.ToggleSurfaceConceptRenderLab(biome, true);
+			Rectangle bounds = SurfaceBackgroundLabGallery.Build(Player);
+			Main.NewText($"{biome} V0 surface-background renderer fixture rebuilt.", Color.LightGreen);
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = $"Apogean {biome} V0 Surface Background Capture Probe";
 			_captureProbeEntities = false;
 			_captureProbeDelay = 180;
 		}

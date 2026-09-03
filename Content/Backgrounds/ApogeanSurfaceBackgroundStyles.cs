@@ -45,27 +45,30 @@ namespace apogean.Content.Backgrounds
 	public sealed class MushroomRuinedBackgroundStyle : ApogeanSurfaceBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Mushroom; }
 	public sealed class EngraftRuinedBackgroundStyle : ApogeanSurfaceBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Engraft; }
 
-	/// <summary>Renderer-only style for comparing the approved Forest concept decomposition in-engine.</summary>
-	public sealed class ForestConceptRenderLabBackgroundStyle : ModSurfaceBackgroundStyle
+	/// <summary>Renderer-only style for comparing one authored surface decomposition in-engine.</summary>
+	public sealed class SurfaceConceptRenderLabBackgroundStyle : ModSurfaceBackgroundStyle
 	{
+		private static RuinedBackgroundBiome Biome =>
+			RuinedBackgroundSelectionSystem.Instance.SurfaceRenderLabBiome ?? RuinedBackgroundBiome.Forest;
+
 		public override void ModifyFarFades(float[] fades, float transitionSpeed) { }
 
 		public override int ChooseFarTexture() =>
-			BackgroundTextureLoader.GetBackgroundSlot(Mod, "Content/Backgrounds/Diagnostics/ForestConceptV0_Far");
+			BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/Diagnostics/{Biome}ConceptV0_Far");
 
 		public override int ChooseMiddleTexture() =>
-			BackgroundTextureLoader.GetBackgroundSlot(Mod, "Content/Backgrounds/Diagnostics/ForestConceptV0_Mid");
+			BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/Diagnostics/{Biome}ConceptV0_Mid");
 
 		public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b) =>
-			BackgroundTextureLoader.GetBackgroundSlot(Mod, "Content/Backgrounds/Diagnostics/ForestConceptV0_Close");
+			BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/Diagnostics/{Biome}ConceptV0_Close");
 	}
 
 	public sealed class RuinedGlobalBackgroundStyle : GlobalBackgroundStyle
 	{
 		internal static int ResolveRuinedSurfaceStyle(Player player)
 		{
-			if (RuinedBackgroundSelectionSystem.Instance.ForestConceptRenderLabEnabled)
-				return ModContent.GetInstance<ForestConceptRenderLabBackgroundStyle>().Slot;
+			if (RuinedBackgroundSelectionSystem.Instance.SurfaceRenderLabBiome.HasValue)
+				return ModContent.GetInstance<SurfaceConceptRenderLabBackgroundStyle>().Slot;
 
 			return RuinedBackgroundSelectionSystem.DetectBiome(player) switch
 			{
@@ -87,7 +90,7 @@ namespace apogean.Content.Backgrounds
 			if (Main.gameMenu || !ModContent.GetInstance<ApogeanWorldConfig>().RuinedBiomeBackgrounds) return;
 			Player player = Main.LocalPlayer;
 			if (player == null || !player.active) return;
-			if (RuinedBackgroundSelectionSystem.Instance.ForestConceptRenderLabEnabled)
+			if (RuinedBackgroundSelectionSystem.Instance.SurfaceRenderLabBiome.HasValue)
 			{
 				style = ResolveRuinedSurfaceStyle(player);
 				return;

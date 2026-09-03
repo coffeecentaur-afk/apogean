@@ -165,15 +165,17 @@ foreach ($biome in @('Forest', 'Desert', 'Jungle', 'Snow', 'Corruption', 'Crimso
     }
 }
 
-foreach ($layer in $layerSpecs.Keys) {
-    $spec = $layerSpecs[$layer]
-    $candidate = Join-Path $projectRoot "Content/Backgrounds/Diagnostics/ForestConceptV0_$layer.png"
-    $production = Join-Path $projectRoot "Content/Backgrounds/Forest/V0_$layer.png"
-    Test-Layer -Path $candidate -ExpectedWidth $spec[0] -ExpectedHeight $spec[1]
-    Test-PixelSheet -Path $candidate -ExpectedWidth $spec[0] -ExpectedHeight $spec[1] -MaximumOpaqueColors 10
-    if ((Get-FileHash -Algorithm SHA256 -LiteralPath $candidate).Hash -ne
-        (Get-FileHash -Algorithm SHA256 -LiteralPath $production).Hash) {
-        Add-Failure "Production Forest V0 $layer differs from its renderer-approved candidate"
+foreach ($approvedBiome in @('Forest', 'Desert')) {
+    foreach ($layer in $layerSpecs.Keys) {
+        $spec = $layerSpecs[$layer]
+        $candidate = Join-Path $projectRoot "Content/Backgrounds/Diagnostics/$($approvedBiome)ConceptV0_$layer.png"
+        $production = Join-Path $projectRoot "Content/Backgrounds/$approvedBiome/V0_$layer.png"
+        Test-Layer -Path $candidate -ExpectedWidth $spec[0] -ExpectedHeight $spec[1]
+        Test-PixelSheet -Path $candidate -ExpectedWidth $spec[0] -ExpectedHeight $spec[1] -MaximumOpaqueColors 10
+        if ((Get-FileHash -Algorithm SHA256 -LiteralPath $candidate).Hash -ne
+            (Get-FileHash -Algorithm SHA256 -LiteralPath $production).Hash) {
+            Add-Failure "Production $approvedBiome V0 $layer differs from its renderer-approved candidate"
+        }
     }
 }
 

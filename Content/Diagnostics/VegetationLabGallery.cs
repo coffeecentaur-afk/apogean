@@ -92,7 +92,11 @@ namespace apogean.Content.Diagnostics
 			}
 
 			int height = rootY - topY + 1;
-			if (height < 6)
+			// Native tree growth legitimately produces short variants. Four trunk
+			// cells still leaves a segment above and below a rootY - 2 chop, so the
+			// fixture can prove Terraria's native split behavior without randomly
+			// rejecting a valid small tree.
+			if (height < 4)
 				throw new InvalidOperationException($"Vegetation Lab tree at {x},{rootY} was too short for a mid-trunk chop proof.");
 
 			int cutY = rootY - Math.Max(2, height / 2);

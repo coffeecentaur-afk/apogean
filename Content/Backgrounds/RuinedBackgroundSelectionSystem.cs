@@ -28,14 +28,15 @@ namespace apogean.Content.Backgrounds
 	{
 		private const int VariantCount = 2;
 		private readonly byte[] variants = new byte[(int)RuinedBackgroundBiome.Count];
-		public bool ForestConceptRenderLabEnabled { get; private set; }
+		public RuinedBackgroundBiome? SurfaceRenderLabBiome { get; private set; }
+		public bool ForestConceptRenderLabEnabled => SurfaceRenderLabBiome == RuinedBackgroundBiome.Forest;
 		public bool ForestUndergroundRenderLabEnabled { get; private set; }
 
 		public static RuinedBackgroundSelectionSystem Instance => ModContent.GetInstance<RuinedBackgroundSelectionSystem>();
 
 		public override void OnWorldLoad()
 		{
-			ForestConceptRenderLabEnabled = false;
+			SurfaceRenderLabBiome = null;
 			ForestUndergroundRenderLabEnabled = false;
 			for (int i = 0; i < variants.Length; i++)
 			{
@@ -46,11 +47,18 @@ namespace apogean.Content.Backgrounds
 
 		public int GetVariant(RuinedBackgroundBiome biome) => variants[(int)biome] % VariantCount;
 
-		public bool ToggleForestConceptRenderLab(bool? enabled = null)
+		public bool ToggleSurfaceConceptRenderLab(RuinedBackgroundBiome biome, bool? enabled = null)
 		{
-			ForestConceptRenderLabEnabled = enabled ?? !ForestConceptRenderLabEnabled;
-			return ForestConceptRenderLabEnabled;
+			bool shouldEnable = enabled ?? SurfaceRenderLabBiome != biome;
+			if (shouldEnable)
+				SurfaceRenderLabBiome = biome;
+			else if (SurfaceRenderLabBiome == biome)
+				SurfaceRenderLabBiome = null;
+			return SurfaceRenderLabBiome == biome;
 		}
+
+		public bool ToggleForestConceptRenderLab(bool? enabled = null) =>
+			ToggleSurfaceConceptRenderLab(RuinedBackgroundBiome.Forest, enabled);
 
 		public bool ToggleForestUndergroundRenderLab(bool? enabled = null)
 		{
@@ -60,7 +68,7 @@ namespace apogean.Content.Backgrounds
 
 		public override void OnWorldUnload()
 		{
-			ForestConceptRenderLabEnabled = false;
+			SurfaceRenderLabBiome = null;
 			ForestUndergroundRenderLabEnabled = false;
 		}
 

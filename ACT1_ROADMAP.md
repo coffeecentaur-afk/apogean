@@ -8,13 +8,14 @@
 - Renderer-gated Maw conversion pipeline: native-topology hostile Soil, Grass, Stone, Sand, Ice, Snow, Mud, and Clay families; custom drops and sand behavior; unsafe-wall conversion; and a live four-stage natural source → Maw → Wastes → vanilla purification matrix. The live matrix covers neutral Wastes terrain plus representative Corruption, Crimson, Hallow, jungle, mushroom, and Underworld sources while proving constructed vanilla and unknown modded content are preserved.
 - An allow-listed file-request bridge now drives destructive render fixtures from the running single-player client without depending on synthetic game input. It consumes only named Apogean validation fixtures from the Terraria Captures directory and retains the same runtime assertions and capture-camera path as chat commands.
 - First approved Wastes forest panorama: a native-sized, transparent far/middle/close parallax decomposition preserving the broadcast spire, ruined skyline, broken highway, settlement remains, and rooted foreground basin from the approved concept. It is live-rendered, seam-checked, and retained as seeded Forest composition V0.
+- First approved Wastes desert panorama: an authored far/middle/close decomposition preserving satellite-crowned mesas, eroded industrial skyline, broken elevated transit, train wreckage, hangar, tank, pipelines, and near debris from the approved concept. Edge silhouettes taper into a shared valley so Terraria can repeat each independently scaled layer without a visible vertical cliff. The reusable surface render lab now selects Forest or Desert and forces a stable daytime palette check before capture.
 - Validation panoramas explicitly resolve the same global ruined-background slot used by ordinary play and sanitize invalid ModBiome water-style values before invoking Terraria's capture renderer. Live and panorama captures now agree without reintroducing the prior liquid-array crash.
 - First approved Wastes underground-depth set: four native-sized cave textures with an opaque, wrap-safe eroded-strata material, distinct shallow/deep palettes, and an in-engine lighting proof. Unique ruined mine landmarks are reserved for sparse world furniture so they do not repeat every 128 pixels.
 
 ## Current environmental gate
 
 1. Continue confirming paint, save/load, and multiplayer synchronization properties in focused client fixtures; placement, framing, merge, slope, mining, light, liquid, drops, and native tree chopping have live proofs.
-2. Expand the proven surface and underground Forest V0 contracts across the biome matrix one bounded composition at a time.
+2. Expand the proven surface Forest/Desert V0 and underground Forest V0 contracts across the remaining biome matrix one bounded composition at a time.
 3. After the background contract is stable, validate faction construction sets, the animated Kessler flag, and faction furniture in dedicated galleries before placing them in world generation.
 
 ## Vertical slices

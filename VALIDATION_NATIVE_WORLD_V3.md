@@ -43,6 +43,10 @@ The atlases use the official tModLoader ExampleMod framing topology as an opaque
 
 The automatic `Apogee Native Visual V3` fixture additionally grows four native ruined trees, performs a deterministic mid-trunk chop on the fourth tree, and fails immediately unless the canopy is removed while the stump remains. Its capture-camera probe resolves Apogean's post-arbitration global background slot explicitly, so the panorama and ordinary camera must show the same ruined Forest composition.
 
+The surface-background fixture is biome-selectable and currently validates Forest V0 and Desert V0. It clears a low, wall-free Wastes stage, fixes the world at midday for repeatable palette review, and renders the same production layer files used in ordinary play. Desert V0 passed a 2560×1400 gameplay-viewport check with readable far/middle/close separation, no rectangular transparency holes, and no hard vertical repeat seam. Its approved evidence is `Art/Validation/2026-09-03-DesertV0SurfaceBackgroundRenderLab.jpg`.
+
+The vegetation chop assertion accepts Terraria's legitimate short native-tree variants when at least four contiguous trunk cells are present. That is enough to leave supported trunk below and canopy above the tested `rootY - 2` cut, avoiding a random false failure while preserving the actual split-tree contract.
+
 ## Maw source-conversion proof
 
 `Tools/Request-LiveValidation.ps1 -Fixture conversion` creates an allow-listed request in the Terraria Captures directory. A running single-player client consumes it, builds the destructive gallery through the production conversion hooks, executes runtime assertions, and schedules the standard capture-camera probe. It does not accept code, paths, or arbitrary commands.
