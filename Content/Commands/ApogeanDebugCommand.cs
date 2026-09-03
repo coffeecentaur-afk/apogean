@@ -26,7 +26,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|backgroundlab [on|off]|gallery|tilelab|grasslab|vegetationlab|terrainlab|terrainproperties|conversionlab|terrainitems|exportatlases|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|backgroundlab [on|off]|undergroundlab [on|off]|gallery|tilelab|grasslab|vegetationlab|terrainlab|terrainproperties|conversionlab|terrainitems|exportatlases|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -112,6 +112,27 @@ namespace apogean.Content.Commands
 						? "Forest concept render lab enabled. The three diagnostic parallax layers are active locally."
 						: "Forest concept render lab disabled. Production background routing restored.",
 						enabled ? Color.LightGreen : Color.LightSkyBlue);
+					break;
+
+				case "undergroundlab":
+					if (Main.netMode == NetmodeID.MultiplayerClient)
+					{
+						caller.Reply("The destructive underground renderer lab is single-player/server-host only.", Color.OrangeRed);
+						break;
+					}
+					bool? undergroundRequested = args.Length > 1
+						? args[1].Equals("on", System.StringComparison.OrdinalIgnoreCase)
+						: null;
+					bool undergroundEnabled = RuinedBackgroundSelectionSystem.Instance.ToggleForestUndergroundRenderLab(undergroundRequested);
+					if (undergroundEnabled)
+					{
+						player.GetModPlayer<TileLabPlayer>().BuildUndergroundBackgroundAndReport();
+						caller.Reply("Wastes underground render lab enabled and its disposable cavern fixture built.", Color.LightGreen);
+					}
+					else
+					{
+						caller.Reply("Wastes underground render lab disabled. Production cave routing restored.", Color.LightSkyBlue);
+					}
 					break;
 
 				case "gallery":

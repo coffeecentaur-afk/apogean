@@ -7,12 +7,13 @@
 - First reference-driven dead-tree overlay is integrated through the tile renderer and passes build/static/capture checks. Its flared roots and all ground-cover families now visibly enter the grass lip instead of floating.
 - Renderer-gated Maw conversion pipeline: native-topology hostile Soil, Grass, Stone, Sand, Ice, Snow, Mud, and Clay families; custom drops and sand behavior; unsafe-wall conversion; and a live four-stage Wastes → Maw → Wastes → vanilla purification matrix.
 - First approved Wastes forest panorama: a native-sized, transparent far/middle/close parallax decomposition preserving the broadcast spire, ruined skyline, broken highway, settlement remains, and rooted foreground basin from the approved concept. It is live-rendered, seam-checked, and retained as seeded Forest composition V0.
+- First approved Wastes underground-depth set: four native-sized cave textures with an opaque, wrap-safe eroded-strata material, distinct shallow/deep palettes, and an in-engine lighting proof. Unique ruined mine landmarks are reserved for sparse world furniture so they do not repeat every 128 pixels.
 
 ## Current environmental gate
 
 1. Continue confirming placement, framing, merge, slope, paint, mining, light, liquid, drop, save/load, and synchronization properties in focused client fixtures.
 2. Expand the validated Wastes/Maw conversion matrix from its complete native material baseline to representative Corruption, Crimson, Hallow, jungle, mushroom, and Underworld sources without consuming protected or unknown modded content.
-3. Use the proven Forest V0 contract to build and renderer-check one Wastes underground-depth set, then expand the surface-biome matrix one bounded composition at a time.
+3. Expand the proven surface and underground Forest V0 contracts across the biome matrix one bounded composition at a time.
 4. After the background contract is stable, validate faction construction sets, the animated Kessler flag, and faction furniture in dedicated galleries before placing them in world generation.
 
 ## Vertical slices

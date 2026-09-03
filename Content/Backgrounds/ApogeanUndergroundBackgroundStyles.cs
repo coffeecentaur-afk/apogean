@@ -28,4 +28,17 @@ namespace apogean.Content.Backgrounds
 	public sealed class MushroomRuinedUndergroundStyle : ApogeanUndergroundBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Mushroom; }
 	public sealed class UnderworldRuinedUndergroundStyle : ApogeanUndergroundBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Underworld; }
 	public sealed class EngraftRuinedUndergroundStyle : ApogeanUndergroundBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Engraft; }
+
+	/// <summary>Renderer-only style for the first Wastes cave texture contract.</summary>
+	public sealed class ForestUndergroundRenderLabBackgroundStyle : ModUndergroundBackgroundStyle
+	{
+		public override void FillTextureArray(int[] textureSlots)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				textureSlots[i] = BackgroundTextureLoader.GetBackgroundSlot(Mod,
+					$"Content/Backgrounds/Diagnostics/ForestUndergroundConceptV0_{i}");
+			}
+		}
+	}
 }

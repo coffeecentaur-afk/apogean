@@ -98,6 +98,11 @@ namespace apogean.Content.Backgrounds
 			if (Main.gameMenu || !ModContent.GetInstance<ApogeanWorldConfig>().RuinedBiomeBackgrounds) return;
 			Player player = Main.LocalPlayer;
 			if (player == null || !player.active) return;
+			if (RuinedBackgroundSelectionSystem.Instance.ForestUndergroundRenderLabEnabled)
+			{
+				style = ModContent.GetInstance<ForestUndergroundRenderLabBackgroundStyle>().Slot;
+				return;
+			}
 
 			if (player.ZoneDungeon || player.ZoneUnderworldHeight ||
 				ModContent.GetModUndergroundBackgroundStyle(style) != null) return;

@@ -177,6 +177,47 @@ foreach ($layer in $layerSpecs.Keys) {
     }
 }
 
+foreach ($index in 0..3) {
+    $height = if ($index -eq 0 -or $index -eq 2) { 16 } else { 96 }
+    $candidate = Join-Path $projectRoot "Content/Backgrounds/Diagnostics/ForestUndergroundConceptV0_$index.png"
+    $production = Join-Path $projectRoot "Content/Backgrounds/Forest/Underground/V0_$index.png"
+    Test-PixelSheet -Path $candidate -ExpectedWidth 160 -ExpectedHeight $height -MaximumOpaqueColors 10
+    if (Test-Path -LiteralPath $candidate) {
+        $bitmap = [System.Drawing.Bitmap]::new($candidate)
+        try {
+            $undergroundFailed = $false
+            for ($y = 0; $y -lt $bitmap.Height; $y++) {
+                if ($bitmap.GetPixel(0, $y).ToArgb() -ne $bitmap.GetPixel(127, $y).ToArgb()) {
+                    Add-Failure "Underground candidate core seam differs: $candidate"
+                    $undergroundFailed = $true
+                    break
+                }
+                for ($x = 0; $x -lt 32; $x++) {
+                    if ($bitmap.GetPixel($x, $y).ToArgb() -ne $bitmap.GetPixel(128 + $x, $y).ToArgb()) {
+                        Add-Failure "Underground candidate wrap strip differs: $candidate"
+                        $undergroundFailed = $true
+                        break
+                    }
+                }
+                if ($undergroundFailed) { break }
+                for ($x = 0; $x -lt $bitmap.Width; $x++) {
+                    if ($bitmap.GetPixel($x, $y).A -ne 255) {
+                        Add-Failure "Underground candidate is not a fully opaque cave material: $candidate"
+                        $undergroundFailed = $true
+                        break
+                    }
+                }
+                if ($undergroundFailed) { break }
+            }
+        }
+        finally { $bitmap.Dispose() }
+    }
+    if ((Get-FileHash -Algorithm SHA256 -LiteralPath $candidate).Hash -ne
+        (Get-FileHash -Algorithm SHA256 -LiteralPath $production).Hash) {
+        Add-Failure "Production Forest underground V0 index $index differs from its renderer-approved candidate"
+    }
+}
+
 $surfaceBackgroundSource = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'Content/Backgrounds/ApogeanSurfaceBackgroundStyles.cs')
 if ($surfaceBackgroundSource -match 'fades\[i\]\s*=|fades\[i\]\s*\+=|fades\[i\]\s*-=') {
     Add-Failure 'Surface style manually advances the installed runtime front fade and can desynchronize the close layer'

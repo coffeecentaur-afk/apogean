@@ -4,6 +4,7 @@ using Terraria.GameInput;
 using Terraria.Graphics.Capture;
 using Terraria.ID;
 using Terraria.ModLoader;
+using apogean.Content.Backgrounds;
 using apogean.Content.World;
 
 namespace apogean.Content.Diagnostics
@@ -34,6 +35,9 @@ namespace apogean.Content.Diagnostics
 
 		public override void PostUpdate()
 		{
+			if (RuinedBackgroundSelectionSystem.Instance.ForestUndergroundRenderLabEnabled)
+				UndergroundBackgroundLabGallery.LightVisibleBackground(Player);
+
 			if (_automaticBuildDelay >= 0)
 			{
 				if (_automaticBuildDelay-- == 0)
@@ -214,6 +218,12 @@ namespace apogean.Content.Diagnostics
 			_captureProbeName = "Apogean Vegetation Lab Capture Probe";
 			_captureProbeEntities = false;
 			_captureProbeDelay = 180;
+		}
+
+		internal void BuildUndergroundBackgroundAndReport()
+		{
+			Rectangle bounds = UndergroundBackgroundLabGallery.Build(Player);
+			Main.NewText($"Underground background lab rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
 		}
 
 		private void RunCaptureProbe()
