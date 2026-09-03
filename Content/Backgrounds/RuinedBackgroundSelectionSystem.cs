@@ -28,11 +28,13 @@ namespace apogean.Content.Backgrounds
 	{
 		private const int VariantCount = 2;
 		private readonly byte[] variants = new byte[(int)RuinedBackgroundBiome.Count];
+		public bool ForestConceptRenderLabEnabled { get; private set; }
 
 		public static RuinedBackgroundSelectionSystem Instance => ModContent.GetInstance<RuinedBackgroundSelectionSystem>();
 
 		public override void OnWorldLoad()
 		{
+			ForestConceptRenderLabEnabled = false;
 			for (int i = 0; i < variants.Length; i++)
 			{
 				int mixedSeed = unchecked(Main.worldID * 397 ^ (i + 17) * 7919);
@@ -41,6 +43,14 @@ namespace apogean.Content.Backgrounds
 		}
 
 		public int GetVariant(RuinedBackgroundBiome biome) => variants[(int)biome] % VariantCount;
+
+		public bool ToggleForestConceptRenderLab(bool? enabled = null)
+		{
+			ForestConceptRenderLabEnabled = enabled ?? !ForestConceptRenderLabEnabled;
+			return ForestConceptRenderLabEnabled;
+		}
+
+		public override void OnWorldUnload() => ForestConceptRenderLabEnabled = false;
 
 		public int Cycle(RuinedBackgroundBiome biome)
 		{

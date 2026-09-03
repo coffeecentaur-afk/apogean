@@ -165,6 +165,32 @@ foreach ($biome in @('Forest', 'Desert', 'Jungle', 'Snow', 'Corruption', 'Crimso
     }
 }
 
+foreach ($layer in $layerSpecs.Keys) {
+    $spec = $layerSpecs[$layer]
+    $candidate = Join-Path $projectRoot "Content/Backgrounds/Diagnostics/ForestConceptV0_$layer.png"
+    $production = Join-Path $projectRoot "Content/Backgrounds/Forest/V0_$layer.png"
+    Test-Layer -Path $candidate -ExpectedWidth $spec[0] -ExpectedHeight $spec[1]
+    Test-PixelSheet -Path $candidate -ExpectedWidth $spec[0] -ExpectedHeight $spec[1] -MaximumOpaqueColors 10
+    if ((Get-FileHash -Algorithm SHA256 -LiteralPath $candidate).Hash -ne
+        (Get-FileHash -Algorithm SHA256 -LiteralPath $production).Hash) {
+        Add-Failure "Production Forest V0 $layer differs from its renderer-approved candidate"
+    }
+}
+
+$surfaceBackgroundSource = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'Content/Backgrounds/ApogeanSurfaceBackgroundStyles.cs')
+if ($surfaceBackgroundSource -match 'fades\[i\]\s*=|fades\[i\]\s*\+=|fades\[i\]\s*-=') {
+    Add-Failure 'Surface style manually advances the installed runtime front fade and can desynchronize the close layer'
+}
+if ($surfaceBackgroundSource -notmatch 'GetModSurfaceBackgroundStyle\(style\)\s*!=\s*null') {
+    Add-Failure 'Global surface replacement does not preserve third-party background style slots'
+}
+if ($surfaceBackgroundSource -notmatch 'GetModUndergroundBackgroundStyle\(style\)\s*!=\s*null') {
+    Add-Failure 'Global underground replacement does not preserve third-party background style slots'
+}
+if ($surfaceBackgroundSource -notmatch 'player\.ZoneUnderworldHeight') {
+    Add-Failure 'Ordinary cave background routing still attempts to replace Terraria''s separate Underworld panorama'
+}
+
 foreach ($sprite in @('RendHook', 'AmberSiphon', 'SinewBow', 'MawEffigy')) {
     $path = Join-Path $projectRoot "Content/Items/Weapons/$sprite.png"
     $bitmap = [System.Drawing.Bitmap]::new($path)

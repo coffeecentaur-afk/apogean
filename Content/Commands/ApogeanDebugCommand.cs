@@ -26,7 +26,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|tilelab|grasslab|vegetationlab|terrainlab|terrainproperties|conversionlab|terrainitems|exportatlases|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|backgroundlab [on|off]|gallery|tilelab|grasslab|vegetationlab|terrainlab|terrainproperties|conversionlab|terrainitems|exportatlases|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -101,6 +101,17 @@ namespace apogean.Content.Commands
 					RuinedBackgroundBiome biome = RuinedBackgroundSelectionSystem.DetectBiome(player);
 					int variant = RuinedBackgroundSelectionSystem.Instance.Cycle(biome);
 					caller.Reply($"{biome} background changed to seeded variant {variant + 1}.", new Color(194, 126, 44));
+					break;
+
+				case "backgroundlab":
+					bool? requested = args.Length > 1
+						? args[1].Equals("on", System.StringComparison.OrdinalIgnoreCase)
+						: null;
+					bool enabled = RuinedBackgroundSelectionSystem.Instance.ToggleForestConceptRenderLab(requested);
+					caller.Reply(enabled
+						? "Forest concept render lab enabled. The three diagnostic parallax layers are active locally."
+						: "Forest concept render lab disabled. Production background routing restored.",
+						enabled ? Color.LightGreen : Color.LightSkyBlue);
 					break;
 
 				case "gallery":

@@ -1,4 +1,3 @@
-using System;
 using Terraria;
 using Terraria.ModLoader;
 using apogean.Content.Config;
@@ -11,12 +10,9 @@ namespace apogean.Content.Backgrounds
 
 		public override void ModifyFarFades(float[] fades, float transitionSpeed)
 		{
-			for (int i = 0; i < fades.Length; i++)
-			{
-				fades[i] = i == Slot
-					? Math.Min(1f, fades[i] + transitionSpeed)
-					: Math.Max(0f, fades[i] - transitionSpeed);
-			}
+			// The installed 1.4.4.9+2026.07 runtime passes its already-updated
+			// front-layer alpha array to this hook. Advancing it again makes the close
+			// layer finish before far/middle. The engine owns the whole-style fade.
 		}
 
 		public override int ChooseFarTexture()
@@ -49,6 +45,21 @@ namespace apogean.Content.Backgrounds
 	public sealed class MushroomRuinedBackgroundStyle : ApogeanSurfaceBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Mushroom; }
 	public sealed class EngraftRuinedBackgroundStyle : ApogeanSurfaceBackgroundStyle { protected override RuinedBackgroundBiome Biome => RuinedBackgroundBiome.Engraft; }
 
+	/// <summary>Renderer-only style for comparing the approved Forest concept decomposition in-engine.</summary>
+	public sealed class ForestConceptRenderLabBackgroundStyle : ModSurfaceBackgroundStyle
+	{
+		public override void ModifyFarFades(float[] fades, float transitionSpeed) { }
+
+		public override int ChooseFarTexture() =>
+			BackgroundTextureLoader.GetBackgroundSlot(Mod, "Content/Backgrounds/Diagnostics/ForestConceptV0_Far");
+
+		public override int ChooseMiddleTexture() =>
+			BackgroundTextureLoader.GetBackgroundSlot(Mod, "Content/Backgrounds/Diagnostics/ForestConceptV0_Mid");
+
+		public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b) =>
+			BackgroundTextureLoader.GetBackgroundSlot(Mod, "Content/Backgrounds/Diagnostics/ForestConceptV0_Close");
+	}
+
 	public sealed class RuinedGlobalBackgroundStyle : GlobalBackgroundStyle
 	{
 		public override void ChooseSurfaceBackgroundStyle(ref int style)
@@ -56,6 +67,16 @@ namespace apogean.Content.Backgrounds
 			if (Main.gameMenu || !ModContent.GetInstance<ApogeanWorldConfig>().RuinedBiomeBackgrounds) return;
 			Player player = Main.LocalPlayer;
 			if (player == null || !player.active) return;
+			if (RuinedBackgroundSelectionSystem.Instance.ForestConceptRenderLabEnabled)
+			{
+				style = ModContent.GetInstance<ForestConceptRenderLabBackgroundStyle>().Slot;
+				return;
+			}
+
+			// The whole-world Wastes treatment replaces only Terraria's built-in
+			// panoramas. A third-party ModBiome has already won priority arbitration
+			// by this point and must keep its own background outside the Maw.
+			if (ModContent.GetModSurfaceBackgroundStyle(style) != null) return;
 
 			style = RuinedBackgroundSelectionSystem.DetectBiome(player) switch
 			{
@@ -78,11 +99,11 @@ namespace apogean.Content.Backgrounds
 			Player player = Main.LocalPlayer;
 			if (player == null || !player.active) return;
 
-			if (player.ZoneDungeon) return;
+			if (player.ZoneDungeon || player.ZoneUnderworldHeight ||
+				ModContent.GetModUndergroundBackgroundStyle(style) != null) return;
 
 			style = RuinedBackgroundSelectionSystem.DetectBiome(player) switch
 			{
-				RuinedBackgroundBiome.Underworld => ModContent.GetInstance<UnderworldRuinedUndergroundStyle>().Slot,
 				RuinedBackgroundBiome.Mushroom => ModContent.GetInstance<MushroomRuinedUndergroundStyle>().Slot,
 				RuinedBackgroundBiome.Desert => ModContent.GetInstance<DesertRuinedUndergroundStyle>().Slot,
 				RuinedBackgroundBiome.Jungle => ModContent.GetInstance<JungleRuinedUndergroundStyle>().Slot,
