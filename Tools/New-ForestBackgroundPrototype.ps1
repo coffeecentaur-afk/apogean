@@ -9,24 +9,30 @@ $layers = @(
         Name = 'Far'
         Source = 'Art/Source/Backgrounds/Forest/V0-Far-extraction-v1.png'
         Output = 'Content/Backgrounds/Diagnostics/ForestConceptV0_Far.png'
+        ProductionOutput = 'Content/Backgrounds/Forest/V0_Far.png'
         Width = 1024
         Height = 408
+        HorizonTop = 96
         Palette = @('#4a4237', '#594f41', '#685c4b', '#776a56', '#877760', '#98866c', '#aa9679', '#bba88c')
     },
     @{
         Name = 'Mid'
         Source = 'Art/Source/Backgrounds/Forest/V0-Mid-extraction-v1.png'
         Output = 'Content/Backgrounds/Diagnostics/ForestConceptV0_Mid.png'
+        ProductionOutput = 'Content/Backgrounds/Forest/V0_Mid.png'
         Width = 1024
         Height = 600
+        HorizonTop = 300
         Palette = @('#211d19', '#2d2721', '#3a3128', '#483b2f', '#584838', '#695742', '#7c684e', '#917a5b', '#a68e6c', '#bba17d')
     },
     @{
         Name = 'Close'
         Source = 'Art/Source/Backgrounds/Forest/V0-Close-extraction-v1.png'
         Output = 'Content/Backgrounds/Diagnostics/ForestConceptV0_Close.png'
+        ProductionOutput = 'Content/Backgrounds/Forest/V0_Close.png'
         Width = 952
         Height = 480
+        HorizonTop = 120
         Palette = @('#12100f', '#1b1815', '#27211b', '#342a20', '#443526', '#58452f', '#705838', '#8b6d43', '#a8844d', '#c09a58')
     }
 )
@@ -99,7 +105,11 @@ function Convert-Layer($specification) {
         $scaledWidth = [Math]::Max(1, [int][Math]::Floor($bounds.Width * $scale))
         $scaledHeight = [Math]::Max(1, [int][Math]::Floor($bounds.Height * $scale))
         $offsetX = [int][Math]::Floor(($output.Width - $scaledWidth) / 2.0)
-        $offsetY = $output.Height - $scaledHeight
+        # Terraria already positions the full texture relative to the surface camera.
+        # Bottom-anchoring a shallow panorama leaves its skyline below the ordinary
+        # ground-level viewport. Author the skyline explicitly, then extend only the
+        # low-frequency earth bed to the bottom of the required engine canvas.
+        $offsetY = [Math]::Min($output.Height - $scaledHeight, [int]$specification.HorizonTop)
 
         for ($y = 0; $y -lt $output.Height; $y++) {
             for ($x = 0; $x -lt $output.Width; $x++) {
@@ -124,11 +134,11 @@ function Convert-Layer($specification) {
             }
         }
 
-        # The generated silhouettes already span the image. Seal only the final
-        # twelve rows with one low-frequency earth tone; stretching each source
-        # column to the floor creates a visible barcode in Terraria's draw scale.
+        # Extend one quiet earth tone below the raised panorama. Stretching each
+        # source column would create a visible barcode at Terraria's draw scale.
         $floor = [System.Drawing.Color]::FromArgb(255, $palette[0].R, $palette[0].G, $palette[0].B)
-        for ($y = $output.Height - 12; $y -lt $output.Height; $y++) {
+        $floorStart = [Math]::Min($output.Height - 12, $offsetY + $scaledHeight)
+        for ($y = $floorStart; $y -lt $output.Height; $y++) {
             for ($x = 0; $x -lt $output.Width; $x++) {
                 $output.SetPixel($x, $y, $floor)
             }
@@ -146,6 +156,12 @@ function Convert-Layer($specification) {
             New-Item -ItemType Directory -Path $directory -Force | Out-Null
         }
         $output.Save($outputPath, [System.Drawing.Imaging.ImageFormat]::Png)
+        $productionPath = Join-Path $Root $specification.ProductionOutput
+        $productionDirectory = Split-Path -Parent $productionPath
+        if (-not (Test-Path -LiteralPath $productionDirectory)) {
+            New-Item -ItemType Directory -Path $productionDirectory -Force | Out-Null
+        }
+        $output.Save($productionPath, [System.Drawing.Imaging.ImageFormat]::Png)
         Write-Host "$($specification.Name): $($output.Width)x$($output.Height), source bounds $bounds, scale $([Math]::Round($scale, 3))"
     }
     finally {

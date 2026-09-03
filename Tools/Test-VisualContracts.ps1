@@ -294,10 +294,7 @@ foreach ($wall in @('KesslerBulkheadWall','KesslerWindowWall','HelixLaboratoryWa
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree.png') -ExpectedWidth 176 -ExpectedHeight 264 -MaximumOpaqueColors 12
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree_Branches.png') -ExpectedWidth 84 -ExpectedHeight 126 -MaximumOpaqueColors 12
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTree_Tops.png') -ExpectedWidth 246 -ExpectedHeight 82 -MaximumOpaqueColors 12
-Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTreeOverlay.png') -ExpectedWidth 128 -ExpectedHeight 272 -MaximumOpaqueColors 10
-Test-TransparentSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTreeHidden.png') -ExpectedWidth 176 -ExpectedHeight 264
-Test-TransparentSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTreeHidden_Branches.png') -ExpectedWidth 84 -ExpectedHeight 126
-Test-TransparentSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTreeHidden_Tops.png') -ExpectedWidth 246 -ExpectedHeight 82
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTreeRoots.png') -ExpectedWidth 144 -ExpectedHeight 32 -MaximumOpaqueColors 12
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadTuft.png') -ExpectedWidth 144 -ExpectedHeight 18 -MaximumOpaqueColors 7
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesBristle.png') -ExpectedWidth 108 -ExpectedHeight 54 -MaximumOpaqueColors 7
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesRootShrub.png') -ExpectedWidth 162 -ExpectedHeight 36 -MaximumOpaqueColors 7

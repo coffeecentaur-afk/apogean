@@ -1,4 +1,7 @@
-param([string]$Root = (Split-Path -Parent $PSScriptRoot))
+param(
+    [string]$Root = (Split-Path -Parent $PSScriptRoot),
+    [switch]$CorporateOnly
+)
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -223,6 +226,70 @@ function New-WallSheet([string]$name,[string]$palette,[string]$motif,[bool]$maw=
     Save-Bitmap $bitmap "Content/Walls/$name.png"
 }
 
+function Draw-CorporateWallFrame(
+    [System.Drawing.Bitmap]$bitmap,
+    [int]$originX,
+    [int]$originY,
+    [System.Drawing.Color[]]$p,
+    [bool]$window,
+    [int]$frame
+) {
+    # Interior wall pixels use broad, quiet material planes. The old generator
+    # boxed every 16px cell, so a room read as graph paper instead of armour.
+    for ($y = 0; $y -lt 16; $y++) {
+        for ($x = 0; $x -lt 16; $x++) {
+            $cluster = Hash-Pixel ([int]($x / 6)) ([int]($y / 6)) ($frame * 13)
+            $index = if ($cluster % 19 -eq 0) { 1 } elseif ($cluster % 11 -eq 0) { 3 } else { 2 }
+            if ($window) { $index = if ($cluster % 17 -eq 0) { 1 } else { 2 } }
+            Put $bitmap ($originX + $x) ($originY + $y) $p[$index]
+        }
+    }
+
+    if ($window) {
+        # Reflections and mullions are sparse and frame-dependent, producing
+        # multi-tile window bays instead of outlining every tile cell.
+        if ($frame % 5 -eq 0) {
+            for ($step = 0; $step -lt 10; $step++) {
+                Put $bitmap ($originX + 2 + $step) ($originY + 12 - [int]($step / 2)) $p[5]
+            }
+        }
+        if ($frame % 9 -eq 2) {
+            for ($y = 2; $y -lt 14; $y++) { Put $bitmap ($originX + 8) ($originY + $y) $p[0] }
+        }
+        Put $bitmap ($originX + 6) ($originY + 6) $p[0]
+        Put $bitmap ($originX + 9) ($originY + 6) $p[4]
+        Put $bitmap ($originX + 9) ($originY + 9) $p[5]
+    }
+    else {
+        # Short seams, recessed plates, and rare status rivets break the plane
+        # without producing continuous horizontal or vertical grids.
+        if ($frame % 6 -eq 0) {
+            for ($x = 3; $x -lt 12; $x++) { Put $bitmap ($originX + $x) ($originY + 6) $p[1] }
+            Put $bitmap ($originX + 3) ($originY + 7) $p[4]
+        }
+        if ($frame % 11 -eq 3) {
+            for ($y = 4; $y -lt 12; $y++) { Put $bitmap ($originX + 11) ($originY + $y) $p[1] }
+        }
+        if ($frame % 17 -eq 4) {
+            Put $bitmap ($originX + 4) ($originY + 4) $p[8]
+            Put $bitmap ($originX + 5) ($originY + 4) $p[9]
+        }
+        Put $bitmap ($originX + 6) ($originY + 6) $p[0]
+        Put $bitmap ($originX + 9) ($originY + 6) $p[4]
+    }
+}
+
+function New-CorporateWallSheet([string]$name,[string]$palette,[bool]$window) {
+    $bitmap = New-Bitmap 468 180
+    for ($fy = 0; $fy -lt 10; $fy++) {
+        for ($fx = 0; $fx -lt 26; $fx++) {
+            Draw-CorporateWallFrame $bitmap ($fx * 18) ($fy * 18) $palettes[$palette] $window ($fy * 26 + $fx)
+        }
+    }
+    Apply-AtlasMask $bitmap $wallFrameMask $false
+    Save-Bitmap $bitmap "Content/Walls/$name.png"
+}
+
 foreach($family in @('Kessler','Helix','Sentrix')){
     foreach($part in @('Block','Trim','Floor','Glass','Beam')){New-CorporateSheet $family $part "$family$part"}
 }
@@ -235,36 +302,42 @@ New-CorporateSheet 'Sentrix' 'Block' 'SentrixRuinBlock'
 New-CorporateSheet 'Kessler' 'Block' 'PrewarConcrete'
 New-CorporateSheet 'Helix' 'Block' 'MawResearchBlock'
 
-foreach($spec in @(
-    @('WastesSoil','WastesSoil','Soil',$false),@('WastesStone','WastesStone','Stone',$false),
-    @('WastesGrass','WastesGrass','Grass',$false),@('WastesSand','WastesSand','Sand',$false),
-    @('WastesIce','WastesIce','Ice',$false),@('WastesSnow','WastesSnow','Snow',$false),
-    @('WastesMud','WastesMud','Mud',$false),@('DeadGrass','WastesGrass','Grass',$false),
-    @('MawDirt','MawDirt','Dirt',$true),@('Mawstone','MawStone','Stone',$true),
-    @('MawGrass','MawGrass','Grass',$true),@('MawSand','MawSand','Sand',$true),
-    @('MawIce','MawIce','Ice',$true),@('MawSnow','MawSnow','Snow',$true),
-    @('MawMud','MawMud','Mud',$true),@('MawClay','MawDirt','Clay',$true),
-    @('EngraftTurf','MawGrass','Grass',$true),@('OssuaryBone','MawBone','Bone',$false)
-)){
-    New-NaturalSheet $spec[0] $spec[1] $spec[2] $spec[3]
+if (-not $CorporateOnly) {
+    foreach($spec in @(
+        @('WastesSoil','WastesSoil','Soil',$false),@('WastesStone','WastesStone','Stone',$false),
+        @('WastesGrass','WastesGrass','Grass',$false),@('WastesSand','WastesSand','Sand',$false),
+        @('WastesIce','WastesIce','Ice',$false),@('WastesSnow','WastesSnow','Snow',$false),
+        @('WastesMud','WastesMud','Mud',$false),@('DeadGrass','WastesGrass','Grass',$false),
+        @('MawDirt','MawDirt','Dirt',$true),@('Mawstone','MawStone','Stone',$true),
+        @('MawGrass','MawGrass','Grass',$true),@('MawSand','MawSand','Sand',$true),
+        @('MawIce','MawIce','Ice',$true),@('MawSnow','MawSnow','Snow',$true),
+        @('MawMud','MawMud','Mud',$true),@('MawClay','MawDirt','Clay',$true),
+        @('EngraftTurf','MawGrass','Grass',$true),@('OssuaryBone','MawBone','Bone',$false)
+    )){
+        New-NaturalSheet $spec[0] $spec[1] $spec[2] $spec[3]
+    }
+
+    foreach($spec in @(
+        @('MawDirtWallUnsafe','MawDirt','Dirt',$true),@('MawStoneWallUnsafe','MawStone','Stone',$true),
+        @('MawGrassWallUnsafe','MawGrass','Grass',$true),@('MawSandWallUnsafe','MawSand','Sand',$true),
+        @('MawIceWallUnsafe','MawIce','Ice',$true),@('MawSnowWallUnsafe','MawSnow','Snow',$true),
+        @('MawMudWallUnsafe','MawMud','Mud',$true),@('MawWallUnsafe','MawStone','Stone',$true),
+        @('WastesDirtWallUnsafe','WastesSoil','Soil',$false),@('WastesStoneWallUnsafe','WastesStone','Stone',$false),
+        @('WastesGrassWallUnsafe','WastesGrass','Grass',$false),@('WastesSandWallUnsafe','WastesSand','Sand',$false),
+        @('WastesIceWallUnsafe','WastesIce','Ice',$false),@('WastesSnowWallUnsafe','WastesSnow','Snow',$false),
+        @('WastesMudWallUnsafe','WastesMud','Mud',$false),
+        @('DeadGrassWallUnsafe','WastesSoil','Soil',$false),@('DeadFlowerWallUnsafe','WastesGrass','Grass',$false)
+    )){
+        New-WallSheet $spec[0] $spec[1] $spec[2] $spec[3]
+    }
 }
 
-foreach($spec in @(
-    @('KesslerBulkheadWall','Kessler','Block',$false),@('KesslerWindowWall','Kessler','Glass',$false),
-    @('HelixLaboratoryWall','Helix','Block',$false),@('HelixObservationWall','Helix','Glass',$false),
-    @('SentrixDataWall','Sentrix','Block',$false),@('SentrixWindowWall','Sentrix','Glass',$false),
-    @('MawDirtWallUnsafe','MawDirt','Dirt',$true),@('MawStoneWallUnsafe','MawStone','Stone',$true),
-    @('MawGrassWallUnsafe','MawGrass','Grass',$true),@('MawSandWallUnsafe','MawSand','Sand',$true),
-    @('MawIceWallUnsafe','MawIce','Ice',$true),@('MawSnowWallUnsafe','MawSnow','Snow',$true),
-    @('MawMudWallUnsafe','MawMud','Mud',$true),@('MawWallUnsafe','MawStone','Stone',$true),
-	@('WastesDirtWallUnsafe','WastesSoil','Soil',$false),@('WastesStoneWallUnsafe','WastesStone','Stone',$false),
-	@('WastesGrassWallUnsafe','WastesGrass','Grass',$false),@('WastesSandWallUnsafe','WastesSand','Sand',$false),
-	@('WastesIceWallUnsafe','WastesIce','Ice',$false),@('WastesSnowWallUnsafe','WastesSnow','Snow',$false),
-	@('WastesMudWallUnsafe','WastesMud','Mud',$false),
-    @('DeadGrassWallUnsafe','WastesSoil','Soil',$false),@('DeadFlowerWallUnsafe','WastesGrass','Grass',$false)
-)){
-    New-WallSheet $spec[0] $spec[1] $spec[2] $spec[3]
-}
+New-CorporateWallSheet 'KesslerBulkheadWall' 'Kessler' $false
+New-CorporateWallSheet 'KesslerWindowWall' 'Kessler' $true
+New-CorporateWallSheet 'HelixLaboratoryWall' 'Helix' $false
+New-CorporateWallSheet 'HelixObservationWall' 'Helix' $true
+New-CorporateWallSheet 'SentrixDataWall' 'Sentrix' $false
+New-CorporateWallSheet 'SentrixWindowWall' 'Sentrix' $true
 
 $terrainFrameMask.Dispose()
 $wallFrameMask.Dispose()

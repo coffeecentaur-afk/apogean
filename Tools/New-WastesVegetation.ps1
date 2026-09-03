@@ -53,6 +53,7 @@ function Draw-TaperedLimb(
     $bodyBrush = [System.Drawing.SolidBrush]::new($(if ($Bone) { $p[5] } else { $p[3] }))
     $shadowBrush = [System.Drawing.SolidBrush]::new($(if ($Bone) { $p[4] } else { $p[2] }))
     $lightBrush = [System.Drawing.SolidBrush]::new($(if ($Bone) { $p[6] } else { $p[4] }))
+    $grainPen = [System.Drawing.Pen]::new($(if ($Bone) { $p[6] } else { $p[4] }), 1)
     try {
         foreach ($pass in @(
             @{ Brush = $outlineBrush; Extra = 4 },
@@ -79,6 +80,14 @@ function Draw-TaperedLimb(
             }
         }
 
+        # A broken, off-centre grain line gives the large limbs the pale split-bark
+        # character of the reference without turning them into smooth vector tubes.
+        for ($i = 0; $i -lt $points.Count - 1; $i++) {
+            $a = $points[$i]; $b = $points[$i + 1]
+            $offset = if ($i % 2 -eq 0) { 2 } else { 1 }
+            $g.DrawLine($grainPen, $a.X + $offset, $a.Y, $b.X + $offset, $b.Y)
+        }
+
         # Broken bark bands follow the mass instead of tracing a ruler-straight centerline.
         for ($i = 1; $i -lt $points.Count - 1; $i++) {
             $point = $points[$i]
@@ -86,7 +95,7 @@ function Draw-TaperedLimb(
         }
     }
     finally {
-        $outlineBrush.Dispose(); $bodyBrush.Dispose(); $shadowBrush.Dispose(); $lightBrush.Dispose()
+        $outlineBrush.Dispose(); $bodyBrush.Dispose(); $shadowBrush.Dispose(); $lightBrush.Dispose(); $grainPen.Dispose()
     }
 }
 
@@ -122,10 +131,28 @@ function New-TrunkSheet {
         }
         for ($y = 0; $y -lt $out.Height; $y++) {
             for ($x = 0; $x -lt $out.Width; $x++) {
-                $source = $reference.GetPixel($x, $y)
-                if ($source.A -eq 0) { continue }
+                $sourceX = $x
+                $source = $reference.GetPixel($sourceX, $y)
                 $frameX = [int]($x / 22); $frameY = [int]($y / 22)
                 $localX = $x % 22; $localY = $y % 22
+                if ($source.A -eq 0) {
+                    # Thicken only inside the current 22px native frame. The old atlas
+                    # inherited a very thin vanilla trunk, which made the broad gnarled
+                    # crown look like it was balanced on a pole. Native segmentation is
+                    # retained, so any struck trunk tile still chops normally.
+                    foreach ($delta in @(-1, 1, -2, 2)) {
+                        $candidateLocalX = $localX + $delta
+                        if ($candidateLocalX -lt 1 -or $candidateLocalX -gt 20) { continue }
+                        $candidateX = $frameX * 22 + $candidateLocalX
+                        $candidate = $reference.GetPixel($candidateX, $y)
+                        if ($candidate.A -gt 0) {
+                            $sourceX = $candidateX
+                            $source = $candidate
+                            break
+                        }
+                    }
+                }
+                if ($source.A -eq 0) { continue }
                 $hash = [Math]::Abs((($x + 7) * 73856093) -bxor (($y + 11) * 19349663))
                 $luminance = (0.299 * $source.R) + (0.587 * $source.G) + (0.114 * $source.B)
                 $color = if ($luminance -lt 35) { $p[0] } elseif ($luminance -lt 62) { $p[1] } elseif ($luminance -lt 88) { $p[2] } elseif ($luminance -lt 116) { $p[3] } elseif ($luminance -lt 150) { $p[4] } else { $p[5] }
@@ -151,18 +178,28 @@ function New-TreeTops {
     $g = $canvas.Graphics
     for ($variant = 0; $variant -lt 3; $variant++) {
         $left = $variant * 82; $center = $left + 41
-        $lean = @(-5, 1, 5)[$variant]
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-6,81),[System.Drawing.Point]::new($center-3,66),[System.Drawing.Point]::new($center+$lean-5,49),[System.Drawing.Point]::new($center+$lean,30),[System.Drawing.Point]::new($center+$lean+5,7)) 15 4
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+5,81),[System.Drawing.Point]::new($center+2,68),[System.Drawing.Point]::new($center+$lean+5,51)) 10 4
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean-3,55),[System.Drawing.Point]::new($center-15,48),[System.Drawing.Point]::new($center-27,35),[System.Drawing.Point]::new($center-34,17),[System.Drawing.Point]::new($center-32,7)) 9 2
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-23,39),[System.Drawing.Point]::new($center-37,42),[System.Drawing.Point]::new($center-40,35)) 5 1
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean+1,46),[System.Drawing.Point]::new($center+17,40),[System.Drawing.Point]::new($center+29,27),[System.Drawing.Point]::new($center+35,10)) 8 2
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+17,40),[System.Drawing.Point]::new($center+34,45),[System.Drawing.Point]::new($center+40,38)) 5 1
-        if ($variant -eq 1) { Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean,31),[System.Drawing.Point]::new($center-7,18),[System.Drawing.Point]::new($center-13,5)) 6 2 -Bone }
-        if ($variant -eq 2) { Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-17,47),[System.Drawing.Point]::new($center-25,32),[System.Drawing.Point]::new($center-22,18)) 5 2 -Bone }
-        Add-Knot $g ($center+$lean-3) 48 6
-        Add-AmberStrand $g ($center - 30) (31 + $variant) (7 + $variant * 2)
-        Add-AmberStrand $g ($center + 29) (29 + $variant) (10 - $variant)
+        $lean = @(-4, 1, 5)[$variant]
+
+        # The crown is a dense continuation of the trunk, not a detached antler.
+        # Its broad forks and pale scars echo the approved grove reference while
+        # still fitting Terraria's three native 82x82 crown variants.
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-7,81),[System.Drawing.Point]::new($center-6,67),[System.Drawing.Point]::new($center+$lean-6,51),[System.Drawing.Point]::new($center+$lean-2,31),[System.Drawing.Point]::new($center+$lean+2,7)) 22 5
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+7,81),[System.Drawing.Point]::new($center+8,67),[System.Drawing.Point]::new($center+$lean+10,51),[System.Drawing.Point]::new($center+$lean+13,35)) 13 4
+
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean-4,58),[System.Drawing.Point]::new($center-14,51),[System.Drawing.Point]::new($center-27,39),[System.Drawing.Point]::new($center-35,24),[System.Drawing.Point]::new($center-33,7)) 12 2
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-24,41),[System.Drawing.Point]::new($center-37,46),[System.Drawing.Point]::new($center-40,37)) 7 1
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-18,49),[System.Drawing.Point]::new($center-22,32),[System.Drawing.Point]::new($center-18,18)) 7 2
+
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean+4,55),[System.Drawing.Point]::new($center+17,49),[System.Drawing.Point]::new($center+29,36),[System.Drawing.Point]::new($center+36,20),[System.Drawing.Point]::new($center+35,6)) 12 2
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+20,46),[System.Drawing.Point]::new($center+36,49),[System.Drawing.Point]::new($center+40,39)) 7 1
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+16,50),[System.Drawing.Point]::new($center+22,32),[System.Drawing.Point]::new($center+20,17)) 7 2
+
+        if ($variant -eq 0) { Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean-1,33),[System.Drawing.Point]::new($center-7,19),[System.Drawing.Point]::new($center-5,4)) 8 3 -Bone }
+        if ($variant -eq 1) { Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-17,48),[System.Drawing.Point]::new($center-27,31),[System.Drawing.Point]::new($center-25,15)) 7 2 -Bone }
+        if ($variant -eq 2) { Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+15,47),[System.Drawing.Point]::new($center+25,30),[System.Drawing.Point]::new($center+24,13)) 7 2 -Bone }
+        Add-Knot $g ($center+$lean-4) 52 8
+        Add-AmberStrand $g ($center - 32) (31 + $variant) (7 + $variant * 2)
+        Add-AmberStrand $g ($center + 31) (28 + $variant) (10 - $variant)
     }
     Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/DeadForestTree_Tops.png')
 }
@@ -172,16 +209,35 @@ function New-TreeBranches {
     $g = $canvas.Graphics
     for ($row = 0; $row -lt 3; $row++) {
         $top = $row * 42
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new(40,$top+38),[System.Drawing.Point]::new(29,$top+31),[System.Drawing.Point]::new(17,$top+21),[System.Drawing.Point]::new(8,$top+7+$row)) 8 2
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new(27,$top+30),[System.Drawing.Point]::new(13,$top+33),[System.Drawing.Point]::new(6,$top+27)) 5 1
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new(44,$top+38),[System.Drawing.Point]::new(55,$top+31),[System.Drawing.Point]::new(67,$top+21),[System.Drawing.Point]::new(76,$top+7+$row)) 8 2
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new(57,$top+30),[System.Drawing.Point]::new(71,$top+33),[System.Drawing.Point]::new(78,$top+27)) 5 1
-        if ($row -eq 1) { Draw-TaperedLimb $g @([System.Drawing.Point]::new(57,$top+30),[System.Drawing.Point]::new(68,$top+18)) 5 1 -Bone }
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new(41,$top+40),[System.Drawing.Point]::new(31,$top+33),[System.Drawing.Point]::new(19,$top+23),[System.Drawing.Point]::new(9,$top+7+$row)) 11 2
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new(28,$top+31),[System.Drawing.Point]::new(14,$top+35),[System.Drawing.Point]::new(5,$top+28)) 7 1
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new(22,$top+25),[System.Drawing.Point]::new(17,$top+14),[System.Drawing.Point]::new(19,$top+5)) 6 1
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new(43,$top+40),[System.Drawing.Point]::new(54,$top+33),[System.Drawing.Point]::new(66,$top+23),[System.Drawing.Point]::new(75,$top+7+$row)) 11 2
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new(57,$top+31),[System.Drawing.Point]::new(71,$top+35),[System.Drawing.Point]::new(79,$top+28)) 7 1
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new(63,$top+25),[System.Drawing.Point]::new(68,$top+14),[System.Drawing.Point]::new(66,$top+5)) 6 1
+        if ($row -eq 1) { Draw-TaperedLimb $g @([System.Drawing.Point]::new(57,$top+31),[System.Drawing.Point]::new(68,$top+17)) 6 2 -Bone }
         Add-Knot $g 28 ($top+30) 4
         Add-Knot $g 56 ($top+30) 4
         Add-AmberStrand $g (11 + $row * 2) ($top + 17) (5 + $row)
     }
     Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/DeadForestTree_Branches.png')
+}
+
+function New-TreeRoots {
+    $canvas = New-Canvas 144 32
+    $g = $canvas.Graphics
+    for ($variant = 0; $variant -lt 3; $variant++) {
+        $left = $variant * 48
+        $center = $left + 24 + @(-2, 1, 3)[$variant]
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center,31),[System.Drawing.Point]::new($center-1,20),[System.Drawing.Point]::new($center+1,8),[System.Drawing.Point]::new($center,0)) 23 12
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-2,18),[System.Drawing.Point]::new($left+13,25),[System.Drawing.Point]::new($left+4,30)) 11 3
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+2,19),[System.Drawing.Point]::new($left+35,25),[System.Drawing.Point]::new($left+45,30)) 11 3
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-4,22),[System.Drawing.Point]::new($left+18,30)) 7 2 -Bone:($variant -eq 1)
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+4,22),[System.Drawing.Point]::new($left+31,31)) 7 2 -Bone:($variant -eq 2)
+        if ($variant -eq 0) { Add-Knot $g ($center+2) 14 6 }
+        Add-AmberStrand $g ($left + 39 - $variant * 4) (21 - $variant) (5 + $variant)
+    }
+    Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/DeadForestTreeRoots.png')
 }
 
 function New-DeadTufts {
@@ -215,4 +271,5 @@ function New-RootWall {
 New-TrunkSheet
 New-TreeTops
 New-TreeBranches
+New-TreeRoots
 Write-Host 'Generated native-scale Wastes tree trunks, crowns, and branches.'

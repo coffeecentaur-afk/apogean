@@ -14,7 +14,10 @@ namespace apogean.Content.Tiles
 	{
 		public override void SetStaticDefaults()
 		{
-			WastesPlantRegistration.ApplyCommon(this, new Color(121, 91, 54), sways: true);
+			// Multi-tile wind sway is evaluated one tile cell at a time by Terraria,
+			// which tears a two-wide silhouette down its center. This is brittle root
+			// litter, not grass, so it deliberately remains rigid.
+			WastesPlantRegistration.ApplyCommon(this, new Color(121, 91, 54), sways: false);
 
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x1);
 			TileObjectData.newTile.Origin = Point16.Zero;

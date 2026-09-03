@@ -12,7 +12,9 @@ namespace apogean.Content.Diagnostics
 	public sealed class TileLabPlayer : ModPlayer
 	{
 		private const string AutomaticWorldName = "Apogee Native Visual V3";
+		private const string AutomaticCampusWorldName = "Apogee Campus Validation";
 		private int _automaticBuildDelay;
+		private bool _automaticCampusFixture;
 		private int _captureProbeDelay;
 		private Rectangle _captureProbeBounds;
 		private string _captureProbeName;
@@ -21,6 +23,7 @@ namespace apogean.Content.Diagnostics
 		public override void Initialize()
 		{
 			_automaticBuildDelay = -1;
+			_automaticCampusFixture = false;
 			_captureProbeDelay = -1;
 			_captureProbeName = "Apogean Tile Lab Capture Probe";
 			_captureProbeEntities = true;
@@ -30,7 +33,12 @@ namespace apogean.Content.Diagnostics
 		{
 			// This existing disposable validation world is our deterministic client-render harness.
 			// Delaying one second lets the player and camera finish settling before the active fixture is built.
-			_automaticBuildDelay = Main.ActiveWorldFileData?.Name == AutomaticWorldName ? 60 : -1;
+			string worldName = Main.ActiveWorldFileData?.Name;
+			bool automaticWorld = worldName == AutomaticWorldName;
+			_automaticCampusFixture = worldName == AutomaticCampusWorldName;
+			_automaticBuildDelay = automaticWorld || _automaticCampusFixture ? 60 : -1;
+			if (automaticWorld || _automaticCampusFixture)
+				RuinedBackgroundSelectionSystem.Instance.ToggleForestConceptRenderLab(true);
 		}
 
 		public override void PostUpdate()
@@ -47,7 +55,10 @@ namespace apogean.Content.Diagnostics
 					{
 						try
 						{
-							BuildMawConversionAndReport(scheduleCaptureProbe: true);
+							if (_automaticCampusFixture)
+								BuildKesslerCampusAndReport(scheduleCaptureProbe: true);
+							else
+								BuildVegetationAndReport(scheduleCaptureProbe: true);
 						}
 						catch (System.Exception exception)
 						{
@@ -216,6 +227,19 @@ namespace apogean.Content.Diagnostics
 
 			_captureProbeBounds = bounds;
 			_captureProbeName = "Apogean Vegetation Lab Capture Probe";
+			_captureProbeEntities = false;
+			_captureProbeDelay = 180;
+		}
+
+		internal void BuildKesslerCampusAndReport(bool scheduleCaptureProbe)
+		{
+			Rectangle bounds = KesslerCampusGallery.Build(Mod, Player);
+			Main.NewText($"Kessler Campus renderer fixture rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Kessler Campus Capture Probe";
 			_captureProbeEntities = false;
 			_captureProbeDelay = 180;
 		}

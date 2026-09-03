@@ -19,6 +19,11 @@ namespace apogean.Content.World
 	/// </summary>
 	public sealed class RuinedSurfaceSystem : ModSystem
 	{
+		// The replacement species has a stark leafless silhouette. Vanilla forest
+		// spacing is too dense for it, so conversion keeps at least this many tiles
+		// between roots instead of rendering an unreadable copied thicket.
+		private const int MinimumDeadTreeSpacing = 8;
+
 		internal static void GenerateWorld(GenerationProgress progress, GameConfiguration config)
 		{
 			progress.Message = "Remembering the world that was...";
@@ -122,8 +127,35 @@ namespace apogean.Content.World
 				}
 			}
 
+			ThinDeadForest(wastesGrass, surfaceY);
 			PlantDeadSurface(wastesGrass, maximumY);
 			return changed;
+		}
+
+		private static void ThinDeadForest(int wastesGrass, int[] surfaceY)
+		{
+			int lastKeptRootX = -MinimumDeadTreeSpacing;
+			for (int x = 30; x < Main.maxTilesX - 30; x++)
+			{
+				int groundY = surfaceY[x];
+				if (groundY <= 1)
+					continue;
+
+				Tile ground = Framing.GetTileSafely(x, groundY);
+				Tile root = Framing.GetTileSafely(x, groundY - 1);
+				if (!ground.HasTile || ground.TileType != wastesGrass || !root.HasTile || root.TileType != TileID.Trees)
+					continue;
+
+				if (x - lastKeptRootX >= MinimumDeadTreeSpacing)
+				{
+					lastKeptRootX = x;
+					continue;
+				}
+
+				// Tree kill logic clears the connected portion above the root while
+				// suppressing world-generation item drops.
+				WorldGen.KillTile(x, groundY - 1, noItem: true);
+			}
 		}
 
 		private static int FindForestSurface(int x, int maximumY)

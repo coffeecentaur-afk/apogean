@@ -140,27 +140,25 @@ Require-SourceContract 'Content/Structures/CorporateTerrainIntegration.cs' @(
 foreach ($treeAsset in @(
     'Content/Tiles/DeadForestTree.png',
     'Content/Tiles/DeadForestTree_Branches.png',
-    'Content/Tiles/DeadForestTree_Tops.png'
+    'Content/Tiles/DeadForestTree_Tops.png',
+    'Content/Tiles/DeadForestTreeRoots.png'
 )) {
     Require-File $treeAsset
 }
 Require-PngContract 'Content/Tiles/DeadForestTree.png' 176 264 8
 Require-PngContract 'Content/Tiles/DeadForestTree_Branches.png' 84 126 6
 Require-PngContract 'Content/Tiles/DeadForestTree_Tops.png' 246 82 6
-Require-PngContract 'Content/Tiles/DeadForestTreeOverlay.png' 128 272 8
-Require-TransparentPng 'Content/Tiles/DeadForestTreeHidden.png' 176 264
-Require-TransparentPng 'Content/Tiles/DeadForestTreeHidden_Branches.png' 84 126
-Require-TransparentPng 'Content/Tiles/DeadForestTreeHidden_Tops.png' 246 82
+Require-PngContract 'Content/Tiles/DeadForestTreeRoots.png' 144 32 6
+Require-SourceContract 'Content/Tiles/DeadForestTreeRootGlobalTile.cs' @(
+    'type != TileID.Trees', 'ground.TileType', 'Rectangle source = new(variant * 48, 0, 48, 32)'
+)
 Require-SourceContract 'Content/Tiles/DeadForestTree.cs' @(
     'GetTexture', 'GetBranchTextures', 'GetTopTextures',
-    'DeadForestTreeHidden', 'DeadForestTreeHidden_Branches', 'DeadForestTreeHidden_Tops'
-)
-Require-SourceContract 'Content/Tiles/DeadForestTreeOverlaySystem.cs' @(
-    'GlobalTile', 'PostDraw', 'DeadForestTreeOverlay', 'Main.drawToScreen', 'Main.offScreenRange',
-    'RootSinkPixels = 9f'
+    'Content/Tiles/DeadForestTree', 'Content/Tiles/DeadForestTree_Branches', 'Content/Tiles/DeadForestTree_Tops'
 )
 Require-SourceContract 'Content/Tiles/DeadTuft.cs' @('DrawYOffset = 4')
 Require-SourceContract 'Content/Tiles/WastesGroundCoverTiles.cs' @('DrawYOffset = 4')
+Require-SourceContract 'Content/World/RuinedSurfaceSystem.cs' @('MinimumDeadTreeSpacing = 8', 'ThinDeadForest')
 
 foreach ($blueprint in @('KesslerCampus','HelixCampus','SentrixCampus')) {
     $path = Join-Path $root "Content/Structures/Blueprints/$blueprint.apstructure"

@@ -1,90 +1,148 @@
 # Fixed 208x96 Kessler surface campus. Surface baseline is y=70.
 size 208 96
 surface 70
-entrance 101 63 7 9
-clear 2 32 30 46
-clear 176 32 30 46
-clear 32 8 144 66
+entrance 101 61 7 9
 
-# Compacted foundation and perimeter defenses.
-fill KesslerFloor 0 70 208 2
-fill KesslerBlock 0 72 208 6
-fill KesslerBlock 8 78 18 8
-fill KesslerBlock 182 78 18 8
-frame KesslerBlock 2 48 30 30 3
-frame KesslerBlock 176 48 30 30 3
-wall KesslerBulkheadWall 5 51 24 21
-wall KesslerBulkheadWall 179 51 24 21
-wall KesslerWindowWall 10 54 14 7
-wall KesslerWindowWall 184 54 14 7
-platform KesslerPlatform 2 45 30
-platform KesslerPlatform 176 45 30
-fill KesslerBeam 14 35 6 13
-fill KesslerBeam 188 35 6 13
-fill KesslerTrim 10 32 14 3
-fill KesslerTrim 184 32 14 3
-object KesslerLight 16 39 1 1
-object KesslerLight 191 39 1 1
+# Clear only the authored occupied volumes; untouched terrain remains around them.
+clear 8 36 24 42
+clear 176 36 24 42
+clear 32 58 24 20
+clear 152 58 24 20
+clear 44 46 45 32
+clear 87 40 34 38
+clear 119 46 45 32
+clear 62 25 34 27
+clear 112 25 34 27
+clear 85 11 38 20
+clear 94 1 20 14
 
-# Headquarters shell, armored roofline, and two interior decks.
-wall KesslerBulkheadWall 35 23 138 49
-frame KesslerBlock 32 20 144 54 3
-fill KesslerTrim 42 16 34 4
-fill KesslerTrim 132 16 34 4
-fill KesslerBlock 86 12 36 8
-fill KesslerTrim 96 8 16 4
-fill KesslerBeam 104 3 2 5
-fill KesslerFloor 34 45 140 3
-fill KesslerFloor 34 70 140 2
-platform KesslerPlatform 38 43 132
-platform KesslerPlatform 38 68 132
+# Connected perimeter wall: two guard towers, low armoured curtain walls, and
+# one central gatehouse. The entire silhouette meets the surface foundation.
+frame KesslerBlock 8 36 24 36 3
+wall KesslerBulkheadWall 11 39 18 30
+wall KesslerWindowWall 13 43 14 8
+fill KesslerTrim 6 33 28 3
+fill KesslerBeam 17 27 6 6
+object KesslerLight 14 42 1 1
+object KesslerLight 25 42 1 1
 
-# Room partitions: armory, command, maintenance, and test bay.
-fill KesslerBeam 64 23 2 22
-fill KesslerBeam 139 23 2 22
-fill KesslerBeam 76 48 2 22
-fill KesslerBeam 127 48 2 22
-wall KesslerWindowWall 69 25 66 11
-wall KesslerWindowWall 81 52 42 8
+frame KesslerBlock 176 36 24 36 3
+wall KesslerBulkheadWall 179 39 18 30
+wall KesslerWindowWall 181 43 14 8
+fill KesslerTrim 174 33 28 3
+fill KesslerBeam 185 27 6 6
+object KesslerLight 182 42 1 1
+object KesslerLight 193 42 1 1
 
-# Upper armory and command deck.
-object KesslerLocker 39 40 2 3
-object KesslerLocker 44 40 2 3
-object KesslerPowerArmorRack 51 39 3 4
-object KesslerConsole 86 41 3 2
-object KesslerTable 98 41 3 2
-object KesslerChair 96 41 1 2 0
-object KesslerChair 102 41 1 2 1
-object KesslerConsole 118 41 3 2
-object KesslerLocker 146 40 2 3
-object KesslerLocker 151 40 2 3
-object KesslerLocker 156 40 2 3
-object KesslerLight 48 27 1 1
-object KesslerLight 84 27 1 1
-object KesslerLight 121 27 1 1
-object KesslerLight 158 27 1 1
+fill KesslerBlock 32 62 12 10
+fill KesslerBlock 164 62 12 10
+fill KesslerTrim 32 59 12 3
+fill KesslerTrim 164 59 12 3
+platform KesslerPlatform 32 57 12
+platform KesslerPlatform 164 57 12
 
-# Ground deck: public quartermaster vestibule, maintenance, and armor test cells.
-object KesslerWorkbench 40 67 2 1
-object KesslerTable 50 66 3 2
-object KesslerChair 48 66 1 2 0
-object KesslerPowerArmorRack 64 64 3 4
-object KesslerConsole 87 66 3 2
-object KesslerTable 94 66 3 2
-object KesslerChair 98 66 1 2 1
-object KesslerPowerArmorRack 134 64 3 4
-object KesslerLocker 146 65 2 3
-object KesslerLocker 151 65 2 3
-object KesslerWorkbench 160 67 2 1
-object KesslerLight 48 52 1 1
-object KesslerLight 88 52 1 1
-object KesslerLight 119 52 1 1
-object KesslerLight 158 52 1 1
+# Tiered headquarters silhouette: distinct maintenance wings, a public
+# gatehouse, paired armories, command deck, and antenna crown. Overlapping
+# frames create one fortified mass without a giant empty rectangle.
+frame KesslerBlock 44 46 45 26 3
+wall KesslerBulkheadWall 47 49 39 20
+wall KesslerWindowWall 51 51 14 6
+wall KesslerWindowWall 69 51 14 6
+fill KesslerFloor 47 65 39 3
+fill KesslerBeam 65 49 3 13
+object KesslerLight 53 50 1 1
+object KesslerLight 61 50 1 1
+object KesslerLight 76 50 1 1
 
-# Exterior warning pylons and landing strip details.
-fill KesslerTrim 0 66 32 3
-fill KesslerTrim 176 66 32 3
-platform KesslerPlatform 32 68 42
-platform KesslerPlatform 132 68 44
-object KesslerConsole 20 69 3 2
-object KesslerConsole 185 69 3 2
+frame KesslerBlock 87 40 34 32 3
+wall KesslerBulkheadWall 90 43 28 26
+wall KesslerWindowWall 94 45 20 7
+fill KesslerFloor 90 65 28 3
+fill KesslerBeam 96 54 3 11
+fill KesslerBeam 109 54 3 11
+object KesslerLight 93 55 1 1
+object KesslerLight 104 53 1 1
+object KesslerLight 115 55 1 1
+
+frame KesslerBlock 119 46 45 26 3
+wall KesslerBulkheadWall 122 49 39 20
+wall KesslerWindowWall 125 51 14 6
+wall KesslerWindowWall 143 51 14 6
+fill KesslerFloor 122 65 39 3
+fill KesslerBeam 140 49 3 13
+object KesslerLight 130 50 1 1
+object KesslerLight 145 50 1 1
+object KesslerLight 153 50 1 1
+
+frame KesslerBlock 62 25 34 23 3
+wall KesslerBulkheadWall 65 28 28 17
+wall KesslerWindowWall 69 30 20 6
+fill KesslerFloor 65 41 28 3
+fill KesslerBeam 78 28 3 13
+object KesslerLight 69 29 1 1
+object KesslerLight 83 29 1 1
+object KesslerLight 88 29 1 1
+
+frame KesslerBlock 112 25 34 23 3
+wall KesslerBulkheadWall 115 28 28 17
+wall KesslerWindowWall 119 30 20 6
+fill KesslerFloor 115 41 28 3
+fill KesslerBeam 128 28 3 13
+object KesslerLight 119 29 1 1
+object KesslerLight 133 29 1 1
+object KesslerLight 138 29 1 1
+
+frame KesslerBlock 85 11 38 18 3
+wall KesslerBulkheadWall 88 14 32 12
+wall KesslerWindowWall 93 16 22 6
+fill KesslerFloor 88 23 32 3
+object KesslerLight 91 15 1 1
+object KesslerLight 104 15 1 1
+object KesslerLight 116 15 1 1
+
+frame KesslerBlock 94 1 20 14 3
+wall KesslerWindowWall 97 4 14 8
+fill KesslerTrim 90 0 28 3
+fill KesslerBeam 102 0 4 1
+
+# Furnished public vestibule, maintenance wings, armories, and command room.
+platform KesslerPlatform 48 63 17
+platform KesslerPlatform 68 63 17
+object KesslerLocker 50 62 2 3
+object KesslerWorkbench 56 64 2 1
+object KesslerConsole 72 63 3 2
+object KesslerPowerArmorRack 79 61 3 4
+
+platform KesslerPlatform 91 63 5
+platform KesslerPlatform 112 63 5
+object KesslerConsole 91 63 3 2
+object KesslerTable 102 63 3 2
+object KesslerChair 100 63 1 2 0
+object KesslerChair 106 63 1 2 1
+object KesslerConsole 113 63 3 2
+
+platform KesslerPlatform 123 63 17
+platform KesslerPlatform 143 63 17
+object KesslerPowerArmorRack 125 61 3 4
+object KesslerConsole 133 63 3 2
+object KesslerWorkbench 149 64 2 1
+object KesslerLocker 156 62 2 3
+
+object KesslerLocker 67 38 2 3
+object KesslerPowerArmorRack 72 37 3 4
+object KesslerWorkbench 84 40 2 1
+object KesslerPowerArmorRack 117 37 3 4
+object KesslerWorkbench 133 40 2 1
+object KesslerLocker 139 38 2 3
+
+object KesslerConsole 90 21 3 2
+object KesslerTable 102 21 3 2
+object KesslerChair 100 21 1 2 0
+object KesslerChair 106 21 1 2 1
+object KesslerConsole 115 21 3 2
+
+# Continuous foundation keys the whole campus into the Wastes surface.
+fill KesslerFloor 6 70 196 2
+fill KesslerBlock 6 72 196 6
+fill KesslerBlock 14 78 18 8
+fill KesslerBlock 176 78 18 8

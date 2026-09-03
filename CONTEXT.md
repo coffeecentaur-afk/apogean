@@ -7,8 +7,11 @@ This glossary defines the setting-specific language shared by world generation, 
 **Renderer-validated asset**:
 A tile, wall, tree, furniture object, or background that has passed its static atlas contract, a clean build, and inspection in a disposable in-game capture at useful scale. A PNG that looks correct outside Terraria is not complete until its framing, seams, anchors, and gameplay rendering pass this gate.
 
-**Composite tree renderer**:
-A wide visual silhouette anchored to Terraria's ordinary `TileID.Trees` gameplay column. Transparent native-size atlases suppress incompatible vanilla-width art, while a tile-render hook draws the approved composite in both normal play and capture-camera output. Chopping, shaking, regrowth, networking, and drops remain native.
+**Native segmented ruined tree**:
+A ruined-tree visual authored inside Terraria's ordinary `TileID.Trees` trunk, branch, and top atlas contracts. Height and branch placement remain native and every trunk segment remains independently choppable. A bounded, fixed-size root flare may be drawn only from the bottom trunk tile; it must disappear with that tile and must never scale or redraw the whole tree.
+
+**Atlas ownership boundary**:
+Each production atlas has one authoritative generator or checked-in source. Narrow generators may not rewrite another family's validated textures. Any regeneration command must preserve unrelated renderer-approved assets byte-for-byte.
 
 ## World ecology
 

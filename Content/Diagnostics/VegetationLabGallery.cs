@@ -10,24 +10,27 @@ namespace apogean.Content.Diagnostics
 	/// <summary>Destructive renderer fixture for the complete Wastes ground-cover family.</summary>
 	internal static class VegetationLabGallery
 	{
-		private const int Width = 142;
-		private const int Height = 38;
+		private const int Width = 170;
+		private const int Height = 45;
 
 		internal static Rectangle Build(Player player)
 		{
 			Point playerTile = player.Center.ToTileCoordinates();
 			int left = Math.Clamp(playerTile.X - Width / 2, 20, Main.maxTilesX - Width - 20);
-			int top = Math.Clamp(playerTile.Y - 19, 20, Main.maxTilesY - Height - 20);
+			int top = Math.Clamp(playerTile.Y - 23, 20, Main.maxTilesY - Height - 20);
 			Rectangle bounds = new(left, top, Width, Height);
 			int floorY = bounds.Bottom - 3;
 
 			Clear(bounds);
+			ClearLooseItems(bounds);
 			PlaceFloor(bounds, floorY);
 			PlaceFamilies(left, floorY);
 			PlaceTrees(left, floorY);
 			Frame(bounds);
 			Lighting.Clear();
-			player.Teleport(new Vector2((left + Width / 2) * 16f, (floorY - 5) * 16f), TeleportationStyleID.RodOfDiscord);
+			// Center the camera on the isolated tree suite while retaining the complete
+			// ground-cover family at the left edge of a 2560px validation capture.
+			player.Teleport(new Vector2((left + 128) * 16f, (floorY - 5) * 16f), TeleportationStyleID.RodOfDiscord);
 			if (Main.netMode == NetmodeID.Server)
 				NetMessage.SendTileSquare(-1, bounds.Center.X, bounds.Center.Y, Width + 4);
 			return bounds;
@@ -62,13 +65,26 @@ namespace apogean.Content.Diagnostics
 		private static void PlaceTrees(int left, int floorY)
 		{
 			int sapling = ModContent.TileType<DeadForestSapling>();
-			// Keep this gate to one isolated tree until its silhouette is approved.
-			// Multiple wide overlays obscure roots and make comparison misleading.
-			int x = left + 121;
-			if (!WorldGen.PlaceObject(x, floorY - 1, sapling, mute: true))
-				throw new InvalidOperationException($"Vegetation Lab could not place a dead-tree sapling at {x},{floorY - 1}.");
-			if (!WorldGen.GrowTree(x, floorY - 1))
-				throw new InvalidOperationException($"Vegetation Lab could not grow a dead forest tree at {x},{floorY - 1}.");
+			// Three well-separated growth calls prove Terraria's native height, branch,
+			// and crown variation without recreating the production forest pileup.
+			foreach (int x in new[] { left + 109, left + 128, left + 147 })
+			{
+				if (!WorldGen.PlaceObject(x, floorY - 1, sapling, mute: true))
+					throw new InvalidOperationException($"Vegetation Lab could not place a dead-tree sapling at {x},{floorY - 1}.");
+				if (!WorldGen.GrowTree(x, floorY - 1))
+					throw new InvalidOperationException($"Vegetation Lab could not grow a dead forest tree at {x},{floorY - 1}.");
+			}
+		}
+
+		private static void ClearLooseItems(Rectangle bounds)
+		{
+			Rectangle worldPixels = new(bounds.X * 16, bounds.Y * 16, bounds.Width * 16, bounds.Height * 16);
+			for (int i = 0; i < Main.maxItems; i++)
+			{
+				Item item = Main.item[i];
+				if (item.active && worldPixels.Contains(item.Center.ToPoint()))
+					item.active = false;
+			}
 		}
 
 		private static void RequireObject(int x, int y, int type, int randomStyle, string label)

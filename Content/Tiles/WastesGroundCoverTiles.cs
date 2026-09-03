@@ -36,7 +36,9 @@ namespace apogean.Content.Tiles
 	{
 		public override void SetStaticDefaults()
 		{
-			WastesPlantRegistration.ApplyCommon(this, new Color(143, 108, 61), sways: true);
+			// Keep the complete two-wide root silhouette rigid. Terraria's basic wind
+			// sway transforms each occupied cell separately and visibly splits it.
+			WastesPlantRegistration.ApplyCommon(this, new Color(143, 108, 61), sways: false);
 
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
 			TileObjectData.newTile.Width = 2;

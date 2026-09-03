@@ -153,7 +153,13 @@ function Test-FixedAtlasContract(
             Add-Failure "Candidate has $opaquePixels opaque pixels: $candidateRelativePath; expected $expectedOpaquePixels"
         }
 
-        $alphaHash = [Convert]::ToHexString([System.Security.Cryptography.SHA256]::HashData($alphaBytes))
+        $sha256 = [System.Security.Cryptography.SHA256]::Create()
+        try {
+            $alphaHash = [BitConverter]::ToString($sha256.ComputeHash($alphaBytes)).Replace('-', '')
+        }
+        finally {
+            $sha256.Dispose()
+        }
         if ($alphaHash -ne $expectedAlphaHash) {
             Add-Failure "Candidate alpha topology changed: $candidateRelativePath; got $alphaHash"
         }

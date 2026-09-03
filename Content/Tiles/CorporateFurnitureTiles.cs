@@ -154,9 +154,11 @@ namespace apogean.Content.Tiles
 
 		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 		{
-			r = EmittedLight.R / 255f * 0.72f;
-			g = EmittedLight.G / 255f * 0.72f;
-			b = EmittedLight.B / 255f * 0.72f;
+			// These fixtures illuminate sealed, windowless campus rooms. A torch-scale
+			// radius left the authored furniture unreadable even with two lights per room.
+			r = EmittedLight.R / 255f * 0.95f;
+			g = EmittedLight.G / 255f * 0.95f;
+			b = EmittedLight.B / 255f * 0.95f;
 		}
 	}
 
