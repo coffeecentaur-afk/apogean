@@ -1,3 +1,4 @@
+using System.IO;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameInput;
@@ -14,9 +15,11 @@ namespace apogean.Content.Diagnostics
 	{
 		private const string AutomaticWorldName = "Apogee Native Visual V3";
 		private const string AutomaticCampusWorldName = "Apogee Campus Validation";
+		private const string LiveValidationRequestFileName = "ApogeanLiveValidation.request";
 		private int _automaticBuildDelay;
 		private bool _automaticCampusFixture;
 		private int _captureProbeDelay;
+		private int _liveValidationPollDelay;
 		private Rectangle _captureProbeBounds;
 		private string _captureProbeName;
 		private bool _captureProbeEntities;
@@ -26,6 +29,7 @@ namespace apogean.Content.Diagnostics
 			_automaticBuildDelay = -1;
 			_automaticCampusFixture = false;
 			_captureProbeDelay = -1;
+			_liveValidationPollDelay = 30;
 			_captureProbeName = "Apogean Tile Lab Capture Probe";
 			_captureProbeEntities = true;
 		}
@@ -44,6 +48,12 @@ namespace apogean.Content.Diagnostics
 
 		public override void PostUpdate()
 		{
+			if (_liveValidationPollDelay-- <= 0)
+			{
+				_liveValidationPollDelay = 30;
+				ConsumeLiveValidationRequest();
+			}
+
 			if (RuinedBackgroundSelectionSystem.Instance.ForestUndergroundRenderLabEnabled)
 				UndergroundBackgroundLabGallery.LightVisibleBackground(Player);
 
@@ -74,6 +84,56 @@ namespace apogean.Content.Diagnostics
 			{
 				_captureProbeDelay = -1;
 				RunCaptureProbe();
+			}
+		}
+
+		private void ConsumeLiveValidationRequest()
+		{
+			if (Main.netMode != NetmodeID.SinglePlayer)
+				return;
+
+			string requestPath = Path.Combine(Main.SavePath, "Captures", LiveValidationRequestFileName);
+			if (!File.Exists(requestPath))
+				return;
+
+			string request = "unread";
+			try
+			{
+				request = File.ReadAllText(requestPath).Trim().ToLowerInvariant();
+				File.Delete(requestPath);
+				switch (request)
+				{
+					case "conversion":
+						BuildMawConversionAndReport(scheduleCaptureProbe: true);
+						break;
+					case "vegetation":
+						BuildVegetationAndReport(scheduleCaptureProbe: true);
+						break;
+					case "wastes-terrain":
+						BuildWastesTerrainAndReport(scheduleCaptureProbe: true);
+						break;
+					case "wastes-properties":
+						BuildWastesTerrainPropertiesAndReport(scheduleCaptureProbe: true);
+						break;
+					case "material":
+						BuildMaterialGalleryAndReport(scheduleCaptureProbe: true);
+						break;
+					case "grass":
+						BuildGrassAndReport(scheduleCaptureProbe: true);
+						break;
+					case "kessler-campus":
+						BuildKesslerCampusAndReport(scheduleCaptureProbe: true);
+						break;
+					default:
+						throw new System.InvalidOperationException($"Unknown live-validation fixture '{request}'.");
+				}
+
+				Mod.Logger.Info($"LIVE VALIDATION REQUEST CONSUMED: {request}");
+			}
+			catch (System.Exception exception)
+			{
+				Mod.Logger.Error($"LIVE VALIDATION REQUEST FAILED: {request}", exception);
+				Main.NewText($"Live validation '{request}' failed. See client.log.", Color.OrangeRed);
 			}
 		}
 

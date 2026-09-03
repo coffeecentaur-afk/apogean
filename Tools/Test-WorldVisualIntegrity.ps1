@@ -120,15 +120,36 @@ $naturalTiles = @(
     'TileID.Dirt', 'TileID.Stone', 'TileID.Grass', 'TileID.Sand',
     'TileID.ClayBlock', 'TileID.Mud', 'TileID.JungleGrass',
     'TileID.SnowBlock', 'TileID.IceBlock', 'TileID.Sandstone',
-    'TileID.HardenedSand', 'TileID.Silt', 'TileID.Slush'
+    'TileID.HardenedSand', 'TileID.Silt', 'TileID.Slush',
+    'TileID.Ebonstone', 'TileID.Crimsand', 'TileID.HallowedIce',
+    'TileID.MushroomGrass', 'TileID.Ash'
 )
 $naturalWalls = @(
     'WallID.DirtUnsafe', 'WallID.Stone', 'WallID.GrassUnsafe',
     'WallID.FlowerUnsafe', 'WallID.JungleUnsafe', 'WallID.MudUnsafe',
     'WallID.SnowWallUnsafe', 'WallID.IceUnsafe', 'WallID.Sandstone',
-    'WallID.HardenedSand'
+    'WallID.HardenedSand', 'WallID.EbonstoneUnsafe', 'WallID.CrimsonHardenedSand',
+    'WallID.HallowUnsafe1', 'WallID.MushroomUnsafe', 'WallID.LavaUnsafe1'
 )
 Require-SourceContract 'Content/World/MawConversionSystem.cs' ($naturalTiles + $naturalWalls)
+Require-SourceContract 'Content/Diagnostics/MawConversionGallery.cs' @(
+    'Corrupt Stone', 'Crimson Sand', 'Hallow Ice', 'Jungle Grass',
+    'Mushroom Grass', 'Underworld Ash', 'PlaceAndValidatePreservedContent'
+)
+
+Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
+	'ApogeanLiveValidation.request',
+	'case "conversion"',
+	'BuildMawConversionAndReport(scheduleCaptureProbe: true)',
+	'LIVE VALIDATION REQUEST CONSUMED',
+	'LIVE VALIDATION REQUEST FAILED'
+)
+
+Require-SourceContract 'Tools/Request-LiveValidation.ps1' @(
+	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'kessler-campus')]",
+	'ApogeanLiveValidation.request',
+	'Set-Content -LiteralPath $requestPath'
+)
 
 # Fixed structures need explicit terrain integration rather than a cleared air moat.
 Require-SourceContract 'Content/Structures/CorporateTerrainIntegration.cs' @(

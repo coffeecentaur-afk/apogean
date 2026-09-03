@@ -86,12 +86,13 @@ namespace apogean.Content.World
 				WallID.CorruptionUnsafe1, WallID.CorruptionUnsafe2, WallID.CorruptionUnsafe3, WallID.CorruptionUnsafe4,
 				WallID.CrimsonUnsafe1, WallID.CrimsonUnsafe2, WallID.CrimsonUnsafe3, WallID.CrimsonUnsafe4,
 				WallID.HallowUnsafe1, WallID.HallowUnsafe2, WallID.HallowUnsafe3, WallID.HallowUnsafe4,
+				WallID.LavaUnsafe1, WallID.LavaUnsafe2, WallID.LavaUnsafe3, WallID.LavaUnsafe4,
 				ModContent.WallType<WastesStoneWallUnsafe>());
 			RegisterWalls(conversionType, mawGrassWall,
 				WallID.GrassUnsafe, WallID.FlowerUnsafe,
 				WallID.CorruptGrassUnsafe, WallID.CrimsonGrassUnsafe, WallID.HallowedGrassUnsafe,
 				WallID.JungleUnsafe, WallID.JungleUnsafe1, WallID.JungleUnsafe2, WallID.JungleUnsafe3, WallID.JungleUnsafe4,
-				WallID.LivingLeaf,
+				WallID.LivingLeaf, WallID.MushroomUnsafe,
 				ModContent.WallType<DeadGrassWallUnsafe>(), ModContent.WallType<DeadFlowerWallUnsafe>(),
 				ModContent.WallType<WastesGrassWallUnsafe>());
 			RegisterWalls(conversionType, mawSandWall,
@@ -144,9 +145,10 @@ namespace apogean.Content.World
 			WallID.CorruptionUnsafe1 or WallID.CorruptionUnsafe2 or WallID.CorruptionUnsafe3 or WallID.CorruptionUnsafe4 or
 			WallID.CrimsonUnsafe1 or WallID.CrimsonUnsafe2 or WallID.CrimsonUnsafe3 or WallID.CrimsonUnsafe4 or
 			WallID.HallowUnsafe1 or WallID.HallowUnsafe2 or WallID.HallowUnsafe3 or WallID.HallowUnsafe4 or
+			WallID.LavaUnsafe1 or WallID.LavaUnsafe2 or WallID.LavaUnsafe3 or WallID.LavaUnsafe4 or
 			WallID.GrassUnsafe or WallID.FlowerUnsafe or WallID.CorruptGrassUnsafe or WallID.CrimsonGrassUnsafe or
 			WallID.HallowedGrassUnsafe or WallID.JungleUnsafe or WallID.JungleUnsafe1 or WallID.JungleUnsafe2 or
-			WallID.JungleUnsafe3 or WallID.JungleUnsafe4 or WallID.LivingLeaf or
+			WallID.JungleUnsafe3 or WallID.JungleUnsafe4 or WallID.LivingLeaf or WallID.MushroomUnsafe or
 			WallID.Sandstone or WallID.HardenedSand or WallID.CorruptSandstone or WallID.CrimsonSandstone or
 			WallID.HallowSandstone or WallID.CorruptHardenedSand or WallID.CrimsonHardenedSand or WallID.HallowHardenedSand or
 			WallID.IceUnsafe or WallID.SnowWallUnsafe or WallID.MudUnsafe ||

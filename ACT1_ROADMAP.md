@@ -5,17 +5,17 @@
 - Faction relation scaffold, sealed compounds, dialogue UI, and a playable Matriarch prototype.
 - Renderer-gated Wastes material pipeline: disposable tile, grass, vegetation, terrain-family, and production-property galleries; local native-atlas export; cold client capture; and validated Soil, Grass, Stone, Sand, Ice, Snow, Mud, unsafe-wall, item, falling-projectile, and ground-cover families.
 - Reference-driven dead trees now use Terraria's native segmented trunk, branch, and crown renderer with varied heights and branch placement. The rejected whole-tree overlay is gone; a live mid-trunk chop assertion proves that the canopy falls while the lower stump and bounded root flare remain. Tree spacing, rigid ground cover, and grass anchoring pass build/static/live/capture checks.
-- Renderer-gated Maw conversion pipeline: native-topology hostile Soil, Grass, Stone, Sand, Ice, Snow, Mud, and Clay families; custom drops and sand behavior; unsafe-wall conversion; and a live four-stage Wastes → Maw → Wastes → vanilla purification matrix.
+- Renderer-gated Maw conversion pipeline: native-topology hostile Soil, Grass, Stone, Sand, Ice, Snow, Mud, and Clay families; custom drops and sand behavior; unsafe-wall conversion; and a live four-stage natural source → Maw → Wastes → vanilla purification matrix. The live matrix covers neutral Wastes terrain plus representative Corruption, Crimson, Hallow, jungle, mushroom, and Underworld sources while proving constructed vanilla and unknown modded content are preserved.
+- An allow-listed file-request bridge now drives destructive render fixtures from the running single-player client without depending on synthetic game input. It consumes only named Apogean validation fixtures from the Terraria Captures directory and retains the same runtime assertions and capture-camera path as chat commands.
 - First approved Wastes forest panorama: a native-sized, transparent far/middle/close parallax decomposition preserving the broadcast spire, ruined skyline, broken highway, settlement remains, and rooted foreground basin from the approved concept. It is live-rendered, seam-checked, and retained as seeded Forest composition V0.
 - Validation panoramas explicitly resolve the same global ruined-background slot used by ordinary play and sanitize invalid ModBiome water-style values before invoking Terraria's capture renderer. Live and panorama captures now agree without reintroducing the prior liquid-array crash.
 - First approved Wastes underground-depth set: four native-sized cave textures with an opaque, wrap-safe eroded-strata material, distinct shallow/deep palettes, and an in-engine lighting proof. Unique ruined mine landmarks are reserved for sparse world furniture so they do not repeat every 128 pixels.
 
 ## Current environmental gate
 
-1. Continue confirming placement, framing, merge, slope, paint, mining, light, liquid, drop, save/load, and synchronization properties in focused client fixtures.
-2. Expand the validated Wastes/Maw conversion matrix from its complete native material baseline to representative Corruption, Crimson, Hallow, jungle, mushroom, and Underworld sources without consuming protected or unknown modded content.
-3. Expand the proven surface and underground Forest V0 contracts across the biome matrix one bounded composition at a time.
-4. After the background contract is stable, validate faction construction sets, the animated Kessler flag, and faction furniture in dedicated galleries before placing them in world generation.
+1. Continue confirming paint, save/load, and multiplayer synchronization properties in focused client fixtures; placement, framing, merge, slope, mining, light, liquid, drops, and native tree chopping have live proofs.
+2. Expand the proven surface and underground Forest V0 contracts across the biome matrix one bounded composition at a time.
+3. After the background contract is stable, validate faction construction sets, the animated Kessler flag, and faction furniture in dedicated galleries before placing them in world generation.
 
 ## Vertical slices
 

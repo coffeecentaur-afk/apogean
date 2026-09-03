@@ -1,6 +1,6 @@
 # Native world and tileset validation — V3
 
-Validated 2026-09-01/02 against tModLoader `v2026.7.3.0` and Terraria `1.4.4.9`.
+Validated 2026-09-01 through 2026-09-03 against tModLoader `v2026.7.3.0` and Terraria `1.4.4.9`.
 
 ## Package gates
 
@@ -42,3 +42,11 @@ Run `/apogean gallery` in a disposable single-player validation world. It clears
 The atlases use the official tModLoader ExampleMod framing topology as an opaque/transparent mask. Every visible pixel, palette, material motif, ruin, amber vein, and corporate detail remains Apogean-authored. No Terraria resource pack is required.
 
 The automatic `Apogee Native Visual V3` fixture additionally grows four native ruined trees, performs a deterministic mid-trunk chop on the fourth tree, and fails immediately unless the canopy is removed while the stump remains. Its capture-camera probe resolves Apogean's post-arbitration global background slot explicitly, so the panorama and ordinary camera must show the same ruined Forest composition.
+
+## Maw source-conversion proof
+
+`Tools/Request-LiveValidation.ps1 -Fixture conversion` creates an allow-listed request in the Terraria Captures directory. A running single-player client consumes it, builds the destructive gallery through the production conversion hooks, executes runtime assertions, and schedules the standard capture-camera probe. It does not accept code, paths, or arbitrary commands.
+
+The 2026-09-03 live proof covers thirteen material columns and four stages: natural source → Maw → one Purity pass/Wastes → two Purity passes/vanilla. Sources include Wastes Soil, Grass, Stone, Sand, Ice, Snow, and Mud plus Corrupt Stone, Crimson Sand, Hallow Ice, Jungle Grass, Mushroom Grass, and Underworld Ash. A separate guard row proves that Gray Brick/Wood Wall/red wire and Kessler block/bulkhead content survive conversion unchanged. Runtime tile, wall, drop, sand-fall, Sandgun-ammunition, ice, snow, and two-step purification assertions all passed without client errors.
+
+Archived renderer proof: `Art/Validation/2026-09-03-MawBiomeSourceConversionMatrix.png`.
