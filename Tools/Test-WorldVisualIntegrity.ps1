@@ -155,8 +155,11 @@ Require-SourceContract 'Content/Tiles/DeadForestTree.cs' @(
     'DeadForestTreeHidden', 'DeadForestTreeHidden_Branches', 'DeadForestTreeHidden_Tops'
 )
 Require-SourceContract 'Content/Tiles/DeadForestTreeOverlaySystem.cs' @(
-    'GlobalTile', 'PostDraw', 'DeadForestTreeOverlay', 'Main.drawToScreen', 'Main.offScreenRange'
+    'GlobalTile', 'PostDraw', 'DeadForestTreeOverlay', 'Main.drawToScreen', 'Main.offScreenRange',
+    'RootSinkPixels = 6f'
 )
+Require-SourceContract 'Content/Tiles/DeadTuft.cs' @('DrawYOffset = 2')
+Require-SourceContract 'Content/Tiles/WastesGroundCoverTiles.cs' @('DrawYOffset = 2')
 
 foreach ($blueprint in @('KesslerCampus','HelixCampus','SentrixCampus')) {
     $path = Join-Path $root "Content/Structures/Blueprints/$blueprint.apstructure"

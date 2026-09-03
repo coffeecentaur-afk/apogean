@@ -44,6 +44,7 @@ namespace apogean.Content.Tiles
 			TileObjectData.newTile.Origin = new Point16(0, 2);
 			TileObjectData.newTile.AnchorBottom = WastesPlantRegistration.GroundAnchor(2);
 			TileObjectData.newTile.AnchorValidTiles = WastesPlantRegistration.ValidGround();
+			TileObjectData.newTile.DrawYOffset = 2;
 			TileObjectData.newTile.CoordinateHeights = [16, 16, 18];
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.StyleMultiplier = 3;
@@ -68,6 +69,7 @@ namespace apogean.Content.Tiles
 			TileObjectData.newTile.Origin = new Point16(1, 1);
 			TileObjectData.newTile.AnchorBottom = WastesPlantRegistration.GroundAnchor(3);
 			TileObjectData.newTile.AnchorValidTiles = WastesPlantRegistration.ValidGround();
+			TileObjectData.newTile.DrawYOffset = 2;
 			TileObjectData.newTile.CoordinateWidth = 16;
 			TileObjectData.newTile.CoordinatePadding = 2;
 			TileObjectData.newTile.CoordinateHeights = [16, 18];

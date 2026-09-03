@@ -53,6 +53,8 @@ namespace apogean.Content.Tiles
 	/// </summary>
 	public sealed class DeadForestTreeRenderer : GlobalTile
 	{
+		private const float TransparentBottomPadding = 4f;
+		private const float RootSinkPixels = 6f;
 		private Asset<Texture2D> _treeTexture;
 
 		public override void Load()
@@ -78,7 +80,10 @@ namespace apogean.Content.Tiles
 			int drawHeight = System.Math.Clamp((trunkTiles + 1) * 16, 176, 288);
 			float scale = drawHeight / (float)texture.Height;
 			Vector2 captureOffset = Main.drawToScreen ? Vector2.Zero : new Vector2(Main.offScreenRange);
-			Vector2 drawPosition = new((i + 0.5f) * 16f, (j + 1) * 16f + 4f);
+			// Anchor the lowest opaque root pixels below the grass lip. Anchoring the
+			// texture canvas itself leaves a visible daylight seam at shorter scales.
+			float rootAnchorY = (j + 1) * 16f + TransparentBottomPadding * scale + RootSinkPixels;
+			Vector2 drawPosition = new((i + 0.5f) * 16f, rootAnchorY);
 			drawPosition = drawPosition - Main.screenPosition + captureOffset;
 			Color lightColor = Lighting.GetColor(i, System.Math.Clamp(treeTop + trunkTiles / 2, 1, Main.maxTilesY - 2));
 			SpriteEffects effects = ((i * 397) & 1) == 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;

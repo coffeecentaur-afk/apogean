@@ -98,8 +98,16 @@ This slice proves atlas rendering and basic soil merging. Grass growth, spreadin
 - Registered each family as one tile style with explicit random placement variants. The first client pass exposed an incorrect `PlaceObject` style argument that pushed later variants beyond the sheet; the lab now selects those variants through the `random` argument, matching tModLoader's `StyleMultiplier` contract.
 - Packed each continuous logical drawing around tModLoader's hidden two-pixel cell gutters. Rendered all ten variants simultaneously on production Wastes grass; every variant anchored to the correct row and all multi-tile roots assembled without seams or clipping.
 - The capture camera wrote `Apogean Vegetation Lab Capture Probe.png` with entities excluded so dropped items, NPCs, and the player cannot obscure the tile evidence. The client log contained no vegetation-lab failure, exception, error, or fatal entry.
+- A follow-up ground-contact pass set a two-pixel `DrawYOffset` on all three ground-cover families. A fresh live render and capture confirmed that tufts, bristles, and root shrubs overlap the grass lip instead of floating above it.
 - Integrated only this validated family into `RuinedSurfaceSystem`: approximately 70% of decoration attempts select low tufts, 22% select bristles, and 8% select shrubs. The existing overall sparse placement rate remains unchanged.
 
 The approved source is `Art/Reference/WastesGroundCover-reference-v2.png`. The deterministic exporter crops those exact silhouettes, downsamples them by coverage, maps them to a six-color charcoal/umber/ochre/amber ramp, grows a one-pixel exterior outline, and packs the result into the native tile atlases. This replaces the rejected line-and-disc approximation.
 
 The next safe increment is the Wastes tree trunk and canopy family. Broader terrain, structures, and Maw geometry remain frozen.
+
+## Wastes tree renderer slice — 2026-09-03
+
+- Preserved Terraria's native tree tile, growth, chopping, collision, and world-state behavior while hiding its narrow native atlases behind fully transparent sheets.
+- Rendered one wide, reference-derived dead-tree composite from the detected root tile through `GlobalTile.PostDraw`, which keeps ordinary gameplay and Capture Camera on the same draw path.
+- Corrected the visible root anchor using the source texture's four-pixel transparent bottom margin plus a six-pixel soil sink. The new capture confirms that the flared roots enter the grass edge rather than hovering above it.
+- Rebuilt and passed the Tile Lab, visual-contract, and world-visual-integrity checks after the grounding correction. The tree silhouette remains subject to the player's visual approval before this family expands into multiple variants.

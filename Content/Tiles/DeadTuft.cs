@@ -20,6 +20,7 @@ namespace apogean.Content.Tiles
 			TileObjectData.newTile.Origin = Point16.Zero;
 			TileObjectData.newTile.AnchorBottom = WastesPlantRegistration.GroundAnchor(2);
 			TileObjectData.newTile.AnchorValidTiles = WastesPlantRegistration.ValidGround();
+			TileObjectData.newTile.DrawYOffset = 2;
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.StyleMultiplier = 4;
 			TileObjectData.newTile.RandomStyleRange = 4;
