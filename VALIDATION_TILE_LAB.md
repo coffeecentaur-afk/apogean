@@ -122,4 +122,12 @@ The next safe increment is the Wastes tree trunk and canopy family. Broader terr
 - Recolored the renderer-exported Terraria 16x16 block-item sprites and 14x14 sand projectile rather than inventing miniature concept art. Mining any Wastes terrain now returns its Wastes item; grass returns Wastes Soil; falling sand and Sandgun sand preserve Wastes identity.
 - The mod built with no errors and only the existing lowercase-mod-class warning. Tile Lab, visual-contract, and world-visual-integrity scripts passed. The live client completed `Apogean Wastes Terrain Properties Capture Probe.png`, logged the reference export, and produced no exception or fatal entry.
 
-The next renderer gate is Maw conversion: derive each hostile counterpart from its validated neutral atlas, test the two-step Maw → Wastes → vanilla purification chain, and exercise the allowlisted tile/wall mapping before any background or faction set begins.
+## Maw conversion and identity slice — 2026-09-03
+
+- Derived hostile Maw Soil, Grass, Stone, Sand, Ice, Snow, Mud, Clay, and seven unsafe-wall atlases from the validated neutral topology instead of inventing a second framing layout. Maw Grass now uses Terraria's complete 288x1980 grass sheet rather than the rejected generic 288x270 terrain sheet.
+- Added custom Maw terrain items, drops, falling sand, and Sandgun ammunition so conversion does not lose material identity when blocks are mined, placed, destabilized, or fired.
+- Added a four-row, seven-column renderer fixture: neutral Wastes source; Maw conversion through the production allowlist; one Purity pass back to Wastes; and a second Purity pass back to vanilla. Every stage converts both tile and unsafe wall.
+- Runtime assertions cover native Maw stone, grass, sand, ice, and snow behavior; custom drops; falling sand; Sandgun ammunition; and the two-step purification chain.
+- The mod built cleanly and all Tile Lab, visual-contract, and world-visual-integrity checks passed. A cold live-client pass wrote `Apogean Maw Conversion Matrix Capture Probe.png`; the capture-camera liquid indices stayed valid and the client log contained no exception or fatal entry.
+
+The next renderer gate is background routing. Surface and underground systems will be separated first, then one Wastes surface composition and one Wastes underground-depth set will establish the visual, parallax, transition, capture-camera, and fallback contracts before the full biome matrix expands.

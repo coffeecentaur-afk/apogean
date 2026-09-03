@@ -43,7 +43,7 @@ namespace apogean.Content.Diagnostics
 					{
 						try
 						{
-							BuildWastesTerrainPropertiesAndReport(scheduleCaptureProbe: true);
+							BuildMawConversionAndReport(scheduleCaptureProbe: true);
 						}
 						catch (System.Exception exception)
 						{
@@ -171,6 +171,24 @@ namespace apogean.Content.Diagnostics
 
 			_captureProbeBounds = bounds;
 			_captureProbeName = "Apogean Wastes Terrain Properties Capture Probe";
+			_captureProbeEntities = false;
+			_captureProbeDelay = 180;
+		}
+
+		internal void BuildMawConversionAndReport(bool scheduleCaptureProbe)
+		{
+			Rectangle bounds = MawConversionGallery.Build(Player,
+				out System.Collections.Generic.IReadOnlyList<string> columns,
+				out System.Collections.Generic.IReadOnlyList<string> stages);
+			Main.NewText($"Maw conversion lab rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			Main.NewText(string.Join(" | ", columns), new Color(194, 126, 44));
+			Main.NewText(string.Join(" → ", stages), Color.LightGreen);
+			Main.NewText("Runtime contracts passed: native Maw materials, drops, sand physics/ammo, and two-step purification.", Color.LightGreen);
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Maw Conversion Matrix Capture Probe";
 			_captureProbeEntities = false;
 			_captureProbeDelay = 180;
 		}

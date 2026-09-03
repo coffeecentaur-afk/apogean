@@ -160,17 +160,24 @@ namespace apogean.Content.Tiles
 	public abstract class MawNaturalTile : ModTile
 	{
 		protected abstract Color MapColor { get; }
+		protected abstract int VanillaEquivalent { get; }
 		protected abstract int PurifiedTile { get; }
-		protected virtual int ItemDrop => ItemID.DirtBlock;
+		protected abstract int ItemDrop { get; }
 		protected virtual int TileDust => DustID.AmberBolt;
 		protected virtual float Resistance => 1.15f;
 
 		public override void SetStaticDefaults()
 		{
-			Main.tileSolid[Type] = true;
-			Main.tileBlockLight[Type] = true;
-			Main.tileMergeDirt[Type] = true;
+			Main.tileSolid[Type] = Main.tileSolid[VanillaEquivalent];
+			Main.tileBlockLight[Type] = Main.tileBlockLight[VanillaEquivalent];
+			Main.tileBrick[Type] = Main.tileBrick[VanillaEquivalent];
+			Main.tileMergeDirt[Type] = Main.tileMergeDirt[VanillaEquivalent];
+			Main.tileSand[Type] = Main.tileSand[VanillaEquivalent];
 			TileID.Sets.ChecksForMerge[Type] = true;
+			TileID.Sets.CanBeDugByShovel[Type] = TileID.Sets.CanBeDugByShovel[VanillaEquivalent];
+			TileID.Sets.CanBeClearedDuringOreRunner[Type] = TileID.Sets.CanBeClearedDuringOreRunner[VanillaEquivalent];
+			TileID.Sets.GeneralPlacementTiles[Type] = TileID.Sets.GeneralPlacementTiles[VanillaEquivalent];
+			TileID.Sets.ResetsHalfBrickPlacementAttempt[Type] = TileID.Sets.ResetsHalfBrickPlacementAttempt[VanillaEquivalent];
 			Main.tileMerge[Type][TileID.Dirt] = true;
 			Main.tileMerge[TileID.Dirt][Type] = true;
 			DustType = TileDust;
@@ -188,22 +195,74 @@ namespace apogean.Content.Tiles
 		}
 	}
 
-	public sealed class MawDirt : MawNaturalTile { protected override Color MapColor => new(89, 67, 39); protected override int PurifiedTile => ModContent.TileType<WastesSoil>(); }
+	public sealed class MawDirt : MawNaturalTile { protected override Color MapColor => new(89, 67, 39); protected override int VanillaEquivalent => TileID.Dirt; protected override int PurifiedTile => ModContent.TileType<WastesSoil>(); protected override int ItemDrop => ModContent.ItemType<MawDirtBlock>(); }
 	public sealed class MawGrass : MawNaturalTile
 	{
 		protected override Color MapColor => new(142, 99, 28);
+		protected override int VanillaEquivalent => TileID.Grass;
 		protected override int PurifiedTile => ModContent.TileType<WastesGrass>();
-		public override void SetStaticDefaults() { base.SetStaticDefaults(); TileID.Sets.Conversion.Grass[Type] = true; }
+		protected override int ItemDrop => ModContent.ItemType<MawDirtBlock>();
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+			TileID.Sets.Grass[Type] = true;
+			TileID.Sets.Conversion.Grass[Type] = true;
+			Main.tileMerge[Type][ModContent.TileType<MawDirt>()] = true;
+			Main.tileMerge[ModContent.TileType<MawDirt>()][Type] = true;
+		}
 	}
-	public sealed class MawSand : MawNaturalTile { protected override Color MapColor => new(151, 111, 40); protected override int PurifiedTile => ModContent.TileType<WastesSand>(); protected override int ItemDrop => ItemID.SandBlock; protected override int TileDust => DustID.Sand; }
+	public sealed class MawSand : MawNaturalTile
+	{
+		protected override Color MapColor => new(151, 111, 40);
+		protected override int VanillaEquivalent => TileID.Sand;
+		protected override int PurifiedTile => ModContent.TileType<WastesSand>();
+		protected override int ItemDrop => ModContent.ItemType<MawSandBlock>();
+		protected override int TileDust => DustID.Sand;
+		protected override float Resistance => 0.8f;
+
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+			Main.tileBrick[Type] = true;
+			Main.tileSand[Type] = true;
+			TileID.Sets.Conversion.Sand[Type] = true;
+			TileID.Sets.ForAdvancedCollision.ForSandshark[Type] = true;
+			TileID.Sets.CanBeDugByShovel[Type] = true;
+			TileID.Sets.Falling[Type] = true;
+			TileID.Sets.Suffocate[Type] = true;
+			TileID.Sets.FallingBlockProjectile[Type] = new TileID.Sets.FallingBlockProjectileInfo(
+				ModContent.ProjectileType<MawSandBallFallingProjectile>(), 10);
+			TileID.Sets.CanBeClearedDuringOreRunner[Type] = true;
+			TileID.Sets.GeneralPlacementTiles[Type] = false;
+		}
+
+		public override bool HasWalkDust() => Main.rand.NextBool(3);
+
+		public override void WalkDust(ref int dustType, ref bool makeDust, ref Color color) => dustType = DustID.Sand;
+	}
 	public sealed class MawIce : MawNaturalTile
 	{
 		protected override Color MapColor => new(112, 111, 77);
+		protected override int VanillaEquivalent => TileID.IceBlock;
 		protected override int PurifiedTile => ModContent.TileType<WastesIce>();
-		protected override int ItemDrop => ItemID.IceBlock;
-		public override void SetStaticDefaults() { base.SetStaticDefaults(); TileID.Sets.IceSkateSlippery[Type] = true; }
+		protected override int ItemDrop => ModContent.ItemType<MawIceBlock>();
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+			TileID.Sets.IceSkateSlippery[Type] = true;
+			TileID.Sets.Ices[Type] = true;
+			TileID.Sets.IcesSlush[Type] = true;
+		}
 	}
-	public sealed class MawSnow : MawNaturalTile { protected override Color MapColor => new(173, 153, 104); protected override int PurifiedTile => ModContent.TileType<WastesSnow>(); protected override int ItemDrop => ItemID.SnowBlock; protected override int TileDust => DustID.Snow; }
-	public sealed class MawMud : MawNaturalTile { protected override Color MapColor => new(78, 62, 34); protected override int PurifiedTile => ModContent.TileType<WastesMud>(); protected override int ItemDrop => ItemID.MudBlock; protected override int TileDust => DustID.Mud; }
-	public sealed class MawClay : MawNaturalTile { protected override Color MapColor => new(120, 88, 52); protected override int PurifiedTile => ModContent.TileType<WastesSoil>(); protected override int ItemDrop => ItemID.ClayBlock; }
+	public sealed class MawSnow : MawNaturalTile
+	{
+		protected override Color MapColor => new(173, 153, 104);
+		protected override int VanillaEquivalent => TileID.SnowBlock;
+		protected override int PurifiedTile => ModContent.TileType<WastesSnow>();
+		protected override int ItemDrop => ModContent.ItemType<MawSnowBlock>();
+		protected override int TileDust => DustID.Snow;
+		public override void SetStaticDefaults() { base.SetStaticDefaults(); TileID.Sets.Snow[Type] = true; }
+	}
+	public sealed class MawMud : MawNaturalTile { protected override Color MapColor => new(78, 62, 34); protected override int VanillaEquivalent => TileID.Mud; protected override int PurifiedTile => ModContent.TileType<WastesMud>(); protected override int ItemDrop => ModContent.ItemType<MawMudBlock>(); protected override int TileDust => DustID.Mud; }
+	public sealed class MawClay : MawNaturalTile { protected override Color MapColor => new(120, 88, 52); protected override int VanillaEquivalent => TileID.ClayBlock; protected override int PurifiedTile => ModContent.TileType<WastesSoil>(); protected override int ItemDrop => ModContent.ItemType<MawClayBlock>(); }
 }

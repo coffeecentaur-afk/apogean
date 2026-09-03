@@ -95,7 +95,8 @@ foreach ($tile in $wastesTiles) {
 
 $mawTiles = @('MawDirt', 'Mawstone', 'MawGrass', 'MawSand', 'MawIce', 'MawSnow', 'MawMud', 'MawClay')
 foreach ($tile in $mawTiles) {
-    Require-PngContract "Content/Tiles/$tile.png" 288 270 8
+    $height = if ($tile -eq 'MawGrass') { 1980 } else { 270 }
+    Require-PngContract "Content/Tiles/$tile.png" 288 $height 4
 }
 
 $mawWalls = @('MawDirtWallUnsafe', 'MawStoneWallUnsafe', 'MawGrassWallUnsafe', 'MawSandWallUnsafe', 'MawIceWallUnsafe', 'MawSnowWallUnsafe', 'MawMudWallUnsafe')

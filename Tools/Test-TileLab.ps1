@@ -163,6 +163,51 @@ function Test-FixedAtlasContract(
     }
 }
 
+function Test-AlphaTopology(
+    [string]$sourceRelativePath,
+    [string]$candidateRelativePath,
+    [int]$maximumOpaqueColors
+) {
+    $sourcePath = Join-Path $Root $sourceRelativePath
+    $candidatePath = Join-Path $Root $candidateRelativePath
+    if (-not (Test-Path -LiteralPath $sourcePath) -or -not (Test-Path -LiteralPath $candidatePath)) {
+        Add-Failure "Missing alpha-topology pair: $sourceRelativePath -> $candidateRelativePath"
+        return
+    }
+
+    $source = [System.Drawing.Bitmap]::new($sourcePath)
+    $candidate = [System.Drawing.Bitmap]::new($candidatePath)
+    try {
+        if ($source.Width -ne $candidate.Width -or $source.Height -ne $candidate.Height) {
+            Add-Failure "Alpha-topology dimensions differ: $candidateRelativePath"
+            return
+        }
+        $colors = [System.Collections.Generic.HashSet[int]]::new()
+        for ($y = 0; $y -lt $source.Height; $y++) {
+            for ($x = 0; $x -lt $source.Width; $x++) {
+                $expectedAlpha = $source.GetPixel($x, $y).A
+                $pixel = $candidate.GetPixel($x, $y)
+                if ($pixel.A -ne $expectedAlpha) {
+                    Add-Failure "Alpha topology differs at ($x,$y): $candidateRelativePath"
+                    return
+                }
+                if ($pixel.A -ne 0 -and $pixel.A -ne 255) {
+                    Add-Failure "Semi-transparent pixel at ($x,$y): $candidateRelativePath"
+                    return
+                }
+                if ($pixel.A -gt 0) { [void]$colors.Add($pixel.ToArgb()) }
+            }
+        }
+        if ($colors.Count -gt $maximumOpaqueColors) {
+            Add-Failure "$candidateRelativePath uses $($colors.Count) colors; maximum is $maximumOpaqueColors"
+        }
+    }
+    finally {
+        $source.Dispose()
+        $candidate.Dispose()
+    }
+}
+
 Test-NormalizedCopy 'Tools/Templates/TerrariaTerrainFrameMask.png' 'Content/Tiles/Diagnostics/TileLabBlock.png' $true
 Test-NormalizedCopy 'Tools/Templates/TerrariaWallFrameMask.png' 'Content/Walls/Diagnostics/TileLabWall.png' $false
 Test-CandidateAtlas 'Tools/Templates/TerrariaTerrainFrameMask.png' 'Content/Tiles/Diagnostics/WastesSoilCandidate.png' 5 44104
@@ -212,6 +257,38 @@ $terrainItemContracts = @(
 foreach ($contract in $terrainItemContracts) {
 	Test-FixedAtlasContract $contract[0] $contract[1] $contract[2] $contract[3] $contract[4] $contract[5]
 }
+$mawTilePairs = @(
+	@('WastesSoil', 'MawDirt'),
+	@('WastesStone', 'MawStone'),
+	@('WastesGrass', 'MawGrass'),
+	@('WastesSand', 'MawSand'),
+	@('WastesIce', 'MawIce'),
+	@('WastesSnow', 'MawSnow'),
+	@('WastesMud', 'MawMud'),
+	@('WastesSoil', 'MawClay')
+)
+foreach ($pair in $mawTilePairs) {
+	Test-AlphaTopology "Content/Tiles/$($pair[0]).png" "Content/Tiles/Diagnostics/$($pair[1])Candidate.png" 6
+	$productionName = if ($pair[1] -eq 'MawStone') { 'Mawstone' } else { $pair[1] }
+	Test-NormalizedCopy "Content/Tiles/Diagnostics/$($pair[1])Candidate.png" "Content/Tiles/$productionName.png" $false
+}
+$mawWallPairs = @('Dirt', 'Stone', 'Grass', 'Sand', 'Ice', 'Snow', 'Mud')
+foreach ($name in $mawWallPairs) {
+	Test-AlphaTopology "Content/Walls/Wastes${name}WallUnsafe.png" "Content/Walls/Diagnostics/Maw${name}WallCandidate.png" 6
+	Test-NormalizedCopy "Content/Walls/Diagnostics/Maw${name}WallCandidate.png" "Content/Walls/Maw${name}WallUnsafe.png" $false
+}
+foreach ($pair in @(
+	@('WastesSoilBlock', 'MawDirtBlock'),
+	@('WastesStoneBlock', 'MawstoneBlock'),
+	@('WastesSandBlock', 'MawSandBlock'),
+	@('WastesIceBlock', 'MawIceBlock'),
+	@('WastesSnowBlock', 'MawSnowBlock'),
+	@('WastesMudBlock', 'MawMudBlock'),
+	@('WastesSoilBlock', 'MawClayBlock')
+)) {
+	Test-AlphaTopology "Content/Items/Placeable/$($pair[0]).png" "Content/Items/Placeable/$($pair[1]).png" 6
+}
+Test-AlphaTopology 'Content/Projectiles/WastesSandBallProjectile.png' 'Content/Projectiles/MawSandBallProjectile.png' 6
 
 foreach ($required in @(
 	'Content/Diagnostics/TileLabContent.cs',
@@ -220,15 +297,19 @@ foreach ($required in @(
 	'Content/Diagnostics/VegetationLabGallery.cs',
 	'Content/Diagnostics/WastesTerrainFamilyGallery.cs',
 	'Content/Diagnostics/WastesTerrainPropertyGallery.cs',
+	'Content/Diagnostics/MawConversionGallery.cs',
 	'Content/Diagnostics/WastesTerrainLabContent.cs',
 	'Content/Projectiles/WastesSandBallFallingProjectile.cs',
+	'Content/Projectiles/MawSandBallProjectile.cs',
 	'Content/Items/Placeable/WastesTerrainBlocks.cs',
+	'Content/Items/Placeable/MawTerrainBlocks.cs',
 	'Content/Diagnostics/TileLabPlayer.cs',
 	'Content/Diagnostics/VanillaAtlasExporter.cs',
 	'Tools/New-WastesSoilCandidate.ps1',
 	'Tools/New-WastesGrassCandidate.ps1',
 	'Tools/New-WastesTerrainFamily.ps1',
 	'Tools/New-WastesTerrainItems.ps1',
+	'Tools/New-MawTerrainFamily.ps1',
 	'Tools/New-WastesGroundCover.ps1',
 	'Content/Tiles/WastesGroundCoverTiles.cs',
 	'Art/Reference/WastesGroundCover-reference-v1.png',

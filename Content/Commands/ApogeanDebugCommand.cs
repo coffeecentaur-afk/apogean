@@ -26,7 +26,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|tilelab|grasslab|vegetationlab|terrainlab|terrainproperties|terrainitems|exportatlases|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|gallery|tilelab|grasslab|vegetationlab|terrainlab|terrainproperties|conversionlab|terrainitems|exportatlases|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -168,6 +168,15 @@ namespace apogean.Content.Commands
 					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ModContent.ItemType<WastesMudBlock>(), 100);
 					player.QuickSpawnItem(player.GetSource_Misc("ApogeanDebug"), ItemID.Sandgun);
 					caller.Reply("Gave the six Wastes terrain blocks and a Sandgun for placement, mining, and ammo checks.", Color.LightGreen);
+					break;
+
+				case "conversionlab":
+					if (Main.netMode == NetmodeID.MultiplayerClient)
+					{
+						caller.Reply("The destructive Maw Conversion Lab is single-player/server-host only.", Color.OrangeRed);
+						break;
+					}
+					player.GetModPlayer<TileLabPlayer>().BuildMawConversionAndReport(scheduleCaptureProbe: true);
 					break;
 
 				case "exportatlases":
