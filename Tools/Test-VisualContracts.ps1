@@ -165,7 +165,7 @@ foreach ($biome in @('Forest', 'Desert', 'Jungle', 'Snow', 'Corruption', 'Crimso
     }
 }
 
-foreach ($approvedBiome in @('Forest', 'Desert', 'Jungle', 'Snow', 'Corruption', 'Crimson', 'Hallow')) {
+foreach ($approvedBiome in @('Forest', 'Desert', 'Jungle', 'Snow', 'Corruption', 'Crimson', 'Hallow', 'Ocean')) {
     foreach ($layer in $layerSpecs.Keys) {
         $spec = $layerSpecs[$layer]
         $candidate = Join-Path $projectRoot "Content/Backgrounds/Diagnostics/$($approvedBiome)ConceptV0_$layer.png"
