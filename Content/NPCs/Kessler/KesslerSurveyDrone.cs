@@ -46,8 +46,11 @@ namespace apogean.Content.NPCs.Kessler
 		{
 			if (!ModContent.GetInstance<FactionProgression>().IsKesslerAssessmentActive)
 			{
-				NPC.active = false;
-				NPC.netUpdate = true;
+				if (Main.netMode != NetmodeID.MultiplayerClient)
+				{
+					NPC.active = false;
+					NPC.netUpdate = true;
+				}
 				return;
 			}
 

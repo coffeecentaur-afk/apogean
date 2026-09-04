@@ -7,7 +7,8 @@ Validated 2026-09-01 through 2026-09-04 against tModLoader `v2026.7.3.0` and Ter
 - `Tools/Test-WorldVisualIntegrity.ps1`: PASS
 - `Tools/Test-VisualContracts.ps1`: PASS
 - `Tools/Test-SurfaceRegression.ps1`: PASS
-- `dotnet build --no-restore`: PASS, zero errors; the existing lowercase `apogean` class-name compiler warning remains.
+- `Tools/Test-KesslerArrival.ps1`: PASS
+- `dotnet build --no-restore`: PASS, zero warnings and zero errors.
 - Dedicated-server content load: PASS with no Apogean warnings or errors after removing invalid placeholder banner registrations.
 
 ## Fresh large-world proof
@@ -50,6 +51,12 @@ The vegetation chop assertion accepts Terraria's legitimate short native-tree va
 The accepted 2026-09-03 vegetation revision deliberately uses exported vanilla Forest tree masks for trunks, branches, and crowns. Apogean changes the palette and adds a bounded root flare but does not replace Terraria's segmented tree renderer. This keeps ordinary height variation and chopping intact. Rigid Wastes ground-cover props use a whole-object draw contract so player contact cannot shear a twig or shrub down its center, while a separate root-skirt atlas closes the Wastes Grass-to-Soil seam. Approved daylight evidence is retained at `Art/Validation/2026-09-03-WastesVegetationNativeTreeBaseline.png`. `Art/Validation/WastesVegetationLab-wide-trunk-rejected.jpg` is retained as negative evidence for the monolithic braided-trunk approach and is not an approved target.
 
 The accepted 2026-09-04 Kessler revision replaces the broad two-deck headquarters box with three stepped, Terraria-scale volumes and converts the checkpoint towers into traversable two-stage rooms. A four-tile platform shaft connects all levels against an authored bulkhead wall, preventing the blue-sky holes exposed by the first live pass, while a lower mezzanine breaks up the armory floor without creating a solid traversal plug. The deterministic campus fixture verifies every shaft platform before capture. Approved full-compound evidence is retained at `Art/Validation/2026-09-04-KesslerCampusSteppedArchitecture.png`.
+
+## Dedicated multiplayer proof
+
+On 2026-09-04, a standalone tModLoader server loaded the disposable `Apogee Campus QA` large world and accepted a separate client over `127.0.0.1`. The client found the server, matched the Apogean/Cheat Sheet mod set, received complete tile data, entered the 8400x2400 world, displayed the synchronized ten-target Kessler audit HUD, and observed the contactable completion state. Server logs recorded `Dron has joined`; neither log gained an Apogean exception, serialization failure, index error, or crash during the successful session.
+
+This run validates the new `CompoundGen.NetSend`/`NetReceive` world-data packet for Campus and bulkhead rectangles. Static arrival contracts additionally enforce server ownership for invasion quota updates, compound tile mutation, assessment-NPC retirement, and Quartermaster anchoring. The earlier refused `127.0.0.1:7777` connection was a test-harness port mismatch before the verified server was restarted on that port, not a mod failure.
 
 ## Maw source-conversion proof
 

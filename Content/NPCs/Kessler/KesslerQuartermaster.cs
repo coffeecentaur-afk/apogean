@@ -48,11 +48,17 @@ namespace apogean.Content.NPCs.Kessler
 		public override void AI()
 		{
 			NPC.velocity.X = 0f;
+			if (Main.netMode == NetmodeID.MultiplayerClient)
+				return;
+
 			if (Content.Structures.CompoundGen.TryGetPublicPost(ApogeanFaction.Kessler, out Point post))
 			{
 				float targetX = post.X * 16f + 8f;
 				if (System.Math.Abs(NPC.Center.X - targetX) > 3f)
+				{
 					NPC.Center = new Vector2(targetX, NPC.Center.Y);
+					NPC.netUpdate = true;
+				}
 			}
 		}
 

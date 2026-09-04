@@ -69,6 +69,9 @@ namespace apogean.Content.Factions
 
 		public void RegisterInvasionKill(ApogeanFaction faction)
 		{
+			// NPC death can be observed by clients, but only the server owns the shared
+			// invasion quota and its one-time completion reward transition.
+			if (Main.netMode == NetmodeID.MultiplayerClient) return;
 			if (GetRelation(faction) != FactionRelation.Hostile) return;
 			if (!invasionKillsRemaining.TryGetValue(faction, out int remaining)) return;
 

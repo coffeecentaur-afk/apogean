@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.Generation;
@@ -82,6 +83,11 @@ namespace apogean.Content.Structures
 
 		private static void SetCompoundSealed(ApogeanFaction faction, bool sealedShut)
 		{
+			// Compound tiles are world state. Clients receive the changed square after the
+			// authoritative server opens or re-arms the bulkhead.
+			if (Main.netMode == NetmodeID.MultiplayerClient)
+				return;
+
 			CompoundGen instance = ModContent.GetInstance<CompoundGen>();
 			if (!instance.compoundBounds.TryGetValue(faction, out Rectangle bounds))
 				return;
@@ -189,5 +195,49 @@ namespace apogean.Content.Structures
 				}
 			}
 		}
+
+		public override void NetSend(BinaryWriter writer)
+		{
+			writer.Write((byte)compoundBounds.Count);
+			foreach ((ApogeanFaction faction, Rectangle bounds) in compoundBounds)
+			{
+				writer.Write((byte)faction);
+				WriteRectangle(writer, bounds);
+
+				bool hasDoor = doorBounds.TryGetValue(faction, out Rectangle door);
+				writer.Write(hasDoor);
+				if (hasDoor)
+					WriteRectangle(writer, door);
+			}
+		}
+
+		public override void NetReceive(BinaryReader reader)
+		{
+			compoundBounds.Clear();
+			doorBounds.Clear();
+			int count = reader.ReadByte();
+			for (int i = 0; i < count; i++)
+			{
+				ApogeanFaction faction = (ApogeanFaction)reader.ReadByte();
+				Rectangle bounds = ReadRectangle(reader);
+				compoundBounds[faction] = bounds;
+				if (reader.ReadBoolean())
+					doorBounds[faction] = ReadRectangle(reader);
+			}
+		}
+
+		private static void WriteRectangle(BinaryWriter writer, Rectangle rectangle)
+		{
+			writer.Write(rectangle.X);
+			writer.Write(rectangle.Y);
+			writer.Write(rectangle.Width);
+			writer.Write(rectangle.Height);
+		}
+
+		private static Rectangle ReadRectangle(BinaryReader reader) => new(
+			reader.ReadInt32(),
+			reader.ReadInt32(),
+			reader.ReadInt32(),
+			reader.ReadInt32());
 	}
 }
