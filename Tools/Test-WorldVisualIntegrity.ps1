@@ -253,7 +253,7 @@ Require-SourceContract 'Content/Tiles/DeadForestTree.cs' @(
 )
 Require-SourceContract 'Content/Tiles/DeadTuft.cs' @('DrawYOffset = 4')
 Require-SourceContract 'Content/Tiles/WastesGroundCoverTiles.cs' @('DrawYOffset = 4')
-Require-SourceContract 'Content/World/RuinedSurfaceSystem.cs' @('MinimumDeadTreeSpacing = 8', 'ThinDeadForest')
+Require-SourceContract 'Content/World/RuinedSurfaceSystem.cs' @('MinimumDeadTreeSpacing = 12', 'ThinDeadForest')
 
 foreach ($blueprint in @('KesslerCampus','HelixCampus','SentrixCampus')) {
     $path = Join-Path $root "Content/Structures/Blueprints/$blueprint.apstructure"

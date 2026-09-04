@@ -10,8 +10,12 @@ using Terraria.GameContent.Metadata;
 namespace apogean.Content.Tiles
 {
 	/// <summary>A low two-tile pile of dead Wastes roots. Four horizontal styles share one object sheet.</summary>
-	public sealed class DeadTuft : ModTile
+	public sealed class DeadTuft : WastesRigidPlantTile
 	{
+		protected override int ObjectWidth => 2;
+		protected override int ObjectHeight => 1;
+		protected override int VisualStyleCount => 4;
+
 		public override void SetStaticDefaults()
 		{
 			// Multi-tile wind sway is evaluated one tile cell at a time by Terraria,

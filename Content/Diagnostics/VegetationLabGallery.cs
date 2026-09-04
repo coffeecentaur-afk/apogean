@@ -15,6 +15,11 @@ namespace apogean.Content.Diagnostics
 
 		internal static Rectangle Build(Player player)
 		{
+			// Keep visual captures deterministic and readable. This fixture validates
+			// silhouettes and terrain seams, which are obscured by Terraria's night tint.
+			Main.dayTime = true;
+			Main.time = 27000d;
+
 			Point playerTile = player.Center.ToTileCoordinates();
 			int left = Math.Clamp(playerTile.X - Width / 2, 20, Main.maxTilesX - Width - 20);
 			int top = Math.Clamp(playerTile.Y - 23, 20, Main.maxTilesY - Height - 20);
@@ -68,7 +73,7 @@ namespace apogean.Content.Diagnostics
 			// Four well-separated growth calls prove Terraria's native height, branch,
 			// and crown variation without recreating the production forest pileup. The
 			// last tree is sacrificed to a deterministic mid-trunk chopping assertion.
-			int[] treeX = { left + 105, left + 123, left + 141, left + 159 };
+			int[] treeX = { left + 104, left + 123, left + 142, left + 160 };
 			foreach (int x in treeX)
 			{
 				if (!WorldGen.PlaceObject(x, floorY - 1, sapling, mute: true))

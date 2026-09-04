@@ -304,6 +304,10 @@ Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadForestTreeRoots
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadTuft.png') -ExpectedWidth 144 -ExpectedHeight 18 -MaximumOpaqueColors 7
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesBristle.png') -ExpectedWidth 108 -ExpectedHeight 54 -MaximumOpaqueColors 7
 Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesRootShrub.png') -ExpectedWidth 162 -ExpectedHeight 36 -MaximumOpaqueColors 7
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/DeadTuft_Whole.png') -ExpectedWidth 128 -ExpectedHeight 16 -MaximumOpaqueColors 7
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesBristle_Whole.png') -ExpectedWidth 96 -ExpectedHeight 48 -MaximumOpaqueColors 7
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesRootShrub_Whole.png') -ExpectedWidth 144 -ExpectedHeight 32 -MaximumOpaqueColors 7
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/WastesGrassRoots.png') -ExpectedWidth 48 -ExpectedHeight 6 -MaximumOpaqueColors 4
 
 foreach ($blueprint in @('KesslerCampus','HelixCampus','SentrixCampus')) {
     $path = Join-Path $projectRoot "Content/Structures/Blueprints/$blueprint.apstructure"

@@ -22,7 +22,7 @@ namespace apogean.Content.World
 		// The replacement species has a stark leafless silhouette. Vanilla forest
 		// spacing is too dense for it, so conversion keeps at least this many tiles
 		// between roots instead of rendering an unreadable copied thicket.
-		private const int MinimumDeadTreeSpacing = 8;
+		private const int MinimumDeadTreeSpacing = 12;
 
 		internal static void GenerateWorld(GenerationProgress progress, GameConfiguration config)
 		{

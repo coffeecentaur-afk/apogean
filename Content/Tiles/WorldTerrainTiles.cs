@@ -1,5 +1,8 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
+using Terraria.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
 using apogean.Content.Items.Placeable;
@@ -66,6 +69,8 @@ namespace apogean.Content.Tiles
 	}
 	public sealed class WastesGrass : WastesTerrainTile
 	{
+		private Asset<Texture2D> rootSkirtTexture;
+
 		protected override Color MapColor => new(128, 94, 48);
 		protected override int VanillaEquivalent => TileID.Grass;
 		protected override int RestoredTile => TileID.Grass;
@@ -77,6 +82,32 @@ namespace apogean.Content.Tiles
 			TileID.Sets.Conversion.Grass[Type] = true;
 			Main.tileMerge[Type][ModContent.TileType<WastesSoil>()] = true;
 			Main.tileMerge[ModContent.TileType<WastesSoil>()][Type] = true;
+		}
+
+		public override void Load()
+		{
+			if (!Main.dedServ)
+				rootSkirtTexture = ModContent.Request<Texture2D>(Texture + "Roots");
+		}
+
+		public override void Unload() => rootSkirtTexture = null;
+
+		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+		{
+			if (rootSkirtTexture is null)
+				return;
+
+			Tile tile = Framing.GetTileSafely(i, j);
+			Tile below = Framing.GetTileSafely(i, j + 1);
+			if (!tile.HasTile || tile.IsHalfBlock || tile.Slope != SlopeType.Solid ||
+				!below.HasTile || below.TileType != ModContent.TileType<WastesSoil>())
+				return;
+
+			int variant = (int)((uint)(i * 1103515245 + j * 12345) % 3u);
+			Rectangle source = new(variant * 16, 0, 16, 6);
+			Vector2 offscreen = Main.drawToScreen ? Vector2.Zero : new Vector2(Main.offScreenRange);
+			Vector2 position = new Vector2(i * 16, (j + 1) * 16 - 2) - Main.screenPosition + offscreen;
+			spriteBatch.Draw(rootSkirtTexture.Value, position, source, Lighting.GetColor(i, j + 1));
 		}
 	}
 	public sealed class WastesSand : WastesTerrainTile

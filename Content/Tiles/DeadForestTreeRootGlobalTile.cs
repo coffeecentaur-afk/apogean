@@ -15,7 +15,6 @@ namespace apogean.Content.Tiles
 	public sealed class DeadForestTreeRootGlobalTile : GlobalTile
 	{
 		private static Asset<Texture2D> roots;
-
 		public override void Load() =>
 			roots = ModContent.Request<Texture2D>("apogean/Content/Tiles/DeadForestTreeRoots");
 

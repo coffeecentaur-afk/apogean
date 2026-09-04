@@ -48,6 +48,26 @@ namespace apogean.Content.Tiles
 		public override Asset<Texture2D> GetBranchTextures() => branchTexture;
 		public override Asset<Texture2D> GetTopTextures() => topTexture;
 
+		public override void SetTreeFoliageSettings(
+			int i,
+			int j,
+			Tile tile,
+			int xoffset,
+			ref int treeFrame,
+			int floorY,
+			ref int topTextureFrameWidth,
+			ref int topTextureFrameHeight)
+		{
+			// Vanilla may repeatedly choose the same crown for nearby trees. Key the
+			// three silhouettes to the actual root and branch height so a grove cannot
+			// become a row of mirrored clones.
+			int rootX = i + xoffset;
+			int mixed = unchecked(rootX * 397 ^ floorY * 97 ^ j * 17 ^ xoffset * 7919);
+			treeFrame = (mixed & int.MaxValue) % 3;
+			topTextureFrameWidth = 80;
+			topTextureFrameHeight = 80;
+		}
+
 		public override int SaplingGrowthType(ref int style)
 		{
 			style = 0;

@@ -116,6 +116,108 @@ function Add-AmberStrand([System.Drawing.Graphics]$g, [int]$x, [int]$y, [int]$le
     } finally { $pen.Dispose(); $tip.Dispose() }
 }
 
+function New-ReferenceFrame(
+    [System.Drawing.Bitmap]$source,
+    [System.Drawing.Rectangle]$crop,
+    [int]$width,
+    [int]$height,
+    [switch]$FlipHorizontal
+) {
+    $frame = [System.Drawing.Bitmap]::new($width, $height, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+    $graphics = [System.Drawing.Graphics]::FromImage($frame)
+    try {
+        $graphics.Clear([System.Drawing.Color]::Transparent)
+        $graphics.CompositingMode = [System.Drawing.Drawing2D.CompositingMode]::SourceCopy
+        $graphics.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::None
+        $graphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::NearestNeighbor
+        $graphics.PixelOffsetMode = [System.Drawing.Drawing2D.PixelOffsetMode]::Half
+        $destination = [System.Drawing.Rectangle]::new(0, 0, $width, $height)
+        $graphics.DrawImage($source, $destination, $crop, [System.Drawing.GraphicsUnit]::Pixel)
+    }
+    finally {
+        $graphics.Dispose()
+    }
+
+    if ($FlipHorizontal) {
+        $frame.RotateFlip([System.Drawing.RotateFlipType]::RotateNoneFlipX)
+    }
+
+    # Force the generated reference into the same nine-color, fully opaque pixel
+    # language as the native trunk atlas. Nearest-color mapping preserves amber
+    # pods and pale split wood without importing image-generation edge noise.
+    for ($y = 0; $y -lt $height; $y++) {
+        for ($x = 0; $x -lt $width; $x++) {
+            $sourceColor = $frame.GetPixel($x, $y)
+            if ($sourceColor.A -lt 96) {
+                $frame.SetPixel($x, $y, [System.Drawing.Color]::Transparent)
+                continue
+            }
+
+            $closest = $p[0]
+            $closestDistance = [double]::MaxValue
+            foreach ($candidate in $p) {
+                $red = [double]$sourceColor.R - $candidate.R
+                $green = [double]$sourceColor.G - $candidate.G
+                $blue = [double]$sourceColor.B - $candidate.B
+                $distance = $red * $red + $green * $green + $blue * $blue
+                if ($distance -lt $closestDistance) {
+                    $closest = $candidate
+                    $closestDistance = $distance
+                }
+            }
+            $frame.SetPixel($x, $y, $closest)
+        }
+    }
+
+    return $frame
+}
+
+function Get-TreeReference {
+    $path = Join-Path $Root 'Art/Source/Trees/DeadForestTree-reference-source-v1.png'
+    if (-not (Test-Path -LiteralPath $path)) {
+        throw "Missing approved tree reference source: $path"
+    }
+    return [System.Drawing.Bitmap]::new($path)
+}
+
+function New-RecoloredVanillaTreeAtlas([string]$referenceName, [string]$relativeOutputPath) {
+    $referencePath = Join-Path $CaptureRoot $referenceName
+    if (-not (Test-Path -LiteralPath $referencePath)) {
+        throw "Missing renderer-exported native tree atlas: $referencePath"
+    }
+
+    $reference = [System.Drawing.Bitmap]::new($referencePath)
+    $output = [System.Drawing.Bitmap]::new(
+        $reference.Width,
+        $reference.Height,
+        [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+    try {
+        for ($y = 0; $y -lt $reference.Height; $y++) {
+            for ($x = 0; $x -lt $reference.Width; $x++) {
+                $source = $reference.GetPixel($x, $y)
+                if ($source.A -eq 0) { continue }
+
+                $luminance = (0.299 * $source.R) + (0.587 * $source.G) + (0.114 * $source.B)
+                $isFoliage = $source.G -gt ($source.R * 1.08) -and $source.G -gt ($source.B * 1.02)
+                if ($isFoliage) {
+                    # Keep Terraria's familiar tree silhouette while turning its
+                    # living foliage into a dry, low-saturation Wastes canopy.
+                    $color = if ($luminance -lt 30) { $p[0] } elseif ($luminance -lt 48) { $p[1] } elseif ($luminance -lt 65) { $p[2] } elseif ($luminance -lt 82) { $p[3] } elseif ($luminance -lt 100) { $p[4] } elseif ($luminance -lt 120) { $p[5] } else { $p[6] }
+                }
+                else {
+                    $color = if ($luminance -lt 28) { $p[0] } elseif ($luminance -lt 45) { $p[1] } elseif ($luminance -lt 62) { $p[2] } elseif ($luminance -lt 80) { $p[3] } elseif ($luminance -lt 100) { $p[4] } elseif ($luminance -lt 125) { $p[5] } else { $p[6] }
+                }
+                $output.SetPixel($x, $y, $color)
+            }
+        }
+        $output.Save((Join-Path $Root $relativeOutputPath), [System.Drawing.Imaging.ImageFormat]::Png)
+    }
+    finally {
+        $reference.Dispose()
+        $output.Dispose()
+    }
+}
+
 function New-TrunkSheet {
     $path = Join-Path $Root 'Content/Tiles/DeadForestTree.png'
     $temporaryPath = Join-Path $Root 'Content/Tiles/DeadForestTree.generated.png'
@@ -131,28 +233,10 @@ function New-TrunkSheet {
         }
         for ($y = 0; $y -lt $out.Height; $y++) {
             for ($x = 0; $x -lt $out.Width; $x++) {
-                $sourceX = $x
-                $source = $reference.GetPixel($sourceX, $y)
-                $frameX = [int]($x / 22); $frameY = [int]($y / 22)
-                $localX = $x % 22; $localY = $y % 22
-                if ($source.A -eq 0) {
-                    # Thicken only inside the current 22px native frame. The old atlas
-                    # inherited a very thin vanilla trunk, which made the broad gnarled
-                    # crown look like it was balanced on a pole. Native segmentation is
-                    # retained, so any struck trunk tile still chops normally.
-                    foreach ($delta in @(-1, 1, -2, 2)) {
-                        $candidateLocalX = $localX + $delta
-                        if ($candidateLocalX -lt 1 -or $candidateLocalX -gt 20) { continue }
-                        $candidateX = $frameX * 22 + $candidateLocalX
-                        $candidate = $reference.GetPixel($candidateX, $y)
-                        if ($candidate.A -gt 0) {
-                            $sourceX = $candidateX
-                            $source = $candidate
-                            break
-                        }
-                    }
-                }
-                if ($source.A -eq 0) { continue }
+				$source = $reference.GetPixel($x, $y)
+				$frameX = [int]($x / 22); $frameY = [int]($y / 22)
+				$localX = $x % 22; $localY = $y % 22
+				if ($source.A -eq 0) { continue }
                 $hash = [Math]::Abs((($x + 7) * 73856093) -bxor (($y + 11) * 19349663))
                 $luminance = (0.299 * $source.R) + (0.587 * $source.G) + (0.114 * $source.B)
                 $color = if ($luminance -lt 35) { $p[0] } elseif ($luminance -lt 62) { $p[1] } elseif ($luminance -lt 88) { $p[2] } elseif ($luminance -lt 116) { $p[3] } elseif ($luminance -lt 150) { $p[4] } else { $p[5] }
@@ -174,53 +258,11 @@ function New-TrunkSheet {
 }
 
 function New-TreeTops {
-    $canvas = New-Canvas 246 82
-    $g = $canvas.Graphics
-    for ($variant = 0; $variant -lt 3; $variant++) {
-        $left = $variant * 82; $center = $left + 41
-        $lean = @(-4, 1, 5)[$variant]
-
-        # The crown is a dense continuation of the trunk, not a detached antler.
-        # Its broad forks and pale scars echo the approved grove reference while
-        # still fitting Terraria's three native 82x82 crown variants.
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-7,81),[System.Drawing.Point]::new($center-6,67),[System.Drawing.Point]::new($center+$lean-6,51),[System.Drawing.Point]::new($center+$lean-2,31),[System.Drawing.Point]::new($center+$lean+2,7)) 22 5
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+7,81),[System.Drawing.Point]::new($center+8,67),[System.Drawing.Point]::new($center+$lean+10,51),[System.Drawing.Point]::new($center+$lean+13,35)) 13 4
-
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean-4,58),[System.Drawing.Point]::new($center-14,51),[System.Drawing.Point]::new($center-27,39),[System.Drawing.Point]::new($center-35,24),[System.Drawing.Point]::new($center-33,7)) 12 2
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-24,41),[System.Drawing.Point]::new($center-37,46),[System.Drawing.Point]::new($center-40,37)) 7 1
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-18,49),[System.Drawing.Point]::new($center-22,32),[System.Drawing.Point]::new($center-18,18)) 7 2
-
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean+4,55),[System.Drawing.Point]::new($center+17,49),[System.Drawing.Point]::new($center+29,36),[System.Drawing.Point]::new($center+36,20),[System.Drawing.Point]::new($center+35,6)) 12 2
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+20,46),[System.Drawing.Point]::new($center+36,49),[System.Drawing.Point]::new($center+40,39)) 7 1
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+16,50),[System.Drawing.Point]::new($center+22,32),[System.Drawing.Point]::new($center+20,17)) 7 2
-
-        if ($variant -eq 0) { Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+$lean-1,33),[System.Drawing.Point]::new($center-7,19),[System.Drawing.Point]::new($center-5,4)) 8 3 -Bone }
-        if ($variant -eq 1) { Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-17,48),[System.Drawing.Point]::new($center-27,31),[System.Drawing.Point]::new($center-25,15)) 7 2 -Bone }
-        if ($variant -eq 2) { Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+15,47),[System.Drawing.Point]::new($center+25,30),[System.Drawing.Point]::new($center+24,13)) 7 2 -Bone }
-        Add-Knot $g ($center+$lean-4) 52 8
-        Add-AmberStrand $g ($center - 32) (31 + $variant) (7 + $variant * 2)
-        Add-AmberStrand $g ($center + 31) (28 + $variant) (10 - $variant)
-    }
-    Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/DeadForestTree_Tops.png')
+    New-RecoloredVanillaTreeAtlas 'Vanilla-ForestTree-Tops.png' 'Content/Tiles/DeadForestTree_Tops.png'
 }
 
 function New-TreeBranches {
-    $canvas = New-Canvas 84 126
-    $g = $canvas.Graphics
-    for ($row = 0; $row -lt 3; $row++) {
-        $top = $row * 42
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new(41,$top+40),[System.Drawing.Point]::new(31,$top+33),[System.Drawing.Point]::new(19,$top+23),[System.Drawing.Point]::new(9,$top+7+$row)) 11 2
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new(28,$top+31),[System.Drawing.Point]::new(14,$top+35),[System.Drawing.Point]::new(5,$top+28)) 7 1
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new(22,$top+25),[System.Drawing.Point]::new(17,$top+14),[System.Drawing.Point]::new(19,$top+5)) 6 1
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new(43,$top+40),[System.Drawing.Point]::new(54,$top+33),[System.Drawing.Point]::new(66,$top+23),[System.Drawing.Point]::new(75,$top+7+$row)) 11 2
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new(57,$top+31),[System.Drawing.Point]::new(71,$top+35),[System.Drawing.Point]::new(79,$top+28)) 7 1
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new(63,$top+25),[System.Drawing.Point]::new(68,$top+14),[System.Drawing.Point]::new(66,$top+5)) 6 1
-        if ($row -eq 1) { Draw-TaperedLimb $g @([System.Drawing.Point]::new(57,$top+31),[System.Drawing.Point]::new(68,$top+17)) 6 2 -Bone }
-        Add-Knot $g 28 ($top+30) 4
-        Add-Knot $g 56 ($top+30) 4
-        Add-AmberStrand $g (11 + $row * 2) ($top + 17) (5 + $row)
-    }
-    Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/DeadForestTree_Branches.png')
+    New-RecoloredVanillaTreeAtlas 'Vanilla-ForestTree-Branches.png' 'Content/Tiles/DeadForestTree_Branches.png'
 }
 
 function New-TreeRoots {
@@ -228,16 +270,32 @@ function New-TreeRoots {
     $g = $canvas.Graphics
     for ($variant = 0; $variant -lt 3; $variant++) {
         $left = $variant * 48
-        $center = $left + 24 + @(-2, 1, 3)[$variant]
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center,31),[System.Drawing.Point]::new($center-1,20),[System.Drawing.Point]::new($center+1,8),[System.Drawing.Point]::new($center,0)) 23 12
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-2,18),[System.Drawing.Point]::new($left+13,25),[System.Drawing.Point]::new($left+4,30)) 11 3
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+2,19),[System.Drawing.Point]::new($left+35,25),[System.Drawing.Point]::new($left+45,30)) 11 3
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-4,22),[System.Drawing.Point]::new($left+18,30)) 7 2 -Bone:($variant -eq 1)
-        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+4,22),[System.Drawing.Point]::new($left+31,31)) 7 2 -Bone:($variant -eq 2)
-        if ($variant -eq 0) { Add-Knot $g ($center+2) 14 6 }
-        Add-AmberStrand $g ($left + 39 - $variant * 4) (21 - $variant) (5 + $variant)
+        $center = $left + 24 + @(-1, 0, 1)[$variant]
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center,31),[System.Drawing.Point]::new($center,18),[System.Drawing.Point]::new($center,4)) 17 12
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center-2,23),[System.Drawing.Point]::new($left+13,29),[System.Drawing.Point]::new($left+8,31)) 7 2
+        Draw-TaperedLimb $g @([System.Drawing.Point]::new($center+2,23),[System.Drawing.Point]::new($left+35,29),[System.Drawing.Point]::new($left+40,31)) 7 2
+        if ($variant -eq 1) { Add-Knot $g ($center+2) 17 4 }
+        $canvas.Bitmap.SetPixel($center + 3, 12 + $variant, $p[5])
+        $canvas.Bitmap.SetPixel($center + 3, 13 + $variant, $p[6])
     }
     Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/DeadForestTreeRoots.png')
+}
+
+function New-GrassRootSkirt {
+    $canvas = New-Canvas 48 6
+    for ($variant = 0; $variant -lt 3; $variant++) {
+        $left = $variant * 16
+        $patterns = @(
+            @(@(1,0),@(1,1),@(2,2),@(2,3),@(3,4),@(8,0),@(8,1),@(7,2),@(7,3),@(13,0),@(13,1),@(14,2)),
+            @(@(3,0),@(3,1),@(4,2),@(4,3),@(9,0),@(9,1),@(10,2),@(10,3),@(10,4),@(14,0),@(13,1)),
+            @(@(1,0),@(2,1),@(2,2),@(6,0),@(6,1),@(5,2),@(5,3),@(11,0),@(11,1),@(12,2),@(12,3),@(11,4))
+        )
+        foreach ($point in $patterns[$variant]) {
+            $shade = if ($point[1] -le 1) { $p[4] } elseif (($point[0] + $point[1]) % 2 -eq 0) { $p[3] } else { $p[2] }
+            $canvas.Bitmap.SetPixel($left + $point[0], $point[1], $shade)
+        }
+    }
+    Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/WastesGrassRoots.png')
 }
 
 function New-DeadTufts {
@@ -272,4 +330,5 @@ New-TrunkSheet
 New-TreeTops
 New-TreeBranches
 New-TreeRoots
+New-GrassRootSkirt
 Write-Host 'Generated native-scale Wastes tree trunks, crowns, and branches.'

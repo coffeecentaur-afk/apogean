@@ -32,6 +32,12 @@ function Reject-FileOrMatch([string]$relativePath, [string]$pattern, [string]$me
     if ($source -match $pattern) { $failures.Add($message) }
 }
 
+function Require-File([string]$relativePath, [string]$message) {
+    if (-not (Test-Path -LiteralPath (Join-Path $Root $relativePath))) {
+        $failures.Add($message)
+    }
+}
+
 function Require-OpaqueTopRatio([string]$relativePath, [double]$maximumRatio) {
     $path = Join-Path $Root $relativePath
     if (-not (Test-Path -LiteralPath $path)) {
@@ -64,13 +70,22 @@ function Require-OpaqueTopRatio([string]$relativePath, [double]$maximumRatio) {
 # root debris, so they must remain one static silhouette when the player walks through them.
 Reject-Match 'Content/Tiles/DeadTuft.cs' 'sways\s*:\s*true' 'DeadTuft still splits under per-cell wind sway'
 Reject-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'sways\s*:\s*true' 'A multi-cell Wastes ground-cover object still uses per-cell wind sway'
+Require-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'TileDrawing\.TileCounterType\.CustomNonSolid' 'Wastes debris is not drawn as one rigid multi-tile sprite'
+Require-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'Texture \+ "_Whole"' 'Wastes debris has no padding-free whole-object atlas'
+Require-Match 'Content/Tiles/WorldTerrainTiles.cs' 'Texture \+ "Roots"' 'Wastes grass has no terrain-seam root overlay'
+Require-Match 'Content/Tiles/WorldTerrainTiles.cs' 'below\.TileType != ModContent\.TileType<WastesSoil>' 'Wastes grass root overlay is not limited to the grass/soil seam'
+Require-File 'Content/Tiles/WastesGrassRoots.png' 'Wastes grass root-skirt atlas is missing'
 
 # A whole-tree overlay cannot preserve Terraria chopping semantics: removing one trunk tile makes
 # the remaining tree rescale. The visible art must come from ModTree's segmented native atlases.
 Reject-Match 'Content/Tiles/DeadForestTree.cs' 'DeadForestTreeHidden' 'DeadForestTree still hides the segmented native tree atlases'
 Require-Match 'Content/Tiles/DeadForestTree.cs' 'Content/Tiles/DeadForestTree"' 'DeadForestTree does not expose its visible trunk atlas'
+Require-Match 'Content/Tiles/DeadForestTree.cs' 'SetTreeFoliageSettings' 'DeadForestTree does not deterministically vary crowns and branches'
 Reject-FileOrMatch 'Content/Tiles/DeadForestTreeOverlaySystem.cs' 'drawHeight\s*=|trunkTiles|SpriteBatch\.Draw' 'Whole-tree scaling overlay is still active and will shrink after chopping'
 Require-Match 'Content/Tiles/DeadForestTreeRootGlobalTile.cs' 'variant \* 48, 0, 48, 32' 'Dead tree root flare is not bounded to a fixed 48x32 base sprite'
+Reject-Match 'Content/Tiles/DeadForestTreeRootGlobalTile.cs' 'trunkOverlay|sourceRow|distanceFromRoot' 'Dead tree still has a custom whole-trunk renderer instead of Terraria-native trunk cells'
+Require-Match 'Tools/New-WastesVegetation.ps1' 'Vanilla-ForestTree-Tops\.png' 'Dead tree crowns are not derived from Terraria native tree topology'
+Require-Match 'Tools/New-WastesVegetation.ps1' 'Vanilla-ForestTree-Branches\.png' 'Dead tree branches are not derived from Terraria native tree topology'
 Require-Match 'Content/Diagnostics/VegetationLabGallery.cs' 'ValidateMidTrunkChop' 'Vegetation fixture does not exercise native mid-trunk chopping'
 Require-Match 'Content/Diagnostics/VegetationLabGallery.cs' 'unsupported\.HasTile.*TileID\.Trees' 'Vegetation fixture does not reject a floating canopy after chopping'
 
@@ -83,7 +98,7 @@ Require-Match 'Content/Diagnostics/TileLabPlayer.cs' 'sceneWater\s*>=\s*0.*Main\
 
 # Wide leafless trees need deliberate thinning after vanilla forest conversion, otherwise adjacent
 # roots become one unreadable copied grove.
-Require-Match 'Content/World/RuinedSurfaceSystem.cs' 'MinimumDeadTreeSpacing\s*=\s*[7-9]' 'Wastes tree conversion has no explicit 7-9 tile minimum spacing'
+Require-Match 'Content/World/RuinedSurfaceSystem.cs' 'MinimumDeadTreeSpacing\s*=\s*1[1-3]' 'Wastes tree conversion has no explicit 11-13 tile minimum spacing'
 Require-Match 'Content/World/RuinedSurfaceSystem.cs' 'ThinDeadForest' 'Wastes tree conversion does not thin inherited vanilla tree clusters'
 
 # Keep authored horizons visible at ordinary ground-level camera height. This catches source/export

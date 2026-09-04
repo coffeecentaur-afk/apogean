@@ -137,6 +137,15 @@ function Copy-LogicalSprite($Source, $Atlas, [int]$StyleIndex, [int]$StyleStride
     }
 }
 
+function Copy-WholeSprite($Source, $Atlas, [int]$StyleIndex) {
+    $left = $StyleIndex * $Source.Width
+    for ($y = 0; $y -lt $Source.Height; $y++) {
+        for ($x = 0; $x -lt $Source.Width; $x++) {
+            $Atlas.SetPixel($left + $x, $y, $Source.GetPixel($x, $y))
+        }
+    }
+}
+
 function Export-Family(
     [System.Drawing.Bitmap]$Reference,
     [System.Drawing.Rectangle[]]$Crops,
@@ -144,25 +153,33 @@ function Export-Family(
     [int]$LogicalHeight,
     [int]$StyleStride,
     [int]$AtlasHeight,
-    [string]$RelativePath
+    [string]$RelativePath,
+    [string]$WholeRelativePath
 ) {
     $atlas = New-TransparentBitmap ($Crops.Length * $StyleStride) $AtlasHeight
+    $wholeAtlas = New-TransparentBitmap ($Crops.Length * $LogicalWidth) $LogicalHeight
     try {
         for ($style = 0; $style -lt $Crops.Length; $style++) {
             $sprite = New-NativeSprite $Reference $Crops[$style] $LogicalWidth $LogicalHeight
-            try { Copy-LogicalSprite $sprite $atlas $style $StyleStride }
+            try {
+                Copy-LogicalSprite $sprite $atlas $style $StyleStride
+                Copy-WholeSprite $sprite $wholeAtlas $style
+            }
             finally { $sprite.Dispose() }
         }
 
         $path = Join-Path $Root $RelativePath
+        $wholePath = Join-Path $Root $WholeRelativePath
         $directory = Split-Path -Parent $path
         if (-not (Test-Path -LiteralPath $directory)) {
             New-Item -ItemType Directory -Path $directory -Force | Out-Null
         }
         $atlas.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
+        $wholeAtlas.Save($wholePath, [System.Drawing.Imaging.ImageFormat]::Png)
     }
     finally {
         $atlas.Dispose()
+        $wholeAtlas.Dispose()
     }
 }
 
@@ -190,9 +207,9 @@ try {
         [System.Drawing.Rectangle]::new(926, 755, 432, 317)
     )
 
-    Export-Family $reference $tufts 32 16 36 18 'Content/Tiles/DeadTuft.png'
-    Export-Family $reference $bristles 32 48 36 54 'Content/Tiles/WastesBristle.png'
-    Export-Family $reference $shrubs 48 32 54 36 'Content/Tiles/WastesRootShrub.png'
+    Export-Family $reference $tufts 32 16 36 18 'Content/Tiles/DeadTuft.png' 'Content/Tiles/DeadTuft_Whole.png'
+    Export-Family $reference $bristles 32 48 36 54 'Content/Tiles/WastesBristle.png' 'Content/Tiles/WastesBristle_Whole.png'
+    Export-Family $reference $shrubs 48 32 54 36 'Content/Tiles/WastesRootShrub.png' 'Content/Tiles/WastesRootShrub_Whole.png'
 }
 finally {
     $reference.Dispose()
