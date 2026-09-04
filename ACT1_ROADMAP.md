@@ -15,12 +15,13 @@
 - First approved Wastes underground-depth set: four native-sized cave textures with an opaque, wrap-safe eroded-strata material, distinct shallow/deep palettes, and an in-engine lighting proof. Unique ruined mine landmarks are reserved for sparse world furniture so they do not repeat every 128 pixels.
 - First approved Ruined Deep Underworld panorama: an opaque refinery horizon plus hard-alpha broken-span and slag/rail overlays, composited in Terraria's final custom-sky depth band so it replaces all five vanilla Hell layers while remaining behind tiles, lava, entities, and UI. The first live art pass exposed residual generated checker pixels as amber visual noise; the corrected extraction passed the second live render and all static gates.
 - First approved Kessler construction slice: native Gray Brick topology recolored into five distinct gunmetal/burnt-red structural materials, two wall fields, a complete room furniture family, warm service lighting, animated power-armour racks, and an animated shield-and-chevron war standard. A native-placement fixture exposed and fixed the shared tileNoAttach defect that had made every corporate room reject furniture.
+- First approved Kessler Campus production slice: a compact 152x72 authored compound now occupies only part of its larger event reservation. Connected checkpoint towers, open public passages, a west-side quartermaster frontage, a separate sealed armory bulkhead, a two-deck headquarters, a command crown, native furniture, animated armour racks and standards, and a terrain-keyed foundation replace the rejected giant shell. The shared template loader now resolves and frames structural anchors before placing every registered multi-tile object natively.
 
 ## Current environmental gate
 
 1. Continue confirming paint, save/load, and multiplayer synchronization properties in focused client fixtures; placement, framing, merge, slope, mining, light, liquid, drops, and native tree chopping have live proofs.
 2. Expand the proven surface Forest/Desert/Jungle/Snow/Corruption/Crimson/Hallow/Ocean/Mushroom V0, underground Forest V0, and Ruined Deep Underworld contracts across the remaining underground biome matrix one bounded composition at a time.
-3. Apply the validated Kessler construction set, animated flag, lighting, and furniture to a compact authored Campus blueprint; reject the current oversized shell rather than polishing it in place.
+3. Validate the compact Kessler Campus in a freshly generated campaign world, including terrain shoulders, public approach, sealed-to-open bulkhead transition, save/load, and multiplayer synchronization.
 
 ## Vertical slices
 

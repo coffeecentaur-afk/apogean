@@ -92,10 +92,13 @@ Require-OpaqueTopRatio 'Content/Backgrounds/Forest/V0_Far.png' 0.28
 Require-OpaqueTopRatio 'Content/Backgrounds/Forest/V0_Mid.png' 0.52
 Require-OpaqueTopRatio 'Content/Backgrounds/Forest/V0_Close.png' 0.32
 
-# The Kessler campus must read as a connected fortified compound, not three detached graph-paper
+# The Kessler campus must read as a compact fortified compound, not detached graph-paper
 # rectangles. Semantic blueprint markers make this cheaply verifiable before an in-engine capture.
 Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' '# Connected perimeter wall' 'Kessler campus lacks a connected military perimeter'
-Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' '# Tiered headquarters silhouette' 'Kessler campus lacks a tiered authored headquarters silhouette'
+Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' '# Compact headquarters' 'Kessler campus lacks a compact authored headquarters'
+Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' '# Public frontage' 'Kessler campus lacks a day-one public frontage'
+Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' 'object KesslerWarBanner 42 9 4 4' 'Kessler campus lacks its western animated war standard'
+Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' 'object KesslerWarBanner 106 9 4 4' 'Kessler campus lacks its eastern animated war standard'
 Reject-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' 'frame\s+KesslerBlock\s+32\s+20\s+144\s+54' 'Kessler campus still uses the giant rectangular headquarters shell seen in the failed render'
 
 if ($failures.Count -gt 0) {

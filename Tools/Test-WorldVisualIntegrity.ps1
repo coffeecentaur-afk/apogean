@@ -196,6 +196,10 @@ Require-SourceContract 'Content/Structures/CorporateTerrainIntegration.cs' @(
     'BlendGroundCampus', 'SealFoundation', 'RestoreTerrainShoulders',
     'PlaceHelixSurfaceDome'
 )
+Require-SourceContract 'Content/Structures/AuthoredStructureTemplate.cs' @(
+    'TileObjectData.GetTileData', 'WorldGen.PlaceObject', 'command.Alternate',
+    'could not place', 'Resolve the shell first'
+)
 
 # Custom trees require all tModLoader texture surfaces and a registered foliage contract.
 foreach ($treeAsset in @(
@@ -236,7 +240,7 @@ foreach ($blueprint in @('KesslerCampus','HelixCampus','SentrixCampus')) {
         }
     }
 }
-Require-SourceContract 'Content/Structures/Blueprints/KesslerCampus.apstructure' @('surface 70')
+Require-SourceContract 'Content/Structures/Blueprints/KesslerCampus.apstructure' @('size 152 72', 'surface 54')
 Require-SourceContract 'Content/Structures/Blueprints/HelixCampus.apstructure' @('surface 45')
 
 foreach ($biome in @('Forest','Desert','Jungle','Snow','Corruption','Crimson','Hallow','Ocean','Mushroom','Underworld','Engraft')) {

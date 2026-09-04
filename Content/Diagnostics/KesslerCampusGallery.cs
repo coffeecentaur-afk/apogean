@@ -18,7 +18,7 @@ namespace apogean.Content.Diagnostics
 	{
 		private const int Width = 208;
 		private const int Height = 96;
-		private const int SurfaceOffset = 70;
+		private const int SurfaceOffset = 54;
 
 		internal static Rectangle Build(Mod mod, Player player)
 		{

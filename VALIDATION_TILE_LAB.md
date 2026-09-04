@@ -169,3 +169,11 @@ The surface and ordinary-cave matrix continues one bounded biome composition at 
 - The accepted client render shows the complete furniture row, differentiated bulkhead/window fields, observation slit, walkable platform, animated fixtures, and roof standard. The old bright graph-paper/bamboo grid is absent. Evidence is archived at Art/Validation/2026-09-03-KesslerNativeConstructionRenderLab.png; static world-visual and pixel contracts plus the packaged build pass.
 
 The next production gate is a compact authored Kessler Campus blueprint that consumes this validated set. The existing oversized dark Campus shell is a rejected blockout, not a base to polish.
+
+## Kessler authored Campus — 2026-09-03
+
+- Replaced the rejected 208x96 tiered shell with a compact 152x72 compound centered inside the existing protected atlas reservation. The reservation still leaves room for patrols, the arrival event, and the walkframe assessment without forcing the building itself to become an oversized box.
+- Split public and progression spaces physically: checkpoint passages and the west quartermaster frontage are open, while a separate internal 3x10 bulkhead controls armory access. Connected patrol walks, support beams, guard towers, the two-deck headquarters, and its command crown all meet the surface footing.
+- Rebuilt authored object placement as a two-pass production path. Shell tiles and walls are framed before each object resolves its registered `TileObjectData` dimensions, origin, and alternate through `WorldGen.PlaceObject`; bad dimensions or rejected anchors now throw instead of drawing plausible but invalid frame rectangles.
+- The production-template capture shows native chairs, workbenches, consoles, lockers, warm wall lights, three animated power-armour racks, and both animated war standards in place. The building is terrain-anchored and the public checkpoint openings remain traversable. Evidence is archived at `Art/Validation/2026-09-03-KesslerCampusProductionRender.png`.
+- `dotnet build --no-restore`, Tile Lab, Surface Regression, World Visual Integrity, and Visual Contracts all pass. A fresh-world pass remains required for final world-placement, sealed-door transition, save/load, and multiplayer acceptance.

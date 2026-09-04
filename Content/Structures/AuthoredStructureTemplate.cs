@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ObjectData;
 using apogean.Content.Factions;
 using apogean.Content.Tiles;
 using apogean.Content.Walls;
@@ -92,10 +93,16 @@ namespace apogean.Content.Structures
 			Point origin = new(originX, originY);
 			Rectangle worldBounds = new(originX, originY, Width, Height);
 
+			// Resolve the shell first so every native object sees its final wall and floor anchors.
+			// Painting frame-important objects before this pass made them look present while leaving
+			// invalid frame data that could vanish, deanimate, or crash during drawing.
 			for (int i = 0; i < commands.Count; i++)
-				Execute(commands[i], origin);
-
+				if (!commands[i].Operation.Equals("object", StringComparison.OrdinalIgnoreCase))
+					Execute(commands[i], origin);
 			FrameRegion(worldBounds);
+			for (int i = 0; i < commands.Count; i++)
+				if (commands[i].Operation.Equals("object", StringComparison.OrdinalIgnoreCase))
+					Execute(commands[i], origin);
 			Rectangle entrance = Entrance;
 			entrance.Offset(origin);
 			int surfaceY = SurfaceBaseline >= 0 ? originY + SurfaceBaseline : -1;
@@ -124,7 +131,7 @@ namespace apogean.Content.Structures
 				case "fill": FillTile(area, ResolveTile(command.Asset)); break;
 				case "frame": PlaceFrame(area, ResolveTile(command.Asset), command.Argument); break;
 				case "platform": FillTile(area, ResolveTile(command.Asset)); break;
-				case "object": PlaceObject(area, ResolveTile(command.Asset), command.Style); break;
+				case "object": PlaceObject(area, ResolveTile(command.Asset), command.Alternate); break;
 			}
 		}
 
@@ -187,26 +194,31 @@ namespace apogean.Content.Structures
 			}
 		}
 
-		private static void PlaceObject(Rectangle area, int tileType, int style)
+		private static void PlaceObject(Rectangle area, int tileType, int alternate)
 		{
-			for (int column = 0; column < area.Width; column++)
-			{
-				for (int row = 0; row < area.Height; row++)
-				{
-					int x = area.Left + column;
-					int y = area.Top + row;
-					if (!WorldGen.InWorld(x, y, 10))
-						continue;
-					Tile tile = Framing.GetTileSafely(x, y);
-					tile.HasTile = true;
-					tile.TileType = (ushort)tileType;
-					tile.TileFrameX = (short)((style * area.Width + column) * 18);
-					tile.TileFrameY = (short)(row * 18);
-					tile.Slope = SlopeType.Solid;
-					tile.IsHalfBlock = false;
-					tile.LiquidAmount = 0;
-				}
-			}
+			const int style = 0;
+			TileObjectData data = TileObjectData.GetTileData(tileType, style, alternate)
+				?? throw new InvalidOperationException(
+					$"Authored object tile {tileType} has no TileObjectData for style {style}, alternate {alternate}.");
+
+			if (data.Width != area.Width || data.Height != area.Height)
+				throw new InvalidOperationException(
+					$"Authored object tile {tileType} declares {area.Width}x{area.Height}, " +
+					$"but TileObjectData requires {data.Width}x{data.Height} for alternate {alternate}.");
+
+			if (!WorldGen.InWorld(area.Left, area.Top, 10) ||
+				!WorldGen.InWorld(area.Right - 1, area.Bottom - 1, 10))
+				throw new InvalidOperationException($"Authored object tile {tileType} is outside world bounds at {area}.");
+
+			// Remove blueprint platforms or stale fixture cells inside the object's own footprint while
+			// retaining its already-authored wall. The supporting floor beneath the rectangle is untouched.
+			ClearArea(area, clearWalls: false);
+			int originX = area.Left + data.Origin.X;
+			int originY = area.Top + data.Origin.Y;
+			if (!WorldGen.PlaceObject(originX, originY, tileType, mute: true, style: style, alternate: alternate))
+				throw new InvalidOperationException(
+					$"Authored object tile {tileType} could not place at {area} " +
+					$"(origin {originX},{originY}; alternate {alternate}).");
 		}
 
 		private static void FrameRegion(Rectangle area)
@@ -287,7 +299,7 @@ namespace apogean.Content.Structures
 		private static Rectangle Rect(string[] parts, int start) => new(
 			Number(parts[start]), Number(parts[start + 1]), Number(parts[start + 2]), Number(parts[start + 3]));
 
-		private readonly record struct StructureCommand(string Operation, string Asset, Rectangle Area, int Argument, int Style);
+		private readonly record struct StructureCommand(string Operation, string Asset, Rectangle Area, int Argument, int Alternate);
 	}
 
 	internal readonly record struct AuthoredStructurePlacement(Rectangle Bounds, Rectangle Entrance, int SurfaceY);
