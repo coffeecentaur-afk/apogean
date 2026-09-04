@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
+  "families": [
+    {
+      "id": "wastes-terrain",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "blockers": ["Repeat the repaired grass-corner fixture and obtain user review before production promotion."]
+    },
+    {
+      "id": "wastes-leafless-tree",
+      "status": "rejected",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "fail",
+      "production": "pending",
+      "userReview": "rejected",
+      "blockers": ["The current base silhouette failed review; rebuild it from the ordinary vanilla segmented-tree footprint with no foliage."]
+    },
+    {
+      "id": "surface-background-v0",
+      "status": "contracted",
+      "static": "fail",
+      "build": "pass",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "blockers": ["Several layers remain below the high-detail production target.", "Replace diagnostic last-row vertical stretching with authored vertical coverage.", "Complete pan, altitude, lighting, transition, and real-biome routing matrix."]
+    },
+    {
+      "id": "helix-construction-v2",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "blockers": ["Package and render the dedicated Helix construction gallery after the tModLoader client releases the mod file."]
+    },
+    {
+      "id": "kessler-construction-v1",
+      "status": "integrated",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pass",
+      "userReview": "pending",
+      "blockers": ["Replace placeholder robotic animation and final sprite language before polished status."]
+    },
+    {
+      "id": "engraft-entity-scale-v2",
+      "status": "fixture-pass",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "blockers": ["Review pursuit, attack, hit, death, drops, and multiplayer before integration."]
+    },
+    {
+      "id": "boss-encounter-pipeline",
+      "status": "specified",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "blockers": ["Convert each boss, starting with MATRIARCH-7A-14, into a validated encounter spec before further AI expansion."]
+    },
+    {
+      "id": "quest-dialogue-pipeline",
+      "status": "specified",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "blockers": ["Specify the first Kessler contract as a versioned quest state card before expanding the campaign chain."]
+    }
+  ]
+}

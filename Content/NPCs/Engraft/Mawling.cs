@@ -10,7 +10,7 @@ using apogean.Content.Items.Materials;
 
 namespace apogean.Content.NPCs.Engraft
 {
-	/// <summary>Small larval scavenger. It is weak alone but makes the biome dangerous in a crowd.</summary>
+	/// <summary>A moth-larva scavenger. It is weak alone but readable and dangerous in a crowd.</summary>
 	public sealed class Mawling : ModNPC, IFactionEntity
 	{
 		public ApogeanFaction Faction => ApogeanFaction.Broodmass;
@@ -19,8 +19,8 @@ namespace apogean.Content.NPCs.Engraft
 
 		public override void SetDefaults()
 		{
-			NPC.width = 16;
-			NPC.height = 16;
+			NPC.width = 26;
+			NPC.height = 20;
 			NPC.damage = 14;
 			NPC.defense = 1;
 			NPC.lifeMax = 38;
@@ -44,7 +44,7 @@ namespace apogean.Content.NPCs.Engraft
 			Vector2 desired = NPC.DirectionTo(target.Center) * 3.6f + new Vector2(0f, wobble);
 			NPC.velocity = Vector2.Lerp(NPC.velocity, desired, 0.07f);
 			NPC.spriteDirection = NPC.direction = target.Center.X > NPC.Center.X ? 1 : -1;
-			NPC.rotation = MathHelper.Clamp(NPC.velocity.Y * 0.08f, -0.3f, 0.3f);
+			NPC.rotation = MathHelper.Clamp(NPC.velocity.Y * 0.035f, -0.12f, 0.12f);
 		}
 
 		public override void FindFrame(int frameHeight)

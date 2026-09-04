@@ -13,6 +13,9 @@ namespace apogean.Content.Tiles
 			Main.tileSolid[Type] = true;
 			Main.tileBlockLight[Type] = true;
 			Main.tileMergeDirt[Type] = true;
+			TileID.Sets.Grass[Type] = true;
+			TileID.Sets.NeedsGrassFraming[Type] = true;
+			TileID.Sets.NeedsGrassFramingDirt[Type] = TileID.Dirt;
 			TileID.Sets.Conversion.Grass[Type] = true;
 			Main.tileMerge[Type][TileID.Dirt] = true;
 			Main.tileMerge[TileID.Dirt][Type] = true;

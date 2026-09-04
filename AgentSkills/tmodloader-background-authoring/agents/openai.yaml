@@ -1,0 +1,4 @@
+interface:
+  display_name: "tModLoader Background Authoring"
+  short_description: "Build seamless high-detail biome backgrounds"
+  default_prompt: "Use $tmodloader-background-authoring to repair this background set and validate its full camera matrix."

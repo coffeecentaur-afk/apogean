@@ -48,7 +48,7 @@ namespace apogean.Content.Backgrounds
 
 		internal static void Unload() => layerSets = null;
 
-		internal static void DrawV0(SpriteBatch spriteBatch, RuinedBackgroundBiome biome)
+		internal static void DrawV0(SpriteBatch spriteBatch, RuinedBackgroundBiome biome, float opacity = 1f)
 		{
 			if (Main.dedServ || Main.mapFullscreen)
 				return;
@@ -60,7 +60,7 @@ namespace apogean.Content.Backgrounds
 			float surfaceCameraDelta = actualSurfaceScreenY - expectedSurfaceScreenY;
 			// The 2026 preview runtime exposes the current world-sky tint but no
 			// longer publishes the old ColorOfSurfaceBackgroundsModified member.
-			Color tint = GetReadableTint(Main.ColorOfTheSkies);
+			Color tint = GetReadableTint(Main.ColorOfTheSkies) * MathHelper.Clamp(opacity, 0f, 1f);
 			float underfillTop = expectedSurfaceScreenY + surfaceCameraDelta * 0.30f;
 			DrawUnderfill(spriteBatch, biome, underfillTop, tint);
 
@@ -70,7 +70,7 @@ namespace apogean.Content.Backgrounds
 			foreach (Layer layer in layers)
 			{
 				float top = Main.screenHeight * layer.BaseTopScreenRatio + surfaceCameraDelta * layer.VerticalParallax;
-				DrawRepeatingLayer(spriteBatch, layer.Texture.Value, top, layer.HorizontalParallax, tint);
+				DrawVerticallyCoveredLayer(spriteBatch, layer.Texture.Value, top, layer.HorizontalParallax, tint);
 			}
 		}
 
@@ -85,7 +85,7 @@ namespace apogean.Content.Backgrounds
 			};
 		}
 
-		private static void DrawRepeatingLayer(
+		private static void DrawVerticallyCoveredLayer(
 			SpriteBatch spriteBatch,
 			Texture2D texture,
 			float top,
@@ -93,22 +93,49 @@ namespace apogean.Content.Backgrounds
 			Color tint)
 		{
 			float width = texture.Width;
-			float cameraOffset = PositiveModulo((float)(Main.screenPosition.X * parallax), width);
-			float startX = -cameraOffset - width;
+			// A normal copy followed by a mirrored copy always joins matching
+			// source-edge pixels. The two-image period also keeps the mirror parity
+			// stable while the camera crosses one texture width.
+			float sequenceOffset = PositiveModulo((float)(Main.screenPosition.X * parallax), width * 2f);
+			int sequenceIndex = (int)Math.Floor(sequenceOffset / width) - 1;
+			float offsetWithinCopy = sequenceOffset % width;
+			float startX = -offsetWithinCopy - width;
 			int copies = (int)Math.Ceiling((Main.screenWidth - startX) / width) + 1;
 
+			int destinationTop = (int)Math.Floor(top);
+			int textureBottom = destinationTop + texture.Height;
 			for (int i = 0; i < copies; i++)
 			{
+				int destinationX = (int)Math.Floor(startX + i * width);
+				SpriteEffects effects = ((sequenceIndex + i) & 1) == 0
+					? SpriteEffects.None
+					: SpriteEffects.FlipHorizontally;
 				spriteBatch.Draw(
 					texture,
-					new Vector2((float)Math.Floor(startX + i * width), (float)Math.Floor(top)),
+					new Vector2(destinationX, destinationTop),
 					null,
 					tint,
 					0f,
 					Vector2.Zero,
 					1f,
-					SpriteEffects.None,
+					effects,
 					0f);
+
+				// Custom background drawing owns vertical coverage. Continue the
+				// authored opaque baseline rather than exposing a source-image edge
+				// when wings or mounts move the camera above the surface fixture.
+				if (textureBottom < Main.screenHeight)
+				{
+					spriteBatch.Draw(
+						texture,
+						new Rectangle(destinationX, textureBottom, texture.Width, Main.screenHeight - textureBottom),
+						new Rectangle(0, texture.Height - 1, texture.Width, 1),
+						tint,
+						0f,
+						Vector2.Zero,
+						effects,
+						0f);
+				}
 			}
 		}
 

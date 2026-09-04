@@ -63,6 +63,8 @@ namespace apogean.Content.Backgrounds
 		public bool ToggleForestConceptRenderLab(bool? enabled = null) =>
 			ToggleSurfaceConceptRenderLab(RuinedBackgroundBiome.Forest, enabled);
 
+		public void DisableSurfaceConceptRenderLab() => SurfaceRenderLabBiome = null;
+
 		public bool ToggleUndergroundConceptRenderLab(RuinedBackgroundBiome biome, bool? enabled = null)
 		{
 			bool shouldEnable = enabled ?? UndergroundRenderLabBiome != biome;

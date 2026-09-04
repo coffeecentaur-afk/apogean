@@ -8,7 +8,10 @@ This glossary defines the setting-specific language shared by world generation, 
 A tile, wall, tree, furniture object, or background that has passed its static atlas contract, a clean build, and inspection in a disposable in-game capture at useful scale. A PNG that looks correct outside Terraria is not complete until its framing, seams, anchors, and gameplay rendering pass this gate.
 
 **Native segmented ruined tree**:
-A ruined-tree visual authored inside Terraria's ordinary `TileID.Trees` trunk, branch, and top atlas contracts. Height and branch placement remain native and every trunk segment remains independently choppable. A bounded, fixed-size root flare may be drawn only from the bottom trunk tile; it must disappear with that tile and must never scale or redraw the whole tree.
+A ruined-tree visual authored inside Terraria's ordinary `TileID.Trees` trunk, branch, and top atlas contracts. Height and branch placement remain native and every trunk segment remains independently choppable. The ordinary tree uses Terraria's narrow trunk/base footprint and leafless wooden tops and branches. Oversized root flares and whole-tree overlays are separate set pieces, never part of this tree family.
+
+**Authoring evidence state**:
+The recorded maturity of one content family: `specified`, `contracted`, `fixture-pass`, `integrated`, `polished`, or `rejected`. Compiler success and static texture validation are evidence fields, not visual acceptance. `Tools/AuthoringStatus.json` is the machine-readable record.
 
 **Atlas ownership boundary**:
 Each production atlas has one authoritative generator or checked-in source. Narrow generators may not rewrite another family's validated textures. Any regeneration command must preserve unrelated renderer-approved assets byte-for-byte.

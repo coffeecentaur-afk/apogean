@@ -1,0 +1,4 @@
+interface:
+  display_name: "tModLoader Quest & Dialogue"
+  short_description: "Build reliable Terraria quests and branching dialogue"
+  default_prompt: "Use $tmodloader-quest-dialogue-authoring to specify and validate this quest or dialogue chain."

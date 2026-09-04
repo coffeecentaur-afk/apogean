@@ -1,0 +1,44 @@
+{
+  "id": "example-contract",
+  "schemaVersion": 1,
+  "availability": {
+    "gate": "exact world and player prerequisite",
+    "cue": ["dialogue", "changed landmark", "map or HUD signal"]
+  },
+  "entry": {
+    "interaction": "named NPC or world object",
+    "ownership": "per-player"
+  },
+  "stages": [
+    {
+      "id": "observable-action",
+      "verb": "defeat",
+      "target": "specific synchronized target",
+      "completionEvent": "server-observed event",
+      "worldEvidence": "visible change or NPC response"
+    }
+  ],
+  "reward": {
+    "ownership": "per-player",
+    "delivery": "inventory then recoverable claim",
+    "duplicateProtection": "stable completion key",
+    "fullInventory": "retain claim at source NPC"
+  },
+  "dialogue": {
+    "startNode": "briefing",
+    "fallbackNode": "safe-fallback",
+    "nodes": ["briefing", "active", "complete", "safe-fallback"]
+  },
+  "multiplayer": {
+    "authority": "server",
+    "lateJoin": "sync durable state and current stage",
+    "mixedProgress": "describe eligibility and contribution",
+    "disconnect": "describe stage and reward ownership"
+  },
+  "failure": {
+    "death": "retry without duplicate reward",
+    "abandonment": "explicit reset or resume",
+    "missingLandmark": "safe alternate interaction"
+  },
+  "nextAction": "visible NPC, route, signal, or unlocked room"
+}

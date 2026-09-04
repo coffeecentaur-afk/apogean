@@ -297,6 +297,8 @@ Convert-Atlas $tileReference 'Content/Tiles/KesslerTrim.png' $palettes.Trim
 Convert-Atlas $tileReference 'Content/Tiles/KesslerFloor.png' $palettes.Floor
 Convert-Atlas $tileReference 'Content/Tiles/KesslerGlass.png' $palettes.Glass
 Convert-Atlas $tileReference 'Content/Tiles/KesslerBeam.png' $palettes.Beam
+Convert-Atlas $tileReference 'Content/Tiles/KesslerPlating.png' $palettes.Block
+Convert-Atlas $tileReference 'Content/Tiles/KesslerRuinBlock.png' $palettes.Beam
 Convert-Atlas $wallReference 'Content/Walls/KesslerBulkheadWall.png' $palettes.BulkheadWall
 Convert-Atlas $wallReference 'Content/Walls/KesslerWindowWall.png' $palettes.WindowWall
 

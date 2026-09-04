@@ -122,8 +122,14 @@ namespace apogean.Content.Diagnostics
 					case "grass":
 						BuildGrassAndReport(scheduleCaptureProbe: true);
 						break;
+					case "entity-scale":
+						BuildEntityScaleAndReport(scheduleCaptureProbe: true);
+						break;
 					case "forest-background":
 						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Forest, scheduleCaptureProbe: true);
+						break;
+					case "forest-background-aerial":
+						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Forest, scheduleCaptureProbe: true, aerial: true);
 						break;
 					case "forest-background-night":
 						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Forest, scheduleCaptureProbe: true, SurfaceBackgroundLighting.Midnight);
@@ -136,6 +142,9 @@ namespace apogean.Content.Diagnostics
 						break;
 					case "jungle-background":
 						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Jungle, scheduleCaptureProbe: true);
+						break;
+					case "jungle-routing":
+						BuildProductionJungleRoutingAndReport(scheduleCaptureProbe: true);
 						break;
 					case "snow-background":
 						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Snow, scheduleCaptureProbe: true);
@@ -160,6 +169,9 @@ namespace apogean.Content.Diagnostics
 						break;
 					case "kessler-construction":
 						BuildKesslerConstructionAndReport(scheduleCaptureProbe: true);
+						break;
+					case "helix-construction":
+						BuildHelixConstructionAndReport(scheduleCaptureProbe: true);
 						break;
 					case "kessler-campus":
 						BuildKesslerCampusAndReport(scheduleCaptureProbe: true);
@@ -226,6 +238,19 @@ namespace apogean.Content.Diagnostics
 
 			_captureProbeBounds = bounds;
 			_captureProbeName = "Apogean Grass Lab Capture Probe";
+			_captureProbeEntities = true;
+			_captureProbeDelay = 180;
+		}
+
+		internal void BuildEntityScaleAndReport(bool scheduleCaptureProbe)
+		{
+			Rectangle bounds = EntityScaleLabGallery.Build(Player);
+			Main.NewText("Entity scale lab: vanilla bird | zombie | Mawling | Graft Hound.", Color.LightGreen);
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Entity Scale Capture Probe";
 			_captureProbeEntities = true;
 			_captureProbeDelay = 180;
 		}
@@ -377,17 +402,33 @@ namespace apogean.Content.Diagnostics
 			_captureProbeDelay = 180;
 		}
 
+		internal void BuildHelixConstructionAndReport(bool scheduleCaptureProbe)
+		{
+			Rectangle bounds = HelixConstructionGallery.Build(Player);
+			Main.NewText($"Helix native construction gallery rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			Main.NewText("Gallery includes native-connected ceramic, trim, floors, smoked glass, walls, furniture, lighting, and animated symbiote tanks.", new Color(111, 213, 133));
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Helix Native Construction Capture Probe";
+			_captureProbeEntities = false;
+			_captureProbeDelay = 180;
+		}
+
 		internal void BuildSurfaceBackgroundAndReport(
 			RuinedBackgroundBiome biome,
 			bool scheduleCaptureProbe,
-			SurfaceBackgroundLighting lighting = SurfaceBackgroundLighting.Noon)
+			SurfaceBackgroundLighting lighting = SurfaceBackgroundLighting.Noon,
+			bool aerial = false)
 		{
 			if (biome is not (RuinedBackgroundBiome.Forest or RuinedBackgroundBiome.Desert or RuinedBackgroundBiome.Jungle or RuinedBackgroundBiome.Snow or RuinedBackgroundBiome.Corruption or RuinedBackgroundBiome.Crimson or RuinedBackgroundBiome.Hallow or RuinedBackgroundBiome.Ocean or RuinedBackgroundBiome.Mushroom))
 				throw new System.InvalidOperationException($"{biome} has no renderer-approved diagnostic surface set.");
 
 			RuinedBackgroundSelectionSystem.Instance.ToggleSurfaceConceptRenderLab(biome, true);
-			Rectangle bounds = SurfaceBackgroundLabGallery.Build(Player, lighting);
-			Main.NewText($"{biome} V0 {lighting} surface-background renderer fixture rebuilt.", Color.LightGreen);
+			Rectangle bounds = SurfaceBackgroundLabGallery.Build(Player, lighting, aerial);
+			string altitude = aerial ? "aerial" : "ground";
+			Main.NewText($"{biome} V0 {lighting} {altitude} surface-background renderer fixture rebuilt.", Color.LightGreen);
 			if (!scheduleCaptureProbe)
 				return;
 
@@ -395,6 +436,21 @@ namespace apogean.Content.Diagnostics
 			_captureProbeName = $"Apogean {biome} V0 {lighting} Surface Background Capture Probe";
 			_captureProbeEntities = false;
 			_captureProbeDelay = 180;
+		}
+
+		internal void BuildProductionJungleRoutingAndReport(bool scheduleCaptureProbe)
+		{
+			RuinedBackgroundSelectionSystem.Instance.DisableSurfaceConceptRenderLab();
+			Rectangle bounds = SurfaceBackgroundLabGallery.BuildProductionJungleRouting(Player);
+			Main.NewText("Production Jungle routing fixture rebuilt; no background override is active.", Color.LightGreen);
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Production Jungle Routing Capture Probe";
+			_captureProbeEntities = false;
+			// Scene metrics and GlobalBackgroundStyle update asynchronously.
+			_captureProbeDelay = 300;
 		}
 
 		internal void BuildUndergroundBackgroundAndReport(RuinedBackgroundBiome biome, bool scheduleCaptureProbe)
@@ -449,7 +505,12 @@ namespace apogean.Content.Diagnostics
 				? sceneWater
 				: Main.waterStyle >= 0 && Main.waterStyle < Main.maxLiquidTypes ? Main.waterStyle : 0;
 			CaptureBiome biome = new(captureBackground, captureWater, sceneEffect.tileColorStyle);
-			Mod.Logger.Info($"TILE LAB CAPTURE PROBE: scene background={sceneBackground}; capture background={captureBackground}; scene water={sceneWater}; main water={Main.waterStyle}; capture water={biome.WaterStyle}");
+			RuinedBackgroundBiome detected = RuinedBackgroundSelectionSystem.DetectBiome(Main.LocalPlayer);
+			Mod.Logger.Info(
+				$"TILE LAB CAPTURE PROBE: scene background={sceneBackground}; capture background={captureBackground}; " +
+				$"detected biome={detected}; render lab={RuinedBackgroundSelectionSystem.Instance.SurfaceRenderLabBiome?.ToString() ?? "off"}; " +
+				$"zones jungle={Main.LocalPlayer.ZoneJungle}, snow={Main.LocalPlayer.ZoneSnow}, desert={Main.LocalPlayer.ZoneDesert}; " +
+				$"scene water={sceneWater}; main water={Main.waterStyle}; capture water={biome.WaterStyle}");
 
 			CaptureManager.Instance.Capture(new CaptureSettings
 			{

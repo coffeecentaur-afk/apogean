@@ -1,0 +1,80 @@
+param(
+    [Parameter(Mandatory = $true)][string]$Trunk,
+    [Parameter(Mandatory = $true)][string]$Branches,
+    [Parameter(Mandatory = $true)][string]$Tops,
+    [string]$TrunkReference = '',
+    [int]$ExpectedTrunkWidth = 176,
+    [int]$ExpectedTrunkHeight = 264,
+    [int]$ExpectedBranchWidth = 84,
+    [int]$ExpectedBranchHeight = 126,
+    [int]$ExpectedTopWidth = 246,
+    [int]$ExpectedTopHeight = 82,
+    [double]$MaximumBranchOpaqueRatio = 0.35,
+    [double]$MaximumTopOpaqueRatio = 0.32,
+    [int]$MaximumOpaqueColors = 24
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+Add-Type -AssemblyName System.Drawing
+$failures = [Collections.Generic.List[string]]::new()
+
+function Test-Texture([string]$label, [string]$path, [int]$width, [int]$height, [double]$maximumOpaqueRatio) {
+    $resolved = (Resolve-Path -LiteralPath $path).Path
+    $bitmap = [Drawing.Bitmap]::new($resolved)
+    try {
+        if ($bitmap.Width -ne $width -or $bitmap.Height -ne $height) {
+            $failures.Add("$label is $($bitmap.Width)x$($bitmap.Height); expected ${width}x${height}")
+        }
+        $opaque = 0
+        $soft = 0
+        $colors = [Collections.Generic.HashSet[int]]::new()
+        for ($y = 0; $y -lt $bitmap.Height; $y++) {
+            for ($x = 0; $x -lt $bitmap.Width; $x++) {
+                $pixel = $bitmap.GetPixel($x, $y)
+                if ($pixel.A -gt 0 -and $pixel.A -lt 255) { $soft++ }
+                if ($pixel.A -eq 255) { $opaque++; [void]$colors.Add($pixel.ToArgb()) }
+            }
+        }
+        if ($soft -gt 0) { $failures.Add("$label contains $soft soft-alpha pixels") }
+        if ($colors.Count -gt $MaximumOpaqueColors) { $failures.Add("$label uses $($colors.Count) colors; maximum is $MaximumOpaqueColors") }
+        if ($opaque -eq 0) { $failures.Add("$label is empty") }
+        if ($maximumOpaqueRatio -gt 0) {
+            $ratio = $opaque / [double]($bitmap.Width * $bitmap.Height)
+            if ($ratio -gt $maximumOpaqueRatio) {
+                $failures.Add("$label opaque ratio $([Math]::Round($ratio, 3)) exceeds $maximumOpaqueRatio; likely a canopy or oversized mass")
+            }
+        }
+    }
+    finally { $bitmap.Dispose() }
+}
+
+function Test-AlphaTopology([string]$candidatePath, [string]$referencePath) {
+    $candidate = [Drawing.Bitmap]::new((Resolve-Path -LiteralPath $candidatePath).Path)
+    $reference = [Drawing.Bitmap]::new((Resolve-Path -LiteralPath $referencePath).Path)
+    try {
+        if ($candidate.Height -ne $reference.Height -or $candidate.Width -gt $reference.Width) {
+            $failures.Add("trunk reference is $($reference.Width)x$($reference.Height), candidate is $($candidate.Width)x$($candidate.Height) and cannot be compared as its leading native segment")
+            return
+        }
+        $mismatches = 0
+        for ($y = 0; $y -lt $candidate.Height; $y++) {
+            for ($x = 0; $x -lt $candidate.Width; $x++) {
+                if (($candidate.GetPixel($x, $y).A -gt 0) -ne ($reference.GetPixel($x, $y).A -gt 0)) { $mismatches++ }
+            }
+        }
+        if ($mismatches -gt 0) { $failures.Add("trunk changes $mismatches pixels of the authoritative vanilla alpha topology") }
+    }
+    finally { $candidate.Dispose(); $reference.Dispose() }
+}
+
+Test-Texture 'Trunk' $Trunk $ExpectedTrunkWidth $ExpectedTrunkHeight 0
+Test-Texture 'Branches' $Branches $ExpectedBranchWidth $ExpectedBranchHeight $MaximumBranchOpaqueRatio
+Test-Texture 'Tops' $Tops $ExpectedTopWidth $ExpectedTopHeight $MaximumTopOpaqueRatio
+if (-not [string]::IsNullOrWhiteSpace($TrunkReference)) { Test-AlphaTopology $Trunk $TrunkReference }
+
+if ($failures.Count -gt 0) {
+    $failures | ForEach-Object { Write-Host "FAIL: $_" -ForegroundColor Red }
+    exit 1
+}
+Write-Host 'PASS: tree sheets satisfy dimensions, hard alpha, palette, and sparse leafless-mass contracts. Live grove validation is still required.' -ForegroundColor Green

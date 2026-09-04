@@ -9,8 +9,8 @@ namespace apogean.Content.Items.Materials
 	{
 		public override void SetDefaults()
 		{
-			Item.width = 20;
-			Item.height = 20;
+			Item.width = 24;
+			Item.height = 24;
 			Item.maxStack = Item.CommonMaxStack;
 			Item.value = Item.sellPrice(copper: 50);
 			Item.rare = ItemRarityID.Blue;

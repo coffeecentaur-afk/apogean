@@ -7,30 +7,49 @@ namespace apogean.Content.Backgrounds
 	public abstract class ApogeanSurfaceBackgroundStyle : ModSurfaceBackgroundStyle
 	{
 		protected abstract RuinedBackgroundBiome Biome { get; }
+		private float rendererOpacity = 1f;
+		private bool UsesHdRenderer => HighDefinitionSurfaceBackgroundRenderer.Supports(Biome);
 
 		public override void ModifyFarFades(float[] fades, float transitionSpeed)
 		{
 			// The installed 1.4.4.9+2026.07 runtime passes its already-updated
 			// front-layer alpha array to this hook. Advancing it again makes the close
 			// layer finish before far/middle. The engine owns the whole-style fade.
+			if (Slot >= 0 && Slot < fades.Length)
+				rendererOpacity = fades[Slot];
 		}
 
 		public override int ChooseFarTexture()
 		{
 			int variant = RuinedBackgroundSelectionSystem.Instance.GetVariant(Biome);
-			return BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/{Biome}/V{variant}_Far");
+			return BackgroundTextureLoader.GetBackgroundSlot(Mod, UsesHdRenderer
+				? "Content/Backgrounds/Diagnostics/HD/Transparent"
+				: $"Content/Backgrounds/{Biome}/V{variant}_Far");
 		}
 
 		public override int ChooseMiddleTexture()
 		{
 			int variant = RuinedBackgroundSelectionSystem.Instance.GetVariant(Biome);
-			return BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/{Biome}/V{variant}_Mid");
+			return BackgroundTextureLoader.GetBackgroundSlot(Mod, UsesHdRenderer
+				? "Content/Backgrounds/Diagnostics/HD/Transparent"
+				: $"Content/Backgrounds/{Biome}/V{variant}_Mid");
 		}
 
 		public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b)
 		{
 			int variant = RuinedBackgroundSelectionSystem.Instance.GetVariant(Biome);
-			return BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/{Biome}/V{variant}_Close");
+			return BackgroundTextureLoader.GetBackgroundSlot(Mod, UsesHdRenderer
+				? "Content/Backgrounds/Diagnostics/HD/Transparent"
+				: $"Content/Backgrounds/{Biome}/V{variant}_Close");
+		}
+
+		public override bool PreDrawCloseBackground(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+		{
+			if (!UsesHdRenderer)
+				return true;
+
+			HighDefinitionSurfaceBackgroundRenderer.DrawV0(spriteBatch, Biome, rendererOpacity);
+			return false;
 		}
 	}
 

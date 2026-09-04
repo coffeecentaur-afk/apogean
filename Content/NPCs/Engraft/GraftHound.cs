@@ -24,8 +24,8 @@ namespace apogean.Content.NPCs.Engraft
 
 		public override void SetDefaults()
 		{
-			NPC.width = 28;
-			NPC.height = 16;
+			NPC.width = 44;
+			NPC.height = 26;
 			NPC.damage = 22;
 			NPC.defense = 5;
 			NPC.lifeMax = 95;

@@ -290,56 +290,22 @@ function New-CorporateWallSheet([string]$name,[string]$palette,[bool]$window) {
     Save-Bitmap $bitmap "Content/Walls/$name.png"
 }
 
-foreach($family in @('Kessler','Helix','Sentrix')){
-    foreach($part in @('Block','Trim','Floor','Glass','Beam')){New-CorporateSheet $family $part "$family$part"}
-}
-New-CorporateSheet 'Kessler' 'Block' 'KesslerPlating'
-New-CorporateSheet 'Helix' 'Block' 'HelixContainmentPanel'
+# Kessler and Helix have focused native-topology generators and must never be
+# overwritten by this older broad material generator. Sentrix remains a
+# contracted prototype until its own focused construction-set pass.
+foreach($part in @('Block','Trim','Floor','Glass','Beam')){New-CorporateSheet 'Sentrix' $part "Sentrix$part"}
 New-CorporateSheet 'Sentrix' 'Block' 'SentrixPanel'
-New-CorporateSheet 'Kessler' 'Block' 'KesslerRuinBlock'
-New-CorporateSheet 'Helix' 'Block' 'HelixRuinBlock'
 New-CorporateSheet 'Sentrix' 'Block' 'SentrixRuinBlock'
 New-CorporateSheet 'Kessler' 'Block' 'PrewarConcrete'
-New-CorporateSheet 'Helix' 'Block' 'MawResearchBlock'
 
-if (-not $CorporateOnly) {
-    foreach($spec in @(
-        @('WastesSoil','WastesSoil','Soil',$false),@('WastesStone','WastesStone','Stone',$false),
-        @('WastesGrass','WastesGrass','Grass',$false),@('WastesSand','WastesSand','Sand',$false),
-        @('WastesIce','WastesIce','Ice',$false),@('WastesSnow','WastesSnow','Snow',$false),
-        @('WastesMud','WastesMud','Mud',$false),@('DeadGrass','WastesGrass','Grass',$false),
-        @('MawDirt','MawDirt','Dirt',$true),@('Mawstone','MawStone','Stone',$true),
-        @('MawGrass','MawGrass','Grass',$true),@('MawSand','MawSand','Sand',$true),
-        @('MawIce','MawIce','Ice',$true),@('MawSnow','MawSnow','Snow',$true),
-        @('MawMud','MawMud','Mud',$true),@('MawClay','MawDirt','Clay',$true),
-        @('EngraftTurf','MawGrass','Grass',$true),@('OssuaryBone','MawBone','Bone',$false)
-    )){
-        New-NaturalSheet $spec[0] $spec[1] $spec[2] $spec[3]
-    }
+# Wastes and Maw atlases are renderer-validated families owned by the focused
+# New-WastesTerrainFamily/New-MawTerrainFamily generators. This legacy script
+# intentionally cannot regenerate them, even when CorporateOnly is omitted.
 
-    foreach($spec in @(
-        @('MawDirtWallUnsafe','MawDirt','Dirt',$true),@('MawStoneWallUnsafe','MawStone','Stone',$true),
-        @('MawGrassWallUnsafe','MawGrass','Grass',$true),@('MawSandWallUnsafe','MawSand','Sand',$true),
-        @('MawIceWallUnsafe','MawIce','Ice',$true),@('MawSnowWallUnsafe','MawSnow','Snow',$true),
-        @('MawMudWallUnsafe','MawMud','Mud',$true),@('MawWallUnsafe','MawStone','Stone',$true),
-        @('WastesDirtWallUnsafe','WastesSoil','Soil',$false),@('WastesStoneWallUnsafe','WastesStone','Stone',$false),
-        @('WastesGrassWallUnsafe','WastesGrass','Grass',$false),@('WastesSandWallUnsafe','WastesSand','Sand',$false),
-        @('WastesIceWallUnsafe','WastesIce','Ice',$false),@('WastesSnowWallUnsafe','WastesSnow','Snow',$false),
-        @('WastesMudWallUnsafe','WastesMud','Mud',$false),
-        @('DeadGrassWallUnsafe','WastesSoil','Soil',$false),@('DeadFlowerWallUnsafe','WastesGrass','Grass',$false)
-    )){
-        New-WallSheet $spec[0] $spec[1] $spec[2] $spec[3]
-    }
-}
-
-New-CorporateWallSheet 'KesslerBulkheadWall' 'Kessler' $false
-New-CorporateWallSheet 'KesslerWindowWall' 'Kessler' $true
-New-CorporateWallSheet 'HelixLaboratoryWall' 'Helix' $false
-New-CorporateWallSheet 'HelixObservationWall' 'Helix' $true
 New-CorporateWallSheet 'SentrixDataWall' 'Sentrix' $false
 New-CorporateWallSheet 'SentrixWindowWall' 'Sentrix' $true
 
 $terrainFrameMask.Dispose()
 $wallFrameMask.Dispose()
 
-Write-Host 'Generated native Terraria-format corporate, Wastes, and Maw tile families.'
+Write-Host 'Generated only the Sentrix prototype and neutral PrewarConcrete; focused Kessler, Helix, Wastes, and Maw assets were not touched.'

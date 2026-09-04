@@ -1,0 +1,4 @@
+interface:
+  display_name: "tModLoader Structure Authoring"
+  short_description: "Build polished Terraria-scale authored locations"
+  default_prompt: "Use $tmodloader-structure-authoring to design and validate this authored Terraria location."

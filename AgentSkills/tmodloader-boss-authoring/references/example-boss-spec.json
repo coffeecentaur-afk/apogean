@@ -1,0 +1,48 @@
+{
+  "id": "example-boss",
+  "progressionGate": "Describe the exact world and player gate.",
+  "encounterThesis": "The player reads a committed attack, dodges it, and exploits a bounded recovery.",
+  "signatureRule": "Describe the one mechanic that changes decisions and belongs to this boss.",
+  "expectedGear": {
+    "mobility": ["baseline boots", "baseline jump"],
+    "defenseRange": "record tested minimum and maximum",
+    "classBenchmarks": ["melee", "ranger", "mage", "summoner"]
+  },
+  "arenaAssumptions": "Describe the smallest reasonable player-built arena.",
+  "phases": [
+    {
+      "id": "opening-loop",
+      "entryCondition": "spawn",
+      "exitCondition": "health or completed-loop threshold",
+      "attacks": [
+        {
+          "id": "committed-strike",
+          "telegraph": "visible pose and distinct audio cue",
+          "telegraphSeconds": 0.6,
+          "dodgeAnswer": "move across the committed line",
+          "counterWindow": "boss pauses after missing",
+          "authority": "server selects direction and spawns damage"
+        }
+      ]
+    }
+  ],
+  "multiplayer": {
+    "stateAuthority": "server",
+    "spawnAuthority": "server",
+    "lateJoin": "sync current phase, state, timer, and targets",
+    "despawn": "end when every living player leaves range",
+    "deathAndRevive": "describe solo defeat and multiplayer revive rules"
+  },
+  "loot": {
+    "normal": "describe direct drops",
+    "expert": "describe individual bag and expert item",
+    "master": "describe relic, trophy, and pet rules"
+  },
+  "testMatrix": {
+    "difficulties": ["normal", "expert", "master"],
+    "playerCounts": [1, 2, 4],
+    "classes": ["melee", "ranger", "mage", "summoner"],
+    "arenaCases": ["minimal handmade", "open terrain", "vertical obstruction"],
+    "failureCases": ["all players dead", "player leaves", "reload", "late join"]
+  }
+}

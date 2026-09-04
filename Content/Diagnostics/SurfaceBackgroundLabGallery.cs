@@ -20,7 +20,10 @@ namespace apogean.Content.Diagnostics
 		private const int Width = 190;
 		private const int Height = 62;
 
-		internal static Rectangle Build(Player player, SurfaceBackgroundLighting lighting = SurfaceBackgroundLighting.Noon)
+		internal static Rectangle Build(
+			Player player,
+			SurfaceBackgroundLighting lighting = SurfaceBackgroundLighting.Noon,
+			bool aerial = false)
 		{
 			// Geometry remains identical across lighting fixtures. These explicit
 			// states prove that Terraria's sky/tint changes without landmark jumps.
@@ -81,7 +84,7 @@ namespace apogean.Content.Diagnostics
 			}
 
 			Lighting.Clear();
-			player.Teleport(new Vector2(bounds.Center.X * 16f, (floorY - 4) * 16f), TeleportationStyleID.RodOfDiscord);
+			player.Teleport(new Vector2(bounds.Center.X * 16f, (floorY - (aerial ? 54 : 4)) * 16f), TeleportationStyleID.RodOfDiscord);
 			player.fallStart = (int)(player.position.Y / 16f);
 			player.statLife = player.statLifeMax2;
 			player.immune = true;
@@ -95,6 +98,25 @@ namespace apogean.Content.Diagnostics
 			}
 			if (Main.netMode == NetmodeID.Server)
 				NetMessage.SendTileSquare(-1, bounds.Center.X, bounds.Center.Y, Width + 6);
+			return bounds;
+		}
+
+		internal static Rectangle BuildProductionJungleRouting(Player player)
+		{
+			Rectangle bounds = Build(player);
+			int jungleGrass = TileID.JungleGrass;
+			int mud = TileID.Mud;
+
+			// Bury a deterministic biome-count bed under the visible Wastes floor.
+			// No render-lab override is active: Terraria's own scene metrics must set
+			// ZoneJungle and the production global background router must respond.
+			for (int x = bounds.Left + 8; x < bounds.Right - 8; x++)
+			for (int y = bounds.Bottom - 9; y < bounds.Bottom; y++)
+				SetTile(x, y, y == bounds.Bottom - 9 ? jungleGrass : mud);
+
+			for (int x = bounds.Left; x < bounds.Right; x++)
+			for (int y = bounds.Bottom - 10; y < bounds.Bottom; y++)
+				WorldGen.SquareTileFrame(x, y, true);
 			return bounds;
 		}
 

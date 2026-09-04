@@ -79,6 +79,8 @@ namespace apogean.Content.Tiles
 		{
 			base.SetStaticDefaults();
 			TileID.Sets.Grass[Type] = true;
+			TileID.Sets.NeedsGrassFraming[Type] = true;
+			TileID.Sets.NeedsGrassFramingDirt[Type] = ModContent.TileType<WastesSoil>();
 			TileID.Sets.Conversion.Grass[Type] = true;
 			Main.tileMerge[Type][ModContent.TileType<WastesSoil>()] = true;
 			Main.tileMerge[ModContent.TileType<WastesSoil>()][Type] = true;
@@ -237,6 +239,8 @@ namespace apogean.Content.Tiles
 		{
 			base.SetStaticDefaults();
 			TileID.Sets.Grass[Type] = true;
+			TileID.Sets.NeedsGrassFraming[Type] = true;
+			TileID.Sets.NeedsGrassFramingDirt[Type] = ModContent.TileType<MawDirt>();
 			TileID.Sets.Conversion.Grass[Type] = true;
 			Main.tileMerge[Type][ModContent.TileType<MawDirt>()] = true;
 			Main.tileMerge[ModContent.TileType<MawDirt>()][Type] = true;

@@ -74,18 +74,20 @@ Require-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'TileDrawing\.TileCounte
 Require-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'Texture \+ "_Whole"' 'Wastes debris has no padding-free whole-object atlas'
 Require-Match 'Content/Tiles/WorldTerrainTiles.cs' 'Texture \+ "Roots"' 'Wastes grass has no terrain-seam root overlay'
 Require-Match 'Content/Tiles/WorldTerrainTiles.cs' 'below\.TileType != ModContent\.TileType<WastesSoil>' 'Wastes grass root overlay is not limited to the grass/soil seam'
+Require-Match 'Content/Tiles/WorldTerrainTiles.cs' 'NeedsGrassFraming\[Type\]\s*=\s*true' 'Wastes grass is not registered for Terraria grass framing'
+Require-Match 'Content/Tiles/WorldTerrainTiles.cs' 'NeedsGrassFramingDirt\[Type\]\s*=\s*ModContent\.TileType<WastesSoil>' 'Wastes grass does not identify Wastes soil as its grass-framing substrate'
 Require-File 'Content/Tiles/WastesGrassRoots.png' 'Wastes grass root-skirt atlas is missing'
 
 # A whole-tree overlay cannot preserve Terraria chopping semantics: removing one trunk tile makes
 # the remaining tree rescale. The visible art must come from ModTree's segmented native atlases.
 Reject-Match 'Content/Tiles/DeadForestTree.cs' 'DeadForestTreeHidden' 'DeadForestTree still hides the segmented native tree atlases'
 Require-Match 'Content/Tiles/DeadForestTree.cs' 'Content/Tiles/DeadForestTree"' 'DeadForestTree does not expose its visible trunk atlas'
-Require-Match 'Content/Tiles/DeadForestTree.cs' 'SetTreeFoliageSettings' 'DeadForestTree does not deterministically vary crowns and branches'
+Require-Match 'Content/Tiles/DeadForestTree.cs' 'SetTreeFoliageSettings' 'DeadForestTree does not deterministically vary native woody tips and branches'
 Reject-FileOrMatch 'Content/Tiles/DeadForestTreeOverlaySystem.cs' 'drawHeight\s*=|trunkTiles|SpriteBatch\.Draw' 'Whole-tree scaling overlay is still active and will shrink after chopping'
-Require-Match 'Content/Tiles/DeadForestTreeRootGlobalTile.cs' 'variant \* 48, 0, 48, 32' 'Dead tree root flare is not bounded to a fixed 48x32 base sprite'
-Reject-Match 'Content/Tiles/DeadForestTreeRootGlobalTile.cs' 'trunkOverlay|sourceRow|distanceFromRoot' 'Dead tree still has a custom whole-trunk renderer instead of Terraria-native trunk cells'
-Require-Match 'Tools/New-WastesVegetation.ps1' 'Vanilla-ForestTree-Tops\.png' 'Dead tree crowns are not derived from Terraria native tree topology'
-Require-Match 'Tools/New-WastesVegetation.ps1' 'Vanilla-ForestTree-Branches\.png' 'Dead tree branches are not derived from Terraria native tree topology'
+Reject-Match 'Content/Tiles/DeadForestTreeRootGlobalTile.cs' 'SpriteBatch\.Draw|spriteBatch\.Draw' 'Dead tree still adds a wide custom root flare'
+Require-Match 'Tools/New-WastesVegetation.ps1' 'New-Canvas\s+246\s+82' "Dead tree crowns do not use Terraria's three-frame crown atlas dimensions"
+Require-Match 'Tools/New-WastesVegetation.ps1' 'New-Canvas\s+84\s+126' "Dead tree branches do not use Terraria's paired side-branch atlas dimensions"
+Require-Match 'Tools/New-WastesVegetation.ps1' 'leafless rather than a brown recolor|instead of a leaf clump' 'Dead tree generator does not document the no-foliage art contract'
 Require-Match 'Content/Diagnostics/VegetationLabGallery.cs' 'ValidateMidTrunkChop' 'Vegetation fixture does not exercise native mid-trunk chopping'
 Require-Match 'Content/Diagnostics/VegetationLabGallery.cs' 'unsupported\.HasTile.*TileID\.Trees' 'Vegetation fixture does not reject a floating canopy after chopping'
 

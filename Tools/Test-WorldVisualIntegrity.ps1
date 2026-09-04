@@ -190,7 +190,7 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 )
 
 Require-SourceContract 'Tools/Request-LiveValidation.ps1' @(
-	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'forest-background', 'forest-background-night', 'forest-background-eclipse', 'desert-background', 'jungle-background', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-construction', 'kessler-campus', 'kessler-world')]",
+	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'entity-scale', 'forest-background', 'forest-background-aerial', 'forest-background-night', 'forest-background-eclipse', 'desert-background', 'jungle-background', 'jungle-routing', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-construction', 'helix-construction', 'kessler-campus', 'kessler-world')]",
 	'ApogeanLiveValidation.request',
 	'Set-Content -LiteralPath $requestPath'
 )
@@ -246,17 +246,15 @@ Require-SourceContract 'Content/Structures/AuthoredStructureTemplate.cs' @(
 foreach ($treeAsset in @(
     'Content/Tiles/DeadForestTree.png',
     'Content/Tiles/DeadForestTree_Branches.png',
-    'Content/Tiles/DeadForestTree_Tops.png',
-    'Content/Tiles/DeadForestTreeRoots.png'
+    'Content/Tiles/DeadForestTree_Tops.png'
 )) {
     Require-File $treeAsset
 }
 Require-PngContract 'Content/Tiles/DeadForestTree.png' 176 264 8
-Require-PngContract 'Content/Tiles/DeadForestTree_Branches.png' 84 126 6
-Require-PngContract 'Content/Tiles/DeadForestTree_Tops.png' 246 82 6
-Require-PngContract 'Content/Tiles/DeadForestTreeRoots.png' 144 32 6
+Require-PngContract 'Content/Tiles/DeadForestTree_Branches.png' 84 126 3
+Require-PngContract 'Content/Tiles/DeadForestTree_Tops.png' 246 82 3
 Require-SourceContract 'Content/Tiles/DeadForestTreeRootGlobalTile.cs' @(
-    'type != TileID.Trees', 'ground.TileType', 'Rectangle source = new(variant * 48, 0, 48, 32)'
+    'Reserved compatibility type', 'intentionally draws nothing'
 )
 Require-SourceContract 'Content/Tiles/DeadForestTree.cs' @(
     'GetTexture', 'GetBranchTextures', 'GetTopTextures',

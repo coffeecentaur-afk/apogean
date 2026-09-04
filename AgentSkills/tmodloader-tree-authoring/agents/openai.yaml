@@ -1,0 +1,4 @@
+interface:
+  display_name: "tModLoader Tree Authoring"
+  short_description: "Build trees that look and behave like Terraria"
+  default_prompt: "Use $tmodloader-tree-authoring to repair this custom tree family and prove it in a live grove fixture."

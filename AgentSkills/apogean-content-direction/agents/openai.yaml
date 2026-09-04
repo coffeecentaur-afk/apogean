@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apogean Content Direction"
+  short_description: "Keep Apogean coherent and evidence-gated"
+  default_prompt: "Use $apogean-content-direction to place this idea correctly within Apogean's design and progression."

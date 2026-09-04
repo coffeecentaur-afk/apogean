@@ -180,7 +180,11 @@ function Get-TreeReference {
     return [System.Drawing.Bitmap]::new($path)
 }
 
-function New-RecoloredVanillaTreeAtlas([string]$referenceName, [string]$relativeOutputPath) {
+function New-RecoloredVanillaTreeAtlas(
+    [string]$referenceName,
+    [string]$relativeOutputPath,
+    [switch]$RemoveFoliage
+) {
     $referencePath = Join-Path $CaptureRoot $referenceName
     if (-not (Test-Path -LiteralPath $referencePath)) {
         throw "Missing renderer-exported native tree atlas: $referencePath"
@@ -198,7 +202,14 @@ function New-RecoloredVanillaTreeAtlas([string]$referenceName, [string]$relative
                 if ($source.A -eq 0) { continue }
 
                 $luminance = (0.299 * $source.R) + (0.587 * $source.G) + (0.114 * $source.B)
-                $isFoliage = $source.G -gt ($source.R * 1.08) -and $source.G -gt ($source.B * 1.02)
+                # Vanilla's tree atlases encode foliage with several blue/green
+                # ramps, including dark leaves whose green channel is not dominant.
+                # Bark is the one stable role: red is greater than both other channels.
+                $isFoliage = -not ($source.R -gt $source.G -and $source.R -gt $source.B)
+                if ($RemoveFoliage -and $isFoliage) {
+                    $output.SetPixel($x, $y, [System.Drawing.Color]::Transparent)
+                    continue
+                }
                 if ($isFoliage) {
                     # Keep Terraria's familiar tree silhouette while turning its
                     # living foliage into a dry, low-saturation Wastes canopy.
@@ -258,11 +269,81 @@ function New-TrunkSheet {
 }
 
 function New-TreeTops {
-    New-RecoloredVanillaTreeAtlas 'Vanilla-ForestTree-Tops.png' 'Content/Tiles/DeadForestTree_Tops.png'
+	# Terraria's top atlas is three 80x80 frames with two pixels of horizontal
+	# padding. Draw only the woody continuation of a familiar forest tree. A
+	# colour-key pass over the vanilla crowns proved too fragile: dark leaf-edge
+	# pixels were mistaken for bark and rebuilt the rejected brown canopy.
+	$canvas = New-Canvas 246 82
+	$g = $canvas.Graphics
+	$frames = @(
+		@(
+			@([System.Drawing.Point]::new(40,80),[System.Drawing.Point]::new(40,51),[System.Drawing.Point]::new(37,31),[System.Drawing.Point]::new(35,16)),
+			@([System.Drawing.Point]::new(39,53),[System.Drawing.Point]::new(28,38),[System.Drawing.Point]::new(20,23),[System.Drawing.Point]::new(18,10)),
+			@([System.Drawing.Point]::new(39,43),[System.Drawing.Point]::new(51,31),[System.Drawing.Point]::new(58,18),[System.Drawing.Point]::new(58,8)),
+			@([System.Drawing.Point]::new(26,35),[System.Drawing.Point]::new(16,31),[System.Drawing.Point]::new(10,24)),
+			@([System.Drawing.Point]::new(52,29),[System.Drawing.Point]::new(65,26),[System.Drawing.Point]::new(71,19))
+		),
+		@(
+			@([System.Drawing.Point]::new(40,80),[System.Drawing.Point]::new(39,53),[System.Drawing.Point]::new(42,34),[System.Drawing.Point]::new(43,12)),
+			@([System.Drawing.Point]::new(40,58),[System.Drawing.Point]::new(27,47),[System.Drawing.Point]::new(20,33),[System.Drawing.Point]::new(19,17)),
+			@([System.Drawing.Point]::new(41,46),[System.Drawing.Point]::new(55,38),[System.Drawing.Point]::new(65,25),[System.Drawing.Point]::new(69,12)),
+			@([System.Drawing.Point]::new(25,43),[System.Drawing.Point]::new(13,39),[System.Drawing.Point]::new(8,31)),
+			@([System.Drawing.Point]::new(57,35),[System.Drawing.Point]::new(71,34),[System.Drawing.Point]::new(75,27))
+		),
+		@(
+			@([System.Drawing.Point]::new(40,80),[System.Drawing.Point]::new(41,55),[System.Drawing.Point]::new(38,37),[System.Drawing.Point]::new(40,18),[System.Drawing.Point]::new(38,7)),
+			@([System.Drawing.Point]::new(40,59),[System.Drawing.Point]::new(29,49),[System.Drawing.Point]::new(19,35),[System.Drawing.Point]::new(14,20)),
+			@([System.Drawing.Point]::new(39,48),[System.Drawing.Point]::new(51,41),[System.Drawing.Point]::new(59,28),[System.Drawing.Point]::new(62,15)),
+			@([System.Drawing.Point]::new(22,39),[System.Drawing.Point]::new(11,38),[System.Drawing.Point]::new(6,31)),
+			@([System.Drawing.Point]::new(54,35),[System.Drawing.Point]::new(68,30),[System.Drawing.Point]::new(74,22))
+		)
+	)
+
+	for ($frame = 0; $frame -lt 3; $frame++) {
+		$offsetX = $frame * 82
+		for ($limb = 0; $limb -lt $frames[$frame].Count; $limb++) {
+			$points = [System.Drawing.Point[]]@($frames[$frame][$limb] | ForEach-Object {
+				[System.Drawing.Point]::new($_.X + $offsetX, $_.Y)
+			})
+			$baseWidth = if ($limb -eq 0) { 7 } elseif ($limb -lt 3) { 5 } else { 3 }
+			Draw-TaperedLimb $g $points $baseWidth 1
+		}
+		Add-Knot $g ($offsetX + 40) 48 4
+	}
+	Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/DeadForestTree_Tops.png')
 }
 
 function New-TreeBranches {
-    New-RecoloredVanillaTreeAtlas 'Vanilla-ForestTree-Branches.png' 'Content/Tiles/DeadForestTree_Branches.png'
+	# Three rows of paired 40x40 side-branch frames, separated by two-pixel
+	# padding. The inner end meets Terraria's 16px trunk; the outer end tapers
+	# into dry twigs instead of a leaf clump.
+	$canvas = New-Canvas 84 126
+	$g = $canvas.Graphics
+	for ($variant = 0; $variant -lt 3; $variant++) {
+		$top = $variant * 42
+		$rise = @(8, 3, 12)[$variant]
+		$leftMain = [System.Drawing.Point[]]@(
+			[System.Drawing.Point]::new(40,$top+27),
+			[System.Drawing.Point]::new(29,$top+22),
+			[System.Drawing.Point]::new(18,$top+15),
+			[System.Drawing.Point]::new(7,$top+$rise))
+		$leftFork = [System.Drawing.Point[]]@(
+			[System.Drawing.Point]::new(22,$top+18),
+			[System.Drawing.Point]::new(15,$top+8),
+			[System.Drawing.Point]::new(13,$top+3))
+		Draw-TaperedLimb $g $leftMain 5 1
+		Draw-TaperedLimb $g $leftFork 3 1
+
+		$rightMain = [System.Drawing.Point[]]@($leftMain | ForEach-Object {
+			[System.Drawing.Point]::new(83 - $_.X, $_.Y)
+		})
+		$rightFork = [System.Drawing.Point[]]@($leftFork | ForEach-Object {
+			[System.Drawing.Point]::new(83 - $_.X, $_.Y)
+		})
+		Draw-TaperedLimb $g $rightMain 5 1
+		Draw-TaperedLimb $g $rightFork 3 1
+	}
+	Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/DeadForestTree_Branches.png')
 }
 
 function New-TreeRoots {
@@ -329,6 +410,6 @@ function New-RootWall {
 New-TrunkSheet
 New-TreeTops
 New-TreeBranches
-New-TreeRoots
+# Ordinary Wastes trees deliberately have no separate root-flare overlay.
 New-GrassRootSkirt
 Write-Host 'Generated native-scale Wastes tree trunks, crowns, and branches.'
