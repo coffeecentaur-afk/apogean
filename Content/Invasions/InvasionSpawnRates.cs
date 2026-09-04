@@ -6,27 +6,36 @@ using apogean.Content.Factions;
 namespace apogean.Content.Invasions
 {
 	/// <summary>
-	/// While a corp faction is Hostile (its invasion is pending), boosts spawn weight for
-	/// that faction's registered NPCs - the same mechanism vanilla invasions use to flood
-	/// spawns near the player instead of a scripted wave list.
+	/// Kessler's assessment temporarily owns ordinary surface spawns. It does not follow players
+	/// underground, and it does not leave faction enemies in the pool after the event completes.
 	/// </summary>
-	public class InvasionSpawnRates : GlobalNPC
+	public sealed class InvasionSpawnRates : GlobalNPC
 	{
-		private const float HostileSpawnBoost = 0.3f;
-
 		public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
 		{
 			FactionProgression progression = ModContent.GetInstance<FactionProgression>();
+			if (!progression.IsKesslerAssessmentActive || !spawnInfo.Player.ZoneOverworldHeight)
+				return;
 
-			foreach (ApogeanFaction faction in FactionProgression.CorpFactions)
-			{
-				if (progression.GetRelation(faction) != FactionRelation.Hostile) continue;
+			IReadOnlyDictionary<int, float> kesslerPool = InvasionNpcRegistry.GetSpawnPool(
+				ApogeanFaction.Kessler,
+				progression);
+			if (kesslerPool.Count == 0)
+				return;
 
-				foreach (int npcType in InvasionNpcRegistry.SpawnPools[faction])
-				{
-					pool[npcType] = pool.TryGetValue(npcType, out float weight) ? weight + HostileSpawnBoost : HostileSpawnBoost;
-				}
-			}
+			pool.Clear();
+			foreach ((int npcType, float weight) in kesslerPool)
+				pool[npcType] = weight;
+		}
+
+		public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
+		{
+			FactionProgression progression = ModContent.GetInstance<FactionProgression>();
+			if (!progression.IsKesslerAssessmentActive || !player.ZoneOverworldHeight)
+				return;
+
+			spawnRate = System.Math.Min(spawnRate, 45);
+			maxSpawns = System.Math.Max(maxSpawns, 6);
 		}
 	}
 }

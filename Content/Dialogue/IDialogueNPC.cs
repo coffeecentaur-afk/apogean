@@ -10,6 +10,12 @@ namespace apogean.Content.Dialogue
 	/// </summary>
 	public interface IDialogueNPC
 	{
+		/// <summary>
+		/// Most dialogue actors suppress vanilla chat. Merchant-like actors may retain right-click
+		/// chat/shop while left-click continues to open the branching Apogean conversation.
+		/// </summary>
+		bool SupportsVanillaChat => false;
+
 		/// <summary>Built once and cached by DialogueSystem; keyed by DialogueNode.Id.</summary>
 		Dictionary<string, DialogueNode> BuildTree();
 

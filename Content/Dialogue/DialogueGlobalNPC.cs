@@ -9,6 +9,7 @@ namespace apogean.Content.Dialogue
 	/// </summary>
 	public class DialogueGlobalNPC : GlobalNPC
 	{
-		public override bool? CanChat(NPC npc) => npc.ModNPC is IDialogueNPC ? false : null;
+		public override bool? CanChat(NPC npc) =>
+			npc.ModNPC is IDialogueNPC dialogueNpc && !dialogueNpc.SupportsVanillaChat ? false : null;
 	}
 }

@@ -36,6 +36,8 @@ The apocalypse is the world's baseline, not a single optional biome.
 
 Each surface biome has at least two authored background compositions. Every composition is a matched transparent far/middle/close parallax set over Terraria's native sky—not a baked panorama. A world's seed selects one composition per biome and that choice remains stable. Terraria's sky and lighting move the same composition through day, night, and solar eclipse so landmarks never jump when time changes. Underground scenery follows tModLoader's separate four-texture transition/ground/rock contract. A later player-facing projector may deliberately cycle a biome's composition; random runtime cycling is forbidden.
 
+The close and middle layers frame ordinary ground-level play first. Important ruins cannot sit so low in the texture that they appear only while flying high above the surface; broad negative sky remains, but the composition's readable landmarks must enter the normal camera from typical terrain elevation.
+
 ### Ruined forest ecology
 
 The Wastes must remain a complete Terraria building biome rather than a set dressing pass.
@@ -43,6 +45,9 @@ The Wastes must remain a complete Terraria building biome rather than a set dres
 - Naturally generated forest terrain is converted to a separate Wastes family: soil, stone, grass, sand, ice, snow, mud, unsafe background walls, dead trees, and dry surface growth. Vanilla green grass, walls, seeds, and related restoration tools remain obtainable and placeable.
 - Restoration is deliberately two-step. Purity converts hostile Maw terrain and unsafe walls into neutral Wastes; a second purity pass converts Wastes into the corresponding vanilla dirt, stone, grass, sand, ice, snow, mud, and natural wall family.
 - Dead forest trees are real trees: they can be chopped, shaken, planted with acorns, regrown, painted, and harvested for ordinary Wood. Their leafless canopy does not emit peaceful falling leaves.
+- A dead tree's struck segment is the visual cut point. It may leave a bounded stump below the strike, but it must never respond by scaling the same complete silhouette down into a shorter tree. Root flares remain narrower than the common spacing between trunks, height and major branch placement vary materially, and natural density leaves regular readable travel gaps instead of forming copy-pasted walls.
+- Wastes grass is a distinct tile family whose cap visibly keys into the soil beneath it at flat runs, slopes, ledges, and single-tile steps. A bright seam, hovering fringe, or exposed gap between grass and soil fails the terrain gate.
+- Dry twigs and brush are brittle ground objects, not two independently swaying grass halves. They either remain rigid and break on contact or use a deliberately authored whole-object reaction; a collision split down the center is invalid.
 - Living Trees retain their wood, roots, rooms, doors, chests, and traversal. World generation removes or replaces their green leaf canopy rather than deleting the structure.
 - Naturally generated unsafe grass and flower walls receive ruined variants. Player-built safe walls and restored green terrain are never globally rewritten after world generation.
 
@@ -160,6 +165,8 @@ The three corporations are visible from day one through sealed landmarks. Their 
 - A hostile Campus raid targets roughly five to eight minutes on a first clear: one to two minutes of persistent security traversal, an optional one-to-two-minute second-in-command confrontation, and a roughly three-and-a-half-to-five-minute CEO encounter. It never pads duration with endlessly respawning guards.
 - Corporate structure blocks, gates, conversion barriers, and a narrow defensive apron resist mining, explosions, actuation, and biome conversion until that corporation's CEO is defeated. Afterward the whole Campus becomes dismantlable so players may reclaim its land for building and transit projects.
 - Each arrival is foreshadowed by an Orbital Omen: a temporary upper-sky craft or signal appears after the prerequisite, then the existing Campus activates and its invasion begins after deliberate player contact rather than an unavoidable surprise.
+- Kessler is the first exception to passive contact: Wall of Flesh immediately announces its impact, then the first dawn observed after an intervening night begins a short live-fire assessment. The encounter contains ten total targets, escalates from Survey Drones to four Reclaimers, uses readable dashed acquisition lines, and deals damage through attacks rather than body collision. Clearing it grants each active participant five Kessler Scrip, opens the public frontage, and stations Quartermaster Mara Venn while the internal armory remains progression-controlled.
+- Mara's standard Terraria contact panel owns requisitions and compatibility-friendly shop access. A separate Briefing button hands off to Apogee's branching dialogue UI on the following UI update; closing vanilla chat during the original chat-button draw frame is forbidden because it can leave stale GUI indices.
 
 The faceless galactic government treats the CEOs as quota-bound colonial houses. A failed company is erased, stripped, and sold to its rivals. The player is the destabilizing factor.
 

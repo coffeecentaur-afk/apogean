@@ -61,6 +61,25 @@ namespace apogean.Content.Structures
 
 		public static void ReArmCompound(ApogeanFaction faction) => SetCompoundSealed(faction, sealedShut: true);
 
+		/// <summary>Returns the fixed public-facing NPC post authored into a saved Campus.</summary>
+		public static bool TryGetPublicPost(ApogeanFaction faction, out Point tilePosition)
+		{
+			tilePosition = Point.Zero;
+			CompoundGen instance = ModContent.GetInstance<CompoundGen>();
+			if (!instance.compoundBounds.TryGetValue(faction, out Rectangle bounds))
+				return false;
+
+			AuthoredStructurePlacement placement = CorporateCampusBlueprints.GetPlacement(instance.Mod, faction, bounds);
+			tilePosition = faction switch
+			{
+				ApogeanFaction.Kessler => new Point(placement.Bounds.Left + 49, placement.SurfaceY - 2),
+				ApogeanFaction.Helix => new Point(placement.Bounds.Left + 96, placement.SurfaceY - 2),
+				ApogeanFaction.Sentrix => new Point(placement.Bounds.Center.X, placement.Bounds.Bottom - 8),
+				_ => Point.Zero
+			};
+			return tilePosition != Point.Zero;
+		}
+
 		private static void SetCompoundSealed(ApogeanFaction faction, bool sealedShut)
 		{
 			CompoundGen instance = ModContent.GetInstance<CompoundGen>();

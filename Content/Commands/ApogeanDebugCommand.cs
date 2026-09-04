@@ -26,7 +26,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|backgroundlab [on|off]|undergroundlab [on|off]|gallery|tilelab|grasslab|vegetationlab|terrainlab|terrainproperties|conversionlab|kesslerlab|terrainitems|exportatlases|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|backgroundlab [on|off]|undergroundlab [on|off]|gallery|tilelab|grasslab|vegetationlab|terrainlab|terrainproperties|conversionlab|kesslerlab|kesslerarrival [status|impact|start|complete]|terrainitems|exportatlases|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -220,6 +220,34 @@ namespace apogean.Content.Commands
 					player.GetModPlayer<TileLabPlayer>().BuildKesslerConstructionAndReport(scheduleCaptureProbe: true);
 					break;
 
+				case "kesslerarrival":
+					if (Main.netMode == NetmodeID.MultiplayerClient)
+					{
+						caller.Reply("Kessler arrival controls are single-player/server-host only.", Color.OrangeRed);
+						break;
+					}
+					if (Main.ActiveWorldFileData?.Name != "Apogee Campus QA")
+					{
+						caller.Reply("Kessler arrival mutation is restricted to the disposable 'Apogee Campus QA' world.", Color.OrangeRed);
+						break;
+					}
+					FactionProgression arrival = ModContent.GetInstance<FactionProgression>();
+					string arrivalAction = args.Length > 1 ? args[1].ToLowerInvariant() : "status";
+					if (arrivalAction == "impact")
+						arrival.DebugSignalKesslerImpact();
+					else if (arrivalAction == "start")
+						arrival.DebugBeginKesslerAssessment();
+					else if (arrivalAction == "complete")
+						arrival.DebugCompleteKesslerAssessment();
+					else if (arrivalAction != "status")
+					{
+						caller.Reply("Use status, impact, start, or complete.", Color.Yellow);
+						break;
+					}
+					string clockReport = KesslerArrivalDiagnostics.ValidateClock();
+					caller.Reply($"Kessler: {arrival.KesslerArrivalStage}; relation {arrival.GetRelation(ApogeanFaction.Kessler)}; remaining {arrival.GetInvasionKillsRemaining(ApogeanFaction.Kessler)}. Clock: {clockReport}.", Color.LightGreen);
+					break;
+
 				case "exportatlases":
 					if (Main.dedServ)
 					{
@@ -248,6 +276,7 @@ namespace apogean.Content.Commands
 				case "flags":
 					FactionProgression progression = ModContent.GetInstance<FactionProgression>();
 					caller.Reply($"Matriarch downed: {progression.MatriarchDowned}", Info);
+					caller.Reply($"Kessler arrival: {progression.KesslerArrivalStage}; kills remaining: {progression.GetInvasionKillsRemaining(ApogeanFaction.Kessler)}", Info);
 					foreach (ApogeanFaction faction in FactionProgression.CorpFactions)
 					{
 						FactionInfo info = FactionInfo.Get(faction);

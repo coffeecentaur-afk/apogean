@@ -1,0 +1,45 @@
+Arrival: {
+	Impact: A Kessler descent hull has broken orbit. The impact rolls across the surface.
+	Assessment: KES/ARSENAL live-fire assessment authorized. Survive the audit.
+	Escalation: Kessler has escalated the assessment. Reclaimer units inbound.
+	Complete: Assessment complete. Kessler's public bulkhead has opened.
+	Hud: KESSLER LIVE-FIRE AUDIT — {0} TARGETS REMAIN
+	HudElite: KESSLER ESCALATION — {0} RECLAIMERS REMAIN
+}
+
+Dialogue: {
+	Quartermaster: {
+		Speaker: Quartermaster Mara Venn
+		VanillaChat: Your audit cleared. That makes you a contractor, not a guest. Requisitions are priced accordingly.
+		RequisitionsButton: Requisitions
+		BriefingButton: Briefing
+		Root:
+			'''
+			Assessment record confirms acceptable field survival. Kessler Armaments recognizes you as
+			an independent contractor with provisional surface clearance. Do not confuse clearance
+			with trust.
+			'''
+		OptionIdentity: "[Ask] Who are you?"
+		OptionAssessment: "[Challenge] You fired on me to offer me work?"
+		OptionScrip: "[Ask] What is Kessler scrip worth?"
+		OptionBack: "[Back] Something else."
+		OptionLeave: "[Leave] End channel."
+		Identity:
+			'''
+			Mara Venn. Quartermaster, surface reclamation detail. I count ammunition, bodies, and
+			promises—in that order, because only the first two survive an audit.
+			'''
+		Assessment:
+			'''
+			We fired near you first. The distinction is the entire test. Anyone can kill a target;
+			Kessler needs contractors who can read a firing solution while standing inside it.
+			'''
+		Scrip:
+			'''
+			Scrip records useful violence performed under Kessler observation. The public counter
+			accepts it for controlled stock. Coins still buy supplies; clearance buys trust.
+			'''
+		Allied: Your contract carries Arsenal priority. That is the closest thing Kessler issues to gratitude.
+		Enemy: This counter is closed to hostile assets. Leave before the turrets finish classifying you.
+	}
+}

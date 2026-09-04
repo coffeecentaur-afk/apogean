@@ -15,6 +15,7 @@ namespace apogean.Content.Dialogue
 	{
 		private UserInterface userInterface;
 		private UIDialogueState dialogueState;
+		private int pendingNpcIndex = -1;
 
 		public NPC ActiveNPC { get; private set; }
 		public Dictionary<string, DialogueNode> ActiveTree { get; private set; }
@@ -33,6 +34,7 @@ namespace apogean.Content.Dialogue
 
 		public override void Unload()
 		{
+			pendingNpcIndex = -1;
 			userInterface = null;
 			dialogueState = null;
 		}
@@ -50,6 +52,16 @@ namespace apogean.Content.Dialogue
 			dialogueState.Refresh(this);
 			userInterface.SetState(dialogueState);
 			Main.playerInventory = false;
+		}
+
+		/// <summary>
+		/// Defers a vanilla-chat-to-custom-dialogue handoff until the next UI update.
+		/// Opening immediately inside OnChatButtonClicked is undone by vanilla's own
+		/// chat-button cleanup later in the same frame.
+		/// </summary>
+		public void RequestOpen(NPC npc)
+		{
+			pendingNpcIndex = npc?.whoAmI ?? -1;
 		}
 
 		public void Advance(int optionIndex, Player player)
@@ -98,6 +110,18 @@ namespace apogean.Content.Dialogue
 
 		public override void UpdateUI(GameTime gameTime)
 		{
+			if (pendingNpcIndex >= 0)
+			{
+				int npcIndex = pendingNpcIndex;
+				pendingNpcIndex = -1;
+				// Closing vanilla NPC chat from inside OnChatButtonClicked can leave
+				// GUIChatDrawInner iterating stale button state for the rest of that
+				// draw frame. Complete both halves of the handoff here instead.
+				Main.CloseNPCChatOrSign();
+				if (npcIndex < Main.maxNPCs && Main.npc[npcIndex].active)
+					Open(Main.npc[npcIndex], Main.LocalPlayer);
+			}
+
 			if (IsOpen)
 			{
 				userInterface?.Update(gameTime);
@@ -106,10 +130,14 @@ namespace apogean.Content.Dialogue
 
 		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
-			int chatIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: NPC Chat"));
-			if (chatIndex == -1) return;
+			// NPC chat no longer has a dedicated public layer in current tModLoader.
+			// Draw before mouse text so tooltips and the cursor remain on top. Falling
+			// back to the end keeps dialogue functional if vanilla renames the anchor.
+			int dialogueIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
+			if (dialogueIndex < 0)
+				dialogueIndex = layers.Count;
 
-			layers.Insert(chatIndex + 1, new LegacyGameInterfaceLayer(
+			layers.Insert(dialogueIndex, new LegacyGameInterfaceLayer(
 				"Apogean: Dialogue",
 				delegate
 				{
