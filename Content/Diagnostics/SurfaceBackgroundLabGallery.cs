@@ -7,30 +7,62 @@ using apogean.Content.Tiles;
 
 namespace apogean.Content.Diagnostics
 {
+	internal enum SurfaceBackgroundLighting
+	{
+		Noon,
+		Midnight,
+		Eclipse
+	}
+
 	/// <summary>Wall-free, low-profile surface fixture for judging authored parallax layers.</summary>
 	internal static class SurfaceBackgroundLabGallery
 	{
 		private const int Width = 190;
 		private const int Height = 62;
 
-		internal static Rectangle Build(Player player)
+		internal static Rectangle Build(Player player, SurfaceBackgroundLighting lighting = SurfaceBackgroundLighting.Noon)
 		{
-			// Keep renderer evidence comparable between runs. Night tint is useful
-			// later, but it hides palette and layer-separation mistakes during art QA.
-			Main.dayTime = true;
-			Main.time = 27000d;
+			// Geometry remains identical across lighting fixtures. These explicit
+			// states prove that Terraria's sky/tint changes without landmark jumps.
+			Main.eclipse = false;
+			switch (lighting)
+			{
+				case SurfaceBackgroundLighting.Midnight:
+					Main.dayTime = false;
+					Main.time = 16200d;
+					break;
+				case SurfaceBackgroundLighting.Eclipse:
+					Main.dayTime = true;
+					Main.time = 27000d;
+					Main.eclipse = true;
+					break;
+				default:
+					Main.dayTime = true;
+					Main.time = 27000d;
+					break;
+			}
 			Main.raining = false;
 
 			Point playerTile = player.Center.ToTileCoordinates();
-			int left = Math.Clamp(playerTile.X - Width / 2, 20, Main.maxTilesX - Width - 20);
-			int top = Math.Clamp(playerTile.Y - 35, 20, Main.maxTilesY - Height - 20);
+			int centerX = Math.Clamp(playerTile.X, Width / 2 + 20, Main.maxTilesX - Width / 2 - 20);
+			// worldSurface is Terraria's underground transition, not the visible
+			// terrain crest. A fixed offset keeps the fixture unambiguously in the
+			// surface background band even when the current X contains a tall lab.
+			int surfaceY = Math.Clamp((int)Main.worldSurface - 50, 80, Main.maxTilesY - Height - 20);
+			int left = centerX - Width / 2;
+			int top = Math.Clamp(surfaceY - Height + 8, 20, Main.maxTilesY - Height - 20);
 			Rectangle bounds = new(left, top, Width, Height);
 			int floorY = bounds.Bottom - 8;
 			int sand = ModContent.TileType<WastesSandCandidate>();
 
 			for (int x = bounds.Left; x < bounds.Right; x++)
 			for (int y = bounds.Top; y < bounds.Bottom; y++)
-				Framing.GetTileSafely(x, y).ClearEverything();
+			{
+				Tile tile = Framing.GetTileSafely(x, y);
+				tile.ClearEverything();
+				tile.WallType = WallID.None;
+				tile.WallColor = PaintID.None;
+			}
 
 			for (int x = bounds.Left; x < bounds.Right; x++)
 			{
@@ -53,7 +85,14 @@ namespace apogean.Content.Diagnostics
 			player.fallStart = (int)(player.position.Y / 16f);
 			player.statLife = player.statLifeMax2;
 			player.immune = true;
-			player.immuneTime = 600;
+			player.immuneNoBlink = true;
+			player.immuneTime = 3600;
+			for (int npcIndex = 0; npcIndex < Main.maxNPCs; npcIndex++)
+			{
+				NPC npc = Main.npc[npcIndex];
+				if (npc.active && !npc.townNPC)
+					npc.active = false;
+			}
 			if (Main.netMode == NetmodeID.Server)
 				NetMessage.SendTileSquare(-1, bounds.Center.X, bounds.Center.Y, Width + 6);
 			return bounds;

@@ -122,6 +122,15 @@ namespace apogean.Content.Diagnostics
 					case "grass":
 						BuildGrassAndReport(scheduleCaptureProbe: true);
 						break;
+					case "forest-background":
+						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Forest, scheduleCaptureProbe: true);
+						break;
+					case "forest-background-night":
+						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Forest, scheduleCaptureProbe: true, SurfaceBackgroundLighting.Midnight);
+						break;
+					case "forest-background-eclipse":
+						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Forest, scheduleCaptureProbe: true, SurfaceBackgroundLighting.Eclipse);
+						break;
 					case "desert-background":
 						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Desert, scheduleCaptureProbe: true);
 						break;
@@ -368,19 +377,22 @@ namespace apogean.Content.Diagnostics
 			_captureProbeDelay = 180;
 		}
 
-		internal void BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome biome, bool scheduleCaptureProbe)
+		internal void BuildSurfaceBackgroundAndReport(
+			RuinedBackgroundBiome biome,
+			bool scheduleCaptureProbe,
+			SurfaceBackgroundLighting lighting = SurfaceBackgroundLighting.Noon)
 		{
 			if (biome is not (RuinedBackgroundBiome.Forest or RuinedBackgroundBiome.Desert or RuinedBackgroundBiome.Jungle or RuinedBackgroundBiome.Snow or RuinedBackgroundBiome.Corruption or RuinedBackgroundBiome.Crimson or RuinedBackgroundBiome.Hallow or RuinedBackgroundBiome.Ocean or RuinedBackgroundBiome.Mushroom))
 				throw new System.InvalidOperationException($"{biome} has no renderer-approved diagnostic surface set.");
 
 			RuinedBackgroundSelectionSystem.Instance.ToggleSurfaceConceptRenderLab(biome, true);
-			Rectangle bounds = SurfaceBackgroundLabGallery.Build(Player);
-			Main.NewText($"{biome} V0 surface-background renderer fixture rebuilt.", Color.LightGreen);
+			Rectangle bounds = SurfaceBackgroundLabGallery.Build(Player, lighting);
+			Main.NewText($"{biome} V0 {lighting} surface-background renderer fixture rebuilt.", Color.LightGreen);
 			if (!scheduleCaptureProbe)
 				return;
 
 			_captureProbeBounds = bounds;
-			_captureProbeName = $"Apogean {biome} V0 Surface Background Capture Probe";
+			_captureProbeName = $"Apogean {biome} V0 {lighting} Surface Background Capture Probe";
 			_captureProbeEntities = false;
 			_captureProbeDelay = 180;
 		}

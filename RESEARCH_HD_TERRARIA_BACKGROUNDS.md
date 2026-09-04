@@ -296,6 +296,23 @@ For each scene, retain one review sheet containing:
 
 Once both variants of both scenes pass, freeze the canvas, layer-role, seam, tint, and review-sheet conventions as the Apogean background art specification. Only then expand to desert, jungle, snow, ocean, world evils, Hallow, underground, and Underworld families.
 
+## Implemented native-detail benchmark — 2026-09-04
+
+The first in-engine proof deliberately exceeded the original 1024-wide planning assumption. Forest, Desert, Jungle, Snow, Corruption, Crimson, Hallow, Ocean, and Glowing Mushroom now each have a transparent V0 far/middle/close set exported at approximately 1,672–2,161 pixels wide and 728–941 pixels high. A custom `PreDrawCloseBackground` compositor repeats those textures at 1:1 source scale, assigns 0.055 / 0.14 / 0.30 horizontal parallax, anchors vertical motion to `Main.worldSurface`, and fills only the lower horizon beneath the transparent layers. This avoids vanilla's enlargement path and keeps the authored high-frequency pixel clusters intact at 2560×1440.
+
+Automated contracts now enforce all of the following across 27 layers:
+
+- at least 1,600×700 source dimensions and no axis above 4,096 pixels;
+- hard alpha only, a transparent top-center sky sample, and preservation of authored transparent regions;
+- exact equality between the first and final pixel columns at every row;
+- at least 128 sampled opaque colors per layer;
+- no more than 32 MiB raw RGBA for the three layers visible in one biome;
+- no more than 256 MiB raw RGBA for the complete diagnostic library.
+
+The accepted library is 162.01 MiB raw RGBA. Live 2560×1440 fixtures verified all nine noon compositions, Forest at midnight and during a solar eclipse, and Mushroom after fixing an exporter defect that had flattened its transparent sky to opaque black. The same fixtures proved that night and eclipse retain the same landmark geometry while a conservative luminance floor keeps the ruins readable.
+
+This is still a renderer benchmark, not the production background switch. The current tModLoader session reported 785.9 MiB for the whole Apogean mod after loading all existing content; that number cannot be attributed to these backgrounds alone, but it is too high to accept without a dedicated before/after residency profile. Production promotion therefore remains gated on style crossfades, one original alternate composition per biome, repeated transition-hitch testing, lossless asset optimization, and a measured resident-memory strategy. Source masters and validation captures remain excluded from the packaged mod through `buildIgnore`.
+
 ## Decision for issue 7
 
 The research ticket can be considered resolved at the specification level with this decision:

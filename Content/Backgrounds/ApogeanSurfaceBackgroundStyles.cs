@@ -50,17 +50,34 @@ namespace apogean.Content.Backgrounds
 	{
 		private static RuinedBackgroundBiome Biome =>
 			RuinedBackgroundSelectionSystem.Instance.SurfaceRenderLabBiome ?? RuinedBackgroundBiome.Forest;
+		private static bool UsesHdRenderer => HighDefinitionSurfaceBackgroundRenderer.Supports(Biome);
 
 		public override void ModifyFarFades(float[] fades, float transitionSpeed) { }
 
-		public override int ChooseFarTexture() =>
-			BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/Diagnostics/{Biome}ConceptV0_Far");
+		public override int ChooseFarTexture() => BackgroundTextureLoader.GetBackgroundSlot(Mod,
+			UsesHdRenderer
+				? "Content/Backgrounds/Diagnostics/HD/Transparent"
+				: $"Content/Backgrounds/Diagnostics/{Biome}ConceptV0_Far");
 
-		public override int ChooseMiddleTexture() =>
-			BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/Diagnostics/{Biome}ConceptV0_Mid");
+		public override int ChooseMiddleTexture() => BackgroundTextureLoader.GetBackgroundSlot(Mod,
+			UsesHdRenderer
+				? "Content/Backgrounds/Diagnostics/HD/Transparent"
+				: $"Content/Backgrounds/Diagnostics/{Biome}ConceptV0_Mid");
 
 		public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b) =>
-			BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Content/Backgrounds/Diagnostics/{Biome}ConceptV0_Close");
+			BackgroundTextureLoader.GetBackgroundSlot(Mod,
+				UsesHdRenderer
+					? "Content/Backgrounds/Diagnostics/HD/Transparent"
+					: $"Content/Backgrounds/Diagnostics/{Biome}ConceptV0_Close");
+
+		public override bool PreDrawCloseBackground(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+		{
+			if (!UsesHdRenderer)
+				return true;
+
+			HighDefinitionSurfaceBackgroundRenderer.DrawV0(spriteBatch, Biome);
+			return false;
+		}
 	}
 
 	public sealed class RuinedGlobalBackgroundStyle : GlobalBackgroundStyle

@@ -159,6 +159,7 @@ Require-SourceContract 'Content/Diagnostics/MawConversionGallery.cs' @(
 Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 	'ApogeanLiveValidation.request',
 	'case "conversion"',
+	'case "forest-background"',
 	'case "desert-background"',
 	'case "jungle-background"',
 	'case "snow-background"',
@@ -167,6 +168,8 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 	'case "hallow-background"',
 	'case "ocean-background"',
 	'case "mushroom-background"',
+	'case "forest-background-night"',
+	'case "forest-background-eclipse"',
 	'case "kessler-construction"',
 	'case "kessler-world"',
 	'BuildMawConversionAndReport(scheduleCaptureProbe: true)',
@@ -178,6 +181,8 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Hallow, scheduleCaptureProbe: true)',
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Ocean, scheduleCaptureProbe: true)',
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Mushroom, scheduleCaptureProbe: true)',
+	'SurfaceBackgroundLighting.Midnight',
+	'SurfaceBackgroundLighting.Eclipse',
 	'BuildKesslerConstructionAndReport(scheduleCaptureProbe: true)',
 	'InspectKesslerWorldAndReport(scheduleCaptureProbe: true)',
 	'LIVE VALIDATION REQUEST CONSUMED',
@@ -185,7 +190,7 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 )
 
 Require-SourceContract 'Tools/Request-LiveValidation.ps1' @(
-	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'jungle-background', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-construction', 'kessler-campus', 'kessler-world')]",
+	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'forest-background', 'forest-background-night', 'forest-background-eclipse', 'desert-background', 'jungle-background', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-construction', 'kessler-campus', 'kessler-world')]",
 	'ApogeanLiveValidation.request',
 	'Set-Content -LiteralPath $requestPath'
 )
@@ -194,6 +199,12 @@ Require-SourceContract 'Content/Backgrounds/RuinedBackgroundSelectionSystem.cs' 
 	'SurfaceRenderLabBiome',
 	'ToggleSurfaceConceptRenderLab'
 )
+
+& (Join-Path $PSScriptRoot 'Test-BackgroundHdContracts.ps1')
+$hdBackgroundContractsPassed = $?
+if (-not $hdBackgroundContractsPassed) {
+	$failures.Add('The surface HD background benchmark failed its native-detail renderer contracts.')
+}
 Require-SourceContract 'Content/Diagnostics/SurfaceBackgroundLabGallery.cs' @(
 	'WastesSandCandidate',
 	'ClearEverything',
