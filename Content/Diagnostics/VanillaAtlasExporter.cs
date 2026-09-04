@@ -36,6 +36,10 @@ namespace apogean.Content.Diagnostics
 			ExportTerrainPair(outputDirectory, "Ice", TileID.IceBlock, "IceUnsafe", WallID.IceUnsafe);
 			ExportTerrainPair(outputDirectory, "Snow", TileID.SnowBlock, "SnowUnsafe", WallID.SnowWallUnsafe);
 			ExportTerrainPair(outputDirectory, "Mud", TileID.Mud, "MudUnsafe", WallID.MudUnsafe);
+			// Corporate construction needs a structural reference, not a terrain mask.
+			// Export the complete vanilla brick atlases so offline generators preserve
+			// Terraria's own adjacency silhouettes and wall-frame topology.
+			ExportTerrainPair(outputDirectory, "GrayBrick", TileID.GrayBrick, "GrayBrick", WallID.GrayBrick);
 			Export(Main.Assets.Request<Texture2D>($"Images/Tiles_{TileID.Trees}", AssetRequestMode.ImmediateLoad).Value,
 				Path.Combine(outputDirectory, "Vanilla-ForestTree-Trunk.png"));
 			Export(Main.Assets.Request<Texture2D>("Images/Tree_Branches_0", AssetRequestMode.ImmediateLoad).Value,

@@ -160,4 +160,12 @@ The surface and ordinary-cave matrix continues one bounded biome composition at 
 - Capture Camera completes without a crash and includes the same custom-sky draw path. Oversized Underworld captures retain Terraria's native `DrawUnderworldBackground(flat: true)` viewport framing and its surrounding black field; the mod does not distort the production panorama to disguise that vanilla camera limitation.
 - `Test-TileLab.ps1`, `Test-VisualContracts.ps1`, `Test-SurfaceRegression.ps1`, and the packaged tModLoader build pass. The only compiler diagnostic remains the pre-existing lowercase mod-class warning.
 
-The next production visual gate is the Kessler construction/furniture gallery: complete block and wall framing first, then faction lighting, the animated flag, and room-scale furniture before campus world generation consumes those assets.
+## Kessler native construction gallery — 2026-09-03
+
+- Exported the installed Gray Brick tile and wall atlases and preserved their real adjacency topology while mapping them to Kessler's gunmetal, burnt-red, signal-orange, and amber palette. The focused generator owns only the Kessler construction family.
+- Added a compact three-bay fixture containing structure block, trim, floor, glazing, beams, bulkhead/window walls, platforms, chairs, table, workbench, lockers, consoles, wall lights, three animated power-armour racks, and the animated shield-and-chevron war standard.
+- Rejected the first render because the 104×42 gallery remained a giant dark shell. The replacement is 92×27, lowers its lights to the occupied plane, and uses near-Terraria-scale room proportions.
+- Proper WorldGen.PlaceObject placement exposed the real furniture failure: all corporate structure tiles were registered tileNoAttach, so every native anchor was rejected. The shared material contract now accepts anchors, and the fixture resolves each registered origin/alternate through TileObjectData and throws if any placement fails.
+- The accepted client render shows the complete furniture row, differentiated bulkhead/window fields, observation slit, walkable platform, animated fixtures, and roof standard. The old bright graph-paper/bamboo grid is absent. Evidence is archived at Art/Validation/2026-09-03-KesslerNativeConstructionRenderLab.png; static world-visual and pixel contracts plus the packaged build pass.
+
+The next production gate is a compact authored Kessler Campus blueprint that consumes this validated set. The existing oversized dark Campus shell is a rejected blockout, not a base to polish.

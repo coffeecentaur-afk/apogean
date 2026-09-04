@@ -216,11 +216,11 @@ namespace apogean.Content.Tiles
 	public sealed class HelixWorkbench : CorporateWorkbench { protected override Color MapColor => new(170, 183, 173); protected override int TileDust => DustID.SilverCoin; }
 	public sealed class SentrixWorkbench : CorporateWorkbench { protected override Color MapColor => new(43, 98, 121); protected override int TileDust => DustID.Electric; }
 
-	public sealed class KesslerLight : CorporateLight { protected override Color MapColor => new(180, 80, 36); protected override int TileDust => DustID.Titanium; protected override Color EmittedLight => new(255, 92, 34); }
+	public sealed class KesslerLight : CorporateLight { protected override Color MapColor => new(192, 113, 65); protected override int TileDust => DustID.Titanium; protected override Color EmittedLight => new(255, 185, 105); }
 	public sealed class HelixLight : CorporateLight { protected override Color MapColor => new(100, 196, 108); protected override int TileDust => DustID.SilverCoin; protected override Color EmittedLight => new(120, 255, 132); }
 	public sealed class SentrixLight : CorporateLight { protected override Color MapColor => new(55, 171, 218); protected override int TileDust => DustID.Electric; protected override Color EmittedLight => new(80, 205, 255); }
 
-	public sealed class KesslerConsole : CorporateConsole { protected override Color MapColor => new(132, 67, 45); protected override int TileDust => DustID.Titanium; protected override Color EmittedLight => new(255, 70, 30); }
+	public sealed class KesslerConsole : CorporateConsole { protected override Color MapColor => new(149, 82, 53); protected override int TileDust => DustID.Titanium; protected override Color EmittedLight => new(255, 135, 70); }
 	public sealed class HelixConsole : CorporateConsole { protected override Color MapColor => new(112, 177, 119); protected override int TileDust => DustID.SilverCoin; protected override Color EmittedLight => new(105, 232, 116); }
 	public sealed class SentrixConsole : CorporateConsole { protected override Color MapColor => new(48, 121, 151); protected override int TileDust => DustID.Electric; protected override Color EmittedLight => new(74, 197, 242); }
 

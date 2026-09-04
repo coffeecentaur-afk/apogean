@@ -273,6 +273,10 @@ foreach ($tileSheet in @(
 foreach ($fixtureSheet in @('KesslerPowerArmorRack', 'HelixSymbioteTank', 'SentrixHologramCore')) {
     Test-PixelSheet -Path (Join-Path $projectRoot "Content/Tiles/$fixtureSheet.png") -ExpectedWidth 54 -ExpectedHeight 288 -MaximumOpaqueColors 16
 }
+Test-PixelSheet -Path (Join-Path $projectRoot 'Content/Tiles/KesslerWarBanner.png') -ExpectedWidth 72 -ExpectedHeight 288 -MaximumOpaqueColors 10
+if ((Get-Content -Raw (Join-Path $projectRoot 'Content/Tiles/CorporateFixtureTiles.cs')) -notmatch 'class KesslerWarBanner') {
+	Add-Failure 'Kessler animated war banner tile is missing'
+}
 
 $corporateFurniture = @{
     'Platform' = @(486, 18)

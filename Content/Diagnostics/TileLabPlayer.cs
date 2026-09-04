@@ -149,6 +149,9 @@ namespace apogean.Content.Diagnostics
 					case "underworld-background":
 						BuildUndergroundBackgroundAndReport(RuinedBackgroundBiome.Underworld, scheduleCaptureProbe: true);
 						break;
+					case "kessler-construction":
+						BuildKesslerConstructionAndReport(scheduleCaptureProbe: true);
+						break;
 					case "kessler-campus":
 						BuildKesslerCampusAndReport(scheduleCaptureProbe: true);
 						break;
@@ -330,6 +333,20 @@ namespace apogean.Content.Diagnostics
 
 			_captureProbeBounds = bounds;
 			_captureProbeName = "Apogean Kessler Campus Capture Probe";
+			_captureProbeEntities = false;
+			_captureProbeDelay = 180;
+		}
+
+		internal void BuildKesslerConstructionAndReport(bool scheduleCaptureProbe)
+		{
+			Rectangle bounds = KesslerConstructionGallery.Build(Player);
+			Main.NewText($"Kessler native construction gallery rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			Main.NewText("Gallery includes block topology, walls, glass, trim, beams, furniture, lighting, power armour, and the animated war banner.", new Color(218, 91, 43));
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Kessler Native Construction Capture Probe";
 			_captureProbeEntities = false;
 			_captureProbeDelay = 180;
 		}

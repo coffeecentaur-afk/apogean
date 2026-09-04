@@ -148,6 +148,7 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 	'case "hallow-background"',
 	'case "ocean-background"',
 	'case "mushroom-background"',
+	'case "kessler-construction"',
 	'BuildMawConversionAndReport(scheduleCaptureProbe: true)',
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Desert, scheduleCaptureProbe: true)',
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Jungle, scheduleCaptureProbe: true)',
@@ -157,12 +158,13 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Hallow, scheduleCaptureProbe: true)',
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Ocean, scheduleCaptureProbe: true)',
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Mushroom, scheduleCaptureProbe: true)',
+	'BuildKesslerConstructionAndReport(scheduleCaptureProbe: true)',
 	'LIVE VALIDATION REQUEST CONSUMED',
 	'LIVE VALIDATION REQUEST FAILED'
 )
 
 Require-SourceContract 'Tools/Request-LiveValidation.ps1' @(
-	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'jungle-background', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-campus')]",
+	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'jungle-background', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-construction', 'kessler-campus')]",
 	'ApogeanLiveValidation.request',
 	'Set-Content -LiteralPath $requestPath'
 )
@@ -176,6 +178,18 @@ Require-SourceContract 'Content/Diagnostics/SurfaceBackgroundLabGallery.cs' @(
 	'ClearEverything',
 	'Teleport'
 )
+Require-SourceContract 'Content/Diagnostics/KesslerConstructionGallery.cs' @(
+	'KesslerBlock', 'KesslerTrim', 'KesslerFloor', 'KesslerGlass', 'KesslerBeam',
+	'KesslerBulkheadWall', 'KesslerWindowWall', 'KesslerPowerArmorRack', 'KesslerWarBanner',
+	'TileObjectData.GetTileData', 'WorldGen.PlaceObject', 'could not place'
+)
+Require-SourceContract 'Content/Tiles/CorporateStructureTiles.cs' @(
+	'Main.tileNoAttach[Type] = false'
+)
+Require-SourceContract 'Tools/New-KesslerConstructionSet.ps1' @(
+	'Vanilla-GrayBrick-Tile.png', 'Vanilla-GrayBrick-Wall.png', 'New-WarBanner'
+)
+Require-PngContract 'Content/Tiles/KesslerWarBanner.png' 72 288 7
 
 # Fixed structures need explicit terrain integration rather than a cleared air moat.
 Require-SourceContract 'Content/Structures/CorporateTerrainIntegration.cs' @(

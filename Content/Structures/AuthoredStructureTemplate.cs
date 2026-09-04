@@ -265,6 +265,7 @@ namespace apogean.Content.Structures
 			nameof(HelixLocker) => ModContent.TileType<HelixLocker>(),
 			nameof(SentrixLocker) => ModContent.TileType<SentrixLocker>(),
 			nameof(KesslerPowerArmorRack) => ModContent.TileType<KesslerPowerArmorRack>(),
+			nameof(KesslerWarBanner) => ModContent.TileType<KesslerWarBanner>(),
 			nameof(HelixSymbioteTank) => ModContent.TileType<HelixSymbioteTank>(),
 			nameof(SentrixHologramCore) => ModContent.TileType<SentrixHologramCore>(),
 			_ => throw new KeyNotFoundException($"Unknown authored-structure tile '{name}'.")

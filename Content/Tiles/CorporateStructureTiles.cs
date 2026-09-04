@@ -21,7 +21,10 @@ namespace apogean.Content.Tiles
 			Main.tileSolid[Type] = true;
 			Main.tileBlockLight[Type] = BlocksLight;
 			Main.tileNoSunLight[Type] = !IsGlass;
-			Main.tileNoAttach[Type] = true;
+			// Campus floors must accept native furniture anchors. Marking structural
+			// tiles NoAttach produced visually solid rooms that rejected every chair,
+			// locker, light, fixture, and banner placed through WorldGen.PlaceObject.
+			Main.tileNoAttach[Type] = false;
 			TileID.Sets.ChecksForMerge[Type] = true;
 			MineResist = 100f;
 			MinPick = 9999;

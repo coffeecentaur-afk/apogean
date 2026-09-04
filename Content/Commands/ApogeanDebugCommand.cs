@@ -26,7 +26,7 @@ namespace apogean.Content.Commands
 
 		public override CommandType Type => CommandType.Chat;
 		public override string Command => "apogean";
-		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|backgroundlab [on|off]|undergroundlab [on|off]|gallery|tilelab|grasslab|vegetationlab|terrainlab|terrainproperties|conversionlab|terrainitems|exportatlases|kit|npc|flags|clear>";
+		public override string Usage => "/apogean <matriarch|lure|gland|engraft [force]|plan|ruin|background|backgroundlab [on|off]|undergroundlab [on|off]|gallery|tilelab|grasslab|vegetationlab|terrainlab|terrainproperties|conversionlab|kesslerlab|terrainitems|exportatlases|kit|npc|flags|clear>";
 		public override string Description => "Apogean playtest helpers";
 
 		public override void Action(CommandCaller caller, string input, string[] args)
@@ -209,6 +209,15 @@ namespace apogean.Content.Commands
 						break;
 					}
 					player.GetModPlayer<TileLabPlayer>().BuildMawConversionAndReport(scheduleCaptureProbe: true);
+					break;
+
+				case "kesslerlab":
+					if (Main.netMode == NetmodeID.MultiplayerClient)
+					{
+						caller.Reply("The destructive Kessler construction gallery is single-player/server-host only.", Color.OrangeRed);
+						break;
+					}
+					player.GetModPlayer<TileLabPlayer>().BuildKesslerConstructionAndReport(scheduleCaptureProbe: true);
 					break;
 
 				case "exportatlases":
