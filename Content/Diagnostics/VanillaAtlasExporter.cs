@@ -46,6 +46,13 @@ namespace apogean.Content.Diagnostics
 				Path.Combine(outputDirectory, "Vanilla-ForestTree-Branches.png"));
 			Export(Main.Assets.Request<Texture2D>("Images/Tree_Tops_0", AssetRequestMode.ImmediateLoad).Value,
 				Path.Combine(outputDirectory, "Vanilla-ForestTree-Tops.png"));
+			for (int style = 0; style <= 31; style++)
+			{
+				Export(Main.Assets.Request<Texture2D>($"Images/Tree_Branches_{style}", AssetRequestMode.ImmediateLoad).Value,
+					Path.Combine(outputDirectory, $"Vanilla-TreeStyle-{style:D2}-Branches.png"));
+				Export(Main.Assets.Request<Texture2D>($"Images/Tree_Tops_{style}", AssetRequestMode.ImmediateLoad).Value,
+					Path.Combine(outputDirectory, $"Vanilla-TreeStyle-{style:D2}-Tops.png"));
+			}
 			ExportItem(outputDirectory, "DirtBlock", ItemID.DirtBlock);
 			ExportItem(outputDirectory, "StoneBlock", ItemID.StoneBlock);
 			ExportItem(outputDirectory, "SandBlock", ItemID.SandBlock);

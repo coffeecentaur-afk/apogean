@@ -22,4 +22,4 @@ if ($rootSource -notmatch 'intentionally draws nothing') {
     Write-Host 'FAIL: legacy global root overlay is active or its ownership is ambiguous.' -ForegroundColor Red
     exit 1
 }
-Write-Host 'PASS: the tree candidate uses segmented ModTree assets and no global whole-tree/root overlay. Its base remains rejected until the live grove is replaced and reviewed.' -ForegroundColor Green
+Write-Host 'PASS: the fixture-pass tree candidate uses segmented ModTree assets, a validated trunk-matched top socket, and no global whole-tree/root overlay. Fresh-world distribution and user review remain required.' -ForegroundColor Green

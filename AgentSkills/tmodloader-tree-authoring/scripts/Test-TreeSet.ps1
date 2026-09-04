@@ -68,13 +68,56 @@ function Test-AlphaTopology([string]$candidatePath, [string]$referencePath) {
     finally { $candidate.Dispose(); $reference.Dispose() }
 }
 
+function Test-TopSocket([string]$path) {
+    $bitmap = [Drawing.Bitmap]::new((Resolve-Path -LiteralPath $path).Path)
+    try {
+        # Ordinary ModTree tops are three 80x80 frames separated by two-pixel
+        # gutters. The renderer rotates each top around the bottom-center wind
+        # anchor, so every frame needs a centered, trunk-width socket that
+        # reaches the final visible row and overlaps upward for several rows.
+        if ($bitmap.Width -ne 246 -or $bitmap.Height -lt 80) { return }
+
+        for ($frame = 0; $frame -lt 3; $frame++) {
+            $centerX = $frame * 82 + 40
+            $bottomOpaque = [Collections.Generic.List[int]]::new()
+            for ($x = $centerX - 8; $x -le $centerX + 8; $x++) {
+                if ($bitmap.GetPixel($x, 79).A -eq 255) { $bottomOpaque.Add($x) }
+            }
+
+            if ($bottomOpaque.Count -lt 7) {
+                $failures.Add("top frame $frame does not reach the wind anchor with a trunk-width socket")
+                continue
+            }
+
+            $socketMidpoint = ($bottomOpaque[0] + $bottomOpaque[$bottomOpaque.Count - 1]) / 2.0
+            if ([Math]::Abs($socketMidpoint - $centerX) -gt 1.5) {
+                $failures.Add("top frame $frame socket is not centered on the trunk/wind anchor")
+            }
+
+            $overlapRows = 0
+            for ($y = 79; $y -ge 68; $y--) {
+                $rowOpaque = 0
+                for ($x = $centerX - 8; $x -le $centerX + 8; $x++) {
+                    if ($bitmap.GetPixel($x, $y).A -eq 255) { $rowOpaque++ }
+                }
+                if ($rowOpaque -ge 5) { $overlapRows++ }
+            }
+            if ($overlapRows -lt 10) {
+                $failures.Add("top frame $frame has only $overlapRows trunk-overlap rows; wind sway can expose its joint")
+            }
+        }
+    }
+    finally { $bitmap.Dispose() }
+}
+
 Test-Texture 'Trunk' $Trunk $ExpectedTrunkWidth $ExpectedTrunkHeight 0
 Test-Texture 'Branches' $Branches $ExpectedBranchWidth $ExpectedBranchHeight $MaximumBranchOpaqueRatio
 Test-Texture 'Tops' $Tops $ExpectedTopWidth $ExpectedTopHeight $MaximumTopOpaqueRatio
+Test-TopSocket $Tops
 if (-not [string]::IsNullOrWhiteSpace($TrunkReference)) { Test-AlphaTopology $Trunk $TrunkReference }
 
 if ($failures.Count -gt 0) {
     $failures | ForEach-Object { Write-Host "FAIL: $_" -ForegroundColor Red }
     exit 1
 }
-Write-Host 'PASS: tree sheets satisfy dimensions, hard alpha, palette, and sparse leafless-mass contracts. Live grove validation is still required.' -ForegroundColor Green
+Write-Host 'PASS: tree sheets satisfy dimensions, hard alpha, palette, sparse leafless mass, and trunk-matched top-socket contracts. Live grove validation is still required.' -ForegroundColor Green

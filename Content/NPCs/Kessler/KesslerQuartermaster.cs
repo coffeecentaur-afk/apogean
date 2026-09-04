@@ -143,7 +143,7 @@ namespace apogean.Content.NPCs.Kessler
 		private static Item ScripPrice(int itemType, int price) => new(itemType)
 		{
 			shopCustomPrice = price,
-			shopSpecialCurrency = global::apogean.apogean.KesslerScripCurrencyId
+			shopSpecialCurrency = global::apogean.Apogean.KesslerScripCurrencyId
 		};
 	}
 }

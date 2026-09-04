@@ -23,6 +23,7 @@ namespace apogean.Content.World
 		// spacing is too dense for it, so conversion keeps at least this many tiles
 		// between roots instead of rendering an unreadable copied thicket.
 		private const int MinimumDeadTreeSpacing = 12;
+		private const int BrokenDeadTreeChance = 7;
 
 		internal static void GenerateWorld(GenerationProgress progress, GameConfiguration config)
 		{
@@ -128,6 +129,7 @@ namespace apogean.Content.World
 			}
 
 			ThinDeadForest(wastesGrass, surfaceY);
+			WeatherDeadForest(wastesGrass, surfaceY);
 			PlantDeadSurface(wastesGrass, maximumY);
 			return changed;
 		}
@@ -156,6 +158,58 @@ namespace apogean.Content.World
 				// suppressing world-generation item drops.
 				WorldGen.KillTile(x, groundY - 1, noItem: true);
 			}
+		}
+
+		/// <summary>
+		/// Turns a small minority of otherwise valid native trees into storm- or
+		/// war-snapped trunks. Cutting a real tree segment delegates the result to
+		/// Terraria's tree logic, so the upper trunk and crown disappear while the
+		/// lower trunk remains independently choppable and continues to drop wood.
+		/// </summary>
+		private static void WeatherDeadForest(int wastesGrass, int[] surfaceY)
+		{
+			for (int x = 30; x < Main.maxTilesX - 30; x++)
+			{
+				int groundY = surfaceY[x];
+				if (groundY <= 1 || !ApogeanWorldPlanSystem.Instance.CanEditTile(x, groundY - 1, WorldEditIntent.WastesConversion))
+					continue;
+
+				Tile ground = Framing.GetTileSafely(x, groundY);
+				Tile root = Framing.GetTileSafely(x, groundY - 1);
+				if (!ground.HasTile || ground.TileType != wastesGrass || !root.HasTile || root.TileType != TileID.Trees)
+					continue;
+
+				// Only evaluate a tree at its actual root. Wide-bottom frames can occupy
+				// neighboring columns, but the continuous vertical trunk owns this column.
+				if (Framing.GetTileSafely(x, groundY - 2).TileType != TileID.Trees)
+					continue;
+
+				int topY = FindTreeTop(x, groundY - 1);
+				int height = groundY - topY;
+				if (height < 8 || !WorldGen.genRand.NextBool(BrokenDeadTreeChance))
+					continue;
+
+				// Preserve roughly half to three quarters of the original trunk. This
+				// reads as occasional environmental damage instead of a forest of stumps.
+				int minimumRemaining = Math.Max(4, height / 2);
+				int maximumRemaining = Math.Max(minimumRemaining, height * 3 / 4);
+				int remainingHeight = WorldGen.genRand.Next(minimumRemaining, maximumRemaining + 1);
+				int cutY = groundY - 1 - remainingHeight;
+				WorldGen.KillTile(x, cutY, noItem: true);
+			}
+		}
+
+		private static int FindTreeTop(int x, int rootY)
+		{
+			int topY = rootY;
+			while (topY > 10)
+			{
+				Tile candidate = Framing.GetTileSafely(x, topY - 1);
+				if (!candidate.HasTile || candidate.TileType != TileID.Trees)
+					break;
+				topY--;
+			}
+			return topY;
 		}
 
 		private static int FindForestSurface(int x, int maximumY)

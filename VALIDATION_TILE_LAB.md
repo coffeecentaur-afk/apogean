@@ -170,6 +170,16 @@ The surface and ordinary-cave matrix continues one bounded biome composition at 
 
 The next production gate is a compact authored Kessler Campus blueprint that consumes this validated set. The existing oversized dark Campus shell is a rejected blockout, not a base to polish.
 
+## Wastes native tree socket and weathering slice — 2026-09-04
+
+- Retired both rejected ordinary-tree treatments: the fixed whole-tree composite with oversized roots and the imported native crown whose width did not match the forest trunk.
+- Authored three sparse 80×80 bare terminal-fork frames directly in the required 246×82 top atlas. Each frame ends in a centered trunk-width socket with twelve rows of overlap and hard alpha; the tree validator now rejects missing, shallow, or off-center sockets.
+- Kept Terraria's segmented trunk, side-branch, height, wind, and chopping paths. In the live Vegetation Lab, the crowns remained seated at 9 mph wind and a native mid-trunk chop removed the supported crown while retaining an independently choppable stump.
+- Added restrained production weathering: about one in seven eligible natural Wastes trees loses an upper native segment during world generation. This creates occasional broken survivors without turning the forest into a field of identical stumps.
+- The isolated tModLoader package build completed with zero warnings and zero errors. Static tree and production-readiness checks pass, and Capture Camera wrote `Apogean Vegetation Lab Capture Probe.png` without an exception or fatal log entry. The accepted fixture evidence is archived at `Art/Validation/2026-09-04-WastesNativeTreeSocketLab.png`.
+
+This family is a fixture pass, not final art approval. User visual signoff and a fresh-world sample proving full-height majority, broken-tree minority, spacing, growth, and save/reload behavior remain required before production promotion.
+
 ## Kessler authored Campus — 2026-09-03
 
 - Replaced the rejected 208x96 tiered shell with a compact 152x72 compound centered inside the existing protected atlas reservation. The reservation still leaves room for patrols, the arrival event, and the walkframe assessment without forcing the building itself to become an oversized box.

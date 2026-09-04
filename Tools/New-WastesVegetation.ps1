@@ -210,17 +210,63 @@ function New-RecoloredVanillaTreeAtlas(
                     $output.SetPixel($x, $y, [System.Drawing.Color]::Transparent)
                     continue
                 }
-                if ($isFoliage) {
-                    # Keep Terraria's familiar tree silhouette while turning its
-                    # living foliage into a dry, low-saturation Wastes canopy.
-                    $color = if ($luminance -lt 30) { $p[0] } elseif ($luminance -lt 48) { $p[1] } elseif ($luminance -lt 65) { $p[2] } elseif ($luminance -lt 82) { $p[3] } elseif ($luminance -lt 100) { $p[4] } elseif ($luminance -lt 120) { $p[5] } else { $p[6] }
-                }
-                else {
-                    $color = if ($luminance -lt 28) { $p[0] } elseif ($luminance -lt 45) { $p[1] } elseif ($luminance -lt 62) { $p[2] } elseif ($luminance -lt 80) { $p[3] } elseif ($luminance -lt 100) { $p[4] } elseif ($luminance -lt 125) { $p[5] } else { $p[6] }
-                }
+                # This helper is now used by exposed branch wood. Keep most of
+                # its values in the same dark range as the segmented trunk;
+                # only the brightest source pixels earn the pale bark accent.
+                $color = if ($luminance -lt 45) { $p[0] } elseif ($luminance -lt 80) { $p[1] } elseif ($luminance -lt 120) { $p[2] } elseif ($luminance -lt 165) { $p[3] } elseif ($luminance -lt 210) { $p[4] } else { $p[5] }
                 $output.SetPixel($x, $y, $color)
             }
         }
+        $output.Save((Join-Path $Root $relativeOutputPath), [System.Drawing.Imaging.ImageFormat]::Png)
+    }
+    finally {
+        $reference.Dispose()
+        $output.Dispose()
+    }
+}
+
+function New-LeaflessTreeTopsFromNativeStyle(
+    [string]$referenceName,
+    [string]$relativeOutputPath
+) {
+    $referencePath = Join-Path $CaptureRoot $referenceName
+    if (-not (Test-Path -LiteralPath $referencePath)) {
+        throw "Missing renderer-exported native tree atlas: $referencePath"
+    }
+
+    $reference = [System.Drawing.Bitmap]::new($referencePath)
+    $output = [System.Drawing.Bitmap]::new(246, 82, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+    try {
+        if (($reference.Width % 3) -ne 0) {
+            throw "Native tree-top atlas width $($reference.Width) is not divisible into three crown frames."
+        }
+
+        $sourceFrameWidth = [int]($reference.Width / 3)
+        # Gem-tree style 31 is Terraria's only native crown whose complete visual
+        # language is exposed branch wood rather than foliage. Fit each of its
+        # three native silhouettes inside the ordinary forest tree's 80x80 crown
+        # contract. Nearest-neighbour sampling keeps every edge pixel-hard.
+        $scale = [Math]::Min(78.0 / $sourceFrameWidth, 78.0 / $reference.Height)
+        $drawWidth = [Math]::Max(1, [int][Math]::Floor($sourceFrameWidth * $scale))
+        $drawHeight = [Math]::Max(1, [int][Math]::Floor($reference.Height * $scale))
+
+        for ($frame = 0; $frame -lt 3; $frame++) {
+            $destinationLeft = ($frame * 82) + [int][Math]::Floor((80 - $drawWidth) / 2)
+            $destinationTop = 80 - $drawHeight
+            for ($dy = 0; $dy -lt $drawHeight; $dy++) {
+                $sourceY = [Math]::Min($reference.Height - 1, [int][Math]::Floor($dy * $reference.Height / $drawHeight))
+                for ($dx = 0; $dx -lt $drawWidth; $dx++) {
+                    $sourceXInFrame = [Math]::Min($sourceFrameWidth - 1, [int][Math]::Floor($dx * $sourceFrameWidth / $drawWidth))
+                    $source = $reference.GetPixel(($frame * $sourceFrameWidth) + $sourceXInFrame, $sourceY)
+                    if ($source.A -eq 0) { continue }
+
+                    $luminance = (0.299 * $source.R) + (0.587 * $source.G) + (0.114 * $source.B)
+                    $color = if ($luminance -lt 45) { $p[0] } elseif ($luminance -lt 80) { $p[1] } elseif ($luminance -lt 120) { $p[2] } elseif ($luminance -lt 165) { $p[3] } elseif ($luminance -lt 210) { $p[4] } else { $p[5] }
+                    $output.SetPixel($destinationLeft + $dx, $destinationTop + $dy, $color)
+                }
+            }
+        }
+
         $output.Save((Join-Path $Root $relativeOutputPath), [System.Drawing.Imaging.ImageFormat]::Png)
     }
     finally {
@@ -268,34 +314,31 @@ function New-TrunkSheet {
     Move-Item -LiteralPath $temporaryPath -Destination $path -Force
 }
 
-function New-TreeTops {
+function New-TrunkMatchedTreeTops {
 	# Terraria's top atlas is three 80x80 frames with two pixels of horizontal
-	# padding. Draw only the woody continuation of a familiar forest tree. A
-	# colour-key pass over the vanilla crowns proved too fragile: dark leaf-edge
-	# pixels were mistaken for bark and rebuilt the rejected brown canopy.
+	# padding. The top is a narrow terminal fork, not a second canopy. Its lower
+	# 20 pixels deliberately overlap the native trunk-width socket so Terraria's
+	# normal wind rotation cannot expose a floating crown seam.
 	$canvas = New-Canvas 246 82
 	$g = $canvas.Graphics
 	$frames = @(
 		@(
-			@([System.Drawing.Point]::new(40,80),[System.Drawing.Point]::new(40,51),[System.Drawing.Point]::new(37,31),[System.Drawing.Point]::new(35,16)),
-			@([System.Drawing.Point]::new(39,53),[System.Drawing.Point]::new(28,38),[System.Drawing.Point]::new(20,23),[System.Drawing.Point]::new(18,10)),
-			@([System.Drawing.Point]::new(39,43),[System.Drawing.Point]::new(51,31),[System.Drawing.Point]::new(58,18),[System.Drawing.Point]::new(58,8)),
-			@([System.Drawing.Point]::new(26,35),[System.Drawing.Point]::new(16,31),[System.Drawing.Point]::new(10,24)),
-			@([System.Drawing.Point]::new(52,29),[System.Drawing.Point]::new(65,26),[System.Drawing.Point]::new(71,19))
+			@([System.Drawing.Point]::new(40,79),[System.Drawing.Point]::new(40,63),[System.Drawing.Point]::new(39,48),[System.Drawing.Point]::new(37,32),[System.Drawing.Point]::new(38,15),[System.Drawing.Point]::new(36,5)),
+			@([System.Drawing.Point]::new(39,47),[System.Drawing.Point]::new(31,37),[System.Drawing.Point]::new(27,24),[System.Drawing.Point]::new(27,13)),
+			@([System.Drawing.Point]::new(38,37),[System.Drawing.Point]::new(47,29),[System.Drawing.Point]::new(52,18),[System.Drawing.Point]::new(52,10)),
+			@([System.Drawing.Point]::new(31,35),[System.Drawing.Point]::new(24,31),[System.Drawing.Point]::new(21,25))
 		),
 		@(
-			@([System.Drawing.Point]::new(40,80),[System.Drawing.Point]::new(39,53),[System.Drawing.Point]::new(42,34),[System.Drawing.Point]::new(43,12)),
-			@([System.Drawing.Point]::new(40,58),[System.Drawing.Point]::new(27,47),[System.Drawing.Point]::new(20,33),[System.Drawing.Point]::new(19,17)),
-			@([System.Drawing.Point]::new(41,46),[System.Drawing.Point]::new(55,38),[System.Drawing.Point]::new(65,25),[System.Drawing.Point]::new(69,12)),
-			@([System.Drawing.Point]::new(25,43),[System.Drawing.Point]::new(13,39),[System.Drawing.Point]::new(8,31)),
-			@([System.Drawing.Point]::new(57,35),[System.Drawing.Point]::new(71,34),[System.Drawing.Point]::new(75,27))
+			@([System.Drawing.Point]::new(40,79),[System.Drawing.Point]::new(40,64),[System.Drawing.Point]::new(41,49),[System.Drawing.Point]::new(42,34),[System.Drawing.Point]::new(41,18),[System.Drawing.Point]::new(43,6)),
+			@([System.Drawing.Point]::new(41,52),[System.Drawing.Point]::new(32,44),[System.Drawing.Point]::new(27,32),[System.Drawing.Point]::new(27,20)),
+			@([System.Drawing.Point]::new(42,40),[System.Drawing.Point]::new(51,34),[System.Drawing.Point]::new(56,24),[System.Drawing.Point]::new(58,14)),
+			@([System.Drawing.Point]::new(50,34),[System.Drawing.Point]::new(56,34),[System.Drawing.Point]::new(61,29))
 		),
 		@(
-			@([System.Drawing.Point]::new(40,80),[System.Drawing.Point]::new(41,55),[System.Drawing.Point]::new(38,37),[System.Drawing.Point]::new(40,18),[System.Drawing.Point]::new(38,7)),
-			@([System.Drawing.Point]::new(40,59),[System.Drawing.Point]::new(29,49),[System.Drawing.Point]::new(19,35),[System.Drawing.Point]::new(14,20)),
-			@([System.Drawing.Point]::new(39,48),[System.Drawing.Point]::new(51,41),[System.Drawing.Point]::new(59,28),[System.Drawing.Point]::new(62,15)),
-			@([System.Drawing.Point]::new(22,39),[System.Drawing.Point]::new(11,38),[System.Drawing.Point]::new(6,31)),
-			@([System.Drawing.Point]::new(54,35),[System.Drawing.Point]::new(68,30),[System.Drawing.Point]::new(74,22))
+			@([System.Drawing.Point]::new(40,79),[System.Drawing.Point]::new(40,63),[System.Drawing.Point]::new(39,50),[System.Drawing.Point]::new(40,35),[System.Drawing.Point]::new(39,20),[System.Drawing.Point]::new(39,7)),
+			@([System.Drawing.Point]::new(39,50),[System.Drawing.Point]::new(48,43),[System.Drawing.Point]::new(53,32),[System.Drawing.Point]::new(54,21)),
+			@([System.Drawing.Point]::new(40,39),[System.Drawing.Point]::new(31,32),[System.Drawing.Point]::new(27,21),[System.Drawing.Point]::new(25,12)),
+			@([System.Drawing.Point]::new(31,31),[System.Drawing.Point]::new(25,30),[System.Drawing.Point]::new(20,25))
 		)
 	)
 
@@ -305,10 +348,27 @@ function New-TreeTops {
 			$points = [System.Drawing.Point[]]@($frames[$frame][$limb] | ForEach-Object {
 				[System.Drawing.Point]::new($_.X + $offsetX, $_.Y)
 			})
-			$baseWidth = if ($limb -eq 0) { 7 } elseif ($limb -lt 3) { 5 } else { 3 }
+			$baseWidth = if ($limb -eq 0) { 11 } elseif ($limb -lt 3) { 5 } else { 3 }
 			Draw-TaperedLimb $g $points $baseWidth 1
 		}
-		Add-Knot $g ($offsetX + 40) 48 4
+
+		# GDI+'s polygon rasterizer does not guarantee coverage on the terminal
+		# coordinate itself. Paint the renderer-facing socket explicitly so the
+		# visible 80th row is centered, trunk-width, and twelve pixels deep.
+		$socketOutline = [System.Drawing.SolidBrush]::new($p[0])
+		$socketBody = [System.Drawing.SolidBrush]::new($p[3])
+		$socketShadow = [System.Drawing.SolidBrush]::new($p[2])
+		$socketLight = [System.Drawing.SolidBrush]::new($p[4])
+		try {
+			$g.FillRectangle($socketOutline, $offsetX + 33, 65, 15, 15)
+			$g.FillRectangle($socketBody, $offsetX + 35, 65, 11, 15)
+			$g.FillRectangle($socketShadow, $offsetX + 35, 66, 3, 13)
+			$g.FillRectangle($socketLight, $offsetX + 43, 66, 1, 12)
+		}
+		finally {
+			$socketOutline.Dispose(); $socketBody.Dispose(); $socketShadow.Dispose(); $socketLight.Dispose()
+		}
+		Add-Knot $g ($offsetX + 40) (48 + $frame * 2) 4
 	}
 	Save-Canvas $canvas (Join-Path $Root 'Content/Tiles/DeadForestTree_Tops.png')
 }
@@ -408,8 +468,12 @@ function New-RootWall {
 }
 
 New-TrunkSheet
-New-TreeTops
-New-TreeBranches
+# The ordinary Wastes tree is intentionally a familiar Terraria forest tree
+# after ecological death, not a bespoke antler silhouette. A directly authored
+# narrow tip fits the native trunk socket; the wider silhouette belongs to the
+# standard side-branch frames and therefore chops with the proper segment.
+New-TrunkMatchedTreeTops
+New-RecoloredVanillaTreeAtlas 'Vanilla-TreeStyle-31-Branches.png' 'Content/Tiles/DeadForestTree_Branches.png'
 # Ordinary Wastes trees deliberately have no separate root-flare overlay.
 New-GrassRootSkirt
-Write-Host 'Generated native-scale Wastes tree trunks, crowns, and branches.'
+Write-Host 'Generated native-scale leafless Wastes tree trunks, crowns, and branches from renderer-exported Terraria atlases.'

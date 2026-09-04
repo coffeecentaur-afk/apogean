@@ -22,6 +22,7 @@ A tree is an engine-composed organism: trunk atlas, branch atlas, top atlas, sap
 
 - Default to Terraria's segmented trunk behavior. Whole-tree multitiles require an explicit gameplay reason.
 - A leafless tree uses wood-only branch and top frames. Recolored leaf clusters are still foliage.
+- Every top frame needs a deep, centered, trunk-width socket at its bottom-center wind anchor. Validate it both statically and at multiple nonzero wind frames.
 - Keep the physical base near vanilla trunk width. Large roots belong to rare set pieces, not every tree.
 - The base's lowest opaque pixels meet the tile surface. Use one draw-offset source; do not compensate in art, `SetDrawPositions`, and a global overlay.
 - Variation comes from height, branch placement, branch choice, and sparse top choices—not repeated mirroring of one complete silhouette.

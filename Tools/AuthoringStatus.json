@@ -14,13 +14,13 @@
     },
     {
       "id": "wastes-leafless-tree",
-      "status": "rejected",
+      "status": "fixture-pass",
       "static": "pass",
       "build": "pass",
-      "liveFixture": "fail",
+      "liveFixture": "pass",
       "production": "pending",
-      "userReview": "rejected",
-      "blockers": ["The current base silhouette failed review; rebuild it from the ordinary vanilla segmented-tree footprint with no foliage."]
+      "userReview": "pending",
+      "blockers": ["Obtain user visual signoff on the narrow trunk-matched terminal forks.", "Generate a fresh production world and verify that occasional snapped trunks remain a minority while full-height trees retain readable spacing and native chopping."]
     },
     {
       "id": "surface-background-v0",

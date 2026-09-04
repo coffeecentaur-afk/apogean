@@ -7,6 +7,10 @@
 - Tops: the choices returned by `ModTree.GetTopTextures`; stable defaults are 80×80. For a dead tree these are sparse wooden crowns, not leaf balls.
 - Sapling: a frame-important tile with its own growth conditions and substrate mapping.
 
+### Top socket contract
+
+Terraria rotates and sways a tree top around its bottom-center attachment. Every ordinary 80×80 top frame must therefore carry opaque trunk-width material to the final visible row, center that material on the frame's horizontal midpoint, and continue it upward deeply enough to overlap the trunk while swaying. A top that is attractive at zero wind but exposes sky between its crown and trunk at another wind frame fails.
+
 ## Candidate record
 
 Record these values beside the generator or source art:
@@ -25,6 +29,7 @@ Record these values beside the generator or source art:
 - root flare floats or covers nearby ground;
 - a chop merely reveals a smaller whole-tree sprite;
 - top frames contain a broad canopy when the concept says leafless;
+- top socket is wider than the trunk, off center, too shallow, or visibly detaches during wind sway;
 - bases overlap at ordinary world-generation spacing;
 - every tree has the same branch heights;
 - black one-pixel twigs disappear against night skies;
