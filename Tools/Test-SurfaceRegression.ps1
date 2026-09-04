@@ -115,6 +115,12 @@ Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' '# Publi
 Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' 'object KesslerWarBanner 42 9 4 4' 'Kessler campus lacks its western animated war standard'
 Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' 'object KesslerWarBanner 106 9 4 4' 'Kessler campus lacks its eastern animated war standard'
 Reject-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' 'frame\s+KesslerBlock\s+32\s+20\s+144\s+54' 'Kessler campus still uses the giant rectangular headquarters shell seen in the failed render'
+Reject-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' 'frame\s+KesslerBlock\s+38\s+16\s+76\s+39' 'Kessler headquarters is still one broad two-deck box'
+Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' 'frame KesslerBlock 38 32 76 23 2' 'Kessler campus lacks its compact logistics deck'
+Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' 'frame KesslerBlock 46 17 60 15 2' 'Kessler campus lacks its stepped operations deck'
+Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' 'frame KesslerBlock 60 7 32 10 2' 'Kessler campus lacks its narrow command crown'
+Require-Match 'Content/Structures/Blueprints/KesslerCampus.apstructure' 'platform KesslerPlatform 75 50 4' 'Kessler campus lacks a traversable platform shaft'
+Require-Match 'Content/Diagnostics/KesslerCampusGallery.cs' 'ValidatePlatformShaft' 'Kessler campus fixture does not validate its vertical traversal route'
 
 if ($failures.Count -gt 0) {
     Write-Host "SURFACE REGRESSION: FAIL ($($failures.Count) problems)" -ForegroundColor Red

@@ -1,6 +1,6 @@
 # Native world and tileset validation — V3
 
-Validated 2026-09-01 through 2026-09-03 against tModLoader `v2026.7.3.0` and Terraria `1.4.4.9`.
+Validated 2026-09-01 through 2026-09-04 against tModLoader `v2026.7.3.0` and Terraria `1.4.4.9`.
 
 ## Package gates
 
@@ -48,6 +48,8 @@ The surface-background fixture is biome-selectable and currently validates Fores
 The vegetation chop assertion accepts Terraria's legitimate short native-tree variants when at least four contiguous trunk cells are present. That is enough to leave supported trunk below and canopy above the tested `rootY - 2` cut, avoiding a random false failure while preserving the actual split-tree contract.
 
 The accepted 2026-09-03 vegetation revision deliberately uses exported vanilla Forest tree masks for trunks, branches, and crowns. Apogean changes the palette and adds a bounded root flare but does not replace Terraria's segmented tree renderer. This keeps ordinary height variation and chopping intact. Rigid Wastes ground-cover props use a whole-object draw contract so player contact cannot shear a twig or shrub down its center, while a separate root-skirt atlas closes the Wastes Grass-to-Soil seam. Approved daylight evidence is retained at `Art/Validation/2026-09-03-WastesVegetationNativeTreeBaseline.png`. `Art/Validation/WastesVegetationLab-wide-trunk-rejected.jpg` is retained as negative evidence for the monolithic braided-trunk approach and is not an approved target.
+
+The accepted 2026-09-04 Kessler revision replaces the broad two-deck headquarters box with three stepped, Terraria-scale volumes and converts the checkpoint towers into traversable two-stage rooms. A four-tile platform shaft connects all levels against an authored bulkhead wall, preventing the blue-sky holes exposed by the first live pass, while a lower mezzanine breaks up the armory floor without creating a solid traversal plug. The deterministic campus fixture verifies every shaft platform before capture. Approved full-compound evidence is retained at `Art/Validation/2026-09-04-KesslerCampusSteppedArchitecture.png`.
 
 ## Maw source-conversion proof
 

@@ -6,103 +6,157 @@ entrance 61 42 3 10
 
 # Clear only occupied architectural volumes. Natural terrain remains outside the compound and
 # CorporateTerrainIntegration keys the foundation directly into the Wastes surface.
-clear 4 13 20 43
-clear 24 31 14 25
-clear 38 5 76 51
-clear 114 31 14 25
-clear 128 13 20 43
-clear 50 0 52 16
+clear 2 9 24 47
+clear 24 29 14 27
+clear 36 0 80 56
+clear 114 29 14 27
+clear 126 9 24 47
 
-# Connected perimeter wall: paired checkpoint towers, overhead patrol walks, open ground-level
-# passages, and terrain-anchored supports establish Kessler territory without a solid screen wall.
-frame KesslerBlock 4 22 20 33 3
-wall KesslerBulkheadWall 7 25 14 27
-wall KesslerWindowWall 9 27 10 7
-fill KesslerFloor 7 39 14 3
-fill KesslerTrim 2 19 24 3
-fill KesslerBeam 11 13 6 6
-erase 4 44 3 8
+# Connected perimeter wall. Each checkpoint is a two-stage guard tower with an elevated watchpod,
+# a lower inspection room, an open ground passage, and an inward patrol walk.
+frame KesslerBlock 4 30 20 25 2
+wall KesslerBulkheadWall 6 32 16 21
+wall KesslerWindowWall 8 34 12 6
+platform KesslerPlatform 6 40 7
+platform KesslerPlatform 15 40 7
+fill KesslerTrim 2 27 24 3
+frame KesslerBlock 8 18 12 12 2
+wall KesslerWindowWall 10 20 8 8
+fill KesslerTrim 6 15 16 3
+fill KesslerBeam 12 9 4 6
 erase 21 44 3 8
-object KesslerLight 9 29 1 1
-object KesslerLight 18 42 1 1
+object KesslerLight 13 21 1 1
+object KesslerLight 9 35 1 1
+object KesslerLight 19 46 1 1
 
-frame KesslerBlock 128 22 20 33 3
-wall KesslerBulkheadWall 131 25 14 27
-wall KesslerWindowWall 133 27 10 7
-fill KesslerFloor 131 39 14 3
-fill KesslerTrim 126 19 24 3
-fill KesslerBeam 135 13 6 6
+frame KesslerBlock 128 30 20 25 2
+wall KesslerBulkheadWall 130 32 16 21
+wall KesslerWindowWall 132 34 12 6
+platform KesslerPlatform 130 40 7
+platform KesslerPlatform 139 40 7
+fill KesslerTrim 126 27 24 3
+frame KesslerBlock 132 18 12 12 2
+wall KesslerWindowWall 134 20 8 8
+fill KesslerTrim 130 15 16 3
+fill KesslerBeam 136 9 4 6
 erase 128 44 3 8
-erase 145 44 3 8
-object KesslerLight 133 29 1 1
-object KesslerLight 142 42 1 1
+object KesslerLight 138 21 1 1
+object KesslerLight 133 35 1 1
+object KesslerLight 142 46 1 1
 
-platform KesslerPlatform 24 37 14
-platform KesslerPlatform 114 37 14
-fill KesslerBeam 27 38 2 14
-fill KesslerBeam 34 38 2 14
-fill KesslerBeam 116 38 2 14
-fill KesslerBeam 123 38 2 14
+platform KesslerPlatform 24 32 14
+platform KesslerPlatform 114 32 14
+fill KesslerBeam 27 33 2 19
+fill KesslerBeam 34 33 2 19
+fill KesslerBeam 116 33 2 19
+fill KesslerBeam 123 33 2 19
 
-# Compact headquarters: a readable two-deck barracks and command block replaces the rejected
-# oversized shell. Its stepped roof, inset glazing, beams, and crown use the validated native set.
-frame KesslerBlock 38 16 76 39 3
-wall KesslerBulkheadWall 41 19 70 33
-wall KesslerWindowWall 44 21 16 8
-wall KesslerWindowWall 68 21 16 8
-wall KesslerWindowWall 92 21 16 8
-fill KesslerFloor 41 34 70 3
-fill KesslerFloor 41 52 70 3
-fill KesslerBeam 61 37 3 15
-fill KesslerBeam 88 37 3 15
-fill KesslerTrim 36 13 80 3
+# Compact headquarters. A logistics/armory deck, divided operations deck, and narrow command
+# crown replace the rejected broad box. Stepped shoulders preserve a readable military silhouette.
+frame KesslerBlock 38 32 76 23 2
+wall KesslerBulkheadWall 40 34 72 18
+wall KesslerWindowWall 41 35 18 5
+wall KesslerWindowWall 64 35 18 5
+wall KesslerWindowWall 86 35 18 5
+wall KesslerWindowWall 107 35 5 5
+fill KesslerFloor 40 52 72 3
+fill KesslerBeam 61 34 3 18
+fill KesslerBeam 84 34 2 18
+fill KesslerBeam 105 34 2 18
+fill KesslerTrim 36 29 80 3
+platform KesslerPlatform 41 43 20
+platform KesslerPlatform 64 43 20
+platform KesslerPlatform 86 43 19
+platform KesslerPlatform 107 43 5
 
-frame KesslerBlock 54 8 44 11 2
-wall KesslerWindowWall 56 10 40 7
-fill KesslerTrim 50 5 52 3
-fill KesslerBeam 73 0 6 5
+frame KesslerBlock 46 17 60 15 2
+wall KesslerBulkheadWall 48 19 56 10
+wall KesslerWindowWall 50 20 15 5
+wall KesslerWindowWall 69 20 14 5
+wall KesslerWindowWall 87 20 15 5
+fill KesslerFloor 48 29 56 3
+fill KesslerBeam 66 19 2 10
+fill KesslerBeam 84 19 2 10
 
-# Public frontage: this west-side opening and quartermaster booth are accessible on day one.
-# The separate internal bulkhead named by `entrance` remains sealed until Kessler arrives.
+frame KesslerBlock 60 7 32 10 2
+wall KesslerBulkheadWall 62 9 28 5
+fill KesslerGlass 63 9 26 1
+fill KesslerFloor 62 14 28 3
+fill KesslerTrim 57 4 38 3
+fill KesslerBeam 74 0 4 4
+
+# Roof-shoulder standards identify the Campus beyond the perimeter without stretching the command
+# crown. Their cloth remains open-air and their poles anchor to compact reinforced plinths.
+fill KesslerTrim 40 13 8 4
+fill KesslerTrim 104 13 8 4
+object KesslerWarBanner 42 9 4 4
+object KesslerWarBanner 106 9 4 4
+
+# Public frontage. The west opening and quartermaster booth are reachable on day one; the separate
+# internal bulkhead named by `entrance` remains sealed until Kessler completes its arrival test.
 erase 38 43 3 9
 fill KesslerGlass 61 42 3 10
 object KesslerConsole 44 50 3 2
 object KesslerTable 51 50 3 2
+object KesslerChair 49 50 1 2 0
 object KesslerChair 55 50 1 2 1
-object KesslerLocker 58 49 2 3
-object KesslerLight 45 41 1 1
-object KesslerLight 57 41 1 1
+object KesslerLocker 57 49 2 3
+object KesslerLight 44 41 1 1
+object KesslerLight 56 41 1 1
 
-# Lower armory and maintenance bays reserve the faction's future quartermaster inventory and
-# provide immediate visual storytelling through animated armour, lockers, and service benches.
-object KesslerPowerArmorRack 67 48 3 4
-object KesslerPowerArmorRack 76 48 3 4
-object KesslerConsole 82 50 3 2
-object KesslerLocker 92 49 2 3
-object KesslerWorkbench 97 51 2 1
-object KesslerPowerArmorRack 104 48 3 4
-object KesslerLight 70 40 1 1
-object KesslerLight 83 40 1 1
-object KesslerLight 97 40 1 1
-object KesslerLight 108 40 1 1
+# Lower armory and maintenance bays. The repeated armor silhouettes are broken into distinct
+# fire-team, maintenance, and stores modules instead of one empty hall.
+object KesslerPowerArmorRack 66 48 3 4
+object KesslerConsole 70 50 3 2
+object KesslerPowerArmorRack 80 48 3 4
+object KesslerLocker 87 49 2 3
+object KesslerWorkbench 91 51 2 1
+object KesslerPowerArmorRack 97 48 3 4
+object KesslerConsole 101 50 3 2
+object KesslerPowerArmorRack 108 48 3 4
+object KesslerLight 68 42 1 1
+object KesslerLight 80 42 1 1
+object KesslerLight 89 42 1 1
+object KesslerLight 99 42 1 1
+object KesslerLight 109 42 1 1
 
-# Upper command deck and standards make the compound identifiable from beyond the perimeter.
-object KesslerConsole 44 32 3 2
-object KesslerTable 53 32 3 2
-object KesslerChair 51 32 1 2 0
-object KesslerChair 57 32 1 2 1
-object KesslerLocker 64 31 2 3
-object KesslerConsole 73 32 3 2
-object KesslerLocker 84 31 2 3
-object KesslerWorkbench 93 33 2 1
-object KesslerConsole 103 32 3 2
-object KesslerLight 47 20 1 1
+# A platform ladder through the secured decks makes the building physically traversable after the
+# bulkhead opens. Platforms remain usable from below and do not become a solid vertical plug.
+erase 75 14 4 38
+wall KesslerBulkheadWall 75 14 4 38
+platform KesslerPlatform 75 15 4
+platform KesslerPlatform 75 20 4
+platform KesslerPlatform 75 25 4
+platform KesslerPlatform 75 30 4
+platform KesslerPlatform 75 35 4
+platform KesslerPlatform 75 40 4
+platform KesslerPlatform 75 45 4
+platform KesslerPlatform 75 50 4
+
+# Operations deck and command crown stay at Terraria room scale. Warm service lamps and consoles
+# create separate pools of activity rather than trying to illuminate one cavernous interior.
+object KesslerConsole 50 27 3 2
+object KesslerTable 56 27 3 2
+object KesslerChair 54 27 1 2 0
+object KesslerChair 60 27 1 2 1
+object KesslerLocker 62 26 2 3
+object KesslerConsole 69 27 3 2
+object KesslerLocker 88 26 2 3
+object KesslerWorkbench 93 28 2 1
+object KesslerConsole 99 27 3 2
+object KesslerLight 52 20 1 1
 object KesslerLight 63 20 1 1
-object KesslerLight 78 20 1 1
-object KesslerLight 94 20 1 1
-object KesslerLight 108 20 1 1
-object KesslerWarBanner 42 9 4 4
-object KesslerWarBanner 106 9 4 4
+object KesslerLight 71 20 1 1
+object KesslerLight 90 20 1 1
+object KesslerLight 101 20 1 1
+
+object KesslerConsole 64 12 3 2
+object KesslerTable 69 12 3 2
+object KesslerChair 68 12 1 2 0
+object KesslerConsole 82 12 3 2
+object KesslerLocker 87 11 2 3
+object KesslerLight 65 10 1 1
+object KesslerLight 86 10 1 1
 
 # Continuous structural footing meets the authored surface datum; the bounded integration pass
 # extends it into uneven natural terrain without clearing an air moat around the building.

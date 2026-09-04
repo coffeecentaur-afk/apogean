@@ -32,12 +32,31 @@ namespace apogean.Content.Diagnostics
 			PlaceWastesGround(left - 12, left + Width + 12, surfaceY);
 			AuthoredStructurePlacement placement = CorporateCampusBlueprints.Place(mod, ApogeanFaction.Kessler, atlasBounds);
 			Frame(new Rectangle(left - 12, top, Width + 24, Height));
+			ValidatePlatformShaft(placement.Bounds.Location);
+			Lighting.Clear();
+			Main.dayTime = true;
+			Main.time = 27000d;
 
 			player.Teleport(new Vector2((placement.Entrance.Center.X + 0.5f) * 16f,
 				(placement.Entrance.Bottom - 2) * 16f), TeleportationStyleID.RodOfDiscord);
 			if (Main.netMode == NetmodeID.Server)
 				NetMessage.SendTileSquare(-1, atlasBounds.Center.X, atlasBounds.Center.Y, Width + 28);
 			return placement.Bounds;
+		}
+
+		private static void ValidatePlatformShaft(Point origin)
+		{
+			int platform = ModContent.TileType<KesslerPlatform>();
+			foreach (int localY in new[] { 15, 20, 25, 30, 35, 40, 45, 50 })
+			{
+				for (int localX = 75; localX < 79; localX++)
+				{
+					Tile tile = Framing.GetTileSafely(origin.X + localX, origin.Y + localY);
+					if (!tile.HasTile || tile.TileType != platform)
+						throw new InvalidOperationException(
+							$"Kessler Campus platform shaft failed at local {localX},{localY}.");
+				}
+			}
 		}
 
 		private static void Clear(Rectangle bounds)
