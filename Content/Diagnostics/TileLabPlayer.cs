@@ -54,7 +54,8 @@ namespace apogean.Content.Diagnostics
 				ConsumeLiveValidationRequest();
 			}
 
-			if (RuinedBackgroundSelectionSystem.Instance.ForestUndergroundRenderLabEnabled)
+			if (RuinedBackgroundSelectionSystem.Instance.UndergroundRenderLabBiome.HasValue ||
+				RuinedBackgroundSelectionSystem.Instance.UnderworldSkyRenderLabEnabled)
 				UndergroundBackgroundLabGallery.LightVisibleBackground(Player);
 
 			if (_automaticBuildDelay >= 0)
@@ -144,6 +145,9 @@ namespace apogean.Content.Diagnostics
 						break;
 					case "mushroom-background":
 						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Mushroom, scheduleCaptureProbe: true);
+						break;
+					case "underworld-background":
+						BuildUndergroundBackgroundAndReport(RuinedBackgroundBiome.Underworld, scheduleCaptureProbe: true);
 						break;
 					case "kessler-campus":
 						BuildKesslerCampusAndReport(scheduleCaptureProbe: true);
@@ -347,11 +351,35 @@ namespace apogean.Content.Diagnostics
 			_captureProbeDelay = 180;
 		}
 
-		internal void BuildUndergroundBackgroundAndReport()
+		internal void BuildUndergroundBackgroundAndReport(RuinedBackgroundBiome biome, bool scheduleCaptureProbe)
 		{
-			Rectangle bounds = UndergroundBackgroundLabGallery.Build(Player);
-			Main.NewText($"Underground background lab rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			bool underworld = biome == RuinedBackgroundBiome.Underworld;
+			if (underworld)
+			{
+				RuinedBackgroundSelectionSystem.Instance.ToggleUndergroundConceptRenderLab(biome, false);
+				RuinedBackgroundSelectionSystem.Instance.ToggleUnderworldSkyRenderLab(true);
+			}
+			else
+			{
+				RuinedBackgroundSelectionSystem.Instance.ToggleUnderworldSkyRenderLab(false);
+				RuinedBackgroundSelectionSystem.Instance.ToggleUndergroundConceptRenderLab(biome, true);
+			}
+			Rectangle bounds = UndergroundBackgroundLabGallery.Build(Player, underworld);
+			string renderer = underworld ? "Underworld custom-sky" : "underground-background";
+			Main.NewText($"{biome} V0 {renderer} renderer fixture rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = underworld
+				? "Apogean Underworld Custom Sky Capture Probe"
+				: $"Apogean {biome} V0 Underground Background Capture Probe";
+			_captureProbeEntities = false;
+			_captureProbeDelay = 180;
 		}
+
+		internal void BuildUndergroundBackgroundAndReport() =>
+			BuildUndergroundBackgroundAndReport(RuinedBackgroundBiome.Forest, scheduleCaptureProbe: false);
 
 		private void RunCaptureProbe()
 		{

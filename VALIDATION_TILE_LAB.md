@@ -148,4 +148,16 @@ The next safe increment is the Wastes tree trunk and canopy family. Broader terr
 - A second cold client pass showed a continuous Terraria-scale back wall with no transparent holes, miniature-room repetition, horizontal seam, or crash. The client log contained no exception, fatal, or invalid-index entry. Evidence is saved at `Art/Validation/2026-09-03-ForestUndergroundRenderLab.jpg`.
 - Restored the lab to off by default and promoted the renderer-approved files to `Content/Backgrounds/Forest/Underground/V0_0.png` through `V0_3.png`. Static tests now require the production copies to remain byte-identical to those candidates.
 
-The next renderer gate is a second Wastes forest surface composition, followed by biome-specific surface/cave families. Faction blocks and furniture remain frozen until the environmental background contract is repeatable across more than one art set.
+The surface and ordinary-cave matrix continues one bounded biome composition at a time. The completed multi-biome surface pass and Forest cave proof establish the repeatable renderer contract required before faction galleries begin.
+
+## Ruined Deep Underworld panorama V0 — 2026-09-03
+
+- Verified against the installed renderer that Hell bypasses `ModUndergroundBackgroundStyle` and draws its own five-depth panorama. The replacement therefore uses a client-only `CustomSky` in `SkyManager.DrawRemainingDepth`'s final `float.MinValue` depth band, after those five layers and before gameplay tiles and entities.
+- Added a dedicated `underworld-background` request fixture at Underworld depth. It enables only the diagnostic compositor, builds a disposable traversal deck with lights, and exercises the same live client and capture path without changing ordinary worlds.
+- Authored a 1024x576 opaque far panorama, a 1024x576 hard-alpha middle overlay, and a 1024x576 hard-alpha close overlay. They preserve the approved Ruined Deep language: distant refinery ruins, fractured cavern vaults, broken pipe spans, slag terraces, rail fragments, winches, hanging cable, and restrained amber lamps.
+- Rejected the first live art pass because pale pixels from the image-generation checker preview survived the alpha conversion and quantized into dense amber streaks. Expanded neutral-light preview removal, regenerated both transparent overlays, and confirmed that the false flecks disappeared without erasing cables or structural highlights.
+- The accepted live render completely replaces the vanilla Hell panorama across a 2560x1400 viewport while remaining behind the fixture deck, player, enemies, lava, minimap, and UI. Evidence is archived at `Art/Validation/2026-09-03-RuinedDeepV0UnderworldRenderLab.png`.
+- Capture Camera completes without a crash and includes the same custom-sky draw path. Oversized Underworld captures retain Terraria's native `DrawUnderworldBackground(flat: true)` viewport framing and its surrounding black field; the mod does not distort the production panorama to disguise that vanilla camera limitation.
+- `Test-TileLab.ps1`, `Test-VisualContracts.ps1`, `Test-SurfaceRegression.ps1`, and the packaged tModLoader build pass. The only compiler diagnostic remains the pre-existing lowercase mod-class warning.
+
+The next production visual gate is the Kessler construction/furniture gallery: complete block and wall framing first, then faction lighting, the animated flag, and room-scale furniture before campus world generation consumes those assets.

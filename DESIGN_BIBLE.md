@@ -77,6 +77,10 @@ Underground backgrounds are routed by both biome and depth. Wastes, desert, snow
 
 Surface compositions may crossfade through their parallax layers. Underground backgrounds use hard texture-set selection, so visible borders require authored transition bands, neutral seam textures, or bounded biome hysteresis rather than random switching.
 
+The global ruined Underworld backdrop is called **the Ruined Deep**. It reads as a buried pre-war refinery and transit horizon swallowed by soot, slag, and lava: distant fractured cavern columns and factory silhouettes, middle-depth broken pipe bridges and towers, and a close field of collapsed rails, winches, cables, and amber work lamps. Its palette is near-black soot, burnt umber, oxidized iron, and restrained amber rather than Maw flesh or Corruption purple. Broad negative space keeps combat and foreground tiles readable. The Burning Root and Stomach remain unique world geometry and never repeat as panorama decoration.
+
+The Underworld does not use `ModUndergroundBackgroundStyle`; Terraria draws a separate five-depth Hell panorama. Apogee replaces that panorama through one client-only custom-sky compositor in the final remaining background depth band, after vanilla Hell layers but before tiles, liquids, entities, and UI. Its opaque far layer and hard-alpha middle/close layers tile horizontally at distinct parallax rates. A dedicated Underworld fixture must prove complete widescreen coverage, clean alpha, layer order, and safe gameplay rendering before the compositor may become the production default.
+
 ## The Maw
 
 The Maw is the hostile biome created by the distributed Broodmass organism, not a recolored Corruption. The neutral Wastes beneath the rest of the world are a separate biome and do not spread.

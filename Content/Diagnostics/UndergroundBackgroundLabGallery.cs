@@ -13,10 +13,13 @@ namespace apogean.Content.Diagnostics
 		private const int Width = 190;
 		private const int Height = 86;
 
-		internal static Rectangle Build(Player player)
+		internal static Rectangle Build(Player player, bool underworld)
 		{
 			int centerX = Math.Clamp(Main.spawnTileX, Width / 2 + 30, Main.maxTilesX - Width / 2 - 30);
-			int centerY = Math.Clamp((int)((Main.worldSurface + Main.rockLayer) * 0.5), Height / 2 + 30, Main.maxTilesY - Height / 2 - 200);
+			int requestedCenterY = underworld
+				? Main.maxTilesY - 150
+				: (int)((Main.worldSurface + Main.rockLayer) * 0.5);
+			int centerY = Math.Clamp(requestedCenterY, Height / 2 + 30, Main.maxTilesY - Height / 2 - 30);
 			Rectangle bounds = new(centerX - Width / 2, centerY - Height / 2, Width, Height);
 			int floorY = bounds.Bottom - 8;
 			int wastesStone = ModContent.TileType<WastesStone>();

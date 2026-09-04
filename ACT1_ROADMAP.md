@@ -13,12 +13,13 @@
 - First approved Wastes snow panorama: an icy far/middle/close decomposition preserving frozen mountains, broken wind machinery, antenna and control towers, a half-buried industrial bunker, exposed pipelines, amber heat lamps, and sparse dead foreground growth. Its original flat lower safety fill was rejected in-engine and replaced with an irregular palette-stepped snow shelf before approval.
 - Validation panoramas explicitly resolve the same global ruined-background slot used by ordinary play and sanitize invalid ModBiome water-style values before invoking Terraria's capture renderer. Live and panorama captures now agree without reintroducing the prior liquid-array crash.
 - First approved Wastes underground-depth set: four native-sized cave textures with an opaque, wrap-safe eroded-strata material, distinct shallow/deep palettes, and an in-engine lighting proof. Unique ruined mine landmarks are reserved for sparse world furniture so they do not repeat every 128 pixels.
+- First approved Ruined Deep Underworld panorama: an opaque refinery horizon plus hard-alpha broken-span and slag/rail overlays, composited in Terraria's final custom-sky depth band so it replaces all five vanilla Hell layers while remaining behind tiles, lava, entities, and UI. The first live art pass exposed residual generated checker pixels as amber visual noise; the corrected extraction passed the second live render and all static gates.
 
 ## Current environmental gate
 
 1. Continue confirming paint, save/load, and multiplayer synchronization properties in focused client fixtures; placement, framing, merge, slope, mining, light, liquid, drops, and native tree chopping have live proofs.
-2. Expand the proven surface Forest/Desert/Jungle/Snow/Corruption/Crimson/Hallow/Ocean/Mushroom V0 and underground Forest V0 contracts across the remaining biome matrix one bounded composition at a time.
-3. After the background contract is stable, validate faction construction sets, the animated Kessler flag, and faction furniture in dedicated galleries before placing them in world generation.
+2. Expand the proven surface Forest/Desert/Jungle/Snow/Corruption/Crimson/Hallow/Ocean/Mushroom V0, underground Forest V0, and Ruined Deep Underworld contracts across the remaining underground biome matrix one bounded composition at a time.
+3. With the surface and Underworld renderer seams proven, validate the Kessler construction set, animated flag, lighting, and furniture in dedicated galleries before placing any of them in world generation.
 
 ## Vertical slices
 

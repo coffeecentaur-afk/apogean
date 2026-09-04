@@ -29,15 +29,18 @@ namespace apogean.Content.Backgrounds
 		private const int VariantCount = 2;
 		private readonly byte[] variants = new byte[(int)RuinedBackgroundBiome.Count];
 		public RuinedBackgroundBiome? SurfaceRenderLabBiome { get; private set; }
+		public RuinedBackgroundBiome? UndergroundRenderLabBiome { get; private set; }
+		public bool UnderworldSkyRenderLabEnabled { get; private set; }
 		public bool ForestConceptRenderLabEnabled => SurfaceRenderLabBiome == RuinedBackgroundBiome.Forest;
-		public bool ForestUndergroundRenderLabEnabled { get; private set; }
+		public bool ForestUndergroundRenderLabEnabled => UndergroundRenderLabBiome == RuinedBackgroundBiome.Forest;
 
 		public static RuinedBackgroundSelectionSystem Instance => ModContent.GetInstance<RuinedBackgroundSelectionSystem>();
 
 		public override void OnWorldLoad()
 		{
 			SurfaceRenderLabBiome = null;
-			ForestUndergroundRenderLabEnabled = false;
+			UndergroundRenderLabBiome = null;
+			UnderworldSkyRenderLabEnabled = false;
 			for (int i = 0; i < variants.Length; i++)
 			{
 				int mixedSeed = unchecked(Main.worldID * 397 ^ (i + 17) * 7919);
@@ -60,16 +63,30 @@ namespace apogean.Content.Backgrounds
 		public bool ToggleForestConceptRenderLab(bool? enabled = null) =>
 			ToggleSurfaceConceptRenderLab(RuinedBackgroundBiome.Forest, enabled);
 
-		public bool ToggleForestUndergroundRenderLab(bool? enabled = null)
+		public bool ToggleUndergroundConceptRenderLab(RuinedBackgroundBiome biome, bool? enabled = null)
 		{
-			ForestUndergroundRenderLabEnabled = enabled ?? !ForestUndergroundRenderLabEnabled;
-			return ForestUndergroundRenderLabEnabled;
+			bool shouldEnable = enabled ?? UndergroundRenderLabBiome != biome;
+			if (shouldEnable)
+				UndergroundRenderLabBiome = biome;
+			else if (UndergroundRenderLabBiome == biome)
+				UndergroundRenderLabBiome = null;
+			return UndergroundRenderLabBiome == biome;
+		}
+
+		public bool ToggleForestUndergroundRenderLab(bool? enabled = null) =>
+			ToggleUndergroundConceptRenderLab(RuinedBackgroundBiome.Forest, enabled);
+
+		public bool ToggleUnderworldSkyRenderLab(bool? enabled = null)
+		{
+			UnderworldSkyRenderLabEnabled = enabled ?? !UnderworldSkyRenderLabEnabled;
+			return UnderworldSkyRenderLabEnabled;
 		}
 
 		public override void OnWorldUnload()
 		{
 			SurfaceRenderLabBiome = null;
-			ForestUndergroundRenderLabEnabled = false;
+			UndergroundRenderLabBiome = null;
+			UnderworldSkyRenderLabEnabled = false;
 		}
 
 		public int Cycle(RuinedBackgroundBiome biome)

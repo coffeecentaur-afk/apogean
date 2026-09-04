@@ -162,7 +162,7 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 )
 
 Require-SourceContract 'Tools/Request-LiveValidation.ps1' @(
-	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'jungle-background', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'kessler-campus')]",
+	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'jungle-background', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-campus')]",
 	'ApogeanLiveValidation.request',
 	'Set-Content -LiteralPath $requestPath'
 )
