@@ -30,6 +30,7 @@ The apocalypse is the world's baseline, not a single optional biome.
 - Jungle panoramas preserve failed Helix research stations and containment infrastructure.
 - Snow panoramas preserve frozen relays, pipelines, and remote industrial sites.
 - Ocean panoramas preserve drowned ports, wrecks, and failed evacuation infrastructure.
+- Glowing Mushroom panoramas show fungal reclamation consuming failed hydroponics, conservatories, nutrient gantries, treatment tanks, and waterworks. Cyan and restrained lavender light remain accents inside a dark cobalt ruin silhouette; the center stays open enough to read traversal and combat.
 - Corruption, Crimson, and Hallow remain immediately recognizable Terraria biomes. Their backgrounds show each force consuming or transforming the same ruined civilization instead of being replaced by the Engraft.
 - The Maw is a second layer of danger: active, biological, ochre-and-charcoal territory growing through the already-dead Wastes.
 
