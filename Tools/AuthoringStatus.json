@@ -14,13 +14,16 @@
     },
     {
       "id": "wastes-leafless-tree",
-      "status": "fixture-pass",
+      "status": "rejected",
       "static": "pass",
       "build": "pass",
       "liveFixture": "pass",
       "production": "pending",
-      "userReview": "pending",
-      "blockers": ["Obtain user visual signoff on the narrow trunk-matched terminal forks.", "Generate a fresh production world and verify that occasional snapped trunks remain a minority while full-height trees retain readable spacing and native chopping."]
+      "userReview": "rejected",
+      "designReview": "approved-A",
+      "designReference": "Art/Reference/2026-09-04-Wastes-Tree-A-Approval.md",
+      "evidenceScope": "Pass fields describe the previous candidate's mechanical checks, not visual acceptance or the unimplemented A design.",
+      "blockers": ["Replace rejected installed terminal-fork art using approved A — Snapped; B/C are not approved.", "Show the native component sheet and assembled comparison before applying the new tree art.", "Repeat static/build/live checks for the new assets, then obtain visual and fresh-world distribution evidence."]
     },
     {
       "id": "surface-background-v0",
