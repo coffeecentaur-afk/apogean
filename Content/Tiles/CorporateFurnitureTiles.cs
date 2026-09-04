@@ -191,7 +191,11 @@ namespace apogean.Content.Tiles
 			TileObjectData.newTile.Width = 2;
 			TileObjectData.newTile.Height = 3;
 			TileObjectData.newTile.Origin = new Point16(0, 2);
-			TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile, 2, 0);
+			// Campus decks deliberately combine full floor blocks and walkable platform catwalks.
+			// Accept both native anchor classes so a locker authored on either surface survives
+			// world generation instead of silently depending on manually painted frame data.
+			TileObjectData.newTile.AnchorBottom = new AnchorData(
+				AnchorType.SolidTile | AnchorType.SolidWithTop, 2, 0);
 			TileObjectData.newTile.CoordinateWidth = 16;
 			TileObjectData.newTile.CoordinatePadding = 2;
 			TileObjectData.newTile.CoordinateHeights = [16, 16, 18];

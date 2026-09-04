@@ -155,6 +155,9 @@ namespace apogean.Content.Diagnostics
 					case "kessler-campus":
 						BuildKesslerCampusAndReport(scheduleCaptureProbe: true);
 						break;
+					case "kessler-world":
+						InspectKesslerWorldAndReport(scheduleCaptureProbe: true);
+						break;
 					default:
 						throw new System.InvalidOperationException($"Unknown live-validation fixture '{request}'.");
 				}
@@ -333,6 +336,20 @@ namespace apogean.Content.Diagnostics
 
 			_captureProbeBounds = bounds;
 			_captureProbeName = "Apogean Kessler Campus Capture Probe";
+			_captureProbeEntities = false;
+			_captureProbeDelay = 180;
+		}
+
+		internal void InspectKesslerWorldAndReport(bool scheduleCaptureProbe)
+		{
+			Rectangle bounds = KesslerWorldGallery.Inspect(Mod, Player, out string report);
+			Main.NewText("Fresh-world Kessler Campus contracts passed.", Color.LightGreen);
+			Mod.Logger.Info($"KESSLER FRESH-WORLD VALIDATION: {report}");
+			if (!scheduleCaptureProbe)
+				return;
+
+			_captureProbeBounds = bounds;
+			_captureProbeName = "Apogean Kessler Fresh World Capture Probe";
 			_captureProbeEntities = false;
 			_captureProbeDelay = 180;
 		}

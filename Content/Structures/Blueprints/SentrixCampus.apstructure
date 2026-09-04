@@ -28,6 +28,10 @@ frame SentrixTrim 4 17 45 10 2
 frame SentrixTrim 127 46 45 10 2
 frame SentrixTrim 4 75 45 10 2
 frame SentrixTrim 127 104 45 10 2
+wall SentrixWindowWall 6 19 41 6
+wall SentrixWindowWall 129 48 41 6
+wall SentrixWindowWall 6 77 41 6
+wall SentrixWindowWall 129 106 41 6
 fill SentrixBeam 4 25 4 8
 fill SentrixBeam 168 54 4 8
 fill SentrixBeam 4 83 4 8

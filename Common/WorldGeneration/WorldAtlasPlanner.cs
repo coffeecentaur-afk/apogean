@@ -33,8 +33,6 @@ namespace apogean.Common.WorldGeneration
 
 			List<ApogeanLandmarkPlan> kesslerCandidates = FindSurfaceCampusCandidates(
 				ApogeanLandmarkKind.KesslerCampus,
-				// Helix's cracked dome and descending laboratory can bridge severe surface relief.
-				// Structural tiles and protected regions remain hard exclusions below.
 				260,
 				120,
 				208,
@@ -42,8 +40,9 @@ namespace apogean.Common.WorldGeneration
 				40,
 				spawnX - mawSide * 1040,
 				900,
-				70,
-				96,
+				54,
+				28,
+				152,
 				occupied,
 				random,
 				findSurface);
@@ -59,6 +58,7 @@ namespace apogean.Common.WorldGeneration
 				1050,
 				45,
 				260,
+				192,
 				occupied,
 				random,
 				findSurface);
@@ -152,6 +152,7 @@ namespace apogean.Common.WorldGeneration
 			int searchRadius,
 			int aboveSurface,
 			int maxSurfaceRelief,
+			int surfaceFootprintWidth,
 			IReadOnlyList<Rectangle> occupied,
 			UnifiedRandom random,
 			Func<int, int> findSurface)
@@ -168,7 +169,8 @@ namespace apogean.Common.WorldGeneration
 				occupied,
 				random,
 				findSurface,
-				96);
+				96,
+				surfaceFootprintWidth);
 			candidates.AddRange(FindSurfaceSites(
 				kind,
 				compactWidth,
@@ -181,7 +183,8 @@ namespace apogean.Common.WorldGeneration
 				occupied,
 				random,
 				findSurface,
-				96));
+				96,
+				surfaceFootprintWidth));
 			return candidates;
 		}
 
@@ -270,7 +273,8 @@ namespace apogean.Common.WorldGeneration
 				occupied,
 				random,
 				findSurface,
-				1);
+				1,
+				width);
 			return candidates.Count > 0 ? candidates[0] : null;
 		}
 
@@ -286,7 +290,8 @@ namespace apogean.Common.WorldGeneration
 			IReadOnlyList<Rectangle> occupied,
 			UnifiedRandom random,
 			Func<int, int> findSurface,
-			int maxCandidates)
+			int maxCandidates,
+			int surfaceFootprintWidth)
 		{
 			List<ApogeanLandmarkPlan> candidates = new();
 			int occupiedRejections = 0;
@@ -312,14 +317,15 @@ namespace apogean.Common.WorldGeneration
 					int centerX = Utils.Clamp(preferredX + sign * distance, edgePadding, Main.maxTilesX - edgePadding);
 					if (!inspected.Add(centerX))
 						continue;
-					int centerY = FindSurfaceBaseline(centerX, width, findSurface);
+					int centerY = FindSurfaceBaseline(centerX, surfaceFootprintWidth, findSurface);
 					Rectangle bounds = new(centerX - width / 2, centerY - aboveSurface, width, height);
 					if (IntersectsReserved(bounds, padding, occupied))
 					{
 						occupiedRejections++;
 						continue;
 					}
-					if (!IsSurfaceWastesCandidate(bounds, findSurface, maxSurfaceRelief, out SurfaceRejection rejection))
+					Rectangle terrainBounds = CenteredSurfaceFootprint(bounds, surfaceFootprintWidth);
+					if (!IsSurfaceWastesCandidate(terrainBounds, findSurface, maxSurfaceRelief, out SurfaceRejection rejection))
 					{
 						terrainRejections++;
 						switch (rejection)
@@ -351,6 +357,12 @@ namespace apogean.Common.WorldGeneration
 					$"protected-structure={structureRejections})";
 			}
 			return candidates;
+		}
+
+		private static Rectangle CenteredSurfaceFootprint(Rectangle reservation, int footprintWidth)
+		{
+			int width = Utils.Clamp(footprintWidth, 16, reservation.Width);
+			return new Rectangle(reservation.Center.X - width / 2, reservation.Top, width, reservation.Height);
 		}
 
 		private static ApogeanLandmarkPlan FindSkySite(

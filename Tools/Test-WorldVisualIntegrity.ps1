@@ -26,6 +26,25 @@ function Require-SourceContract([string]$relativePath, [string[]]$patterns) {
     }
 }
 
+function Require-OrderedSourceContract([string]$relativePath, [string[]]$patterns) {
+    $path = Join-Path $root $relativePath
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+        $failures.Add("Missing implementation seam: $relativePath")
+        return
+    }
+
+    $source = Get-Content -Raw -LiteralPath $path
+    $cursor = 0
+    foreach ($pattern in $patterns) {
+        $index = $source.IndexOf($pattern, $cursor, [System.StringComparison]::Ordinal)
+        if ($index -lt 0) {
+            $failures.Add("$relativePath does not place $pattern after the preceding world-generation pass")
+            return
+        }
+        $cursor = $index + $pattern.Length
+    }
+}
+
 function Require-PngContract([string]$relativePath, [int]$width, [int]$height, [int]$minimumColors) {
     $path = Join-Path $root $relativePath
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
@@ -149,6 +168,7 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 	'case "ocean-background"',
 	'case "mushroom-background"',
 	'case "kessler-construction"',
+	'case "kessler-world"',
 	'BuildMawConversionAndReport(scheduleCaptureProbe: true)',
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Desert, scheduleCaptureProbe: true)',
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Jungle, scheduleCaptureProbe: true)',
@@ -159,12 +179,13 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Ocean, scheduleCaptureProbe: true)',
 	'BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Mushroom, scheduleCaptureProbe: true)',
 	'BuildKesslerConstructionAndReport(scheduleCaptureProbe: true)',
+	'InspectKesslerWorldAndReport(scheduleCaptureProbe: true)',
 	'LIVE VALIDATION REQUEST CONSUMED',
 	'LIVE VALIDATION REQUEST FAILED'
 )
 
 Require-SourceContract 'Tools/Request-LiveValidation.ps1' @(
-	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'jungle-background', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-construction', 'kessler-campus')]",
+	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'desert-background', 'jungle-background', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-construction', 'kessler-campus', 'kessler-world')]",
 	'ApogeanLiveValidation.request',
 	'Set-Content -LiteralPath $requestPath'
 )
@@ -183,8 +204,17 @@ Require-SourceContract 'Content/Diagnostics/KesslerConstructionGallery.cs' @(
 	'KesslerBulkheadWall', 'KesslerWindowWall', 'KesslerPowerArmorRack', 'KesslerWarBanner',
 	'TileObjectData.GetTileData', 'WorldGen.PlaceObject', 'could not place'
 )
+Require-SourceContract 'Content/Diagnostics/KesslerWorldGallery.cs' @(
+	'RequiredWorldName', 'GetLandmark(ApogeanLandmarkKind.KesslerCampus)',
+	'ValidateRectangleType', 'ValidateRectangleEmpty', 'CompoundGen.UnsealCompound',
+	'CompoundGen.ReArmCompound', 'KesslerPowerArmorRack', 'KesslerWarBanner',
+	'InspectTerrainContact', 'supportedColumns < requiredSupport', 'capture.Inflate(2, 2)'
+)
 Require-SourceContract 'Content/Tiles/CorporateStructureTiles.cs' @(
 	'Main.tileNoAttach[Type] = false'
+)
+Require-SourceContract 'Content/Tiles/CorporateFurnitureTiles.cs' @(
+	'AnchorType.SolidTile | AnchorType.SolidWithTop'
 )
 Require-SourceContract 'Tools/New-KesslerConstructionSet.ps1' @(
 	'Vanilla-GrayBrick-Tile.png', 'Vanilla-GrayBrick-Wall.png', 'New-WarBanner'
@@ -242,6 +272,18 @@ foreach ($blueprint in @('KesslerCampus','HelixCampus','SentrixCampus')) {
 }
 Require-SourceContract 'Content/Structures/Blueprints/KesslerCampus.apstructure' @('size 152 72', 'surface 54')
 Require-SourceContract 'Content/Structures/Blueprints/HelixCampus.apstructure' @('surface 45')
+Require-SourceContract 'Common/WorldGeneration/WorldAtlasPlanner.cs' @(
+	'54,', '28,', '152,', 'CenteredSurfaceFootprint(bounds, surfaceFootprintWidth)',
+	'FindSurfaceBaseline(centerX, surfaceFootprintWidth, findSurface)'
+)
+Require-OrderedSourceContract 'Common/WorldGeneration/ApogeanWorldGenerationSystem.cs' @(
+	'new PassLegacy("The Maw"', 'new PassLegacy("A World Picked Clean"',
+	'"Apogean Compounds"', '"Apogean Ruins"'
+)
+Require-SourceContract 'Content/Structures/Blueprints/SentrixCampus.apstructure' @(
+    'wall SentrixWindowWall 6 19 41 6', 'wall SentrixWindowWall 129 48 41 6',
+    'wall SentrixWindowWall 6 77 41 6', 'wall SentrixWindowWall 129 106 41 6'
+)
 
 foreach ($biome in @('Forest','Desert','Jungle','Snow','Corruption','Crimson','Hallow','Ocean','Mushroom','Underworld','Engraft')) {
     Require-PngContract "Content/Backgrounds/$biome/V0_Far.png" 1024 408 5

@@ -23,15 +23,19 @@ namespace apogean.Common.WorldGeneration
 			int finalCleanupIndex = FindPass(tasks, "Final Cleanup");
 			int finalizationIndex = finalCleanupIndex >= 0 ? finalCleanupIndex + 1 : tasks.Count;
 			tasks.Insert(finalizationIndex++, new PassLegacy("The Maw", EngraftSystem.Instance.GenerateWorld));
+
+			// The atlas is now available, so the Wastes pass can respect every saved protection. Run
+			// it before authored buildings: otherwise a campus foundation becomes the first solid tile
+			// seen by the forest-column detector and leaves living grass and trees stranded beneath it.
+			if (ModContent.GetInstance<ApogeanWorldConfig>().RuinedSurface)
+				tasks.Insert(finalizationIndex++, new PassLegacy("A World Picked Clean", RuinedSurfaceSystem.GenerateWorld));
+
 			tasks.Insert(finalizationIndex++, new PassLegacy(
 				"Apogean Compounds",
 				ModContent.GetInstance<CompoundGen>().GenerateWorld));
 			tasks.Insert(finalizationIndex++, new PassLegacy(
 				"Apogean Ruins",
 				ModContent.GetInstance<RuinGen>().GenerateWorld));
-
-			if (ModContent.GetInstance<ApogeanWorldConfig>().RuinedSurface)
-				tasks.Insert(finalizationIndex, new PassLegacy("A World Picked Clean", RuinedSurfaceSystem.GenerateWorld));
 		}
 
 		private static int FindPass(IReadOnlyList<GenPass> tasks, string name)

@@ -217,8 +217,33 @@ namespace apogean.Content.Structures
 			int originY = area.Top + data.Origin.Y;
 			if (!WorldGen.PlaceObject(originX, originY, tileType, mute: true, style: style, alternate: alternate))
 				throw new InvalidOperationException(
-					$"Authored object tile {tileType} could not place at {area} " +
-					$"(origin {originX},{originY}; alternate {alternate}).");
+					$"Authored object {DescribeTileType(tileType)} could not place at {area} " +
+					$"(origin {originX},{originY}; alternate {alternate}). " +
+					$"Bottom anchors: {DescribeBottomAnchors(area)}");
+		}
+
+		private static string DescribeTileType(int tileType)
+		{
+			ModTile modTile = TileLoader.GetTile(tileType);
+			return modTile is null ? tileType.ToString(CultureInfo.InvariantCulture) : $"{modTile.FullName} ({tileType})";
+		}
+
+		private static string DescribeBottomAnchors(Rectangle area)
+		{
+			StringBuilder result = new();
+			for (int x = area.Left; x < area.Right; x++)
+			{
+				if (result.Length > 0)
+					result.Append("; ");
+				Tile tile = Framing.GetTileSafely(x, area.Bottom);
+				bool solid = tile.HasTile && tile.TileType < Main.tileSolid.Length && Main.tileSolid[tile.TileType];
+				bool solidTop = tile.HasTile && tile.TileType < Main.tileSolidTop.Length && Main.tileSolidTop[tile.TileType];
+				bool noAttach = tile.HasTile && tile.TileType < Main.tileNoAttach.Length && Main.tileNoAttach[tile.TileType];
+				result.Append(CultureInfo.InvariantCulture,
+					$"{x},{area.Bottom}=type:{tile.TileType},has:{tile.HasTile},solid:{solid},solidTop:{solidTop}," +
+					$"noAttach:{noAttach},slope:{tile.Slope},half:{tile.IsHalfBlock},actuated:{tile.IsActuated}");
+			}
+			return result.ToString();
 		}
 
 		private static void FrameRegion(Rectangle area)
