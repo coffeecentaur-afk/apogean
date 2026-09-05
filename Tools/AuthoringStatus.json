@@ -61,19 +61,31 @@
       "designReview": "approved-A",
       "designReference": "Art/Reference/2026-09-04-Wastes-Tree-A-Approval.md",
       "evidenceScope": "Pass fields describe the previous candidate's mechanical checks, not visual acceptance or the separate uninstalled A candidate.",
-      "blockers": ["Replace rejected installed terminal-fork art only after the separate wastes-snapped-a-v1 candidate passes review; B/C are not approved.", "Repeat static/build/live checks for the new assets, then obtain visual and fresh-world distribution evidence."]
+      "blockers": ["Replace rejected installed terminal-fork art only after the separate wastes-snapped-a-v2 candidate passes review; B/C are not approved.", "Repeat static/build/live checks for the new assets, then obtain visual and fresh-world distribution evidence."]
     },
     {
       "id": "wastes-snapped-a-v1",
+      "status": "rejected",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "rejected",
+      "evidenceReference": "Art/Candidates/WastesSnappedA-v1/README.md",
+      "evidenceScope": "Exact candidate PNGs and offline native-scale assembly only. Same native trunk/root atlas, three snapped caps, paired short stubs; no production texture, game code, or world changed.",
+      "blockers": ["User rejected jagged edges along intact branches and bright bark speckles; requested consideration of textured holes. Superseded by v2 for review, not installation."]
+    },
+    {
+      "id": "wastes-snapped-a-v2",
       "status": "contracted",
       "static": "pass",
       "build": "pending",
       "liveFixture": "pending",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "Art/Candidates/WastesSnappedA-v1/README.md",
-      "evidenceScope": "Exact candidate PNGs and offline native-scale assembly only. Same native trunk/root atlas, three snapped caps, paired short stubs; no production texture, game code, or world changed.",
-      "blockers": ["Obtain user review of Native-comparison.png before installing/loading this art.", "After approval, test live wind, roots, slopes, paint, multi-height chopping, growth, reload and multiplayer; then check fresh-world spacing."]
+      "evidenceReference": "Art/Candidates/WastesSnappedA-v2/README.md",
+      "evidenceScope": "Review-only native assembly: intact tapered branch contours, five muted browns without cream/amber flecks, small knot and dark hollow cap options. Native dimensions, trunk/top alpha and branch pivots preserved. New focused regression passes v2 and rejects v1. No Content assets, C# code or worlds changed.",
+      "blockers": ["Obtain user review of Native-comparison.png, including revised bark and proposed recesses, before installing/loading this art.", "After approval, test live wind, roots, slopes, paint, multi-height chopping, growth, reload and multiplayer; then check fresh-world spacing. No earlier candidate's live pass transfers."]
     },
     {
       "id": "surface-background-v0",

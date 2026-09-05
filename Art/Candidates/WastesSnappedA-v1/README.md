@@ -1,5 +1,7 @@
 # A — Snapped / native candidate v1
 
+**Review outcome (2026-09-04): rejected.** User identified jagged contours where branches are not broken, disliked the bright bark flecks, and asked about textured holes. The unchanged v1 PNGs remain as comparison evidence. Review the sibling `../WastesSnappedA-v2/` candidate instead; neither candidate is installed. To reproduce v1 components with the versioned exporter, specify `-Revision 1` (default is now 2).
+
 Review only. **Not installed or loaded in tModLoader.** Start with `Native-comparison.png`: the middle panel uses actual candidate pixels at 1×, the right panel enlarges the same cap/joint pixels by 4×, and the left panel labels the resized approved concept. `Native-assembly.png` is the standalone 520×350 offline assembly. Neither is a live screenshot.
 
 ## Asset contract

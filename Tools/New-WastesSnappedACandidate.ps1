@@ -1,11 +1,14 @@
-param([string]$Root = (Split-Path -Parent $PSScriptRoot))
+param(
+    [string]$Root = (Split-Path -Parent $PSScriptRoot),
+    [ValidateSet(1, 2)][int]$Revision = 2
+)
 
 # Review-only export. This tool has deliberately no Promote switch and never writes
 # Content/. Native assembly is an offline drawing-contract preview, not live evidence.
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
-$destination = Join-Path $Root 'Art/Candidates/WastesSnappedA-v1'
+$destination = Join-Path $Root "Art/Candidates/WastesSnappedA-v$Revision"
 New-Item -ItemType Directory -Path $destination -Force | Out-Null
 $sourcePath = Join-Path $Root 'Art/Source/Trees/WastesSnappedA-components-source-v1.png'
 $trunkPath = Join-Path $Root 'Content/Tiles/DeadForestTree.png'
@@ -13,6 +16,7 @@ if ((Get-FileHash -LiteralPath $trunkPath -Algorithm SHA256).Hash -ne 'F472C9779
     throw 'The reviewed trunk input changed. Re-contract this candidate rather than silently changing its material.'
 }
 $source = [Drawing.Bitmap]::new($sourcePath)
+$revisionSource = if ($Revision -eq 2) { [Drawing.Bitmap]::new((Join-Path $Root 'Art/Source/Trees/WastesSnappedA-components-source-v2.png')) } else { $null }
 $trunk = [Drawing.Bitmap]::new($trunkPath)
 $tops = [Drawing.Bitmap]::new(246, 82)
 $branches = [Drawing.Bitmap]::new(84, 126)
@@ -30,13 +34,13 @@ function Quantize([Drawing.Color]$pixel) {
     return $best
 }
 
-function Extract([int[]]$rectangle, [int]$width, [int]$height) {
+function Extract([int[]]$rectangle, [int]$width, [int]$height, $Image = $source) {
     $piece = [Drawing.Bitmap]::new($width, $height)
     for ($y = 0; $y -lt $height; $y++) {
         for ($x = 0; $x -lt $width; $x++) {
             $sx = $rectangle[0] + [int][Math]::Floor(($x + 0.5) * $rectangle[2] / $width)
             $sy = $rectangle[1] + [int][Math]::Floor(($y + 0.5) * $rectangle[3] / $height)
-            $piece.SetPixel($x, $y, (Quantize $source.GetPixel($sx, $sy)))
+            $piece.SetPixel($x, $y, (Quantize $Image.GetPixel($sx, $sy)))
         }
     }
     return ,$piece
@@ -57,6 +61,17 @@ function Graphics-For($bitmap, [string]$background) {
 
 try {
     if ($source.Width -ne 1536 -or $source.Height -ne 1024) { throw 'Source crop contract requires the inspected 1536x1024 source.' }
+    if ($Revision -eq 2) {
+        if ($revisionSource.Width -ne 1536 -or $revisionSource.Height -ne 1024) { throw 'Revision source crop contract requires 1536x1024.' }
+        # Remove the old isolated cream/amber flecks without erasing bark grain,
+        # changing native alpha, widening roots, or recoloring runtime textures.
+        $flecks = @('#ccb17d', '#efdbae', '#d18a20', '#9f5d13') | ForEach-Object { ([Drawing.ColorTranslator]::FromHtml($_)).ToArgb() }
+        for ($y = 0; $y -lt $trunk.Height; $y++) {
+            for ($x = 0; $x -lt $trunk.Width; $x++) {
+                if ($trunk.GetPixel($x, $y).ToArgb() -in $flecks) { $trunk.SetPixel($x, $y, $palette[3]) }
+            }
+        }
+    }
     $caps = @(@(236, 29, 142, 523), @(678, 45, 144, 508), @(1138, 144, 169, 409))
     for ($frame = 0; $frame -lt 3; $frame++) {
         $height = @(58, 56, 40)[$frame]
@@ -81,14 +96,74 @@ try {
                         $pixel = $trunk.GetPixel($x + 2, $atlasY % 16)
                         if ($atlasY -lt 64 -and ($x -eq 0 -or $x -eq 15 -or $piece.GetPixel([Math]::Max(0, $x - 1), $y).A -eq 0 -or $piece.GetPixel([Math]::Min(15, $x + 1), $y).A -eq 0)) { $pixel = $palette[0] }
                     }
+                    if ($Revision -eq 2 -and $pixel.A -gt 0 -and $pixel.R -gt 150) { $pixel = $palette[4] }
                     $tops.SetPixel($frame * 82 + 32 + $x, $atlasY, $pixel)
                 }
             }
         }
         finally { $piece.Dispose() }
     }
+    if ($Revision -eq 2) {
+        # One recessed feature per selected TOP, never in a repeated trunk cell.
+        # The generated source supplies dark wood/rim pixels, not transparency.
+        $recesses = @(
+            @{ Frame = 1; Crop = @(694, 238, 53, 85); Width = 7; Height = 11; X = 38; Y = 43 },
+            @{ Frame = 2; Crop = @(1204, 230, 55, 128); Width = 7; Height = 15; X = 38; Y = 51 }
+        )
+        foreach ($recess in $recesses) {
+            $piece = Extract $recess.Crop $recess.Width $recess.Height $revisionSource
+            try {
+                for ($y = 0; $y -lt $piece.Height; $y++) {
+                    for ($x = 0; $x -lt $piece.Width; $x++) {
+                        $px = $recess.Frame * 82 + $recess.X + $x
+                        $py = $recess.Y + $y
+                        $color = $piece.GetPixel($x, $y)
+                        if ($color.A -ne 255 -or $tops.GetPixel($px, $py).A -ne 255) { throw 'A recess must remain opaque and inside intact wood.' }
+                        $tops.SetPixel($px, $py, $color)
+                    }
+                }
+            }
+            finally { $piece.Dispose() }
+        }
+    }
     $stubs = @(@(112, 708, 352, 200), @(598, 708, 313, 200), @(1053, 708, 346, 200))
+    if ($Revision -eq 2) { $stubs = @(@(114, 709, 349, 188), @(588, 709, 321, 188), @(1043, 709, 348, 188)) }
     for ($variant = 0; $variant -lt 3; $variant++) {
+        if ($Revision -eq 2) {
+            # Preserve native sockets, but fit the source's woody texture into
+            # deliberately continuous contours instead of clipping off a T-post.
+            # x=0..3 is the only fractured end; x=4..23 is intact tapered bark.
+            $upper = @(
+                @(3, 2, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7),
+                @(4, 3, 4, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7),
+                @(2, 1, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7)
+            )[$variant]
+            $lower = @(
+                @(6, 7, 6, 7, 7, 8, 8, 8, 9, 9, 10, 10, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13, 13),
+                @(7, 8, 7, 8, 8, 8, 9, 9, 9, 10, 10, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13),
+                @(5, 6, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 10, 11, 11, 12, 12, 12, 13, 13, 13, 13, 13)
+            )[$variant]
+            $piece = Extract $stubs[$variant] 24 24 $revisionSource
+            try {
+                for ($x = 0; $x -lt 24; $x++) {
+                    $woodRows = @(0..23 | Where-Object { $piece.GetPixel($x, $_).A -eq 255 })
+                    if ($woodRows.Count -eq 0) { throw "Missing revised branch source column $x in variant $variant." }
+                    for ($y = $upper[$x]; $y -le $lower[$x]; $y++) {
+                        $fraction = ($y - $upper[$x]) / [double]($lower[$x] - $upper[$x])
+                        $sy = $woodRows[[Math]::Min($woodRows.Count - 1, [int][Math]::Floor($fraction * ($woodRows.Count - 1))) ]
+                        $pixel = $piece.GetPixel($x, $sy)
+                        # Structured bark ridges, not the old vertical trunk's
+                        # isolated highlights pasted sideways onto a small limb.
+                        if ($pixel.R -gt 150) { $pixel = $palette[4] }
+                        if ($y -eq $upper[$x] -or $y -eq $lower[$x]) { $pixel = $palette[0] }
+                        $branches.SetPixel(16 + $x, $variant * 42 + 14 + $y, $pixel)
+                        $branches.SetPixel(42 + 23 - $x, $variant * 42 + 20 + $y, $pixel)
+                    }
+                }
+            }
+            finally { $piece.Dispose() }
+            continue
+        }
         $piece = Extract $stubs[$variant] 24 16
         try {
             for ($y = 0; $y -lt 16; $y++) {
@@ -111,7 +186,8 @@ try {
     }
     $tops.Save((Join-Path $destination 'DeadForestTree_Tops.png'), [Drawing.Imaging.ImageFormat]::Png)
     $branches.Save((Join-Path $destination 'DeadForestTree_Branches.png'), [Drawing.Imaging.ImageFormat]::Png)
-    Copy-Item -LiteralPath $trunkPath -Destination (Join-Path $destination 'DeadForestTree.png')
+    if ($Revision -eq 2) { $trunk.Save((Join-Path $destination 'DeadForestTree.png'), [Drawing.Imaging.ImageFormat]::Png) }
+    else { Copy-Item -LiteralPath $trunkPath -Destination (Join-Path $destination 'DeadForestTree.png') }
 
     # Atlas inspection board: native 22px trunk pitch / 20px drawn cells.
     $atlasBoard = [Drawing.Bitmap]::new(1120, 1110)
@@ -186,7 +262,7 @@ try {
         $small = [Drawing.Font]::new('Consolas', 11)
         $reference = [Drawing.Bitmap]::new((Join-Path $Root 'Art/Reference/2026-09-04-Wastes-Deadwood-Study.png'))
         try {
-            $bg.DrawString('A / SNAPPED   -   NATIVE ASSET REVIEW', $heading, [Drawing.Brushes]::White, 22, 16)
+            $bg.DrawString("A / SNAPPED V$Revision   -   NATIVE ASSET REVIEW", $heading, [Drawing.Brushes]::White, 22, 16)
             $bg.DrawString('Offline assembly from the candidate PNGs. Not installed. Live wind/chop tests still pending.', $small, [Drawing.Brushes]::LightGray, 22, 49)
             $bg.DrawString('APPROVED A STUDY', $small, [Drawing.Brushes]::White, 22, 88)
             $bg.DrawImage($reference, [Drawing.Rectangle]::new(22, 120, 174, 350), 235, 220, 174, 480, [Drawing.GraphicsUnit]::Pixel)
@@ -214,4 +290,4 @@ try {
     finally { $labelFont.Dispose(); $sg.Dispose(); $scene.Dispose() }
     Write-Host "Candidate-only PNGs exported to $destination; no Content asset changed."
 }
-finally { $source.Dispose(); $trunk.Dispose(); $tops.Dispose(); $branches.Dispose() }
+finally { if ($null -ne $revisionSource) { $revisionSource.Dispose() }; $source.Dispose(); $trunk.Dispose(); $tops.Dispose(); $branches.Dispose() }
