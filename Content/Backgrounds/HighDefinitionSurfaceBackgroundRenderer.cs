@@ -10,10 +10,10 @@ using Terraria.ModLoader;
 namespace apogean.Content.Backgrounds
 {
 	/// <summary>
-	/// Draws source-resolution panorama layers without the vanilla background
-	/// renderer's two-times enlargement. This keeps authored pixels at roughly
-	/// one screen pixel in a 1440p viewport instead of downsampling and enlarging
-	/// the art before it reaches the GPU.
+	/// Draws V0 diagnostic panorama layers outside vanilla's enlarged slots.
+	/// V0 still inherits forced minimum background zoom; scale 1 alone is not
+	/// verified native screen scale. The staged Wastes V1 path compensates that
+	/// zoom and has a separate source-to-live landmark regression.
 	/// </summary>
 	internal static class HighDefinitionSurfaceBackgroundRenderer
 	{
@@ -46,12 +46,22 @@ namespace apogean.Content.Backgrounds
 			};
 		}
 
-		internal static void Unload() => layerSets = null;
+		internal static void Unload()
+		{
+			layerSets = null;
+			WastesLandscapeV1Renderer.Unload();
+		}
 
 		internal static void DrawV0(SpriteBatch spriteBatch, RuinedBackgroundBiome biome, float opacity = 1f)
 		{
 			if (Main.dedServ || Main.mapFullscreen)
 				return;
+			if (biome == RuinedBackgroundBiome.Forest &&
+				WastesLandscapeV1Renderer.EnabledForCurrentWorld)
+			{
+				WastesLandscapeV1Renderer.Draw(spriteBatch, opacity);
+				return;
+			}
 			if (!Supports(biome))
 				throw new ArgumentOutOfRangeException(nameof(biome), biome, "No native-detail surface benchmark is registered.");
 

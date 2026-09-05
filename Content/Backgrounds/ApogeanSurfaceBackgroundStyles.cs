@@ -13,6 +13,8 @@ namespace apogean.Content.Backgrounds
 
 		public override void ModifyFarFades(float[] fades, float transitionSpeed)
 		{
+			if (Biome == RuinedBackgroundBiome.Forest && WastesLandscapeV1Renderer.EnabledForCurrentWorld)
+				WastesLandscapeV1Renderer.Load();
 			// The installed 1.4.4.9+2026.07 runtime passes its already-updated
 			// front-layer alpha array to this hook. Advancing it again makes the close
 			// layer finish before far/middle. The engine owns the whole-style fade.
@@ -72,7 +74,12 @@ namespace apogean.Content.Backgrounds
 			RuinedBackgroundSelectionSystem.Instance.SurfaceRenderLabBiome ?? RuinedBackgroundBiome.Forest;
 		private static bool UsesHdRenderer => HighDefinitionSurfaceBackgroundRenderer.Supports(Biome);
 
-		public override void ModifyFarFades(float[] fades, float transitionSpeed) { }
+		public override void ModifyFarFades(float[] fades, float transitionSpeed)
+		{
+			// Candidate textures are requested only on entering this diagnostic
+			// style, never on every draw or in ordinary production biomes.
+			if (Biome == RuinedBackgroundBiome.Forest) WastesLandscapeV1Renderer.Load();
+		}
 
 		public override int ChooseFarTexture() => BackgroundTextureLoader.GetBackgroundSlot(Mod,
 			UsesHdRenderer

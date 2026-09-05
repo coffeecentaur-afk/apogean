@@ -24,19 +24,19 @@
       "userReview": "accepted",
       "evidenceScope": "User approves composition and authorizes installation; does not validate layer exports, higher-resolution detail, or live rendering.",
       "evidenceReference": "Art/Reference/Backgrounds/2026-09-04/README.md",
-      "blockers": ["Composition approved; five opaque source concepts still require proper layer exports.", "Author true transparent layers and shared geometry/glow masks at target resolution; no concept is installed."]
+      "blockers": ["Composition approved; Wastes has derived hard-alpha V1 layers staged only in the QA world/render lab. Four other opaque concepts still require proper runtime exports.", "Author shared restoration geometry/vegetation and Maw glow masks; composition approval does not certify live assets."]
     },
     {
       "id": "wastes-landscape-export-v1",
       "status": "contracted",
-      "static": "fail",
-      "build": "pending",
+      "static": "pass",
+      "build": "pass",
       "liveFixture": "pending",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "Art/Reference/Backgrounds/2026-09-04/Rejected/README.md",
-      "evidenceScope": "Built-in far-layer export rejected before import: actual 1774x887 RGB, zero transparent pixels. Existing renderer/assets untouched.",
-      "blockers": ["Resolve export workflow; deterministic mask cleanup permission requested, no API fallback used.", "Produce actual native-detail layers, prove alpha/seams/coverage and full live matrix within measured memory budget."]
+      "evidenceReference": "Art/Validation/WastesLandscapeV1/README.md",
+      "evidenceScope": "Three 2048x1280 hard-alpha layers, 30 MiB raw RGBA, scoped to Apogee Native Visual V3/Forest lab. Final live 1440p scale regression passes (111 source / 111 capture pixels); ten camera/lighting samples and three unforced Wastes/green/Jungle routing captures at each of 1080p and 1440p. Full live gate remains pending.",
+      "blockers": ["Complete continuous repeat travel, adjacent fade/scene-priority matrix, and actual Green Solution behavior; inspect lower-ground joins/noise and obtain final visual acceptance.", "Profile hitches/residency before general-world promotion; alternate compositions and matched restoration masks remain pending."]
     },
     {
       "id": "wastes-terrain",
@@ -69,7 +69,7 @@
       "liveFixture": "pending",
       "production": "pending",
       "userReview": "pending",
-      "blockers": ["Several layers remain below the high-detail production target.", "Replace diagnostic last-row vertical stretching with authored vertical coverage.", "Complete pan, altitude, lighting, transition, and real-biome routing matrix."]
+      "blockers": ["Several layers remain below the high-detail production target; Draw(scale:1) alone was disproven as native screen scale by the V1 1440p test.", "Replace diagnostic last-row vertical stretching with authored vertical coverage.", "Complete pan, altitude, lighting, transition, and real-biome routing matrix."]
     },
     {
       "id": "helix-construction-v2",

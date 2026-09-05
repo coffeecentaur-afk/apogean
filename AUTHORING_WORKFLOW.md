@@ -45,3 +45,7 @@ pwsh -File Tools/Invoke-ApogeanContentGate.ps1 -Profile Quest
 ```
 
 An intentionally red gate is useful: it names what is still missing. Never weaken a production threshold merely to make the report green.
+
+## Background lesson retained — 2026-09-04
+
+Measure a source landmark against its actual Windows game capture. A 111-pixel truck became 150 pixels wide despite `Draw(scale:1)`, because Terraria applies forced minimum background zoom and temporarily logical screen dimensions. The scoped correction produced110 pixels without changing the user's zoom. `Tools/Test-WastesLandmarkScale.ps1` retains this red/green regression; `Art/Validation/WastesLandscapeV1/README.md` records the full bounded proof. Never infer native detail from texture dimensions or draw scale alone. Check composition behind real terrain as well as in an empty gallery, and keep art, coverage, routing and performance acceptance separate.

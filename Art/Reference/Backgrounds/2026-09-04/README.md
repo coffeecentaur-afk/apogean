@@ -1,6 +1,6 @@
 # Landscape review — 2026-09-04
 
-Status: **composition approved; installation authorized, export pending**. The user approved these new backgrounds on 2026-09-04 and requested quality comparable to high-quality background mods. No image in this directory is yet used by the game. Built-in image generation produced these originals; full prompts are in [PROMPTS.md](PROMPTS.md).
+Status: **composition approved; derived Wastes layers installed for QA only**. The user approved these new backgrounds on 2026-09-04 and requested quality comparable to high-quality background mods. No opaque concept in this directory is directly used by the game. Wastes now has separately authored and deterministically processed hard-alpha layers; see [live validation](../../../Validation/WastesLandscapeV1/README.md). The other four concepts remain export-pending. Built-in image generation produced these originals; full prompts are in [PROMPTS.md](PROMPTS.md).
 
 The user temporarily put landscapes/backgrounds ahead of implementing the approved A — Snapped tree. Tree A remains approved but unimplemented; these landscape trees do not replace its native atlas.
 
@@ -36,10 +36,12 @@ The first Wastes output was too painterly; the retained refinement simplifies it
 
 The forum's first implemented reactive-scene behavior is **local forest restoration**, not per-block deforestation. The source uses cached nearby grass counts and falls back to Terraria's native forest after enough local restoration. See [validation record](../../../../FOREST_RESTORATION_VALIDATION.md).
 
-Continuous percent-based art blending and a runtime Maw glow-mask transition remain pending. The new art is not installed; existing background defects, including row stretching and missing alternate compositions, are not claimed fixed by this pass.
+Continuous percent-based art blending and a runtime Maw glow-mask transition remain pending. The derived Wastes V1 is installed only in the disposable QA world/Forest render lab. Its three 2048×1280 layers use authored lower strata instead of a stretched last row, and its 1440p native scale was measured against the source. Ordinary-world V0, other biome defects and missing alternate compositions are not claimed fixed by this pass.
 
 ## Export attempt after approval
 
 [Measured resolution research](../../../../RESEARCH_BACKGROUND_RESOLUTION_TARGET.md) distinguishes actual pack dimensions from renderer scale. There is no single community “HD” size. Maintain the current memory budgets until a measured residency change is deliberately adopted.
 
 The first far-layer export failed: requested 3072×1536, returned 1774×887 opaque RGB with a painted checkerboard. It is retained only under [Rejected](Rejected/README.md), excluded from the mod package. No bad export was installed and no lower-resolution enlargement was described as new detail. The read-only pre-import gate is `Tools/Test-SurfaceLayerExport.ps1`.
+
+The user subsequently approved local deterministic processing. Four actual 2172×724 originals now provide Far/Mid/Close and lower-ground source pixels without enlargement. Provenance and exact prompts are in `Art/Source/Backgrounds/WastesV1/`; the exported family consumes 30 MiB raw RGBA. Export/static/build success and bounded live tests do not close the remaining full-pan, transition, profiling and artistic promotion gates.

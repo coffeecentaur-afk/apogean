@@ -103,6 +103,11 @@ namespace apogean.Content.Diagnostics
 			{
 				request = File.ReadAllText(requestPath).Trim().ToLowerInvariant();
 				File.Delete(requestPath);
+				if (request.StartsWith("wastes-camera-", System.StringComparison.Ordinal))
+				{
+					Player.GetModPlayer<WastesLandscapeCameraLab>().Start(request.Substring("wastes-camera-".Length));
+					return;
+				}
 				switch (request)
 				{
 					case "conversion":
