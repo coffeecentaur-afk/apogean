@@ -1,17 +1,19 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$skillScript = Join-Path ([Environment]::GetFolderPath('UserProfile')) '.codex/skills/tmodloader-tree-authoring/scripts/Test-TreeSet.ps1'
-if (-not (Test-Path -LiteralPath $skillScript)) { throw "Missing installed tree-authoring validator: $skillScript" }
+$skillScript = Join-Path $root 'AgentSkills/tmodloader-tree-authoring/scripts/Test-TreeSet.ps1'
+if (-not (Test-Path -LiteralPath $skillScript)) { throw "Missing versioned tree-authoring validator: $skillScript" }
 $referenceRoot = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games/Terraria/tModLoader/Captures/ApogeanTileLabReferences'
 $trunkReference = Join-Path $referenceRoot 'Vanilla-ForestTree-Trunk.png'
 if (-not (Test-Path -LiteralPath $trunkReference)) { throw "Missing authoritative vanilla tree reference: $trunkReference" }
 
-& $skillScript `
+$shell = (Get-Process -Id $PID).Path
+& $shell -NoProfile -ExecutionPolicy Bypass -File $skillScript `
     -Trunk (Join-Path $root 'Content/Tiles/DeadForestTree.png') `
     -Branches (Join-Path $root 'Content/Tiles/DeadForestTree_Branches.png') `
     -Tops (Join-Path $root 'Content/Tiles/DeadForestTree_Tops.png') `
     -TrunkReference $trunkReference
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 $treeSource = Get-Content -Raw -LiteralPath (Join-Path $root 'Content/Tiles/DeadForestTree.cs')
 $rootSource = Get-Content -Raw -LiteralPath (Join-Path $root 'Content/Tiles/DeadForestTreeRootGlobalTile.cs')

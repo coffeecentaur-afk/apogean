@@ -6,12 +6,16 @@ param(
     [int]$ExpectedHeight = 0,
     [int]$MaximumOpaqueColors = 16,
     [switch]$AllowOpaqueWhite,
+    [switch]$PreserveReferenceWhiteMask,
     [switch]$AllowSoftAlpha
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
+if ($PreserveReferenceWhiteMask -and -not $ReferenceAtlas) {
+    throw 'PreserveReferenceWhiteMask requires an authoritative ReferenceAtlas.'
+}
 
 $failures = [Collections.Generic.List[string]]::new()
 $atlasPath = (Resolve-Path -LiteralPath $Atlas).Path
@@ -42,7 +46,7 @@ try {
 
     if ($opaque -eq 0) { $failures.Add('Atlas contains no opaque artwork') }
     if (-not $AllowSoftAlpha -and $soft -gt 0) { $failures.Add("Atlas contains $soft soft-alpha pixels") }
-    if (-not $AllowOpaqueWhite -and $white -gt 0) { $failures.Add("Atlas contains $white opaque-white pixels") }
+    if (-not $AllowOpaqueWhite -and -not $PreserveReferenceWhiteMask -and $white -gt 0) { $failures.Add("Atlas contains $white opaque-white pixels") }
     if ($colors.Count -gt $MaximumOpaqueColors) {
         $failures.Add("Atlas uses $($colors.Count) opaque colors; maximum is $MaximumOpaqueColors")
     }
@@ -56,15 +60,23 @@ try {
             }
             else {
                 $alphaMismatches = 0
+                $whiteMaskMismatches = 0
                 for ($y = 0; $y -lt $bitmap.Height; $y++) {
                     for ($x = 0; $x -lt $bitmap.Width; $x++) {
                         $sourceVisible = $reference.GetPixel($x, $y).A -gt 0
                         $atlasVisible = $bitmap.GetPixel($x, $y).A -gt 0
                         if ($sourceVisible -ne $atlasVisible) { $alphaMismatches++ }
+                        if ($PreserveReferenceWhiteMask -and
+                            (($reference.GetPixel($x, $y).ToArgb() -eq -1) -ne ($bitmap.GetPixel($x, $y).ToArgb() -eq -1))) {
+                            $whiteMaskMismatches++
+                        }
                     }
                 }
                 if ($alphaMismatches -gt 0) {
                     $failures.Add("Atlas changes native alpha topology at $alphaMismatches pixels")
+                }
+                if ($whiteMaskMismatches -gt 0) {
+                    $failures.Add("Atlas changes the engine white mask at $whiteMaskMismatches pixels")
                 }
             }
         }

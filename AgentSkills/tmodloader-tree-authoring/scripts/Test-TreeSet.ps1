@@ -94,16 +94,40 @@ function Test-TopSocket([string]$path) {
                 $failures.Add("top frame $frame socket is not centered on the trunk/wind anchor")
             }
 
-            $overlapRows = 0
+            # Row counts alone accept severed tips: eleven wide rows plus a fully
+            # transparent row used to pass. Follow only the wood connected to the
+            # bottom-center anchor, using edge-connected pixels inside the socket.
+            $connected = [Collections.Generic.HashSet[int]]::new()
+            $pending = [Collections.Generic.Queue[int]]::new()
+            if ($bitmap.GetPixel($centerX, 79).A -eq 255) {
+                [void]$connected.Add(195) # 11 * 17 + 8
+                $pending.Enqueue(195)
+            }
+            while ($pending.Count -gt 0) {
+                $position = $pending.Dequeue()
+                $localX = $position % 17
+                $localY = [int][Math]::Floor($position / 17.0)
+                foreach ($step in @(@(-1, 0), @(1, 0), @(0, -1), @(0, 1))) {
+                    $nx = $localX + $step[0]
+                    $ny = $localY + $step[1]
+                    if ($nx -lt 0 -or $nx -ge 17 -or $ny -lt 0 -or $ny -ge 12) { continue }
+                    $next = $ny * 17 + $nx
+                    if (-not $connected.Contains($next) -and $bitmap.GetPixel($centerX - 8 + $nx, 68 + $ny).A -eq 255) {
+                        [void]$connected.Add($next)
+                        $pending.Enqueue($next)
+                    }
+                }
+            }
             for ($y = 79; $y -ge 68; $y--) {
                 $rowOpaque = 0
                 for ($x = $centerX - 8; $x -le $centerX + 8; $x++) {
-                    if ($bitmap.GetPixel($x, $y).A -eq 255) { $rowOpaque++ }
+                    if ($connected.Contains(($y - 68) * 17 + ($x - $centerX + 8))) { $rowOpaque++ }
                 }
-                if ($rowOpaque -ge 5) { $overlapRows++ }
-            }
-            if ($overlapRows -lt 10) {
-                $failures.Add("top frame $frame has only $overlapRows trunk-overlap rows; wind sway can expose its joint")
+                $minimum = if ($y -eq 79) { 7 } else { 5 }
+                if ($rowOpaque -lt $minimum) {
+                    $failures.Add("top frame $frame socket loses connected trunk-width overlap at row $y ($rowOpaque pixels, minimum $minimum)")
+                    break
+                }
             }
         }
     }

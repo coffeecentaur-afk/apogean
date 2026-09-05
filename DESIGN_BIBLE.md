@@ -27,6 +27,8 @@ Every visual or gameplay family advances through `specified` → `contracted` �
 
 ### Environmental history
 
+The approved recovery workflow is recorded in `AUTHORING_WORKFLOW.md`. A — Snapped has a native component/assembly candidate under `Art/Candidates/WastesSnappedA-v1/`, awaiting review before any installation. Its offline comparison is not a live screenshot or proof of wind/chop behavior.
+
 The apocalypse is the world's baseline, not a single optional biome.
 
 - The Wastes replace the ordinary starting forest as a neutral, non-spreading biome: dead terrain and trees, broken roads, substations, and settlement remains. They do not count as world evil.

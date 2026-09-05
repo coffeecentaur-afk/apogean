@@ -11,6 +11,8 @@
 
 Terraria rotates and sways a tree top around its bottom-center attachment. Every ordinary 80×80 top frame must therefore carry opaque trunk-width material to the final visible row, center that material on the frame's horizontal midpoint, and continue it upward deeply enough to overlap the trunk while swaying. A top that is attractive at zero wind but exposes sky between its crown and trunk at another wind frame fails.
 
+Count connected wood from the bottom-center anchor, not just wide opaque rows: a transparent row severing an otherwise wide socket must fail. Test the caller's exit code too; an inner script's failure can otherwise be followed by a misleading outer PASS. For the currently verified ordinary renderer, left and right 40×40 branch frames use different pivots, `(40,24)` and `(0,30)`. Preserve that six-pixel difference when deriving paired art; a naive horizontal mirror is insufficient. Verify these values against the installed renderer when changing versions.
+
 ## Candidate record
 
 Record these values beside the generator or source art:

@@ -46,6 +46,8 @@
       "liveFixture": "pass",
       "production": "pending",
       "userReview": "pending",
+      "evidenceReference": "Art/Validation/ValidatorRecovery-2026-09-04.md",
+      "evidenceScope": "The actual Terrain gate now validates all 14 tile/wall PNGs against native exports, including exact grass white-mask locations. Isolated broken-input regression checks pass; live grass-corner approval remains separate.",
       "blockers": ["Repeat the repaired grass-corner fixture and obtain user review before production promotion."]
     },
     {
@@ -58,8 +60,20 @@
       "userReview": "rejected",
       "designReview": "approved-A",
       "designReference": "Art/Reference/2026-09-04-Wastes-Tree-A-Approval.md",
-      "evidenceScope": "Pass fields describe the previous candidate's mechanical checks, not visual acceptance or the unimplemented A design.",
-      "blockers": ["Replace rejected installed terminal-fork art using approved A — Snapped; B/C are not approved.", "Show the native component sheet and assembled comparison before applying the new tree art.", "Repeat static/build/live checks for the new assets, then obtain visual and fresh-world distribution evidence."]
+      "evidenceScope": "Pass fields describe the previous candidate's mechanical checks, not visual acceptance or the separate uninstalled A candidate.",
+      "blockers": ["Replace rejected installed terminal-fork art only after the separate wastes-snapped-a-v1 candidate passes review; B/C are not approved.", "Repeat static/build/live checks for the new assets, then obtain visual and fresh-world distribution evidence."]
+    },
+    {
+      "id": "wastes-snapped-a-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesSnappedA-v1/README.md",
+      "evidenceScope": "Exact candidate PNGs and offline native-scale assembly only. Same native trunk/root atlas, three snapped caps, paired short stubs; no production texture, game code, or world changed.",
+      "blockers": ["Obtain user review of Native-comparison.png before installing/loading this art.", "After approval, test live wind, roots, slopes, paint, multi-height chopping, growth, reload and multiplayer; then check fresh-world spacing."]
     },
     {
       "id": "surface-background-v0",

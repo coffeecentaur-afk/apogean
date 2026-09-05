@@ -23,6 +23,8 @@
 
 ## Current environmental gate
 
+**Current recovery order, approved after the landscape checkpoint:** prove validator failures first; show the A — Snapped native tree assembly for approval before loading it; close grass corners/ground cover; finish one Wastes background family; validate the generated starting area; then begin the Maw entrance/shallow gameplay slice. Other new content is paused. Historical landscape-first notes below describe the preceding checkpoint, not permission to bypass this order. Current tree review artifact: `Art/Candidates/WastesSnappedA-v1/Native-comparison.png` (offline, not installed).
+
 **2026-09-04 user priority override:** landscape concepts and scoped Dynamic Parallax implementation come first in this pass. Five review-only Wastes/restored/Maw surface/cavern concepts are saved in `Art/Reference/Backgrounds/2026-09-04/`. The local forest-restoration threshold fallback passes build, 25 policy checks, the unforced live Wastes → mixed → green → mixed → Wastes sequence, and Jungle priority after restoration. Seven captured PNGs and telemetry are in `Art/Validation/ForestRestoration/2026-09-04/`; the actual client viewport was 2560×1369. A failing fixture exposed leftover terrain in the scene scan, fixed through QA isolation without changing production thresholds. Full solution/flight/lighting/viewport/priority coverage and visual acceptance remain pending. Continuous proportional art blending, Maw dormancy glow masks, and production layer extraction remain pending. Resume the A — Snapped tree gate below after this bounded landscape proof.
 
 > Current status is evidence-gated. Tree and background visual candidates are not approved merely because their engine paths compile.

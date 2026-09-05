@@ -7,8 +7,8 @@ This is the production rule for adding visual and gameplay content. It prevents 
 1. **Specify the player promise.** State what the player sees, understands, does, and receives. Name the closest Terraria behavior that must remain familiar.
 2. **Contract the engine behavior.** Record the owning tModLoader type, exact dimensions/framing, authority, lifetime, placement bounds, failure behavior, and test fixture.
 3. **Build the smallest probe.** Author one tile, tree set, room, background composition, enemy, or boss state that can disprove the riskiest assumption.
-4. **Run static gates.** Use `Tools/Invoke-ApogeanContentGate.ps1 -Profile <family>`. Static success permits an in-game render; it never approves appearance.
-5. **Render the deterministic fixture.** Capture ordinary gameplay scale plus the family's failure cases. Use the same production draw/placement path whenever possible.
+4. **Run static gates.** Use `Tools/Invoke-ApogeanContentGate.ps1 -Profile <family>`. New or repaired validators must reject deliberate defects in isolated copies, including failure propagation through their real entrypoint. `Tools/Test-VisualValidatorMutations.ps1` exercises the tree/terrain cases. Static success never approves appearance.
+5. **Obtain the requested art approval, then render the deterministic fixture.** Show actual native assets assembled with their engine offsets, not only concept art. Capture ordinary gameplay scale plus the family's failure cases. Use the same production draw/placement path whenever possible.
 6. **Record the evidence.** Update `Tools/AuthoringStatus.json` as `fixture-pass`, `integrated`, `polished`, or `rejected`. A rejection keeps its useful technical proof but blocks dependent production work.
 7. **Promote or replace.** Expand a family only after its probe passes. Replace rejected art at the same seam instead of layering compensating overlays over it.
 
@@ -28,6 +28,8 @@ This is the production rule for adding visual and gameplay content. It prevents 
 The default dependency order is terrain framing → native trees/vegetation → background rendering/routing → faction materials/furniture → complete structure templates → entities → boss encounters → quests/dialogue/progression. Design specifications may run ahead, but unfinished foundations do not gain production dependents.
 
 Installed Codex skills enforce the focused contracts: `$tmodloader-atlas-authoring`, `$tmodloader-tree-authoring`, `$tmodloader-background-authoring`, `$tmodloader-structure-authoring`, `$tmodloader-entity-authoring`, `$tmodloader-boss-authoring`, `$tmodloader-quest-dialogue-authoring`, and `$apogean-content-direction`.
+
+Current approved recovery order (2026-09-04): validator reliability → A — Snapped native assembly/approval → grass-corner and ground-cover checks → one complete Wastes background family → a cohesive generated starting area → Maw entrance/shallow slice → exploration/combat/rewards. Other new content is paused. Continue within a step until evidence or a real approval boundary; a compile pass cannot bypass a visual rejection. Keep experiments outside ordinary play, preserving the last accepted appearance where one exists.
 
 ## Reference discipline
 
