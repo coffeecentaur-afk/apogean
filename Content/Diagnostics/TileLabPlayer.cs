@@ -91,7 +91,8 @@ namespace apogean.Content.Diagnostics
 
 		private void ConsumeLiveValidationRequest()
 		{
-			if (Main.netMode != NetmodeID.SinglePlayer)
+			if (Main.netMode != NetmodeID.SinglePlayer ||
+				Main.ActiveWorldFileData?.Name is not (AutomaticWorldName or AutomaticCampusWorldName))
 				return;
 
 			string requestPath = Path.Combine(Main.SavePath, "Captures", LiveValidationRequestFileName);
@@ -103,6 +104,13 @@ namespace apogean.Content.Diagnostics
 			{
 				request = File.ReadAllText(requestPath).Trim().ToLowerInvariant();
 				File.Delete(requestPath);
+				if (request.StartsWith("vegetation-view-", System.StringComparison.Ordinal))
+				{
+					ModContent.GetInstance<VegetationVisualLab>().Start(request.Substring("vegetation-view-".Length));
+					return;
+				}
+				// Restore the previous fixture's temporary paint/weather before replacing any tiles or saving.
+				ModContent.GetInstance<VegetationVisualLab>().ClearFixture();
 				if (request.StartsWith("wastes-camera-", System.StringComparison.Ordinal))
 				{
 					Player.GetModPlayer<WastesLandscapeCameraLab>().Start(request.Substring("wastes-camera-".Length));
@@ -110,6 +118,9 @@ namespace apogean.Content.Diagnostics
 				}
 				switch (request)
 				{
+					case "qa-save-and-quit":
+						WorldGen.SaveAndQuit();
+						break;
 					case "conversion":
 						BuildMawConversionAndReport(scheduleCaptureProbe: true);
 						break;
@@ -354,7 +365,9 @@ namespace apogean.Content.Diagnostics
 
 		internal void BuildVegetationAndReport(bool scheduleCaptureProbe)
 		{
+			ModContent.GetInstance<VegetationVisualLab>().ClearFixture();
 			Rectangle bounds = VegetationLabGallery.Build(Player);
+			ModContent.GetInstance<VegetationVisualLab>().Register(bounds);
 			Main.NewText($"Vegetation Lab rebuilt at X {bounds.Left}-{bounds.Right - 1}, Y {bounds.Top}-{bounds.Bottom - 1}.", Color.LightGreen);
 			Main.NewText("Runtime contract passed: a native mid-trunk chop removed the canopy and retained the stump.", Color.LightGreen);
 			if (!scheduleCaptureProbe)

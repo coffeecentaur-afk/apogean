@@ -46,9 +46,9 @@
       "liveFixture": "pass",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "Art/Validation/ValidatorRecovery-2026-09-04.md",
-      "evidenceScope": "The actual Terrain gate now validates all 14 tile/wall PNGs against native exports, including exact grass white-mask locations. Isolated broken-input regression checks pass; live grass-corner approval remains separate.",
-      "blockers": ["Repeat the repaired grass-corner fixture and obtain user review before production promotion."]
+      "evidenceReference": "Art/Validation/WastesGrassProduction-2026-09-04/README.md",
+      "evidenceScope": "All 14 native atlas contracts and prior mutation checks pass. Repaired grass gallery now exercises actual production tiles rather than obsolete candidates, with vanilla controls and four grass/slope/soil junctions. No white gaps observed in this bounded live matrix; seven-material registration/property fixture also passes. No production terrain PNG or logic changed in this pass.",
+      "blockers": ["Final corner/ground-cover visual review and remaining actual interaction, paint/actuation and merge combinations; bounded fixture evidence is not full production acceptance."]
     },
     {
       "id": "wastes-leafless-tree",
@@ -96,8 +96,8 @@
       "production": "pending",
       "userReview": "accepted",
       "evidenceReference": "Art/Validation/WastesSnappedA-v3/README.md",
-      "evidenceScope": "User condition fulfilled: branches +1 native pixel on each side, unchanged v2 trunk/top PNGs. Cold tModLoader 2026.7.3.0 build/load and disposable grove pass: native sapling growth, middle chop, flat anchors, and two daylight 10-11 mph west-wind samples. Exact tested textures copied into Content; no gameplay C# changed. This is bounded fixture evidence, not exhaustive production acceptance.",
-      "blockers": ["Complete night/strong-wind, paint, slope/tight-spacing, native axe/drop/shake, natural random-update growth, reload, multiplayer observation and fresh-world distribution checks before integrated/polished status."]
+      "evidenceScope": "Approved v3 branch thickness remains installed, textures unchanged. Extended disposable-grove checks add two 40-mph frames per wind direction, dark new-moon capture, native trunk/root/top Deep Blue paint, native chop woodDelta=3, and three whole-prop removal assertions. QA save/quit confirmed. These are bounded engine/API and Windows render samples, not manual-input or full production acceptance.",
+      "blockers": ["Night readability and side-branch paint coverage remain partial. Complete slope/tight-spacing, actual axe/shake input, natural random-update growth, preserved-grove reload, multiplayer observation and fresh-world distribution before integrated/polished status."]
     },
     {
       "id": "surface-background-v0",

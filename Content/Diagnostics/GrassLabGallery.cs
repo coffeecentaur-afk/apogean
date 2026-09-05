@@ -3,12 +3,14 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using apogean.Content.Tiles;
+using apogean.Content.Walls;
 
 namespace apogean.Content.Diagnostics
 {
 	/// <summary>
 	/// Destructive grass-only renderer fixture. The left suite is vanilla grass/dirt;
-	/// the right suite is the isolated Wastes grass/soil candidate.
+	/// the right suite is the actual production Wastes grass/soil, not the obsolete diagnostic candidate.
 	/// </summary>
 	internal static class GrassLabGallery
 	{
@@ -17,6 +19,8 @@ namespace apogean.Content.Diagnostics
 
 		internal static Rectangle Build(Player player)
 		{
+			Main.dayTime = true;
+			Main.time = 27000d;
 			Point playerTile = player.Center.ToTileCoordinates();
 			int left = Math.Clamp(playerTile.X - Width / 2, 20, Main.maxTilesX - Width - 20);
 			int top = Math.Clamp(playerTile.Y - 17, 20, Main.maxTilesY - Height - 20);
@@ -29,9 +33,9 @@ namespace apogean.Content.Diagnostics
 			PlaceGrassSuite(
 				left + 62,
 				floorY,
-				ModContent.TileType<WastesGrassCandidate>(),
-				ModContent.TileType<WastesSoilCandidate>(),
-				ModContent.WallType<WastesGrassWallCandidate>());
+				ModContent.TileType<WastesGrass>(),
+				ModContent.TileType<WastesSoil>(),
+				ModContent.WallType<WastesGrassWallUnsafe>());
 
 			Frame(bounds);
 			Lighting.Clear();
@@ -81,6 +85,22 @@ namespace apogean.Content.Diagnostics
 			Framing.GetTileSafely(left + 52, floorY - 3).Slope = SlopeType.SlopeDownRight;
 			Framing.GetTileSafely(left + 54, floorY - 3).Slope = SlopeType.SlopeUpLeft;
 			Framing.GetTileSafely(left + 55, floorY - 3).Slope = SlopeType.SlopeUpRight;
+			for (int x = left + 49; x <= left + 56; x++)
+				SetTile(x, floorY - 2, soilType);
+
+			// Four separate full-grass/slope/dirt junctions reproduce the reported corner seam,
+			// with identical vanilla controls. Floating slopes alone do not exercise this merge.
+			SlopeType[] slopes = { SlopeType.SlopeDownLeft, SlopeType.SlopeDownRight, SlopeType.SlopeUpLeft, SlopeType.SlopeUpRight };
+			for (int index = 0; index < slopes.Length; index++)
+			{
+				int x = left + 23 + index * 8;
+				int y = floorY - 16;
+				SetTile(x, y, grassType);
+				SetTile(x + 1, y, grassType);
+				Framing.GetTileSafely(x + 1, y).Slope = slopes[index];
+				SetTile(x, y + 1, soilType);
+				SetTile(x + 1, y + 1, soilType);
+			}
 		}
 
 		private static void Clear(Rectangle bounds)

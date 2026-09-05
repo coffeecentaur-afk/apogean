@@ -27,7 +27,7 @@ Every visual or gameplay family advances through `specified` → `contracted` �
 
 ### Environmental history
 
-The approved recovery workflow is recorded in `AUTHORING_WORKFLOW.md`. A — Snapped v3 fulfills the user's v2 approval condition of slightly thicker branches. The exact native textures are installed after a clean build and bounded disposable-grove proof; see `Art/Validation/WastesSnappedA-v3/README.md`. V1 was rejected for jagged intact branches and bright bark speckles. Offline comparisons remain separate from live screenshots; the broader production matrix is still open.
+The approved recovery workflow is recorded in `AUTHORING_WORKFLOW.md`. A — Snapped v3 fulfills the user's v2 approval condition of slightly thicker branches. The exact native textures are installed after a clean build and bounded disposable-grove proof; see `Art/Validation/WastesSnappedA-v3/README.md`. Extended checks add strong wind in both directions, partial night/paint coverage, native wood drops and whole-object ground-cover breaks without changing approved art. V1 was rejected for jagged intact branches and bright bark speckles. Offline comparisons remain separate from live screenshots; the broader production matrix is still open. Grass-corner validation now uses the actual production grass/soil classes with matching vanilla controls, not obsolete candidate tiles.
 
 The apocalypse is the world's baseline, not a single optional biome.
 

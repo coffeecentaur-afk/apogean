@@ -134,6 +134,52 @@ namespace apogean.Content.Diagnostics
 			}
 		}
 
+		internal static string ValidateProperties(Rectangle bounds)
+		{
+			int floorY = bounds.Bottom - 3;
+			int x = bounds.Left + 104;
+			int rootY = floorY - 1;
+			int topY = rootY;
+			while (Main.tile[x, topY - 1].HasTile && Main.tile[x, topY - 1].TileType == TileID.Trees) topY--;
+			if (!Main.tile[x, rootY].HasTile || Main.tile[x, rootY].TileType != TileID.Trees || rootY - topY < 3)
+				throw new InvalidOperationException("Rebuild the grove before running its destructive properties check.");
+			int before = CountWood();
+			int cutY = topY + 1;
+			WorldGen.KillTile(x, cutY, noItem: false);
+			int wood = CountWood() - before;
+			if (wood <= 0 || Main.tile[x, cutY].HasTile || !Main.tile[x, cutY + 1].HasTile)
+				throw new InvalidOperationException($"Native chop/drop check failed: woodDelta={wood}.");
+			for (int y = topY; y < cutY; y++)
+				if (Main.tile[x, y].HasTile && Main.tile[x, y].TileType == TileID.Trees)
+					throw new InvalidOperationException($"Native chop left unsupported wood at {x},{y}.");
+			// Remove one interior tile per multi-tile prop and require the entire brittle object to disappear.
+			CheckWholeProp(bounds.Left + 7, floorY - 1, 2, 1, ModContent.TileType<DeadTuft>());
+			CheckWholeProp(bounds.Left + 42, floorY - 3, 2, 3, ModContent.TileType<WastesBristle>());
+			CheckWholeProp(bounds.Left + 70, floorY - 2, 3, 2, ModContent.TileType<WastesRootShrub>());
+			return $"PASS native KillTile woodDelta={wood}; cut removed above/retained below; 3 whole-prop removals; API fixture, not manual axe/contact or multiplayer proof.";
+		}
+
+		private static int CountWood()
+		{
+			int total = 0;
+			foreach (Item item in Main.item)
+				if (item.active && item.type == ItemID.Wood) total += item.stack;
+			return total;
+		}
+
+		private static void CheckWholeProp(int left, int top, int width, int height, int type)
+		{
+			for (int x = left; x < left + width; x++)
+				for (int y = top; y < top + height; y++)
+					if (!Main.tile[x, y].HasTile || Main.tile[x, y].TileType != type)
+						throw new InvalidOperationException($"Missing prop fixture cell {x},{y}; rebuild the grove.");
+			WorldGen.KillTile(left + width - 1, top + height - 1, noItem: true);
+			for (int x = left; x < left + width; x++)
+				for (int y = top; y < top + height; y++)
+					if (Main.tile[x, y].HasTile && Main.tile[x, y].TileType == type)
+						throw new InvalidOperationException($"Prop left a split fragment at {x},{y}.");
+		}
+
 		private static void RequireObject(int x, int y, int type, int randomStyle, string label)
 		{
 			// These sheets are one item style with several visual placement variants.
