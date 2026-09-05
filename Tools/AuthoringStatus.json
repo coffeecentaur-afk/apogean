@@ -61,7 +61,7 @@
       "designReview": "approved-A",
       "designReference": "Art/Reference/2026-09-04-Wastes-Tree-A-Approval.md",
       "evidenceScope": "Pass fields describe the previous candidate's mechanical checks, not visual acceptance or the separate uninstalled A candidate.",
-      "blockers": ["Replace rejected installed terminal-fork art only after the separate wastes-snapped-a-v2 candidate passes review; B/C are not approved.", "Repeat static/build/live checks for the new assets, then obtain visual and fresh-world distribution evidence."]
+      "blockers": ["Historical terminal-fork rejection, superseded by the installed wastes-snapped-a-v3 fixture-pass candidate. B/C remain unapproved; follow v3 for remaining production checks."]
     },
     {
       "id": "wastes-snapped-a-v1",
@@ -82,10 +82,22 @@
       "build": "pending",
       "liveFixture": "pending",
       "production": "pending",
-      "userReview": "pending",
+      "userReview": "accepted",
       "evidenceReference": "Art/Candidates/WastesSnappedA-v2/README.md",
       "evidenceScope": "Review-only native assembly: intact tapered branch contours, five muted browns without cream/amber flecks, small knot and dark hollow cap options. Native dimensions, trunk/top alpha and branch pivots preserved. New focused regression passes v2 and rejects v1. No Content assets, C# code or worlds changed.",
-      "blockers": ["Obtain user review of Native-comparison.png, including revised bark and proposed recesses, before installing/loading this art.", "After approval, test live wind, roots, slopes, paint, multi-height chopping, growth, reload and multiplayer; then check fresh-world spacing. No earlier candidate's live pass transfers."]
+      "blockers": ["User accepted the art subject to slightly thicker branches. V3 implements that condition and carries the subsequent live proof; v2 itself was never installed."]
+    },
+    {
+      "id": "wastes-snapped-a-v3",
+      "status": "fixture-pass",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "accepted",
+      "evidenceReference": "Art/Validation/WastesSnappedA-v3/README.md",
+      "evidenceScope": "User condition fulfilled: branches +1 native pixel on each side, unchanged v2 trunk/top PNGs. Cold tModLoader 2026.7.3.0 build/load and disposable grove pass: native sapling growth, middle chop, flat anchors, and two daylight 10-11 mph west-wind samples. Exact tested textures copied into Content; no gameplay C# changed. This is bounded fixture evidence, not exhaustive production acceptance.",
+      "blockers": ["Complete night/strong-wind, paint, slope/tight-spacing, native axe/drop/shake, natural random-update growth, reload, multiplayer observation and fresh-world distribution checks before integrated/polished status."]
     },
     {
       "id": "surface-background-v0",

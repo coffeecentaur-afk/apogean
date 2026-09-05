@@ -1,5 +1,6 @@
 param(
 	[string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot),
+	[string]$TreeCandidateDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -40,6 +41,19 @@ try {
 	}
 
 	Copy-Item -LiteralPath $targetsFile -Destination (Join-Path $workspace 'tModLoader.targets')
+	if ($TreeCandidateDirectory) {
+		$candidateRoot = (Resolve-Path -LiteralPath $TreeCandidateDirectory).Path
+		$allowedRoot = (Join-Path $sourceRoot 'Art/Candidates') + [IO.Path]::DirectorySeparatorChar
+		if (-not $candidateRoot.StartsWith($allowedRoot, [StringComparison]::OrdinalIgnoreCase)) {
+			throw 'Tree test assets must come from this project Art/Candidates directory.'
+		}
+		# Package the reviewed candidate in the temporary mirror for a disposable
+		# live fixture. Repository Content textures stay untouched until live proof.
+		foreach ($asset in @('DeadForestTree.png', 'DeadForestTree_Branches.png', 'DeadForestTree_Tops.png')) {
+			Copy-Item -LiteralPath (Join-Path $candidateRoot $asset) -Destination (Join-Path $mirrorRoot "Content/Tiles/$asset")
+		}
+		Write-Host "QA tree asset override: $candidateRoot (build mirror only)."
+	}
 	Push-Location $mirrorRoot
 	try {
 		& dotnet build '.\apogean.csproj' -v:minimal

@@ -1,6 +1,7 @@
 param(
     [string]$CandidateDirectory = (Join-Path $PSScriptRoot '../Art/Candidates/WastesSnappedA-v2'),
-    [string]$BaselineDirectory = (Join-Path $PSScriptRoot '../Art/Candidates/WastesSnappedA-v1')
+    [string]$BaselineDirectory = (Join-Path $PSScriptRoot '../Art/Candidates/WastesSnappedA-v1'),
+    [string]$ThicknessReferenceDirectory = ''
 )
 
 # A focused art-export regression, not a live tree test or appearance approval.
@@ -58,6 +59,28 @@ foreach ($name in @('DeadForestTree.png', 'DeadForestTree_Tops.png', 'DeadForest
         }
     }
     finally { $candidate.Dispose(); $baseline.Dispose() }
+}
+
+if ($ThicknessReferenceDirectory) {
+    foreach ($name in @('DeadForestTree.png', 'DeadForestTree_Tops.png')) {
+        if ((Get-FileHash (Join-Path $CandidateDirectory $name)).Hash -ne (Get-FileHash (Join-Path $ThicknessReferenceDirectory $name)).Hash) {
+            $failures.Add("Thickness-only revision changed $name")
+        }
+    }
+    $thicker = [Drawing.Bitmap]::new((Resolve-Path (Join-Path $CandidateDirectory 'DeadForestTree_Branches.png')).Path)
+    $previous = [Drawing.Bitmap]::new((Resolve-Path (Join-Path $ThicknessReferenceDirectory 'DeadForestTree_Branches.png')).Path)
+    try {
+        foreach ($variant in 0..2) {
+            foreach ($x in 16..39) {
+                $oldRows = @(0..39 | Where-Object { $previous.GetPixel($x, $variant * 42 + $_).A -eq 255 })
+                $newRows = @(0..39 | Where-Object { $thicker.GetPixel($x, $variant * 42 + $_).A -eq 255 })
+                if ($oldRows.Count -eq 0 -or $newRows.Count -ne $oldRows.Count + 2 -or $newRows[0] -ne $oldRows[0] - 1 -or $newRows[-1] -ne $oldRows[-1] + 1) {
+                    $failures.Add("branch $variant column $x is not exactly one pixel thicker per side")
+                }
+            }
+        }
+    }
+    finally { $thicker.Dispose(); $previous.Dispose() }
 }
 
 if ($failures.Count) {
