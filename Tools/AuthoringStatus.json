@@ -11,8 +11,8 @@
       "production": "pending",
       "userReview": "pending",
       "evidenceReference": "FOREST_RESTORATION_VALIDATION.md",
-      "evidenceScope": "Unforced noon/ground Wastes-mixed-green-mixed-Wastes routing and Jungle priority passed at 2560x1369; not full visual-matrix or user acceptance.",
-      "blockers": ["Test real Green Solution conversion, flight/teleport/reload, remaining viewport/lighting/scene-priority cases; current background art remains unapproved.", "Threshold fallback only: continuous ecological art blending and underground restoration routing remain unimplemented."]
+      "evidenceScope": "Unforced native PureSpray converts real Wastes169/living0 to Wastes0/living169 at 1080p and 1440p. Incoming/outgoing fades each have19 partial samples with0 mismatches or missing draws, following a retained minimized red trace. Jungle priority rechecked after restoration at1440p. Not manual input, multiplayer, full visual matrix or art acceptance.",
+      "blockers": ["Test manual Clentaminator input, multiplayer, flight/teleport/reload and remaining lighting/scene-priority boundaries; current background art remains unapproved.", "Threshold fallback only: continuous ecological art blending and underground restoration routing remain unimplemented."]
     },
     {
       "id": "landscape-concepts-2026-09-04",
@@ -35,8 +35,8 @@
       "production": "pending",
       "userReview": "pending",
       "evidenceReference": "Art/Validation/WastesLandscapeV1/README.md",
-      "evidenceScope": "Three 2048x1280 hard-alpha layers, 30 MiB raw RGBA, scoped to Apogee Native Visual V3/Forest lab. Final live 1440p scale regression passes (111 source / 111 capture pixels); ten camera/lighting samples and three unforced Wastes/green/Jungle routing captures at each of 1080p and 1440p. New full-world camera-sweep and native PureSpray/fade harness build cleanly but have NOT run in-world; paused for the next user visual session. Full live gate remains pending.",
-      "blockers": ["Complete continuous repeat travel, adjacent fade/scene-priority matrix, and actual Green Solution behavior; inspect lower-ground joins/noise and obtain final visual acceptance.", "Profile hitches/residency before general-world promotion; alternate compositions and matched restoration masks remain pending."]
+      "evidenceScope": "Three unchanged2048x1280 hard-alpha layers,30MiB raw RGBA, QA-only. Archived live landmark scale111/111px still passes and old111/150px fails. Native PureSpray/fade passes at1080p/1440p. Physical sweeps cover more than3.4 Far repeats but terrain occludes them; isolated phase sweeps exercise the same renderer without moving the physical camera. See9/5 evidence for exact ranges/screenshots. Art repetition and lower-ground composition keep the full live gate pending.",
+      "blockers": ["Complete adjacent scene-priority/boundary and altitude/lighting matrix; repeated roadside landmarks and heavy soil/rock bands need reviewable art improvements and visual acceptance.", "Profile candidate-specific hitches/residency before general-world promotion; whole-client memory snapshot is not that proof. Alternate compositions and matched restoration masks remain pending."]
     },
     {
       "id": "wastes-terrain",

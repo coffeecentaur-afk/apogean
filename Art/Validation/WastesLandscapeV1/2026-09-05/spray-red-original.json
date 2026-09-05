@@ -1,0 +1,15 @@
+{
+  "pass": false,
+  "tick": 1400,
+  "spawned": 47,
+  "frames": 11595,
+  "sawWaste": true,
+  "sawGreen": true,
+  "partialFrames": 38,
+  "mismatchedFrames": 38,
+  "viewport": "2560x1369",
+  "forcedBackground": false,
+  "projectile": "Terraria.ID.ProjectileID.PureSpray",
+  "manualClentaminatorInputTested": false,
+  "utc": "2026-09-05T15:08:36.6660288Z"
+}

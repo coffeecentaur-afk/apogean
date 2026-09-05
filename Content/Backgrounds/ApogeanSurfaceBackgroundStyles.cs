@@ -8,7 +8,6 @@ namespace apogean.Content.Backgrounds
 	public abstract class ApogeanSurfaceBackgroundStyle : ModSurfaceBackgroundStyle
 	{
 		protected abstract RuinedBackgroundBiome Biome { get; }
-		private float rendererOpacity = 1f;
 		private bool UsesHdRenderer => HighDefinitionSurfaceBackgroundRenderer.Supports(Biome);
 
 		public override void ModifyFarFades(float[] fades, float transitionSpeed)
@@ -16,10 +15,9 @@ namespace apogean.Content.Backgrounds
 			if (Biome == RuinedBackgroundBiome.Forest && WastesLandscapeV1Renderer.EnabledForCurrentWorld)
 				WastesLandscapeV1Renderer.Load();
 			// The installed 1.4.4.9+2026.07 runtime passes its already-updated
-			// front-layer alpha array to this hook. Advancing it again makes the close
-			// layer finish before far/middle. The engine owns the whole-style fade.
-			if (Slot >= 0 && Slot < fades.Length)
-				rendererOpacity = fades[Slot];
+			// front-layer alpha array to this selected-style-only hook. Never cache
+			// it here: outgoing styles still draw but no longer receive this hook.
+			// Advancing it again also double-steps the engine-owned transition.
 		}
 
 		public override int ChooseFarTexture()
@@ -51,7 +49,7 @@ namespace apogean.Content.Backgrounds
 			if (!UsesHdRenderer)
 				return true;
 
-			HighDefinitionSurfaceBackgroundRenderer.DrawV0(spriteBatch, Biome, rendererOpacity);
+			HighDefinitionSurfaceBackgroundRenderer.DrawV0(spriteBatch, Biome, Main.bgAlphaFrontLayer[Slot], Slot);
 			return false;
 		}
 	}
@@ -102,7 +100,7 @@ namespace apogean.Content.Backgrounds
 			if (!UsesHdRenderer)
 				return true;
 
-			HighDefinitionSurfaceBackgroundRenderer.DrawV0(spriteBatch, Biome);
+			HighDefinitionSurfaceBackgroundRenderer.DrawV0(spriteBatch, Biome, Main.bgAlphaFrontLayer[Slot], Slot);
 			return false;
 		}
 	}

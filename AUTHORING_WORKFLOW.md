@@ -51,3 +51,7 @@ An intentionally red gate is useful: it names what is still missing. Never weake
 ## Background lesson retained — 2026-09-04
 
 Measure a source landmark against its actual Windows game capture. A 111-pixel truck became 150 pixels wide despite `Draw(scale:1)`, because Terraria applies forced minimum background zoom and temporarily logical screen dimensions. The scoped correction produced110 pixels without changing the user's zoom. `Tools/Test-WastesLandmarkScale.ps1` retains this red/green regression; `Art/Validation/WastesLandscapeV1/README.md` records the full bounded proof. Never infer native detail from texture dimensions or draw scale alone. Check composition behind real terrain as well as in an empty gallery, and keep art, coverage, routing and performance acceptance separate.
+
+## Background lesson retained — 2026-09-05
+
+A settled restored scene is not evidence of a correct fade. The native PureSpray fixture reproduced an outgoing style that stayed opaque because its selected-only refresh hook stopped running. Read current engine alpha at draw time, identify which style actually drew, and require both fade directions plus missing-draw rejection. `Test-ForestSprayLive.ps1 -Replay` explicitly labels archived evidence; `Test-ForestSprayValidator.ps1` must reject deliberately defective traces through the real CLI. Physical travel distance also cannot approve hidden artwork: use labelled isolated phase sweeps for texture joins, retaining separate real-world camera/routing tests. No static measurement promotes art.

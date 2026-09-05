@@ -64,6 +64,8 @@ Still required: continuous full repeat-phase travel, actual Green Solution conve
 
 ## 2026-09-04 overnight checkpoint — new checks not yet run
 
+**Superseded on2026-09-05:** these live checks have now run. The spray test reproduced and fixed stale outgoing opacity; both target viewports pass. Physical sweeps meet travel distance but encounter foreground occlusion. The new isolated phase sweep exposes repetition and lower-terrain art work still needed. See [the dated red/green evidence and next gates](2026-09-05/README.md). No PNGs were changed or promoted.
+
 The user accepted the displayed production grass/soil connection and continuation to backgrounds, then chose to leave live visual validation for tomorrow. The new code builds with zero warnings/errors; `Test-WastesParallaxSweep.ps1` passes 14 range checks, including negative controls for the old short viewpoints and a small world. No new in-world background result or art approval is claimed. No PNGs changed, and V1 remains QA-only.
 
 Next session, in order:

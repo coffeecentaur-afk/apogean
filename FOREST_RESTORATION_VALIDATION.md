@@ -67,3 +67,9 @@ Then test Green Solution on actual Wastes (not only pre-planted fixtures), norma
 ## Next gate
 
 The bounded routing sequence is proven. Next verify real Green Solution conversion, flight/cache boundaries, other scene priorities and the remaining camera/lighting matrix. Obtain separate composition review of the five concepts before authoring one matching production layer set; do not bulk-install the opaque concepts. Resume the approved A — Snapped component-sheet gate in the recorded plan order.
+
+## 2026-09-05 update — native conversion and outgoing fade
+
+Native `ProjectileID.PureSpray` now passes actual Wastes-to-grass conversion and both style-fade directions at1920×1080 and2560×1440. Before the fix, the minimized live trace contained19 wrong outgoing frames because opacity was cached in a selected-style-only hook; reading the engine alpha at draw time fixes it without changing thresholds. The recorder filters by actual style slot and requires incoming/outgoing samples with no missing draws. The CLI recomputes samples independently and its synthetic negative controls reject a falsely green report. This is not manual Clentaminator-input proof or multiplayer validation.
+
+Jungle priority was rechecked after purification at1440p: real Jungle metrics selected slot20 with the diagnostic override off despite cached living-forest state. Detailed red/green traces, source-scale controls, repeat-phase screenshots and remaining art/performance gates are in [the September5 record](Art/Validation/WastesLandscapeV1/2026-09-05/README.md). Earlier routing-only limitations above describe their historical sessions; the native conversion gate is no longer untested. Remaining checks include flight/cache boundaries, reload, other scene priorities, the full lighting matrix and ordinary-world integration.

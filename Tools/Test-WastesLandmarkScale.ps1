@@ -7,28 +7,31 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
-Add-Type -ReferencedAssemblies System.Drawing -TypeDefinition @'
-using System;
-using System.Drawing;
-public static class TruckSpan {
- public static int Measure(string path, int x, int y, int w, int h) {
-  using(var image=new Bitmap(path)) {
-   if(x<0 || y<0 || w<=0 || h<=0 || x>image.Width-w || y>image.Height-h)
-    throw new ArgumentOutOfRangeException("ROI", "Fixture region must fit inside the capture.");
-   int left=int.MaxValue,right=-1;
-   for(int a=x;a<x+w;a++)for(int b=y;b<y+h;b++) {
-    var p=image.GetPixel(a,b);
-    if(p.A>0 && p.R>70 && p.R>p.G*1.20 && p.R>p.B*1.25) {left=Math.Min(left,a);right=Math.Max(right,a);}
-   }
-   if(right<left)throw new Exception("No truck pigment in selected fixture region");
-   return right-left+1;
-  }
- }
+# Use the loaded drawing API directly. Compiling against the .NET Framework
+# System.Drawing facade fails under pwsh's System.Drawing.Common type forwarding.
+function Measure-TruckSpan([string]$Path, [int]$Left, [int]$Top, [int]$W, [int]$H) {
+    $bitmap = [Drawing.Bitmap]::new($Path)
+    try {
+        if ($Left -lt 0 -or $Top -lt 0 -or $W -le 0 -or $H -le 0 -or $Left -gt $bitmap.Width-$W -or $Top -gt $bitmap.Height-$H) {
+            throw 'Fixture region must fit inside the capture.'
+        }
+        $minimum = [int]::MaxValue; $maximum = -1
+        for ($a=$Left; $a -lt $Left+$W; $a++) {
+            for ($b=$Top; $b -lt $Top+$H; $b++) {
+                $p = $bitmap.GetPixel($a,$b)
+                if ($p.A -gt 0 -and $p.R -gt 70 -and $p.R -gt $p.G*1.20 -and $p.R -gt $p.B*1.25) {
+                    $minimum = [math]::Min($minimum,$a); $maximum = [math]::Max($maximum,$a)
+                }
+            }
+        }
+        if ($maximum -lt $minimum) { throw 'No truck pigment in selected fixture region' }
+        return $maximum-$minimum+1
+    }
+    finally { $bitmap.Dispose() }
 }
-'@
 $root=Split-Path -Parent $PSScriptRoot
-$source=[TruckSpan]::Measure((Join-Path $root 'Content/Backgrounds/Candidates/WastesV1/Mid.png'),460,193,125,35)
-$actual=[TruckSpan]::Measure((Join-Path $root $Capture),$X,$Y,$Width,$Height)
+$source=Measure-TruckSpan (Join-Path $root 'Content/Backgrounds/Candidates/WastesV1/Mid.png') 460 193 125 35
+$actual=Measure-TruckSpan (Join-Path $root $Capture) $X $Y $Width $Height
 $scale=$actual/[double]$source
 Write-Host "Truck body: source=$source px; live=$actual px; measured scale=$([math]::Round($scale,3))"
 if ([math]::Abs($actual-$source) -gt 3) { throw 'FAIL: the live landmark is enlarged despite Draw(scale:1).' }

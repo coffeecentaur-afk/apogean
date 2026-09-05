@@ -29,11 +29,13 @@ namespace apogean.Content.Backgrounds
 
 		internal static void Unload() => layers = null;
 
-		internal static void Draw(SpriteBatch batch, float opacity)
+		internal static void Draw(SpriteBatch batch, float opacity, int styleSlot)
 		{
 			if (Main.dedServ || Main.mapFullscreen || layers == null || opacity <= 0f) return;
-			Main.LocalPlayer.GetModPlayer<WastesLandscapeCameraLab>().ObserveDraw(Main.screenPosition.X);
-			ModContent.GetInstance<ForestSprayVisualLab>().ObserveWastesDraw(opacity);
+			WastesLandscapeCameraLab cameraLab = Main.LocalPlayer.GetModPlayer<WastesLandscapeCameraLab>();
+			float sampledX = cameraLab.BackgroundSampleX(Main.screenPosition.X);
+			cameraLab.ObserveDraw(sampledX);
+			ModContent.GetInstance<ForestSprayVisualLab>().ObserveWastesDraw(opacity, styleSlot);
 			// Terraria's surface pass uses logical screen dimensions and a forced
 			// minimum background zoom (e.g. 4/3 at 1440p). Counter only its zoom,
 			// not gravity effects, so an authored pixel remains a display pixel.
@@ -60,7 +62,7 @@ namespace apogean.Content.Backgrounds
 				// Only the closest opaque terrain must reach the bottom. Clamping
 				// every layer would bury the distant skyline behind real surface tiles.
 				if (i == layers.Length - 1) top = Math.Max(height - texture.Height, top);
-				float phase = (float)(Main.screenPosition.X * horizontal % texture.Width);
+				float phase = (float)(sampledX * horizontal % texture.Width);
 				if (phase < 0) phase += texture.Width;
 				for (float x = -phase; x < width; x += texture.Width)
 				{

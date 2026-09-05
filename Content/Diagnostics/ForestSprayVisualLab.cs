@@ -17,12 +17,14 @@ namespace apogean.Content.Diagnostics
 	public sealed class ForestSprayVisualLab : ModSystem
 	{
 		private bool active, sawWaste, sawGreen;
-		private int tick, column, spawned, partialFrames, mismatchedFrames, frames;
+		private int tick, column, spawned, partialFrames, mismatchedFrames, missingFrames, incomingFrames, outgoingFrames, frames;
 		private float lastOpacity = -1;
 		private Rectangle bounds;
 		private Vector2 holdPosition;
 		private bool previousDay, previousEclipse, previousRain;
 		private double previousTime;
+		private double previousRainTime;
+		private float previousRainStrength;
 		private readonly StringBuilder samples = new();
 		private static bool IsQa => Main.netMode == NetmodeID.SinglePlayer && Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3";
 
@@ -32,10 +34,12 @@ namespace apogean.Content.Diagnostics
 			Stop();
 			previousDay = Main.dayTime; previousTime = Main.time;
 			previousEclipse = Main.eclipse; previousRain = Main.raining;
+			previousRainTime = Main.rainTime; previousRainStrength = Main.maxRaining;
 			RuinedBackgroundSelectionSystem.Instance.DisableSurfaceConceptRenderLab();
 			bounds = SurfaceBackgroundLabGallery.BuildForestRestoration(Main.LocalPlayer, 0);
 			holdPosition = Main.LocalPlayer.position;
 			tick = spawned = partialFrames = mismatchedFrames = frames = 0;
+			missingFrames = incomingFrames = outgoingFrames = 0;
 			column = bounds.Left + 2;
 			sawWaste = sawGreen = false; lastOpacity = -1;
 			samples.Clear().AppendLine("tick,living,wastes,restored,engineOpacity,drawOpacity");
@@ -43,9 +47,12 @@ namespace apogean.Content.Diagnostics
 			Mod.Logger.Info($"FOREST SPRAY START: bounds={bounds}; nativeProjectile=PureSpray; forcedBackground=False; duration=1400 ticks");
 		}
 
-		internal void ObserveWastesDraw(float opacity)
+		internal void ObserveWastesDraw(float opacity, int styleSlot)
 		{
-			if (active) lastOpacity = opacity;
+			// An outgoing diagnostic preview may coexist with the production slot.
+			// Compare only the draw belonging to the slot we actually measure.
+			if (active && styleSlot == ModContent.GetInstance<ForestRuinedBackgroundStyle>().Slot)
+				lastOpacity = opacity;
 		}
 
 		public override void PostUpdateWorld()
@@ -58,6 +65,7 @@ namespace apogean.Content.Diagnostics
 			player.fallStart = (int)(player.position.Y / 16);
 			player.immune = player.immuneNoBlink = true; player.immuneTime = 60;
 			Main.dayTime = true; Main.time = 27000; Main.eclipse = Main.raining = false;
+			Main.rainTime = 0; Main.maxRaining = 0;
 			if (tick >= 300 && tick % 12 == 0 && column < bounds.Right - 2)
 			{
 				int floor = bounds.Bottom - 8;
@@ -87,10 +95,12 @@ namespace apogean.Content.Diagnostics
 				sawWaste |= !state.UseLivingForest && state.WastesCount > 40;
 				sawGreen |= state.UseLivingForest && state.LivingCount > 40;
 			}
-			if (engineOpacity > .001f && engineOpacity < .999f && lastOpacity >= 0)
+			if (engineOpacity > .001f && engineOpacity < .999f)
 			{
 				partialFrames++;
-				if (Math.Abs(lastOpacity - engineOpacity) > .001f) mismatchedFrames++;
+				if (state.UseLivingForest) outgoingFrames++; else incomingFrames++;
+				if (lastOpacity < 0) missingFrames++;
+				else if (Math.Abs(lastOpacity - engineOpacity) > .001f) mismatchedFrames++;
 			}
 			frames++;
 			samples.AppendLine(FormattableString.Invariant($"{tick},{state.LivingCount},{state.WastesCount},{state.UseLivingForest},{engineOpacity:F6},{lastOpacity:F6}"));
@@ -103,13 +113,14 @@ namespace apogean.Content.Diagnostics
 			active = false;
 			Main.dayTime = previousDay; Main.time = previousTime;
 			Main.eclipse = previousEclipse; Main.raining = previousRain;
+			Main.rainTime = previousRainTime; Main.maxRaining = previousRainStrength;
 			string directory = Path.Combine(Main.SavePath, "Captures");
 			Directory.CreateDirectory(directory);
 			File.WriteAllText(Path.Combine(directory, "Apogean-ForestSpray.csv"), samples.ToString());
-			bool pass = tick >= 1400 && sawWaste && sawGreen && partialFrames > 0 && mismatchedFrames == 0;
+			bool pass = tick >= 1400 && sawWaste && sawGreen && incomingFrames > 0 && outgoingFrames > 0 && mismatchedFrames == 0 && missingFrames == 0;
 			File.WriteAllText(Path.Combine(directory, "Apogean-ForestSpray.json"), JsonSerializer.Serialize(new
 			{
-				pass, tick, spawned, frames, sawWaste, sawGreen, partialFrames, mismatchedFrames,
+				pass, tick, spawned, frames, sawWaste, sawGreen, partialFrames, incomingFrames, outgoingFrames, mismatchedFrames, missingFrames,
 				viewport = $"{Main.screenWidth}x{Main.screenHeight}",
 				forcedBackground = false, projectile = "Terraria.ID.ProjectileID.PureSpray",
 				manualClentaminatorInputTested = false, utc = DateTime.UtcNow

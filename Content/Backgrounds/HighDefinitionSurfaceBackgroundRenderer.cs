@@ -52,14 +52,14 @@ namespace apogean.Content.Backgrounds
 			WastesLandscapeV1Renderer.Unload();
 		}
 
-		internal static void DrawV0(SpriteBatch spriteBatch, RuinedBackgroundBiome biome, float opacity = 1f)
+		internal static void DrawV0(SpriteBatch spriteBatch, RuinedBackgroundBiome biome, float opacity, int styleSlot)
 		{
 			if (Main.dedServ || Main.mapFullscreen)
 				return;
 			if (biome == RuinedBackgroundBiome.Forest &&
 				WastesLandscapeV1Renderer.EnabledForCurrentWorld)
 			{
-				WastesLandscapeV1Renderer.Draw(spriteBatch, opacity);
+				WastesLandscapeV1Renderer.Draw(spriteBatch, opacity, styleSlot);
 				return;
 			}
 			if (!Supports(biome))
@@ -173,6 +173,9 @@ namespace apogean.Content.Backgrounds
 			};
 			Vector3 modulation = tint.ToVector3();
 			Color underfill = new(baseColor.ToVector3() * modulation);
+			// ToVector3 drops alpha. Keep the same fade as the textured layers;
+			// RGB already contains opacity through tint (premultiplied blending).
+			underfill.A = tint.A;
 			spriteBatch.Draw(
 				TextureAssets.MagicPixel.Value,
 				new Rectangle(0, topPixel, Main.screenWidth, Main.screenHeight - topPixel),
