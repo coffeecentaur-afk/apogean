@@ -46,9 +46,9 @@
       "liveFixture": "pass",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "Art/Validation/WastesGrassProduction-2026-09-04/README.md",
-      "evidenceScope": "All 14 native atlas contracts and prior mutation checks pass. Repaired grass gallery now exercises actual production tiles rather than obsolete candidates, with vanilla controls and four grass/slope/soil junctions. No white gaps observed in this bounded live matrix; seven-material registration/property fixture also passes. No production terrain PNG or logic changed in this pass.",
-      "blockers": ["Final corner/ground-cover visual review and remaining actual interaction, paint/actuation and merge combinations; bounded fixture evidence is not full production acceptance."]
+      "evidenceReference": "Art/Validation/WastesCoatings-2026-09-04/README.md",
+      "evidenceScope": "14 native atlas contracts pass. Production grass/corner gallery rechecked against vanilla with no white gaps in the bounded sample. Live comparison reproduced rigid brush ignoring paint/Echo, then verified the native painted-cell fix, actuation dimming and midnight illuminant appearance. 11,264 atlas pixels reproduce the unchanged whole sprites; alpha/color negative controls pass. No terrain or tree PNG changed.",
+      "blockers": ["Obtain explicit corner/ground-cover visual review before the background step. Actual paint/wiring input, partial coatings/Spectre reveal, multiplayer, wider merges and generated composition remain unverified; fixture evidence is not full production acceptance."]
     },
     {
       "id": "wastes-leafless-tree",
@@ -96,8 +96,8 @@
       "production": "pending",
       "userReview": "accepted",
       "evidenceReference": "Art/Validation/WastesSnappedA-v3/README.md",
-      "evidenceScope": "Approved v3 branch thickness remains installed, textures unchanged. Extended disposable-grove checks add two 40-mph frames per wind direction, dark new-moon capture, native trunk/root/top Deep Blue paint, native chop woodDelta=3, and three whole-prop removal assertions. QA save/quit confirmed. These are bounded engine/API and Windows render samples, not manual-input or full production acceptance.",
-      "blockers": ["Night readability and side-branch paint coverage remain partial. Complete slope/tight-spacing, actual axe/shake input, natural random-update growth, preserved-grove reload, multiplayer observation and fresh-world distribution before integrated/polished status."]
+      "evidenceScope": "Approved v3 PNGs unchanged. Adds real side-branch paint coverage, full-moon sample, accelerated production-sapling flat/terrace growth and blocked-roof/sloped-anchor/close-neighbor rejection. Saved vegetation digest matches after reopening the same QA world without automatic rebuild. Earlier wind/chop/whole-prop checks retained; Persistence/README.md distinguishes API/render evidence from manual input.",
+      "blockers": ["Night bark readability remains partial. Actual axe/shake/Acorn input, elapsed-time growth, multiplayer observation and fresh-world distribution remain open before integrated/polished status."]
     },
     {
       "id": "surface-background-v0",

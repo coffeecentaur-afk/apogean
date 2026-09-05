@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
@@ -35,26 +34,16 @@ namespace apogean.Content.Tiles
 	}
 
 	/// <summary>
-	/// Draws each brittle multi-tile prop as one logical sprite. Terraria normally draws each
-	/// occupied tile cell independently; this renderer removes the visible centre split and
-	/// guarantees that player contact can never bend one half away from the other.
+	/// Draws each brittle multi-tile prop in one rigid coordinate system. Native painted
+	/// atlas cells exactly reconstruct the approved whole sprite, while retaining per-cell
+	/// paint/coatings and never applying independent wind transforms to its halves.
 	/// </summary>
 	public abstract class WastesRigidPlantTile : ModTile
 	{
-		private Asset<Texture2D> wholeTexture;
-
 		protected abstract int ObjectWidth { get; }
 		protected abstract int ObjectHeight { get; }
 		protected abstract int VisualStyleCount { get; }
 		protected virtual int VisualDrawYOffset => 4;
-
-		public override void Load()
-		{
-			if (!Main.dedServ)
-				wholeTexture = ModContent.Request<Texture2D>(Texture + "_Whole");
-		}
-
-		public override void Unload() => wholeTexture = null;
 
 		public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
 		{
@@ -71,17 +60,21 @@ namespace apogean.Content.Tiles
 
 		public override void SpecialDraw(int i, int j, SpriteBatch spriteBatch)
 		{
-			if (wholeTexture is null)
-				return;
-
-			Tile tile = Framing.GetTileSafely(i, j);
-			int framedObjectWidth = ObjectWidth * 18;
-			int style = System.Math.Abs(tile.TileFrameX / framedObjectWidth) % VisualStyleCount;
-			int logicalWidth = ObjectWidth * 16;
-			int logicalHeight = ObjectHeight * 16;
-			Rectangle source = new(style * logicalWidth, 0, logicalWidth, logicalHeight);
-			Vector2 position = new Vector2(i * 16f, j * 16f + VisualDrawYOffset) - Main.screenPosition;
-			spriteBatch.Draw(wholeTexture.Value, position, source, Lighting.GetColor(i, j));
+			Color ambient = Lighting.GetColor(i, j);
+			Vector2 origin = new Vector2(i * 16f, j * 16f + VisualDrawYOffset) - Main.screenPosition;
+			for (int dx = 0; dx < ObjectWidth; dx++)
+				for (int dy = 0; dy < ObjectHeight; dy++)
+				{
+					Tile tile = Framing.GetTileSafely(i + dx, j + dy);
+					if (!tile.HasTile || tile.TileType != Type || !TileDrawing.IsVisible(tile)) continue;
+					Texture2D texture = Main.instance.TilesRenderer.GetTileDrawTexture(tile, i + dx, j + dy);
+					Color color = tile.IsTileFullbright ? Color.White : ambient;
+					// Match native actuation dimming; Tile.actColor is engine-internal.
+					if (tile.IsActuated)
+						color = new Color((byte)(color.R * 0.4), (byte)(color.G * 0.4), (byte)(color.B * 0.4), color.A);
+					Rectangle source = new(tile.TileFrameX, tile.TileFrameY, 16, 16);
+					spriteBatch.Draw(texture, origin + new Vector2(dx * 16, dy * 16), source, color);
+				}
 		}
 	}
 

@@ -71,7 +71,13 @@ function Require-OpaqueTopRatio([string]$relativePath, [double]$maximumRatio) {
 Reject-Match 'Content/Tiles/DeadTuft.cs' 'sways\s*:\s*true' 'DeadTuft still splits under per-cell wind sway'
 Reject-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'sways\s*:\s*true' 'A multi-cell Wastes ground-cover object still uses per-cell wind sway'
 Require-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'TileDrawing\.TileCounterType\.CustomNonSolid' 'Wastes debris is not drawn as one rigid multi-tile sprite'
-Require-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'Texture \+ "_Whole"' 'Wastes debris has no padding-free whole-object atlas'
+# Native painted cells reconstruct the padding-free sprite (Test-RigidPlantAtlas),
+# but share one rigid transform. Requiring the old _Whole draw bypassed coatings.
+Require-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'GetTileDrawTexture\(tile,' 'Wastes debris bypasses native painted textures'
+Require-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'TileDrawing\.IsVisible\(tile\)' 'Wastes debris ignores Echo visibility'
+Require-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'tile\.IsTileFullbright \? Color\.White' 'Wastes debris ignores illuminant coating'
+Require-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'tile\.IsActuated' 'Wastes debris ignores actuation'
+Require-Match 'Content/Tiles/WastesGroundCoverTiles.cs' 'origin \+ new Vector2\(dx \* 16, dy \* 16\)' 'Wastes debris cells do not share their rigid coordinate system'
 Require-Match 'Content/Tiles/WorldTerrainTiles.cs' 'Texture \+ "Roots"' 'Wastes grass has no terrain-seam root overlay'
 Require-Match 'Content/Tiles/WorldTerrainTiles.cs' 'below\.TileType != ModContent\.TileType<WastesSoil>' 'Wastes grass root overlay is not limited to the grass/soil seam'
 Require-Match 'Content/Tiles/WorldTerrainTiles.cs' 'NeedsGrassFraming\[Type\]\s*=\s*true' 'Wastes grass is not registered for Terraria grass framing'

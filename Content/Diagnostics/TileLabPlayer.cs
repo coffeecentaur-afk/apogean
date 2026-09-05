@@ -49,7 +49,7 @@ namespace apogean.Content.Diagnostics
 
 		public override void PostUpdate()
 		{
-			if (_liveValidationPollDelay-- <= 0)
+			if (_automaticBuildDelay < 0 && _liveValidationPollDelay-- <= 0)
 			{
 				_liveValidationPollDelay = 30;
 				ConsumeLiveValidationRequest();
@@ -70,6 +70,8 @@ namespace apogean.Content.Diagnostics
 						{
 							if (_automaticCampusFixture)
 								BuildKesslerCampusAndReport(scheduleCaptureProbe: true);
+							else if (ModContent.GetInstance<VegetationVisualLab>().RestoreCheckpoint())
+								Mod.Logger.Info("AUTOMATIC LAB: preserved grove loaded, no destructive fixture build.");
 							else
 								BuildVegetationAndReport(scheduleCaptureProbe: true);
 						}
@@ -109,7 +111,14 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<VegetationVisualLab>().Start(request.Substring("vegetation-view-".Length));
 					return;
 				}
-				// Restore the previous fixture's temporary paint/weather before replacing any tiles or saving.
+				if (request == "qa-save-and-quit")
+				{
+					ModContent.GetInstance<VegetationVisualLab>().Release();
+					WorldGen.SaveAndQuit();
+					Mod.Logger.Info("LIVE VALIDATION REQUEST CONSUMED: qa-save-and-quit");
+					return;
+				}
+				// Restore temporary state and invalidate a checkpoint before replacing fixture tiles.
 				ModContent.GetInstance<VegetationVisualLab>().ClearFixture();
 				if (request.StartsWith("wastes-camera-", System.StringComparison.Ordinal))
 				{
@@ -118,9 +127,6 @@ namespace apogean.Content.Diagnostics
 				}
 				switch (request)
 				{
-					case "qa-save-and-quit":
-						WorldGen.SaveAndQuit();
-						break;
 					case "conversion":
 						BuildMawConversionAndReport(scheduleCaptureProbe: true);
 						break;
