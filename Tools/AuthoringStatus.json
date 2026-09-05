@@ -21,9 +21,22 @@
       "build": "pending",
       "liveFixture": "pending",
       "production": "pending",
-      "userReview": "pending",
+      "userReview": "accepted",
+      "evidenceScope": "User approves composition and authorizes installation; does not validate layer exports, higher-resolution detail, or live rendering.",
       "evidenceReference": "Art/Reference/Backgrounds/2026-09-04/README.md",
-      "blockers": ["Five opaque source concepts only; obtain composition review.", "Author true transparent layers and shared geometry/glow masks at target resolution; no concept is installed."]
+      "blockers": ["Composition approved; five opaque source concepts still require proper layer exports.", "Author true transparent layers and shared geometry/glow masks at target resolution; no concept is installed."]
+    },
+    {
+      "id": "wastes-landscape-export-v1",
+      "status": "contracted",
+      "static": "fail",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Reference/Backgrounds/2026-09-04/Rejected/README.md",
+      "evidenceScope": "Built-in far-layer export rejected before import: actual 1774x887 RGB, zero transparent pixels. Existing renderer/assets untouched.",
+      "blockers": ["Resolve export workflow; deterministic mask cleanup permission requested, no API fallback used.", "Produce actual native-detail layers, prove alpha/seams/coverage and full live matrix within measured memory budget."]
     },
     {
       "id": "wastes-terrain",
