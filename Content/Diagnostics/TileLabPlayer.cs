@@ -113,6 +113,8 @@ namespace apogean.Content.Diagnostics
 				}
 				if (request == "qa-save-and-quit")
 				{
+					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
+					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
 					ModContent.GetInstance<VegetationVisualLab>().Release();
 					WorldGen.SaveAndQuit();
 					Mod.Logger.Info("LIVE VALIDATION REQUEST CONSUMED: qa-save-and-quit");
@@ -122,11 +124,17 @@ namespace apogean.Content.Diagnostics
 				ModContent.GetInstance<VegetationVisualLab>().ClearFixture();
 				if (request.StartsWith("wastes-camera-", System.StringComparison.Ordinal))
 				{
+					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
 					Player.GetModPlayer<WastesLandscapeCameraLab>().Start(request.Substring("wastes-camera-".Length));
 					return;
 				}
+				Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
+				ModContent.GetInstance<ForestSprayVisualLab>().Stop();
 				switch (request)
 				{
+					case "forest-restoration-spray":
+						ModContent.GetInstance<ForestSprayVisualLab>().Start();
+						break;
 					case "conversion":
 						BuildMawConversionAndReport(scheduleCaptureProbe: true);
 						break;

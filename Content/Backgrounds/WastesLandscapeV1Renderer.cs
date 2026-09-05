@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.ModLoader;
+using apogean.Common.Backgrounds;
+using apogean.Content.Diagnostics;
 
 namespace apogean.Content.Backgrounds
 {
@@ -30,6 +32,8 @@ namespace apogean.Content.Backgrounds
 		internal static void Draw(SpriteBatch batch, float opacity)
 		{
 			if (Main.dedServ || Main.mapFullscreen || layers == null || opacity <= 0f) return;
+			Main.LocalPlayer.GetModPlayer<WastesLandscapeCameraLab>().ObserveDraw(Main.screenPosition.X);
+			ModContent.GetInstance<ForestSprayVisualLab>().ObserveWastesDraw(opacity);
 			// Terraria's surface pass uses logical screen dimensions and a forced
 			// minimum background zoom (e.g. 4/3 at 1440p). Counter only its zoom,
 			// not gravity effects, so an authored pixel remains a display pixel.
@@ -47,7 +51,7 @@ namespace apogean.Content.Backgrounds
 			Color tint = light * MathHelper.Clamp(opacity, 0, 1);
 			for (int i = 0; i < layers.Length; i++)
 			{
-				float horizontal = i == 0 ? .055f : i == 1 ? .14f : .30f;
+				float horizontal = WastesParallaxContract.Horizontal(i);
 				float vertical = i == 0 ? .10f : i == 1 ? .18f : .30f;
 				Texture2D texture = layers[i].Value;
 				// The camera anchors the ground line, not the image top. Clamp only

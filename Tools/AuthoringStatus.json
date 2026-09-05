@@ -35,20 +35,20 @@
       "production": "pending",
       "userReview": "pending",
       "evidenceReference": "Art/Validation/WastesLandscapeV1/README.md",
-      "evidenceScope": "Three 2048x1280 hard-alpha layers, 30 MiB raw RGBA, scoped to Apogee Native Visual V3/Forest lab. Final live 1440p scale regression passes (111 source / 111 capture pixels); ten camera/lighting samples and three unforced Wastes/green/Jungle routing captures at each of 1080p and 1440p. Full live gate remains pending.",
+      "evidenceScope": "Three 2048x1280 hard-alpha layers, 30 MiB raw RGBA, scoped to Apogee Native Visual V3/Forest lab. Final live 1440p scale regression passes (111 source / 111 capture pixels); ten camera/lighting samples and three unforced Wastes/green/Jungle routing captures at each of 1080p and 1440p. New full-world camera-sweep and native PureSpray/fade harness build cleanly but have NOT run in-world; paused for the next user visual session. Full live gate remains pending.",
       "blockers": ["Complete continuous repeat travel, adjacent fade/scene-priority matrix, and actual Green Solution behavior; inspect lower-ground joins/noise and obtain final visual acceptance.", "Profile hitches/residency before general-world promotion; alternate compositions and matched restoration masks remain pending."]
     },
     {
       "id": "wastes-terrain",
-      "status": "contracted",
+      "status": "fixture-pass",
       "static": "pass",
       "build": "pass",
       "liveFixture": "pass",
       "production": "pending",
-      "userReview": "pending",
+      "userReview": "accepted",
       "evidenceReference": "Art/Validation/WastesCoatings-2026-09-04/README.md",
       "evidenceScope": "14 native atlas contracts pass. Production grass/corner gallery rechecked against vanilla with no white gaps in the bounded sample. Live comparison reproduced rigid brush ignoring paint/Echo, then verified the native painted-cell fix, actuation dimming and midnight illuminant appearance. 11,264 atlas pixels reproduce the unchanged whole sprites; alpha/color negative controls pass. No terrain or tree PNG changed.",
-      "blockers": ["Obtain explicit corner/ground-cover visual review before the background step. Actual paint/wiring input, partial coatings/Spectre reveal, multiplayer, wider merges and generated composition remain unverified; fixture evidence is not full production acceptance."]
+      "blockers": ["User accepted the displayed production grass/soil connection and continuation to backgrounds. Actual paint/wiring input, partial coatings/Spectre reveal, multiplayer, wider merges and generated composition remain unverified; fixture evidence is not full production acceptance."]
     },
     {
       "id": "wastes-leafless-tree",

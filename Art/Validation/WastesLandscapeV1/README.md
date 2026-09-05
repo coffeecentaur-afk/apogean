@@ -62,7 +62,22 @@ Three additional current captures at each viewport use **unforced production sce
 
 Still required: continuous full repeat-phase travel, actual Green Solution conversion, adjacent fades, the remaining scene-priority cases, gravity/zoom/window variants, and hitch/residency measurement. Art review found flat rock bands exposed during flight and a too-literal soil cross-section; fine noise, repeated landmarks, depth separation and lower joins need further work. Original alternate compositions and matched restoration vegetation masks remain future work; native forest threshold fallback remains approved. No claim that all biome backgrounds, trees, structures, or the Maw are finished.
 
-## Safe handoff
+## 2026-09-04 overnight checkpoint — new checks not yet run
+
+The user accepted the displayed production grass/soil connection and continuation to backgrounds, then chose to leave live visual validation for tomorrow. The new code builds with zero warnings/errors; `Test-WastesParallaxSweep.ps1` passes 14 range checks, including negative controls for the old short viewpoints and a small world. No new in-world background result or art approval is claimed. No PNGs changed, and V1 remains QA-only.
+
+Next session, in order:
+
+1. Open only **gg → Apogee Native Visual V3**. No new world is required. Run `Tools/Request-WastesCameraCheck.ps1 -Case pan-right`, then `pan-left`, observing each 30-second sweep and its 10-second endpoint hold. Record original game-window screenshots. The renderer now reports actual drawn world-pixel range and per-layer repeats on release/expiry; require at least 2.5 for the farthest layer. Range coverage is not artistic seam acceptance.
+2. Release the camera. Run `Tools/Request-LiveValidation.ps1 -Fixture forest-restoration-spray`. This is a destructive, QA-only isolated fixture: it starts with real Wastes grass and sends short-lived, owned native PureSpray projectiles through the floor. It does not directly modify scene counts or force the background. It runs 1400 game ticks and writes `Captures/Apogean-ForestSpray.json` and `.csv`.
+3. Run `Tools/Test-ForestSprayLive.ps1` within 15 minutes of completion. It requires observed Wastes and restored states, intermediate draw frames, and matching engine/draw opacity. Preserve any failing baseline before fixing anything. Native projectile API invocation is **not** manual Clentaminator input proof.
+4. Inspect both directions of biome fades, lower rock/soil bands during flight, actual repeat joins, and 1080p/1440p coverage. Keep remaining art, memory and routing gates open. Do not expand to other biome families prematurely.
+
+Investigation lead, not a live-confirmed fix: the installed `SurfaceBackgroundStylesLoader.ModifyFarFades` calls only the currently selected style, while the front-alpha array is updated for every style. `ApogeanSurfaceBackgroundStyle` currently caches its opacity in that selected-only hook. The spray probe should establish whether outgoing Wastes draws therefore hold stale opacity. Do not assume its outcome or mark a source-only inference as a reproduced visual defect. Private local runtime inspection stays outside the repository.
+
+Fresh backup: `C:/Users/max_h/AppData/Local/Temp/Apogean-BackgroundSweep-aa63b2f5fc9e43a0bef396ef60f3821d` contains the approved QA `.wld/.twld`, gg `.plr/.tplr` and pre-launch config. This session launched only to the character-selection menu and closed the client **without entering a world**. The existing saved grove was not replaced by the new spray fixture. No overnight automation was created. Resume on the user's next request.
+
+## Previous safe handoff
 
 Rerun checks: all three `Test-SurfaceLayerExport` inspections pass; `Test-WastesLandmarkScale` passes; `Test-ForestRestoration` passes25 policy cases; `Test-GeneratorOwnership` passes; `Test-AuthoringStatus` passes11 evidence-consistent families; the existing `Test-BackgroundHdContracts` passes its27-asset static checks, not native screen-scale certification. Latest isolated package build has zero warnings and zero errors. None of these checks overrides the pending production/art gates above.
 

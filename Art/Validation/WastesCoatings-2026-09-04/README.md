@@ -61,8 +61,9 @@ a startup request from being silently overwritten by the delayed initial grove.
 This is bounded single-player evidence, **not polished/general-world acceptance**.
 Partial-object coating combinations, Spectre reveal, actual paint-brush/wiring
 input, multiplayer replication and generated-world composition remain open.
-Final corner/ground-cover visual review is the next user gate before moving the
-recovery order to the Wastes background family. Backgrounds visible in these
+The user subsequently accepted the displayed production grass/soil connection
+and continuation to the Wastes background family. This is fixture-level visual
+acceptance, not approval of every remaining terrain interaction. Backgrounds visible in these
 screenshots remain a separate QA-only candidate, not approved by this terrain test.
 
 ## Reference contracts
