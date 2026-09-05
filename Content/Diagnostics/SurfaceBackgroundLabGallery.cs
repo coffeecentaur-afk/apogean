@@ -120,6 +120,32 @@ namespace apogean.Content.Diagnostics
 			return bounds;
 		}
 
+		internal static Rectangle BuildForestRestoration(Player player, int greenPercent)
+		{
+			if (greenPercent < 0 || greenPercent > 100)
+				throw new ArgumentOutOfRangeException(nameof(greenPercent));
+			Rectangle bounds = Build(player);
+			int floorY = bounds.Bottom - 8;
+			int wastesGrass = ModContent.TileType<WastesGrass>();
+			int wastesSoil = ModContent.TileType<WastesSoil>();
+			for (int x = bounds.Left; x < bounds.Right; x++)
+			for (int y = bounds.Top; y < bounds.Bottom; y++)
+			{
+				Framing.GetTileSafely(x, y).ClearEverything();
+				if (y >= floorY)
+				{
+					// Interleave in small runs so each local scene window has the same ratio.
+					bool green = ((x - bounds.Left) % 20) * 5 < greenPercent;
+					SetTile(x, y, y == floorY ? (green ? TileID.Grass : wastesGrass) :
+						(green ? TileID.Dirt : wastesSoil));
+				}
+			}
+			for (int x = bounds.Left; x < bounds.Right; x++)
+			for (int y = floorY - 1; y < bounds.Bottom; y++)
+				WorldGen.SquareTileFrame(x, y, true);
+			return bounds;
+		}
+
 		private static void SetTile(int x, int y, int type)
 		{
 			Tile tile = Framing.GetTileSafely(x, y);

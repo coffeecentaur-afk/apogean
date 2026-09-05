@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ModLoader;
 using apogean.Content.Config;
+using apogean.Common.Biomes;
 
 namespace apogean.Content.Backgrounds
 {
@@ -101,12 +102,17 @@ namespace apogean.Content.Backgrounds
 
 	public sealed class RuinedGlobalBackgroundStyle : GlobalBackgroundStyle
 	{
-		internal static int ResolveRuinedSurfaceStyle(Player player)
+		internal static int ResolveRuinedSurfaceStyle(Player player, int nativeStyle)
 		{
 			if (RuinedBackgroundSelectionSystem.Instance.SurfaceRenderLabBiome.HasValue)
 				return ModContent.GetInstance<SurfaceConceptRenderLabBackgroundStyle>().Slot;
 
-			return RuinedBackgroundSelectionSystem.DetectBiome(player) switch
+			RuinedBackgroundBiome biome = RuinedBackgroundSelectionSystem.DetectBiome(player);
+			if (biome == RuinedBackgroundBiome.Forest &&
+				ModContent.GetInstance<ForestRestorationSystem>().State.IsLivingAt(player.Center.X / 16d))
+				return nativeStyle; // Preserve Terraria's seed/region-selected forest variant.
+
+			return biome switch
 			{
 				RuinedBackgroundBiome.Desert => ModContent.GetInstance<DesertRuinedBackgroundStyle>().Slot,
 				RuinedBackgroundBiome.Jungle => ModContent.GetInstance<JungleRuinedBackgroundStyle>().Slot,
@@ -126,9 +132,11 @@ namespace apogean.Content.Backgrounds
 			if (Main.gameMenu || !ModContent.GetInstance<ApogeanWorldConfig>().RuinedBiomeBackgrounds) return;
 			Player player = Main.LocalPlayer;
 			if (player == null || !player.active) return;
+			if (style >= 0 && ModContent.GetModSurfaceBackgroundStyle(style) == null)
+				ModContent.GetInstance<ForestRestorationSystem>().LastNativeSurfaceStyle = style;
 			if (RuinedBackgroundSelectionSystem.Instance.SurfaceRenderLabBiome.HasValue)
 			{
-				style = ResolveRuinedSurfaceStyle(player);
+				style = ResolveRuinedSurfaceStyle(player, style);
 				return;
 			}
 
@@ -137,7 +145,7 @@ namespace apogean.Content.Backgrounds
 			// by this point and must keep its own background outside the Maw.
 			if (ModContent.GetModSurfaceBackgroundStyle(style) != null) return;
 
-			style = ResolveRuinedSurfaceStyle(player);
+			style = ResolveRuinedSurfaceStyle(player, style);
 		}
 
 		public override void ChooseUndergroundBackgroundStyle(ref int style)

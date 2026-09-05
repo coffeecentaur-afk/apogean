@@ -190,7 +190,7 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 )
 
 Require-SourceContract 'Tools/Request-LiveValidation.ps1' @(
-	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'entity-scale', 'forest-background', 'forest-background-aerial', 'forest-background-night', 'forest-background-eclipse', 'desert-background', 'jungle-background', 'jungle-routing', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-construction', 'helix-construction', 'kessler-campus', 'kessler-world')]",
+	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'entity-scale', 'forest-background', 'forest-background-aerial', 'forest-background-night', 'forest-background-eclipse', 'desert-background', 'jungle-background', 'jungle-routing', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-construction', 'helix-construction', 'kessler-campus', 'kessler-world', 'forest-restoration-wastes', 'forest-restoration-mixed', 'forest-restoration-green')]",
 	'ApogeanLiveValidation.request',
 	'Set-Content -LiteralPath $requestPath'
 )

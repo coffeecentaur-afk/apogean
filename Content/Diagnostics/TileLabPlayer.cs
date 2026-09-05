@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 using apogean.Content.Backgrounds;
 using apogean.Content.Config;
 using apogean.Content.World;
+using apogean.Common.Biomes;
 
 namespace apogean.Content.Diagnostics
 {
@@ -145,6 +146,15 @@ namespace apogean.Content.Diagnostics
 						break;
 					case "jungle-routing":
 						BuildProductionJungleRoutingAndReport(scheduleCaptureProbe: true);
+						break;
+					case "forest-restoration-wastes":
+						BuildForestRestorationAndReport(0);
+						break;
+					case "forest-restoration-mixed":
+						BuildForestRestorationAndReport(50);
+						break;
+					case "forest-restoration-green":
+						BuildForestRestorationAndReport(100);
 						break;
 					case "snow-background":
 						BuildSurfaceBackgroundAndReport(RuinedBackgroundBiome.Snow, scheduleCaptureProbe: true);
@@ -453,6 +463,21 @@ namespace apogean.Content.Diagnostics
 			_captureProbeDelay = 300;
 		}
 
+		private void BuildForestRestorationAndReport(int greenPercent)
+		{
+			string worldName = Main.ActiveWorldFileData?.Name;
+			if (Main.netMode != NetmodeID.SinglePlayer ||
+				(worldName != AutomaticWorldName && worldName != AutomaticCampusWorldName))
+				throw new System.InvalidOperationException("Restoration fixtures require a named disposable QA world.");
+
+			RuinedBackgroundSelectionSystem.Instance.DisableSurfaceConceptRenderLab();
+			_captureProbeBounds = SurfaceBackgroundLabGallery.BuildForestRestoration(Player, greenPercent);
+			_captureProbeName = $"Apogean Forest Restoration {greenPercent} Percent Capture Probe";
+			_captureProbeEntities = false;
+			_captureProbeDelay = 300;
+			Main.NewText($"Local forest restoration fixture: {greenPercent}% planted green; production routing, no forced background.", Color.LightGreen);
+		}
+
 		internal void BuildUndergroundBackgroundAndReport(RuinedBackgroundBiome biome, bool scheduleCaptureProbe)
 		{
 			bool underworld = biome == RuinedBackgroundBiome.Underworld;
@@ -496,7 +521,9 @@ namespace apogean.Content.Diagnostics
 				// arbitration, so CurrentSceneEffect still contains a vanilla slot. The
 				// capture camera only sees CurrentSceneEffect; resolve the same ruined
 				// slot explicitly so live and panorama validation cannot disagree.
-				captureBackground = RuinedGlobalBackgroundStyle.ResolveRuinedSurfaceStyle(Main.LocalPlayer);
+				int nativeStyle = sceneBackground >= 0 ? sceneBackground :
+					ModContent.GetInstance<ForestRestorationSystem>().LastNativeSurfaceStyle;
+				captureBackground = RuinedGlobalBackgroundStyle.ResolveRuinedSurfaceStyle(Main.LocalPlayer, nativeStyle);
 			}
 
 			// Some ModBiome combinations expose water style -1. CaptureBiome indexes
@@ -506,6 +533,10 @@ namespace apogean.Content.Diagnostics
 				: Main.waterStyle >= 0 && Main.waterStyle < Main.maxLiquidTypes ? Main.waterStyle : 0;
 			CaptureBiome biome = new(captureBackground, captureWater, sceneEffect.tileColorStyle);
 			RuinedBackgroundBiome detected = RuinedBackgroundSelectionSystem.DetectBiome(Main.LocalPlayer);
+			ForestRestorationState restoration = ModContent.GetInstance<ForestRestorationSystem>().State;
+			Mod.Logger.Info($"FOREST RESTORATION: living={restoration.LivingCount}; wastes={restoration.WastesCount}; " +
+				$"fraction={restoration.LivingFraction:F3}; evidence={restoration.HasEvidence}; " +
+				$"living selected={restoration.IsLivingAt(Main.LocalPlayer.Center.X / 16d)}; output={_captureProbeName}");
 			Mod.Logger.Info(
 				$"TILE LAB CAPTURE PROBE: scene background={sceneBackground}; capture background={captureBackground}; " +
 				$"detected biome={detected}; render lab={RuinedBackgroundSelectionSystem.Instance.SurfaceRenderLabBiome?.ToString() ?? "off"}; " +

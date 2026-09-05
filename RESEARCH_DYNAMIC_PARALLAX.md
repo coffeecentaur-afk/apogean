@@ -1,5 +1,7 @@
 # Dynamic parallax: community proposals and Apogean boundaries
 
+**Subsequent decision, 2026-09-04:** the user approved landscape-first concept work and a limited reactive-scene implementation, then specifically required local greenification to change the Wastes background. The initial native-forest threshold fallback and its pending live checks are recorded in `FOREST_RESTORATION_VALIDATION.md`. Five new art studies live in `Art/Reference/Backgrounds/2026-09-04/`. The research-only boundaries below describe the earlier audit, not a denial of that later authorization. Per-block deforestation and front-of-player overlays remain out of scope.
+
 Checked 2026-09-04. Research only; no renderer, assets consumed by the game, world data, or gameplay changes. User separately approved **A — Snapped** from the Wastes deadwood sheet; that decision is recorded in Art/Reference/2026-09-04-Wastes-Tree-A-Approval.md.
 
 ## What the linked discussion actually proposes

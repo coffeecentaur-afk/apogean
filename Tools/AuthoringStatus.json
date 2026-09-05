@@ -3,6 +3,28 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "forest-restoration-routing",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "FOREST_RESTORATION_VALIDATION.md",
+      "blockers": ["App-control approval timed out before entering the disposable world; run the real routing/capture matrix.", "Threshold fallback only: continuous ecological art blending and underground restoration routing remain unimplemented."]
+    },
+    {
+      "id": "landscape-concepts-2026-09-04",
+      "status": "specified",
+      "static": "pending",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Reference/Backgrounds/2026-09-04/README.md",
+      "blockers": ["Five opaque source concepts only; obtain composition review.", "Author true transparent layers and shared geometry/glow masks at target resolution; no concept is installed."]
+    },
+    {
       "id": "wastes-terrain",
       "status": "contracted",
       "static": "pass",
