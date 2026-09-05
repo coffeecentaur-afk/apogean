@@ -542,6 +542,7 @@ namespace apogean.Content.Diagnostics
 				$"detected biome={detected}; render lab={RuinedBackgroundSelectionSystem.Instance.SurfaceRenderLabBiome?.ToString() ?? "off"}; " +
 				$"zones jungle={Main.LocalPlayer.ZoneJungle}, snow={Main.LocalPlayer.ZoneSnow}, desert={Main.LocalPlayer.ZoneDesert}; " +
 				$"scene water={sceneWater}; main water={Main.waterStyle}; capture water={biome.WaterStyle}");
+			Mod.Logger.Info($"TILE LAB VIEWPORT: width={Main.screenWidth}; height={Main.screenHeight}; output={_captureProbeName}");
 
 			CaptureManager.Instance.Capture(new CaptureSettings
 			{

@@ -128,6 +128,16 @@ namespace apogean.Content.Diagnostics
 			int floorY = bounds.Bottom - 8;
 			int wastesGrass = ModContent.TileType<WastesGrass>();
 			int wastesSoil = ModContent.TileType<WastesSoil>();
+			// The photograph is not the biome-count window. Older QA platforms
+			// below its shallow floor otherwise contribute hundreds of Wastes tiles.
+			// Isolate real terrain, not synthetic scene counts; the caller restricts
+			// this destructive fixture to the named disposable single-player worlds.
+			Rectangle isolation = bounds;
+			isolation.Inflate(96, 96);
+			isolation = Rectangle.Intersect(isolation, new Rectangle(10, 10, Main.maxTilesX - 20, Main.maxTilesY - 20));
+			for (int x = isolation.Left; x < isolation.Right; x++)
+			for (int y = isolation.Top; y < isolation.Bottom; y++)
+				Framing.GetTileSafely(x, y).ClearEverything();
 			for (int x = bounds.Left; x < bounds.Right; x++)
 			for (int y = bounds.Top; y < bounds.Bottom; y++)
 			{

@@ -1,6 +1,6 @@
 # Local forest restoration — implementation and validation
 
-2026-09-04. Source policy and isolated build pass; **live rendering pending**.
+2026-09-04. Source policy, isolated build, and the bounded **live restoration-routing fixture pass**. Full production/visual matrix remains pending. No new concept art was installed.
 
 ## User contract
 
@@ -27,9 +27,26 @@ tModLoader provides nearby counts through TileCountsAvailable(ReadOnlySpan<int>)
 - Isolated mod build/package: zero errors, zero warnings.
 - Tools/Test-WorldVisualIntegrity.ps1: passed, including the existing nine-biome/27-layer HD static contracts. Tools/Test-AuthoringStatus.ps1: ten families passed evidence-state consistency. Neither result approves visual quality or the new opaque concepts.
 - The installed client loaded Apogean successfully after the build. Its pre-existing missing icon_small.png warning remains. This is loading evidence, not in-world routing evidence.
-- No new in-game screenshot was obtained. Computer Use found the tModLoader window but returned “Computer Use app approval timed out.” No UI input/world entry followed. Do not retry around that approval through another control method.
+- The earlier app-control approval timeout was resolved after the user's explicit continuation. The test character and disposable `Apogee Native Visual V3` world were backed up before entry. No normal world was entered.
+- The first live 100%-green fixture **failed**: 169 living / 248 Wastes = 40.5%, with unforced Forest routing. Repeated failure ruled out stale metrics and another biome winning. Older QA platforms below the 190×62 photograph contaminated the scene sample. The fixture now clears a world-clipped 96-tile buffer on every side (382×254 maximum), then rebuilds the original visible strip. The production 65/35 thresholds were not changed to pass the test.
+- `Tools/Test-ForestRestorationLive.ps1` went red on that exact failure, then passed after isolation and rebuilding. It consumes fresh telemetry and capture timestamps, asserts the planted/measured ratio within six percentage points, checks unforced Forest selection and expected hysteresis state, and preserves the engine PNG unchanged with a JSON sidecar. It does not claim to judge art or independently recognize the pixels.
+- The full five-step sequence passed at a logged **2560×1369 client viewport**. Capture panoramas are **3040×992**, not 2560×1440 viewport evidence. All six forest captures plus the Jungle-priority capture were inspected; normal game views also showed green Forest and the later Jungle route. No new exception or DrawLiquid crash appeared during this run.
 
-## Pending live matrix
+| Evidence | Living / Wastes | Fraction | Selected capture slot | Result |
+| --- | --- | --- | --- | --- |
+| 00-green-regression | 169 / 0 | 1.000 | 10, native forest | Former failing test passes |
+| 01-wastes | 0 / 169 | 0.000 | 18, ruined forest | Wastes |
+| 02-mixed-from-wastes | 80 / 89 | 0.473 | 18 | Retains Wastes |
+| 03-green | 169 / 0 | 1.000 | 10 | Green forest |
+| 04-mixed-from-green | 80 / 89 | 0.473 | 10 | Retains green |
+| 05-wastes-return | 0 / 169 | 0.000 | 18 | Returns to Wastes |
+| 06-jungle-priority | 0 / 0, cached green | 1.000 cached | 20, ruined jungle | Actual ZoneJungle beats cached green Forest |
+
+Slots are observations of this installed mod set, not hard-coded public IDs. Evidence is in [Art/Validation/ForestRestoration/2026-09-04](Art/Validation/ForestRestoration/2026-09-04/README.md). A tileless sample retains the last valid fraction deliberately; the Jungle screenshot proves that cached forest state does not outrank another detected biome.
+
+The authoring skills keep **routing proof separate from art approval**. The Wastes game view still exposes mirrored landmarks, low horizon placement, and stretched lower-row coverage; the restored native slot uses the installed native/resource-pack scenery rather than the new restored-forest concept. These captures do not promote those artworks or approve transitions frame-by-frame.
+
+## Reproducible fixture and remaining matrix
 
 Only use the named disposable single-player worlds Apogee Native Visual V3 or Apogee Campus Validation. The new destructive fixtures reject other worlds.
 
@@ -39,7 +56,9 @@ The file-request bridge exposes:
 2. forest-restoration-mixed: 50% planted green.
 3. forest-restoration-green: 100% planted green.
 
-Run in order Wastes → mixed → green → mixed → Wastes to prove both hysteresis directions. The fixture percentages are planted ratios; surrounding terrain may change measured scene counts, so inspect telemetry rather than assuming exact agreement. Each request clears/rebuilds only the existing 190×62 diagnostic footprint, removes forced surface-background selection, waits 300 ticks for metrics/fades, and schedules a named capture.
+Run in order Wastes → mixed → green → mixed → Wastes to prove both hysteresis directions. The fixture percentages are planted ratios; the periodic mixed pattern measures 47.3% in this engine sample. Each request clears the isolated footprint described above, rebuilds the 190×62 strip, removes forced surface-background selection, waits 300 ticks for metrics/fades, and schedules a named capture. This is a destructive QA fixture, never a gameplay conversion command.
+
+Example: `pwsh -NoProfile -File Tools/Test-ForestRestorationLive.ps1 -Fixture forest-restoration-green -ExpectedState Green`. Run while the named disposable single-player world is active and unpaused. `-EvidenceName` optionally saves a new, non-overwritten evidence pair.
 
 For every capture record FOREST RESTORATION telemetry, TILE LAB CAPTURE PROBE telemetry, detected biome, measured local ratio, selected slot, rendered screenshot and whether the visual result matches. A diagnostic world with adjacent Jungle/Snow/Maw counts can legitimately route elsewhere; relocate the disposable fixture, never weaken biome priority to make a test pass.
 
@@ -47,4 +66,4 @@ Then test Green Solution on actual Wastes (not only pre-planted fixtures), norma
 
 ## Next gate
 
-Get app-control approval and run the local routing matrix. Review the five new concept images separately. Then prepare one approved matching layer set; do not bulk-install all concepts or resume unbounded renderer revisions without this evidence.
+The bounded routing sequence is proven. Next verify real Green Solution conversion, flight/cache boundaries, other scene priorities and the remaining camera/lighting matrix. Obtain separate composition review of the five concepts before authoring one matching production layer set; do not bulk-install the opaque concepts. Resume the approved A — Snapped component-sheet gate in the recorded plan order.

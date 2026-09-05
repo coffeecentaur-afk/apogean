@@ -1,0 +1,9 @@
+{
+  "Fixture": "forest-restoration-mixed",
+  "ExpectedState": "Green",
+  "MeasuredFraction": 0.473,
+  "Metrics": "[19:15:20.276] [Main Thread/INFO] [apogean]: FOREST RESTORATION: living=80; wastes=89; fraction=0.473; evidence=True; living selected=True; output=Apogean Forest Restoration 50 Percent Capture Probe",
+  "Routing": "[19:15:20.276] [Main Thread/INFO] [apogean]: TILE LAB CAPTURE PROBE: scene background=-1; capture background=10; detected biome=Forest; render lab=off; zones jungle=False, snow=False, desert=False; scene water=-1; main water=0; capture water=0",
+  "Viewport": "[19:15:20.276] [Main Thread/INFO] [apogean]: TILE LAB VIEWPORT: width=2560; height=1369; output=Apogean Forest Restoration 50 Percent Capture Probe",
+  "CapturedAt": "2026-09-04T19:15:20.9909483-05:00"
+}

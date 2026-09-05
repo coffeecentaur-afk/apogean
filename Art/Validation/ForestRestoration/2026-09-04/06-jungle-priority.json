@@ -1,0 +1,8 @@
+{
+  "Fixture": "jungle-routing after restored forest",
+  "ExpectedState": "Jungle",
+  "Metrics": "[19:16:55.692] [Main Thread/INFO] [apogean]: FOREST RESTORATION: living=0; wastes=0; fraction=1.000; evidence=True; living selected=True; output=Apogean Production Jungle Routing Capture Probe",
+  "Routing": "[19:16:55.692] [Main Thread/INFO] [apogean]: TILE LAB CAPTURE PROBE: scene background=-1; capture background=20; detected biome=Jungle; render lab=off; zones jungle=True, snow=False, desert=False; scene water=-1; main water=0; capture water=0",
+  "Viewport": "[19:16:55.692] [Main Thread/INFO] [apogean]: TILE LAB VIEWPORT: width=2560; height=1369; output=Apogean Production Jungle Routing Capture Probe",
+  "CapturedAt": "2026-09-04T19:19:05.1286815-05:00"
+}
