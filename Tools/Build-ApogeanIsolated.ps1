@@ -1,6 +1,7 @@
 param(
 	[string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot),
 	[string]$TreeCandidateDirectory = '',
+	[string]$WastesCutoutCandidateDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -53,6 +54,24 @@ try {
 			Copy-Item -LiteralPath (Join-Path $candidateRoot $asset) -Destination (Join-Path $mirrorRoot "Content/Tiles/$asset")
 		}
 		Write-Host "QA tree asset override: $candidateRoot (build mirror only)."
+	}
+	if ($WastesCutoutCandidateDirectory) {
+		$candidateRoot = (Resolve-Path -LiteralPath $WastesCutoutCandidateDirectory).Path
+		$allowedRoot = (Join-Path $sourceRoot 'Art/Candidates') + [IO.Path]::DirectorySeparatorChar
+		if (-not $candidateRoot.StartsWith($allowedRoot, [StringComparison]::OrdinalIgnoreCase)) {
+			throw 'Wastes test assets must come from this project Art/Candidates directory.'
+		}
+		# Only these two approved repairs enter the temporary package. Keep the
+		# repository's current QA art and all other biome assets unchanged.
+		foreach ($entry in @(@('Station.png','Station-report.json'), @('Foreground-Deep.png','Foreground-report.json'))) {
+			$asset = Join-Path $candidateRoot $entry[0]
+			$report = Get-Content -Raw -LiteralPath (Join-Path $candidateRoot $entry[1]) | ConvertFrom-Json
+			if (-not $report.pass -or (Get-FileHash -LiteralPath $asset).Hash -ne $report.candidateSHA256) {
+				throw "Wastes candidate differs from its passing export report: $asset"
+			}
+			Copy-Item -LiteralPath $asset -Destination (Join-Path $mirrorRoot "Content/Backgrounds/Candidates/WastesModules/$($entry[0])")
+			Write-Host "QA Wastes override: $($entry[0]); SHA256=$($report.candidateSHA256) (build mirror only)."
+		}
 	}
 	Push-Location $mirrorRoot
 	try {

@@ -76,15 +76,15 @@
     },
     {
       "id": "wastes-cutout-exact-v1",
-      "status": "contracted",
+      "status": "fixture-pass",
       "static": "pass",
-      "build": "pending",
-      "liveFixture": "pending",
+      "build": "pass",
+      "liveFixture": "pass",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "Art/Candidates/WastesCutoutRepair-2026-09-05/Exact-v1/README.md",
-      "evidenceScope": "Candidate-only hash-pinned repair: Station954 changed pixels including675 restored; Foreground114 color-only changes with identical alpha. Native dimensions and all pixels outside bounded regions preserved. Actual connectivity CLI fails archived baseline and passes repair. Seven export-gate controls pass. Light/dark offline crops inspected; reusable installed/Git skill updated. No runtime art, world or game process changed.",
-      "blockers": ["Not installed, built or live-rendered. Native appearance and full camera/routing/lighting/restoration gates remain open.", "Broad diagnostic retains275 pale boundary warnings and a separate Station sprig. These are not automatically bad pixels; do not delete or darken them to force full halo approval. Extra variants remain deferred polish."]
+      "evidenceReference": "Art/Validation/WastesExactCutouts-2026-09-05/README.md",
+      "evidenceScope": "Same exact hash-pinned repair packaged through an isolated mirror: zero build warnings/errors. Native2560x1369 ground/ascent/shallow/night/eclipse/rain and both physical diagonal sweeps passed submitted geometry: zero failures, max0.01px matrix error and0.96px anchor rounding. Eight unretouched captures retained; Station connections and timber rims visually inspected. Installed QA package contains repairs; repository Content PNGs unchanged. No regular world opened or renderer changed. Actual CLI rejects six bad traces. This bounded fixture pass is not full background acceptance.",
+      "blockers": ["User review, real-biome/restoration transitions, visible deep cave handoff, other viewports, multiplayer and production promotion remain open. Known grove digest mismatch recurred without rebuilding or crashing; persistence is not approved.", "Broad diagnostic retains275 pale boundary warnings and a separate Station sprig. These are not automatically bad pixels; do not delete or darken them to force full halo approval. Extra variants and heavy Far strata remain deferred polish. Normal builds omit the candidate unless the documented override is supplied."]
     },
     {
       "id": "wastes-terrain",

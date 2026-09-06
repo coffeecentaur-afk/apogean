@@ -1,8 +1,12 @@
 # Exact native-pixel cleanup — offline candidate
 
 The user approved deterministic pixel-level repair and asked that corrections be
-retained as reusable skills. This candidate is **not installed or live-validated**.
-No world, runtime texture, renderer, display setting or game process was changed.
+retained as reusable skills. The offline creation pass changed no world, runtime
+texture, renderer, display setting or game process. A subsequent temporary-mirror
+build and native QA pass of these exact hashes is now recorded in
+`Art/Validation/WastesExactCutouts-2026-09-05/README.md`. The installed QA package
+contains the repairs, but repository Content PNGs remain unchanged. User review
+and production promotion are still pending.
 
 ## Recipe and evidence
 
@@ -58,9 +62,10 @@ Python lacks PyYAML; no environment packages were installed to hide that limitat
 nearest-neighbor inspection crops, not higher-resolution art or game captures.
 `Upper-after.png` is a native 1x crop. Both light and dark backings were inspected.
 
-Next gate: native game inspection of these exact candidate hashes, with the
-existing camera/routing matrix. Do not claim these files solved live tint,
-repetition, cave handoff or regional anchoring. No general-world promotion.
+The subsequent native pass covers eight camera/lighting cases with zero geometry
+failures and actual gameplay screenshots. Real-biome/restoration transitions and
+user visual approval remain open. Do not claim these files solved repetition,
+deep cave handoff or production regional anchoring. No general-world promotion.
 
 ## Retained lesson
 
