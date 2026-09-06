@@ -76,15 +76,15 @@
     },
     {
       "id": "wastes-cutout-exact-v1",
-      "status": "fixture-pass",
+      "status": "rejected",
       "static": "pass",
       "build": "pass",
-      "liveFixture": "pass",
+      "liveFixture": "fail",
       "production": "pending",
-      "userReview": "pending",
-      "evidenceReference": "Art/Validation/WastesExactCutouts-2026-09-05/README.md",
-      "evidenceScope": "Same exact hash-pinned repair packaged through an isolated mirror: zero build warnings/errors. Native2560x1369 ground/ascent/shallow/night/eclipse/rain and both physical diagonal sweeps passed submitted geometry: zero failures, max0.01px matrix error and0.96px anchor rounding. Eight unretouched captures retained; Station connections and timber rims visually inspected. Installed QA package contains repairs; repository Content PNGs unchanged. No regular world opened or renderer changed. Actual CLI rejects six bad traces. This bounded fixture pass is not full background acceptance.",
-      "blockers": ["User review, real-biome/restoration transitions, visible deep cave handoff, other viewports, multiplayer and production promotion remain open. Known grove digest mismatch recurred without rebuilding or crashing; persistence is not approved.", "Broad diagnostic retains275 pale boundary warnings and a separate Station sprig. These are not automatically bad pixels; do not delete or darken them to force full halo approval. Extra variants and heavy Far strata remain deferred polish. Normal builds omit the candidate unless the documented override is supplied."]
+      "userReview": "rejected",
+      "evidenceReference": "Art/Validation/WastesExactCutouts-2026-09-05/FOREGROUND_REVIEW.md",
+      "evidenceScope": "Partial art verdict: user accepts the exact Station repair and likes the layered composition, but rejects the foreground pale perimeter. Preserve Station hash C7017CE5. Historical clean build and eight geometry cases remain valid (0.01px matrix/0.96px anchor error), not visual approval. New read-only full-perimeter probe finds417 pale-neutral candidates,188 below the old440-row cutoff, zero partial alpha and zero hidden transparent RGB; these are review candidates, not all confirmed bad pixels. Four real CLI controls pass. No runtime/source PNG, renderer or world changed during review.",
+      "blockers": ["Foreground visual failure remains: prior114-pixel repair covered timber only. Park that component pending material-aware full-perimeter candidate and native review; accepted Station must remain unchanged. Do not approve the whole pair from camera/export success.", "Requested Far direction is cracked dusty earth and demolished city silhouettes in related smoky browns/grays, with reduced repeated rock bands. Preview composition before replacement; palette matching must not hide edge defects.", "Real-biome/restoration transitions, visible cave handoff, other viewports, multiplayer and production promotion remain open. Known grove digest mismatch remains unresolved. Normal builds still omit the candidate unless the documented override is supplied."]
     },
     {
       "id": "wastes-terrain",

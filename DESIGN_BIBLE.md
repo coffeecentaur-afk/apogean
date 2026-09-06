@@ -228,6 +228,22 @@ The user authorized the four-design set to proceed into depth completion and dis
 
 ### Latest background review constraint
 
+**Latest partial acceptance:** the gas-station module's repaired tree silhouettes
+and appearance are accepted; preserve that exact artwork. The foreground still
+fails for pale grass/cliff cutout rims even though its timber was cleaned. Inspect
+the whole perimeter and retain deliberate material highlights while removing
+unwanted pale outlining; do not hide leakage by changing the layer behind it.
+
+**Requested Far revision, concept first:** replace the dominant repetitive gray
+rock-wall impression with cracked dusty earth and a demolished city/industrial
+horizon: collapsed building shells, broken urban infrastructure and quiet rubble
+intervals. Keep distance darker and lower-contrast, using soot, dusty umber and
+smoky gray related to the ochre roadside foreground/midground. Preserve the
+approved highway/station/tree language and terrain-locked layer layout. Palette
+cohesion must retain depth rather than making all layers equally bright or brown.
+Restoration changes ecology, not the ruined city's history. This is a direction
+for a reviewable composition, not approval of unmade runtime art.
+
 **Subsequent user-approved scope:** close the functional/visual baseline in one bounded corrective pass, then proceed to the starting-area slice. Actual regional anchoring, clean connected cutouts and gap-free movement/transitions remain acceptance requirements. Extra long-bank variants and final composition detail are deferred polish; the variation requirement below remains a release target, not a blocker for the playable baseline. See AUTHORING_WORKFLOW.md, Bounded background correction, for the stopping rule.
 
 **Evidence update (2026-09-05, not a new art decision):** the exact Station/Close edge repair has native QA screenshots and passing geometry across eight camera/lighting cases, including both physical diagonal sweeps. See `Art/Validation/WastesExactCutouts-2026-09-05/README.md`. This does not accept the overall composition, real-biome/restoration transitions, cave handoff or general-world deployment. Preserve the existing design requirements and defer additional variants rather than restarting an art-generation loop.

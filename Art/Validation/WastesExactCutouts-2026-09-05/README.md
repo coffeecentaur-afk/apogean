@@ -1,5 +1,9 @@
 # Exact Wastes cutout repair — native QA evidence
 
+**Subsequent user review:** Station accepted; foreground pale perimeter rejected.
+The geometry results below remain historical technical proof, not overall visual
+acceptance. See [specific findings and next boundary](FOREGROUND_REVIEW.md).
+
 ## Result and boundary
 
 The exact two repaired PNGs passed a clean isolated build (zero warnings/errors)

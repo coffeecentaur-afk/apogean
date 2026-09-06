@@ -28,6 +28,10 @@ When the user approves deterministic local image editing:
    nearest-neighbor magnification. Component tests need semantic regions and
    ground anchors: isolated debris or a separate sprig is not a broken branch.
    Keep broad warnings visible even when a narrower structural test passes.
+   Inspect the full exposed perimeter, including lower cliff sides; an upper-row
+   probe or timber-only repair cannot approve grass/rock edges elsewhere. Separate
+   opaque pale pixels, partial alpha, and RGB stored under zero alpha before
+   blaming filtering. Palette cohesion is an art decision, not a halo fix.
 6. Run the real validator with both passing controls and deliberately broken
    controls. Compare repaired files with the pinned baseline, not just dimensions.
    Freeze the candidate hashes before live QA.

@@ -23,6 +23,15 @@
 
 ## Current environmental gate
 
+**Latest visual verdict:** gas station accepted; foreground still rejected for its
+pale perimeter. Freeze the exact Station repair; do not repeat its art cycle.
+The earlier timber-only correction and upper440-row probe missed wider cliff
+edges. Full-perimeter evidence and the requested cracked-earth/demolished-city
+Far direction are recorded in `Art/Validation/WastesExactCutouts-2026-09-05/FOREGROUND_REVIEW.md`.
+Keep foreground parked pending a bounded material-aware correction and review.
+The Far palette/composition study must be shown before replacement; matching
+colors is not a substitute for clean edges. Existing camera evidence stays valid.
+
 **Biome-scope clarification:** current Wastes scenery is not a universal-world backdrop. Finish its bounded baseline before the next background family, the Maw; other surface and depth-specific families retain their distinct identities and quality targets (DESIGN_BIBLE.md, Environmental history). The failed whole-image repairs remain parked. The user-approved exact pixel repair now has a clean temporary-mirror build and native2560x1369 proof across eight camera/lighting cases, including both full diagonal sweeps; see `Art/Validation/WastesExactCutouts-2026-09-05/README.md`. The installed QA package contains the exact candidates, not the repository Content files. User art review, real-biome/restoration transitions and general-world promotion remain open. Reusable lessons live in the installed/Git-mirrored background skill, not only this candidate. No new artwork was generated during this bounded pass.
 
 **Latest user decision (2026-09-05):** replace the open-ended background-polish milestone with the bounded baseline correction in AUTHORING_WORKFLOW.md. Finish terrain anchoring, clean/connected cutouts and movement/transition checks, then review native game screenshots. More variants and final detailing are deferred. If the pass fails, simplify or park the failing layer rather than looping through new art. Historical matrix and rejected evidence below remain valid; none are promoted by this scope decision.

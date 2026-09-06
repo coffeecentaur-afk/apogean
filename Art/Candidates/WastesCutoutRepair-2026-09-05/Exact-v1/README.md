@@ -1,5 +1,9 @@
 # Exact native-pixel cleanup — offline candidate
 
+**Latest partial review:** preserve the accepted Station PNG. Foreground remains
+rejected for the turf/cliff rim outside the earlier timber-only correction.
+See `Art/Validation/WastesExactCutouts-2026-09-05/FOREGROUND_REVIEW.md`.
+
 The user approved deterministic pixel-level repair and asked that corrections be
 retained as reusable skills. The offline creation pass changed no world, runtime
 texture, renderer, display setting or game process. A subsequent temporary-mirror
