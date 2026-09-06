@@ -32,3 +32,20 @@ The first real CLI test intentionally copied the opaque source and failed REMOVE
 Eleven actual CLI rejection cases cover mask dimensions, gray/colored/soft masks, empty/full masks, kept soft-alpha source, both hash mismatches, existing output, and existing sidecar. Inputs and original output are hash-checked afterward. The city validator additionally checks all recorded prepared-color changes and the exact final mask result; three in-memory defects are rejected separately.
 
 Evidence: Art/Candidates/WastesFarCity-v1/Transparent-v1/README.md. No passing export test grants artwork, runtime canvas, coverage, biome routing or live-render approval.
+
+## Native-size runtime fitting
+
+After cutout acceptance, solve the renderer's actual coverage separately from
+transparency. Do not enlarge a source merely to meet an old canvas number.
+The optional city QA uses `New-WastesCityRuntime.ps1` for source-pixel edge joins
+and deeper ground quilting, checked by `Test-WastesCityRuntime.ps1` and isolated
+build hash checks. This fitter is pinned to one city source, not a universal
+landscape-authoring system; repeated source ground is not new painted detail.
+
+In live testing, wait for a fresh case acknowledgement before labeling a capture.
+A paused client can retain the previous scene while a file request is queued.
+Keep that capture marked unverified, resume the client and repeat the intended
+case. Distinguish a screenshot after a sweep returns from one taken during it.
+Geometry coverage success also cannot certify altitude visibility: the city
+covered the screen correctly but remained visible in Space. Test both required
+presence at low altitude and required absence at high altitude.

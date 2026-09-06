@@ -30,3 +30,9 @@ Edges-Dark/Light/Warm-Before-After.png were inspected offline. Left is before, r
 Static invariants pass. User art approval, native rendering, live lighting/joins/routing and production acceptance remain pending. No Content PNG, renderer, build, game process or world changed.
 
 The subsequent checkerboard question concerns the separate Far city generation, not this already-transparent foreground. Do not apply a new cutout mask to this color-only repair.
+# Subsequent runtime checkpoint
+
+This exact candidate was later packaged unchanged in the city QA run. See
+`Art/Validation/WastesCityRuntime-2026-09-05/README.md` for the bounded native
+captures and remaining scene/approval gates. The offline evidence below retains
+its original scope; it is not whole-scene visual acceptance.

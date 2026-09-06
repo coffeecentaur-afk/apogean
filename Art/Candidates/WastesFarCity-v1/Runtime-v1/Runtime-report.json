@@ -1,0 +1,13 @@
+{
+  "pass": true,
+  "candidateSHA256": "D61106D719B292675607B8D9275BDCA73BE7CE01D9405606CF04EB8D1C966FE6",
+  "sourceSHA256": "71C14F299210D278E1EB61B31EEBC9E341F2EF986E0C4D4159D0B3C2A41B785B",
+  "size": "1458x1792",
+  "nativeScale": 1,
+  "rawBytes": 10450944,
+  "protectedRectangle": "128,0,1330,928",
+  "negativeControls": 4,
+  "projectionChecks": 42,
+  "minimumFarBottomMargin": 413.0,
+  "scope": "Offline pixel provenance, alpha and projection contracts only. Reused ground texture is not new painted detail. Not GPU, art, routing or production approval."
+}

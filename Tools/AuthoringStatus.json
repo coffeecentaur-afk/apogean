@@ -90,13 +90,13 @@
       "id": "wastes-foreground-perimeter-v2",
       "status": "contracted",
       "static": "pass",
-      "build": "pending",
+      "build": "pass",
       "liveFixture": "pending",
       "production": "pending",
       "userReview": "pending",
       "evidenceReference": "Art/Candidates/WastesForegroundPerimeter-v2/README.md",
-      "evidenceScope": "Candidate-only exact1448x1915 repair:1049 RGB edge changes, zero alpha/interior changes; accepted Station unchanged. Deterministic hash, donor manifest, mutation selftests and dark/light/warm offline comparisons retained. No build or installation.",
-      "blockers": ["User art review and native live matrix pending. Donor heuristic is asset-specific; diagnostic417-to6 pale-edge count is not complete halo removal or approval."]
+      "evidenceScope": "Exact1448x1915 repair:1049 RGB edge changes, zero alpha/interior changes; accepted Station unchanged. Deterministic hash, donor manifest and mutation tests retained. Subsequently packaged unchanged in the optional city QA build with2560x1369 ground/wings/night/rain/eclipse screenshots and passing geometry; see Art/Validation/WastesCityRuntime-2026-09-05/README.md. Original offline report remains scoped to export invariants.",
+      "blockers": ["User art review and complete viewports/routing matrix remain pending. Donor heuristic is asset-specific; diagnostic417-to6 pale-edge count is not proof of complete halo removal. City Space visibility is a separate open scene defect."]
     },
     {
       "id": "wastes-far-city-concept-v1",
@@ -121,6 +121,18 @@
       "evidenceReference": "Art/Candidates/WastesFarCity-v1/Transparent-v1/README.md",
       "evidenceScope": "1586x992 explicit-mask derivative:750305 transparent pixels, zero partial alpha;6926 separately recorded bounded edge-color changes. Actual exporter CLI regression passes and city validator rejects three in-memory mutations. Dark/light offline previews inspected. No generation, resize, install or live check.",
       "blockers": ["Static pass is only the native-source mask contract, not requested2048x1280 runtime readiness. Composition, mask/art acceptance, authored canvas/coverage, joins and live rendering remain open."]
+    },
+    {
+      "id": "wastes-far-city-runtime-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "fail",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/WastesCityRuntime-2026-09-05/README.md",
+      "evidenceScope": "Native1458x1792 minimum-error source-pixel fitting,42 projection checks and4 negative controls. Nine live geometry cases pass at2560x1369; both diagonal sweeps cover4.853 actual Far periods; max rounding0.96px. Station/foreground-v2 unchanged. Direct art captures include ground,wings,sky,night,rain,eclipse and shallow descent. Overall live gate fails the latest requirement: city still visible in Space.",
+      "blockers": ["Research altitude conventions and add a gradual all-terrestrial-layer exit into native Space; sky.png retains the failure. No ordinary-world promotion.", "Mid broken-building concept requested; preview before installation. Reused ground-pattern repetition, other viewports, real-biome/restoration/cave transitions and performance remain open."]
     },
     {
       "id": "wastes-terrain",

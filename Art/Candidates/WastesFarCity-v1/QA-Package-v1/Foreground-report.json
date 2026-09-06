@@ -1,0 +1,15 @@
+{
+  "referenceSize": "1448x1915",
+  "candidateSize": "1448x1915",
+  "transparentPixels": 484520,
+  "partialAlphaPixels": 0,
+  "changedOutsideApprovedRegions": 0,
+  "changedInsideApprovedRegions": 1049,
+  "changedAlphaPixels": 0,
+  "alphaMaskPreservationRequired": true,
+  "referenceSHA256": "4158255600690F0BFA67931C8D3AE0B5FF5E93B3BE5714D360DCB279DD3CC8D4",
+  "candidateSHA256": "9D039C003929EC128F43C3DFEFB3F98C22DC15488EB0AA9B0F9151C00D726FE4",
+  "failures": [],
+  "pass": true,
+  "scope": "Export invariants only. A pass does not approve silhouette, material, connected branches, scene routing or live rendering."
+}

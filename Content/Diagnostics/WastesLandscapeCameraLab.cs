@@ -159,7 +159,7 @@ namespace apogean.Content.Diagnostics
 			moduleFrameChecks++;
 			if (expected != submitted) moduleFailures++;
 			if (moduleFrameChecks <= 2)
-				Mod.Logger.Info($"WASTES MODULAR SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; top={top:F2}; submitted={submitted}; expected={expected}; rgbaMiB=28.39; scope=QA; artApproval=False");
+				Mod.Logger.Info($"WASTES MODULAR SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; top={top:F2}; submitted={submitted}; expected={expected}; rgbaMiB={WastesLandscapeV1Renderer.RawTextureMiB:F2}; farWidth={WastesLandscapeV1Renderer.FarRepeatWidth}; scope=QA; artApproval=False");
 		}
 
 		internal void Release()
@@ -171,7 +171,8 @@ namespace apogean.Content.Diagnostics
 			if (Sweeping)
 			{
 				double distance = drawnFrames == 0 ? 0 : drawnMax - drawnMin;
-				Mod.Logger.Info($"WASTES V1 SWEEP: case={scenario}; isolatedPhase={PhaseSweep}; drawnFrames={drawnFrames}; sampledTravel={distance:F1}; farRepeats={WastesParallaxContract.Repeats(distance, 0):F3}; midRepeats={WastesParallaxContract.Repeats(distance, 1):F3}; closeRepeats={WastesParallaxContract.Repeats(distance, 2):F3}; coveragePass={WastesParallaxContract.Repeats(distance, 0) >= 2.5}; artApproval=False");
+				double farRepeats = WastesParallaxContract.Repeats(distance, 0, WastesLandscapeV1Renderer.FarRepeatWidth);
+				Mod.Logger.Info($"WASTES V1 SWEEP: case={scenario}; isolatedPhase={PhaseSweep}; drawnFrames={drawnFrames}; sampledTravel={distance:F1}; farRepeats={farRepeats:F3}; midRepeats={WastesParallaxContract.Repeats(distance, 1, WastesModularLayout.MidPeriod):F3}; closeRepeats={WastesParallaxContract.Repeats(distance, 2, WastesModularLayout.ClosePeriod):F3}; coveragePass={farRepeats >= 2.5}; artApproval=False");
 			}
 			if (remaining > 0)
 			{

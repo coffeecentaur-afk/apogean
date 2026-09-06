@@ -2,6 +2,7 @@ param(
 	[string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot),
 	[string]$TreeCandidateDirectory = '',
 	[string]$WastesCutoutCandidateDirectory = '',
+	[string]$WastesCityCandidateDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -72,6 +73,26 @@ try {
 			Copy-Item -LiteralPath $asset -Destination (Join-Path $mirrorRoot "Content/Backgrounds/Candidates/WastesModules/$($entry[0])")
 			Write-Host "QA Wastes override: $($entry[0]); SHA256=$($report.candidateSHA256) (build mirror only)."
 		}
+	}
+	if ($WastesCityCandidateDirectory) {
+		$candidateRoot = (Resolve-Path -LiteralPath $WastesCityCandidateDirectory).Path
+		$allowedRoot = (Join-Path $sourceRoot 'Art/Candidates') + [IO.Path]::DirectorySeparatorChar
+		if (-not $candidateRoot.StartsWith($allowedRoot, [StringComparison]::OrdinalIgnoreCase)) {
+			throw 'City test assets must come from this project Art/Candidates directory.'
+		}
+		$asset = Join-Path $candidateRoot 'Far.png'
+		$report = Get-Content -Raw -LiteralPath (Join-Path $candidateRoot 'Runtime-report.json') | ConvertFrom-Json
+		if (-not $report.pass -or (Get-FileHash -LiteralPath $asset).Hash -ne $report.candidateSHA256) {
+			throw 'City candidate differs from its passing runtime-fit report.'
+		}
+		# Re-run the independent pixel/depth audit rather than trusting a boolean
+		# report. Its memory/coverage scope is not live visual acceptance.
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-WastesCityRuntime.ps1') -CandidateDirectory $candidateRoot
+		if ($LASTEXITCODE -ne 0) { throw 'City runtime audit failed.' }
+		$destination = Join-Path $mirrorRoot 'Content/Backgrounds/Candidates/WastesCity'
+		New-Item -ItemType Directory -Path $destination -Force | Out-Null
+		Copy-Item -LiteralPath $asset -Destination (Join-Path $destination 'Far.png')
+		Write-Host "QA city override: $($report.candidateSHA256) (build mirror only)."
 	}
 	Push-Location $mirrorRoot
 	try {

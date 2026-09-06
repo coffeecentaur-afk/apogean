@@ -12,6 +12,10 @@ namespace apogean.Common.Backgrounds
 			0 => .055f, 1 => .14f, 2 => .30f,
 			_ => throw new ArgumentOutOfRangeException(nameof(layer))
 		};
-		public static double Repeats(double travel, int layer) => Math.Abs(travel) * Horizontal(layer) / TextureWidth;
+		public static double Repeats(double travel, int layer, int repeatWidth = TextureWidth)
+		{
+			if (repeatWidth <= 0) throw new ArgumentOutOfRangeException(nameof(repeatWidth));
+			return Math.Abs(travel) * Horizontal(layer) / repeatWidth;
+		}
 	}
 }

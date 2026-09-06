@@ -14,6 +14,20 @@ namespace apogean.Content.Backgrounds
 	{
 		private static Asset<Texture2D>[] layers;
 		private static Asset<Texture2D>[] modular;
+		private static bool nativeCity;
+		internal static int FarRepeatWidth => layers?[0]?.Value.Width ?? WastesParallaxContract.TextureWidth;
+		internal static double RawTextureMiB
+		{
+			get
+			{
+				long bytes = 0;
+				if (layers != null) foreach (var asset in layers)
+					if (asset != null) bytes += (long)asset.Value.Width * asset.Value.Height * 4;
+				if (modular != null) foreach (var asset in modular)
+					bytes += (long)asset.Value.Width * asset.Value.Height * 4;
+				return bytes / 1048576d;
+			}
+		}
 		// Production routing can be exercised without promoting art to real worlds.
 		internal static bool EnabledForCurrentWorld =>
 			Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" ||
@@ -21,8 +35,12 @@ namespace apogean.Content.Backgrounds
 		internal static void Load()
 		{
 			if (Main.dedServ || layers != null) return;
+			// Optional asset exists only in an isolated QA package. Ordinary builds
+			// retain the prior candidate; neither path promotes art to other worlds.
+			const string cityPath = "apogean/Content/Backgrounds/Candidates/WastesCity/Far";
+			nativeCity = ModContent.HasAsset(cityPath);
 			layers = new[] {
-				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesV1/Far"),
+				ModContent.Request<Texture2D>(nativeCity ? cityPath : "apogean/Content/Backgrounds/Candidates/WastesV1/Far"),
 				(Asset<Texture2D>)null, null
 			};
 			modular = new[] {
@@ -33,7 +51,7 @@ namespace apogean.Content.Backgrounds
 			};
 		}
 
-		internal static void Unload() { layers = null; modular = null; }
+		internal static void Unload() { layers = null; modular = null; nativeCity = false; }
 
 		internal static void Draw(SpriteBatch batch, float opacity, int styleSlot)
 		{
@@ -82,7 +100,11 @@ namespace apogean.Content.Backgrounds
 						WastesCameraProjection.LogicalCoordinate((int)Math.Floor(x), Main.BackgroundViewMatrix.Zoom.X),
 						WastesCameraProjection.LogicalCoordinate((int)Math.Floor(top), Main.BackgroundViewMatrix.Zoom.Y));
 					batch.Draw(texture, position, null, layerTint, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
-					float coveredBottom = DrawLowerStrata(batch, texture, position.X, (float)Math.Floor(top) + texture.Height, height, scale, layerTint);
+					float coveredBottom = (float)Math.Floor(top) + texture.Height;
+					// City candidate owns its full native-depth coverage. Do not reflect
+					// the skyline or silently substitute the old strata guard below it.
+					if (!nativeCity)
+						coveredBottom = DrawLowerStrata(batch, texture, position.X, coveredBottom, height, scale, layerTint);
 					if (x == -phase) first = position;
 					end = new Vector2(position.X + texture.Width * scale.X,
 						coveredBottom * scale.Y);

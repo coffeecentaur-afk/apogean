@@ -1,0 +1,22 @@
+{
+  "sourceSHA256": "71C14F299210D278E1EB61B31EEBC9E341F2EF986E0C4D4159D0B3C2A41B785B",
+  "width": 1458,
+  "height": 1792,
+  "sourceWidth": 1586,
+  "sourceHeight": 992,
+  "horizontalOverlap": 128,
+  "unchangedRectangle": [
+    128,
+    0,
+    1330,
+    928
+  ],
+  "groundDonorRows": [
+    688,
+    991
+  ],
+  "groundContinuationStart": 928,
+  "sourceScale": 1,
+  "rawBytes": 10450944,
+  "scope": "Offline native-pixel fitting candidate; repeated texture quilting is not new painted detail or live art approval."
+}

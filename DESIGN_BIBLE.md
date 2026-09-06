@@ -245,6 +245,28 @@ exporter now has actual CLI regression proof; the city has a separate masked
 candidate with bounded edge-color preparation. See Tools/BackgroundMaskWorkflow.md.
 Actual runtime dimensions and in-game/art approval remain separate gates.
 
+**Native city fitting update:** the masked city now has an optional1458x1792
+QA-only runtime derivative, native-pixel edge joins and extended source-ground
+texture, not enlarged detail. Station and foreground-v2 hashes are preserved.
+See `Art/Validation/WastesCityRuntime-2026-09-05/README.md`; geometry passes are
+not artistic or Space-handoff approval.
+
+**Latest altitude/scene direction:** all terrestrial scenery must eventually
+leave the view during ascent. The ruined city must not persist as the Space
+background. Close remains world-ground locked and exits by ordinary camera
+movement; Mid yields next; Far must hand off to the native sky/space layer too.
+Research engine/mod height conventions before fixing exact thresholds. Preserve
+night/eclipse geometry and restoration fades; do not use an abrupt cutoff or
+change land anchors to follow the player. This does not alter descending cave
+handoff requirements.
+
+**Additional Mid artifact:** design one standalone demolished building on a
+broken raised foundation, sharing the Far city's structural/material language
+but authored for the closer plane. Leave transparent negative space, maintain
+quiet intervals and deep flight-safe underside coverage. Preserve Station and
+Highway. Show a native-size concept/assembly before installation; do not simply
+enlarge a cropped Far building or tile a solid city wall across Mid.
+
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial
 horizon: collapsed building shells, broken urban infrastructure and quiet rubble
