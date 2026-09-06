@@ -120,14 +120,15 @@ namespace apogean.Content.Diagnostics
 					Mod.Logger.Info("LIVE VALIDATION REQUEST CONSUMED: qa-save-and-quit");
 					return;
 				}
-				// Restore temporary state and invalidate a checkpoint before replacing fixture tiles.
-				ModContent.GetInstance<VegetationVisualLab>().ClearFixture();
 				if (request.StartsWith("wastes-camera-", System.StringComparison.Ordinal))
 				{
 					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
 					Player.GetModPlayer<WastesLandscapeCameraLab>().Start(request.Substring("wastes-camera-".Length));
 					return;
 				}
+				// Camera-only checks must not invalidate the saved grove checkpoint.
+				// Restore temporary state only before replacing fixture tiles.
+				ModContent.GetInstance<VegetationVisualLab>().ClearFixture();
 				Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
 				ModContent.GetInstance<ForestSprayVisualLab>().Stop();
 				switch (request)

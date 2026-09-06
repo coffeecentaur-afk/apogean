@@ -42,9 +42,11 @@ namespace apogean.Content.Backgrounds
 			// Do not End/Begin the caller's batch or mutate global zoom settings.
 			int width = batch.GraphicsDevice.Viewport.Width;
 			int height = batch.GraphicsDevice.Viewport.Height;
-			Matrix inverseZoom = Matrix.Invert(Main.BackgroundViewMatrix.ZoomMatrix);
 			Vector2 scale = Vector2.One / Main.BackgroundViewMatrix.Zoom;
-			float groundDelta = (float)((Main.worldSurface - 50) * 16 - Main.screenPosition.Y) - height * .55f;
+			// DrawBG temporarily shifts screenPosition into its logical view. Remove
+			// that offset for the world-surface datum, not the sprite positions.
+			float worldCameraY = Main.screenPosition.Y - Main.BackgroundViewMatrix.Translation.Y;
+			float altitude = WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f);
 			// A continuous sky-derived floor avoids brightening abruptly when
 			// dayTime flips at dusk. Alpha belongs to the style fade, not sky tint.
 			Color sky = Main.ColorOfTheSkies;
@@ -54,22 +56,49 @@ namespace apogean.Content.Backgrounds
 			for (int i = 0; i < layers.Length; i++)
 			{
 				float horizontal = WastesParallaxContract.Horizontal(i);
-				float vertical = i == 0 ? .10f : i == 1 ? .18f : .30f;
 				Texture2D texture = layers[i].Value;
-				// The camera anchors the ground line, not the image top. Clamp only
-				// at the lower surface transition to retain authored bottom coverage.
-				float top = height * (.57f + i * .025f) - 740 + groundDelta * vertical;
-				// Only the closest opaque terrain must reach the bottom. Clamping
-				// every layer would bury the distant skyline behind real surface tiles.
-				if (i == layers.Length - 1) top = Math.Max(height - texture.Height, top);
+				float top = WastesCameraProjection.Top(Main.worldSurface, worldCameraY, height, texture.Height, i, Main.GameViewMatrix.Zoom.Y);
+				// Close leaves the camera by world movement, never by a below-ground
+				// fade. Mid yields gradually to Far after the first third of ascent.
+				Color layerTint = i == 1 ? tint * WastesCameraProjection.MiddleOpacity(altitude) : tint;
 				float phase = (float)(sampledX * horizontal % texture.Width);
 				if (phase < 0) phase += texture.Width;
+				Vector2 first = Vector2.Zero, end = Vector2.Zero;
 				for (float x = -phase; x < width; x += texture.Width)
 				{
-					Vector2 position = Vector2.Transform(new Vector2((int)Math.Floor(x), (int)Math.Floor(top)), inverseZoom);
-					batch.Draw(texture, position, null, tint, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+					Vector2 position = new(
+						WastesCameraProjection.LogicalCoordinate((int)Math.Floor(x), Main.BackgroundViewMatrix.Zoom.X),
+						WastesCameraProjection.LogicalCoordinate((int)Math.Floor(top), Main.BackgroundViewMatrix.Zoom.Y));
+					batch.Draw(texture, position, null, layerTint, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+					float coveredBottom = DrawLowerStrata(batch, texture, position.X, (float)Math.Floor(top) + texture.Height, height, scale, layerTint);
+					if (x == -phase) first = position;
+					end = new Vector2(position.X + texture.Width * scale.X,
+						coveredBottom * scale.Y);
 				}
+				cameraLab.ObserveProjection(i, first, end, Main.CurrentFrameFlags.Hacks.CurrentBackgroundMatrixForCreditsRoll, width, height);
+				if (i == 2) cameraLab.ObserveGroundLock(top, worldCameraY, height);
 			}
+		}
+
+		// Bounded QA continuation of existing opaque rock/soil, never a stretched
+		// last row or additional GPU asset. Alternating vertical reflection makes
+		// source edges meet exactly. Repeated strata still need the art-review gate.
+		// Terraria continues to own the surface-to-underground style handoff.
+		private static float DrawLowerStrata(SpriteBatch batch, Texture2D texture, float logicalX,
+			float baseY, int viewportHeight, Vector2 scale, Color tint)
+		{
+			const int rows = WastesCameraProjection.LowerStrataHeight;
+			Rectangle source = new(0, texture.Height - rows, texture.Width, rows);
+			int first = Math.Max(0, (int)Math.Floor(-baseY / rows));
+			float bottom = baseY;
+			for (int index = first; baseY + index * rows < viewportHeight; index++)
+			{
+				Vector2 position = new(logicalX, (baseY + index * rows) * scale.Y);
+				batch.Draw(texture, position, source, tint, 0, Vector2.Zero, scale,
+					index % 2 == 0 ? SpriteEffects.FlipVertically : SpriteEffects.None, 0);
+				bottom = baseY + (index + 1) * rows;
+			}
+			return bottom;
 		}
 	}
 }

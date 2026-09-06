@@ -40,6 +40,14 @@ Machine-readable evidence and blockers live in `Tools/AuthoringStatus.json`. `To
 
 Community background research is recorded in `RESEARCH_DYNAMIC_PARALLAX.md`. The user subsequently approved landscape-first work and local restoration-reactive scenery; the source implementation, bounded live proof and remaining matrix are recorded in `FOREST_RESTORATION_VALIDATION.md`. Ordinary surface styles already route supported biomes through the HD V0 compositor despite older diagnostic-only prose. That routing is not a visual promotion; existing coverage, seam and art-quality gates remain open.
 
+## Current flight correction checkpoint — 2026-09-05
+
+User feedback reopened the Wastes V1 camera/art gate: excessive vertical movement, left-side repeat cutoff during diagonal flight, over-frequent roadside landmarks, and sediment repeated through multiple depths. The live red diagonal fixture reproduced a425.67px maximum left gap. The ground-locked, altitude-staged correction now passes1080p/1440p submitted-geometry sweeps and five altitude holds; shallow descent visibly retains Close. See `Art/Validation/WastesLandscapeV1/2026-09-05-Flight/README.md`. Do not claim the terrain-obscured deeper capture proves cave handoff, or the later changed QA grove checkpoint proves persistence.
+
+Next within this same family: preview **modular transparent midground** hill/ruin groups, replacing the uninterrupted soil wall. Include deeper cliff/sloped undersides and compatible continuation pieces, with fixed region-height anchors validated at ground and elevated viewpoints. Height locking cannot excuse an exposed flat cut. Keep gaps open beside/between the deeper pieces. The upper-silhouette concept in `Art/Candidates/WastesMidgroundModules/2026-09-05/` is not approved or engine-ready (baked checkerboard; shallow bottoms). After art approval, contract and implement stable placement, real through-gaps, compatible joined groups, Far-owned coverage and restoration variants. No background asset promotion or dependent biome/faction work until this gate passes. Accepted tree art stays unchanged; the separate QA checkpoint mismatch needs diagnosis, not an automatic rebuild.
+
+Next art pass: original quiet/open roadside variants between major landmarks; detailed sediment concentrated in the nearest ledge; quieter overlapping middle ledges with exposed pipes/rock; preserve drooping dead grass. Show candidates before installation. Do not expand to Maw backgrounds while this family's visual gate is open.
+
 ## Vertical slices
 
 1. **Engraft foundation** — biome identity, Maw Nodes/Ruptures, bounded conversion, three initial enemies, debug tools, and art direction.

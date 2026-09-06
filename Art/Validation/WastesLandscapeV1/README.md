@@ -16,7 +16,7 @@ The approved composition is `Art/Reference/Backgrounds/2026-09-04/Wastes-Surface
 
 All three have zero soft-alpha pixels, zero opaque pixels in the tested sky band, zero transparent pixels in the ground band, and identical edge columns. Equality alone does not prove an invisible art join.
 
-## Renderer contract
+## Original renderer contract (superseded by the 2026-09-05 flight follow-up)
 
 - Physical viewport, not the temporarily logical `Main.screenWidth/Height` used during surface drawing.
 - Native source scale after cancelling `BackgroundViewMatrix.ZoomMatrix` and reciprocal zoom in draw inputs; no global zoom or SpriteBatch state changes. Gravity effects remain owned by Terraria.
@@ -78,6 +78,10 @@ Next session, in order:
 Investigation lead, not a live-confirmed fix: the installed `SurfaceBackgroundStylesLoader.ModifyFarFades` calls only the currently selected style, while the front-alpha array is updated for every style. `ApogeanSurfaceBackgroundStyle` currently caches its opacity in that selected-only hook. The spray probe should establish whether outgoing Wastes draws therefore hold stale opacity. Do not assume its outcome or mark a source-only inference as a reproduced visual defect. Private local runtime inspection stays outside the repository.
 
 Fresh backup: `C:/Users/max_h/AppData/Local/Temp/Apogean-BackgroundSweep-aa63b2f5fc9e43a0bef396ef60f3821d` contains the approved QA `.wld/.twld`, gg `.plr/.tplr` and pre-launch config. This session launched only to the character-selection menu and closed the client **without entering a world**. The existing saved grove was not replaced by the new spray fixture. No overnight automation was created. Resume on the user's next request.
+
+## 2026-09-05 follow-up: combined diagonal flight
+
+User found a left-edge cut that the earlier separated camera checks missed. The new combined-flight fixture reproduced it (425.67px maximum left gap). The renderer must undo the surface batch's scale without undoing a centered translation already removed by Terraria. The subsequent clarified contract world-locks Close, stages Mid/Far by altitude, and removes the early below-ground fade. See [flight red/green evidence and the revised art direction](2026-09-05-Flight/README.md). The new correction is **not** final art, comfort, multiplayer or general-world acceptance; tree and background PNGs remain unchanged.
 
 ## Previous safe handoff
 
