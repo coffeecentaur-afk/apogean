@@ -1,0 +1,22 @@
+{
+  "width": 1448,
+  "height": 1915,
+  "transparent": 484520,
+  "partialAlpha": 0,
+  "transparentWithNonzeroRgb": 0,
+  "opaqueBoundaryPixels": 4745,
+  "paleNeutralBoundaryCandidates": 6,
+  "candidatesBelowOld440RowProbe": 1,
+  "examplesBelowOldProbe": [
+    {
+      "x": 1414,
+      "y": 862,
+      "r": 104,
+      "g": 104,
+      "b": 107,
+      "a": 255
+    }
+  ],
+  "scope": "Read-only full-perimeter inspection; no artwork, color, alpha or game state changed. Counts are review aids, not automatic deletion targets. Transparent RGB is not proof of runtime leakage without the loader/sampler path.",
+  "sourceSHA256": "9D039C003929EC128F43C3DFEFB3F98C22DC15488EB0AA9B0F9151C00D726FE4"
+}

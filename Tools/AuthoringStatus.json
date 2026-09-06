@@ -87,6 +87,30 @@
       "blockers": ["Foreground visual failure remains: prior114-pixel repair covered timber only. Park that component pending material-aware full-perimeter candidate and native review; accepted Station must remain unchanged. Do not approve the whole pair from camera/export success.", "Requested Far direction is cracked dusty earth and demolished city silhouettes in related smoky browns/grays, with reduced repeated rock bands. Preview composition before replacement; palette matching must not hide edge defects.", "Real-biome/restoration transitions, visible cave handoff, other viewports, multiplayer and production promotion remain open. Known grove digest mismatch remains unresolved. Normal builds still omit the candidate unless the documented override is supplied."]
     },
     {
+      "id": "wastes-foreground-perimeter-v2",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesForegroundPerimeter-v2/README.md",
+      "evidenceScope": "Candidate-only exact1448x1915 repair:1049 RGB edge changes, zero alpha/interior changes; accepted Station unchanged. Deterministic hash, donor manifest, mutation selftests and dark/light/warm offline comparisons retained. No build or installation.",
+      "blockers": ["User art review and native live matrix pending. Donor heuristic is asset-specific; diagnostic417-to6 pale-edge count is not complete halo removal or approval."]
+    },
+    {
+      "id": "wastes-far-city-concept-v1",
+      "status": "specified",
+      "static": "fail",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesFarCity-v1/README.md",
+      "evidenceScope": "One built-in generated city study,1586x992 instead of2048x1280, zero transparent pixels; export gate rejects. Original output and exact prompt retained, not installed.",
+      "blockers": ["User challenged repeated checkerboard exports. Separate explicit-mask workflow proposed but not implemented; no further generation loop. Composition, alpha, native dimensions, coverage and live evidence remain open."]
+    },
+    {
       "id": "wastes-terrain",
       "status": "fixture-pass",
       "static": "pass",

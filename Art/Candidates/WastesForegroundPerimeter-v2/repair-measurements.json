@@ -1,0 +1,13 @@
+{
+  "width": 1448,
+  "height": 1915,
+  "changedPixels": 1049,
+  "changedBelowOldProbe": 418,
+  "alphaChanges": 0,
+  "interiorChanges": 0,
+  "donorRadius": 7,
+  "stationChanged": false,
+  "installed": false,
+  "liveApproved": false,
+  "selection": "Pale exposed pixels at least16 luma brighter than the median of5 nearest opaque-body colors. Asset-specific candidate rule, not a universal cleanup."
+}

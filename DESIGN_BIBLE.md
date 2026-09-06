@@ -234,6 +234,15 @@ fails for pale grass/cliff cutout rims even though its timber was cleaned. Inspe
 the whole perimeter and retain deliberate material highlights while removing
 unwanted pale outlining; do not hide leakage by changing the layer behind it.
 
+**Transparency workflow correction:** generated checkerboard RGB is never an
+acceptable transparency deliverable. Separate authored color from a reviewed
+cutout mask and validate the exported alpha before reviewing it as a usable
+layer. Preserve fine connections and intentional pale materials; a global gray
+key or darker scenery behind a fringe is not the solution. The v2 foreground
+color-only repair and failed-alpha Far concept are recorded separately in their
+candidate READMEs; neither is installed or live-approved. A reusable mask export
+step is proposed, not yet implemented.
+
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial
 horizon: collapsed building shells, broken urban infrastructure and quiet rubble

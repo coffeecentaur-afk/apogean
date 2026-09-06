@@ -23,6 +23,13 @@
 
 ## Current environmental gate
 
+**Latest candidate checkpoint:** foreground perimeter v2 has offline-only proof
+in `Art/Candidates/WastesForegroundPerimeter-v2/README.md`; accepted Station is
+unchanged. Far city v1 is a failed-alpha composition study, not installable art.
+The user's checkerboard concern makes a reviewed explicit-mask export workflow
+the next bounded tooling decision before another generated panorama. See
+`Art/Candidates/WastesFarCity-v1/README.md`. No new build/live approval is claimed.
+
 **Latest visual verdict:** gas station accepted; foreground still rejected for its
 pale perimeter. Freeze the exact Station repair; do not repeat its art cycle.
 The earlier timber-only correction and upper440-row probe missed wider cliff
