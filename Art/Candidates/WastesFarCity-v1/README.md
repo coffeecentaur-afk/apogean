@@ -10,6 +10,11 @@ The demolished buildings, industrial ruins and warm cracked earth explore the re
 
 ## User correction: separate artwork from transparency
 
+**Follow-up implemented:** the deterministic exporter and reviewed-mask candidate
+are now in Transparent-v1/README.md and Tools/BackgroundMaskWorkflow.md. The
+proposal below describes the historical decision, not the current tool status.
+The original City-Concept.png and its failed export report remain unchanged.
+
 The user challenged the repeated reliance on generation to supply alpha. Diagnosis: the requested transparency was not present in the returned file. The pre-install test caught it, but displaying a failed output without a resolved export still wastes review cycles.
 
 Existing background-authoring instructions require actual alpha; multiple older prototype scripts instead use source-specific color keys. Those keys are not a safe general solution for gray ruins or thin dark branches.

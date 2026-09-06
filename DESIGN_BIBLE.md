@@ -240,8 +240,10 @@ cutout mask and validate the exported alpha before reviewing it as a usable
 layer. Preserve fine connections and intentional pale materials; a global gray
 key or darker scenery behind a fringe is not the solution. The v2 foreground
 color-only repair and failed-alpha Far concept are recorded separately in their
-candidate READMEs; neither is installed or live-approved. A reusable mask export
-step is proposed, not yet implemented.
+candidate READMEs; neither is installed or live-approved. The reusable hard-mask
+exporter now has actual CLI regression proof; the city has a separate masked
+candidate with bounded edge-color preparation. See Tools/BackgroundMaskWorkflow.md.
+Actual runtime dimensions and in-game/art approval remain separate gates.
 
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial

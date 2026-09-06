@@ -26,6 +26,12 @@ connectivity or appearance. Every later biome/variant inherits the checks, not
 Wastes-specific colors, coordinates or scenery. No claim of automatic learning or
 first-time perfection replaces a recorded test and live review.
 
+Deterministic cutouts use the explicit-mask export contract in
+`Tools/BackgroundMaskWorkflow.md`: separate source color, reviewed mask and RGBA
+output. The Background gate now runs the actual exporter CLI controls and city
+candidate pixel checks. A source-specific mask proposal is not a universal color
+key, and edge-color preparation must retain its own change record.
+
 ## Evidence states
 
 | State | Meaning |

@@ -43,6 +43,28 @@ missing branches. `Tools/Test-BackgroundReplacementValidator.ps1` tests the real
 entrypoint, including deliberately eroded silhouettes. Bright-edge warnings are
 review aids, never a mandate to darken all pale pixels.
 
+## Explicit-mask export
+
+For deterministic local editing authorized by the user, separate three artifacts:
+source color, a same-size reviewed keep/remove mask, and the exported RGBA PNG.
+In Apogean, use `Tools/Export-MaskedBackground.ps1`; its contract and actual CLI
+tests are documented in `Tools/BackgroundMaskWorkflow.md`.
+
+White mask pixels keep fully opaque source pixels exactly; black pixels become
+RGBA0. Ambiguous mask colors/alpha, mismatched sizes, changed pinned inputs and
+existing output files are errors. The exporter does not identify the subject.
+A segmentation/color-based proposal is an editable suggestion, never a universal
+color key: inspect the sky, enclosed openings, thin connections and intentionally
+pale materials before approving its mask. Preserve the original master.
+
+Preview on dark and light solid backings before asking for an install decision.
+Treat baked-matte edge color separately from alpha: retain the reviewed mask and
+record any bounded color changes against the master. Passing pixel-preservation
+tests does not certify mask semantics or eliminate the need for visual review.
+A failed generated alpha request should go through this bounded mask workflow
+when authorized, not an automatic regeneration loop. Keep the generated source's
+actual size; matching a different runtime canvas is a separate authoring gate.
+
 ## Camera and family transfer
 
 - Close terrain uses a stable world/regional ground datum, never player altitude.

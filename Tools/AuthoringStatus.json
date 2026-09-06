@@ -108,7 +108,19 @@
       "userReview": "pending",
       "evidenceReference": "Art/Candidates/WastesFarCity-v1/README.md",
       "evidenceScope": "One built-in generated city study,1586x992 instead of2048x1280, zero transparent pixels; export gate rejects. Original output and exact prompt retained, not installed.",
-      "blockers": ["User challenged repeated checkerboard exports. Separate explicit-mask workflow proposed but not implemented; no further generation loop. Composition, alpha, native dimensions, coverage and live evidence remain open."]
+      "blockers": ["Original generated export remains rejected; the explicit-mask derivative has separate evidence in wastes-far-city-masked-v1. Do not promote this opaque original. Composition, runtime dimensions, coverage and live evidence remain open."]
+    },
+    {
+      "id": "wastes-far-city-masked-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesFarCity-v1/Transparent-v1/README.md",
+      "evidenceScope": "1586x992 explicit-mask derivative:750305 transparent pixels, zero partial alpha;6926 separately recorded bounded edge-color changes. Actual exporter CLI regression passes and city validator rejects three in-memory mutations. Dark/light offline previews inspected. No generation, resize, install or live check.",
+      "blockers": ["Static pass is only the native-source mask contract, not requested2048x1280 runtime readiness. Composition, mask/art acceptance, authored canvas/coverage, joins and live rendering remain open."]
     },
     {
       "id": "wastes-terrain",
