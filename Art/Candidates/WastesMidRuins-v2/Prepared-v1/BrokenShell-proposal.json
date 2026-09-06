@@ -1,0 +1,223 @@
+{
+  "recipeVersion": 1,
+  "sourceSHA256": "7A088DFB2AE4C1A2AF3DCD531D00179A839B4C1375ED92BD5D6743786A9CF146",
+  "state": "agent-reviewed mask; edge-color candidate",
+  "width": 1024,
+  "height": 1536,
+  "selectedComponents": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11,
+    15,
+    16,
+    17,
+    18
+  ],
+  "edgeColorChanges": 5748,
+  "sourceTransparentPixels": 0,
+  "sourcePartialPixels": 0,
+  "proposedRemoved": 810820,
+  "keptBounds": {
+    "minX": 94,
+    "minY": 147,
+    "maxX": 921,
+    "maxY": 1511
+  },
+  "components": [
+    {
+      "id": 1,
+      "area": 801911,
+      "minX": 0,
+      "minY": 0,
+      "maxX": 1023,
+      "maxY": 1535,
+      "border": true
+    },
+    {
+      "id": 2,
+      "area": 593,
+      "minX": 438,
+      "minY": 179,
+      "maxX": 462,
+      "maxY": 206,
+      "border": false
+    },
+    {
+      "id": 3,
+      "area": 280,
+      "minX": 467,
+      "minY": 182,
+      "maxX": 483,
+      "maxY": 202,
+      "border": false
+    },
+    {
+      "id": 4,
+      "area": 1,
+      "minX": 340,
+      "minY": 236,
+      "maxX": 340,
+      "maxY": 236,
+      "border": false
+    },
+    {
+      "id": 5,
+      "area": 160,
+      "minX": 652,
+      "minY": 278,
+      "maxX": 667,
+      "maxY": 292,
+      "border": false
+    },
+    {
+      "id": 6,
+      "area": 1370,
+      "minX": 275,
+      "minY": 321,
+      "maxX": 303,
+      "maxY": 386,
+      "border": false
+    },
+    {
+      "id": 7,
+      "area": 2409,
+      "minX": 602,
+      "minY": 335,
+      "maxX": 642,
+      "maxY": 420,
+      "border": false
+    },
+    {
+      "id": 8,
+      "area": 370,
+      "minX": 756,
+      "minY": 342,
+      "maxX": 775,
+      "maxY": 361,
+      "border": false
+    },
+    {
+      "id": 9,
+      "area": 1,
+      "minX": 842,
+      "minY": 428,
+      "maxX": 842,
+      "maxY": 428,
+      "border": false
+    },
+    {
+      "id": 10,
+      "area": 103,
+      "minX": 854,
+      "minY": 474,
+      "maxX": 862,
+      "maxY": 486,
+      "border": false
+    },
+    {
+      "id": 11,
+      "area": 3490,
+      "minX": 652,
+      "minY": 531,
+      "maxX": 718,
+      "maxY": 604,
+      "border": false
+    },
+    {
+      "id": 12,
+      "area": 1,
+      "minX": 151,
+      "minY": 657,
+      "maxX": 151,
+      "maxY": 657,
+      "border": false
+    },
+    {
+      "id": 13,
+      "area": 1,
+      "minX": 150,
+      "minY": 658,
+      "maxX": 150,
+      "maxY": 658,
+      "border": false
+    },
+    {
+      "id": 14,
+      "area": 2,
+      "minX": 906,
+      "minY": 753,
+      "maxX": 906,
+      "maxY": 754,
+      "border": false
+    },
+    {
+      "id": 15,
+      "area": 43,
+      "minX": 159,
+      "minY": 777,
+      "maxX": 162,
+      "maxY": 792,
+      "border": false
+    },
+    {
+      "id": 16,
+      "area": 13,
+      "minX": 165,
+      "minY": 1027,
+      "maxX": 168,
+      "maxY": 1031,
+      "border": false
+    },
+    {
+      "id": 17,
+      "area": 42,
+      "minX": 719,
+      "minY": 1053,
+      "maxX": 721,
+      "maxY": 1069,
+      "border": false
+    },
+    {
+      "id": 18,
+      "area": 36,
+      "minX": 711,
+      "minY": 1054,
+      "maxX": 713,
+      "maxY": 1068,
+      "border": false
+    },
+    {
+      "id": 19,
+      "area": 3,
+      "minX": 698,
+      "minY": 1233,
+      "maxX": 700,
+      "maxY": 1233,
+      "border": false
+    },
+    {
+      "id": 20,
+      "area": 1,
+      "minX": 653,
+      "minY": 1454,
+      "maxX": 653,
+      "maxY": 1454,
+      "border": false
+    },
+    {
+      "id": 21,
+      "area": 1,
+      "minX": 654,
+      "minY": 1455,
+      "maxX": 654,
+      "maxY": 1455,
+      "border": false
+    }
+  ]
+}

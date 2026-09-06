@@ -35,12 +35,14 @@ The apocalypse is the world's baseline, not a single optional biome.
 
 - The Wastes replace the ordinary starting forest as a neutral, non-spreading biome: dead terrain and trees, broken roads, substations, and settlement remains. They do not count as world evil.
 - Desert panoramas preserve collapsed highways, freight routes, and buried logistics works.
-- Jungle panoramas preserve failed Helix research stations and containment infrastructure.
+- The Jungle is the surviving green exception: lush canopy and dense living growth reclaim abandoned Helix research stations and containment infrastructure. Human occupation failed; the forest did not. Do not apply Wastes browning, leafless silhouettes or a desolate skyline across it.
 - Snow panoramas preserve frozen relays, pipelines, and remote industrial sites.
 - Ocean panoramas preserve drowned ports, wrecks, and failed evacuation infrastructure.
 - Glowing Mushroom panoramas show fungal reclamation consuming failed hydroponics, conservatories, nutrient gantries, treatment tanks, and waterworks. Cyan and restrained lavender light remain accents inside a dark cobalt ruin silhouette; the center stays open enough to read traversal and combat.
 - Corruption, Crimson, and Hallow remain immediately recognizable Terraria biomes. Their backgrounds show each force consuming or transforming the same ruined civilization instead of being replaced by the Engraft.
 - The Maw is a second layer of danger: active, biological, ochre-and-charcoal territory growing through the already-dead Wastes.
+
+**2026-09-06 architecture direction:** Wastes/ordinary forest ruins carry Kessler's military-industrial history; infected-biome ruins carry Helix's study/containment history; snow and desert emphasize broken highways, bridges and logistics; sky-island/space remains carry Sentrix's precise surveillance/data architecture. These are environmental-history rules, not new territory, biome-priority, infection-origin or progression rules. Helix studied infected places; this does not establish that Helix created every infection or that Hallow counts as evil. The living Jungle exception overrides any generic desolation treatment. Full per-layer briefs and review boundaries: `BACKGROUND_BIOME_DIRECTION.md`.
 
 Each surface biome has at least two authored background compositions. Every composition is a matched transparent far/middle/close parallax set over Terraria's native sky—not a baked panorama. A world's seed selects one composition per biome and that choice remains stable. Terraria's sky and lighting move the same composition through day, night, and solar eclipse so landmarks never jump when time changes. Underground scenery follows tModLoader's separate four-texture transition/ground/rock contract. A later player-facing projector may deliberately cycle a biome's composition; random runtime cycling is forbidden.
 
@@ -272,12 +274,18 @@ presence/absence, gradual return and independent geometry evidence live in
 `Art/Validation/WastesSpaceHandoff-2026-09-06/README.md`. This fixes the tested
 Space defect, not every production background/art/transition gate.
 
-**Additional Mid artifact:** design one standalone demolished building on a
-broken raised foundation, sharing the Far city's structural/material language
-but authored for the closer plane. Leave transparent negative space, maintain
-quiet intervals and deep flight-safe underside coverage. Preserve Station and
-Highway. Show a native-size concept/assembly before installation; do not simply
-enlarge a cropped Far building or tile a solid city wall across Mid.
+**Additional Mid artifacts, 2026-09-06 user update:** the user likes the original
+broken-building concept and requests two or three ruins to reduce repetition.
+Use three total: retain that two-storey broken shell; propose a low motor depot
+and a narrow checkpoint/communications ruin. They are Kessler-history scenery,
+not new traversable buildings. Stable placements alternate distinct silhouettes
+with quiet terrain/gaps; no camera/time-driven random reshuffling. Preserve
+Station, Highway, Far city and current Close artwork. Concept approval does not
+approve the original's baked checkerboard, runtime dimensions or camera coverage.
+Review separate masks and native-scale assemblies before installation; never
+enlarge a cropped Far building or turn Mid into a solid city wall. This bounded
+two-concept addition supersedes the earlier extra-ruins deferral, not the other
+baseline gates or the starting-area/Maw order.
 
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial

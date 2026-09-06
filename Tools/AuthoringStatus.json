@@ -153,10 +153,22 @@
       "build": "pending",
       "liveFixture": "pending",
       "production": "pending",
-      "userReview": "pending",
+      "userReview": "accepted",
       "evidenceReference": "Art/Candidates/WastesMidRuin-v1/README.md",
-      "evidenceScope": "One built-in1024x1536 original concept. Encoded-alpha inspection finds0 transparent/partial pixels; checkerboard is baked RGB. Architecture has excess perspective for the requested side view. Stored verbatim with prompt; no export, resize, install or world mutation.",
-      "blockers": ["Resolve silhouette/view-angle direction before cleanup. Then create separately reviewed hard mask and native-scale deep assembly; do not approve or install opaque draft and do not repeat generation unattended."]
+      "evidenceScope": "User likes the original broken-building visual direction on2026-09-06, superseding initial agent perspective objection. Original1024x1536 remains verbatim and opaque; static fail here describes that original. A separately tracked reviewed-mask derivative now exists in wastes-mid-ruins-cutouts-v2. No resize, install or world mutation.",
+      "blockers": ["Native-scale building/cliff assembly and placement/flight remain unproven. Do not install the opaque original or equate appearance approval with runtime approval."]
+    },
+    {
+      "id": "wastes-mid-ruins-cutouts-v2",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesMidRuins-v2/README.md",
+      "evidenceScope": "Three1024x1536 concept cutouts: retained broken shell plus two new built-in originals (motor depot and checkpoint). Reviewed source-specific masks; no original edits. Separate recorded edge RGB donors remove matte rims without mask erosion. All exact exports/hard alpha/provenance pass, with9 in-memory defect controls and reused exporter CLI regression. Offline light/dark previews only, not game screenshots. Biome-history direction including living Jungle exception recorded; no runtime code changed.",
+      "blockers": ["Two new silhouettes need user review; native-scale assembly must resolve oversized building features and width/depth mismatches against accepted Station, not silently resize into existing slots.", "Stable variant placement, deep joins and actual flight/lighting/biome/restoration/performance checks remain pending. Existing accepted scenery and installed QA mod unchanged; no ordinary-world promotion."]
     },
     {
       "id": "wastes-terrain",

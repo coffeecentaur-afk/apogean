@@ -59,6 +59,23 @@ If that pass still fails, simplify or park the failing layer and report the rema
 
 The starting-area slice includes the approved drop pod and shallow divot (DESIGN_BIBLE.md, Spawn sanctuary). Its later ground-to-orbit relay is specified only and does not expand the current implementation scope.
 
+## Bounded architecture-variation addition (2026-09-06)
+
+The latest user direction authorizes three Wastes Mid ruins total, not three
+additional ruins: keep the liked broken shell and draft a low motor depot plus
+a narrow checkpoint. Two new concepts is the stop bound for this pass. Update
+their separate art/export/runtime evidence; do not repeat generation just to
+chase transparency. Reuse the explicit-mask workflow for an approved silhouette.
+This overrides the earlier extra-ruins deferral only for this small candidate set.
+It does not install new assets, approve all Wastes gates or start every biome.
+
+Each later family starts from `BACKGROUND_BIOME_DIRECTION.md`: historical
+architecture and local ecology are separate inputs. In particular, Jungle means
+living green canopy reclaiming abandoned Helix infrastructure, not brown Wastes
+with laboratory props. Reuse alpha, native-scale, flight, spacing, lighting and
+routing tests, never a single recolored Wastes panorama. Review the actual
+source/mask and assembled native-scale result before a disposable live fixture.
+
 ## Reference discipline
 
 Other mods and games are studied for reusable principles: engine ownership, placement safety, encounter readability, functional silhouettes, objective clarity, co-op state, and environmental storytelling. Apogean does not copy source, assets, layouts, names, dialogue, timing, or recognizable encounter combinations. Research provenance and the verified/inferred boundary live in `RESEARCH_APOGEAN_CONTENT_WORKFLOWS.md`.
@@ -97,7 +114,9 @@ actual draw samples and completion records; its companion validator rejects
 missing samples/endpoints and defective presence/absence. A screenshot after a
 30-second hold expires is a return view, not evidence of that held case.
 
-Do not spend extraction effort on a concept that also fails its view/silhouette
-contract. The Mid ruin draft has both baked matte and unwanted perspective:
-park it for art-direction review before a separate explicit-mask export. Never
-interpret a displayed checkerboard as an alpha result; inspect encoded pixels.
+Do not spend extraction effort on an unresolved silhouette. The user has now
+liked the first Mid ruin's visual direction, superseding the initial reviewer
+objection to its perspective; preserve that approval rather than restarting
+its design cycle. Its baked matte and unproven native-scale fit still require
+separate export/assembly gates. Never interpret a displayed checkerboard as an
+alpha result; inspect encoded pixels.

@@ -12,6 +12,18 @@ through a color key or quietly rescaled into service.
 
 ## Design verdict
 
+### Latest user review — 2026-09-06
+
+The user likes this building's appearance and asks for two or three ruins total.
+Retain this broken shell as the first design. That visual acceptance supersedes
+the initial reviewer objection below; do not force another redesign because the
+previous agent preferred a flatter view. Alpha and native-scale assembly remain
+unresolved technical gates. The two additional proposed shapes and per-biome
+direction are in `BACKGROUND_BIOME_DIRECTION.md` and
+`Art/Candidates/WastesMidRuins-v2/`. This PNG remains verbatim, not installed.
+
+### Initial reviewer notes (historical, superseded where noted)
+
 - Useful: broken two-storey concrete shell, collapsed wing, exposed floors,
   rusty rebar, sparse dead grass, deep irregular support and exposed drain.
   Warm sooty grays/umbers connect the distant city and roadside vocabulary.
@@ -26,6 +38,6 @@ through a color key or quietly rescaled into service.
 Next: review the architecture/silhouette only. If retained, produce a bounded
 side-view correction and a separately reviewed mask, then fit a native-scale
 upper/cliff/continuation assembly and test both backings, joins and flight.
-No installation, tile generation, extra module variants, new lore or faction
-assets are authorized by this concept checkpoint. Preserve Station and Highway
+This earlier checkpoint did not authorize installation or extra variants; the
+latest user decision above now authorizes two additional concepts only. Preserve Station and Highway
 and the quiet intervals between them. See `Tools/BackgroundMaskWorkflow.md`.

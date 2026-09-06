@@ -1,0 +1,10 @@
+{
+  "recipeVersion": 1,
+  "reviewState": "agent-reviewed",
+  "scope": "Mask silhouette only. Exterior matte and enclosed sky openings selected from proposal components. Tiny isolated pale material pixels retained. Separate edge RGB proposal must be inspected before export acceptance; no runtime approval.",
+  "sources": [
+    { "name": "BrokenShell", "sourceSHA256": "7A088DFB2AE4C1A2AF3DCD531D00179A839B4C1375ED92BD5D6743786A9CF146", "removeComponents": [1,2,3,5,6,7,8,10,11,15,16,17,18] },
+    { "name": "MotorDepot", "sourceSHA256": "456442A7E3D7454DB3BAB4794E34A57004BB58A784A93E2395E3CE39D071DB2F", "removeComponents": [1,2,3,4,5,12,13,14] },
+    { "name": "Checkpoint", "sourceSHA256": "3702DD05277CD7630F9F47409356103A36FEB256A07339097AD3C22B7C25B044", "removeComponents": [1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,30,36,37,39,42] }
+  ]
+}

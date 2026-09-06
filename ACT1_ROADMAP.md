@@ -26,9 +26,14 @@
 **Current handoff:** `HANDOFF_2026-09-06.md` is the next-session entry point.
 Space-handoff implementation now has focused red/green arithmetic and native
 submitted-color proof; see `Art/Validation/WastesSpaceHandoff-2026-09-06/README.md`.
-The first Mid ruin draft is parked under `Art/Candidates/WastesMidRuin-v1/`:
-its opaque checkerboard and perspective fail the export/design contract. It is
-not installed. Do not restart an art loop or promote it from a successful build.
+**Latest user direction (2026-09-06):** retain the first Mid ruin's liked visual
+direction and prepare two distinct alternatives (low motor depot and narrow
+checkpoint), making three ruins total. The original remains technically blocked
+by its opaque checkerboard and missing native-scale assembly; liking its look
+does not install it. Candidate family: `Art/Candidates/WastesMidRuins-v2/`.
+`BACKGROUND_BIOME_DIRECTION.md` records the architecture map and the green,
+overgrown, abandoned Jungle exception. No other biome is recolored or promoted
+by this design pass. Finish Wastes baseline, then starting area and shallow Maw.
 
 **Latest candidate checkpoint:** native city fitting and foreground perimeter-v2
 now have a zero-warning isolated build and2560x1369 live evidence in
