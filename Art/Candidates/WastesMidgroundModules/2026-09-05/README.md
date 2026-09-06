@@ -2,6 +2,8 @@
 
 Status: design discussion, not approved art, not an engine asset. Nothing here is loaded by the mod. Current camera validation remains in `Art/Validation/WastesLandscapeV1/2026-09-05-Flight/`.
 
+Follow-up: [Deep v1](Deep-v1/README.md) contains three exported Mid groups with authored cliff continuation, one longer foreground-bank candidate and labelled ground/elevated compositions. This upper-only sheet is superseded for review, not promoted. New foreground depth and other visual gates remain open.
+
 `UpperSilhouettes-v2-CONCEPT-ONLY.png` depicts three original subjects: a broken highway on a hill, a quiet pipe mound, and an abandoned fuel station on a smaller rise. It illustrates modular subject choice, not final spacing, material fidelity, depth, resolution or in-game scale. Leave two or three quieter/open sections between major landmarks in the assembled landscape, not just this sheet's narrow spaces.
 
 ## Export audit

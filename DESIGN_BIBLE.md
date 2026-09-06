@@ -203,6 +203,8 @@ This requires original reviewable concepts before new textures are installed. Fi
 
 Any renderer revision must test combined diagonal flight through repeat boundaries in both directions, not only horizontal panning plus separate fixed-height screenshots. Validate submitted geometry through the actual surface batch transform at 1080p, 1440p and the user's windowed viewport. Source-sized sprites alone do not prove correct screen placement. Visual approval, terrain occlusion, authored joins, routing/fades and multiplayer remain separate evidence gates.
 
+**Layered-painting foreground follow-up:** Close also uses joined landscape sections and open valleys, but its sections are substantially longer than the smaller Mid hills. Stagger the authored composition so normal ground-height gaps often reveal Mid terrain/ruins. Some overlap is welcome and unavoidable as independent parallax rates shift the layers; never move a chunk dynamically to avoid another chunk. Close retains its fixed world-ground anchor and drawn lower extent. The review layout in `Art/Candidates/WastesMidgroundModules/2026-09-05/Deep-v1/` uses a1448px near bank against391–576px Mid groups. These dimensions illustrate the requested scale relationship, not a final generation distribution. Current candidate art remains uninstalled pending approval and foreground depth completion.
+
 ## Future Boundary
 
 The star chart, mobile ship, company war, CEO routes, post-Moon-Lord Deep Maw, and procedural completion content are deliberately roadmap items. Act 1 establishes their vocabulary without pretending to ship them early.

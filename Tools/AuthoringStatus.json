@@ -39,6 +39,18 @@
       "blockers": ["Latest user direction replaces the solid Mid wall with stable modular hill/ruin groups and true transparent gaps. Draw deeper cliff/sloped undersides and compatible continuation pieces; validate fixed Mid anchors from ground and high flight. Upper-silhouette concept is not approved or engine-ready: baked checkerboard and shallow bottoms. Preview assembled assets before installing; remove Mid blanket lower-fill, retain Far coverage and quiet spacing.", "Current user-window1369p rerun, visible cave handoff, regional terrain datum, gravity/multiplayer, remaining lighting/routing and performance proof are pending. Diagnose changed QA grove before claiming persistence. No general-world promotion."]
     },
     {
+      "id": "wastes-modular-landscape-deep-v1",
+      "status": "contracted",
+      "static": "pending",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesMidgroundModules/2026-09-05/Deep-v1/README.md",
+      "evidenceScope": "Four review designs, not installed: three hard-alpha Mid groups with authored1408px cliff depth and one1448x1086 long Close bank. Mid pixel/socket/crop tests pass2,162,688 pixels and six actual negative CLI controls. Ten labelled offline views are composition studies, not game screenshots. Existing projection helper reused with proposed art alignment; Mid anchor redesign remains unimplemented.",
+      "blockers": ["Review longer staggered Close segments with smaller Mid hills. Stop additional generation for this set until review. Draw another compatible lower Close section before1440p/shallow-descent testing; current bank exposes its bottom in those cases.", "Quieter Far composition, edge/slope polish, regional anchor, real-game routing/lighting/depth/gravity/multiplayer, source-scale verification and measured memory remain open. No family promotion."]
+    },
+    {
       "id": "wastes-terrain",
       "status": "fixture-pass",
       "static": "pass",

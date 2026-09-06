@@ -1,0 +1,40 @@
+{
+  "sourceWidth": 1536,
+  "sourceHeight": 1024,
+  "exportHeight": 1408,
+  "overlap": 256,
+  "lowerRows": 640,
+  "socketY": 768,
+  "seamMin": 2,
+  "seamMax": 249,
+  "transparent": 813629,
+  "opaque": 1349059,
+  "partialAlpha": 0,
+  "layoutPeriod": 2655,
+  "groups": [
+    {
+      "id": "Highway",
+      "x": 0,
+      "width": 576,
+      "height": 1408,
+      "layoutX": 0
+    },
+    {
+      "id": "Quiet",
+      "x": 616,
+      "width": 391,
+      "height": 1408,
+      "layoutX": 936
+    },
+    {
+      "id": "Station",
+      "x": 1048,
+      "width": 488,
+      "height": 1408,
+      "layoutX": 1687
+    }
+  ],
+  "rescaled": false,
+  "installed": false,
+  "artApproved": false
+}

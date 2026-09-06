@@ -48,6 +48,8 @@ Next within this same family: preview **modular transparent midground** hill/rui
 
 Next art pass: original quiet/open roadside variants between major landmarks; detailed sediment concentrated in the nearest ledge; quieter overlapping middle ledges with exposed pipes/rock; preserve drooping dead grass. Show candidates before installation. Do not expand to Maw backgrounds while this family's visual gate is open.
 
+Modular follow-up: `Art/Candidates/WastesMidgroundModules/2026-09-05/Deep-v1/README.md` retains four review designs (three Mid hills plus a longer Close bank), ten offline compositions, exact upper/lower reconstruction and six negative CLI controls. The user requests long joined foreground sections staggered against Mid, allowing natural overlaps. No runtime PNG changed. The new Close bank needs an authored lower continuation before1440p/descent; quieter Far art and visual approval remain open. Pause additional image generation for this set at the review boundary.
+
 ## Vertical slices
 
 1. **Engraft foundation** — biome identity, Maw Nodes/Ruptures, bounded conversion, three initial enemies, debug tools, and art direction.
