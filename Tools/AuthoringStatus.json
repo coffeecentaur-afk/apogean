@@ -63,6 +63,18 @@
       "blockers": ["User visual review remains pending; original cutout failures remain in the separate landscape family.", "Production generation-time capture, server-owned synchronization, saved-profile reload, other viewports and biome/restoration transitions are not yet proven for this candidate. Initial QA sampling cannot distinguish original terrain from player-built natural blocks."]
     },
     {
+      "id": "wastes-cutout-repair-v1",
+      "status": "contracted",
+      "static": "fail",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesCutoutRepair-2026-09-05/README.md",
+      "evidenceScope": "One built-in edit per existing Station/Foreground asset. Returned sizes738x2131 and1091x1442 violate native488x1408 and1448x1915; neither output has transparent pixels. Real pre-install CLI rejects both. Validator accepts two positive controls and rejects four deliberate defects. No runtime art, renderer or world changed; no new build/live approval claimed.",
+      "blockers": ["Park failed full-image edits under the bounded stopping rule. Precise native pixel-level repair is the proposed next method, pending explicit editing-method approval; do not rescale/key and mislabel these outputs as invariant-preserving fixes.", "Current Wastes runtime cutouts still fail their own quality probe. Wastes-only scope reaffirmed; Maw and other biome/depth artwork remain separate dependent families."]
+    },
+    {
       "id": "wastes-terrain",
       "status": "fixture-pass",
       "static": "pass",

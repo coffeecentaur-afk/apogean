@@ -1,0 +1,11 @@
+# Bounded cutout repair prompts
+
+Built-in image generation, edit mode. One call per existing asset; no paid API fallback. Both outputs failed the native export gate and remain outside Content.
+
+## Station
+
+Use case: precise-object-edit. Image 1 is the edit target: a Terraria-style pixel-art parallax gas-station cliff module. Make a tightly scoped repair ONLY to the two small leafless trees, one beside the pumps at left and one beside the tall sign at right. Their existing limbs are fragmented: reconnect each surviving twig to a continuous dark-brown trunk with natural taper, continuous opaque bark and restrained shading matching the current art. No floating branch fragments and no pink/magenta/white fringe. Keep tree sizes, positions, species and simple sparse dead silhouettes. All other pixels/geometry must remain unchanged: gas station, roof, pumps, sign, rocks, cliff body, pipes, soil lip and lower termination. Preserve the original 488 x 1408 canvas, no scale change, no shifting, no crop, no new objects or text. Preserve genuine transparent empty sky/side margins with alpha=0 and solid pixel-art edges alpha=255. No background fill or checkerboard. This is a repair of an existing game asset, not a new concept illustration. Return the repaired single module.
+
+## Foreground
+
+Use case: background-extraction / precise-object-edit. Image 1 is the edit target: an existing Terraria-style long foreground bank, 1448 x 1915 pixels. Correct ONLY the pale gray/white matte halo along the outer silhouette, particularly the fallen wooden branches and upper turf. Replace contaminated edge colors with continuous dark/subdued brown wood or ochre turf matching adjacent material, without thinning the branches or erasing legitimate slate-rock highlights. Keep the exact existing landscape composition, contours, branch thickness, soil reference row330, pipe placement, rock planes, depth and lower cliff; all interior material away from the affected edge stays unchanged. Keep original canvas dimensions 1448 x 1915, no enlargement, no crop or repositioning. Empty sky and side valleys must be genuine alpha=0 transparency; opaque pixel clusters alpha=255, no blur, soft antialiasing or white/checkerboard background. Do not add detail, objects or text. Return one repaired existing bank, not a new landscape design.

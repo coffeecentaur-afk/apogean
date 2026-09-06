@@ -23,6 +23,8 @@
 
 ## Current environmental gate
 
+**Biome-scope clarification:** current Wastes scenery is not a universal-world backdrop. Finish its bounded baseline before the next background family, the Maw; other surface and depth-specific families retain their distinct identities and quality targets (DESIGN_BIBLE.md, Environmental history). `Art/Candidates/WastesCutoutRepair-2026-09-05/README.md` records the subsequent two-image cleanup attempt: both outputs rejected for changed dimensions and absent alpha, no runtime installation. Stop whole-image retries; precise pixel-repair tooling is the proposed next method, pending explicit editing-method approval.
+
 **Latest user decision (2026-09-05):** replace the open-ended background-polish milestone with the bounded baseline correction in AUTHORING_WORKFLOW.md. Finish terrain anchoring, clean/connected cutouts and movement/transition checks, then review native game screenshots. More variants and final detailing are deferred. If the pass fails, simplify or park the failing layer rather than looping through new art. Historical matrix and rejected evidence below remain valid; none are promoted by this scope decision.
 
 **Next starting-area addition, specified only:** the approved unbranded damaged drop pod in a shallow divot, as recoverable/placeable world furniture, with safe spawn clearance and a broken communications panel. Its repaired relay, housing-based NPC signal coverage, additional relays and ship hologram purchasing are later work; see DESIGN_BIBLE.md, Spawn sanctuary. Do not implement them during the background correction.
