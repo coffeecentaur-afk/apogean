@@ -60,7 +60,9 @@ namespace apogean.Content.Diagnostics
 			minimumBottom = float.PositiveInfinity;
 			drawnMin = float.PositiveInfinity; drawnMax = float.NegativeInfinity;
 			RuinedBackgroundSelectionSystem.Instance.ToggleSurfaceConceptRenderLab(RuinedBackgroundBiome.Forest, true);
-			float groundY = (float)((Main.worldSurface - 50) * 16);
+			float shift = requested == "left" ? -5120 : requested == "right" ? 5120 : 0;
+			float groundY = WastesGroundProfileSystem.TryGroundAt(Main.maxTilesX * 8f + shift, out float regionalY)
+				? regionalY : (float)((Main.worldSurface - 50) * 16);
 			// Reduce terrain occlusion, without carving the world. Some mountains
 			// still obscure this route; a phase sweep isolates the texture joins.
 			float lift = Panning ? 2400 : requested == "jump" ? 96 : requested == "wings" ? 1200 : 0;
@@ -69,7 +71,6 @@ namespace apogean.Content.Diagnostics
 			if (requested == "high-altitude") lift = ascent * .8f;
 			if (requested == "below-ground") lift = -400;
 			if (requested == "underground") lift = -1600;
-			float shift = requested == "left" ? -5120 : requested == "right" ? 5120 : 0;
 			camera = new Vector2(Main.maxTilesX * 8f - Main.screenWidth / 2f + shift,
 				requested == "sky" ? 16 : groundY - Main.screenHeight * .55f - lift);
 			groundCameraY = groundY - Main.screenHeight * .55f;
@@ -116,16 +117,16 @@ namespace apogean.Content.Diagnostics
 				Mod.Logger.Info($"WASTES V1 PROJECTION SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; camera={Main.screenPosition}; zoom={Main.BackgroundViewMatrix.Zoom}; zoomTranslation={Main.BackgroundViewMatrix.ZoomMatrix.Translation}; batch={matrix}; left={left:F2}; right={right:F2}; bottom={Math.Max(a.Y,b.Y):F2}; opacityOwnsFade=True; failed={failed}");
 		}
 
-		internal void ObserveGroundLock(float top, float worldCameraY, int height)
+		internal void ObserveGroundLock(float top, float worldCameraY, int height, float? regionalGround = null)
 		{
 			if (remaining <= 0) return;
-			float worldGround = (float)((Main.worldSurface - 50) * 16);
+			float worldGround = regionalGround ?? (float)((Main.worldSurface - 50) * 16);
 			// Independent engine projection of the world-space soil datum.
 			Vector2 expected = Vector2.Transform(new Vector2(0, worldGround - 48 - worldCameraY), Main.GameViewMatrix.ZoomMatrix);
 			float soil = (float)Math.Floor(top) + WastesCameraProjection.CloseSoilRow;
 			lockError = Math.Max(lockError, Math.Abs(expected.Y - soil));
 			if (lockChecks++ == 0)
-				Mod.Logger.Info($"WASTES V1 GROUND SAMPLE: case={scenario}; viewport={Main.instance.GraphicsDevice.Viewport.Width}x{height}; referenceY={worldGround}; soilY={soil:F2}; expectedY={expected.Y:F2}; gameZoom={Main.GameViewMatrix.Zoom.Y}; closeTop={top:F2}; cameraY={worldCameraY:F2}; altitude={WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f):F3}; midOpacity={WastesCameraProjection.MiddleOpacity(WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f)):F3}; datum=worldSurfaceMinus50; artApproval=False");
+				Mod.Logger.Info($"WASTES V1 GROUND SAMPLE: case={scenario}; viewport={Main.instance.GraphicsDevice.Viewport.Width}x{height}; referenceY={worldGround}; soilY={soil:F2}; expectedY={expected.Y:F2}; gameZoom={Main.GameViewMatrix.Zoom.Y}; closeTop={top:F2}; cameraY={worldCameraY:F2}; altitude={WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f):F3}; midOpacity={WastesCameraProjection.MiddleOpacity(WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f)):F3}; datum={(regionalGround.HasValue ? "savedRegionalTerrainQA" : "worldSurfaceMinus50")}; artApproval=False");
 		}
 
 		internal void ObserveModularProjection(int layer, Vector2 submitted, Vector2 expected, int depth,
@@ -198,6 +199,8 @@ namespace apogean.Content.Diagnostics
 				if (Diagonal)
 				{
 					float progress = Math.Min(panTick / (float)PanDuration, 1f);
+					if (WastesGroundProfileSystem.TryGroundAt(camera.X + Main.screenWidth * .5f, out float regionalY))
+						groundCameraY = regionalY - Main.screenHeight * .55f;
 					// Continuous ground-to-high-sky-to-ground diagonal flight. Terrain
 					// may occlude artwork; submitted-geometry checks remain independent.
 					camera.Y = groundCameraY - 4200 * (1 - Math.Abs(2 * progress - 1));

@@ -47,8 +47,20 @@
       "production": "pending",
       "userReview": "rejected",
       "evidenceReference": "Art/Validation/WastesModularLandscape-2026-09-05/README.md",
-      "evidenceScope": "User authorized continuation into QA. Three 1408px Mid groups plus one 1448x1915 Close bank, 829 new authored rows. Four asset hashes match runtime candidates. Mid/Close pixel/socket tests, 56 layout cases, seven actual CLI negative asset/layout cases and live-validator positive/six-negative controls pass. Build clean. New renderer is QA-only, with no Mid/Close lower fill. Actual 1080p/1369p/1440p ground, shallow and both diagonal sweeps pass: zero module failures, maximum projected error 0.01px, anchor error 0.83px. Full fixture acceptance remains pending. 24 labelled offline views are not game screenshots. Existing Mid response retained; regional anchor remains unimplemented.",
-      "blockers": ["User live review requires revision: pale Close silhouette edges, detached Station-tree limbs, excessive one-bank repetition and wrong local-ground height. New candidate-specific cutout and local-ground repro checks are red despite the earlier structural/geometry passes. Repair connected cutouts, preview genuine long-bank variants and add fixed region-ground anchors. Quiet the existing Far's exposed heavy rock bands. No dependent family expansion.", "Visible cave handoff beyond shallow 400px descent, remaining altitude/lighting/real-biome/restoration matrix, gravity/multiplayer, source-scale landmark measurement and measured GPU residency/hitches remain open. No promotion based only on geometry/static tests."]
+      "evidenceScope": "Historical geometry proof: three 1408px Mid groups plus one 1448x1915 Close bank; unchanged runtime assets, QA-only, no Mid/Close lower fill. Actual 1080p/1369p/1440p sweeps passed structural checks against the old global anchor, not local-ground accuracy. User subsequently rejected pale cutouts, detached branches, repetition and ground height. Regional-ground follow-up is tracked separately as wastes-regional-ground-qa-v1. Offline views are not game screenshots; no visual acceptance is inferred.",
+      "blockers": ["Current bounded baseline gate: repair pale Close silhouette edges and detached Station limbs; review the regional-ground candidate and transitions. One corrective pass, then simplify/park a failing layer rather than automatically regenerate. Extra bank variants, Far shading and final composition are deferred polish under the latest user-approved scope, not grounds for endless expansion.", "Visible cave handoff beyond shallow 400px descent, remaining altitude/lighting/real-biome/restoration matrix, gravity/multiplayer, source-scale landmark measurement and measured GPU residency/hitches remain open. No promotion based only on geometry/static tests."]
+    },
+    {
+      "id": "wastes-regional-ground-qa-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/WastesRegionalGround-2026-09-05/README.md",
+      "evidenceScope": "QA-only single-player saved terrain profile, sampled once outside drawing. Red global-datum and thin-floor regressions now pass; 90 projection combinations and two actual negative controls exercised. Clean build. Native 2560x1369 ground, ascent, shallow descent and both diagonal sweeps pass submitted geometry checks: zero failures, max projection error 0.01px, anchor rounding 0.96px. Both sweeps exceed 3.45 Far periods. Three unretouched game captures and QA-only telemetry retained. Artwork unchanged; this is not full background approval.",
+      "blockers": ["User visual review remains pending; original cutout failures remain in the separate landscape family.", "Production generation-time capture, server-owned synchronization, saved-profile reload, other viewports and biome/restoration transitions are not yet proven for this candidate. Initial QA sampling cannot distinguish original terrain from player-built natural blocks."]
     },
     {
       "id": "wastes-terrain",

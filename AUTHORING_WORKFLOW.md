@@ -29,7 +29,15 @@ The default dependency order is terrain framing → native trees/vegetation → 
 
 Installed Codex skills enforce the focused contracts: `$tmodloader-atlas-authoring`, `$tmodloader-tree-authoring`, `$tmodloader-background-authoring`, `$tmodloader-structure-authoring`, `$tmodloader-entity-authoring`, `$tmodloader-boss-authoring`, `$tmodloader-quest-dialogue-authoring`, and `$apogean-content-direction`.
 
-Current approved recovery order (2026-09-04): validator reliability → A — Snapped native assembly/approval → grass-corner and ground-cover checks → one complete Wastes background family → a cohesive generated starting area → Maw entrance/shallow slice → exploration/combat/rewards. Other new content is paused. Continue within a step until evidence or a real approval boundary; a compile pass cannot bypass a visual rejection. Keep experiments outside ordinary play, preserving the last accepted appearance where one exists.
+Current approved recovery order (2026-09-05 scope decision): validator reliability → A — Snapped native assembly/approval → grass-corner and ground-cover checks → a reliable, visually acceptable Wastes background baseline → a cohesive generated starting area → Maw entrance/shallow slice → exploration/combat/rewards. A baseline is not final polish. Keep experiments outside ordinary play, preserving the last accepted appearance where one exists.
+
+### Bounded background correction
+
+The user approved one corrective pass for actual regional-ground anchoring, pale cutout rims and disconnected station branches. Check ground movement, diagonal flight in both directions, shallow descent and biome/restoration transitions for gaps or regressions. Show actual game screenshots before accepting the baseline. Additional foreground variants, finer shading, extra ruins and additional scenery families are deferred polish, not prerequisites for the next playable slice.
+
+If that pass still fails, simplify or park the failing layer and report the remaining failure instead of automatically starting another art-generation cycle. A simplified fallback must pass its own fixture before dependent production work continues. Keep rejected evidence and unresolved full-release checks; scope reduction never changes a failed test into a pass.
+
+The starting-area slice includes the approved drop pod and shallow divot (DESIGN_BIBLE.md, Spawn sanctuary). Its later ground-to-orbit relay is specified only and does not expand the current implementation scope.
 
 ## Reference discipline
 

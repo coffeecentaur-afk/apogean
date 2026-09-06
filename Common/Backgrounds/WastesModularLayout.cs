@@ -28,13 +28,16 @@ namespace apogean.Common.Backgrounds
 			double phase = (worldX * WastesParallaxContract.Horizontal(layer) - (layer == 2 ? 620 : 0)) % period;
 			return (float)(phase < 0 ? phase + period : phase);
 		}
-		public static float Top(double surface, float cameraY, int height, int layer, float zoom)
+		public static float Top(double surface, float cameraY, int height, int layer, float zoom, float? regionalGround = null)
 		{
 			if (layer == 1)
 				return 220 + WastesCameraProjection.Top(surface, cameraY, height, MidHeight, 1, zoom);
 			if (layer == 2)
-				return WastesCameraProjection.Top(surface, cameraY, height, CloseHeight, 2, zoom)
-					+ WastesCameraProjection.CloseSoilRow - CloseSoilRow;
+			{
+				float ground = regionalGround ?? (float)((surface - 50) * 16);
+				return (ground - WastesCameraProjection.GroundOffset - cameraY - height * .5f) * zoom
+					+ height * .5f - CloseSoilRow;
+			}
 			throw new ArgumentOutOfRangeException(nameof(layer));
 		}
 		// Validate only geometry that can actually intersect the viewport. A bank

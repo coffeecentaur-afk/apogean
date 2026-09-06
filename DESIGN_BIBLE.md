@@ -77,6 +77,19 @@ The Wastes must remain a complete Terraria building biome rather than a set dres
 - Legacy worlds receive the same implicit safety rule without silently generating a new Maw or moving existing terrain. A forced debug command may bypass the rule only for explicit playtesting.
 - Spawn remains mechanically safe even though its palette and ecology communicate a dead world.
 
+#### Arrival pod — approved starting-area direction
+
+- The player wakes with amnesia beside an opened, damaged drop pod in a small shallow impact divot. Disturbed soil and sparse debris tell the arrival story without creating a large crater, an escape obstacle or a hazardous spawn. Keep an unobstructed player spawn and travel route.
+- The pod is real world furniture behind the player, not parallax artwork. Its initial design has no obvious corporate branding; its broken communications panel hints at later use. Show its native-scale design before installation.
+- Once removable, the pod drops intact as a placeable item. Relocation does not automatically change Terraria's world spawn or the player's bed spawn. The precise removal unlock, dimensions and placement contract still require specification before coding.
+- Generate the arrival scene only in a newly generated supported world. Preserve existing player terrain; rejoining or dying does not generate another impact scene.
+
+#### Future communications relay — specified, deferred
+
+Repairing the pod eventually makes it the first ground-to-orbit relay for the ship's hologram terminal. Eligible NPCs are connected by their assigned housing locations inside its transmission boundary, rather than transient walking positions. Additional craftable relays support distributed settlements. Pod loss or relocation must never permanently lock out communications.
+
+Remote contact supports dialogue and purchases with shipping costs, not selling or unrestricted remote services. Existing progression, corporate access and individual standing still apply. Signal range, repair unlock, contact availability while an NPC is absent, and shared-world ownership remain later contracts. No relay network or ship UI is part of the starting-area implementation.
+
 ### World placement contract
 
 - Complete Apogee campaign generation initially requires a standard large world. Medium support may receive authored compact variants later; small worlds do not silently generate an incomplete campaign.
@@ -210,6 +223,8 @@ Any renderer revision must test combined diagonal flight through repeat boundari
 The user authorized the four-design set to proceed into depth completion and disposable-world render checks. A1448×1915 Close bank now supplies829 fresh native lower rows; original upper830 rows remain unchanged. Three1408px Mid groups and the longer Close bank use stable spaced layouts and no reflected/stretched lower fill. Only the existing Far retains its provisional coverage guard and remains too banded. Current runtime allocation is28.39MiB raw RGBA, not a GPU profiling result. Native screenshots and explicit partial gates are in `Art/Validation/WastesModularLandscape-2026-09-05/README.md`. General-world promotion and the visible cave handoff remain unapproved; no Maw/faction dependent work advances from these static or bounded camera passes.
 
 ### Latest background review constraint
+
+**Subsequent user-approved scope:** close the functional/visual baseline in one bounded corrective pass, then proceed to the starting-area slice. Actual regional anchoring, clean connected cutouts and gap-free movement/transitions remain acceptance requirements. Extra long-bank variants and final composition detail are deferred polish; the variation requirement below remains a release target, not a blocker for the playable baseline. See AUTHORING_WORKFLOW.md, Bounded background correction, for the stopping rule.
 
 The current modular Wastes iteration requires revision: pale cutout rims and disconnected gas-station tree branches must not ship. Hard alpha alone is insufficient; preserve connected bark silhouettes and inspect light/dark backings. One repeated long foreground bank is insufficient variation; author genuinely different long-bank and quiet sections, not mirrored duplicates. The nominal near soil lip should sit roughly three world tiles above **actual regional ground**, around a standing player's head. That is an elevation/offset requirement, never a instruction to follow the player's head during flight. Keep each section's ground datum stable while the player moves vertically; the old `worldSurface - 50` QA arithmetic is not a local-ground implementation. The camera tests pass their old global-anchor contract, not this visual requirement. No dependent biome promotion until revisions are reviewed.
 

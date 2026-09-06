@@ -95,7 +95,12 @@ namespace apogean.Content.Backgrounds
 		private static void DrawModular(SpriteBatch batch, int layer, float sampledX, float cameraY,
 			int width, int height, Vector2 scale, Color tint, WastesLandscapeCameraLab lab)
 		{
-			float top = WastesModularLayout.Top(Main.worldSurface, cameraY, height, layer, Main.GameViewMatrix.Zoom.Y);
+			// Use physical world X, not the diagnostic repeat-phase override. Every
+			// vertical view over this region receives the same saved terrain datum.
+			float centerX = Main.screenPosition.X - Main.BackgroundViewMatrix.Translation.X + width * .5f;
+			bool hasRegionalGround = WastesGroundProfileSystem.TryGroundAt(centerX, out float ground);
+			float top = WastesModularLayout.Top(Main.worldSurface, cameraY, height, layer, Main.GameViewMatrix.Zoom.Y,
+				hasRegionalGround ? ground : null);
 			int period = layer == 1 ? WastesModularLayout.MidPeriod : WastesModularLayout.ClosePeriod;
 			float phase = WastesModularLayout.Phase(sampledX, layer);
 			int depth = layer == 1 ? WastesModularLayout.MidHeight : WastesModularLayout.CloseHeight;
@@ -120,7 +125,8 @@ namespace apogean.Content.Backgrounds
 			}
 			lab.ObserveModularFrame(layer, sampledX, top, submitted, width, height);
 			if (layer == 2)
-				lab.ObserveGroundLock(top + WastesModularLayout.CloseSoilRow - WastesCameraProjection.CloseSoilRow, cameraY, height);
+				lab.ObserveGroundLock(top + WastesModularLayout.CloseSoilRow - WastesCameraProjection.CloseSoilRow,
+					cameraY, height, hasRegionalGround ? ground : null);
 		}
 
 		// Bounded QA continuation of existing opaque rock/soil, never a stretched

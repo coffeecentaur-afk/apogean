@@ -1,0 +1,38 @@
+WASTES REGIONAL GROUND: samples=264; stepTiles=32; centerGroundY=10368; source=initialQATerrain; saveEnabled=True; scope=singlePlayerQA; artApproval=False
+WASTES V1 CAMERA: case=ground; x=65920; y=9615.05; viewport=2560x1369; hold=1800 ticks; production routing=False
+WASTES MODULAR SAMPLE: case=ground; layer=1; viewport=2560x1369; top=271.04; submitted=4; expected=4; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR SAMPLE: case=ground; layer=2; viewport=2560x1369; top=381.83; submitted=2; expected=2; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES V1 GROUND SAMPLE: case=ground; viewport=2560x1369; referenceY=10368; soilY=711.00; expectedY=711.83; gameZoom=1.3333334; closeTop=223.83; cameraY=9615.00; altitude=0.000; midOpacity=1.000; datum=savedRegionalTerrainQA; artApproval=False
+WASTES MODULAR RESULT: case=ground; matrixChecks=65040; frameChecks=21680; failures=0; maxPixelError=0.01; artApproval=False
+WASTES V1 PROJECTION: case=ground; checks=10840; failures=0; maxLeftGap=0.00; maxRightGap=0.00; minFarBottomMargin=453.01; artApproval=False
+WASTES V1 GROUND LOCK: case=ground; checks=10840; maxError=0.83; pass=True; artApproval=False
+WASTES V1 CAMERA: case=wings; x=65920; y=8415.05; viewport=2560x1369; hold=1800 ticks; production routing=False
+WASTES MODULAR SAMPLE: case=wings; layer=1; viewport=2560x1369; top=307.04; submitted=4; expected=4; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR SAMPLE: case=wings; layer=2; viewport=2560x1369; top=1981.83; submitted=0; expected=0; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES V1 GROUND SAMPLE: case=wings; viewport=2560x1369; referenceY=10368; soilY=2311.00; expectedY=2311.83; gameZoom=1.3333334; closeTop=1823.83; cameraY=8415.00; altitude=0.081; midOpacity=1.000; datum=savedRegionalTerrainQA; artApproval=False
+WASTES MODULAR RESULT: case=wings; matrixChecks=58876; frameChecks=29438; failures=0; maxPixelError=0.01; artApproval=False
+WASTES V1 PROJECTION: case=wings; checks=14719; failures=0; maxLeftGap=0.00; maxRightGap=0.00; minFarBottomMargin=468.01; artApproval=False
+WASTES V1 GROUND LOCK: case=wings; checks=14719; maxError=0.83; pass=True; artApproval=False
+WASTES V1 CAMERA: case=below-ground; x=65920; y=10015.05; viewport=2560x1369; hold=1800 ticks; production routing=False
+WASTES MODULAR SAMPLE: case=below-ground; layer=1; viewport=2560x1369; top=259.04; submitted=4; expected=4; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR SAMPLE: case=below-ground; layer=2; viewport=2560x1369; top=-151.50; submitted=2; expected=2; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES V1 GROUND SAMPLE: case=below-ground; viewport=2560x1369; referenceY=10368; soilY=178.00; expectedY=178.50; gameZoom=1.3333334; closeTop=-309.50; cameraY=10015.00; altitude=0.000; midOpacity=1.000; datum=savedRegionalTerrainQA; artApproval=False
+WASTES MODULAR RESULT: case=below-ground; matrixChecks=89832; frameChecks=29944; failures=0; maxPixelError=0.01; artApproval=False
+WASTES V1 PROJECTION: case=below-ground; checks=14972; failures=0; maxLeftGap=0.00; maxRightGap=0.00; minFarBottomMargin=449.01; artApproval=False
+WASTES V1 GROUND LOCK: case=below-ground; checks=14972; maxError=0.50; pass=True; artApproval=False
+WASTES V1 CAMERA: case=diagonal-left; x=130240; y=7215.05; viewport=2560x1369; hold=2400 ticks; production routing=False
+WASTES MODULAR SAMPLE: case=diagonal-left; layer=1; viewport=2560x1369; top=305.45; submitted=3; expected=3; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR SAMPLE: case=diagonal-left; layer=2; viewport=2560x1369; top=388.50; submitted=2; expected=2; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES V1 GROUND SAMPLE: case=diagonal-left; viewport=2560x1369; referenceY=9226; soilY=718.00; expectedY=718.50; gameZoom=1.3333334; closeTop=230.50; cameraY=8468.00; altitude=0.073; midOpacity=1.000; datum=savedRegionalTerrainQA; artApproval=False
+WASTES MODULAR RESULT: case=diagonal-left; matrixChecks=85746; frameChecks=39714; failures=0; maxPixelError=0.01; artApproval=False
+WASTES V1 PROJECTION: case=diagonal-left; checks=19857; failures=0; maxLeftGap=0.00; maxRightGap=0.00; minFarBottomMargin=0.01; artApproval=False
+WASTES V1 GROUND LOCK: case=diagonal-left; checks=19857; maxError=0.96; pass=True; artApproval=False
+WASTES V1 SWEEP: case=diagonal-left; isolatedPhase=False; drawnFrames=19857; sampledTravel=128640.0; farRepeats=3.455; midRepeats=8.794; closeRepeats=18.844; coveragePass=True; artApproval=False
+WASTES V1 CAMERA: case=diagonal-right; x=1600; y=7215.05; viewport=2560x1369; hold=2400 ticks; production routing=False
+WASTES MODULAR SAMPLE: case=diagonal-right; layer=1; viewport=2560x1369; top=383.45; submitted=4; expected=4; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR SAMPLE: case=diagonal-right; layer=2; viewport=2560x1369; top=388.50; submitted=2; expected=2; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES V1 GROUND SAMPLE: case=diagonal-right; viewport=2560x1369; referenceY=6626; soilY=718.00; expectedY=718.50; gameZoom=1.3333334; closeTop=230.50; cameraY=5868.00; altitude=0.510; midOpacity=0.529; datum=savedRegionalTerrainQA; artApproval=False
+WASTES MODULAR RESULT: case=diagonal-right; matrixChecks=81267; frameChecks=39964; failures=0; maxPixelError=0.01; artApproval=False
+WASTES V1 PROJECTION: case=diagonal-right; checks=19982; failures=0; maxLeftGap=0.00; maxRightGap=0.00; minFarBottomMargin=0.01; artApproval=False
+WASTES V1 GROUND LOCK: case=diagonal-right; checks=19982; maxError=0.96; pass=True; artApproval=False
+WASTES V1 SWEEP: case=diagonal-right; isolatedPhase=False; drawnFrames=19982; sampledTravel=128640.0; farRepeats=3.455; midRepeats=8.794; closeRepeats=18.844; coveragePass=True; artApproval=False
