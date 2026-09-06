@@ -23,6 +23,8 @@ namespace apogean.Content.Diagnostics
 		private float groundCameraY;
 		private int lockChecks;
 		private float lockError;
+		private int moduleChecks, moduleFailures, moduleFrameChecks;
+		private float modulePixelError;
 		private RuinedBackgroundBiome? previousLab;
 		private bool Diagonal => scenario is "diagonal-left" or "diagonal-right";
 		private bool Panning => scenario is "pan-left" or "pan-right" || Diagonal;
@@ -53,6 +55,7 @@ namespace apogean.Content.Diagnostics
 			panTick = drawnFrames = 0;
 			projectionChecks = projectionFailures = 0;
 			lockChecks = 0; lockError = 0;
+			moduleChecks = moduleFailures = moduleFrameChecks = 0; modulePixelError = 0;
 			worstLeft = worstRight = 0;
 			minimumBottom = float.PositiveInfinity;
 			drawnMin = float.PositiveInfinity; drawnMax = float.NegativeInfinity;
@@ -125,9 +128,43 @@ namespace apogean.Content.Diagnostics
 				Mod.Logger.Info($"WASTES V1 GROUND SAMPLE: case={scenario}; viewport={Main.instance.GraphicsDevice.Viewport.Width}x{height}; referenceY={worldGround}; soilY={soil:F2}; expectedY={expected.Y:F2}; gameZoom={Main.GameViewMatrix.Zoom.Y}; closeTop={top:F2}; cameraY={worldCameraY:F2}; altitude={WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f):F3}; midOpacity={WastesCameraProjection.MiddleOpacity(WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f)):F3}; datum=worldSurfaceMinus50; artApproval=False");
 		}
 
+		internal void ObserveModularProjection(int layer, Vector2 submitted, Vector2 expected, int depth,
+			Matrix matrix, int width, int height)
+		{
+			if (remaining <= 0) return;
+			Vector2 actual = Vector2.Transform(submitted, matrix);
+			float error = Math.Max(Math.Abs(actual.X - expected.X), Math.Abs(actual.Y - expected.Y));
+			modulePixelError = Math.Max(modulePixelError, error);
+			moduleChecks++;
+			if (error > 1.1f || WastesModularLayout.BottomExposed(expected.Y, depth, height)) moduleFailures++;
+		}
+
+		internal void ObserveModularFrame(int layer, float worldX, float top, int submitted, int width, int height)
+		{
+			if (remaining <= 0) return;
+			// Independent absolute-cell enumeration detects a dropped trailing cell.
+			// An intentional valley at either screen edge is NOT a coverage failure.
+			int period = layer == 1 ? 2655 : 2268, depth = layer == 1 ? 1408 : 1915;
+			double origin = worldX * WastesParallaxContract.Horizontal(layer) - (layer == 2 ? 620 : 0);
+			int expected = 0;
+			if (top < height && top + depth > 0)
+				for (int cell = (int)Math.Floor(origin / period) - 1; cell <= (int)Math.Floor((origin + width) / period) + 1; cell++)
+					for (int group = 0; group < (layer == 1 ? 3 : 1); group++)
+					{
+						double x = cell * period - origin + (layer == 1 ? WastesModularLayout.MidOffset(group) : 0);
+						int span = layer == 1 ? WastesModularLayout.MidWidth(group) : 1448;
+						if (x < width && x + span > 0) expected++;
+					}
+			moduleFrameChecks++;
+			if (expected != submitted) moduleFailures++;
+			if (moduleFrameChecks <= 2)
+				Mod.Logger.Info($"WASTES MODULAR SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; top={top:F2}; submitted={submitted}; expected={expected}; rgbaMiB=28.39; scope=QA; artApproval=False");
+		}
+
 		internal void Release()
 		{
 			if (remaining <= 0) return;
+			Mod.Logger.Info($"WASTES MODULAR RESULT: case={scenario}; matrixChecks={moduleChecks}; frameChecks={moduleFrameChecks}; failures={moduleFailures}; maxPixelError={modulePixelError:F2}; artApproval=False");
 			Mod.Logger.Info($"WASTES V1 PROJECTION: case={scenario}; checks={projectionChecks}; failures={projectionFailures}; maxLeftGap={worstLeft:F2}; maxRightGap={worstRight:F2}; minFarBottomMargin={minimumBottom:F2}; artApproval=False");
 			Mod.Logger.Info($"WASTES V1 GROUND LOCK: case={scenario}; checks={lockChecks}; maxError={lockError:F2}; pass={lockChecks > 0 && lockError <= 1.1f}; artApproval=False");
 			if (Sweeping)

@@ -1,6 +1,10 @@
 # Modular landscape study — Deep v1
 
-**Review-only. Not installed.** Four terrain designs: highway hill, quiet pipe hill, station hill, and a longer foreground bank. A shared authored lower-cliff source extends the three Mid groups. Four image-generation calls include that continuation and the foreground cleanup; the ten rendered views are camera/layout variations of the same assets, not ten unique designs.
+**Latest review: revisions required.** User found pale foreground cutout edges, detached gas-station tree limbs, excessive Close repetition and the wrong local-ground/head-height placement. These remain unresolved. Structural tests and the bounded camera matrix are not art approval; see the new red reproduction probes in the live-evidence record.
+
+**Current: installed only in the disposable QA-world/Forest-lab renderer after the user's go-ahead. Not promoted to ordinary worlds or final art.** Still four terrain designs: highway hill, quiet pipe hill, station hill, and a longer foreground bank. A fifth built-in image-generation call added only the foreground's lower extension. The final bank is1448×1915 with829 new native rows; the approved upper830 rows are unchanged. There are now24 offline camera studies, not24 designs. See [live evidence and limits](../../../../Validation/WastesModularLandscape-2026-09-05/README.md) and [extension prompt](FOREGROUND_DEPTH_PROMPT.md).
+
+The earlier measurements below document the original review-only checkpoint. Its short-foreground blocker is superseded for ground and400px shallow descent at1080p/1369p/1440p, **not** for arbitrary underground depth/cave handoff. Current runtime raw RGBA is28.39MiB. `Foreground-Bank.png` remains the original1086px source export; `Foreground-Deep.png` is the1915px runtime candidate. No Mid/Close reflected fill is used.
 
 ## Start here
 
@@ -10,7 +14,7 @@
 
 These are labelled offline compositions at 1 source pixel per output pixel, **not tModLoader screenshots**. Real tiles, entities, lighting, engine matrix effects and production scene selection are not reproduced. The grey banded Far terrain is the unchanged earlier reference and remains unapproved; it is not the new Mid layer. Its quieting is still required.
 
-## Current components
+## Original review checkpoint components
 
 | Component | Actual exported pixels | Role |
 |---|---|---|

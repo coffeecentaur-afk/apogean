@@ -50,6 +50,10 @@ Next art pass: original quiet/open roadside variants between major landmarks; de
 
 Modular follow-up: `Art/Candidates/WastesMidgroundModules/2026-09-05/Deep-v1/README.md` retains four review designs (three Mid hills plus a longer Close bank), ten offline compositions, exact upper/lower reconstruction and six negative CLI controls. The user requests long joined foreground sections staggered against Mid, allowing natural overlaps. No runtime PNG changed. The new Close bank needs an authored lower continuation before1440p/descent; quieter Far art and visual approval remain open. Pause additional image generation for this set at the review boundary.
 
+Latest modular continuation: user said go after the four-design composition checkpoint. Foreground now has an authored1915px depth; new Mid/Close candidates are staged only in the existing QA-world/Forest-lab path. Static asset/socket/hash and camera gates pass, build clean, with original live captures under `Art/Validation/WastesModularLandscape-2026-09-05/`. Do not confuse the new shallow-descent coverage with native cave-handoff proof. Keep this family contracted pending quieter Far art, review, complete camera/routing/lighting matrix and performance. Additional landscape designs and dependent biomes remain out of this pass.
+
+Background acceptance override from latest user inspection: the modular candidate needs clean cutout rims, connected station trees, genuine Close variants and an actual regional-ground anchor. These are failed visual requirements despite passing viewport-coverage arithmetic. Retain the bounded live evidence and red cutout/local-ground probes; fix this family before expanding into Maw/factions. Display settings were restored after the QA-only run.
+
 ## Vertical slices
 
 1. **Engraft foundation** — biome identity, Maw Nodes/Ruptures, bounded conversion, three initial enemies, debug tools, and art direction.

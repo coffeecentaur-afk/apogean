@@ -13,6 +13,7 @@ namespace apogean.Content.Backgrounds
 	internal static class WastesLandscapeV1Renderer
 	{
 		private static Asset<Texture2D>[] layers;
+		private static Asset<Texture2D>[] modular;
 		// Production routing can be exercised without promoting art to real worlds.
 		internal static bool EnabledForCurrentWorld =>
 			Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" ||
@@ -22,12 +23,17 @@ namespace apogean.Content.Backgrounds
 			if (Main.dedServ || layers != null) return;
 			layers = new[] {
 				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesV1/Far"),
-				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesV1/Mid"),
-				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesV1/Close")
+				(Asset<Texture2D>)null, null
+			};
+			modular = new[] {
+				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesModules/Highway"),
+				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesModules/Quiet"),
+				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesModules/Station"),
+				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesModules/Foreground-Deep")
 			};
 		}
 
-		internal static void Unload() => layers = null;
+		internal static void Unload() { layers = null; modular = null; }
 
 		internal static void Draw(SpriteBatch batch, float opacity, int styleSlot)
 		{
@@ -55,6 +61,12 @@ namespace apogean.Content.Backgrounds
 			Color tint = light * MathHelper.Clamp(opacity, 0, 1);
 			for (int i = 0; i < layers.Length; i++)
 			{
+				if (i > 0)
+				{
+					DrawModular(batch, i, sampledX, worldCameraY, width, height, scale,
+						i == 1 ? tint * WastesCameraProjection.MiddleOpacity(altitude) : tint, cameraLab);
+					continue;
+				}
 				float horizontal = WastesParallaxContract.Horizontal(i);
 				Texture2D texture = layers[i].Value;
 				float top = WastesCameraProjection.Top(Main.worldSurface, worldCameraY, height, texture.Height, i, Main.GameViewMatrix.Zoom.Y);
@@ -78,6 +90,37 @@ namespace apogean.Content.Backgrounds
 				cameraLab.ObserveProjection(i, first, end, Main.CurrentFrameFlags.Hacks.CurrentBackgroundMatrixForCreditsRoll, width, height);
 				if (i == 2) cameraLab.ObserveGroundLock(top, worldCameraY, height);
 			}
+		}
+
+		private static void DrawModular(SpriteBatch batch, int layer, float sampledX, float cameraY,
+			int width, int height, Vector2 scale, Color tint, WastesLandscapeCameraLab lab)
+		{
+			float top = WastesModularLayout.Top(Main.worldSurface, cameraY, height, layer, Main.GameViewMatrix.Zoom.Y);
+			int period = layer == 1 ? WastesModularLayout.MidPeriod : WastesModularLayout.ClosePeriod;
+			float phase = WastesModularLayout.Phase(sampledX, layer);
+			int depth = layer == 1 ? WastesModularLayout.MidHeight : WastesModularLayout.CloseHeight;
+			int submitted = 0;
+			// The previous period can contribute a trailing group at the left edge.
+			// Gaps are real negative space; no opaque fill or reflected strata here.
+			for (float start = -phase - period; start < width; start += period)
+			{
+				int count = layer == 1 ? 3 : 1;
+				for (int group = 0; group < count; group++)
+				{
+					Texture2D texture = modular[layer == 1 ? group : 3].Value;
+					float x = start + (layer == 1 ? WastesModularLayout.MidOffset(group) : 0);
+					if (x + texture.Width <= 0 || x >= width || top >= height || top + depth <= 0) continue;
+					Vector2 pixel = new((float)Math.Floor(x), (float)Math.Floor(top));
+					Vector2 position = pixel * scale;
+					batch.Draw(texture, position, null, tint, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+					lab.ObserveModularProjection(layer, position, pixel, texture.Height,
+						Main.CurrentFrameFlags.Hacks.CurrentBackgroundMatrixForCreditsRoll, width, height);
+					submitted++;
+				}
+			}
+			lab.ObserveModularFrame(layer, sampledX, top, submitted, width, height);
+			if (layer == 2)
+				lab.ObserveGroundLock(top + WastesModularLayout.CloseSoilRow - WastesCameraProjection.CloseSoilRow, cameraY, height);
 		}
 
 		// Bounded QA continuation of existing opaque rock/soil, never a stretched

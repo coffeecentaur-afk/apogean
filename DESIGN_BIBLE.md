@@ -205,6 +205,14 @@ Any renderer revision must test combined diagonal flight through repeat boundari
 
 **Layered-painting foreground follow-up:** Close also uses joined landscape sections and open valleys, but its sections are substantially longer than the smaller Mid hills. Stagger the authored composition so normal ground-height gaps often reveal Mid terrain/ruins. Some overlap is welcome and unavoidable as independent parallax rates shift the layers; never move a chunk dynamically to avoid another chunk. Close retains its fixed world-ground anchor and drawn lower extent. The review layout in `Art/Candidates/WastesMidgroundModules/2026-09-05/Deep-v1/` uses a1448px near bank against391–576px Mid groups. These dimensions illustrate the requested scale relationship, not a final generation distribution. Current candidate art remains uninstalled pending approval and foreground depth completion.
 
+### Modular landscape QA continuation
+
+The user authorized the four-design set to proceed into depth completion and disposable-world render checks. A1448×1915 Close bank now supplies829 fresh native lower rows; original upper830 rows remain unchanged. Three1408px Mid groups and the longer Close bank use stable spaced layouts and no reflected/stretched lower fill. Only the existing Far retains its provisional coverage guard and remains too banded. Current runtime allocation is28.39MiB raw RGBA, not a GPU profiling result. Native screenshots and explicit partial gates are in `Art/Validation/WastesModularLandscape-2026-09-05/README.md`. General-world promotion and the visible cave handoff remain unapproved; no Maw/faction dependent work advances from these static or bounded camera passes.
+
+### Latest background review constraint
+
+The current modular Wastes iteration requires revision: pale cutout rims and disconnected gas-station tree branches must not ship. Hard alpha alone is insufficient; preserve connected bark silhouettes and inspect light/dark backings. One repeated long foreground bank is insufficient variation; author genuinely different long-bank and quiet sections, not mirrored duplicates. The nominal near soil lip should sit roughly three world tiles above **actual regional ground**, around a standing player's head. That is an elevation/offset requirement, never a instruction to follow the player's head during flight. Keep each section's ground datum stable while the player moves vertically; the old `worldSurface - 50` QA arithmetic is not a local-ground implementation. The camera tests pass their old global-anchor contract, not this visual requirement. No dependent biome promotion until revisions are reviewed.
+
 ## Future Boundary
 
 The star chart, mobile ship, company war, CEO routes, post-Moon-Lord Deep Maw, and procedural completion content are deliberately roadmap items. Act 1 establishes their vocabulary without pretending to ship them early.

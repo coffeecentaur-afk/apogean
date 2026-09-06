@@ -1,0 +1,32 @@
+WASTES V1 CAMERA: case=ground; x=65920; y=8792; viewport=2560x1440; hold=1800 ticks; production routing=False
+WASTES MODULAR SAMPLE: case=ground; layer=1; viewport=2560x1440; top=336.80; submitted=4; expected=4; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR SAMPLE: case=ground; layer=2; viewport=2560x1440; top=422.00; submitted=2; expected=2; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR RESULT: case=ground; matrixChecks=40902; frameChecks=13634; failures=0; maxPixelError=0.01; artApproval=False
+WASTES V1 PROJECTION: case=ground; checks=6817; failures=0; maxLeftGap=0.00; maxRightGap=0.00; minFarBottomMargin=432.01; artApproval=False
+WASTES V1 GROUND LOCK: case=ground; checks=6817; maxError=0.00; pass=True; artApproval=False
+WASTES V1 CAMERA: case=diagonal-left; x=130240; y=6392; viewport=2560x1440; hold=2400 ticks; production routing=False
+WASTES MODULAR SAMPLE: case=diagonal-left; layer=1; viewport=2560x1440; top=336.95; submitted=3; expected=3; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR SAMPLE: case=diagonal-left; layer=2; viewport=2560x1440; top=428.67; submitted=2; expected=2; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR RESULT: case=diagonal-left; matrixChecks=86123; frameChecks=39850; failures=0; maxPixelError=0.01; artApproval=False
+WASTES V1 PROJECTION: case=diagonal-left; checks=19925; failures=0; maxLeftGap=0.00; maxRightGap=0.00; minFarBottomMargin=432.01; artApproval=False
+WASTES V1 GROUND LOCK: case=diagonal-left; checks=19925; maxError=0.67; pass=True; artApproval=False
+WASTES V1 SWEEP: case=diagonal-left; isolatedPhase=False; drawnFrames=19925; sampledTravel=128640.0; farRepeats=3.455; midRepeats=8.794; closeRepeats=18.844; coveragePass=True; artApproval=False
+WASTES V1 CAMERA: case=below-ground; x=65920; y=9192; viewport=2560x1440; hold=1800 ticks; production routing=False
+WASTES MODULAR SAMPLE: case=below-ground; layer=1; viewport=2560x1440; top=324.80; submitted=4; expected=4; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR SAMPLE: case=below-ground; layer=2; viewport=2560x1440; top=-111.33; submitted=2; expected=2; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR RESULT: case=below-ground; matrixChecks=65052; frameChecks=21684; failures=0; maxPixelError=0.01; artApproval=False
+WASTES V1 PROJECTION: case=below-ground; checks=10842; failures=0; maxLeftGap=0.00; maxRightGap=0.00; minFarBottomMargin=427.01; artApproval=False
+WASTES V1 GROUND LOCK: case=below-ground; checks=10842; maxError=0.67; pass=True; artApproval=False
+WASTES V1 CAMERA: case=diagonal-right; x=1600; y=6392; viewport=2560x1440; hold=2400 ticks; production routing=False
+WASTES MODULAR SAMPLE: case=diagonal-right; layer=1; viewport=2560x1440; top=336.95; submitted=4; expected=4; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR SAMPLE: case=diagonal-right; layer=2; viewport=2560x1440; top=428.67; submitted=2; expected=2; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR RESULT: case=diagonal-right; matrixChecks=81444; frameChecks=39970; failures=0; maxPixelError=0.01; artApproval=False
+WASTES V1 PROJECTION: case=diagonal-right; checks=19985; failures=0; maxLeftGap=0.00; maxRightGap=0.00; minFarBottomMargin=432.01; artApproval=False
+WASTES V1 GROUND LOCK: case=diagonal-right; checks=19985; maxError=0.67; pass=True; artApproval=False
+WASTES V1 SWEEP: case=diagonal-right; isolatedPhase=False; drawnFrames=19985; sampledTravel=128640.0; farRepeats=3.455; midRepeats=8.794; closeRepeats=18.844; coveragePass=True; artApproval=False
+WASTES V1 CAMERA: case=ground; x=65920; y=8792; viewport=2560x1440; hold=1800 ticks; production routing=False
+WASTES MODULAR SAMPLE: case=ground; layer=1; viewport=2560x1440; top=336.80; submitted=4; expected=4; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR SAMPLE: case=ground; layer=2; viewport=2560x1440; top=422.00; submitted=2; expected=2; rgbaMiB=28.39; scope=QA; artApproval=False
+WASTES MODULAR RESULT: case=ground; matrixChecks=7746; frameChecks=2582; failures=0; maxPixelError=0.01; artApproval=False
+WASTES V1 PROJECTION: case=ground; checks=1291; failures=0; maxLeftGap=0.00; maxRightGap=0.00; minFarBottomMargin=432.01; artApproval=False
+WASTES V1 GROUND LOCK: case=ground; checks=1291; maxError=0.00; pass=True; artApproval=False

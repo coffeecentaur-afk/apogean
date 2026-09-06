@@ -1,0 +1,19 @@
+{
+  "width": 1448,
+  "height": 1915,
+  "socketY": 830,
+  "overlap": 256,
+  "seamMin": 74,
+  "seamMax": 182,
+  "transparent": 484520,
+  "partialAlpha": 0,
+  "unchangedUpperRows": 830,
+  "lowerSourceWidth": 1449,
+  "lowerSourceHeight": 1085,
+  "croppedRightColumns": 1,
+  "newNetRows": 829,
+  "rawRgbaBytes": 11091680,
+  "rescaled": false,
+  "installed": false,
+  "caveHandoffValidated": false
+}

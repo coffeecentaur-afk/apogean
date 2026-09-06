@@ -1,4 +1,4 @@
-param()
+param([switch]$SkipExport)
 # Candidate-only matte extraction/composition, not a tModLoader or production test.
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -77,6 +77,41 @@ public static class ModularMidPreview
                 nominalSoilRow=330,rawRgbaBytes=output.Width*output.Height*4,
                 lowerContinuationRequired=true,installed=false,artApproved=false},new JsonSerializerOptions{WriteIndented=true});
             File.WriteAllText(Path.Combine(root,"Derived","foreground-measurements.json"),report);
+            return report;
+        }
+    }
+    public static string ExtendForeground(string root)
+    {
+        string output=Path.Combine(root,"Derived");
+        using(var upper=new Bitmap(Path.Combine(output,"Foreground-Bank.png")))
+        using(var lowerSource=new Bitmap(Path.Combine(root,"Foreground-Lower-Source.png")))
+        using(var lower=lowerSource.Clone(new Rectangle(0,0,1448,1085),PixelFormat.Format32bppArgb))
+        using(var joined=new Bitmap(1448,1915,PixelFormat.Format32bppArgb))
+        {
+            if(upper.Width!=1448||upper.Height!=1086||lowerSource.Width!=1449||lowerSource.Height!=1085)
+                throw new InvalidDataException("Foreground source dimensions changed; refuse rescaling.");
+            // Preserve original pixels on either side of a connected minimum-error
+            // cut. No feathering, resizing, repeated rows or reflected rock.
+            int[] seam=Seam(upper,lower);
+            long transparent=0;
+            for(int y=0;y<joined.Height;y++)for(int x=0;x<joined.Width;x++)
+            {
+                Color c=y<830+seam[x]?upper.GetPixel(x,y):lower.GetPixel(x,y-830);
+                if(c.A!=0&&c.A!=255)throw new InvalidDataException("Foreground source has soft alpha.");
+                joined.SetPixel(x,y,c);
+                if(c.A==0)transparent++;
+            }
+            joined.Save(Path.Combine(output,"Foreground-Deep.png"),ImageFormat.Png);
+            using(var top=joined.Clone(new Rectangle(0,0,1448,830),PixelFormat.Format32bppArgb))
+                top.Save(Path.Combine(output,"Foreground-Top.png"),ImageFormat.Png);
+            using(var bottom=joined.Clone(new Rectangle(0,830,1448,1085),PixelFormat.Format32bppArgb))
+                bottom.Save(Path.Combine(output,"Foreground-Continuation.png"),ImageFormat.Png);
+            string report=JsonSerializer.Serialize(new {width=1448,height=1915,socketY=830,overlap=Overlap,
+                seamMin=seam.Min(),seamMax=seam.Max(),transparent,partialAlpha=0,unchangedUpperRows=830,
+                lowerSourceWidth=1449,lowerSourceHeight=1085,croppedRightColumns=1,
+                newNetRows=829,rawRgbaBytes=1448*1915*4,rescaled=false,installed=false,
+                caveHandoffValidated=false},new JsonSerializerOptions{WriteIndented=true});
+            File.WriteAllText(Path.Combine(output,"foreground-depth-measurements.json"),report);
             return report;
         }
     }
@@ -178,7 +213,7 @@ public static class ModularMidPreview
         float farTop,float midTop,float closeTop,float midOpacity,bool nearest,float pan,bool modularForeground)
     {
         string output=Path.Combine(root,"Derived");
-        using(var far=new Bitmap(farPath)) using(var close=new Bitmap(modularForeground?Path.Combine(output,"Foreground-Bank.png"):closePath))
+        using(var far=new Bitmap(farPath)) using(var close=new Bitmap(modularForeground?Path.Combine(output,"Foreground-Deep.png"):closePath))
         using(var highway=new Bitmap(Path.Combine(output,"Highway.png")))
         using(var quiet=new Bitmap(Path.Combine(output,"Quiet.png")))
         using(var station=new Bitmap(Path.Combine(output,"Station.png")))
@@ -200,7 +235,9 @@ public static class ModularMidPreview
             {
                 var matrix=new ColorMatrix();matrix.Matrix33=midOpacity;attributes.SetColorMatrix(matrix);
                 int phase=(int)(pan%period);if(phase<0)phase+=period;
-                for(int start=-phase;start<width;start+=period)
+                // Include the preceding period: its last group may still be in
+                // view after the period origin has crossed the left edge.
+                for(int start=-phase-period;start<width;start+=period)
                 {
                     int x=start;
                     foreach(var module in modules)
@@ -217,7 +254,7 @@ public static class ModularMidPreview
                 int closePeriod=close.Width+820;
                 int phase=(int)(pan*.30/.14-620)%closePeriod;if(phase<0)phase+=closePeriod;
                 int top=(int)Math.Floor(closeTop+488-330);
-                if(top<height&&top+close.Height<height)
+                if(top<height&&top+close.Height>0&&top+close.Height<height)
                     throw new InvalidDataException("Foreground bottom exposed: author a lower extension, not a fill.");
                 for(int x=-phase;x<width;x+=closePeriod)g.DrawImageUnscaled(close,x,top);
             }
@@ -243,9 +280,11 @@ public static class ModularMidPreview
     }
 }
 '@
-$json = [ModularMidPreview]::Export($candidate)
-Write-Output $json
-Write-Output ([ModularMidPreview]::ExportForeground($candidate))
+if(-not $SkipExport) {
+    Write-Output ([ModularMidPreview]::Export($candidate))
+    Write-Output ([ModularMidPreview]::ExportForeground($candidate))
+    Write-Output ([ModularMidPreview]::ExtendForeground($candidate))
+}
 $far = Join-Path $repoRoot 'Content/Backgrounds/Candidates/WastesV1/Far.png'
 $close = Join-Path $repoRoot 'Content/Backgrounds/Candidates/WastesV1/Close.png'
 # Reuse the current fixed QA datum and production projection arithmetic. New
@@ -253,7 +292,7 @@ $close = Join-Path $repoRoot 'Content/Backgrounds/Candidates/WastesV1/Close.png'
 $surface = 649.0
 $ground = ($surface - 50) * 16
 $span = $ground - $surface * 16 * .35
-foreach($viewport in @(@{Width=1920;Height=1080;Zoom=1.0},@{Width=2560;Height=1440;Zoom=4.0/3.0})) {
+foreach($viewport in @(@{Width=1920;Height=1080;Zoom=1.0},@{Width=2560;Height=1369;Zoom=4.0/3.0},@{Width=2560;Height=1440;Zoom=4.0/3.0})) {
     foreach($sample in @(@{Name='Ground';Lift=0;Fade=$true},@{Name='Elevated';Lift=$span/3;Fade=$true},
         @{Name='Shallow';Lift=-400;Fade=$true},@{Name='High-NoFade-Stress';Lift=$span*.8;Fade=$false})) {
         $cameraY=$ground-$viewport.Height*.5-$sample.Lift
@@ -264,9 +303,9 @@ foreach($viewport in @(@{Width=1920;Height=1080;Zoom=1.0},@{Width=2560;Height=14
         $opacity=if($sample.Fade){[apogean.Common.Backgrounds.WastesCameraProjection]::MiddleOpacity($altitude)}else{1.0}
         if($midTop+1408 -lt $viewport.Height){throw 'Candidate underside exposed; author more depth instead of hiding it.'}
         [ModularMidPreview]::Render($candidate,$far,$close,$sample.Name,$viewport.Width,$viewport.Height,$farTop,$midTop,$closeTop,$opacity,$true,80,$false)
-        if($viewport.Height -eq 1080 -and $sample.Name -in 'Ground','Elevated') {
+        if($sample.Name -in 'Ground','Elevated','Shallow','High-NoFade-Stress') {
             [ModularMidPreview]::Render($candidate,$far,$close,('Layered-'+$sample.Name),$viewport.Width,$viewport.Height,$farTop,$midTop,$closeTop,$opacity,$true,80,$true)
         }
     }
 }
-Write-Host 'Candidate exported with original material pixels, authored Mid continuation, and ten offline viewport studies. No game assets changed.'
+Write-Host 'Candidate exported with original material pixels and authored Mid/Close depth. 24 offline viewport studies; not live-game or cave-handoff approval.'

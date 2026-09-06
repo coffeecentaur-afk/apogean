@@ -41,14 +41,14 @@
     {
       "id": "wastes-modular-landscape-deep-v1",
       "status": "contracted",
-      "static": "pending",
-      "build": "pending",
-      "liveFixture": "pending",
+      "static": "fail",
+      "build": "pass",
+      "liveFixture": "fail",
       "production": "pending",
-      "userReview": "pending",
-      "evidenceReference": "Art/Candidates/WastesMidgroundModules/2026-09-05/Deep-v1/README.md",
-      "evidenceScope": "Four review designs, not installed: three hard-alpha Mid groups with authored1408px cliff depth and one1448x1086 long Close bank. Mid pixel/socket/crop tests pass2,162,688 pixels and six actual negative CLI controls. Ten labelled offline views are composition studies, not game screenshots. Existing projection helper reused with proposed art alignment; Mid anchor redesign remains unimplemented.",
-      "blockers": ["Review longer staggered Close segments with smaller Mid hills. Stop additional generation for this set until review. Draw another compatible lower Close section before1440p/shallow-descent testing; current bank exposes its bottom in those cases.", "Quieter Far composition, edge/slope polish, regional anchor, real-game routing/lighting/depth/gravity/multiplayer, source-scale verification and measured memory remain open. No family promotion."]
+      "userReview": "rejected",
+      "evidenceReference": "Art/Validation/WastesModularLandscape-2026-09-05/README.md",
+      "evidenceScope": "User authorized continuation into QA. Three 1408px Mid groups plus one 1448x1915 Close bank, 829 new authored rows. Four asset hashes match runtime candidates. Mid/Close pixel/socket tests, 56 layout cases, seven actual CLI negative asset/layout cases and live-validator positive/six-negative controls pass. Build clean. New renderer is QA-only, with no Mid/Close lower fill. Actual 1080p/1369p/1440p ground, shallow and both diagonal sweeps pass: zero module failures, maximum projected error 0.01px, anchor error 0.83px. Full fixture acceptance remains pending. 24 labelled offline views are not game screenshots. Existing Mid response retained; regional anchor remains unimplemented.",
+      "blockers": ["User live review requires revision: pale Close silhouette edges, detached Station-tree limbs, excessive one-bank repetition and wrong local-ground height. New candidate-specific cutout and local-ground repro checks are red despite the earlier structural/geometry passes. Repair connected cutouts, preview genuine long-bank variants and add fixed region-ground anchors. Quiet the existing Far's exposed heavy rock bands. No dependent family expansion.", "Visible cave handoff beyond shallow 400px descent, remaining altitude/lighting/real-biome/restoration matrix, gravity/multiplayer, source-scale landmark measurement and measured GPU residency/hitches remain open. No promotion based only on geometry/static tests."]
     },
     {
       "id": "wastes-terrain",
