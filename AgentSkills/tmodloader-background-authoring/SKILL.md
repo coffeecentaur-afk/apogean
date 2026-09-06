@@ -11,7 +11,7 @@ A background is a camera system with art inputs. Art quality, layer extraction, 
 
 1. Read the style/sky classes, selection priority, renderer, source master, layer extraction script, and latest screenshots.
 2. Define the camera contract: target resolutions, surface anchor, layer order, horizontal/vertical parallax, repeat method, night/eclipsed tint, fade ownership, and memory budget. Keep `ModSceneEffect` selection, `ModSurfaceBackgroundStyle` slots, underground slots, and any `CustomSky` lifecycle as distinct owners.
-3. Keep a full source master. Derive Far, Mid, and Close layers with transparent sky; never paint checkerboards into alpha.
+3. Keep a full source master. Derive Far, Mid, and Close layers with transparent sky; never paint checkerboards into alpha. Before repairing cutouts or carrying user corrections into a new family, read [feedback-repairs.md](references/feedback-repairs.md). Preserve native pixels outside the agreed repair regions.
 4. Run `scripts/Test-BackgroundSet.ps1`. It checks assets, not routing or visual quality.
 5. Render deterministic ground and aerial fixtures at every supported viewport. Pan at least 2.5 texture widths left and right and move from ground to the maximum expected flight altitude.
 6. Render noon, midnight, rain, eclipse, and a transition into each adjacent biome. Add a production-routing fixture that uses real biome counts without a forced diagnostic override.
@@ -31,3 +31,5 @@ A background is a camera system with art inputs. Art quality, layer extraction, 
 - For vanilla-style surface fades, the selected background slot approaches 1 while every competing slot approaches 0. A custom compositor must not leave the engine's competing layer opaque beneath it.
 
 Read [background-contracts.md](references/background-contracts.md) before adding a renderer or biome family.
+
+After a verified correction, retain the general rule and regression check in this skill/tooling; keep biome-specific art choices and candidate evidence in the project. Skills preserve reusable instructions, not automatic art approval.

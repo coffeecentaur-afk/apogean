@@ -42,10 +42,11 @@ The existing magenta key discards dark branch-edge colors; white-matte extractio
 also leaves pale silhouette contamination. Precise repairs must preserve untouched
 native pixels, not regenerate/rescale the complete landscape.
 
-The one-pass stopping rule is now reached for this image-edit attempt. Park these
-failed candidates. Next proposed action is deterministic pixel-level repair in the
-existing export tooling, with explicit approval for that editing method before use;
-do not start another whole-image generation loop or promote dependent biome art.
+The one-pass stopping rule was reached for this image-edit attempt; these failed
+full-image candidates remain parked. The user subsequently approved deterministic
+pixel repair. `Exact-v1/README.md` records the bounded native-pixel candidate,
+passing export/connectivity checks and remaining review gates. No new whole-image
+generation was attempted and no dependent biome art was promoted.
 
 ## Routing audit (source evidence, not a new live test)
 

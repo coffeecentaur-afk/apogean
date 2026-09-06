@@ -2,7 +2,8 @@ param(
     [Parameter(Mandatory)][string]$ReferencePath,
     [Parameter(Mandatory)][string]$CandidatePath,
     [string[]]$AllowedRectangles = @(),
-    [string]$ReportPath
+    [string]$ReportPath,
+    [switch]$PreserveAlphaMask
 )
 # Read-only pre-install gate. This does not remove mattes, resize or approve art.
 Set-StrictMode -Version Latest
@@ -17,13 +18,14 @@ using System.Drawing;
 public static class BackgroundReplacementProbe {
     public static long[] Inspect(string reference, string candidate, int[] boxes) {
         using(var a = new Bitmap(reference)) using(var b = new Bitmap(candidate)) {
-            long empty=0, soft=0, changedOutside=0, changedInside=0;
+            long empty=0, soft=0, changedOutside=0, changedInside=0, changedAlpha=0;
             bool sameSize=a.Width==b.Width && a.Height==b.Height;
             for(int y=0;y<b.Height;y++) for(int x=0;x<b.Width;x++) {
                 Color pixel=b.GetPixel(x,y);
                 if(pixel.A==0) empty++; else if(pixel.A!=255) soft++;
                 if(!sameSize) continue;
                 Color old=a.GetPixel(x,y);
+                if(old.A!=pixel.A)changedAlpha++;
                 if(old.A==pixel.A && (pixel.A==0 || old.ToArgb()==pixel.ToArgb())) continue;
                 bool allowed=false;
                 for(int i=0;i<boxes.Length;i+=4)
@@ -31,7 +33,7 @@ public static class BackgroundReplacementProbe {
                         x<(long)boxes[i]+boxes[i+2] && y<(long)boxes[i+1]+boxes[i+3];
                 if(allowed) changedInside++; else changedOutside++;
             }
-            return new long[]{a.Width,a.Height,b.Width,b.Height,empty,soft,changedOutside,changedInside};
+            return new long[]{a.Width,a.Height,b.Width,b.Height,empty,soft,changedOutside,changedInside,changedAlpha};
         }
     }
 }
@@ -49,6 +51,7 @@ if ($values[0] -ne $values[2] -or $values[1] -ne $values[3]) { $failures.Add('DI
 if ($values[4] -eq 0) { $failures.Add('NO_TRANSPARENT_PIXELS') }
 if ($values[5] -ne 0) { $failures.Add('SOFT_ALPHA') }
 if ($values[6] -ne 0) { $failures.Add('PIXELS_CHANGED_OUTSIDE_APPROVED_REGIONS') }
+if ($PreserveAlphaMask -and $values[8] -ne 0) { $failures.Add('ALPHA_MASK_CHANGED') }
 $report = [ordered]@{
     referenceSize = "$($values[0])x$($values[1])"
     candidateSize = "$($values[2])x$($values[3])"
@@ -56,6 +59,8 @@ $report = [ordered]@{
     partialAlphaPixels = $values[5]
     changedOutsideApprovedRegions = $(if ($failures.Contains('DIMENSIONS_CHANGED')) { $null } else { $values[6] })
     changedInsideApprovedRegions = $(if ($failures.Contains('DIMENSIONS_CHANGED')) { $null } else { $values[7] })
+    changedAlphaPixels = $(if ($failures.Contains('DIMENSIONS_CHANGED')) { $null } else { $values[8] })
+    alphaMaskPreservationRequired = [bool]$PreserveAlphaMask
     referenceSHA256 = (Get-FileHash -LiteralPath $ReferencePath -Algorithm SHA256).Hash
     candidateSHA256 = (Get-FileHash -LiteralPath $CandidatePath -Algorithm SHA256).Hash
     failures = $failures.ToArray()

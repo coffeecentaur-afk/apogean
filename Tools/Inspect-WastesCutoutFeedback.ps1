@@ -1,4 +1,4 @@
-param([switch]$RequireClean)
+param([switch]$RequireClean,[string]$AssetRoot,[switch]$RequireTreeConnections)
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.Drawing
@@ -46,15 +46,20 @@ public static class WastesCutoutFeedback {
 }
 '@
 $repoRoot=Split-Path -Parent $PSScriptRoot
-$runtime=Join-Path $repoRoot 'Content/Backgrounds/Candidates/WastesModules'
+$runtime=if($AssetRoot){(Resolve-Path -LiteralPath $AssetRoot).Path}else{Join-Path $repoRoot 'Content/Backgrounds/Candidates/WastesModules'}
 $left=@([WastesCutoutFeedback]::Detached((Join-Path $runtime 'Station.png'),30,365,56,75))
 $right=@([WastesCutoutFeedback]::Detached((Join-Path $runtime 'Station.png'),410,350,60,91))
+# Source inspection identifies x84,y406 as a separate terrain sprig, not part
+# of the left tree. Retain the broader warning; do not erase it to pass a test.
+$leftTree=@([WastesCutoutFeedback]::Detached((Join-Path $runtime 'Station.png'),30,365,46,75))
 $pale=@([WastesCutoutFeedback]::PaleEdges((Join-Path $runtime 'Foreground-Deep.png')))
 [pscustomobject]@{
     stationLeftDetachedComponents=$left
     stationRightDetachedComponents=$right
+    stationLeftTreeDetachedComponents=$leftTree
     foregroundPaleBoundaryCount=$pale.Count
     foregroundPaleBoundaryExamples=@($pale | Select-Object -First 16)
     scope='Read-only candidate-specific visual-review probes. Bright pixels require source/visual inspection; hard alpha is not edge-quality approval.'
 } | ConvertTo-Json -Depth 5
+if($RequireTreeConnections -and ($leftTree.Count+$right.Count -gt 0)){throw 'TREE_CONNECTION_FAILURE: source-identified Station branch islands remain'}
 if($RequireClean -and ($left.Count+$right.Count+$pale.Count -gt 0)){throw 'CUTOUT_REVIEW_REQUIRED: detached opaque branch islands / pale silhouette candidates remain in shipped QA PNGs'}

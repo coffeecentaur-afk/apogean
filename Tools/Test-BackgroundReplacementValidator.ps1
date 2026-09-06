@@ -15,7 +15,7 @@ try {
         $bitmap.SetPixel(2,2,[Drawing.Color]::FromArgb(255,50,35,20))
         $bitmap.Save($reference,[Drawing.Imaging.ImageFormat]::Png)
     } finally { $bitmap.Dispose() }
-    $cases = @('identical','dimensions','opaque','soft','outside','inside')
+    $cases = @('identical','dimensions','opaque','soft','outside','inside','eroded')
     foreach ($case in $cases) {
         $candidate = Join-Path $fixtureRoot ($case + '.png')
         $bitmap = if ($case -eq 'dimensions') { [Drawing.Bitmap]::new(5,4) } else { [Drawing.Bitmap]::new($reference) }
@@ -25,11 +25,12 @@ try {
                 'soft' { $bitmap.SetPixel(1,1,[Drawing.Color]::FromArgb(128,60,40,20)) }
                 'outside' { $bitmap.SetPixel(2,2,[Drawing.Color]::FromArgb(255,61,40,20)) }
                 'inside' { $bitmap.SetPixel(1,1,[Drawing.Color]::FromArgb(255,61,40,20)) }
+                'eroded' { $bitmap.SetPixel(1,1,[Drawing.Color]::Transparent) }
             }
             $bitmap.Save($candidate,[Drawing.Imaging.ImageFormat]::Png)
         } finally { $bitmap.Dispose() }
         $report = Join-Path $fixtureRoot ($case + '.json')
-        & $runner -NoProfile -File $probe -ReferencePath $reference -CandidatePath $candidate -AllowedRectangles '1,1,1,1' -ReportPath $report | Out-Null
+        & $runner -NoProfile -File $probe -ReferencePath $reference -CandidatePath $candidate -AllowedRectangles '1,1,1,1' -ReportPath $report -PreserveAlphaMask | Out-Null
         $code = $LASTEXITCODE
         $result = Get-Content -Raw -LiteralPath $report | ConvertFrom-Json
         $expected = switch ($case) {
@@ -37,6 +38,7 @@ try {
             'opaque' { 'NO_TRANSPARENT_PIXELS' }
             'soft' { 'SOFT_ALPHA' }
             'outside' { 'PIXELS_CHANGED_OUTSIDE_APPROVED_REGIONS' }
+            'eroded' { 'ALPHA_MASK_CHANGED' }
             default { $null }
         }
         if ($expected) {
@@ -52,4 +54,4 @@ try {
     }
     Remove-Item -LiteralPath $resolved -Recurse -Force
 }
-Write-Output 'PASS: two positive and four negative export-gate controls. No production assets changed.'
+Write-Output 'PASS: two positive and five negative export-gate controls. No production assets changed.'

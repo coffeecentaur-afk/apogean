@@ -12,6 +12,20 @@ This is the production rule for adding visual and gameplay content. It prevents 
 6. **Record the evidence.** Update `Tools/AuthoringStatus.json` as `fixture-pass`, `integrated`, `polished`, or `rejected`. A rejection keeps its useful technical proof but blocks dependent production work.
 7. **Promote or replace.** Expand a family only after its probe passes. Replace rejected art at the same seam instead of layering compensating overlays over it.
 
+## Retaining corrections
+
+Turn each confirmed user correction into a visible requirement and a regression
+check where one is possible. Keep reusable method changes in the installed and
+Git-mirrored authoring skill; biome identity/composition in the bible; exact source
+hashes, coordinates and screenshots in the candidate record. Do not duplicate a
+long chronology in all three. `Test-VersionedSkills.ps1` detects mirror drift.
+
+For background cutouts, the skill's `references/feedback-repairs.md` is the shared
+repair protocol. Native-size preservation and valid alpha do not certify branch
+connectivity or appearance. Every later biome/variant inherits the checks, not
+Wastes-specific colors, coordinates or scenery. No claim of automatic learning or
+first-time perfection replaces a recorded test and live review.
+
 ## Evidence states
 
 | State | Meaning |

@@ -72,7 +72,19 @@
       "userReview": "pending",
       "evidenceReference": "Art/Candidates/WastesCutoutRepair-2026-09-05/README.md",
       "evidenceScope": "One built-in edit per existing Station/Foreground asset. Returned sizes738x2131 and1091x1442 violate native488x1408 and1448x1915; neither output has transparent pixels. Real pre-install CLI rejects both. Validator accepts two positive controls and rejects four deliberate defects. No runtime art, renderer or world changed; no new build/live approval claimed.",
-      "blockers": ["Park failed full-image edits under the bounded stopping rule. Precise native pixel-level repair is the proposed next method, pending explicit editing-method approval; do not rescale/key and mislabel these outputs as invariant-preserving fixes.", "Current Wastes runtime cutouts still fail their own quality probe. Wastes-only scope reaffirmed; Maw and other biome/depth artwork remain separate dependent families."]
+      "blockers": ["Failed full-image edits remain parked. User approved exact native pixel repair; the separate wastes-cutout-exact-v1 candidate retains its own evidence. Do not rescale/key these rejected outputs into service.", "Current Wastes runtime cutouts still fail their own quality probe. Wastes-only scope reaffirmed; Maw and other biome/depth artwork remain separate dependent families."]
+    },
+    {
+      "id": "wastes-cutout-exact-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesCutoutRepair-2026-09-05/Exact-v1/README.md",
+      "evidenceScope": "Candidate-only hash-pinned repair: Station954 changed pixels including675 restored; Foreground114 color-only changes with identical alpha. Native dimensions and all pixels outside bounded regions preserved. Actual connectivity CLI fails archived baseline and passes repair. Seven export-gate controls pass. Light/dark offline crops inspected; reusable installed/Git skill updated. No runtime art, world or game process changed.",
+      "blockers": ["Not installed, built or live-rendered. Native appearance and full camera/routing/lighting/restoration gates remain open.", "Broad diagnostic retains275 pale boundary warnings and a separate Station sprig. These are not automatically bad pixels; do not delete or darken them to force full halo approval. Extra variants remain deferred polish."]
     },
     {
       "id": "wastes-terrain",
