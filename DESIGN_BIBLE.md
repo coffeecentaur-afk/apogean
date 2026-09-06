@@ -255,10 +255,22 @@ not artistic or Space-handoff approval.
 leave the view during ascent. The ruined city must not persist as the Space
 background. Close remains world-ground locked and exits by ordinary camera
 movement; Mid yields next; Far must hand off to the native sky/space layer too.
-Research engine/mod height conventions before fixing exact thresholds. Preserve
+Use the version-pinned conventions in `RESEARCH_BACKGROUND_ALTITUDE_HANDOFF.md`. Preserve
 night/eclipse geometry and restoration fades; do not use an abrupt cutoff or
 change land anchors to follow the player. This does not alter descending cave
 handoff requirements.
+
+**Space-handoff implementation (2026-09-06, QA scope):** a shared, stateless
+land-opacity envelope multiplies the entire submitted color, not just sky alpha.
+Far stays visible through 70% of the global ground-to-Space ascent, then fades
+smoothly to zero by the installed engine's integer player-center Space boundary.
+The higher of player and camera altitude controls that guarantee. The 70% onset
+is Apogean presentation policy, not a universal Terraria rule. Close keeps its
+regional world-ground anchoring; Mid keeps its earlier camera-altitude staging.
+There is no new below-ground cutoff and no world/ecology mutation. Native
+presence/absence, gradual return and independent geometry evidence live in
+`Art/Validation/WastesSpaceHandoff-2026-09-06/README.md`. This fixes the tested
+Space defect, not every production background/art/transition gate.
 
 **Additional Mid artifact:** design one standalone demolished building on a
 broken raised foundation, sharing the Far city's structural/material language

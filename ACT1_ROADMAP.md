@@ -23,19 +23,22 @@
 
 ## Current environmental gate
 
-**Bedtime handoff:** `HANDOFF_2026-09-05.md` is the next-session entry point.
-The QA world is saved and client closed. Altitude research is complete in
-`RESEARCH_BACKGROUND_ALTITUDE_HANDOFF.md`; Space-handoff implementation and the
-new Mid building concept are tomorrow's work, not completed features.
+**Current handoff:** `HANDOFF_2026-09-06.md` is the next-session entry point.
+Space-handoff implementation now has focused red/green arithmetic and native
+submitted-color proof; see `Art/Validation/WastesSpaceHandoff-2026-09-06/README.md`.
+The first Mid ruin draft is parked under `Art/Candidates/WastesMidRuin-v1/`:
+its opaque checkerboard and perspective fail the export/design contract. It is
+not installed. Do not restart an art loop or promote it from a successful build.
 
 **Latest candidate checkpoint:** native city fitting and foreground perimeter-v2
 now have a zero-warning isolated build and2560x1369 live evidence in
 `Art/Validation/WastesCityRuntime-2026-09-05/README.md`. Station remains byte-identical.
 The original opaque generated city is still rejected; its explicit-mask derivative
 is fitted to1458x1792 without enlarging or mirroring it. Nine live geometry cases,
-including both4.853-period Far sweeps, pass. **Full visual gate remains open:**
-the user correctly identified the city persisting into Space. Research terrestrial
-layer exit heights, then correct and verify that handoff before promotion.
+including both4.853-period Far sweeps, pass. The user-identified city-in-Space
+defect is corrected in the subsequent QA build. **Full visual gate remains open:**
+art review, actual-biome/restoration/cave transitions and production proof are
+separate from the focused Space fix.
 The requested separate Mid broken-building module is concept-first follow-up,
 not a replacement for the gas station or authorization for another solid Mid wall.
 No ordinary-world art was promoted; the installed package is a QA override.

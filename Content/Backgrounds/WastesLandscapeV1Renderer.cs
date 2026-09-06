@@ -70,7 +70,6 @@ namespace apogean.Content.Backgrounds
 			// DrawBG temporarily shifts screenPosition into its logical view. Remove
 			// that offset for the world-surface datum, not the sprite positions.
 			float worldCameraY = Main.screenPosition.Y - Main.BackgroundViewMatrix.Translation.Y;
-			float altitude = WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f);
 			// A continuous sky-derived floor avoids brightening abruptly when
 			// dayTime flips at dusk. Alpha belongs to the style fade, not sky tint.
 			Color sky = Main.ColorOfTheSkies;
@@ -79,10 +78,15 @@ namespace apogean.Content.Backgrounds
 			Color tint = light * MathHelper.Clamp(opacity, 0, 1);
 			for (int i = 0; i < layers.Length; i++)
 			{
+				float landOpacity = WastesCameraProjection.LandOpacity(Main.worldSurface,
+					worldCameraY + height * .5f, Main.LocalPlayer.Center.Y, i);
+				Color layerTint = tint * landOpacity;
+				cameraLab.ObserveLandOpacity(i, worldCameraY + height * .5f,
+					landOpacity, layerTint.A, opacity, width, height);
 				if (i > 0)
 				{
 					DrawModular(batch, i, sampledX, worldCameraY, width, height, scale,
-						i == 1 ? tint * WastesCameraProjection.MiddleOpacity(altitude) : tint, cameraLab);
+						layerTint, cameraLab);
 					continue;
 				}
 				float horizontal = WastesParallaxContract.Horizontal(i);
@@ -90,7 +94,6 @@ namespace apogean.Content.Backgrounds
 				float top = WastesCameraProjection.Top(Main.worldSurface, worldCameraY, height, texture.Height, i, Main.GameViewMatrix.Zoom.Y);
 				// Close leaves the camera by world movement, never by a below-ground
 				// fade. Mid yields gradually to Far after the first third of ascent.
-				Color layerTint = i == 1 ? tint * WastesCameraProjection.MiddleOpacity(altitude) : tint;
 				float phase = (float)(sampledX * horizontal % texture.Width);
 				if (phase < 0) phase += texture.Width;
 				Vector2 first = Vector2.Zero, end = Vector2.Zero;

@@ -25,6 +25,9 @@ namespace apogean.Content.Diagnostics
 		private float lockError;
 		private int moduleChecks, moduleFailures, moduleFrameChecks;
 		private float modulePixelError;
+		private int landChecks, landFailures, spaceChecks, groundPresenceChecks, partialFarChecks;
+		private float flightGroundCenter, flightSpaceCenter;
+		private bool SpaceFlight => scenario is "space-ascent" or "space-descent";
 		private RuinedBackgroundBiome? previousLab;
 		private bool Diagonal => scenario is "diagonal-left" or "diagonal-right";
 		private bool Panning => scenario is "pan-left" or "pan-right" || Diagonal;
@@ -40,7 +43,7 @@ namespace apogean.Content.Diagnostics
 			if (Main.netMode != NetmodeID.SinglePlayer || Main.ActiveWorldFileData?.Name != "Apogee Native Visual V3")
 				throw new InvalidOperationException("Landscape camera checks require Apogee Native Visual V3 single-player.");
 			if (requested == "release") { Release(); return; }
-			if (requested is not ("ground" or "jump" or "wings" or "sky" or "left" or "right" or "sunset" or "night" or "rain" or "eclipse" or "pan-left" or "pan-right" or "phase-left" or "phase-right" or "diagonal-left" or "diagonal-right" or "mid-altitude" or "high-altitude" or "below-ground" or "underground"))
+			if (requested is not ("ground" or "jump" or "wings" or "sky" or "left" or "right" or "sunset" or "night" or "rain" or "eclipse" or "pan-left" or "pan-right" or "phase-left" or "phase-right" or "diagonal-left" or "diagonal-right" or "mid-altitude" or "high-altitude" or "below-ground" or "underground" or "space-fade" or "space-edge" or "space-ascent" or "space-descent"))
 				throw new ArgumentOutOfRangeException(nameof(requested));
 			if (remaining > 0) Release();
 			if (remaining == 0)
@@ -56,6 +59,7 @@ namespace apogean.Content.Diagnostics
 			projectionChecks = projectionFailures = 0;
 			lockChecks = 0; lockError = 0;
 			moduleChecks = moduleFailures = moduleFrameChecks = 0; modulePixelError = 0;
+			landChecks = landFailures = spaceChecks = groundPresenceChecks = partialFarChecks = 0;
 			worstLeft = worstRight = 0;
 			minimumBottom = float.PositiveInfinity;
 			drawnMin = float.PositiveInfinity; drawnMax = float.NegativeInfinity;
@@ -74,6 +78,10 @@ namespace apogean.Content.Diagnostics
 			camera = new Vector2(Main.maxTilesX * 8f - Main.screenWidth / 2f + shift,
 				requested == "sky" ? 16 : groundY - Main.screenHeight * .55f - lift);
 			groundCameraY = groundY - Main.screenHeight * .55f;
+			flightGroundCenter = (float)((Main.worldSurface - 50) * 16);
+			flightSpaceCenter = WastesCameraProjection.SpaceBoundaryY(Main.worldSurface);
+			if (requested == "space-fade") camera.Y = MathHelper.Lerp(flightGroundCenter, flightSpaceCenter, .85f) - Main.screenHeight * .5f;
+			if (requested == "space-edge") camera.Y = flightSpaceCenter - 1 - Main.screenHeight * .5f;
 			if (Sweeping)
 			{
 				float left = 1600, right = Main.maxTilesX * 16f - Main.screenWidth - 1600;
@@ -96,6 +104,33 @@ namespace apogean.Content.Diagnostics
 			if (remaining <= 0 || !Sweeping) return;
 			drawnFrames++;
 			drawnMin = Math.Min(drawnMin, actualX); drawnMax = Math.Max(drawnMax, actualX);
+		}
+
+		// Observe the actual color submitted to the renderer, not just a forecast.
+		// Geometry continues to be checked independently even when land is invisible.
+		internal void ObserveLandOpacity(int layer, float cameraCenter, float factor, byte alpha,
+			float styleOpacity, int width, int height)
+		{
+			if (remaining <= 0) return;
+			landChecks++;
+			bool inSpace = (int)(Player.Center.Y / 16f) <= Main.worldSurface * (double).35f;
+			bool cameraSpace = (int)(cameraCenter / 16f) <= Main.worldSurface * (double).35f;
+			bool failed = factor < 0 || factor > 1;
+			if (inSpace || cameraSpace)
+			{
+				spaceChecks++;
+				failed |= alpha != 0 || factor != 0;
+			}
+			float ground = (float)((Main.worldSurface - 50) * 16);
+			if (cameraCenter >= ground && Player.Center.Y >= ground && styleOpacity >= .99f)
+			{
+				groundPresenceChecks++;
+				failed |= factor != 1 || alpha < 250;
+			}
+			if (layer == 0 && factor > .05f && factor < .95f && alpha > 0 && styleOpacity >= .99f) partialFarChecks++;
+			if (failed) landFailures++;
+			if (landChecks <= 3 || (SpaceFlight && layer == 0 && panTick % 60 == 0) || (failed && landFailures == 1))
+				Mod.Logger.Info($"WASTES LAND SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; cameraCenter={cameraCenter:F2}; playerCenter={Player.Center.Y:F2}; space={inSpace}; cameraSpace={cameraSpace}; factor={factor:F5}; submittedAlpha={alpha}; styleOpacity={styleOpacity:F3}; failed={failed}");
 		}
 
 		// Permanent QA probe: project the *submitted* geometry through the engine's
@@ -165,6 +200,7 @@ namespace apogean.Content.Diagnostics
 		internal void Release()
 		{
 			if (remaining <= 0) return;
+			Mod.Logger.Info($"WASTES LAND RESULT: case={scenario}; viewport={Main.screenWidth}x{Main.screenHeight}; checks={landChecks}; spaceChecks={spaceChecks}; groundChecks={groundPresenceChecks}; partialFarChecks={partialFarChecks}; failures={landFailures}; artApproval=False");
 			Mod.Logger.Info($"WASTES MODULAR RESULT: case={scenario}; matrixChecks={moduleChecks}; frameChecks={moduleFrameChecks}; failures={moduleFailures}; maxPixelError={modulePixelError:F2}; artApproval=False");
 			Mod.Logger.Info($"WASTES V1 PROJECTION: case={scenario}; checks={projectionChecks}; failures={projectionFailures}; maxLeftGap={worstLeft:F2}; maxRightGap={worstRight:F2}; minFarBottomMargin={minimumBottom:F2}; artApproval=False");
 			Mod.Logger.Info($"WASTES V1 GROUND LOCK: case={scenario}; checks={lockChecks}; maxError={lockError:F2}; pass={lockChecks > 0 && lockError <= 1.1f}; artApproval=False");
@@ -193,6 +229,15 @@ namespace apogean.Content.Diagnostics
 			if (Main.netMode != NetmodeID.SinglePlayer || Main.ActiveWorldFileData?.Name != "Apogee Native Visual V3") { remaining = 0; return; }
 			if (remaining == 1) { Release(); return; }
 			remaining--;
+			if (SpaceFlight)
+			{
+				// Twenty seconds through the transition, then a ten-second endpoint.
+				float progress = Math.Min(panTick++ / 1200f, 1f);
+				float start = scenario == "space-ascent" ? 0 : 1.04f;
+				float end = scenario == "space-ascent" ? 1.04f : 0;
+				camera.Y = MathHelper.Lerp(flightGroundCenter, flightSpaceCenter,
+					MathHelper.Lerp(start, end, progress)) - Main.screenHeight * .5f;
+			}
 			if (Sweeping)
 			{
 				sampledX = MathHelper.Lerp(panStart, panEnd, Math.Min(panTick++ / (float)PanDuration, 1f));

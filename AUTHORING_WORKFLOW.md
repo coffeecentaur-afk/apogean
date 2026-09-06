@@ -83,3 +83,21 @@ Measure a source landmark against its actual Windows game capture. A 111-pixel t
 ## Background lesson retained — 2026-09-05
 
 A settled restored scene is not evidence of a correct fade. The native PureSpray fixture reproduced an outgoing style that stayed opaque because its selected-only refresh hook stopped running. Read current engine alpha at draw time, identify which style actually drew, and require both fade directions plus missing-draw rejection. `Test-ForestSprayLive.ps1 -Replay` explicitly labels archived evidence; `Test-ForestSprayValidator.ps1` must reject deliberately defective traces through the real CLI. Physical travel distance also cannot approve hidden artwork: use labelled isolated phase sweeps for texture joins, retaining separate real-world camera/routing tests. No static measurement promotes art.
+
+## Background lesson retained — 2026-09-06
+
+Coverage and visibility are independent contracts. A fully screen-covering city
+can still be wrong in Space. Test full submitted RGBA against independent
+player/camera classification, ground presence, partial fade and both continuous
+flight endpoints. Keep geometry checks even during deliberate invisibility;
+their success is not proof of visible continuity. `Test-WastesSpaceHandoff.ps1`
+uses the live pure policy; its CLI controls reject always-visible, always-hidden,
+abrupt and camera/player-blind alternatives. `Test-WastesSpaceLive.ps1` replays
+actual draw samples and completion records; its companion validator rejects
+missing samples/endpoints and defective presence/absence. A screenshot after a
+30-second hold expires is a return view, not evidence of that held case.
+
+Do not spend extraction effort on a concept that also fails its view/silhouette
+contract. The Mid ruin draft has both baked matte and unwanted perspective:
+park it for art-direction review before a separate explicit-mask export. Never
+interpret a displayed checkerboard as an alpha result; inspect encoded pixels.

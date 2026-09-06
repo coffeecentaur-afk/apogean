@@ -96,7 +96,7 @@
       "userReview": "pending",
       "evidenceReference": "Art/Candidates/WastesForegroundPerimeter-v2/README.md",
       "evidenceScope": "Exact1448x1915 repair:1049 RGB edge changes, zero alpha/interior changes; accepted Station unchanged. Deterministic hash, donor manifest and mutation tests retained. Subsequently packaged unchanged in the optional city QA build with2560x1369 ground/wings/night/rain/eclipse screenshots and passing geometry; see Art/Validation/WastesCityRuntime-2026-09-05/README.md. Original offline report remains scoped to export invariants.",
-      "blockers": ["User art review and complete viewports/routing matrix remain pending. Donor heuristic is asset-specific; diagnostic417-to6 pale-edge count is not proof of complete halo removal. City Space visibility is a separate open scene defect."]
+      "blockers": ["User art review and complete viewports/routing matrix remain pending. Donor heuristic is asset-specific; diagnostic417-to6 pale-edge count is not proof of complete halo removal. Space visibility has separate focused proof in wastes-space-handoff-v1; it does not approve this art."]
     },
     {
       "id": "wastes-far-city-concept-v1",
@@ -127,12 +127,36 @@
       "status": "contracted",
       "static": "pass",
       "build": "pass",
-      "liveFixture": "fail",
+      "liveFixture": "pending",
       "production": "pending",
       "userReview": "pending",
       "evidenceReference": "Art/Validation/WastesCityRuntime-2026-09-05/README.md",
-      "evidenceScope": "Native1458x1792 minimum-error source-pixel fitting,42 projection checks and4 negative controls. Nine live geometry cases pass at2560x1369; both diagonal sweeps cover4.853 actual Far periods; max rounding0.96px. Station/foreground-v2 unchanged. Direct art captures include ground,wings,sky,night,rain,eclipse and shallow descent. Overall live gate fails the latest requirement: city still visible in Space.",
-      "blockers": ["Research altitude conventions and add a gradual all-terrestrial-layer exit into native Space; sky.png retains the failure. No ordinary-world promotion.", "Mid broken-building concept requested; preview before installation. Reused ground-pattern repetition, other viewports, real-biome/restoration/cave transitions and performance remain open."]
+      "evidenceScope": "Native1458x1792 minimum-error source-pixel fitting,42 projection checks and4 negative controls. Historical2560x1369 geometry and lighting captures retained. Station/foreground-v2 unchanged. The subsequent wastes-space-handoff-v1 fixture fixes the previously captured city-in-Space defect at2560x1369 and1920x1080; whole-scene acceptance remains pending.",
+      "blockers": ["Review updated native screenshots; overall art, actual-biome/restoration/cave transitions, multiplayer/gravity and performance remain open. No ordinary-world promotion.", "Mid broken-building draft is parked with export and view-angle failures; preview corrected native assembly before installation. Reused ground-pattern repetition remains deferred polish."]
+    },
+    {
+      "id": "wastes-space-handoff-v1",
+      "status": "fixture-pass",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/WastesSpaceHandoff-2026-09-06/README.md",
+      "evidenceScope": "Focused land RGBA presence/absence only:18180 live-policy arithmetic checks plus real CLI controls, clean isolated build, six native holds/continuous-flight cases at2560x1369 and1920x1080. Full-color ground and partial fade, zero land at player/camera Space, smooth ascent/descent endpoints; actual log validator rejects defective/missing traces. Original candidate PNGs unchanged; geometry is measured independently of opacity.",
+      "blockers": ["User visual comfort review and ordinary-world routing/restoration/cave/multiplayer/gravity/performance matrix remain open. This bounded Space fixture is not whole-background promotion."]
+    },
+    {
+      "id": "wastes-mid-ruin-concept-v1",
+      "status": "specified",
+      "static": "fail",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesMidRuin-v1/README.md",
+      "evidenceScope": "One built-in1024x1536 original concept. Encoded-alpha inspection finds0 transparent/partial pixels; checkerboard is baked RGB. Architecture has excess perspective for the requested side view. Stored verbatim with prompt; no export, resize, install or world mutation.",
+      "blockers": ["Resolve silhouette/view-angle direction before cleanup. Then create separately reviewed hard mask and native-scale deep assembly; do not approve or install opaque draft and do not repeat generation unattended."]
     },
     {
       "id": "wastes-terrain",

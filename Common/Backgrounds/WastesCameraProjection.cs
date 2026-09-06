@@ -49,6 +49,27 @@ namespace apogean.Common.Backgrounds
 			return 1 - t * t * (3 - 2 * t);
 		}
 
+		// First continuous pixel boundary above which the installed 1.4.4 integer
+		// player-center tile qualifies as Space. Preserve the engine's float .35.
+		public static float SpaceBoundaryY(double surfaceTiles) =>
+			(float)((Math.Floor(surfaceTiles * (double).35f) + 1) * 16);
+
+		// A presentation envelope, not a biome mutation. Reaches zero for either
+		// the camera or player entering Space; camera offsets cannot retain a city
+		// around a Space-classified player. No state, zoom, or below-ground cutoff.
+		public static float LandOpacity(double surfaceTiles, float cameraCenterY, float playerCenterY, int layer)
+		{
+			if (layer < 0 || layer > 2) throw new ArgumentOutOfRangeException(nameof(layer));
+			float ground = (float)((surfaceTiles - 50) * 16);
+			float center = Math.Min(cameraCenterY, playerCenterY);
+			float ascent = Math.Clamp((ground - center) / Math.Max(1, ground - SpaceBoundaryY(surfaceTiles)), 0, 1);
+			float t = Math.Clamp((ascent - .7f) / .3f, 0, 1);
+			float land = 1 - t * t * (3 - 2 * t);
+			// Preserve existing camera-based Mid staging. Close normally exits by
+			// world-ground motion first; this envelope is also its Space safety net.
+			return layer == 1 ? land * MiddleOpacity(Altitude(surfaceTiles, cameraCenterY)) : land;
+		}
+
 		public const int LowerStrataHeight = 512;
 		public static float CoveredBottom(float top, int textureHeight, int viewportHeight)
 		{
