@@ -38,8 +38,13 @@ their own visual subject, not the jungle canopy or a generic dead cave.
 3. **Checkpoint/communications ruin:** narrow stepped observation post and short
    broken antenna; vertical silhouette, not another wide shell or skyscraper.
 
-The last two are proposed designs generated once each for review under
-`Art/Candidates/WastesMidRuins-v2/`. No new traversable structure, faction
+The user accepted these three basic designs, then questioned their identical
+facing. One checkpoint redraw exposes its opposite side while retaining
+upper-left lighting and the original cliff. Native ground-scale comparison with
+the real character and Station is available after the user could not judge
+an offline board: `Art/Validation/WastesMidScale-2026-09-06/README.md`.
+Size/facing and full integration remain separate review gates.
+Sources remain under `Art/Candidates/WastesMidRuins-v2/`. No new traversable structure, faction
 mechanic, NPC or inventory item is part of this background work.
 
 Placement must be stable across camera travel, time, reload and clients. A

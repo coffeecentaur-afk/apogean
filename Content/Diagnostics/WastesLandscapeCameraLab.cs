@@ -38,13 +38,21 @@ namespace apogean.Content.Diagnostics
 		private double previousTime;
 		private double previousRainTime;
 		private float previousRainStrength;
+		private int galleryChecks, galleryFailures;
+		internal int ScaleGalleryIndex => remaining <= 0 ? 0 : scenario switch
+		{
+			"scale-shell" => 1, "scale-depot" => 2, "scale-checkpoint" => 3, _ => 0
+		};
+		internal float ScaleGalleryGround { get; private set; }
 		internal void Start(string requested)
 		{
 			if (Main.netMode != NetmodeID.SinglePlayer || Main.ActiveWorldFileData?.Name != "Apogee Native Visual V3")
 				throw new InvalidOperationException("Landscape camera checks require Apogee Native Visual V3 single-player.");
 			if (requested == "release") { Release(); return; }
-			if (requested is not ("ground" or "jump" or "wings" or "sky" or "left" or "right" or "sunset" or "night" or "rain" or "eclipse" or "pan-left" or "pan-right" or "phase-left" or "phase-right" or "diagonal-left" or "diagonal-right" or "mid-altitude" or "high-altitude" or "below-ground" or "underground" or "space-fade" or "space-edge" or "space-ascent" or "space-descent"))
+			if (requested is not ("ground" or "jump" or "wings" or "sky" or "left" or "right" or "sunset" or "night" or "rain" or "eclipse" or "pan-left" or "pan-right" or "phase-left" or "phase-right" or "diagonal-left" or "diagonal-right" or "mid-altitude" or "high-altitude" or "below-ground" or "underground" or "space-fade" or "space-edge" or "space-ascent" or "space-descent" or "scale-shell" or "scale-depot" or "scale-checkpoint"))
 				throw new ArgumentOutOfRangeException(nameof(requested));
+			if (requested.StartsWith("scale-", StringComparison.Ordinal) && !WastesRuinScaleGallery.Available)
+				throw new InvalidOperationException("Scale study assets require an isolated QA build; no fallback art will be shown.");
 			if (remaining > 0) Release();
 			if (remaining == 0)
 			{
@@ -56,6 +64,7 @@ namespace apogean.Content.Diagnostics
 			scenario = requested;
 			remaining = Sweeping ? PanDuration + 600 : 1800;
 			panTick = drawnFrames = 0;
+			galleryChecks = galleryFailures = 0;
 			projectionChecks = projectionFailures = 0;
 			lockChecks = 0; lockError = 0;
 			moduleChecks = moduleFailures = moduleFrameChecks = 0; modulePixelError = 0;
@@ -78,6 +87,15 @@ namespace apogean.Content.Diagnostics
 			camera = new Vector2(Main.maxTilesX * 8f - Main.screenWidth / 2f + shift,
 				requested == "sky" ? 16 : groundY - Main.screenHeight * .55f - lift);
 			groundCameraY = groundY - Main.screenHeight * .55f;
+			if (ScaleGalleryIndex > 0)
+			{
+				// Read actual terrain; never clear or rebuild tiles for a scale view.
+				int x = Main.maxTilesX / 2;
+				int y = Math.Max(20, (int)Main.worldSurface - 180);
+				while (y < Main.maxTilesY - 200 && !WorldGen.SolidTile(x, y)) y++;
+				ScaleGalleryGround = y * 16;
+				camera.Y = ScaleGalleryGround - Main.screenHeight * .62f;
+			}
 			flightGroundCenter = (float)((Main.worldSurface - 50) * 16);
 			flightSpaceCenter = WastesCameraProjection.SpaceBoundaryY(Main.worldSurface);
 			if (requested == "space-fade") camera.Y = MathHelper.Lerp(flightGroundCenter, flightSpaceCenter, .85f) - Main.screenHeight * .5f;
@@ -98,6 +116,16 @@ namespace apogean.Content.Diagnostics
 		// the horizontal input to the actual production renderer changes. It
 		// stays inactive in ordinary worlds and preserves the physical camera.
 		internal float BackgroundSampleX(float actualX) => remaining > 0 && PhaseSweep ? sampledX : actualX;
+
+		internal void ObserveScaleGallery(int side, string asset, Vector2 expected, Vector2 actual,
+			int textureWidth, int textureHeight, int width, int height)
+		{
+			if (ScaleGalleryIndex == 0) return;
+			bool failed = Vector2.Distance(expected, actual) > 1.1f || textureWidth != 512 || textureHeight != 460;
+			if (failed) galleryFailures++;
+			if (galleryChecks++ < 2)
+				Mod.Logger.Info($"WASTES SCALE SAMPLE: case={scenario}; side={side}; asset={asset}; viewport={width}x{height}; texture={textureWidth}x{textureHeight}; pixel={actual}; soil={actual.Y + 340}; gameZoom={Main.GameViewMatrix.Zoom}; player={Player.width}x{Player.height}; failed={failed}; scope=ground-scale-only; production=False");
+		}
 
 		internal void ObserveDraw(float actualX)
 		{
@@ -200,6 +228,8 @@ namespace apogean.Content.Diagnostics
 		internal void Release()
 		{
 			if (remaining <= 0) return;
+			if (ScaleGalleryIndex > 0)
+				Mod.Logger.Info($"WASTES SCALE RESULT: case={scenario}; samples={galleryChecks}; failures={galleryFailures}; artApproval=False; flightCoverage=False");
 			Mod.Logger.Info($"WASTES LAND RESULT: case={scenario}; viewport={Main.screenWidth}x{Main.screenHeight}; checks={landChecks}; spaceChecks={spaceChecks}; groundChecks={groundPresenceChecks}; partialFarChecks={partialFarChecks}; failures={landFailures}; artApproval=False");
 			Mod.Logger.Info($"WASTES MODULAR RESULT: case={scenario}; matrixChecks={moduleChecks}; frameChecks={moduleFrameChecks}; failures={moduleFailures}; maxPixelError={modulePixelError:F2}; artApproval=False");
 			Mod.Logger.Info($"WASTES V1 PROJECTION: case={scenario}; checks={projectionChecks}; failures={projectionFailures}; maxLeftGap={worstLeft:F2}; maxRightGap={worstRight:F2}; minFarBottomMargin={minimumBottom:F2}; artApproval=False");
@@ -253,6 +283,7 @@ namespace apogean.Content.Diagnostics
 				}
 			}
 			Player.Center = camera + new Vector2(Main.screenWidth / 2f, Main.screenHeight / 2f);
+			if (ScaleGalleryIndex > 0) Player.Bottom = new Vector2(Main.maxTilesX * 8f, ScaleGalleryGround);
 			Player.velocity = Vector2.Zero;
 			Player.fallStart = (int)(Player.position.Y / 16f);
 			Player.immune = true;

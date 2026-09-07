@@ -51,7 +51,7 @@ namespace apogean.Content.Backgrounds
 			};
 		}
 
-		internal static void Unload() { layers = null; modular = null; nativeCity = false; }
+		internal static void Unload() { layers = null; modular = null; nativeCity = false; WastesRuinScaleGallery.Unload(); }
 
 		internal static void Draw(SpriteBatch batch, float opacity, int styleSlot)
 		{
@@ -85,6 +85,11 @@ namespace apogean.Content.Backgrounds
 					landOpacity, layerTint.A, opacity, width, height);
 				if (i > 0)
 				{
+					if (cameraLab.ScaleGalleryIndex > 0)
+					{
+						if (i == 1) WastesRuinScaleGallery.Draw(batch, cameraLab, worldCameraY, width, height, scale, layerTint);
+						continue; // Scale-only view hides normal Mid/Close, never world tiles.
+					}
 					DrawModular(batch, i, sampledX, worldCameraY, width, height, scale,
 						layerTint, cameraLab);
 					continue;

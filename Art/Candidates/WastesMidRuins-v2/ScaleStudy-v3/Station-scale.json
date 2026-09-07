@@ -1,0 +1,15 @@
+{
+  "sourceSHA256": "C7017CE5572D987B7F1F7A5AEFAC4BB441ECAA9BAAD1EAF81D676E044BEDF58C",
+  "sourceWidth": 488,
+  "sourceHeight": 1408,
+  "sourceGround": 440,
+  "width": 512,
+  "height": 460,
+  "ground": 340,
+  "numerator": 1,
+  "denominator": 1,
+  "left": 12,
+  "top": -100,
+  "kept": 92426,
+  "scope": "Offline 1x upper-module study only. Explicit reduction, not added detail or runtime coverage."
+}

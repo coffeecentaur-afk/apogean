@@ -3,6 +3,7 @@ param(
 	[string]$TreeCandidateDirectory = '',
 	[string]$WastesCutoutCandidateDirectory = '',
 	[string]$WastesCityCandidateDirectory = '',
+	[string]$WastesScaleCandidateDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -93,6 +94,21 @@ try {
 		New-Item -ItemType Directory -Path $destination -Force | Out-Null
 		Copy-Item -LiteralPath $asset -Destination (Join-Path $destination 'Far.png')
 		Write-Host "QA city override: $($report.candidateSHA256) (build mirror only)."
+	}
+	if ($WastesScaleCandidateDirectory) {
+		$candidateRoot = (Resolve-Path -LiteralPath $WastesScaleCandidateDirectory).Path
+		$allowedRoot = (Join-Path $sourceRoot 'Art/Candidates') + [IO.Path]::DirectorySeparatorChar
+		if (-not $candidateRoot.StartsWith($allowedRoot, [StringComparison]::OrdinalIgnoreCase)) {
+			throw 'Scale study assets must come from this project Art/Candidates directory.'
+		}
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-WastesMidScaleStudy.ps1') -CandidateDirectory $candidateRoot
+		if ($LASTEXITCODE -ne 0) { throw 'Mid scale study audit failed.' }
+		$destination = Join-Path $mirrorRoot 'Content/Backgrounds/Candidates/WastesScaleGallery'
+		New-Item -ItemType Directory -Path $destination -Force | Out-Null
+		foreach ($name in @('Station','BrokenShell','MotorDepot','Checkpoint')) {
+			Copy-Item -LiteralPath (Join-Path $candidateRoot "$name-Upper.png") -Destination $destination
+		}
+		Write-Host 'QA ground-scale gallery included; no ordinary Mid module replacement.'
 	}
 	Push-Location $mirrorRoot
 	try {

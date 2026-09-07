@@ -78,6 +78,16 @@ source/mask and assembled native-scale result before a disposable live fixture.
 
 ## Reference discipline
 
+### Native scale gate, not another offline approval loop
+
+When a user cannot judge scale from a board, supply a bounded native ground
+gallery beside the real character, terrain and an accepted landmark. Label any
+suppressed scenery, source reduction, upper-only crop and forced routing. Do not
+demand offline approval first or promote short studies into deep modules.
+Example: `Art/Validation/WastesMidScale-2026-09-06/README.md`.
+Changing exposed building sides must preserve scene lighting; keep source/mask
+provenance instead of silently mirroring all its lighting and terrain.
+
 Other mods and games are studied for reusable principles: engine ownership, placement safety, encounter readability, functional silhouettes, objective clarity, co-op state, and environmental storytelling. Apogean does not copy source, assets, layouts, names, dialogue, timing, or recognizable encounter combinations. Research provenance and the verified/inferred boundary live in `RESEARCH_APOGEAN_CONTENT_WORKFLOWS.md`.
 
 ## Current commands

@@ -23,6 +23,15 @@
 
 ## Current environmental gate
 
+**Latest checkpoint:** three ruin upper studies now have native ground-scale
+captures beside gg and the unchanged Station, after the user could not judge the
+offline comparison. Checkpoint faces the opposite way without reversing lighting
+or the old cliff. `Art/Validation/WastesMidScale-2026-09-06/README.md` records
+exact QA build, source sampling and bounds. Await size/facing verdict, then deep
+foundations and stable quiet-spaced placement. This is not full-background
+approval, flight coverage or ordinary-world promotion. Keep Wastes → starting
+area/drop pod → shallow Maw order; Jungle remains lush/overgrown/abandoned.
+
 **Current handoff:** `HANDOFF_2026-09-06.md` is the next-session entry point.
 Space-handoff implementation now has focused red/green arithmetic and native
 submitted-color proof; see `Art/Validation/WastesSpaceHandoff-2026-09-06/README.md`.

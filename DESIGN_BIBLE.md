@@ -287,6 +287,13 @@ enlarge a cropped Far building or turn Mid into a solid city wall. This bounded
 two-concept addition supersedes the earlier extra-ruins deferral, not the other
 baseline gates or the starting-area/Maw order.
 
+**Mid scale follow-up:** basic ruin shapes accepted; one opposite-side checkpoint
+redraw preserves scene lighting and the old cliff, rather than globally mirroring.
+The user needed real character scale. Native ground-only pairs now exist in
+`Art/Validation/WastesMidScale-2026-09-06/README.md`. Explicit2/5 upper studies
+are not approved1408px-deep modules. Size/facing review, foundations and full
+parallax/routing proof still precede integration. Accepted Station remains intact.
+
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial
 horizon: collapsed building shells, broken urban infrastructure and quiet rubble

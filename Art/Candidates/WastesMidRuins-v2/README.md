@@ -1,5 +1,12 @@
 # Three Wastes Mid ruins — architecture concepts and clean cutouts
 
+**Latest follow-up:** user accepted the three basic shapes and requested less
+uniform facing. `FacingStudy-v1` has one opposite-side checkpoint edit with the
+old cliff preserved. `ScaleStudy-v3` has explicitly reduced upper studies.
+Actual native captures now live in `Art/Validation/WastesMidScale-2026-09-06/README.md`.
+This scale-only gallery does not promote full-size cutouts or solve coverage.
+The sections below record the earlier concept/export pass.
+
 2026-09-06. **Review-only, not installed, not game screenshots.**
 The user likes the earlier broken shell and requested two or three ruins total.
 This pass retained it and generated exactly two new originals with the built-in

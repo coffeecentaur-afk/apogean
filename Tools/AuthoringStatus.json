@@ -165,10 +165,22 @@
       "build": "pending",
       "liveFixture": "pending",
       "production": "pending",
-      "userReview": "pending",
+      "userReview": "accepted",
       "evidenceReference": "Art/Candidates/WastesMidRuins-v2/README.md",
       "evidenceScope": "Three1024x1536 concept cutouts: retained broken shell plus two new built-in originals (motor depot and checkpoint). Reviewed source-specific masks; no original edits. Separate recorded edge RGB donors remove matte rims without mask erosion. All exact exports/hard alpha/provenance pass, with9 in-memory defect controls and reused exporter CLI regression. Offline light/dark previews only, not game screenshots. Biome-history direction including living Jungle exception recorded; no runtime code changed.",
-      "blockers": ["Two new silhouettes need user review; native-scale assembly must resolve oversized building features and width/depth mismatches against accepted Station, not silently resize into existing slots.", "Stable variant placement, deep joins and actual flight/lighting/biome/restoration/performance checks remain pending. Existing accepted scenery and installed QA mod unchanged; no ordinary-world promotion."]
+      "blockers": ["Basic silhouettes accepted; user noted identical facing. Separate wastes-mid-ruins-scale-v1 tracks a targeted opposite-facing checkpoint and native upper-size review. These original full-size cutouts are not installed.", "Stable variant placement, deep joins and actual flight/lighting/biome/restoration/performance checks remain pending; no ordinary-world promotion."]
+    },
+    {
+      "id": "wastes-mid-ruins-scale-v1",
+      "status": "fixture-pass",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/WastesMidScale-2026-09-06/README.md",
+      "evidenceScope": "One opposite-side checkpoint edit with all796 lower rows preserved; explicit-mask exact-alpha derivative. Three2/5 sampled upper studies beside1/1 Station,512x460. User needed game scale; actual2560x1369 ground-only paired renders include real character/terrain. Build0warnings/errors, each native pair observed, zero submitted-position/dimension failures, normal scenery restored, saved QA world. Static/live CLI defect controls pass. No regular-world art changed.",
+      "blockers": ["Await user size/facing verdict on actual captures, not the offline board. Forced ground-scale gallery suppresses regular Mid/Close and hides cropped bottoms under terrain; not final composition or deep coverage.", "Author deep foundations, stable quiet-spaced placement and test flight, lighting, real-biome/restoration routing and residency before promotion. Existing grove checkpoint mismatch remains unresolved and was not reset."]
     },
     {
       "id": "wastes-terrain",
