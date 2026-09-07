@@ -348,6 +348,13 @@ static masks/build success. A failed whole-image depth experiment is retained se
 not approved: generated lower extensions changed upper art and framing, while
 the reuse probe exposed joins. Short masked studies are not full-depth modules.
 
+**September7 evidence, not a new design decision:** the exact four-building bank
+passes unforced local greenification, native spray fades and Jungle priority /
+return in the disposable world. Native Forest is still the accepted threshold
+fallback, not new reclaimed-city artwork. Keep the approved building art fixed;
+visible cave handoff, performance and remaining production checks are separate.
+See `Art/Validation/ForestRestoration/2026-09-07/README.md`.
+
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial
 horizon: collapsed building shells, broken urban infrastructure and quiet rubble

@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using apogean.Content.Tiles;
+using apogean.Common.Backgrounds;
 
 namespace apogean.Content.Diagnostics
 {
@@ -47,7 +48,8 @@ namespace apogean.Content.Diagnostics
 			Main.raining = false;
 
 			Point playerTile = player.Center.ToTileCoordinates();
-			int centerX = Math.Clamp(playerTile.X, Width / 2 + 20, Main.maxTilesX - Width / 2 - 20);
+			Rectangle preserved = ModContent.GetInstance<VegetationVisualLab>().PreservedBounds;
+			int centerX = BackgroundFixturePlacement.Center(playerTile.X, Main.maxTilesX, preserved.Left, preserved.Right);
 			// worldSurface is Terraria's underground transition, not the visible
 			// terrain crest. A fixed offset keeps the fixture unambiguously in the
 			// surface background band even when the current X contains a tall lab.

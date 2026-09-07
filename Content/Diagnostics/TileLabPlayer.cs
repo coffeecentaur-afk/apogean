@@ -128,7 +128,11 @@ namespace apogean.Content.Diagnostics
 				}
 				// Camera-only checks must not invalidate the saved grove checkpoint.
 				// Restore temporary state only before replacing fixture tiles.
-				ModContent.GetInstance<VegetationVisualLab>().ClearFixture();
+				bool backgroundRouting = request.StartsWith("forest-restoration-", System.StringComparison.Ordinal) || request == "jungle-routing";
+				VegetationVisualLab vegetation = ModContent.GetInstance<VegetationVisualLab>();
+				if (backgroundRouting) vegetation.Release();
+				else vegetation.ClearFixture();
+				string groveBefore = backgroundRouting ? vegetation.CheckpointSnapshot() : null;
 				Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
 				ModContent.GetInstance<ForestSprayVisualLab>().Stop();
 				switch (request)
@@ -224,6 +228,12 @@ namespace apogean.Content.Diagnostics
 						throw new System.InvalidOperationException($"Unknown live-validation fixture '{request}'.");
 				}
 
+				if (backgroundRouting)
+				{
+					if (groveBefore != vegetation.CheckpointSnapshot())
+						throw new System.InvalidOperationException("Background fixture changed preserved grove or its checkpoint.");
+					Mod.Logger.Info($"BACKGROUND GROVE GUARD: request={request}; unchanged=True; snapshot={groveBefore}; scope=before-after-only-not-reload-acceptance");
+				}
 				Mod.Logger.Info($"LIVE VALIDATION REQUEST CONSUMED: {request}");
 			}
 			catch (System.Exception exception)

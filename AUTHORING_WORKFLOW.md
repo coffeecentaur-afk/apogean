@@ -34,6 +34,14 @@ key, and edge-color preparation must retain its own change record.
 
 ## Evidence states
 
+Shared disposable worlds still contain independent evidence. A new background
+fixture must preserve existing grove checkpoints, reserve its full destructive
+isolation/framing/spray envelope outside the grove, and compare its snapshot
+before/after setup. Never clear or rewrite a failing expected digest to make an
+unrelated test pass. September7's routing fixture retains the old reload failure
+while proving its own bounded checks; those are separate results. Use
+`Tools/Test-BackgroundFixturePlacement.ps1` and the native grove-guard records.
+
 | State | Meaning |
 | --- | --- |
 | `specified` | Player experience and dependencies are agreed. |

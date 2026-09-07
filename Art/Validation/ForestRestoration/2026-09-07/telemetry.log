@@ -1,0 +1,35 @@
+BACKGROUND GROVE GUARD: request=forest-restoration-wastes; unchanged=True; snapshot=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4:EB1D7019867ACEFC06C4B7EF93BBF9DA30AD2AA92FC95B5B5BDDE2454FDA939E; scope=before-after-only-not-reload-acceptance
+FOREST RESTORATION: living=0; wastes=169; fraction=0.000; evidence=True; living selected=False; output=Apogean Forest Restoration 0 Percent Capture Probe
+TILE LAB CAPTURE PROBE: scene background=-1; capture background=18; detected biome=Forest; render lab=off; zones jungle=False, snow=False, desert=False; scene water=-1; main water=0; capture water=0
+TILE LAB VIEWPORT: width=2560; height=1369; output=Apogean Forest Restoration 0 Percent Capture Probe
+BACKGROUND GROVE GUARD: request=forest-restoration-mixed; unchanged=True; snapshot=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4:EB1D7019867ACEFC06C4B7EF93BBF9DA30AD2AA92FC95B5B5BDDE2454FDA939E; scope=before-after-only-not-reload-acceptance
+FOREST RESTORATION: living=80; wastes=89; fraction=0.473; evidence=True; living selected=False; output=Apogean Forest Restoration 50 Percent Capture Probe
+TILE LAB CAPTURE PROBE: scene background=-1; capture background=18; detected biome=Forest; render lab=off; zones jungle=False, snow=False, desert=False; scene water=-1; main water=0; capture water=0
+TILE LAB VIEWPORT: width=2560; height=1369; output=Apogean Forest Restoration 50 Percent Capture Probe
+BACKGROUND GROVE GUARD: request=forest-restoration-green; unchanged=True; snapshot=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4:EB1D7019867ACEFC06C4B7EF93BBF9DA30AD2AA92FC95B5B5BDDE2454FDA939E; scope=before-after-only-not-reload-acceptance
+FOREST RESTORATION: living=169; wastes=0; fraction=1.000; evidence=True; living selected=True; output=Apogean Forest Restoration 100 Percent Capture Probe
+TILE LAB CAPTURE PROBE: scene background=-1; capture background=10; detected biome=Forest; render lab=off; zones jungle=False, snow=False, desert=False; scene water=-1; main water=0; capture water=0
+TILE LAB VIEWPORT: width=2560; height=1369; output=Apogean Forest Restoration 100 Percent Capture Probe
+BACKGROUND GROVE GUARD: request=forest-restoration-mixed; unchanged=True; snapshot=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4:EB1D7019867ACEFC06C4B7EF93BBF9DA30AD2AA92FC95B5B5BDDE2454FDA939E; scope=before-after-only-not-reload-acceptance
+FOREST RESTORATION: living=80; wastes=89; fraction=0.473; evidence=True; living selected=True; output=Apogean Forest Restoration 50 Percent Capture Probe
+TILE LAB CAPTURE PROBE: scene background=-1; capture background=10; detected biome=Forest; render lab=off; zones jungle=False, snow=False, desert=False; scene water=-1; main water=0; capture water=0
+TILE LAB VIEWPORT: width=2560; height=1369; output=Apogean Forest Restoration 50 Percent Capture Probe
+BACKGROUND GROVE GUARD: request=forest-restoration-wastes; unchanged=True; snapshot=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4:EB1D7019867ACEFC06C4B7EF93BBF9DA30AD2AA92FC95B5B5BDDE2454FDA939E; scope=before-after-only-not-reload-acceptance
+FOREST RESTORATION: living=0; wastes=169; fraction=0.000; evidence=True; living selected=False; output=Apogean Forest Restoration 0 Percent Capture Probe
+TILE LAB CAPTURE PROBE: scene background=-1; capture background=18; detected biome=Forest; render lab=off; zones jungle=False, snow=False, desert=False; scene water=-1; main water=0; capture water=0
+TILE LAB VIEWPORT: width=2560; height=1369; output=Apogean Forest Restoration 0 Percent Capture Probe
+BACKGROUND GROVE GUARD: request=forest-restoration-green; unchanged=True; snapshot=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4:EB1D7019867ACEFC06C4B7EF93BBF9DA30AD2AA92FC95B5B5BDDE2454FDA939E; scope=before-after-only-not-reload-acceptance
+FOREST RESTORATION: living=169; wastes=0; fraction=1.000; evidence=True; living selected=True; output=Apogean Forest Restoration 100 Percent Capture Probe
+TILE LAB CAPTURE PROBE: scene background=-1; capture background=10; detected biome=Forest; render lab=off; zones jungle=False, snow=False, desert=False; scene water=-1; main water=0; capture water=0
+TILE LAB VIEWPORT: width=2560; height=1369; output=Apogean Forest Restoration 100 Percent Capture Probe
+FOREST SPRAY START: bounds={X:3817 Y:545 Width:190 Height:62}; nativeProjectile=PureSpray; forcedBackground=False; duration=1400 ticks
+BACKGROUND GROVE GUARD: request=forest-restoration-spray; unchanged=True; snapshot=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4:EB1D7019867ACEFC06C4B7EF93BBF9DA30AD2AA92FC95B5B5BDDE2454FDA939E; scope=before-after-only-not-reload-acceptance
+FOREST SPRAY RESULT: pass=True; tick=1400; spawned=47; sawWaste=True; sawGreen=True; partialFrames=38; mismatchedFrames=0
+BACKGROUND GROVE GUARD: request=jungle-routing; unchanged=True; snapshot=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4:EB1D7019867ACEFC06C4B7EF93BBF9DA30AD2AA92FC95B5B5BDDE2454FDA939E; scope=before-after-only-not-reload-acceptance
+FOREST RESTORATION: living=0; wastes=0; fraction=1.000; evidence=True; living selected=True; output=Apogean Production Jungle Routing Capture Probe
+TILE LAB CAPTURE PROBE: scene background=-1; capture background=20; detected biome=Jungle; render lab=off; zones jungle=True, snow=False, desert=False; scene water=-1; main water=0; capture water=0
+TILE LAB VIEWPORT: width=2560; height=1369; output=Apogean Production Jungle Routing Capture Probe
+BACKGROUND GROVE GUARD: request=forest-restoration-wastes; unchanged=True; snapshot=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4:EB1D7019867ACEFC06C4B7EF93BBF9DA30AD2AA92FC95B5B5BDDE2454FDA939E; scope=before-after-only-not-reload-acceptance
+FOREST RESTORATION: living=0; wastes=169; fraction=0.000; evidence=True; living selected=False; output=Apogean Forest Restoration 0 Percent Capture Probe
+TILE LAB CAPTURE PROBE: scene background=-1; capture background=18; detected biome=Forest; render lab=off; zones jungle=False, snow=False, desert=False; scene water=-1; main water=0; capture water=0
+TILE LAB VIEWPORT: width=2560; height=1369; output=Apogean Forest Restoration 0 Percent Capture Probe

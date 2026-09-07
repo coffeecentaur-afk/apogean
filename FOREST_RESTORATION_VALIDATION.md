@@ -1,5 +1,13 @@
 # Local forest restoration — implementation and validation
 
+**Current exact-bank retest,2026-09-07:** the accepted Wastes Mid bank passes
+unforced hysteresis, real PureSpray fades, Jungle priority and Wastes return at
+2560×1369. Evidence and limits: `Art/Validation/ForestRestoration/2026-09-07/README.md`.
+QA fixtures now preserve the saved grove and avoid its full isolation envelope;
+the pre-existing grove reload mismatch remains unresolved. No threshold change,
+new reclaimed-ruin art, manual-input or multiplayer proof. Historical evidence below
+is retained for its original package, not silently promoted to the new artwork.
+
 2026-09-04. Source policy, isolated build, and the bounded **live restoration-routing fixture pass**. Full production/visual matrix remains pending. No new concept art was installed.
 
 ## User contract

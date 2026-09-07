@@ -30,8 +30,11 @@ optional512x1408 bank with quiet/open intervals between five landmarks. Clean
 QA build; native combined-set evidence is recorded in
 `Art/Validation/WastesMidDepth-2026-09-06/README.md`. Whole-image rejected
 experiments remain parked; only explicitly selected lower geology is reused.
-Do not restart the building style loop. Complete remaining combined lighting,
-biome/restoration and user-review gates before Wastes mobs. Normal Content PNGs
+Do not restart the building style loop. September7 unforced greenification,
+native spray fades and Jungle priority/return pass with this exact bank; see
+`Art/Validation/ForestRestoration/2026-09-07/README.md`. Visible cave handoff,
+measured performance, remaining scene/viewport/persistence checks and combined
+user review are still open before promotion and Wastes mobs. Normal Content PNGs
 are unchanged; the new bank is QA-only, not ordinary-world promotion. The grove
 saved-state mismatch remains unresolved and must not be bypassed.
 
@@ -59,7 +62,7 @@ foundations and stable quiet-spaced placement. This is not full-background
 approval, flight coverage or ordinary-world promotion. Keep Wastes → starting
 area/drop pod → shallow Maw order; Jungle remains lush/overgrown/abandoned.
 
-**Current handoff:** `HANDOFF_2026-09-06.md` is the next-session entry point.
+**Current handoff:** `HANDOFF_2026-09-07.md` is the next-session entry point.
 Space-handoff implementation now has focused red/green arithmetic and native
 submitted-color proof; see `Art/Validation/WastesSpaceHandoff-2026-09-06/README.md`.
 **Latest user direction (2026-09-06):** retain the first Mid ruin's liked visual

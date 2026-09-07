@@ -11,8 +11,8 @@
       "production": "pending",
       "userReview": "pending",
       "evidenceReference": "FOREST_RESTORATION_VALIDATION.md",
-      "evidenceScope": "Unforced native PureSpray converts real Wastes169/living0 to Wastes0/living169 at 1080p and 1440p. Incoming/outgoing fades each have19 partial samples with0 mismatches or missing draws, following a retained minimized red trace. Jungle priority rechecked after restoration at1440p. Not manual input, multiplayer, full visual matrix or art acceptance.",
-      "blockers": ["Test manual Clentaminator input, multiplayer, flight/teleport/reload and remaining lighting/scene-priority boundaries; current background art remains unapproved.", "Threshold fallback only: continuous ecological art blending and underground restoration routing remain unimplemented."]
+      "evidenceScope": "Historical PureSpray proof at1080p/1440p retained. Exact approved Mid bank rechecked September7 at2560x1369: full unforced hysteresis sequence, native47-projectile PureSpray run with19 incoming/19 outgoing fade samples and0 missing/mismatched draws, Jungle priority then Wastes return. Art/Validation/ForestRestoration/2026-09-07/README.md records35 QA lines and4 exact native crops. Not manual input, multiplayer, full visual matrix or whole-family art acceptance.",
+      "blockers": ["Test manual Clentaminator input, multiplayer, flight/teleport/reload and remaining lighting/scene-priority boundaries; accepted building tops do not approve all depth/routing artwork.", "Threshold fallback only: continuous ecological art blending and underground restoration routing remain unimplemented."]
     },
     {
       "id": "landscape-concepts-2026-09-04",
@@ -254,8 +254,8 @@
       "production": "pending",
       "userReview": "pending",
       "evidenceReference": "Art/Validation/WastesMidDepth-2026-09-06/README.md",
-      "evidenceScope": "Four512x1408 modules preserve225792 upper pixels each; lower-only source/mask/seam/donor audit and exact regeneration pass.176 layout cases plus seven actual CLI defect controls. Clean QA build. Native2560x1369 ground, shallow descent, both phase/diagonal directions, Space holds/flights and night/eclipse/rain pass bounded submitted-geometry/color checks:0.01px draw error,0.96px anchor,2.648 Mid periods per sweep. Ten exact native crops;649 allowlisted records. QA-only; approved upper art is not blanket full-depth acceptance.",
-      "blockers": ["Review the new full-depth joins/spacing; preserve all four accepted building designs. Similar Station/garage lower pipe motifs and sparse lower-edge specks remain disclosed polish targets.", "Recheck exact bank through unforced greenification and Jungle/other biome priorities. Visible cave handoff, other viewport/zoom cases, saved regional profile, multiplayer/gravity and performance remain open.", "Expanded36.74MiB raw bank is not GPU residency proof or an accepted aggregate production budget. Grove checkpoint mismatch remains unresolved/unbypassed. Finish Wastes baseline before mobs; no normal-world promotion."]
+      "evidenceScope": "Four512x1408 modules preserve225792 upper pixels each; exact export/layout controls pass. September6 native2560x1369 ground/descent/phase/diagonal/Space/lighting checks retained:0.01px draw error,0.96px anchor,2.648 Mid periods. September7 same art with clean QA build passes unforced restoration/hysteresis, actual spray fades, Jungle priority and Wastes return;35 records/4 native crops in Art/Validation/ForestRestoration/2026-09-07/README.md.72 QA placement cases and9 native guards preserve the old grove checkpoint, not accept its mismatch. QA-only; no blanket full-depth acceptance.",
+      "blockers": ["Review the new full-depth joins/spacing; preserve all four accepted building designs. Similar Station/garage lower pipe motifs and sparse lower-edge specks remain disclosed polish targets.", "Visible cave handoff, other scene-priority and viewport/zoom cases, saved regional profile, multiplayer/gravity and measured performance remain open. Raised restoration fixture is not natural-ground alignment proof.", "Expanded36.74MiB raw bank is not GPU residency proof or an accepted aggregate production budget. Grove checkpoint mismatch remains unresolved/unbypassed. Finish Wastes baseline before mobs; no normal-world promotion."]
     },
     {
       "id": "wastes-terrain",

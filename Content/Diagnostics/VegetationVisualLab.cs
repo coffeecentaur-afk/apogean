@@ -18,6 +18,9 @@ namespace apogean.Content.Diagnostics
 		private int remaining;
 		private string scenario;
 		private string checkpoint;
+		internal Rectangle PreservedBounds => checkpoint == null ? Rectangle.Empty : bounds;
+		// Compare before/after unrelated QA without accepting a stale expected digest.
+		internal string CheckpointSnapshot() => checkpoint == null ? "none" : checkpoint + ":" + Fingerprint();
 		private int previousMoon;
 		private bool previousDay, previousRain, previousEclipse;
 		private double previousTime, previousRainTime;
