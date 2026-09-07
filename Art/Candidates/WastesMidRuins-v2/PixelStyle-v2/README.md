@@ -1,5 +1,11 @@
 # Gritty depot — material and pixel-grid study
 
+Latest user selection: v1's cleaner BUILDING is preferred over this redraw.
+The grittier treatment is suitable direction for TERRAIN, not a request to make
+all building surfaces equally busy. This is not whole-module acceptance or a
+confirmed Station style match. Do not continue whole-building redraws; the mixed
+component assembly does not yet exist. Historical generation/evidence follows.
+
 Latest user clarification: the accepted gas station feels gritty AND pixel-art.
 V1 overcorrected by making concrete, paint and rock too smooth/clean. Do not
 treat less texture as the target. Preserve dirt, decay and irregular chipped

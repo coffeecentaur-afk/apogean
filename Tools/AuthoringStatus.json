@@ -184,15 +184,16 @@
     },
     {
       "id": "wastes-mid-depot-pixel-style-v1",
-      "status": "rejected",
+      "status": "contracted",
       "static": "pass",
       "build": "pending",
       "liveFixture": "pending",
       "production": "pending",
-      "userReview": "rejected",
+      "userReview": "pending",
+      "componentPreference": "Latest user prefers v1's cleaner building over gritty v2. Relative working choice only; Station style match and complete module review remain unresolved.",
       "evidenceReference": "Art/Candidates/WastesMidRuins-v2/PixelStyle-v1/README.md",
       "evidenceScope": "One built-in depot redraw plus reviewed mask, recorded RGB edge preparation and explicit1/3 registered512x432 upper study beside unchanged Station and previous depot. Full source/export/sample provenance passes, four actual CLI defect controls reject expected reasons, all outputs reproduce exactly. Offline only; no Content PNG, build, native client or world changed.",
-      "blockers": ["User rejected v1 as too clean; Station is gritty and that wear must remain. V2 separately tracks one weathered material edit and fixed-grid experiment.", "Short offline study is not the512x460 native gallery pack or1408px-deep module. New native proof, foundations, spacing and full production gates remain pending."]
+      "blockers": ["Blanket clean-v1 rejection superseded by preference for its building. Rougher v2 terrain is a separate component direction; no combined asset exists. Do not regenerate the whole building or claim a Station style match.", "Short offline study is not the512x460 native gallery pack or1408px-deep module. New native proof, foundations, spacing and full production gates remain pending."]
     },
     {
       "id": "wastes-mid-depot-pixel-style-v2",
@@ -202,9 +203,10 @@
       "liveFixture": "pending",
       "production": "pending",
       "userReview": "pending",
+      "componentPreference": "User does not select v2's building; grittier terrain direction is preferred. No whole-module or grid-variant technical acceptance inferred.",
       "evidenceReference": "Art/Candidates/WastesMidRuins-v2/PixelStyle-v2/README.md",
       "evidenceScope": "One gritty material redraw, reviewed16-component mask,4008 recorded edge RGB donors, exact hard alpha, approximate1/3 fitting and separate2px-grid resampling comparison. Reused version-pinned tools reproduce all v1/v2/grid outputs. Independent audit plus five actual CLI defect reasons pass. No Content/build/game/world changes.",
-      "blockers": ["Weathering is closer but agent review still finds fine texture; fixed-grid experiment needs style and thin-feature review. Neither derivative is accepted or automatically promoted.", "Native-size geometry shifted slightly; deep foundations, live render, placement, lighting/routing and production checks remain pending. Stop at the bounded review, not another generation loop."]
+      "blockers": ["Keep v1 building as the working choice; use rougher treatment only as terrain direction. Style match remains unresolved and no mixed assembly exists. Stop whole-building redraws.", "Native-size geometry shifted slightly; deep foundations, live render, placement, lighting/routing and production checks remain pending. Component preference does not automatically promote either derivative."]
     },
     {
       "id": "wastes-terrain",

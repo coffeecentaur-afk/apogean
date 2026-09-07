@@ -96,6 +96,11 @@ patches, not just whole silhouettes. If a fixed-grid resampling study is useful,
 label it as resampling with possible thin-feature loss, not authored detail or
 proof of a style match (`PixelStyle-v2/README.md`). Stop after the bounded probe.
 
+Evaluate architecture and supporting terrain independently. A user may prefer
+readable, quieter building surfaces and rougher ground in the same module.
+Record that component choice without claiming a complete style match, and do
+not repeatedly retexture both regions to solve a preference about only one.
+
 ### Native scale gate, not another offline approval loop
 
 When a user cannot judge scale from a board, supply a bounded native ground

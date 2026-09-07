@@ -31,10 +31,11 @@ It has offline mask/export/fitting proof only. The earlier native technical
 evidence remains valid for the old sprites, not this candidate. No production
 promotion or extra biome work; then resume foundations and the existing order.
 
-Follow-up: v1 is rejected as too clean. Preserve gritty weathering while matching
-Station's pixel treatment. One v2 depot edit and a separately labelled fixed-grid
-resampling test are ready for offline review. No install/new native proof. Do
-not iterate the other ruins until the material direction is settled.
+Latest follow-up supersedes the blanket v1 rejection: user prefers the cleaner
+v1 BUILDING over gritty v2, while v2's rougher treatment suits the TERRAIN.
+Keep v1 as the working architectural choice; the Station style mismatch remains
+acknowledged. No new redraw or blanket art approval. Component assembly and
+native proof remain separate; do not repeatedly retexture the whole building.
 
 **Latest checkpoint:** three ruin upper studies now have native ground-scale
 captures beside gg and the unchanged Station, after the user could not judge the

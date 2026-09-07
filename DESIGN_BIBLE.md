@@ -309,6 +309,14 @@ pixel patchwork: chipped paint, dirty mortar, soot, rust and broken materials.
 Do not equate more pixel-art with cleaner or emptier surfaces. The v2 depot
 material/grid study is review-only; a fixed grid alone cannot approve style.
 
+**Latest component preference:** between those depot versions, retain v1's
+cleaner building as the working choice. The grittier v2 treatment suits terrain
+better than architecture. Terrain may have denser, rougher texture while building
+surfaces remain easier to read. This is a relative preference, not confirmation
+that either depot matches Station's pixel style. Keep Station unchanged; stop
+whole-building redraws. Any future mixed assembly needs its own seam/native
+review, not automatic approval from its separately preferred components.
+
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial
 horizon: collapsed building shells, broken urban infrastructure and quiet rubble

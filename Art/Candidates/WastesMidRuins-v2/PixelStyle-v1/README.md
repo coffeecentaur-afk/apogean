@@ -1,5 +1,10 @@
 # Motor depot — pixel-language review
 
+Latest user selection after v2: this version's BUILDING is the preferred working
+choice; the rougher v2 treatment fits TERRAIN better. Earlier blanket clean-v1
+rejection is superseded by this component preference. A match to Station's pixel
+style is still unconfirmed. No new assembly, asset edit or installation follows.
+
 The user finds the native-size ruins too realistic compared with the accepted
 gas station. Retain their general architectural size and basic designs; redraw
 their material language. One depot correction is the bounded probe before
