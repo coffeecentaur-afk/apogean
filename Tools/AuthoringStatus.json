@@ -4,27 +4,27 @@
   "families": [
     {
       "id": "wastes-mid-spacing-v3",
-      "status": "contracted",
+      "status": "fixture-pass",
       "static": "pass",
-      "build": "fail",
-      "liveFixture": "pending",
+      "build": "pass",
+      "liveFixture": "pass",
       "production": "pending",
       "userReview": "pending",
       "evidenceReference": "Art/Validation/WastesMidSpacing-2026-09-07/README.md",
-      "evidenceScope": "User requests fewer Mid pieces and larger gaps after accepting foreground response. Spacing-only trial:10,000px period,2,000px landmark intervals,459-638px open gaps,32% lower density. All artwork/size/order/Close motion unchanged.176 layout cases and four negative CLI controls pass; foreground/cap/anchor regressions pass. C# compiled but packaging failed TML003 because running tModLoader holds the mod file. Installed accepted0391BE79 package is hash-unchanged; no new native spacing proof or appearance approval.",
-      "blockers": ["Rebuild/package after the user closes tModLoader or disables the mod; do not interrupt their current playtest. Inspect ground/diagonal and period-edge composition with the sparser bank. New spacing comfort is pending, not the previously approved foreground.", "Existing whole-family native coverage, grove mismatch, viewport/routing/performance and ordinary-world integration gates remain separate. Do not change foreground height to prevent occasional overlap; user treats it as minor polish."]
+      "evidenceScope": "Spacing-only trial:10,000px period,2,000px landmark intervals,459-638px open gaps,32% lower density; all art/size/order/Close motion unchanged.176 layout cases and four negative CLI controls pass. After user closed game, FE1B5E8B package installed with zero warnings/errors. Eight native camera cases pass at2560x1369 with zero modular matrix/depth/count failures;1639 QA records replay through three validators. Nine raw screenshots retained with terrain-obscured limits labelled. User spacing review remains pending; approved foreground retained. Exporter PROJECTION SAMPLE omission fixed with red/green regression, not renderer changes.",
+      "blockers": ["User review of wider spacing remains pending, not the previously approved foreground. Additional viewports, zoom/gravity, real-biome/deep-cave routing, multiplayer and measured performance remain separate from this camera fixture.", "Known grove mismatch and legacy production/integration gates remain open. No ordinary-world promotion or grove rebuild. Do not change foreground height to prevent occasional overlap; user treats it as minor polish."]
     },
     {
       "id": "wastes-stable-height-v2",
-      "status": "rejected",
+      "status": "fixture-pass",
       "static": "pass",
       "build": "pass",
-      "liveFixture": "fail",
+      "liveFixture": "pass",
       "production": "pending",
       "userReview": "accepted",
       "evidenceReference": "Art/Validation/WastesForegroundDepth-2026-09-07/README.md",
-      "evidenceScope": "User now accepts installed foreground movement/composition: that looks so much better i love it. Close .20 horizontal/.06 vertical and15% cap replaces tile-speed Close; Mid25%/Far50% and artwork stay unchanged.1735 depth,3150 height,5799 fixed-section assertions and10 actual-source mutation controls pass, plus4 synthetic trace-validator controls. Same-art package builds cleanly. Agent native matrix remains incomplete after desktop attachment failure; historical coverage rejection remains, not disproved by user comfort acceptance. Sparser Mid follow-up is tracked separately; occasional foreground overlap is minor deferred polish.",
-      "blockers": ["Run new run-flat/run-diagonal camera traces, both ground pans, both diagonals and ascent/descent; obtain actual screenshots. User movement/appearance review is accepted, not a substitute for the missing bounded matrix. Desktop attachment previously failed after bounded retry. Do not claim camera-only traces prove physical running.", "Earlier low-camera Close depth failure remains unresolved until the complete new native matrix passes. Counters now split depth/count/matrix failures. Keep all art unchanged; no fade of exposed edges or final-row stretching. Full viewport/biome/deep-cave/zoom/gravity/multiplayer and production-ground-profile gates remain open. Preserve known grove digest mismatch without rebuilding it."]
+      "evidenceScope": "User accepts foreground movement/composition. Close .20/.06 and15% cap; Mid25%/Far50% and artwork unchanged.1735 depth,3150 height,5799 fixed-section assertions and10 source mutations pass. Subsequent FE1B5E8B spacing build passes all eight planned native cases at2560x1369: two running-camera traces, both ground pans/diagonals and ascent/descent. Zero modular matrix/depth/count failures;15 stable Close sections per pan. Earlier low-camera and diagonal failures do not reproduce in this bounded matrix. Evidence in WastesMidSpacing-2026-09-07, historical failures retained. Simulated camera response is not physical-running proof.",
+      "blockers": ["Keep approved art and response unchanged; wider Mid spacing has its own pending user review. No height fade, exposed-edge masking or last-row stretching. Occasional tall Close overlap is minor deferred polish.", "Full viewport/biome/deep-cave/zoom/gravity/multiplayer, measured performance and production-ground-profile gates remain open. Preserve known grove digest mismatch without rebuilding it. Native matrix pass does not promote the optional bank to ordinary worlds."]
     },
     {
       "id": "wastes-reclamation-backgrounds",

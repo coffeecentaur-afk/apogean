@@ -4,7 +4,9 @@
 accepts this installed foreground response/composition and regards occasional
 overlap as minor. Preserve the accepted depth and artwork. The requested sparser
 Mid follow-up is tracked separately in `../WastesMidSpacing-2026-09-07/README.md`.
-This user report is not a replacement for the still-unrun native matrix below.
+The subsequent spacing package now passes the full eight-case native camera
+matrix at2560x1369; see that follow-up README and actual telemetry. Historical
+attachment failure below is retained, not the current native outcome.
 
 The user clarified the apparent following/jumping is the combined diagonal
 response and perceived closeness, not necessarily an unstable world anchor.
@@ -30,8 +32,9 @@ Caps still let higher flight leave every surface layer behind.
 Feedback command: `pwsh -NoProfile -File Tools/Test-WastesForegroundDepth.ps1`.
 It exercises the real modular Close projection with a 16px running rise and
 checks for .96px scenery motion, with ceiling, relief and revisit checks.
-Exact user comfort approval is pending. Retain the existing coverage failures
-until their full fixtures actually pass.
+User movement/composition approval is now accepted. Coverage failures were
+retained until the subsequent full eight-case matrix passed; no broader
+production gate or untested viewport is implied.
 
 ## Checked and installed
 
@@ -59,7 +62,7 @@ until their full fixtures actually pass.
 - Pre-install package/player/world/config backup:
   `C:/Users/max_h/AppData/Local/Temp/ApogeanForegroundDepth-89aff07003bb4f2b9a0fd809794bf260`.
 
-## Native status — not validated
+## Initial native attempt — historical attachment failure
 
 The existing QA game consumed `qa-save-and-quit`; native main menu was observed
 before exiting. Build was installed, then tModLoader restarted through Steam;

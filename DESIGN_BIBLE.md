@@ -47,7 +47,9 @@ gaps. Preserve the accepted foreground; occasional tall-bank overlap is minor
 deferred polish. The spacing-only trial changes the five-landmark period from
 6,800 to10,000px, keeping original art/size/order and parallax. No new world is
 needed. See `Art/Validation/WastesMidSpacing-2026-09-07/README.md`; wider-spacing
-native review is separate from the approved foreground response.
+native review is separate from the approved foreground response. This candidate
+now builds cleanly and passes the bounded eight-case camera matrix at2560x1369;
+new spacing appearance approval and ordinary-world promotion remain separate.
 
 Wastes camera clarification (September7): foreground sections have stable
 world/terrain anchors, never a shared ground height resampled under the moving

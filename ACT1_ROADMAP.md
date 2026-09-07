@@ -26,9 +26,10 @@
 **User acceptance:** farther-back foreground movement/composition is liked;
 preserve it. Only requested follow-up is sparser Mid placement with larger gaps.
 Occasional foreground overlap is minor deferred polish, not a new redesign.
-Spacing-only10,000px sequence has passing static checks; package installation
-is blocked by the running game's file lock. No new live spacing proof.
-See `Art/Validation/WastesMidSpacing-2026-09-07/README.md` before the next reload.
+Spacing-only10,000px sequence has passing static checks and is now installed
+after the user closed the game, with zero build warnings/errors. Native camera
+results and remaining gates are recorded in
+`Art/Validation/WastesMidSpacing-2026-09-07/README.md`.
 
 **Latest user clarification:** foreground feels too close/reactive during
 diagonal running; use a deeper Close plane, not temporal smoothing. Trial .20
