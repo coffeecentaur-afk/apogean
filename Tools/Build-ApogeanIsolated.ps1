@@ -4,6 +4,7 @@ param(
 	[string]$WastesCutoutCandidateDirectory = '',
 	[string]$WastesCityCandidateDirectory = '',
 	[string]$WastesScaleCandidateDirectory = '',
+	[string]$WastesDepotAssemblyDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -109,6 +110,19 @@ try {
 			Copy-Item -LiteralPath (Join-Path $candidateRoot "$name-Upper.png") -Destination $destination
 		}
 		Write-Host 'QA ground-scale gallery included; no ordinary Mid module replacement.'
+	}
+	if ($WastesDepotAssemblyDirectory) {
+		if (-not $WastesScaleCandidateDirectory) { throw 'Depot assembly requires the existing scale gallery.' }
+		$candidateRoot = (Resolve-Path -LiteralPath $WastesDepotAssemblyDirectory).Path
+		$allowedRoot = (Join-Path $sourceRoot 'Art/Candidates') + [IO.Path]::DirectorySeparatorChar
+		if (-not $candidateRoot.StartsWith($allowedRoot, [StringComparison]::OrdinalIgnoreCase)) {
+			throw 'Depot assembly must come from this project Art/Candidates directory.'
+		}
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-WastesDepotAssembly.ps1') -CandidateDirectory $candidateRoot
+		if ($LASTEXITCODE -ne 0) { throw 'Depot assembly audit failed.' }
+		$asset = Join-Path $candidateRoot 'MotorDepot-Upper.png'
+		Copy-Item -LiteralPath $asset -Destination (Join-Path $mirrorRoot 'Content/Backgrounds/Candidates/WastesScaleGallery/MotorDepot-Upper.png')
+		Write-Host "QA depot assembly override: SHA256=$((Get-FileHash -LiteralPath $asset).Hash); ground-only; mirror only."
 	}
 	Push-Location $mirrorRoot
 	try {

@@ -314,8 +314,9 @@ cleaner building as the working choice. The grittier v2 treatment suits terrain
 better than architecture. Terrain may have denser, rougher texture while building
 surfaces remain easier to read. This is a relative preference, not confirmation
 that either depot matches Station's pixel style. Keep Station unchanged; stop
-whole-building redraws. Any future mixed assembly needs its own seam/native
-review, not automatic approval from its separately preferred components.
+whole-building redraws. `ComponentAssembly-v1` now combines unchanged v1 upper
+pixels with v2's rougher ground at the footing. This remains a short ground-scale
+review candidate, not automatic art approval or a full-height Mid module.
 
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial

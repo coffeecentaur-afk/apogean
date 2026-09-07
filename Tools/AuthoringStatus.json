@@ -193,7 +193,7 @@
       "componentPreference": "Latest user prefers v1's cleaner building over gritty v2. Relative working choice only; Station style match and complete module review remain unresolved.",
       "evidenceReference": "Art/Candidates/WastesMidRuins-v2/PixelStyle-v1/README.md",
       "evidenceScope": "One built-in depot redraw plus reviewed mask, recorded RGB edge preparation and explicit1/3 registered512x432 upper study beside unchanged Station and previous depot. Full source/export/sample provenance passes, four actual CLI defect controls reject expected reasons, all outputs reproduce exactly. Offline only; no Content PNG, build, native client or world changed.",
-      "blockers": ["Blanket clean-v1 rejection superseded by preference for its building. Rougher v2 terrain is a separate component direction; no combined asset exists. Do not regenerate the whole building or claim a Station style match.", "Short offline study is not the512x460 native gallery pack or1408px-deep module. New native proof, foundations, spacing and full production gates remain pending."]
+      "blockers": ["Preferred building is now preserved in the separately tracked wastes-mid-depot-component-assembly-v1; this original remains unchanged. Do not regenerate it or claim a Station style match.", "Short original study is not a1408px-deep module. The assembly has its own native evidence; foundations, spacing and full production gates remain pending."]
     },
     {
       "id": "wastes-mid-depot-pixel-style-v2",
@@ -206,7 +206,19 @@
       "componentPreference": "User does not select v2's building; grittier terrain direction is preferred. No whole-module or grid-variant technical acceptance inferred.",
       "evidenceReference": "Art/Candidates/WastesMidRuins-v2/PixelStyle-v2/README.md",
       "evidenceScope": "One gritty material redraw, reviewed16-component mask,4008 recorded edge RGB donors, exact hard alpha, approximate1/3 fitting and separate2px-grid resampling comparison. Reused version-pinned tools reproduce all v1/v2/grid outputs. Independent audit plus five actual CLI defect reasons pass. No Content/build/game/world changes.",
-      "blockers": ["Keep v1 building as the working choice; use rougher treatment only as terrain direction. Style match remains unresolved and no mixed assembly exists. Stop whole-building redraws.", "Native-size geometry shifted slightly; deep foundations, live render, placement, lighting/routing and production checks remain pending. Component preference does not automatically promote either derivative."]
+      "blockers": ["V1 building plus this grid study's ground is now separately tracked as wastes-mid-depot-component-assembly-v1. This redraw's building remains unselected; style match unresolved. Stop whole-building redraws.", "Native-size geometry shifted slightly; deep foundations, placement, lighting/routing and production checks remain pending. Component preference does not automatically promote this original derivative."]
+    },
+    {
+      "id": "wastes-mid-depot-component-assembly-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/WastesDepotAssembly-2026-09-06/README.md",
+      "evidenceScope": "Exact v1 building plus v2 grid terrain, stepped footing join,432 authored rows plus28 explicitly empty QA padding. All235520 pixels/source selector audited; three actual CLI defects rejected; full reproduction. Build0warnings/errors. Fresh named-SP native gallery beside unchanged Station/real player; depot29942 draw samples0failures; shell/checkpoint regression and normal-return pass; four live CLI defects rejected. No repository Content or game C# change.",
+      "blockers": ["Combined art and Station-style review pending. Quieter building/rougher ground is a component preference, not full approval. Stop whole-building regeneration.", "Ground-only candidate: author deep foundations, quiet seeded placement and flight/lighting/biome/restoration proof before production. Existing grove checkpoint mismatch remains unresolved and unbypassed."]
     },
     {
       "id": "wastes-terrain",

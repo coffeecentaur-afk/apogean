@@ -100,6 +100,10 @@ Evaluate architecture and supporting terrain independently. A user may prefer
 readable, quieter building surfaces and rougher ground in the same module.
 Record that component choice without claiming a complete style match, and do
 not repeatedly retexture both regions to solve a preference about only one.
+For deterministic component assembly, pin both inputs, record a reviewed source
+selector, preserve their pixels, and check the footing separately from alpha.
+An upper-only crop may use explicitly empty padding in a ground gallery, never
+as a claim of authored deep coverage. Example: `ComponentAssembly-v1/README.md`.
 
 ### Native scale gate, not another offline approval loop
 
