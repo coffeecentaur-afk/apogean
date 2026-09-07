@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -26,11 +27,14 @@ namespace apogean.Content.Diagnostics
 		private int moduleChecks, moduleFailures, moduleFrameChecks;
 		private float modulePixelError;
 		private int landChecks, landFailures, spaceChecks, groundPresenceChecks, partialFarChecks;
+		private readonly Dictionary<int, float> closeAnchors = new();
+		private int anchorChecks, anchorFailures, heightChecks, heightFailures, cappedChecks, exitedChecks;
 		private float flightGroundCenter, flightSpaceCenter;
 		private bool SpaceFlight => scenario is "space-ascent" or "space-descent";
 		private RuinedBackgroundBiome? previousLab;
 		private bool Diagonal => scenario is "diagonal-left" or "diagonal-right";
-		private bool Panning => scenario is "pan-left" or "pan-right" || Diagonal;
+		private bool GroundPan => scenario is "ground-pan-left" or "ground-pan-right";
+		private bool Panning => scenario is "pan-left" or "pan-right" || GroundPan || Diagonal;
 		private bool PhaseSweep => scenario is "phase-left" or "phase-right";
 		private bool Sweeping => Panning || PhaseSweep;
 		private const int PanDuration = 1800;
@@ -49,7 +53,7 @@ namespace apogean.Content.Diagnostics
 			if (Main.netMode != NetmodeID.SinglePlayer || Main.ActiveWorldFileData?.Name != "Apogee Native Visual V3")
 				throw new InvalidOperationException("Landscape camera checks require Apogee Native Visual V3 single-player.");
 			if (requested == "release") { Release(); return; }
-			if (requested is not ("ground" or "jump" or "wings" or "sky" or "left" or "right" or "sunset" or "night" or "rain" or "eclipse" or "pan-left" or "pan-right" or "phase-left" or "phase-right" or "diagonal-left" or "diagonal-right" or "mid-altitude" or "high-altitude" or "below-ground" or "underground" or "space-fade" or "space-edge" or "space-ascent" or "space-descent" or "scale-shell" or "scale-depot" or "scale-checkpoint"))
+			if (requested is not ("ground" or "jump" or "wings" or "sky" or "left" or "right" or "sunset" or "night" or "rain" or "eclipse" or "pan-left" or "pan-right" or "ground-pan-left" or "ground-pan-right" or "phase-left" or "phase-right" or "diagonal-left" or "diagonal-right" or "mid-altitude" or "high-altitude" or "below-ground" or "underground" or "space-fade" or "space-edge" or "space-ascent" or "space-descent" or "scale-shell" or "scale-depot" or "scale-checkpoint"))
 				throw new ArgumentOutOfRangeException(nameof(requested));
 			if (requested.StartsWith("scale-", StringComparison.Ordinal) && !WastesRuinScaleGallery.Available)
 				throw new InvalidOperationException("Scale study assets require an isolated QA build; no fallback art will be shown.");
@@ -69,6 +73,8 @@ namespace apogean.Content.Diagnostics
 			lockChecks = 0; lockError = 0;
 			moduleChecks = moduleFailures = moduleFrameChecks = 0; modulePixelError = 0;
 			landChecks = landFailures = spaceChecks = groundPresenceChecks = partialFarChecks = 0;
+			closeAnchors.Clear();
+			anchorChecks = anchorFailures = heightChecks = heightFailures = cappedChecks = exitedChecks = 0;
 			worstLeft = worstRight = 0;
 			minimumBottom = float.PositiveInfinity;
 			drawnMin = float.PositiveInfinity; drawnMax = float.NegativeInfinity;
@@ -78,7 +84,7 @@ namespace apogean.Content.Diagnostics
 				? regionalY : (float)((Main.worldSurface - 50) * 16);
 			// Reduce terrain occlusion, without carving the world. Some mountains
 			// still obscure this route; a phase sweep isolates the texture joins.
-			float lift = Panning ? 2400 : requested == "jump" ? 96 : requested == "wings" ? 1200 : 0;
+			float lift = GroundPan ? 0 : Panning ? 2400 : requested == "jump" ? 96 : requested == "wings" ? 1200 : 0;
 			float ascent = groundY - (float)(Main.worldSurface * 16 * .35);
 			if (requested == "mid-altitude") lift = ascent / 3;
 			if (requested == "high-altitude") lift = ascent * .8f;
@@ -103,7 +109,7 @@ namespace apogean.Content.Diagnostics
 			if (Sweeping)
 			{
 				float left = 1600, right = Main.maxTilesX * 16f - Main.screenWidth - 1600;
-				bool rightward = requested is "pan-right" or "phase-right" or "diagonal-right";
+				bool rightward = requested is "pan-right" or "ground-pan-right" or "phase-right" or "diagonal-right";
 				panStart = rightward ? left : right;
 				panEnd = rightward ? right : left;
 				sampledX = panStart;
@@ -143,11 +149,11 @@ namespace apogean.Content.Diagnostics
 			landChecks++;
 			bool inSpace = (int)(Player.Center.Y / 16f) <= Main.worldSurface * (double).35f;
 			bool cameraSpace = (int)(cameraCenter / 16f) <= Main.worldSurface * (double).35f;
-			bool failed = factor < 0 || factor > 1;
+			bool failed = factor != 1 || Math.Abs(alpha - 255 * MathHelper.Clamp(styleOpacity, 0, 1)) > 2;
 			if (inSpace || cameraSpace)
 			{
 				spaceChecks++;
-				failed |= alpha != 0 || factor != 0;
+				// Space classification no longer forces a transparency cut.
 			}
 			float ground = (float)((Main.worldSurface - 50) * 16);
 			if (cameraCenter >= ground && Player.Center.Y >= ground && styleOpacity >= .99f)
@@ -158,7 +164,37 @@ namespace apogean.Content.Diagnostics
 			if (layer == 0 && factor > .05f && factor < .95f && alpha > 0 && styleOpacity >= .99f) partialFarChecks++;
 			if (failed) landFailures++;
 			if (landChecks <= 3 || (SpaceFlight && layer == 0 && panTick % 60 == 0) || (failed && landFailures == 1))
-				Mod.Logger.Info($"WASTES LAND SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; cameraCenter={cameraCenter:F2}; playerCenter={Player.Center.Y:F2}; space={inSpace}; cameraSpace={cameraSpace}; factor={factor:F5}; submittedAlpha={alpha}; styleOpacity={styleOpacity:F3}; failed={failed}");
+				Mod.Logger.Info($"WASTES HEIGHT ALPHA SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; cameraCenter={cameraCenter:F2}; playerCenter={Player.Center.Y:F2}; space={inSpace}; cameraSpace={cameraSpace}; factor={factor:F5}; submittedAlpha={alpha}; styleOpacity={styleOpacity:F3}; failed={failed}");
+		}
+
+		internal void ObserveCloseAnchor(int cell, float ground)
+		{
+			if (remaining <= 0) return;
+			bool failed = closeAnchors.TryGetValue(cell, out float previous) && Math.Abs(previous - ground) > .01f;
+			if (failed) anchorFailures++;
+			closeAnchors[cell] = ground;
+			if (anchorChecks++ < 3 || (failed && anchorFailures == 1))
+				Mod.Logger.Info($"WASTES CLOSE ANCHOR SAMPLE: case={scenario}; cell={cell}; ground={ground:F3}; failed={failed}");
+		}
+
+		internal void ObserveHeightProjection(int layer, float cameraY, float top, int width, int height, float zoom)
+		{
+			if (remaining <= 0) return;
+			float center = cameraY + height * .5f;
+			float ground = (float)((Main.worldSurface - 50) * 16);
+			float boundary = (float)((Math.Floor(Main.worldSurface * (double).35f) + 1) * 16);
+			float cap = ground - Math.Max(1, ground - boundary) * (layer == 1 ? 1f / 3f : .7f);
+			float sample = Math.Max(center, cap);
+			float expected = height * (.57f + layer * .025f) - 740
+				+ (ground - sample - height * .05f) * (layer == 1 ? .03f : .012f)
+				+ (sample - center) * zoom + (layer == 1 ? 220 : 0);
+			bool failed = !float.IsFinite(top) || Math.Abs(expected - top) > .02f;
+			heightChecks++;
+			if (failed) heightFailures++;
+			if (center < cap) cappedChecks++;
+			if (top >= height) exitedChecks++;
+			if (heightChecks <= 2 || (SpaceFlight && panTick % 60 == 0) || (failed && heightFailures == 1))
+				Mod.Logger.Info($"WASTES HEIGHT POSITION SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; cameraCenter={center:F3}; cap={cap:F3}; top={top:F3}; expected={expected:F3}; zoom={zoom:F3}; exited={top >= height}; failed={failed}");
 		}
 
 		// Permanent QA probe: project the *submitted* geometry through the engine's
@@ -171,7 +207,7 @@ namespace apogean.Content.Diagnostics
 			projectionChecks++;
 			worstLeft = Math.Max(worstLeft, left);
 			worstRight = Math.Max(worstRight, width - right);
-			// Far owns coverage when altitude has faded Mid out. All surface layers
+			// Far owns coverage while Mid has left view. All surface layers
 			// use native-size opaque lower strata until the engine depth handoff.
 			if (layer == 0) minimumBottom = Math.Min(minimumBottom, Math.Max(a.Y, b.Y) - height);
 			bool failed = left > 1 || right < width - 1 || (layer == 0 && Math.Max(a.Y, b.Y) < height - 1);
@@ -203,7 +239,7 @@ namespace apogean.Content.Diagnostics
 			if (error > 1.1f || WastesModularLayout.BottomExposed(expected.Y, depth, height)) moduleFailures++;
 		}
 
-		internal void ObserveModularFrame(int layer, float worldX, float top, int submitted, int width, int height)
+		internal void ObserveModularFrame(int layer, float worldX, float top, int submitted, int width, int height, float cameraY, float zoom)
 		{
 			if (remaining <= 0) return;
 			// Independent absolute-cell enumeration detects a dropped trailing cell.
@@ -212,8 +248,16 @@ namespace apogean.Content.Diagnostics
 			int period = bank ? 6800 : layer == 1 ? 2655 : 2268, depth = layer == 1 ? 1408 : 1915;
 			double origin = worldX * WastesParallaxContract.Horizontal(layer) - (layer == 2 ? 620 : 0);
 			int expected = 0;
-			if (top < height && top + depth > 0)
+			if (layer == 2 || (top < height && top + depth > 0))
 				for (int cell = (int)Math.Floor(origin / period) - 1; cell <= (int)Math.Floor((origin + width) / period) + 1; cell++)
+				{
+					if (layer == 2)
+					{
+						float anchorX = (float)((cell * 2268d + 724 + 620) / WastesParallaxContract.Horizontal(2));
+						float ground = WastesGroundProfileSystem.TryGroundAt(anchorX, out float sampled) ? sampled : (float)((Main.worldSurface - 50) * 16);
+						float cellTop = (ground - 48 - cameraY - height * .5f) * zoom + height * .5f - 330;
+						if (cellTop >= height || cellTop + depth <= 0) continue;
+					}
 					for (int group = 0; group < (bank ? 10 : layer == 1 ? 3 : 1); group++)
 					{
 						int offset = bank ? (group / 2 * 1360 + (group % 2 == 1 ? 760 : 0)) : layer == 1 ? WastesModularLayout.MidOffset(group) : 0;
@@ -221,6 +265,7 @@ namespace apogean.Content.Diagnostics
 						int span = bank ? (group % 2 == 1 ? 391 : group == 0 ? 576 : 512) : layer == 1 ? WastesModularLayout.MidWidth(group) : 1448;
 						if (x < width && x + span > 0) expected++;
 					}
+				}
 			moduleFrameChecks++;
 			if (expected != submitted) moduleFailures++;
 			if (moduleFrameChecks <= 2)
@@ -232,7 +277,9 @@ namespace apogean.Content.Diagnostics
 			if (remaining <= 0) return;
 			if (ScaleGalleryIndex > 0)
 				Mod.Logger.Info($"WASTES SCALE RESULT: case={scenario}; samples={galleryChecks}; failures={galleryFailures}; artApproval=False; flightCoverage=False");
-			Mod.Logger.Info($"WASTES LAND RESULT: case={scenario}; viewport={Main.screenWidth}x{Main.screenHeight}; checks={landChecks}; spaceChecks={spaceChecks}; groundChecks={groundPresenceChecks}; partialFarChecks={partialFarChecks}; failures={landFailures}; artApproval=False");
+			Mod.Logger.Info($"WASTES HEIGHT ALPHA RESULT: case={scenario}; viewport={Main.screenWidth}x{Main.screenHeight}; checks={landChecks}; spaceChecks={spaceChecks}; groundChecks={groundPresenceChecks}; partialFarChecks={partialFarChecks}; failures={landFailures}; artApproval=False");
+			Mod.Logger.Info($"WASTES HEIGHT POSITION RESULT: case={scenario}; viewport={Main.screenWidth}x{Main.screenHeight}; checks={heightChecks}; capped={cappedChecks}; exited={exitedChecks}; failures={heightFailures}; artApproval=False");
+			Mod.Logger.Info($"WASTES CLOSE ANCHOR RESULT: case={scenario}; checks={anchorChecks}; sections={closeAnchors.Count}; failures={anchorFailures}; artApproval=False");
 			Mod.Logger.Info($"WASTES MODULAR RESULT: case={scenario}; matrixChecks={moduleChecks}; frameChecks={moduleFrameChecks}; failures={moduleFailures}; maxPixelError={modulePixelError:F2}; artApproval=False");
 			Mod.Logger.Info($"WASTES V1 PROJECTION: case={scenario}; checks={projectionChecks}; failures={projectionFailures}; maxLeftGap={worstLeft:F2}; maxRightGap={worstRight:F2}; minFarBottomMargin={minimumBottom:F2}; artApproval=False");
 			Mod.Logger.Info($"WASTES V1 GROUND LOCK: case={scenario}; checks={lockChecks}; maxError={lockError:F2}; pass={lockChecks > 0 && lockError <= 1.1f}; artApproval=False");

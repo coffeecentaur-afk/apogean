@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "wastes-stable-height-v2",
+      "status": "rejected",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "fail",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/WastesHeightLock-2026-09-07/README.md",
+      "evidenceScope": "3000 height assertions,5804 fixed-section assertions and six CLI mutations pass; same-art QA package builds cleanly. Native2560x1369: both horizontal sweeps retain21 fixed-height sections with zero anchor/height failures; ascent/descent pass opaque positional exit/return. Full fixture FAILS modular coverage:15053 right and10342 left failures, with demonstrated finite Close depth shortage at lower viewpoints. Four negative trace controls rejected.1472 allowlisted records and two native captures retained. QA saved; no ordinary-world promotion or user art rejection implied.",
+      "blockers": ["Isolate visible low-camera depth fixture and count/depth causes; extend lower coverage or define a valid cave handoff without moving the anchors, fading exposed edges or stretching final rows. Preserve accepted building artwork. Complete four-case native gate must pass; flight-only pass is not promotion.", "Initial1/3 Mid and70% Far caps remain composition tuning pending user review. Full viewport/biome/deep-cave/zoom/gravity/multiplayer and production-ground-profile contracts remain open; retain known grove digest mismatch without rebuilding it."]
+    },
+    {
       "id": "wastes-reclamation-backgrounds",
       "status": "specified",
       "static": "pending",

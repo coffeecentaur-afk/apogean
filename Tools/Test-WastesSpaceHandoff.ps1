@@ -1,4 +1,6 @@
 param([string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot))
+# HISTORICAL opacity policy, superseded 2026-09-07 by Test-WastesHeightLock.ps1.
+# Replay only against the old source revision; not an active current-code gate.
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 Add-Type -Path (Join-Path $ProjectRoot 'Common/Backgrounds/WastesCameraProjection.cs')

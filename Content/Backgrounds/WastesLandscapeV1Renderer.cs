@@ -119,8 +119,9 @@ namespace apogean.Content.Backgrounds
 				float horizontal = WastesParallaxContract.Horizontal(i);
 				Texture2D texture = layers[i].Value;
 				float top = WastesCameraProjection.Top(Main.worldSurface, worldCameraY, height, texture.Height, i, Main.GameViewMatrix.Zoom.Y);
-				// Close leaves the camera by world movement, never by a below-ground
-				// fade. Mid yields gradually to Far after the first third of ascent.
+				cameraLab.ObserveHeightProjection(i, worldCameraY, top, width, height, Main.GameViewMatrix.Zoom.Y);
+				// Distant layers remain solid and leave view by capped world motion.
+				// The diagnostic still observes offscreen bounds; skip GPU draws only.
 				float phase = (float)(sampledX * horizontal % texture.Width);
 				if (phase < 0) phase += texture.Width;
 				Vector2 first = Vector2.Zero, end = Vector2.Zero;
@@ -129,7 +130,8 @@ namespace apogean.Content.Backgrounds
 					Vector2 position = new(
 						WastesCameraProjection.LogicalCoordinate((int)Math.Floor(x), Main.BackgroundViewMatrix.Zoom.X),
 						WastesCameraProjection.LogicalCoordinate((int)Math.Floor(top), Main.BackgroundViewMatrix.Zoom.Y));
-					batch.Draw(texture, position, null, layerTint, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+					if (top < height && top + texture.Height > 0)
+						batch.Draw(texture, position, null, layerTint, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
 					float coveredBottom = (float)Math.Floor(top) + texture.Height;
 					// City candidate owns its full native-depth coverage. Do not reflect
 					// the skyline or silently substitute the old strata guard below it.
@@ -147,21 +149,26 @@ namespace apogean.Content.Backgrounds
 		private static void DrawModular(SpriteBatch batch, int layer, float sampledX, float cameraY,
 			int width, int height, Vector2 scale, Color tint, WastesLandscapeCameraLab lab)
 		{
-			// Use physical world X, not the diagnostic repeat-phase override. Every
-			// vertical view over this region receives the same saved terrain datum.
-			float centerX = Main.screenPosition.X - Main.BackgroundViewMatrix.Translation.X + width * .5f;
-			bool hasRegionalGround = WastesGroundProfileSystem.TryGroundAt(centerX, out float ground);
-			float top = WastesModularLayout.Top(Main.worldSurface, cameraY, height, layer, Main.GameViewMatrix.Zoom.Y,
-				hasRegionalGround ? ground : null);
+			float zoom = Main.GameViewMatrix.Zoom.Y;
+			float midTop = WastesModularLayout.Top(Main.worldSurface, cameraY, height, layer, zoom);
+			if (layer == 1) lab.ObserveHeightProjection(layer, cameraY, midTop, width, height, zoom);
 			bool newMid = layer == 1 && HasRuinBank;
 			int period = layer == 1 ? MidRepeatWidth : WastesModularLayout.ClosePeriod;
-			float phase = newMid ? WastesRuinLayout.Phase(sampledX) : WastesModularLayout.Phase(sampledX, layer);
+			double scroll = sampledX * (double)WastesParallaxContract.Horizontal(layer)
+				- (layer == 2 ? WastesModularLayout.ClosePhaseOffset : 0);
 			int depth = layer == 1 ? WastesModularLayout.MidHeight : WastesModularLayout.CloseHeight;
 			int submitted = 0;
 			// The previous period can contribute a trailing group at the left edge.
 			// Gaps are real negative space; no opaque fill or reflected strata here.
-			for (float start = -phase - period; start < width; start += period)
+			for (int cell = (int)Math.Floor(scroll / period) - 1; cell * (double)period - scroll < width; cell++)
 			{
+				float start = (float)(cell * (double)period - scroll);
+				float? regionalGround = layer == 2 ? SavedGroundAt(WastesModularLayout.CloseAnchorX(cell)) : null;
+				float top = layer == 2
+					? WastesModularLayout.CloseTop(Main.worldSurface, cameraY, height, zoom, cell, SavedGroundAt)
+					: midTop;
+				if (layer == 2)
+					lab.ObserveCloseAnchor(cell, regionalGround ?? (float)((Main.worldSurface - 50) * 16));
 				int count = newMid ? WastesRuinLayout.Count : layer == 1 ? 3 : 1;
 				for (int group = 0; group < count; group++)
 				{
@@ -173,14 +180,17 @@ namespace apogean.Content.Backgrounds
 					batch.Draw(texture, position, null, tint, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
 					lab.ObserveModularProjection(layer, position, pixel, texture.Height,
 						Main.CurrentFrameFlags.Hacks.CurrentBackgroundMatrixForCreditsRoll, width, height);
+					if (layer == 2)
+						lab.ObserveGroundLock(top + WastesModularLayout.CloseSoilRow - WastesCameraProjection.CloseSoilRow,
+							cameraY, height, regionalGround);
 					submitted++;
 				}
 			}
-			lab.ObserveModularFrame(layer, sampledX, top, submitted, width, height);
-			if (layer == 2)
-				lab.ObserveGroundLock(top + WastesModularLayout.CloseSoilRow - WastesCameraProjection.CloseSoilRow,
-					cameraY, height, hasRegionalGround ? ground : null);
+			lab.ObserveModularFrame(layer, sampledX, midTop, submitted, width, height, cameraY, zoom);
 		}
+
+		private static float? SavedGroundAt(float worldX) =>
+			WastesGroundProfileSystem.TryGroundAt(worldX, out float ground) ? ground : null;
 
 		// Bounded QA continuation of existing opaque rock/soil, never a stretched
 		// last row or additional GPU asset. Alternating vertical reflection makes

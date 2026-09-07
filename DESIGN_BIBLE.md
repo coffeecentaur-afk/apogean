@@ -2,6 +2,15 @@
 
 This document is the binding creative and progression reference for the mod.  A feature that conflicts with it needs an explicit design decision before it is added.
 
+## Reusable engine/tooling authorization
+
+September7: the user permits a separate reusable engine or tooling mod when
+needed, with a downloadable dependency for consumers. Do not infer that every
+feature needs a new mod or require players to install development-only tools.
+Keep Apogean's content identity separate from shared infrastructure; document
+API/version/install/save/multiplayer boundaries and validate the integration.
+The workflow records the extraction gate. No library is created by this decision.
+
 ## Pillars
 
 1. **Terraria remains Terraria.** The mod expands the adventure rather than replacing its familiar exploration, building, classes, and boss progression.
@@ -22,6 +31,15 @@ This document is the binding creative and progression reference for the mod.  A 
 All sprite work uses hard opaque pixel clusters, limited palettes, readable native-scale silhouettes, and no soft anti-aliasing. The generated reference sheet is retained under `Art/Reference/` as inspiration only; it is not a game asset.
 
 ### Authoring evidence gate
+
+Wastes camera clarification (September7): foreground sections have stable
+world/terrain anchors, never a shared ground height resampled under the moving
+camera. Midground and distant scenery use maximum-height positional locks and
+leave view through camera motion, not altitude opacity. Current QA tuning locks
+Mid at1/3 and Far at70% of the ascent reference; biome transitions and global
+reclamation blending stay independent. Details and evidence live in
+`Art/Validation/WastesHeightLock-2026-09-07/README.md`. This overrides earlier
+altitude-fade staging, not the accepted art or Close→Mid→Far recovery order.
 
 Every visual or gameplay family advances through `specified` → `contracted` → `fixture-pass` → `integrated` → `polished`; a failed live render or explicit rejection moves it to `rejected`. A clean build, correct PNG dimensions, or passing static validator cannot by itself advance visual status. Promotion requires the family contract, one deterministic in-game fixture, production-path evidence, and the review recorded in `Tools/AuthoringStatus.json`. Work proceeds one dependency family at a time unless a later feature is explicitly labeled as a disposable prototype.
 

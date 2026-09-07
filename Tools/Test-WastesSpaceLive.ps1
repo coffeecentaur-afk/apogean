@@ -1,4 +1,5 @@
 param([Parameter(Mandatory)][string]$LogPath,[Parameter(Mandatory)][string]$Viewport)
+# HISTORICAL log replay only. Current motion contract uses Test-WastesHeightLive.ps1.
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $lines = Get-Content -LiteralPath $LogPath

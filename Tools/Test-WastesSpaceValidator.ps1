@@ -1,4 +1,6 @@
 param([string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot))
+# HISTORICAL mutation suite for the retired opacity policy. Current gate:
+# Test-WastesHeightMutations.ps1. This script requires its historical source.
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $sourcePath = Join-Path $ProjectRoot 'Common/Backgrounds/WastesCameraProjection.cs'

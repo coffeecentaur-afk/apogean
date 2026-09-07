@@ -29,9 +29,30 @@ namespace apogean.Common.Backgrounds
 				float ground = (float)((surfaceTiles - 50) * 16);
 				return (ground - GroundOffset - cameraY - height * .5f) * gameZoom + height * .5f - CloseSoilRow;
 			}
-			float delta = (float)((surfaceTiles - 50) * 16 - cameraY) - height * .55f;
+			// Preserve the approved slow parallax below the ceiling. Above it,
+			// evaluate that same composition at the ceiling and project its fixed
+			// world position with the remaining camera displacement. Never latch
+			// a first-visited frame: descent/teleport/reload must give the same Y.
+			float center = cameraY + height * .5f;
+			float cappedCenter = Math.Max(center, LockCameraCenterY(surfaceTiles, layer));
+			float cappedCamera = cappedCenter - height * .5f;
+			float delta = (float)((surfaceTiles - 50) * 16 - cappedCamera) - height * .55f;
 			float top = height * (.57f + layer * .025f) - 740 + delta * Vertical(layer);
-			return top;
+			return top + (cappedCenter - center) * gameZoom;
+		}
+
+		// World-height staging, not an opacity envelope. Mid locks first; Far
+		// keeps its slow parallax longer. These initial tuning points retain the
+		// previous staging order without dissolving scenery at those heights.
+		public static float LockCameraCenterY(double surfaceTiles, int layer)
+		{
+			float fraction = layer switch
+			{
+				0 => .7f, 1 => 1f / 3f,
+				_ => throw new ArgumentOutOfRangeException(nameof(layer))
+			};
+			float ground = (float)((surfaceTiles - 50) * 16);
+			return ground - Math.Max(1, ground - SpaceBoundaryY(surfaceTiles)) * fraction;
 		}
 
 		// Normalized ascent from the fixed ground datum toward the upper-sky
@@ -45,8 +66,8 @@ namespace apogean.Common.Backgrounds
 
 		public static float MiddleOpacity(float altitude)
 		{
-			float t = Math.Clamp((altitude - 1f / 3f) / (.7f - 1f / 3f), 0, 1);
-			return 1 - t * t * (3 - 2 * t);
+			// Retained for existing diagnostic callers; height no longer fades Mid.
+			return 1f;
 		}
 
 		// First continuous pixel boundary above which the installed 1.4.4 integer
@@ -54,20 +75,13 @@ namespace apogean.Common.Backgrounds
 		public static float SpaceBoundaryY(double surfaceTiles) =>
 			(float)((Math.Floor(surfaceTiles * (double).35f) + 1) * 16);
 
-		// A presentation envelope, not a biome mutation. Reaches zero for either
-		// the camera or player entering Space; camera offsets cannot retain a city
-		// around a Space-classified player. No state, zoom, or below-ground cutoff.
+		// Deliberately independent of player/camera altitude. The capped geometry
+		// leaves the viewport instead. Biome/style and future reclamation fades
+		// remain separate factors; entering Space must not force alpha to zero.
 		public static float LandOpacity(double surfaceTiles, float cameraCenterY, float playerCenterY, int layer)
 		{
 			if (layer < 0 || layer > 2) throw new ArgumentOutOfRangeException(nameof(layer));
-			float ground = (float)((surfaceTiles - 50) * 16);
-			float center = Math.Min(cameraCenterY, playerCenterY);
-			float ascent = Math.Clamp((ground - center) / Math.Max(1, ground - SpaceBoundaryY(surfaceTiles)), 0, 1);
-			float t = Math.Clamp((ascent - .7f) / .3f, 0, 1);
-			float land = 1 - t * t * (3 - 2 * t);
-			// Preserve existing camera-based Mid staging. Close normally exits by
-			// world-ground motion first; this envelope is also its Space safety net.
-			return layer == 1 ? land * MiddleOpacity(Altitude(surfaceTiles, cameraCenterY)) : land;
+			return 1f;
 		}
 
 		public const int LowerStrataHeight = 512;

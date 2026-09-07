@@ -12,6 +12,14 @@ namespace apogean.Common.Backgrounds
 		public const int CloseHeight = 1915;
 		public const int CloseWidth = 1448;
 		public const int CloseSoilRow = 330;
+		public const int ClosePhaseOffset = 620;
+		// An absolute parallax cell keeps its own sampled terrain height. Sampling
+		// at the moving camera center makes every visible bank rise/fall together.
+		public static float CloseAnchorX(int cell) =>
+			(float)(((double)cell * ClosePeriod + CloseWidth * .5 + ClosePhaseOffset) / WastesParallaxContract.Horizontal(2));
+		public static float CloseTop(double surface, float cameraY, int height, float zoom,
+			int cell, Func<float, float?> groundAt) =>
+			Top(surface, cameraY, height, 2, zoom, groundAt(CloseAnchorX(cell)));
 		public static int MidOffset(int group) => group switch
 		{
 			0 => 0, 1 => 936, 2 => 1687,
@@ -25,7 +33,7 @@ namespace apogean.Common.Backgrounds
 		public static float Phase(double worldX, int layer)
 		{
 			int period = layer == 1 ? MidPeriod : ClosePeriod;
-			double phase = (worldX * WastesParallaxContract.Horizontal(layer) - (layer == 2 ? 620 : 0)) % period;
+			double phase = (worldX * WastesParallaxContract.Horizontal(layer) - (layer == 2 ? ClosePhaseOffset : 0)) % period;
 			return (float)(phase < 0 ? phase + period : phase);
 		}
 		public static float Top(double surface, float cameraY, int height, int layer, float zoom, float? regionalGround = null)

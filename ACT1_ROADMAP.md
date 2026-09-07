@@ -23,6 +23,14 @@
 
 ## Current environmental gate
 
+**Immediate motion correction:** stable per-section Close anchors and capped
+Mid/Far height replace moving-camera ground sampling and altitude opacity.
+See `Art/Validation/WastesHeightLock-2026-09-07/README.md`: native pan anchors and
+ascent/descent pass at2560x1369, but the full fixture remains rejected on shallow
+Close coverage at lower viewpoints. Resolve that depth/cave handoff and rerun
+the full sweep before reclamation or other families. Existing artwork is unchanged.
+Historical opacity proof is not proof of this new user-requested camera policy.
+
 **Latest restoration clarification:** the user wants the same ruined Wastes
 landscape progressively overgrown according to world-wide recovery, not the
 native-Forest swap shown in the test. `WASTES_RECLAMATION_DIRECTION.md` separates

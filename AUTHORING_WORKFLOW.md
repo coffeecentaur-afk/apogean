@@ -32,6 +32,29 @@ output. The Background gate now runs the actual exporter CLI controls and city
 candidate pixel checks. A source-specific mask proposal is not a universal color
 key, and edge-color preparation must retain its own change record.
 
+Camera regression rule: give parallax sections absolute identities and stable
+world anchors; a saved terrain snapshot alone is insufficient if the renderer
+samples it at the moving camera. Track the same section through level pans,
+repeat boundaries and return trips. Test positional height locks separately from
+opacity, and keep depth/coverage failures red even when anchor tests pass.
+`Test-WastesFixedSections.ps1`, `Test-WastesHeightLock.ps1` and their mutation
+controls retain this correction; the native trace includes section identities,
+submitted alpha and independent screen positions. A below-ground whole-world
+pan may be terrain-occluded, so telemetry is not a visual acceptance screenshot.
+
+## Reusable tooling and dependency mods
+
+Standing user authorization (September7): a separate tModLoader mod may be
+created for reusable engine/tooling capabilities, and Apogean may depend on it
+when that solves a concrete need. A second mod is an available option, not a
+requirement for every bug. Build-only atlas tools and agent skills should remain
+development tools unless players genuinely need their runtime functionality.
+For extraction, record ownership, a small public API, compatible tModLoader and
+library versions, install/update instructions, save/network boundaries, and tests
+with both the library alone and Apogean installed. Existing art, destructive
+operation and publication approval gates still apply; this is not an instruction
+to publish a new dependency now. Current Wastes camera fixes stay in Apogean.
+
 ## Evidence states
 
 Shared disposable worlds still contain independent evidence. A new background

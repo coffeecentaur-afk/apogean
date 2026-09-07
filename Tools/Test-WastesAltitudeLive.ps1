@@ -1,4 +1,5 @@
 param([Parameter(Mandatory)][string]$LogPath,[Parameter(Mandatory)][string]$Viewport)
+# Historical opacity-log replay only; current geometry uses Test-WastesHeightLive.ps1.
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 if($Viewport -notmatch '^\d+x(\d+)$'){throw 'Invalid viewport'}
