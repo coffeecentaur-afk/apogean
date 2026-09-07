@@ -1,0 +1,13 @@
+# Gritty depot correction — exact prompt
+
+Built-in image generation, one style-transfer edit. Station is the style reference;
+PixelStyle-v1's transparent depot is the target. The clean v1 rendering is rejected.
+Do not install this original directly. See README.md for actual output properties.
+
+Use case: style-transfer. One targeted MATERIAL REDRAW, not new architecture.
+Input 1: accepted gas station, STYLE REFERENCE ONLY, do not redraw or include it.
+Input 2: motor depot, EDIT TARGET. It was rejected because its smooth, clean concrete and neat beveled rocks look too pristine and too much like a 3D render.
+Make the depot feel as dirty, worn and visibly pixel-authored as the gas station. Preserve dense weathering; do NOT interpret "pixel art" as clean, minimal or smooth. The station's rust-red paint is broken into irregular hard-edged gray and brown pixel patches; its walls have soot, exposed brickwork, missing plaster and uneven blocky mottling. Bring that weathered patchwork onto the depot. Dirty gray-umber walls instead of broad beige slabs, ragged faded red paint with many missing rectangular chips, soot collecting over garage openings, old rust tracking below bolts, cracked mortar and exposed masonry, grimy battered shutter slats. Draw those details as deliberate square/stepped pixel clusters, never photographic speckle, a noise overlay or smooth smudges.
+Preserve the useful dirt/detail DENSITY of the station. Use a consistent coarse pixel grid: at the target1317x1194 canvas, prominent color clusters are roughly6–12 source pixels wide, corresponding to2–4 final game pixels at one-third size. Flat colored pixel patches with stepped highlights/shadows, no subpixel smoothing, no antialiasing, no glossy bevels or airbrushed light, no uniform thick cartoon outline. The cliff must be dirty, chipped and crumbly with exposed gravel and jagged stratified earth, not a stack of pristine rounded stone pillars. Broken roof and debris remain damaged.
+Keep the same canvas1317x1194, composition, viewpoint, building width/height, ground row about904, upper-left light, vent, two garage bays, bent shutter, broken right roof, service door, pipes, cliff and existing props. Do not add floors, signs, text, characters or new buildings. Do not brighten or clean the facade; leave dark grime at edges and irregular worn highlights. Do not enlarge the building or move the ground. Keep large empty space above it.
+Output only the edited depot with genuine transparent alpha around it and in the exposed roof openings. No white rim, painted checkerboard, background, captions or framing. This is a gritty low-resolution pixel-art game asset, not a photorealistic ruin given a pixel filter.

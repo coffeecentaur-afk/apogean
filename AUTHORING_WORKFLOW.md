@@ -89,6 +89,13 @@ dimensions and any fitting separately; do not describe changed geometry as a
 lossless repair. One revised object is the approval boundary before batch work.
 Example: `Art/Candidates/WastesMidRuins-v2/PixelStyle-v1/README.md`.
 
+Follow-up correction: weathering density and pixel grain are separate decisions.
+An accepted gritty reference must stay gritty; do not flatten its worn materials
+into pristine slabs when reducing photographic noise. Compare native material
+patches, not just whole silhouettes. If a fixed-grid resampling study is useful,
+label it as resampling with possible thin-feature loss, not authored detail or
+proof of a style match (`PixelStyle-v2/README.md`). Stop after the bounded probe.
+
 ### Native scale gate, not another offline approval loop
 
 When a user cannot judge scale from a board, supply a bounded native ground

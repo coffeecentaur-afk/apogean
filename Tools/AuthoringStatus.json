@@ -184,15 +184,27 @@
     },
     {
       "id": "wastes-mid-depot-pixel-style-v1",
+      "status": "rejected",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "rejected",
+      "evidenceReference": "Art/Candidates/WastesMidRuins-v2/PixelStyle-v1/README.md",
+      "evidenceScope": "One built-in depot redraw plus reviewed mask, recorded RGB edge preparation and explicit1/3 registered512x432 upper study beside unchanged Station and previous depot. Full source/export/sample provenance passes, four actual CLI defect controls reject expected reasons, all outputs reproduce exactly. Offline only; no Content PNG, build, native client or world changed.",
+      "blockers": ["User rejected v1 as too clean; Station is gritty and that wear must remain. V2 separately tracks one weathered material edit and fixed-grid experiment.", "Short offline study is not the512x460 native gallery pack or1408px-deep module. New native proof, foundations, spacing and full production gates remain pending."]
+    },
+    {
+      "id": "wastes-mid-depot-pixel-style-v2",
       "status": "contracted",
       "static": "pass",
       "build": "pending",
       "liveFixture": "pending",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "Art/Candidates/WastesMidRuins-v2/PixelStyle-v1/README.md",
-      "evidenceScope": "One built-in depot redraw plus reviewed mask, recorded RGB edge preparation and explicit1/3 registered512x432 upper study beside unchanged Station and previous depot. Full source/export/sample provenance passes, four actual CLI defect controls reject expected reasons, all outputs reproduce exactly. Offline only; no Content PNG, build, native client or world changed.",
-      "blockers": ["User must judge the revised pixel language before revising the other two ruins. General size is retained approximately, not exact invariant preservation.", "Short offline study is not the512x460 native gallery pack or1408px-deep module. New native proof, foundations, spacing and full production gates remain pending."]
+      "evidenceReference": "Art/Candidates/WastesMidRuins-v2/PixelStyle-v2/README.md",
+      "evidenceScope": "One gritty material redraw, reviewed16-component mask,4008 recorded edge RGB donors, exact hard alpha, approximate1/3 fitting and separate2px-grid resampling comparison. Reused version-pinned tools reproduce all v1/v2/grid outputs. Independent audit plus five actual CLI defect reasons pass. No Content/build/game/world changes.",
+      "blockers": ["Weathering is closer but agent review still finds fine texture; fixed-grid experiment needs style and thin-feature review. Neither derivative is accepted or automatically promoted.", "Native-size geometry shifted slightly; deep foundations, live render, placement, lighting/routing and production checks remain pending. Stop at the bounded review, not another generation loop."]
     },
     {
       "id": "wastes-terrain",

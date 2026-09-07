@@ -1,0 +1,155 @@
+{
+  "sourceSHA256": "C47B826925B5AF405CF51BDEFA315991F10D07B87ECBE6234086ECCA0E10C10B",
+  "width": 1316,
+  "height": 1195,
+  "status": "UNREVIEWED proposal",
+  "criterion": "this source only: min RGB \u003E=225 and chroma \u003C=12; no erosion; separate recorded RGB edge donors",
+  "selected": [],
+  "edgeColorChanges": 0,
+  "regions": [
+    {
+      "id": 1,
+      "area": 832672,
+      "minX": 0,
+      "minY": 0,
+      "maxX": 1315,
+      "maxY": 1194,
+      "border": true
+    },
+    {
+      "id": 2,
+      "area": 37,
+      "minX": 269,
+      "minY": 437,
+      "maxX": 272,
+      "maxY": 454,
+      "border": false
+    },
+    {
+      "id": 3,
+      "area": 10,
+      "minX": 1015,
+      "minY": 464,
+      "maxX": 1017,
+      "maxY": 467,
+      "border": false
+    },
+    {
+      "id": 4,
+      "area": 11,
+      "minX": 592,
+      "minY": 465,
+      "maxX": 595,
+      "maxY": 468,
+      "border": false
+    },
+    {
+      "id": 5,
+      "area": 2,
+      "minX": 602,
+      "minY": 467,
+      "maxX": 603,
+      "maxY": 467,
+      "border": false
+    },
+    {
+      "id": 6,
+      "area": 1,
+      "minX": 550,
+      "minY": 470,
+      "maxX": 550,
+      "maxY": 470,
+      "border": false
+    },
+    {
+      "id": 7,
+      "area": 3,
+      "minX": 548,
+      "minY": 472,
+      "maxX": 550,
+      "maxY": 472,
+      "border": false
+    },
+    {
+      "id": 8,
+      "area": 216,
+      "minX": 877,
+      "minY": 490,
+      "maxX": 901,
+      "maxY": 510,
+      "border": false
+    },
+    {
+      "id": 9,
+      "area": 150,
+      "minX": 856,
+      "minY": 498,
+      "maxX": 874,
+      "maxY": 514,
+      "border": false
+    },
+    {
+      "id": 10,
+      "area": 136,
+      "minX": 935,
+      "minY": 505,
+      "maxX": 959,
+      "maxY": 515,
+      "border": false
+    },
+    {
+      "id": 11,
+      "area": 122,
+      "minX": 815,
+      "minY": 517,
+      "maxX": 832,
+      "maxY": 526,
+      "border": false
+    },
+    {
+      "id": 12,
+      "area": 232,
+      "minX": 910,
+      "minY": 550,
+      "maxX": 935,
+      "maxY": 566,
+      "border": false
+    },
+    {
+      "id": 13,
+      "area": 1055,
+      "minX": 937,
+      "minY": 550,
+      "maxX": 981,
+      "maxY": 577,
+      "border": false
+    },
+    {
+      "id": 14,
+      "area": 230,
+      "minX": 902,
+      "minY": 573,
+      "maxX": 922,
+      "maxY": 593,
+      "border": false
+    },
+    {
+      "id": 15,
+      "area": 753,
+      "minX": 923,
+      "minY": 584,
+      "maxX": 963,
+      "maxY": 609,
+      "border": false
+    },
+    {
+      "id": 16,
+      "area": 7,
+      "minX": 1156,
+      "minY": 752,
+      "maxX": 1156,
+      "maxY": 758,
+      "border": false
+    }
+  ]
+}

@@ -303,6 +303,12 @@ first, review it, then transfer the accepted language to shell/checkpoint. Keep
 Station unchanged. `Art/Candidates/WastesMidRuins-v2/PixelStyle-v1/` is the
 offline probe, not a new native render or complete deep module.
 
+**Clarification after v1 review:** gritty is desirable. V1's smooth beige slabs
+and neat rock faces lost the ruined-world character. Match Station's weathered
+pixel patchwork: chipped paint, dirty mortar, soot, rust and broken materials.
+Do not equate more pixel-art with cleaner or emptier surfaces. The v2 depot
+material/grid study is review-only; a fixed grid alone cannot approve style.
+
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial
 horizon: collapsed building shells, broken urban infrastructure and quiet rubble
