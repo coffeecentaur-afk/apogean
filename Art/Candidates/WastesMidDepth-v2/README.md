@@ -53,6 +53,12 @@ loader selects the optional bank only in the existing QA/render-lab path.
 
 ## Stable composition
 
+September7 follow-up supersedes only this original distribution: user requests
+fewer Mid pieces and wider gaps after approving foreground depth. The new
+10,000px-period spacing trial preserves all artwork and is tracked at
+`Art/Validation/WastesMidSpacing-2026-09-07/README.md`. The6,800px record below
+remains historical evidence, not the current trial's placement contract.
+
 The6800px Mid period alternates highway, Station, garage, shell and checkpoint
 with five quiet hills, plus true open intervals (minimum184px between bounding
 boxes). Camera movement never rerolls the arrangement. The long existing Close

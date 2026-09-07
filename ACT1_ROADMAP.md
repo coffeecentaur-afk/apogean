@@ -23,6 +23,13 @@
 
 ## Current environmental gate
 
+**User acceptance:** farther-back foreground movement/composition is liked;
+preserve it. Only requested follow-up is sparser Mid placement with larger gaps.
+Occasional foreground overlap is minor deferred polish, not a new redesign.
+Spacing-only10,000px sequence has passing static checks; package installation
+is blocked by the running game's file lock. No new live spacing proof.
+See `Art/Validation/WastesMidSpacing-2026-09-07/README.md` before the next reload.
+
 **Latest user clarification:** foreground feels too close/reactive during
 diagonal running; use a deeper Close plane, not temporal smoothing. Trial .20
 horizontal/.06 vertical with15% flight cap; Mid/Far and all art unchanged.

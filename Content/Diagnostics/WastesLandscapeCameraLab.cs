@@ -290,7 +290,7 @@ namespace apogean.Content.Diagnostics
 			// Independent absolute-cell enumeration detects a dropped trailing cell.
 			// An intentional valley at either screen edge is NOT a coverage failure.
 			bool bank = layer == 1 && WastesLandscapeV1Renderer.HasRuinBank;
-			int period = bank ? 6800 : layer == 1 ? 2655 : 2268, depth = layer == 1 ? 1408 : 1915;
+			int period = bank ? 10000 : layer == 1 ? 2655 : 2268, depth = layer == 1 ? 1408 : 1915;
 			double origin = worldX * WastesParallaxContract.Horizontal(layer) - (layer == 2 ? 620 : 0);
 			int expected = 0;
 			if (layer == 2 || (top < height && top + depth > 0))
@@ -305,7 +305,7 @@ namespace apogean.Content.Diagnostics
 					}
 					for (int group = 0; group < (bank ? 10 : layer == 1 ? 3 : 1); group++)
 					{
-						int offset = bank ? (group / 2 * 1360 + (group % 2 == 1 ? 760 : 0)) : layer == 1 ? WastesModularLayout.MidOffset(group) : 0;
+						int offset = bank ? (group / 2 * 2000 + (group % 2 == 1 ? 1150 : 0)) : layer == 1 ? WastesModularLayout.MidOffset(group) : 0;
 						double x = cell * period - origin + offset;
 						int span = bank ? (group % 2 == 1 ? 391 : group == 0 ? 576 : 512) : layer == 1 ? WastesModularLayout.MidWidth(group) : 1448;
 						if (x < width && x + span > 0) expected++;

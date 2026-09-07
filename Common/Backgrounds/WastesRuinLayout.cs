@@ -6,12 +6,14 @@ namespace apogean.Common.Backgrounds
     // two open intervals. No per-frame randomness, mirroring, or joined Mid fill.
     public static class WastesRuinLayout
     {
-        public const int Period = 6800;
+        // Wider intervals, not smaller art:32% fewer landmarks than the
+        // original6,800px sequence. Preserve independent Mid/Close parallax.
+        public const int Period = 10000;
         public const int Count = 10;
         public static int Offset(int group)
         {
             if (group < 0 || group >= Count) throw new ArgumentOutOfRangeException(nameof(group));
-            return group / 2 * 1360 + (group % 2 == 0 ? 0 : 760);
+            return group / 2 * 2000 + (group % 2 == 0 ? 0 : 1150);
         }
         // Array: Highway, Quiet, Station, MotorDepot, BrokenShell, Checkpoint.
         public static int Asset(int group)

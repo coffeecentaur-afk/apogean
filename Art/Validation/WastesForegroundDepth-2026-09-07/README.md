@@ -1,5 +1,11 @@
 # Foreground depth trial — September 7
 
+**Subsequent user review:** "that looks so much better i love it." The user
+accepts this installed foreground response/composition and regards occasional
+overlap as minor. Preserve the accepted depth and artwork. The requested sparser
+Mid follow-up is tracked separately in `../WastesMidSpacing-2026-09-07/README.md`.
+This user report is not a replacement for the still-unrun native matrix below.
+
 The user clarified the apparent following/jumping is the combined diagonal
 response and perceived closeness, not necessarily an unstable world anchor.
 They want Close pushed back toward Mid, while still a little nearer. This
