@@ -338,7 +338,13 @@ accepted checkpoint/broken-shell style. They stopped combined depth work on
 that mismatch. Freeze the selected Station and garage; revise only those other
 tops, compare all four at intended scale, and obtain style review before any
 installation. `Art/Candidates/WastesRuinUpperStyle-v1/README.md` records the
-pending corrected pair. A failed depth experiment is retained separately,
+corrected pair, now selected by the user's “looks good to me.” All four upper
+designs are fixed. `WastesMidDepth-v2` assembles their exact architecture through
+study soil row340 into512x1408 QA modules (100px downward translation); only lower
+footing/geology changes. Sparse stable placement alternates five landmarks with
+quiet hills and genuine gaps. Native test evidence remains separate from style
+acceptance; do not reopen approved building design or promote normal worlds from
+static masks/build success. A failed whole-image depth experiment is retained separately,
 not approved: generated lower extensions changed upper art and framing, while
 the reuse probe exposed joins. Short masked studies are not full-depth modules.
 

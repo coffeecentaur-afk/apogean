@@ -23,17 +23,17 @@
 
 ## Current environmental gate
 
-**Current:** user interrupted combined depth work because the checkpoint and
-broken-building tops do not match the approved Station/garage. Keep the accepted
-pair unchanged. One corrected upper candidate each is ready for user review in
-`Art/Candidates/WastesRuinUpperStyle-v1/README.md`; masks/provenance pass, but
-there is no new installation/build/native proof. Rejected lower-extension work
-is parked in `Art/Candidates/WastesMidBank-v1/README.md`. After style approval:
-preserve all four uppers, complete compatible depth/quiet placement, test the
-combined set through flight/lighting/biome/restoration, then Wastes mobs. Do not
-restart the accepted pair's style loop. Earlier Station ground proof remains in
-`Art/Validation/WastesStationBridge-2026-09-06/README.md`; it never approved the
-other two tops or full-depth assets. Normal Content is unchanged.
+**Current:** user selected the corrected checkpoint and broken-shell tops with
+“looks good to me.” All four buildings are now fixed. `WastesMidDepth-v2`
+preserves their exact architecture, adds audited lower terrain, and tests an
+optional512x1408 bank with quiet/open intervals between five landmarks. Clean
+QA build; native combined-set evidence is recorded in
+`Art/Validation/WastesMidDepth-2026-09-06/README.md`. Whole-image rejected
+experiments remain parked; only explicitly selected lower geology is reused.
+Do not restart the building style loop. Complete remaining combined lighting,
+biome/restoration and user-review gates before Wastes mobs. Normal Content PNGs
+are unchanged; the new bank is QA-only, not ordinary-world promotion. The grove
+saved-state mismatch remains unresolved and must not be bypassed.
 
 **Earlier user review:** overall native ruin scale is not the requested change;
 their fine realistic texture is. Station remains the approved pixel-art anchor.

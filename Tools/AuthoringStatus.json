@@ -237,13 +237,25 @@
       "id": "wastes-ruin-upper-style-v1",
       "status": "contracted",
       "static": "pass",
-      "build": "pending",
-      "liveFixture": "pending",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "accepted",
+      "evidenceReference": "Art/Candidates/WastesRuinUpperStyle-v1/README.md",
+      "evidenceScope": "User accepted the corrected two-top style board. Original review pass was offline only. The unchanged architecture now appears in the separately audited WastesMidDepth-v2 bank with clean build and bounded native sequence evidence in Art/Validation/WastesMidDepth-2026-09-06/README.md. This does not approve every cliff footing or full-world routing.",
+      "blockers": ["User said looks good to me, accepting this two-top style comparison. Preserve the approved building designs. Footing/depth/routing acceptance remains separate.", "Depth continuation is tracked in WastesMidDepth-v2; old MidBank-v1 whole assets remain rejected. Combined flight/lighting/real-biome/restoration proof still precedes Wastes mobs. Existing QA grove persistence mismatch remains unresolved/unbypassed."]
+    },
+    {
+      "id": "wastes-mid-depth-v2",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "Art/Candidates/WastesRuinUpperStyle-v1/README.md",
-      "evidenceScope": "Two upper-only image edits with approved Station/garage hash-pinned unchanged. Reviewed masks and recorded bounded RGB donors; independent full-pixel export/provenance and512x460 fit audit passes. Three actual CLI defects rejected. Four-way light/dark offline comparison; no new build/install/native/world operation.",
-      "blockers": ["User style review required for checkpoint and ruined-building tops. Do not infer acceptance from static proof or earlier native ground views. Checkpoint footing gray rim remains unfinished terrain.", "Rejected combined-depth work is parked in WastesMidBank-v1. After top approval, author compatible depth and quiet placement, then combined flight/lighting/real-biome/restoration proof before Wastes mobs. Existing QA grove persistence mismatch remains unresolved/unbypassed."]
+      "evidenceReference": "Art/Validation/WastesMidDepth-2026-09-06/README.md",
+      "evidenceScope": "Four512x1408 modules preserve225792 upper pixels each; lower-only source/mask/seam/donor audit and exact regeneration pass.176 layout cases plus seven actual CLI defect controls. Clean QA build. Native2560x1369 ground, shallow descent, both phase/diagonal directions, Space holds/flights and night/eclipse/rain pass bounded submitted-geometry/color checks:0.01px draw error,0.96px anchor,2.648 Mid periods per sweep. Ten exact native crops;649 allowlisted records. QA-only; approved upper art is not blanket full-depth acceptance.",
+      "blockers": ["Review the new full-depth joins/spacing; preserve all four accepted building designs. Similar Station/garage lower pipe motifs and sparse lower-edge specks remain disclosed polish targets.", "Recheck exact bank through unforced greenification and Jungle/other biome priorities. Visible cave handoff, other viewport/zoom cases, saved regional profile, multiplayer/gravity and performance remain open.", "Expanded36.74MiB raw bank is not GPU residency proof or an accepted aggregate production budget. Grove checkpoint mismatch remains unresolved/unbypassed. Finish Wastes baseline before mobs; no normal-world promotion."]
     },
     {
       "id": "wastes-terrain",

@@ -6,6 +6,7 @@ param(
 	[string]$WastesScaleCandidateDirectory = '',
 	[string]$WastesDepotAssemblyDirectory = '',
 	[string]$WastesStationBridgeDirectory = '',
+	[string]$WastesMidDepthDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -139,6 +140,25 @@ try {
 		# Never substitute it for WastesModules/Station's 1408px-deep texture.
 		Copy-Item -LiteralPath $asset -Destination (Join-Path $mirrorRoot 'Content/Backgrounds/Candidates/WastesScaleGallery/Station-Upper.png')
 		Write-Host "QA approved Station bridge override: SHA256=$((Get-FileHash -LiteralPath $asset).Hash); ground-only; mirror only."
+	}
+	if ($WastesMidDepthDirectory) {
+		$candidateRoot = (Resolve-Path -LiteralPath $WastesMidDepthDirectory).Path
+		$allowedRoot = (Join-Path $sourceRoot 'Art/Candidates') + [IO.Path]::DirectorySeparatorChar
+		if (-not $candidateRoot.StartsWith($allowedRoot, [StringComparison]::OrdinalIgnoreCase)) { throw 'Ruin bank must be in Art/Candidates.' }
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-WastesMidDepthAssembly.ps1') -CandidateDirectory $candidateRoot
+		if ($LASTEXITCODE -ne 0) { throw 'Ruin bank audit failed.' }
+		$destination = Join-Path $mirrorRoot 'Content/Backgrounds/Candidates/WastesRuinBank'
+		New-Item -ItemType Directory -Path $destination -Force | Out-Null
+		foreach ($name in @('Station','MotorDepot','BrokenShell','Checkpoint')) {
+			Copy-Item -LiteralPath (Join-Path $candidateRoot "$name.png") -Destination $destination
+		}
+		# Preserve approved upper studies in the separate ground-scale fixture too.
+		if ($WastesScaleCandidateDirectory) {
+			foreach ($name in @('BrokenShell','Checkpoint')) {
+				Copy-Item -LiteralPath (Join-Path $sourceRoot "Art/Candidates/WastesRuinUpperStyle-v1/Study/$name-Upper.png") -Destination (Join-Path $mirrorRoot 'Content/Backgrounds/Candidates/WastesScaleGallery')
+			}
+		}
+		Write-Host 'QA full-depth bank included; named disposable Wastes path only, no production art promotion.'
 	}
 	Push-Location $mirrorRoot
 	try {

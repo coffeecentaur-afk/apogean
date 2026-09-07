@@ -208,21 +208,23 @@ namespace apogean.Content.Diagnostics
 			if (remaining <= 0) return;
 			// Independent absolute-cell enumeration detects a dropped trailing cell.
 			// An intentional valley at either screen edge is NOT a coverage failure.
-			int period = layer == 1 ? 2655 : 2268, depth = layer == 1 ? 1408 : 1915;
+			bool bank = layer == 1 && WastesLandscapeV1Renderer.HasRuinBank;
+			int period = bank ? 6800 : layer == 1 ? 2655 : 2268, depth = layer == 1 ? 1408 : 1915;
 			double origin = worldX * WastesParallaxContract.Horizontal(layer) - (layer == 2 ? 620 : 0);
 			int expected = 0;
 			if (top < height && top + depth > 0)
 				for (int cell = (int)Math.Floor(origin / period) - 1; cell <= (int)Math.Floor((origin + width) / period) + 1; cell++)
-					for (int group = 0; group < (layer == 1 ? 3 : 1); group++)
+					for (int group = 0; group < (bank ? 10 : layer == 1 ? 3 : 1); group++)
 					{
-						double x = cell * period - origin + (layer == 1 ? WastesModularLayout.MidOffset(group) : 0);
-						int span = layer == 1 ? WastesModularLayout.MidWidth(group) : 1448;
+						int offset = bank ? (group / 2 * 1360 + (group % 2 == 1 ? 760 : 0)) : layer == 1 ? WastesModularLayout.MidOffset(group) : 0;
+						double x = cell * period - origin + offset;
+						int span = bank ? (group % 2 == 1 ? 391 : group == 0 ? 576 : 512) : layer == 1 ? WastesModularLayout.MidWidth(group) : 1448;
 						if (x < width && x + span > 0) expected++;
 					}
 			moduleFrameChecks++;
 			if (expected != submitted) moduleFailures++;
 			if (moduleFrameChecks <= 2)
-				Mod.Logger.Info($"WASTES MODULAR SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; top={top:F2}; submitted={submitted}; expected={expected}; rgbaMiB={WastesLandscapeV1Renderer.RawTextureMiB:F2}; farWidth={WastesLandscapeV1Renderer.FarRepeatWidth}; scope=QA; artApproval=False");
+				Mod.Logger.Info($"WASTES MODULAR SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; top={top:F2}; submitted={submitted}; expected={expected}; rgbaMiB={WastesLandscapeV1Renderer.RawTextureMiB:F2}; farWidth={WastesLandscapeV1Renderer.FarRepeatWidth}; ruinBank={bank}; period={period}; scope=QA; artApproval=False");
 		}
 
 		internal void Release()
@@ -238,7 +240,7 @@ namespace apogean.Content.Diagnostics
 			{
 				double distance = drawnFrames == 0 ? 0 : drawnMax - drawnMin;
 				double farRepeats = WastesParallaxContract.Repeats(distance, 0, WastesLandscapeV1Renderer.FarRepeatWidth);
-				Mod.Logger.Info($"WASTES V1 SWEEP: case={scenario}; isolatedPhase={PhaseSweep}; drawnFrames={drawnFrames}; sampledTravel={distance:F1}; farRepeats={farRepeats:F3}; midRepeats={WastesParallaxContract.Repeats(distance, 1, WastesModularLayout.MidPeriod):F3}; closeRepeats={WastesParallaxContract.Repeats(distance, 2, WastesModularLayout.ClosePeriod):F3}; coveragePass={farRepeats >= 2.5}; artApproval=False");
+				Mod.Logger.Info($"WASTES V1 SWEEP: case={scenario}; isolatedPhase={PhaseSweep}; drawnFrames={drawnFrames}; sampledTravel={distance:F1}; farRepeats={farRepeats:F3}; midRepeats={WastesParallaxContract.Repeats(distance, 1, WastesLandscapeV1Renderer.MidRepeatWidth):F3}; closeRepeats={WastesParallaxContract.Repeats(distance, 2, WastesModularLayout.ClosePeriod):F3}; coveragePass={farRepeats >= 2.5}; artApproval=False");
 			}
 			if (remaining > 0)
 			{

@@ -1,4 +1,9 @@
-# Wastes ruined-building and checkpoint tops — pending style review
+# Wastes ruined-building and checkpoint tops — style accepted
+
+Latest user verdict: **"looks good to me"** approves the displayed two-top
+comparison. Preserve all four building designs. This is upper-art approval,
+not automatic acceptance of depth, new footing joins, placement or live routing.
+Continuation is tracked separately in `../WastesMidDepth-v2/README.md`.
 
 ## Decision and scope
 
@@ -71,8 +76,7 @@ passes. These checks do not replace user style review or a native fixture.
 
 ## Next gate
 
-Ask whether these two TOPS match the approved pair closely enough. Do not install
-them or continue the combined depth pass before that review. If accepted,
+The requested two-TOP review is now accepted; do not ask it again. Next,
 preserve all four uppers, author compatible deeper terrain and quiet placement,
 then test the assembled set together in the disposable QA world: ground scale,
 horizontal/diagonal travel, ascent/Space/descent, lighting and real biome/

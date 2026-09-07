@@ -1,0 +1,67 @@
+{
+  "recipe": "WastesMidDepth-v2",
+  "width": 512,
+  "height": 1408,
+  "upperOffsetY": 100,
+  "preservedThroughRow": 440,
+  "soilRow": 440,
+  "state": "UNREVIEWED mask and footing proposal; not runtime",
+  "assets": [
+    {
+      "name": "Station",
+      "upper": "Art/Candidates/WastesStationBridge-v1/Study/Station-Upper.png",
+      "upperSHA256": "81CD2A9EB7CC99E637CFCF2EEF610CB64AA3A8EC90D06A4723B51BF93D0F0861",
+      "lower": "Art/Candidates/WastesMidBank-v1/Generated/Station-original.png",
+      "lowerSHA256": "C18F4629C0503D44AE4DB4F9FBEDAFD15682879EB3654819F1154DAFD7229DF6",
+      "n": 3,
+      "d": 4,
+      "dx": -27,
+      "dy": 226,
+      "seamStart": 500,
+      "seamEnd": 538,
+      "blackMatte": false
+    },
+    {
+      "name": "MotorDepot",
+      "upper": "Art/Candidates/WastesMidRuins-v2/ComponentAssembly-v1/MotorDepot-Upper.png",
+      "upperSHA256": "AD30DA51EDF8CAE32822AFF52D67B28733D1AC965AF185BC7D01A4E1DEAEF890",
+      "lower": "Art/Candidates/WastesMidBank-v1/Generated/MotorDepot-original.png",
+      "lowerSHA256": "F2C3491A7DC19C0543CF90285487F3BD288640DB6B95CCFD65A770DD2E637B36",
+      "n": 2,
+      "d": 3,
+      "dx": 4,
+      "dy": 243,
+      "seamStart": 475,
+      "seamEnd": 510,
+      "blackMatte": false
+    },
+    {
+      "name": "BrokenShell",
+      "upper": "Art/Candidates/WastesRuinUpperStyle-v1/Study/BrokenShell-Upper.png",
+      "upperSHA256": "B6F3DA533BCE10F436B15A1CE25E368B660EC17CCD6A33E526D62FA7DD34A597",
+      "lower": "Art/Candidates/WastesMidBank-v1/Generated/BrokenShell-original.png",
+      "lowerSHA256": "58D3815436DE81EA1E2DC2E02828D68601AE8A8A8022F1211E158B196690031A",
+      "n": 2,
+      "d": 3,
+      "dx": 4,
+      "dy": 187,
+      "seamStart": 444,
+      "seamEnd": 455,
+      "blackMatte": true
+    },
+    {
+      "name": "Checkpoint",
+      "upper": "Art/Candidates/WastesRuinUpperStyle-v1/Study/Checkpoint-Upper.png",
+      "upperSHA256": "51EF9199EDD1B4C012729E29197825A86C2F250C0031B366E7C6BC5EC6B742CC",
+      "lower": "Art/Candidates/WastesMidBank-v1/Generated/Checkpoint-original.png",
+      "lowerSHA256": "457CF61A820BC193C0C641857AE36EE040BEC029EF820E50CC45B66878637C46",
+      "n": 2,
+      "d": 3,
+      "dx": 4,
+      "dy": 83,
+      "seamStart": 444,
+      "seamEnd": 455,
+      "blackMatte": false
+    }
+  ]
+}

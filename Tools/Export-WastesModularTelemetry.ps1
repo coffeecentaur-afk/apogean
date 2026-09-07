@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 # Publish only named QA records, not Steam/account/system startup diagnostics.
 $records = @(Get-Content -LiteralPath $LogPath | ForEach-Object {
-    if ($_ -match '(WASTES (?:REGIONAL GROUND|MODULAR (?:RESULT|SAMPLE)|V1 (?:CAMERA|PROJECTION|GROUND LOCK|GROUND SAMPLE|SWEEP)):[^\r\n]*)$') {
+    if ($_ -match '(WASTES (?:REGIONAL GROUND|LAND (?:RESULT|SAMPLE)|MODULAR (?:RESULT|SAMPLE)|V1 (?:CAMERA|PROJECTION|GROUND LOCK|GROUND SAMPLE|SWEEP)):[^\r\n]*)$') {
         $Matches[1]
     }
 })

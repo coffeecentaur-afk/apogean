@@ -14,6 +14,9 @@ namespace apogean.Content.Backgrounds
 	{
 		private static Asset<Texture2D>[] layers;
 		private static Asset<Texture2D>[] modular;
+		private static Asset<Texture2D>[] ruinBank;
+		internal static bool HasRuinBank => ruinBank != null;
+		internal static int MidRepeatWidth => HasRuinBank ? WastesRuinLayout.Period : WastesModularLayout.MidPeriod;
 		private static bool nativeCity;
 		internal static int FarRepeatWidth => layers?[0]?.Value.Width ?? WastesParallaxContract.TextureWidth;
 		internal static double RawTextureMiB
@@ -25,6 +28,8 @@ namespace apogean.Content.Backgrounds
 					if (asset != null) bytes += (long)asset.Value.Width * asset.Value.Height * 4;
 				if (modular != null) foreach (var asset in modular)
 					bytes += (long)asset.Value.Width * asset.Value.Height * 4;
+				if (ruinBank != null) foreach (var asset in ruinBank)
+					if (asset != modular[0] && asset != modular[1] && asset != modular[2]) bytes += (long)asset.Value.Width * asset.Value.Height * 4;
 				return bytes / 1048576d;
 			}
 		}
@@ -39,6 +44,12 @@ namespace apogean.Content.Backgrounds
 			// retain the prior candidate; neither path promotes art to other worlds.
 			const string cityPath = "apogean/Content/Backgrounds/Candidates/WastesCity/Far";
 			nativeCity = ModContent.HasAsset(cityPath);
+			const string bankPath = "apogean/Content/Backgrounds/Candidates/WastesRuinBank/";
+			string[] names = { "Station", "MotorDepot", "BrokenShell", "Checkpoint" };
+			int present = 0;
+			foreach (string name in names) if (ModContent.HasAsset(bankPath + name)) present++;
+			if (present != 0 && present != names.Length)
+				throw new InvalidOperationException("Incomplete Wastes QA ruin bank; do not silently mix asset versions.");
 			layers = new[] {
 				ModContent.Request<Texture2D>(nativeCity ? cityPath : "apogean/Content/Backgrounds/Candidates/WastesV1/Far"),
 				(Asset<Texture2D>)null, null
@@ -46,12 +57,23 @@ namespace apogean.Content.Backgrounds
 			modular = new[] {
 				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesModules/Highway"),
 				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesModules/Quiet"),
-				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesModules/Station"),
+				ModContent.Request<Texture2D>(present == names.Length ? bankPath + "Station" : "apogean/Content/Backgrounds/Candidates/WastesModules/Station"),
 				ModContent.Request<Texture2D>("apogean/Content/Backgrounds/Candidates/WastesModules/Foreground-Deep")
 			};
+			if (present == names.Length)
+			{
+				ruinBank = new Asset<Texture2D>[6];
+				ruinBank[0] = modular[0]; ruinBank[1] = modular[1];
+				for (int i = 0; i < names.Length; i++)
+				{
+					ruinBank[i + 2] = ModContent.Request<Texture2D>(bankPath + names[i]);
+					if (ruinBank[i + 2].Value.Width != 512 || ruinBank[i + 2].Value.Height != 1408)
+						throw new InvalidOperationException("Wastes QA ruin bank requires audited 512x1408 assets.");
+				}
+			}
 		}
 
-		internal static void Unload() { layers = null; modular = null; nativeCity = false; WastesRuinScaleGallery.Unload(); }
+		internal static void Unload() { layers = null; modular = null; ruinBank = null; nativeCity = false; WastesRuinScaleGallery.Unload(); }
 
 		internal static void Draw(SpriteBatch batch, float opacity, int styleSlot)
 		{
@@ -131,19 +153,20 @@ namespace apogean.Content.Backgrounds
 			bool hasRegionalGround = WastesGroundProfileSystem.TryGroundAt(centerX, out float ground);
 			float top = WastesModularLayout.Top(Main.worldSurface, cameraY, height, layer, Main.GameViewMatrix.Zoom.Y,
 				hasRegionalGround ? ground : null);
-			int period = layer == 1 ? WastesModularLayout.MidPeriod : WastesModularLayout.ClosePeriod;
-			float phase = WastesModularLayout.Phase(sampledX, layer);
+			bool newMid = layer == 1 && HasRuinBank;
+			int period = layer == 1 ? MidRepeatWidth : WastesModularLayout.ClosePeriod;
+			float phase = newMid ? WastesRuinLayout.Phase(sampledX) : WastesModularLayout.Phase(sampledX, layer);
 			int depth = layer == 1 ? WastesModularLayout.MidHeight : WastesModularLayout.CloseHeight;
 			int submitted = 0;
 			// The previous period can contribute a trailing group at the left edge.
 			// Gaps are real negative space; no opaque fill or reflected strata here.
 			for (float start = -phase - period; start < width; start += period)
 			{
-				int count = layer == 1 ? 3 : 1;
+				int count = newMid ? WastesRuinLayout.Count : layer == 1 ? 3 : 1;
 				for (int group = 0; group < count; group++)
 				{
-					Texture2D texture = modular[layer == 1 ? group : 3].Value;
-					float x = start + (layer == 1 ? WastesModularLayout.MidOffset(group) : 0);
+					Texture2D texture = newMid ? ruinBank[WastesRuinLayout.Asset(group)].Value : modular[layer == 1 ? group : 3].Value;
+					float x = start + (newMid ? WastesRuinLayout.Offset(group) : layer == 1 ? WastesModularLayout.MidOffset(group) : 0);
 					if (x + texture.Width <= 0 || x >= width || top >= height || top + depth <= 0) continue;
 					Vector2 pixel = new((float)Math.Floor(x), (float)Math.Floor(top));
 					Vector2 position = pixel * scale;

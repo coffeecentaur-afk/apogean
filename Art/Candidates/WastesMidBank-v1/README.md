@@ -5,6 +5,11 @@ then moving to Wastes mobs. That work was interrupted when they identified a
 style mismatch in the checkpoint and ruined-building tops. Resolve that review
 first; see `../WastesRuinUpperStyle-v1/README.md`.
 
+Later: the corrected upper pair was accepted. `../WastesMidDepth-v2/README.md`
+explicitly reuses selected LOWER geology from these originals under the exact
+approved buildings, with new masks, seam contracts and its own evidence. This
+does not approve or install the whole images or this failed reuse probe.
+
 `ReuseProbe/` is the output of `Tools/New-WastesMidBank.ps1`: four512×1408
 assemblies translating the short uppers by100px and borrowing old deep terrain.
 The agent rejected its visible horizontal join near row560, square shoulders
