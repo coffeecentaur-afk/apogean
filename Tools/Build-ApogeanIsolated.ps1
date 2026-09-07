@@ -5,6 +5,7 @@ param(
 	[string]$WastesCityCandidateDirectory = '',
 	[string]$WastesScaleCandidateDirectory = '',
 	[string]$WastesDepotAssemblyDirectory = '',
+	[string]$WastesStationBridgeDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -123,6 +124,21 @@ try {
 		$asset = Join-Path $candidateRoot 'MotorDepot-Upper.png'
 		Copy-Item -LiteralPath $asset -Destination (Join-Path $mirrorRoot 'Content/Backgrounds/Candidates/WastesScaleGallery/MotorDepot-Upper.png')
 		Write-Host "QA depot assembly override: SHA256=$((Get-FileHash -LiteralPath $asset).Hash); ground-only; mirror only."
+	}
+	if ($WastesStationBridgeDirectory) {
+		if (-not $WastesScaleCandidateDirectory) { throw 'Station bridge requires the existing scale gallery.' }
+		$candidateRoot = (Resolve-Path -LiteralPath $WastesStationBridgeDirectory).Path
+		$allowedRoot = (Join-Path $sourceRoot 'Art/Candidates') + [IO.Path]::DirectorySeparatorChar
+		if (-not $candidateRoot.StartsWith($allowedRoot, [StringComparison]::OrdinalIgnoreCase)) {
+			throw 'Station bridge must come from this project Art/Candidates directory.'
+		}
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-WastesStationBridgeStudy.ps1') -StudyDirectory $candidateRoot
+		if ($LASTEXITCODE -ne 0) { throw 'Station bridge audit failed.' }
+		$asset = Join-Path $candidateRoot 'Station-Upper.png'
+		# Only the named disposable ground gallery receives this upper-only art.
+		# Never substitute it for WastesModules/Station's 1408px-deep texture.
+		Copy-Item -LiteralPath $asset -Destination (Join-Path $mirrorRoot 'Content/Backgrounds/Candidates/WastesScaleGallery/Station-Upper.png')
+		Write-Host "QA approved Station bridge override: SHA256=$((Get-FileHash -LiteralPath $asset).Hash); ground-only; mirror only."
 	}
 	Push-Location $mirrorRoot
 	try {

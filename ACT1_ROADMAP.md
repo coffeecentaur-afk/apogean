@@ -23,13 +23,13 @@
 
 ## Current environmental gate
 
-**Current:** user likes the garage's cleaner outline/design and Station's broader
-pixel clusters, but now rejects Station's rough cutout. Earlier immutable-Station
-direction is qualified. One new Station bridge is in
-`Art/Candidates/WastesStationBridge-v1/`: inspected hard-alpha extraction and
-comparable-size offline boards only. Current runtime art is unchanged. Pair
-cohesion remains unaccepted; garage itself is liked. Review the one candidate,
-then deep foundations/native checks if selected. No extra garage redraw loop.
+**Current:** user selected the middle Station bridge, pairing broader pixel
+clusters with cleaner contours; garage remains unchanged. Exact upper art now
+has a zero-warning build and bounded native daylight ground evidence in
+`Art/Validation/WastesStationBridge-2026-09-06/README.md`. Only the temporary
+disposable gallery receives it. Normal full-depth Station/Content stay unchanged.
+Next is compatible deep terrain below the approved upper, then placement and
+full flight/lighting/routing proof. No more Station/garage redesign loop.
 
 **Earlier user review:** overall native ruin scale is not the requested change;
 their fine realistic texture is. Station remains the approved pixel-art anchor.

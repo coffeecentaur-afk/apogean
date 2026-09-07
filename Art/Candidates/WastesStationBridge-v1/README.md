@@ -1,5 +1,17 @@
 # Station style bridge — one offline candidate
 
+## Selected; bounded native check completed
+
+The user answered **yes** to the middle candidate. Freeze the selected
+`Study/Station-Upper.png` hash
+`81CD2A9EB7CC99E637CFCF2EEF610CB64AA3A8EC90D06A4723B51BF93D0F0861`.
+The exact image now has a clean isolated build and fresh daylight ground-gallery
+proof in `../../Validation/WastesStationBridge-2026-09-06/README.md`. No new art
+generated. Only the temporary gallery received it; the full-depth Station and
+repository Content remain unchanged. Style selected, depth/production pending.
+The following sections record the earlier preparation, not a current refusal
+to proceed or a new request to approve the same offline picture again.
+
 ## Latest user direction
 
 The garage has finer detail but the preferred design/cutout. The Station has

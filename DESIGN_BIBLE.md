@@ -325,9 +325,13 @@ originals intact, not aesthetically frozen. Aim for an in-between: one Station
 redraw may bridge the two without another garage-redraw loop. This is about
 pixel grain AND edge quality, not just adding/removing grit. The previous native
 pair is unaccepted for cohesion, not a rejection of the garage itself.
-`Art/Candidates/WastesStationBridge-v1/` is one offline mask/export/size-study
-candidate only. Inspect it before installation; deeper foundations, native
-render proof, and user acceptance remain separate gates.
+The user subsequently selected the middle `WastesStationBridge-v1` candidate.
+Preserve that exact approved upper artwork; do not restart its style cycle.
+Its unchanged512x460 derivative now has a clean build and bounded native
+daylight ground-gallery evidence beside the garage/shell/checkpoint. This is
+not the full1408px Mid module. Author compatible deeper terrain before ordinary
+placement and full flight/lighting/routing proof. See
+`Art/Validation/WastesStationBridge-2026-09-06/README.md`.
 
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial
