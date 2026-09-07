@@ -32,6 +32,15 @@ All sprite work uses hard opaque pixel clusters, limited palettes, readable nati
 
 ### Authoring evidence gate
 
+Latest foreground clarification (September7): the combined diagonal response
+feels too near/reactive even with stable section anchors. Push Close back toward
+Mid, remaining slightly nearer. The depth trial uses Close .20 horizontal/.06
+vertical, with a15% ascent ceiling; Mid .14/.03 and25%, Far .055/.012 and50%
+remain unchanged. This supersedes tile-speed vertical Close locking, not stable
+section identity. Project terrain relief through the same depth; no spring,
+camera-follow catch-up, art redraw or altitude fade. Exact comfort is pending
+native/user review. Evidence: `Art/Validation/WastesForegroundDepth-2026-09-07/README.md`.
+
 Wastes camera clarification (September7): foreground sections have stable
 world/terrain anchors, never a shared ground height resampled under the moving
 camera. Midground and distant scenery use maximum-height positional locks and

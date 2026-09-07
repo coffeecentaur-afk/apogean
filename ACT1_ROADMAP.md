@@ -23,6 +23,14 @@
 
 ## Current environmental gate
 
+**Latest user clarification:** foreground feels too close/reactive during
+diagonal running; use a deeper Close plane, not temporal smoothing. Trial .20
+horizontal/.06 vertical with15% flight cap; Mid/Far and all art unchanged.
+This supersedes tile-speed Close motion. Static regressions and clean build pass;
+native full-matrix status and review are tracked in
+`Art/Validation/WastesForegroundDepth-2026-09-07/README.md`. Do not promote from
+motion-only checks or bypass the existing coverage/grove/persistence blockers.
+
 **Immediate motion correction:** stable per-section Close anchors and capped
 Mid/Far height replace moving-camera ground sampling and altitude opacity.
 See `Art/Validation/WastesHeightLock-2026-09-07/README.md`: native pan anchors and

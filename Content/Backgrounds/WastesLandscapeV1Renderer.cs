@@ -181,8 +181,12 @@ namespace apogean.Content.Backgrounds
 					lab.ObserveModularProjection(layer, position, pixel, texture.Height,
 						Main.CurrentFrameFlags.Hacks.CurrentBackgroundMatrixForCreditsRoll, width, height);
 					if (layer == 2)
+					{
+						lab.ObserveRunningMotion(cell, sampledX, cameraY, position,
+							Main.CurrentFrameFlags.Hacks.CurrentBackgroundMatrixForCreditsRoll);
 						lab.ObserveGroundLock(top + WastesModularLayout.CloseSoilRow - WastesCameraProjection.CloseSoilRow,
 							cameraY, height, regionalGround);
+					}
 					submitted++;
 				}
 			}

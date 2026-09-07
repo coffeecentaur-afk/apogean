@@ -25,12 +25,18 @@ namespace apogean.Content.Diagnostics
 		private int lockChecks;
 		private float lockError;
 		private int moduleChecks, moduleFailures, moduleFrameChecks;
+		private int moduleDepthFailures, moduleCountFailures, moduleMatrixFailures;
 		private float modulePixelError;
 		private int landChecks, landFailures, spaceChecks, groundPresenceChecks, partialFarChecks;
 		private readonly Dictionary<int, float> closeAnchors = new();
 		private int anchorChecks, anchorFailures, heightChecks, heightFailures, cappedChecks, exitedChecks;
 		private float flightGroundCenter, flightSpaceCenter;
 		private bool SpaceFlight => scenario is "space-ascent" or "space-descent";
+		private bool Running => scenario is "run-flat" or "run-diagonal";
+		private Vector2 runOrigin;
+		private readonly Dictionary<int, (float X, float Y, Vector2 Pixel)> runPrevious = new();
+		private int runChecks, runFailures, runSampleTick;
+		private float runMinX, runMaxX, runMinY, runMaxY, runError;
 		private RuinedBackgroundBiome? previousLab;
 		private bool Diagonal => scenario is "diagonal-left" or "diagonal-right";
 		private bool GroundPan => scenario is "ground-pan-left" or "ground-pan-right";
@@ -53,7 +59,7 @@ namespace apogean.Content.Diagnostics
 			if (Main.netMode != NetmodeID.SinglePlayer || Main.ActiveWorldFileData?.Name != "Apogee Native Visual V3")
 				throw new InvalidOperationException("Landscape camera checks require Apogee Native Visual V3 single-player.");
 			if (requested == "release") { Release(); return; }
-			if (requested is not ("ground" or "jump" or "wings" or "sky" or "left" or "right" or "sunset" or "night" or "rain" or "eclipse" or "pan-left" or "pan-right" or "ground-pan-left" or "ground-pan-right" or "phase-left" or "phase-right" or "diagonal-left" or "diagonal-right" or "mid-altitude" or "high-altitude" or "below-ground" or "underground" or "space-fade" or "space-edge" or "space-ascent" or "space-descent" or "scale-shell" or "scale-depot" or "scale-checkpoint"))
+			if (requested is not ("ground" or "jump" or "wings" or "sky" or "left" or "right" or "sunset" or "night" or "rain" or "eclipse" or "pan-left" or "pan-right" or "ground-pan-left" or "ground-pan-right" or "phase-left" or "phase-right" or "diagonal-left" or "diagonal-right" or "run-flat" or "run-diagonal" or "mid-altitude" or "high-altitude" or "below-ground" or "underground" or "space-fade" or "space-edge" or "space-ascent" or "space-descent" or "scale-shell" or "scale-depot" or "scale-checkpoint"))
 				throw new ArgumentOutOfRangeException(nameof(requested));
 			if (requested.StartsWith("scale-", StringComparison.Ordinal) && !WastesRuinScaleGallery.Available)
 				throw new InvalidOperationException("Scale study assets require an isolated QA build; no fallback art will be shown.");
@@ -72,6 +78,9 @@ namespace apogean.Content.Diagnostics
 			projectionChecks = projectionFailures = 0;
 			lockChecks = 0; lockError = 0;
 			moduleChecks = moduleFailures = moduleFrameChecks = 0; modulePixelError = 0;
+			moduleDepthFailures = moduleCountFailures = moduleMatrixFailures = 0;
+			runPrevious.Clear(); runChecks = runFailures = 0; runSampleTick = -1; runError = 0;
+			runMinX = runMinY = float.PositiveInfinity; runMaxX = runMaxY = float.NegativeInfinity;
 			landChecks = landFailures = spaceChecks = groundPresenceChecks = partialFarChecks = 0;
 			closeAnchors.Clear();
 			anchorChecks = anchorFailures = heightChecks = heightFailures = cappedChecks = exitedChecks = 0;
@@ -93,6 +102,7 @@ namespace apogean.Content.Diagnostics
 			camera = new Vector2(Main.maxTilesX * 8f - Main.screenWidth / 2f + shift,
 				requested == "sky" ? 16 : groundY - Main.screenHeight * .55f - lift);
 			groundCameraY = groundY - Main.screenHeight * .55f;
+			runOrigin = camera;
 			if (ScaleGalleryIndex > 0)
 			{
 				// Read actual terrain; never clear or rebuild tiles for a scale view.
@@ -221,12 +231,42 @@ namespace apogean.Content.Diagnostics
 		{
 			if (remaining <= 0) return;
 			float worldGround = regionalGround ?? (float)((Main.worldSurface - 50) * 16);
-			// Independent engine projection of the world-space soil datum.
-			Vector2 expected = Vector2.Transform(new Vector2(0, worldGround - 48 - worldCameraY), Main.GameViewMatrix.ZoomMatrix);
+			// Independent depth-plane reference, not the superseded tile-speed lock.
+			float expected = ExpectedCloseSoil(worldGround, worldCameraY, height, Main.GameViewMatrix.Zoom.Y);
 			float soil = (float)Math.Floor(top) + WastesCameraProjection.CloseSoilRow;
-			lockError = Math.Max(lockError, Math.Abs(expected.Y - soil));
+			lockError = Math.Max(lockError, Math.Abs(expected - soil));
 			if (lockChecks++ == 0)
-				Mod.Logger.Info($"WASTES V1 GROUND SAMPLE: case={scenario}; viewport={Main.instance.GraphicsDevice.Viewport.Width}x{height}; referenceY={worldGround}; soilY={soil:F2}; expectedY={expected.Y:F2}; gameZoom={Main.GameViewMatrix.Zoom.Y}; closeTop={top:F2}; cameraY={worldCameraY:F2}; altitude={WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f):F3}; midOpacity={WastesCameraProjection.MiddleOpacity(WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f)):F3}; datum={(regionalGround.HasValue ? "savedRegionalTerrainQA" : "worldSurfaceMinus50")}; artApproval=False");
+				Mod.Logger.Info($"WASTES V1 GROUND SAMPLE: case={scenario}; viewport={Main.instance.GraphicsDevice.Viewport.Width}x{height}; referenceY={worldGround}; soilY={soil:F2}; expectedY={expected:F2}; gameZoom={Main.GameViewMatrix.Zoom.Y}; closeTop={top:F2}; cameraY={worldCameraY:F2}; altitude={WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f):F3}; midOpacity={WastesCameraProjection.MiddleOpacity(WastesCameraProjection.Altitude(Main.worldSurface, worldCameraY + height * .5f)):F3}; datum={(regionalGround.HasValue ? "savedRegionalTerrainQA" : "worldSurfaceMinus50")}; artApproval=False; closeMode=depthPlane");
+		}
+
+		private static float ExpectedCloseSoil(float ground, float cameraY, int height, float zoom)
+		{
+			float center = cameraY + height * .5f;
+			float reference = (float)((Main.worldSurface - 50) * 16);
+			float boundary = (float)((Math.Floor(Main.worldSurface * (double).35f) + 1) * 16);
+			float cap = reference - Math.Max(1, reference - boundary) * .15f;
+			return height * .5f - 48 * zoom + (ground - Math.Max(center, cap)) * .06f + Math.Max(0, cap - center) * zoom;
+		}
+
+		internal void ObserveRunningMotion(int cell, float worldX, float cameraY, Vector2 submitted, Matrix matrix)
+		{
+			if (remaining <= 0 || !Running) return;
+			Vector2 actual = Vector2.Transform(submitted, matrix);
+			runMinX = Math.Min(runMinX, worldX); runMaxX = Math.Max(runMaxX, worldX);
+			runMinY = Math.Min(runMinY, cameraY); runMaxY = Math.Max(runMaxY, cameraY);
+			if (runPrevious.TryGetValue(cell, out var previous))
+			{
+				float error = Math.Max(Math.Abs(actual.X - previous.Pixel.X + (worldX - previous.X) * .20f),
+					Math.Abs(actual.Y - previous.Pixel.Y + (cameraY - previous.Y) * .06f));
+				runError = Math.Max(runError, error); runChecks++;
+				if (error > 1.05f) runFailures++; // at most one native-pixel flooring difference
+			}
+			runPrevious[cell] = (worldX, cameraY, actual);
+			if (panTick % 60 == 0 && runSampleTick != panTick)
+			{
+				runSampleTick = panTick;
+				Mod.Logger.Info($"WASTES RUN MOTION SAMPLE: case={scenario}; tick={panTick}; cell={cell}; cameraX={worldX:F3}; cameraY={cameraY:F3}; pixelX={actual.X:F3}; pixelY={actual.Y:F3}; horizontal={WastesParallaxContract.Horizontal(2):F3}; vertical={WastesCameraProjection.Vertical(2):F3}; simulatedCamera=True");
+			}
 		}
 
 		internal void ObserveModularProjection(int layer, Vector2 submitted, Vector2 expected, int depth,
@@ -237,7 +277,11 @@ namespace apogean.Content.Diagnostics
 			float error = Math.Max(Math.Abs(actual.X - expected.X), Math.Abs(actual.Y - expected.Y));
 			modulePixelError = Math.Max(modulePixelError, error);
 			moduleChecks++;
-			if (error > 1.1f || WastesModularLayout.BottomExposed(expected.Y, depth, height)) moduleFailures++;
+			bool matrixFailed = error > 1.1f;
+			bool depthFailed = WastesModularLayout.BottomExposed(expected.Y, depth, height);
+			if (matrixFailed) moduleMatrixFailures++;
+			if (depthFailed) moduleDepthFailures++;
+			if (matrixFailed || depthFailed) moduleFailures++;
 		}
 
 		internal void ObserveModularFrame(int layer, float worldX, float top, int submitted, int width, int height, float cameraY, float zoom)
@@ -256,7 +300,7 @@ namespace apogean.Content.Diagnostics
 					{
 						float anchorX = (float)((cell * 2268d + 724 + 620) / WastesParallaxContract.Horizontal(2));
 						float ground = WastesGroundProfileSystem.TryGroundAt(anchorX, out float sampled) ? sampled : (float)((Main.worldSurface - 50) * 16);
-						float cellTop = (ground - 48 - cameraY - height * .5f) * zoom + height * .5f - 330;
+						float cellTop = ExpectedCloseSoil(ground, cameraY, height, zoom) - 330;
 						if (cellTop >= height || cellTop + depth <= 0) continue;
 					}
 					for (int group = 0; group < (bank ? 10 : layer == 1 ? 3 : 1); group++)
@@ -268,7 +312,7 @@ namespace apogean.Content.Diagnostics
 					}
 				}
 			moduleFrameChecks++;
-			if (expected != submitted) moduleFailures++;
+			if (expected != submitted) { moduleFailures++; moduleCountFailures++; }
 			if (moduleFrameChecks <= 2)
 				Mod.Logger.Info($"WASTES MODULAR SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; top={top:F2}; submitted={submitted}; expected={expected}; rgbaMiB={WastesLandscapeV1Renderer.RawTextureMiB:F2}; farWidth={WastesLandscapeV1Renderer.FarRepeatWidth}; ruinBank={bank}; period={period}; scope=QA; artApproval=False");
 		}
@@ -281,7 +325,9 @@ namespace apogean.Content.Diagnostics
 			Mod.Logger.Info($"WASTES HEIGHT ALPHA RESULT: case={scenario}; viewport={Main.screenWidth}x{Main.screenHeight}; checks={landChecks}; spaceChecks={spaceChecks}; groundChecks={groundPresenceChecks}; partialFarChecks={partialFarChecks}; failures={landFailures}; artApproval=False");
 			Mod.Logger.Info($"WASTES HEIGHT POSITION RESULT: case={scenario}; viewport={Main.screenWidth}x{Main.screenHeight}; checks={heightChecks}; capped={cappedChecks}; exited={exitedChecks}; failures={heightFailures}; artApproval=False");
 			Mod.Logger.Info($"WASTES CLOSE ANCHOR RESULT: case={scenario}; checks={anchorChecks}; sections={closeAnchors.Count}; failures={anchorFailures}; artApproval=False");
-			Mod.Logger.Info($"WASTES MODULAR RESULT: case={scenario}; matrixChecks={moduleChecks}; frameChecks={moduleFrameChecks}; failures={moduleFailures}; maxPixelError={modulePixelError:F2}; artApproval=False");
+			Mod.Logger.Info($"WASTES MODULAR RESULT: case={scenario}; matrixChecks={moduleChecks}; frameChecks={moduleFrameChecks}; failures={moduleFailures}; maxPixelError={modulePixelError:F2}; artApproval=False; matrixFailures={moduleMatrixFailures}; depthFailures={moduleDepthFailures}; countFailures={moduleCountFailures}");
+			if (Running)
+				Mod.Logger.Info($"WASTES RUN MOTION RESULT: case={scenario}; viewport={Main.screenWidth}x{Main.screenHeight}; checks={runChecks}; failures={runFailures}; travelX={runMaxX-runMinX:F3}; travelY={runMaxY-runMinY:F3}; maxError={runError:F3}; horizontal={WastesParallaxContract.Horizontal(2):F3}; vertical={WastesCameraProjection.Vertical(2):F3}; simulatedCamera=True; artApproval=False");
 			Mod.Logger.Info($"WASTES V1 PROJECTION: case={scenario}; checks={projectionChecks}; failures={projectionFailures}; maxLeftGap={worstLeft:F2}; maxRightGap={worstRight:F2}; minFarBottomMargin={minimumBottom:F2}; artApproval=False");
 			Mod.Logger.Info($"WASTES V1 GROUND LOCK: case={scenario}; checks={lockChecks}; maxError={lockError:F2}; pass={lockChecks > 0 && lockError <= 1.1f}; artApproval=False");
 			if (Sweeping)
@@ -309,6 +355,14 @@ namespace apogean.Content.Diagnostics
 			if (Main.netMode != NetmodeID.SinglePlayer || Main.ActiveWorldFileData?.Name != "Apogee Native Visual V3") { remaining = 0; return; }
 			if (remaining == 1) { Release(); return; }
 			remaining--;
+			if (Running)
+			{
+				// Camera-only comfort fixture: 20s traversing 3600px with optional
+				// gentle diagonal rises; 10s stopped. No terrain or physics claim.
+				float progress = Math.Min(panTick++ / 1200f, 1f);
+				camera.X = runOrigin.X + MathHelper.Lerp(-1800, 1800, progress);
+				camera.Y = runOrigin.Y - (scenario == "run-diagonal" ? 64 * (float)Math.Sin(progress * Math.PI * 6) : 0);
+			}
 			if (SpaceFlight)
 			{
 				// Twenty seconds through the transition, then a ten-second endpoint.

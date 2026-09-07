@@ -26,7 +26,10 @@ foreach($height in 1080,1369,1440) {
         $ground=[apogean.Common.Backgrounds.WastesCameraProjection]::Top(649,$camera,$height,1280,$layer)
         $flight=[apogean.Common.Backgrounds.WastesCameraProjection]::Top(649,($camera-1200),$height,1280,$layer)
         if($layer -eq 2) {
-            Assert-Projection ([math]::Abs($flight-$ground-1200) -lt .01) 'nearest layer remains world locked'
+            $cap=9584-(9584-3648)*.15
+            $center=$camera+$height*.5
+            $expected=(9584-[math]::Max($center-1200,$cap))*.06+[math]::Max(0.0,[double]($cap-($center-1200)))-(9584-$center)*.06
+            Assert-Projection ([math]::Abs($flight-$ground-$expected) -lt .02) 'Close depth response transitions to fixed-height flight exit'
         } else {
             Assert-Projection ([math]::Abs($flight-$ground) -le 72.1) "distant layer stays subtle: layer=$layer ${width}x$height"
         }
@@ -40,5 +43,5 @@ foreach($height in 1080,1369,1440) {
 # Preserve original failure patterns as negative controls.
 $oldLeft=(0-(-426.6667))/[single](4.0/3.0)*[single](4.0/3.0)
 Assert-Projection ($oldLeft -gt 400) 'old centered inverse fails left-edge coverage'
-Assert-Projection ([math]::Abs(1200*.06-1200) -gt 1000) 'rejected reduced-motion response is not a world lock'
+Assert-Projection (6000*.06 -lt 1080) 'unbounded low parallax cannot provide the required high-flight exit'
 Write-Host "PASS: $checks production projection/coverage/response checks including original-bug controls. Not GPU or art acceptance."

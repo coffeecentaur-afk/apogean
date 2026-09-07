@@ -9,7 +9,7 @@ namespace apogean.Common.Backgrounds
 		public const int TextureWidth = 2048;
 		public static float Horizontal(int layer) => layer switch
 		{
-			0 => .055f, 1 => .14f, 2 => .30f,
+			0 => .055f, 1 => .14f, 2 => .20f,
 			_ => throw new ArgumentOutOfRangeException(nameof(layer))
 		};
 		public static double Repeats(double travel, int layer, int repeatWidth = TextureWidth)

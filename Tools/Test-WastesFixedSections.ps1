@@ -12,17 +12,17 @@ $checks = 0
 $seen = @{}
 # Follow the SAME absolute sections across pans, seams and return trips.
 foreach ($x in (0..240 | ForEach-Object { $_*512-1024 }) + (240..0 | ForEach-Object { $_*512-1024 })) {
-    $scroll = $x*[double][single]0.3-620
+    $scroll = $x*[double][single]0.2-620
     $first = [int][math]::Floor($scroll/2268)-1
     foreach ($cell in $first..($first+3)) {
         $actual = [apogean.Common.Backgrounds.WastesModularLayout]::CloseTop(649,9000,1440,1,$cell,$sampler)
-        $anchor = ($cell*2268.0+724+620)/[double][single]0.3
-        $expected = $profile.GroundAt([single]$anchor)-48-9000-330
+        $anchor = ($cell*2268.0+724+620)/[double][single]0.2
+        $expected = 720-48-330+($profile.GroundAt([single]$anchor)-9720)*.06
         if ([math]::Abs($actual-$expected) -gt .01) { throw 'FAIL: fixed section uses wrong terrain anchor' }
         if ($seen.ContainsKey($cell) -and $seen[$cell] -ne $actual) { throw 'FAIL: foreground section changes height while panning' }
         $seen[$cell] = $actual
         $flight = [apogean.Common.Backgrounds.WastesModularLayout]::CloseTop(649,8600,1440,1,$cell,$sampler)
-        if ([math]::Abs($flight-$actual-400) -gt .01) { throw 'FAIL: foreground stopped being world-locked during flight' }
+        if ([math]::Abs($flight-$actual-24) -gt .01) { throw 'FAIL: low foreground motion does not use the farther-back depth plane' }
         $checks += 3
     }
 }

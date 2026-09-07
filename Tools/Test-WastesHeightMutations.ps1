@@ -5,6 +5,9 @@ $scratch = Join-Path ([IO.Path]::GetTempPath()) ('ApogeanHeightMutations-' + [gu
 New-Item -ItemType Directory -Path (Join-Path $scratch 'Common/Backgrounds'),(Join-Path $scratch 'Content/Backgrounds') | Out-Null
 $files = @('Common/Backgrounds/WastesCameraProjection.cs','Common/Backgrounds/WastesModularLayout.cs','Common/Backgrounds/WastesParallaxContract.cs','Common/Backgrounds/WastesGroundProfile.cs','Content/Backgrounds/WastesLandscapeV1Renderer.cs')
 $mutations = @(
+    @('tile-speed foreground','Common/Backgrounds/WastesCameraProjection.cs','2 => .06f','2 => 1f','Test-WastesForegroundDepth.ps1'),
+    @('camera-close foreground','Common/Backgrounds/WastesParallaxContract.cs','2 => .20f','2 => .30f','Test-WastesForegroundDepth.ps1'),
+    @('unbounded foreground','Common/Backgrounds/WastesCameraProjection.cs','LockCameraCenterY(surfaceTiles, 2)','float.NegativeInfinity','Test-WastesForegroundDepth.ps1'),
     @('previous higher ceilings','Common/Backgrounds/WastesCameraProjection.cs','0 => .5f, 1 => .25f','0 => .7f, 1 => 1f / 3f','Test-WastesHeightLock.ps1'),
     @('no ceiling','Common/Backgrounds/WastesCameraProjection.cs','Math.Max(center, LockCameraCenterY(surfaceTiles, layer))','center','Test-WastesHeightLock.ps1'),
     @('screen-following ceiling','Common/Backgrounds/WastesCameraProjection.cs','(cappedCenter - center) * gameZoom','0f','Test-WastesHeightLock.ps1'),

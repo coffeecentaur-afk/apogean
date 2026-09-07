@@ -42,6 +42,14 @@ controls retain this correction; the native trace includes section identities,
 submitted alpha and independent screen positions. A below-ground whole-world
 pan may be terrain-occluded, so telemetry is not a visual acceptance screenshot.
 
+Stable anchors do not certify perceived depth or movement comfort. When the user
+reports combined diagonal reactivity, test horizontal AND vertical response of
+the same rendered section with a small repeatable rise/fall path. Keep the
+projection stateless; do not hide excessive depth response with a camera spring.
+`Test-WastesForegroundDepth.ps1` and `Test-WastesRunningLive.ps1` retain this
+specific correction. Camera-only traces are not physical-running or user-feel
+approval. Ceiling/coverage, routing and art gates remain separate.
+
 ## Reusable tooling and dependency mods
 
 Standing user authorization (September7): a separate tModLoader mod may be

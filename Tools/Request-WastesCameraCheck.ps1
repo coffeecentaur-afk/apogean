@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory)]
-    [ValidateSet('ground','jump','wings','sky','left','right','sunset','night','rain','eclipse','pan-left','pan-right','ground-pan-left','ground-pan-right','phase-left','phase-right','diagonal-left','diagonal-right','mid-altitude','high-altitude','below-ground','underground','space-fade','space-edge','space-ascent','space-descent','scale-shell','scale-depot','scale-checkpoint','release')]
+    [ValidateSet('ground','jump','wings','sky','left','right','sunset','night','rain','eclipse','pan-left','pan-right','ground-pan-left','ground-pan-right','phase-left','phase-right','diagonal-left','diagonal-right','run-flat','run-diagonal','mid-altitude','high-altitude','below-ground','underground','space-fade','space-edge','space-ascent','space-descent','scale-shell','scale-depot','scale-checkpoint','release')]
     [string]$Case,
     [string]$TModLoaderRoot = (Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games/Terraria/tModLoader')
 )

@@ -16,7 +16,9 @@ foreach($viewport in @(@{Height=1080;Zoom=1.0},@{Height=1369;Zoom=4.0/3.0},@{Hei
             if([apogean.Common.Backgrounds.WastesModularLayout]::BottomExposed($top,$depth,$viewport.Height)){throw 'DEPTH_CUTOFF'}
             if($layer -eq 2) {
                 $socket=if($Mutation -eq 'SocketShift'){331}else{330}
-                $expected=($lift-48)*$viewport.Zoom+$viewport.Height*.5
+                $cap=9584-(9584-3648)*.15
+                $center=$cameraY+$viewport.Height*.5
+                $expected=$viewport.Height*.5-48*$viewport.Zoom+(9584-[math]::Max($center,$cap))*.06+[math]::Max(0.0,[double]($cap-$center))*$viewport.Zoom
                 if([Math]::Abs($top+$socket-$expected) -gt .01){throw 'SOCKET_SHIFT'}
             }
             $checks++

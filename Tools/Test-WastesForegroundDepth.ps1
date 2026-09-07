@@ -1,48 +1,49 @@
-param([ValidateRange(0,4)][int]$Mutation=0)
+param([string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot))
 Set-StrictMode -Version Latest
-$ErrorActionPreference='Stop'
-Add-Type -AssemblyName System.Drawing
-$references=@([System.Drawing.Bitmap].Assembly.Location,[System.Drawing.Color].Assembly.Location,'System.Runtime','System.IO')
-$references+=@(Get-ChildItem -LiteralPath $PSHOME -Filter 'System.Private.Windows*.dll' | Select-Object -ExpandProperty FullName)
-Add-Type -ReferencedAssemblies $references -TypeDefinition @'
-using System;
-using System.Drawing;
-using System.IO;
-public static class ForegroundDepthCheck
-{
-    static bool Same(Color a,Color b)=>a.A==b.A&&(a.A==0||a.ToArgb()==b.ToArgb());
-    public static void Run(string root,int mutation)
-    {
-        using(var full=new Bitmap(Path.Combine(root,"Derived/Foreground-Deep.png")))
-        using(var upper=new Bitmap(Path.Combine(root,"Derived/Foreground-Bank.png")))
-        using(var top=new Bitmap(Path.Combine(root,"Derived/Foreground-Top.png")))
-        using(var lower=new Bitmap(Path.Combine(root,"Derived/Foreground-Continuation.png")))
-        using(var source=new Bitmap(Path.Combine(root,"Foreground-Lower-Source.png")))
-        {
-            if(full.Width!=1448||full.Height!=1915||top.Height!=830||lower.Height!=1085||source.Width!=1449||source.Height!=1085)
-                throw new InvalidDataException("DIMENSIONS");
-            if(mutation==1)full.SetPixel(700,1400,Color.FromArgb(128,10,10,10));
-            if(mutation==2)full.SetPixel(700,500,Color.White);
-            if(mutation==3)lower.SetPixel(700,300,Color.White);
-            if(mutation==4)full.SetPixel(700,1400,Color.White);
-            for(int y=0;y<full.Height;y++)for(int x=0;x<full.Width;x++)
-            {
-                Color c=full.GetPixel(x,y);
-                if(c.A!=0&&c.A!=255)throw new InvalidDataException("SOFT_ALPHA");
-                if(y<830&&!Same(c,upper.GetPixel(x,y)))throw new InvalidDataException("UPPER_CHANGED");
-                if(y>=1086&&!Same(c,source.GetPixel(x,y-830)))throw new InvalidDataException("LOWER_CHANGED");
-                if(!Same(c,y<830?top.GetPixel(x,y):lower.GetPixel(x,y-830)))throw new InvalidDataException("SOCKET_SHIFT");
+$ErrorActionPreference = 'Stop'
+$source = @('WastesCameraProjection','WastesParallaxContract','WastesModularLayout') | ForEach-Object {
+    (Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot "Common/Backgrounds/$_.cs")) -replace '(?m)^using System;', ''
+}
+Add-Type -TypeDefinition ("using System;`n" + ($source -join "`n"))
+$checks = 0
+function Assert-Depth([bool]$condition, [string]$message) {
+    if (-not $condition) { throw "FAIL: $message" }
+    $script:checks++
+}
+$sampler = [Func[single,Nullable[single]]]{ param($x) [single]9584 }
+$camera = 9584-1369*.5
+$rest = [apogean.Common.Backgrounds.WastesModularLayout]::CloseTop(649,$camera,1369,(4.0/3),8,$sampler)
+$step = [apogean.Common.Backgrounds.WastesModularLayout]::CloseTop(649,($camera-16),1369,(4.0/3),8,$sampler)
+Assert-Depth ([math]::Abs($step-$rest-.96) -lt .01) "16px running rise moves foreground $($step-$rest)px; depth trial expects 0.96px, not terrain-speed movement"
+Assert-Depth ([math]::Abs([apogean.Common.Backgrounds.WastesParallaxContract]::Horizontal(2)-.20) -lt .00001) 'Close horizontal response must be .20, ahead of .14 Mid'
+Assert-Depth ([apogean.Common.Backgrounds.WastesParallaxContract]::Horizontal(2) -gt [apogean.Common.Backgrounds.WastesParallaxContract]::Horizontal(1)) 'Close must remain in front of Mid'
+
+foreach ($surface in 250,500,649,700) {
+    $ground=($surface-50)*16
+    $space=([math]::Floor($surface * [double][single]0.35)+1)*16
+    $cap=$ground-($ground-$space)*.15
+    Assert-Depth ([math]::Abs([apogean.Common.Backgrounds.WastesCameraProjection]::LockCameraCenterY($surface,2)-$cap) -lt .01) 'Close ceiling is 15% of the existing ascent reference'
+    foreach ($height in 1080,1369,1440) {
+        foreach ($zoom in 1.0,(4.0/3),2.0) {
+            foreach ($anchorOffset in -128,0,600) {
+                $anchor=[single]($ground+$anchorOffset)
+                $localSampler=[Func[single,Nullable[single]]]{ param($x) $anchor }
+                foreach ($center in ($ground+400),$ground,($cap+.25),$cap,($cap-.25),($cap-32),($cap-5000)) {
+                    $camera=$center-$height*.5
+                    $top=[apogean.Common.Backgrounds.WastesModularLayout]::CloseTop($surface,$camera,$height,$zoom,8,$localSampler)
+                    $expected=$height*.5-48*$zoom-330+($anchor-[math]::Max($center,$cap))*.06+[math]::Max(0.0,[double]($cap-$center))*$zoom
+                    Assert-Depth ([math]::Abs($top-$expected) -lt .02) "depth plane mismatch: surface=$surface height=$height zoom=$zoom anchor=$anchor center=$center actual=$top expected=$expected"
+                    $again=[apogean.Common.Backgrounds.WastesModularLayout]::CloseTop($surface,$camera,$height,$zoom,8,$localSampler)
+                    Assert-Depth ($again -eq $top) 'no spring, delayed catch-up, or visit-dependent placement'
+                    if ($center -eq $cap-5000) { Assert-Depth ($top -gt $height) 'high flight must still leave the foreground below view' }
+                }
+                # Surface relief remains tied to immutable anchors, but is not
+                # projected at tile speed merely because the camera runs sideways.
+                $low=[apogean.Common.Backgrounds.WastesModularLayout]::Top($surface,($ground-$height*.5),$height,2,$zoom,$ground)
+                $high=[apogean.Common.Backgrounds.WastesModularLayout]::Top($surface,($ground-$height*.5),$height,2,$zoom,($ground+160))
+                Assert-Depth ([math]::Abs($high-$low-9.6) -lt .02) '160px terrain relief projects to 9.6px, not a wall-sized step'
             }
         }
     }
 }
-'@
-$repoRoot=Split-Path -Parent $PSScriptRoot
-$candidate=Join-Path $repoRoot 'Art/Candidates/WastesMidgroundModules/2026-09-05/Deep-v1'
-[ForegroundDepthCheck]::Run($candidate,$Mutation)
-foreach($asset in @('Highway','Quiet','Station','Foreground-Deep')) {
-    $sourceHash=(Get-FileHash (Join-Path $candidate "Derived/$asset.png")).Hash
-    $runtimeHash=(Get-FileHash (Join-Path $repoRoot "Content/Backgrounds/Candidates/WastesModules/$asset.png")).Hash
-    if($sourceHash -ne $runtimeHash){throw "STALE_RUNTIME_ASSET: $asset"}
-}
-Write-Output 'PASS: 2,772,920 foreground pixels, hard alpha, original upper 830 rows, native lower source pixels, exact socket assembly, four QA asset hashes.'
+Write-Host "PASS: $checks Close-depth assertions. This is the user's farther-back parallax trial, not final comfort or production approval."

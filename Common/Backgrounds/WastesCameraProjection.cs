@@ -16,7 +16,7 @@ namespace apogean.Common.Backgrounds
 
 		public static float Vertical(int layer) => layer switch
 		{
-			0 => .012f, 1 => .03f, 2 => 1f,
+			0 => .012f, 1 => .03f, 2 => .06f,
 			_ => throw new ArgumentOutOfRangeException(nameof(layer))
 		};
 
@@ -24,10 +24,7 @@ namespace apogean.Common.Backgrounds
 		{
 			if (layer == 2)
 			{
-				// Fixed world Y, same vertical camera displacement/zoom as tiles.
-				// Never clamp this layer to the screen: flight must leave it below.
-				float ground = (float)((surfaceTiles - 50) * 16);
-				return (ground - GroundOffset - cameraY - height * .5f) * gameZoom + height * .5f - CloseSoilRow;
+				return CloseSoilY(surfaceTiles, cameraY, height, gameZoom) - CloseSoilRow;
 			}
 			// Preserve the approved slow parallax below the ceiling. Above it,
 			// evaluate that same composition at the ceiling and project its fixed
@@ -41,14 +38,28 @@ namespace apogean.Common.Backgrounds
 			return top + (cappedCenter - center) * gameZoom;
 		}
 
-		// World-height staging, not an opacity envelope. Mid locks first; Far
-		// keeps its slow parallax longer. Lower ceilings make scenery leave view
+		// Close is scenery just ahead of Mid, not a tile-speed foreground plane.
+		// Both camera movement and fixed terrain relief project through its depth.
+		// The ceiling restores full world motion so flight can leave it behind.
+		// No temporal filter: stopping, returning and reloading never cause catch-up.
+		public static float CloseSoilY(double surfaceTiles, float cameraY, int height,
+			float gameZoom, float? regionalGround = null)
+		{
+			float center = cameraY + height * .5f;
+			float ground = regionalGround ?? (float)((surfaceTiles - 50) * 16);
+			float capped = Math.Max(center, LockCameraCenterY(surfaceTiles, 2));
+			return height * .5f - GroundOffset * gameZoom + (ground - capped) * Vertical(2)
+				+ (capped - center) * gameZoom;
+		}
+
+		// World-height staging, not an opacity envelope. Close locks before Mid;
+		// Far keeps its slow parallax longer. Lower ceilings make scenery leave view
 		// earlier without changing ground composition or dissolving it on ascent.
 		public static float LockCameraCenterY(double surfaceTiles, int layer)
 		{
 			float fraction = layer switch
 			{
-				0 => .5f, 1 => .25f,
+				0 => .5f, 1 => .25f, 2 => .15f,
 				_ => throw new ArgumentOutOfRangeException(nameof(layer))
 			};
 			float ground = (float)((surfaceTiles - 50) * 16);

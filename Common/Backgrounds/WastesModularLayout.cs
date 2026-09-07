@@ -42,9 +42,7 @@ namespace apogean.Common.Backgrounds
 				return 220 + WastesCameraProjection.Top(surface, cameraY, height, MidHeight, 1, zoom);
 			if (layer == 2)
 			{
-				float ground = regionalGround ?? (float)((surface - 50) * 16);
-				return (ground - WastesCameraProjection.GroundOffset - cameraY - height * .5f) * zoom
-					+ height * .5f - CloseSoilRow;
+				return WastesCameraProjection.CloseSoilY(surface, cameraY, height, zoom, regionalGround) - CloseSoilRow;
 			}
 			throw new ArgumentOutOfRangeException(nameof(layer));
 		}
