@@ -34,6 +34,12 @@ purification test. This records art/gameplay intent, not an implemented system.
 
 ## Clarifications still open
 
+The user subsequently approved the shown reclaimed-city vegetation style and
+endorsed reusing this method for Maw sleep/awakening. Proceed to registered plant
+layers without another style vote. Approval does not make opaque generated studies
+valid exports or settle the global counter/curves. See `MAW_DORMANCY_VISUAL_DIRECTION.md`:
+Maw activity is separate from restoration, with existing progression triggers unchanged.
+
 The user confirmed the order and overlapping city-wide growth. Numeric response
 curves, plant coverage at each progress sample and any local influence on Close/
 Mid remain to be contracted. Far must represent world-wide progress, not inherit

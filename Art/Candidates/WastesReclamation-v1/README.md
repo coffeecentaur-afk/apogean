@@ -3,6 +3,13 @@
 September7,2026. Built-in image-generation tool, not CLI/API fallback.
 Exact prompts: [PROMPTS.md](PROMPTS.md). No art here is installed or a game capture.
 
+**User review accepted:** "yes that looks great" confirms the vegetation style
+shown in the denser study. Proceed with registered vegetation-only authoring;
+do not repeat the style-approval question. This does not approve changed masonry,
+opaque mattes, runtime dimensions, a calibrated 100% endpoint or live rendering.
+The user also proposed this method for Maw sleep/awakening, recorded separately
+in `MAW_DORMANCY_VISUAL_DIRECTION.md`.
+
 ## Existing barren city — cropped source on a solid review backing
 
 ![Barren reference](City-Barren-Reference.png)
@@ -23,9 +30,9 @@ Saved sources were not resized. Any display fitting is for review only.
 The denser image still reads as partly recovered, with extensive bare ground and
 few substantial leafy trees. Full recovery needs broader living ground and more
 rooted trees, retaining readable damaged architecture. Its generated filename is
-kept for provenance; it is **not approved as the100% endpoint**. Vegetation style,
-density and Terraria-scale readability need review. Do not automatically regenerate
-the accepted buildings to solve that gate.
+kept for provenance; it is **not approved as the100% endpoint**. Vegetation style
+is now accepted; final density and native Terraria-scale readability retain their
+own review. Do not automatically regenerate the accepted buildings to solve that gate.
 
 ## Provenance
 
@@ -69,7 +76,7 @@ shows shading/detail drift. These are expected rejections of opaque concepts
 
 ## Next gate
 
-Review vegetation style, then author registered plant-only layers/masks on the
+With vegetation style accepted, author registered plant-only layers/masks on the
 original city. Base pixels must remain exact outside reviewed plant occlusions.
 Keep stable cluster identities across stages; no fades between regenerated
 panoramas. Prove light/dark cutouts, separated early-growth regions, alignment,

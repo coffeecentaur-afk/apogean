@@ -34,9 +34,14 @@ Following `go`, review-only Far city growth studies and an offline curve calcula
 are recorded in `Art/Candidates/WastesReclamation-v1/README.md`. 1227 arithmetic
 assertions pass; both generated studies are rejected as runtime replacements
 (changed dimensions, opaque backdrops and visually shifted masonry). No world
-counter or installation. Review vegetation style before registered overlays;
-the denser study is not yet a fully living endpoint. Preserve approved architecture
+counter or installation. Vegetation style is now user-approved; registered overlays
+are next, while the denser study is not yet a fully living endpoint. Preserve approved architecture
 and existing cave/performance work; do not infer native proof from these studies.
+
+**Approved future reuse:** `MAW_DORMANCY_VISUAL_DIRECTION.md` specifies the same
+stable-base/detail-layer method for Maw sleep/awakening, independently of purification.
+Existing Matriarch/Hardmode triggers stand. This is design-only, not a new priority:
+continue Wastes, starting area, then shallow Maw. No new Maw art/runtime proof.
 
 **Current:** user selected the corrected checkpoint and broken-shell tops with
 “looks good to me.” All four buildings are now fixed. `WastesMidDepth-v2`
