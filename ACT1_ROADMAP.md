@@ -30,8 +30,13 @@ this specified target from the passing local fallback. Close → Mid → Far is
 confirmed with overlapping growth: the Far city shows sparse plants throughout
 early, then denser coverage as world-wide recovery advances. World-counter
 scope, response curves and art remain open; do not re-ask the layer-order choice.
-Preserve approved architecture. No new art/runtime implementation starts merely
-because the design has been recorded; existing cave/performance work stays valid.
+Following `go`, review-only Far city growth studies and an offline curve calculator
+are recorded in `Art/Candidates/WastesReclamation-v1/README.md`. 1227 arithmetic
+assertions pass; both generated studies are rejected as runtime replacements
+(changed dimensions, opaque backdrops and visually shifted masonry). No world
+counter or installation. Review vegetation style before registered overlays;
+the denser study is not yet a fully living endpoint. Preserve approved architecture
+and existing cave/performance work; do not infer native proof from these studies.
 
 **Current:** user selected the corrected checkpoint and broken-shell tops with
 “looks good to me.” All four buildings are now fixed. `WastesMidDepth-v2`

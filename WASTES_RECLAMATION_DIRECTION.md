@@ -75,7 +75,66 @@ world or saved-data change is made by recording this direction.
    lighting, both diagonal directions, biome/Space/cave handoffs, reload and
    clients receiving the same world state. Native screenshots remain mandatory.
 
-This specification does not declare the world-counter/art prototype started or
-complete, or silently expand today's bounded cave/performance checks. Keep the
-approved barren architecture and existing test evidence while planning this
-separate restoration branch. Do not present fallback success as its completion.
+## September7 bounded follow-through — offline only
+
+The subsequent `go` authorized first Far city growth studies and an offline
+response calculator. See `Art/Candidates/WastesReclamation-v1/README.md`. No
+runtime counter, installation, world modification or native QA occurred. The
+generated studies are not pixel-registered and cannot replace the original art.
+Preserve existing architecture and cave/performance work; arithmetic tests and
+historical fallback tests do not prove global reclamation.
+
+### Proposed measurement contract — not implemented or approved
+
+Use **restored eligible surface area / original eligible surface area**, separate
+from Dryad evil percentages. Store a generation-time map of restorable surface
+plots rather than requiring every underground stone tile to be cleansed. Plot
+size, soil depth, sample density and restored-plot classification remain open.
+The offline calculator takes supplied counts; it deliberately does not guess them.
+
+| Case | Recommendation | Remaining decision |
+|---|---|---|
+| Generated Wastes | Register actual converted surface land, not whole bounding rectangles. | Finalize after relevant generation passes and protected-structure exclusions. |
+| Surface Maw | Maw to Wastes is containment, not greenery; later compatible living terrain counts. | Define eligible surface footprint and native-evil overlap, not the entire underground Gullet volume. |
+| Untouched living biomes | Jungle does not grant recovery credit for simply existing. | Respect original biome/configuration boundaries. |
+| Mining/building/unknown blocks | Never shrink the denominator or credit empty/constructed land as green. | Decide how retained plot state and bounded nearby soil evidence allow building without making full recovery impossible. |
+| Reinfection | Recommend lowering recovery when eligible land becomes infected again; boss kills alone do not lock it green. | Choose sampling delay and visual smoothing; this policy is not yet user-approved. |
+| Old worlds | Missing baseline is unknown, not zero damage or full recovery. | Explicit migration policy; original terrain cannot be assumed perfectly reconstructible. |
+| No eligible area | Report unavailable, avoiding division by zero and a fabricated green city. | Preserve ordinary biome routing until a meaningful measure exists. |
+
+Proposed ownership: server-owned world ecology, versioned persistence and shared
+client values. Track changed plots plus bounded reconciliation outside drawing;
+clients interpolate published progress. Contract update/residency budgets before
+integration. This is not an implemented or measured network/performance path.
+Start the first fixture with global-only values; optional local Close/Mid influence
+must never distort Far's global signal.
+
+Local code evidence: `Content/World/RuinedSurfaceSystem.cs` identifies forest
+surface columns and converts selected depths but does not retain this baseline.
+`Common/Biomes/ForestRestorationState.cs` has local grass hysteresis and a position
+radius; it is not a global counter. Do not rename its fraction and call it global.
+Existing world-plan save/network hooks are possible integration points only.
+
+### Proposed overlapping response curves
+
+For global recovery R in [0,1]: Close=`1-(1-R)^3`, Mid=`1-(1-R)^2`, Far=`R`.
+These are vegetation-stage activation weights, **not green pixel percentages**.
+Reveal stable plant clusters across the panorama; do not fade the whole ruin
+layer or shift landmarks. The formula does not itself prove readable distributed
+growth at low progress, seamless art, or correct scenery selection.
+
+| Global recovery | Close weight | Mid weight | Far weight |
+|---:|---:|---:|---:|
+| 0% | 0% | 0% | 0% |
+| 10% | 27.1% | 19% | 10% |
+| 25% | 57.8% | 43.8% | 25% |
+| 50% | 87.5% | 75% | 50% |
+| 75% | 98.4% | 93.8% | 75% |
+| 100% | 100% | 100% | 100% |
+
+Run `Tools/Get-WastesReclamationProfile.ps1 -EligibleSurfaceUnits 100 -RestoredSurfaceUnits 25`.
+`Tools/Test-WastesReclamationProfile.ps1` passes1227 offline assertions, including
+four invalid-count rejection cases, endpoints, overlap, monotonicity, equal ratios,
+falling recovery, large counts and tiny positive ratios. No terrain classification,
+mining-exploit, migration, save/network, art coverage or native-render proof is
+claimed. Numeric tuning and the counting policy remain proposals.
