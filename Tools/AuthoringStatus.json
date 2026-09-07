@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "wastes-reclamation-backgrounds",
+      "status": "specified",
+      "static": "pending",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "WASTES_RECLAMATION_DIRECTION.md",
+      "evidenceScope": "September7 confirmed design: retain Wastes ruins and add living vegetation. Close leads, Mid follows, Far trails with overlapping growth. The entire distant city gets scattered greenery early, increasing in density with world-wide recovery; all layers become fully living at full recovery. No new art, counter or runtime proof. Pending userReview is for actual artwork/implementation, not a request to reconfirm the accepted order. Local native-Forest fallback is not final reclamation.",
+      "blockers": ["Define eligible world-wide recovery measure, denominator, former-Maw treatment, response curves/local influence and regression behavior without equating neutral Wastes with green land. Far must reflect global progress and cannot remain wholly dead until Mid is finished.", "Review matched vegetation stages while preserving accepted architecture; contract counting/save/multiplayer, compositing/alpha/coverage and measured memory, then prove native endpoints and intermediate stages. No blanket green tint, spatial wipe, native-forest replacement or moving landmarks."]
+    },
+    {
       "id": "forest-restoration-routing",
       "status": "contracted",
       "static": "pass",
@@ -12,7 +24,7 @@
       "userReview": "pending",
       "evidenceReference": "FOREST_RESTORATION_VALIDATION.md",
       "evidenceScope": "Historical PureSpray proof at1080p/1440p retained. Exact approved Mid bank rechecked September7 at2560x1369: full unforced hysteresis sequence, native47-projectile PureSpray run with19 incoming/19 outgoing fade samples and0 missing/mismatched draws, Jungle priority then Wastes return. Art/Validation/ForestRestoration/2026-09-07/README.md records35 QA lines and4 exact native crops. Not manual input, multiplayer, full visual matrix or whole-family art acceptance.",
-      "blockers": ["Test manual Clentaminator input, multiplayer, flight/teleport/reload and remaining lighting/scene-priority boundaries; accepted building tops do not approve all depth/routing artwork.", "Threshold fallback only: continuous ecological art blending and underground restoration routing remain unimplemented."]
+      "blockers": ["Test manual Clentaminator input, multiplayer, flight/teleport/reload and remaining lighting/scene-priority boundaries; accepted building tops do not approve all depth/routing artwork.", "Installed technical fallback only, not final restoration design. World-wide, same-ruin staged vegetation is separately specified in wastes-reclamation-backgrounds; underground restoration routing remains unimplemented."]
     },
     {
       "id": "landscape-concepts-2026-09-04",

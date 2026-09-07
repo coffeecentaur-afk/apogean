@@ -1,5 +1,10 @@
 # Local forest restoration — implementation and validation
 
+**Design clarification after this test:** `WASTES_RECLAMATION_DIRECTION.md` now
+specifies world-wide staged vegetation reclaiming the same Wastes ruins. The
+local native-Forest switch below is only the installed technical fallback, not
+the intended finished appearance or proof of the new global recovery measure.
+
 **Current exact-bank retest,2026-09-07:** the accepted Wastes Mid bank passes
 unforced hysteresis, real PureSpray fades, Jungle priority and Wastes return at
 2560×1369. Evidence and limits: `Art/Validation/ForestRestoration/2026-09-07/README.md`.

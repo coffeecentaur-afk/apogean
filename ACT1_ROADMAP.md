@@ -23,6 +23,16 @@
 
 ## Current environmental gate
 
+**Latest restoration clarification:** the user wants the same ruined Wastes
+landscape progressively overgrown according to world-wide recovery, not the
+native-Forest swap shown in the test. `WASTES_RECLAMATION_DIRECTION.md` separates
+this specified target from the passing local fallback. Close → Mid → Far is
+confirmed with overlapping growth: the Far city shows sparse plants throughout
+early, then denser coverage as world-wide recovery advances. World-counter
+scope, response curves and art remain open; do not re-ask the layer-order choice.
+Preserve approved architecture. No new art/runtime implementation starts merely
+because the design has been recorded; existing cave/performance work stays valid.
+
 **Current:** user selected the corrected checkpoint and broken-shell tops with
 “looks good to me.” All four buildings are now fixed. `WastesMidDepth-v2`
 preserves their exact architecture, adds audited lower terrain, and tests an
