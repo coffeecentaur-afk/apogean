@@ -1,0 +1,46 @@
+{
+  "recipe": "NativeMidBank-probe-v1",
+  "width": 512,
+  "height": 1408,
+  "upperOffsetY": 100,
+  "soilRow": 440,
+  "assets": [
+    {
+      "name": "Station",
+      "upper": "Art/Candidates/WastesStationBridge-v1/Study/Station-Upper.png",
+      "upperSHA256": "81CD2A9EB7CC99E637CFCF2EEF610CB64AA3A8EC90D06A4723B51BF93D0F0861",
+      "lower": "Art/Candidates/WastesFarCity-v1/QA-Package-v1/Station.png",
+      "lowerSHA256": "C7017CE5572D987B7F1F7A5AEFAC4BB441ECAA9BAAD1EAF81D676E044BEDF58C",
+      "lowerOffsetX": 12,
+      "assetSHA256": "CC6081FAFECA9C1F55CAE4AA6A0E0E592876D2F9499F106C3F60950A064AF738"
+    },
+    {
+      "name": "MotorDepot",
+      "upper": "Art/Candidates/WastesMidRuins-v2/ComponentAssembly-v1/MotorDepot-Upper.png",
+      "upperSHA256": "AD30DA51EDF8CAE32822AFF52D67B28733D1AC965AF185BC7D01A4E1DEAEF890",
+      "lower": "Art/Candidates/WastesFarCity-v1/QA-Package-v1/Station.png",
+      "lowerSHA256": "C7017CE5572D987B7F1F7A5AEFAC4BB441ECAA9BAAD1EAF81D676E044BEDF58C",
+      "lowerOffsetX": 12,
+      "assetSHA256": "3E2CA2F7C02FABEDEC8A9C291F6908C9FFA66037CDB4B26E2DF30BBB309ED33D"
+    },
+    {
+      "name": "BrokenShell",
+      "upper": "Art/Candidates/WastesMidRuins-v2/ScaleStudy-v3/BrokenShell-Upper.png",
+      "upperSHA256": "371989108EEF09CE9DAB06326E7BDCE34505DCC597775FD4EDDA828A7C9229DA",
+      "lower": "Content/Backgrounds/Candidates/WastesModules/Highway.png",
+      "lowerSHA256": "5FC9628114CC7F4A5493110CE71802CCCA890AA78E6896DF35B3D67D70B63359",
+      "lowerOffsetX": -32,
+      "assetSHA256": "EC1E482F6D3BC5EE75056323221B047399BC1567B439D514021D9CE7473E55D3"
+    },
+    {
+      "name": "Checkpoint",
+      "upper": "Art/Candidates/WastesMidRuins-v2/ScaleStudy-v3/Checkpoint-Upper.png",
+      "upperSHA256": "8512BBAE3F7FFEAE8BBD5CA3E7ECC4F1A0B434A7382FC266B7A005201643F0C5",
+      "lower": "Content/Backgrounds/Candidates/WastesModules/Quiet.png",
+      "lowerSHA256": "F5FC9565235464A1D33FC2158FE3E03E7D7D34321B4CE868D1A9BA98EC3CB40B",
+      "lowerOffsetX": 60,
+      "assetSHA256": "9E340ECA179C0EC72FD9531601D69E6A3E7EA523B394BC586CE703DB841F774A"
+    }
+  ],
+  "scope": "Offline native-pixel reuse probe. Original visible upper pixels preserved; transparent space below ground may gain cliff. No installation, new painted detail or art approval."
+}

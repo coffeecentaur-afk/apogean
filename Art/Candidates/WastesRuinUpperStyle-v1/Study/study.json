@@ -1,0 +1,31 @@
+{
+  "recipe": "RuinUpperStudy-v1",
+  "width": 512,
+  "height": 460,
+  "soilRow": 340,
+  "assets": [
+    {
+      "name": "BrokenShell",
+      "sourceSHA256": "98A4D9666B5C8C9C01830B6E254C2DE0A08847BFA0DF8AA70065693E153A5B08",
+      "candidateSHA256": "B6F3DA533BCE10F436B15A1CE25E368B660EC17CCD6A33E526D62FA7DD34A597",
+      "numerator": 3,
+      "denominator": 8,
+      "offsetX": 8,
+      "offsetY": -35,
+      "sourceSoilRow": 1000
+    },
+    {
+      "name": "Checkpoint",
+      "sourceSHA256": "D459F9C14EBD3003BCE1AD48D3A8EAD5FD4D66D9CE6A9805F95C818E3849EBD5",
+      "candidateSHA256": "51EF9199EDD1B4C012729E29197825A86C2F250C0031B366E7C6BC5EC6B742CC",
+      "numerator": 1,
+      "denominator": 3,
+      "offsetX": 32,
+      "offsetY": 5,
+      "sourceSoilRow": 1005
+    }
+  ],
+  "stationSHA256": "81CD2A9EB7CC99E637CFCF2EEF610CB64AA3A8EC90D06A4723B51BF93D0F0861",
+  "garageSHA256": "AD30DA51EDF8CAE32822AFF52D67B28733D1AC965AF185BC7D01A4E1DEAEF890",
+  "scope": "Offline upper-only comparison. Explicit nearest-center reduction and registration; no enlargement or claim of pixel-exact geometry preservation. No runtime import or art approval."
+}

@@ -1,0 +1,18 @@
+{
+  "recipeVersion": 1,
+  "reviewState": "agent-reviewed",
+  "sources": [
+    {
+      "name": "BrokenShell",
+      "sourceSHA256": "5F9004C02792E2F4C386B177A793333C3AF156B9C4AE23D04FC1727A58750FB2",
+      "removeComponents": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+      "reason": "Exterior neutral matte, antenna/rebar gaps, through-windows and tiny external cutout gaps. Dark interior recesses and warm plaster remain. Inspected full-source dark preview."
+    },
+    {
+      "name": "Checkpoint",
+      "sourceSHA256": "8D1175CF2B1E0732B10CCFE66B94C613DACDDE1D51AE905E35F376B994E3F2C2",
+      "removeComponents": [1,2,3,4,9,10,11,12,13,14,15,16,17,18,19,20,23,24,25,26,27,28,29],
+      "reason": "Exterior matte, antenna gaps, open windows, railing, wire loop and exterior footing gaps. Preserve the tiny interior roof/wall highlight components5,6,7,8,21,22. Source ground shadow may still require later footing treatment; this decision does not approve a deep cliff."
+    }
+  ]
+}

@@ -23,13 +23,17 @@
 
 ## Current environmental gate
 
-**Current:** user selected the middle Station bridge, pairing broader pixel
-clusters with cleaner contours; garage remains unchanged. Exact upper art now
-has a zero-warning build and bounded native daylight ground evidence in
-`Art/Validation/WastesStationBridge-2026-09-06/README.md`. Only the temporary
-disposable gallery receives it. Normal full-depth Station/Content stay unchanged.
-Next is compatible deep terrain below the approved upper, then placement and
-full flight/lighting/routing proof. No more Station/garage redesign loop.
+**Current:** user interrupted combined depth work because the checkpoint and
+broken-building tops do not match the approved Station/garage. Keep the accepted
+pair unchanged. One corrected upper candidate each is ready for user review in
+`Art/Candidates/WastesRuinUpperStyle-v1/README.md`; masks/provenance pass, but
+there is no new installation/build/native proof. Rejected lower-extension work
+is parked in `Art/Candidates/WastesMidBank-v1/README.md`. After style approval:
+preserve all four uppers, complete compatible depth/quiet placement, test the
+combined set through flight/lighting/biome/restoration, then Wastes mobs. Do not
+restart the accepted pair's style loop. Earlier Station ground proof remains in
+`Art/Validation/WastesStationBridge-2026-09-06/README.md`; it never approved the
+other two tops or full-depth assets. Normal Content is unchanged.
 
 **Earlier user review:** overall native ruin scale is not the requested change;
 their fine realistic texture is. Station remains the approved pixel-art anchor.

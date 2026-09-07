@@ -234,6 +234,18 @@
       "blockers": ["Do not repeat the approved Station/garage style decision or regenerate the upper artwork. Compatible deep terrain/side continuation and its join remain to be authored.", "Actual BackgroundSet depth probe correctly rejects512x460 against the1408px Mid contract. Ordinary placement, full flight/Space/descent, lighting/real-biome/restoration and production gates remain open. Existing QA grove checkpoint mismatch remains unresolved and unbypassed."]
     },
     {
+      "id": "wastes-ruin-upper-style-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesRuinUpperStyle-v1/README.md",
+      "evidenceScope": "Two upper-only image edits with approved Station/garage hash-pinned unchanged. Reviewed masks and recorded bounded RGB donors; independent full-pixel export/provenance and512x460 fit audit passes. Three actual CLI defects rejected. Four-way light/dark offline comparison; no new build/install/native/world operation.",
+      "blockers": ["User style review required for checkpoint and ruined-building tops. Do not infer acceptance from static proof or earlier native ground views. Checkpoint footing gray rim remains unfinished terrain.", "Rejected combined-depth work is parked in WastesMidBank-v1. After top approval, author compatible depth and quiet placement, then combined flight/lighting/real-biome/restoration proof before Wastes mobs. Existing QA grove persistence mismatch remains unresolved/unbypassed."]
+    },
+    {
       "id": "wastes-terrain",
       "status": "fixture-pass",
       "static": "pass",

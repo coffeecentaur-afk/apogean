@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "width": 1323,
+  "height": 1189,
+  "keptPixels": 295511,
+  "transparentPixels": 1277536,
+  "partialAlphaPixels": 0,
+  "sourceSHA256": "E90BB7CE0AA3A1A5B3D7A249A3A9713C868026AC04350EF004F72A55380CE40C",
+  "maskSHA256": "06FA086ABE9DDBBD197202005F70473A0BE945322D092E68D611819EA8E875F4",
+  "outputSHA256": "D459F9C14EBD3003BCE1AD48D3A8EAD5FD4D66D9CE6A9805F95C818E3849EBD5",
+  "keptPixelsUnchanged": true,
+  "transparentRGBZero": true,
+  "pngRoundtripVerified": true,
+  "pass": true,
+  "scope": "Exact hard-mask export only. Mask semantics, edge color, artwork, runtime dimensions, seams and live rendering require separate review."
+}

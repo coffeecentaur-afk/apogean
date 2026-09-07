@@ -1,5 +1,5 @@
 param([Parameter(Mandatory)][string]$OutputDirectory, [string]$DecisionPath,
-    [ValidateSet('Ruins','StationBridge')][string]$Family='Ruins')
+    [ValidateSet('Ruins','StationBridge','RuinUpperStyle')][string]$Family='Ruins')
 # Source-specific review proposals for pinned concept originals, not a
 # generic background remover or production atlas import. Originals are never
 # edited; optional prepared-color derivatives retain exact edge donor records.
@@ -15,6 +15,12 @@ $expectedWidth=1024; $expectedHeight=1536
 if($Family -eq 'StationBridge'){
     $sources=@(@{name='Station';path='Art/Candidates/WastesStationBridge-v1/Station-original.png';hash='E5E81D8B8B612ADF8DA814BA207B5868495239D18F631759E13EF47149357F75'})
     $expectedWidth=1323; $expectedHeight=1189
+}
+if($Family -eq 'RuinUpperStyle'){
+    $sources=@(
+        @{name='BrokenShell';path='Art/Candidates/WastesRuinUpperStyle-v1/BrokenShell-original.png';hash='5F9004C02792E2F4C386B177A793333C3AF156B9C4AE23D04FC1727A58750FB2';width=1322;height=1190},
+        @{name='Checkpoint';path='Art/Candidates/WastesRuinUpperStyle-v1/Checkpoint-original.png';hash='8D1175CF2B1E0732B10CCFE66B94C613DACDDE1D51AE905E35F376B994E3F2C2';width=1323;height=1189}
+    )
 }
 $output = [IO.Path]::GetFullPath($OutputDirectory)
 if (Test-Path -LiteralPath $output) { throw 'USE_NEW_OUTPUT_DIRECTORY' }
@@ -147,6 +153,8 @@ public static class MidRuinMaskProposal {
 foreach ($source in $sources) {
     [int[]]$selected = @()
     if ($decision) { $selected = [int[]]$source.decision.removeComponents }
-    [MidRuinMaskProposal]::Run($source.full,$output,$source.name,$source.hash,$selected,[bool]$decision,$expectedWidth,$expectedHeight)
+    $width=if($source.ContainsKey('width')){$source.width}else{$expectedWidth}
+    $height=if($source.ContainsKey('height')){$source.height}else{$expectedHeight}
+    [MidRuinMaskProposal]::Run($source.full,$output,$source.name,$source.hash,$selected,[bool]$decision,$width,$height)
 }
 Write-Output "Masks and offline light/dark previews (not game screenshots): $output"

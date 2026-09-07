@@ -333,6 +333,15 @@ not the full1408px Mid module. Author compatible deeper terrain before ordinary
 placement and full flight/lighting/routing proof. See
 `Art/Validation/WastesStationBridge-2026-09-06/README.md`.
 
+**Latest two-top correction:** native ground evidence did not mean the user
+accepted checkpoint/broken-shell style. They stopped combined depth work on
+that mismatch. Freeze the selected Station and garage; revise only those other
+tops, compare all four at intended scale, and obtain style review before any
+installation. `Art/Candidates/WastesRuinUpperStyle-v1/README.md` records the
+pending corrected pair. A failed depth experiment is retained separately,
+not approved: generated lower extensions changed upper art and framing, while
+the reuse probe exposed joins. Short masked studies are not full-depth modules.
+
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial
 horizon: collapsed building shells, broken urban infrastructure and quiet rubble
