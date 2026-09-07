@@ -42,13 +42,13 @@ namespace apogean.Common.Backgrounds
 		}
 
 		// World-height staging, not an opacity envelope. Mid locks first; Far
-		// keeps its slow parallax longer. These initial tuning points retain the
-		// previous staging order without dissolving scenery at those heights.
+		// keeps its slow parallax longer. Lower ceilings make scenery leave view
+		// earlier without changing ground composition or dissolving it on ascent.
 		public static float LockCameraCenterY(double surfaceTiles, int layer)
 		{
 			float fraction = layer switch
 			{
-				0 => .7f, 1 => 1f / 3f,
+				0 => .5f, 1 => .25f,
 				_ => throw new ArgumentOutOfRangeException(nameof(layer))
 			};
 			float ground = (float)((surfaceTiles - 50) * 16);

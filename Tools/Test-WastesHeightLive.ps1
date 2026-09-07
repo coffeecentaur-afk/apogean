@@ -35,6 +35,10 @@ foreach ($case in $Cases) {
             $sawCapped = $false; $sawUncapped = $false; $sawExit = $false
             $previous = $null
             foreach ($s in $samples) {
+                # Do not pass an archived higher-ceiling trace as today's build.
+                # Replay pre-lowering evidence with the validator at commit0ec6d6c.
+                $fraction = if ($layer -eq 1) { '0.250' } else { '0.500' }
+                if (-not $s.EndsWith("capFraction=$fraction")) { throw "WRONG_CAP_PROFILE: $case/$layer" }
                 if ($s -notmatch 'cameraCenter=([-\d.]+); cap=([-\d.]+); top=([-\d.]+); expected=([-\d.]+); zoom=([\d.]+); exited=(True|False); failed=False') { throw "BAD_POSITION: $s" }
                 $center = [double]::Parse($Matches[1],[cultureinfo]::InvariantCulture)
                 $cap = [double]::Parse($Matches[2],[cultureinfo]::InvariantCulture)

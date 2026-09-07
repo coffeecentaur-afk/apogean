@@ -5,6 +5,7 @@ $scratch = Join-Path ([IO.Path]::GetTempPath()) ('ApogeanHeightMutations-' + [gu
 New-Item -ItemType Directory -Path (Join-Path $scratch 'Common/Backgrounds'),(Join-Path $scratch 'Content/Backgrounds') | Out-Null
 $files = @('Common/Backgrounds/WastesCameraProjection.cs','Common/Backgrounds/WastesModularLayout.cs','Common/Backgrounds/WastesParallaxContract.cs','Common/Backgrounds/WastesGroundProfile.cs','Content/Backgrounds/WastesLandscapeV1Renderer.cs')
 $mutations = @(
+    @('previous higher ceilings','Common/Backgrounds/WastesCameraProjection.cs','0 => .5f, 1 => .25f','0 => .7f, 1 => 1f / 3f','Test-WastesHeightLock.ps1'),
     @('no ceiling','Common/Backgrounds/WastesCameraProjection.cs','Math.Max(center, LockCameraCenterY(surfaceTiles, layer))','center','Test-WastesHeightLock.ps1'),
     @('screen-following ceiling','Common/Backgrounds/WastesCameraProjection.cs','(cappedCenter - center) * gameZoom','0f','Test-WastesHeightLock.ps1'),
     @('ignores zoom','Common/Backgrounds/WastesCameraProjection.cs','(cappedCenter - center) * gameZoom','(cappedCenter - center)','Test-WastesHeightLock.ps1'),
@@ -23,4 +24,4 @@ foreach ($m in $mutations) {
     if ($LASTEXITCODE -eq 0 -or ($output -join "`n") -notmatch 'FAIL:') { throw "Mutation not meaningfully rejected: $($m[0]); $output" }
     Write-Host "PASS: rejected $($m[0])"
 }
-Write-Host "PASS: six incorrect camera/anchor mutations rejected. Temporary evidence retained at $scratch"
+Write-Host "PASS: $($mutations.Count) incorrect camera/anchor mutations rejected. Temporary evidence retained at $scratch"

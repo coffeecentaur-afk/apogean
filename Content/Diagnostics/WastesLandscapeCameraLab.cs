@@ -183,7 +183,8 @@ namespace apogean.Content.Diagnostics
 			float center = cameraY + height * .5f;
 			float ground = (float)((Main.worldSurface - 50) * 16);
 			float boundary = (float)((Math.Floor(Main.worldSurface * (double).35f) + 1) * 16);
-			float cap = ground - Math.Max(1, ground - boundary) * (layer == 1 ? 1f / 3f : .7f);
+			float fraction = layer == 1 ? .25f : .5f;
+			float cap = ground - Math.Max(1, ground - boundary) * fraction;
 			float sample = Math.Max(center, cap);
 			float expected = height * (.57f + layer * .025f) - 740
 				+ (ground - sample - height * .05f) * (layer == 1 ? .03f : .012f)
@@ -194,7 +195,7 @@ namespace apogean.Content.Diagnostics
 			if (center < cap) cappedChecks++;
 			if (top >= height) exitedChecks++;
 			if (heightChecks <= 2 || (SpaceFlight && panTick % 60 == 0) || (failed && heightFailures == 1))
-				Mod.Logger.Info($"WASTES HEIGHT POSITION SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; cameraCenter={center:F3}; cap={cap:F3}; top={top:F3}; expected={expected:F3}; zoom={zoom:F3}; exited={top >= height}; failed={failed}");
+				Mod.Logger.Info($"WASTES HEIGHT POSITION SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; cameraCenter={center:F3}; cap={cap:F3}; top={top:F3}; expected={expected:F3}; zoom={zoom:F3}; exited={top >= height}; failed={failed}; capFraction={fraction:F3}");
 		}
 
 		// Permanent QA probe: project the *submitted* geometry through the engine's

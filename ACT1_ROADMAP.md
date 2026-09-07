@@ -30,6 +30,11 @@ ascent/descent pass at2560x1369, but the full fixture remains rejected on shallo
 Close coverage at lower viewpoints. Resolve that depth/cave handoff and rerun
 the full sweep before reclamation or other families. Existing artwork is unchanged.
 Historical opacity proof is not proof of this new user-requested camera policy.
+Latest user clarification lowers maximum flight ceilings, not ground placement.
+`Art/Validation/WastesLowerCaps-2026-09-07/README.md` records the Mid25%/Far50%
+trial, clean build, passing native ascent/descent and matched before/after views.
+Ground composition is unchanged. Exact fractions await user inspection; neither
+this tuning nor its flight-only pass resolves the separate Close coverage gate.
 
 **Latest restoration clarification:** the user wants the same ruined Wastes
 landscape progressively overgrown according to world-wide recovery, not the

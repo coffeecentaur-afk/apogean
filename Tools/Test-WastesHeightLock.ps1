@@ -22,9 +22,11 @@ foreach ($surface in 250,350,500,649,700) {
     foreach ($height in 720,1080,1369,1440,2160) {
         foreach ($zoom in 1.0,1.25,2.0) {
             foreach ($layer in 0,1) {
-                # Independent policy reference: existing staging points become locks.
-                $fraction = if ($layer -eq 1) { 1.0/3.0 } else { .7 }
+                # Lower flight ceilings, not a downward ground-composition offset.
+                $fraction = if ($layer -eq 1) { .25 } else { .5 }
                 $capCenter = $ground - ($ground-$space)*$fraction
+                $actualCap = [apogean.Common.Backgrounds.WastesCameraProjection]::LockCameraCenterY($surface,$layer)
+                Assert-Height ([math]::Abs($actualCap-$capCenter) -lt .01) "lower cap layer=$layer actual=$actualCap expected=$capCenter"
                 $capCamera = $capCenter - $height*.5
                 $capTop = [apogean.Common.Backgrounds.WastesCameraProjection]::Top($surface,$capCamera,$height,1792,$layer,$zoom)
                 foreach ($lift in -400,-.25,0,.25,16,400,1200,4000) {

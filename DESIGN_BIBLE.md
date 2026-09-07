@@ -36,10 +36,16 @@ Wastes camera clarification (September7): foreground sections have stable
 world/terrain anchors, never a shared ground height resampled under the moving
 camera. Midground and distant scenery use maximum-height positional locks and
 leave view through camera motion, not altitude opacity. Current QA tuning locks
-Mid at1/3 and Far at70% of the ascent reference; biome transitions and global
+Mid at25% and Far at50% of the ascent reference; biome transitions and global
 reclamation blending stay independent. Details and evidence live in
 `Art/Validation/WastesHeightLock-2026-09-07/README.md`. This overrides earlier
 altitude-fade staging, not the accepted art or Close→Mid→Far recovery order.
+
+Latest clarification: lower the maximum **flight caps**, not the ground-level
+placement. The25%/50% values replace1/3/70% as a bounded tuning trial; the user
+has not yet reviewed those exact numbers. No downward base offset, texture
+resize, foreground anchor change or reinstated altitude fade. Evidence:
+`Art/Validation/WastesLowerCaps-2026-09-07/README.md`.
 
 Every visual or gameplay family advances through `specified` → `contracted` → `fixture-pass` → `integrated` → `polished`; a failed live render or explicit rejection moves it to `rejected`. A clean build, correct PNG dimensions, or passing static validator cannot by itself advance visual status. Promotion requires the family contract, one deterministic in-game fixture, production-path evidence, and the review recorded in `Tools/AuthoringStatus.json`. Work proceeds one dependency family at a time unless a later feature is explicitly labeled as a disposable prototype.
 
