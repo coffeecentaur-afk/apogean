@@ -309,7 +309,7 @@ pixel patchwork: chipped paint, dirty mortar, soot, rust and broken materials.
 Do not equate more pixel-art with cleaner or emptier surfaces. The v2 depot
 material/grid study is review-only; a fixed grid alone cannot approve style.
 
-**Latest component preference:** between those depot versions, retain v1's
+**Depot component preference:** between those depot versions, retain v1's
 cleaner building as the working choice. The grittier v2 treatment suits terrain
 better than architecture. Terrain may have denser, rougher texture while building
 surfaces remain easier to read. This is a relative preference, not confirmation
@@ -317,6 +317,17 @@ that either depot matches Station's pixel style. Keep Station unchanged; stop
 whole-building redraws. `ComponentAssembly-v1` now combines unchanged v1 upper
 pixels with v2's rougher ground at the footing. This remains a short ground-scale
 review candidate, not automatic art approval or a full-height Mid module.
+
+**Latest Station/garage correction:** the user likes the garage's design and
+cleaner contour, but Station's broader/fewer pixel clusters. Station's cutout is
+now criticized; its earlier blanket reference status is superseded. Keep both
+originals intact, not aesthetically frozen. Aim for an in-between: one Station
+redraw may bridge the two without another garage-redraw loop. This is about
+pixel grain AND edge quality, not just adding/removing grit. The previous native
+pair is unaccepted for cohesion, not a rejection of the garage itself.
+`Art/Candidates/WastesStationBridge-v1/` is one offline mask/export/size-study
+candidate only. Inspect it before installation; deeper foundations, native
+render proof, and user acceptance remain separate gates.
 
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial

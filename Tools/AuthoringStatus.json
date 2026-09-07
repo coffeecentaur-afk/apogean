@@ -210,15 +210,28 @@
     },
     {
       "id": "wastes-mid-depot-component-assembly-v1",
-      "status": "contracted",
+      "status": "rejected",
       "static": "pass",
       "build": "pass",
       "liveFixture": "pass",
       "production": "pending",
-      "userReview": "pending",
+      "userReview": "rejected",
+      "componentPreference": "Garage design and cleaner cutout are liked. Rejected verdict concerns Station/garage pair cohesion, not the garage itself. Station's broader grain remains preferred but its rough cutout is now criticized.",
       "evidenceReference": "Art/Validation/WastesDepotAssembly-2026-09-06/README.md",
       "evidenceScope": "Exact v1 building plus v2 grid terrain, stepped footing join,432 authored rows plus28 explicitly empty QA padding. All235520 pixels/source selector audited; three actual CLI defects rejected; full reproduction. Build0warnings/errors. Fresh named-SP native gallery beside unchanged Station/real player; depot29942 draw samples0failures; shell/checkpoint regression and normal-return pass; four live CLI defects rejected. No repository Content or game C# change.",
-      "blockers": ["Combined art and Station-style review pending. Quieter building/rougher ground is a component preference, not full approval. Stop whole-building regeneration.", "Ground-only candidate: author deep foundations, quiet seeded placement and flight/lighting/biome/restoration proof before production. Existing grove checkpoint mismatch remains unresolved and unbypassed."]
+      "blockers": ["Pair cohesion is unaccepted. Preserve this liked garage; one separately tracked Station bridge explores broader pixel clusters with cleaner contours. No further garage regeneration.", "Ground-only candidate: author deep foundations, quiet seeded placement and flight/lighting/biome/restoration proof before production. Existing grove checkpoint mismatch remains unresolved and unbypassed."]
+    },
+    {
+      "id": "wastes-station-style-bridge-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesStationBridge-v1/README.md",
+      "evidenceScope": "One generated Station edit; original returned1323x1189 opaque painted matte rather than requested dimensions/alpha. Reviewed17-component mask,5690 recorded edge RGB donors, exact hard-alpha export and explicit3/8 upper-study fit checked independently at all pixels. Three actual CLI defects reject expected reasons. Light/dark offline comparisons beside unchanged Station and garage. No Content PNG, renderer, build, client or world changes. Static pass covers derivative provenance/alpha only.",
+      "blockers": ["User art review pending: broader canopy chips/connected branches, terrain still finely detailed. Not a perfect style-match claim. One candidate only; do not loop generation.", "512x460 study is not a1408px-deep module. Foundations, native edge/scale/lighting checks, spacing and full production gates remain unproven; existing QA grove checkpoint mismatch remains unresolved."]
     },
     {
       "id": "wastes-terrain",

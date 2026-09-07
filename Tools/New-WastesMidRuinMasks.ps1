@@ -1,5 +1,6 @@
-param([Parameter(Mandatory)][string]$OutputDirectory, [string]$DecisionPath)
-# Source-specific review proposals for three pinned concept originals, not a
+param([Parameter(Mandatory)][string]$OutputDirectory, [string]$DecisionPath,
+    [ValidateSet('Ruins','StationBridge')][string]$Family='Ruins')
+# Source-specific review proposals for pinned concept originals, not a
 # generic background remover or production atlas import. Originals are never
 # edited; optional prepared-color derivatives retain exact edge donor records.
 Set-StrictMode -Version Latest
@@ -10,6 +11,11 @@ $sources = @(
     @{ name='MotorDepot'; path='Art/Candidates/WastesMidRuins-v2/MotorDepot-original.png'; hash='456442A7E3D7454DB3BAB4794E34A57004BB58A784A93E2395E3CE39D071DB2F' },
     @{ name='Checkpoint'; path='Art/Candidates/WastesMidRuins-v2/Checkpoint-original.png'; hash='3702DD05277CD7630F9F47409356103A36FEB256A07339097AD3C22B7C25B044' }
 )
+$expectedWidth=1024; $expectedHeight=1536
+if($Family -eq 'StationBridge'){
+    $sources=@(@{name='Station';path='Art/Candidates/WastesStationBridge-v1/Station-original.png';hash='E5E81D8B8B612ADF8DA814BA207B5868495239D18F631759E13EF47149357F75'})
+    $expectedWidth=1323; $expectedHeight=1189
+}
 $output = [IO.Path]::GetFullPath($OutputDirectory)
 if (Test-Path -LiteralPath $output) { throw 'USE_NEW_OUTPUT_DIRECTORY' }
 foreach ($source in $sources) {
@@ -37,10 +43,10 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.Json;
 public static class MidRuinMaskProposal {
-    public static void Run(string path,string output,string name,string hash,int[] selected,bool finalized) {
+    public static void Run(string path,string output,string name,string hash,int[] selected,bool finalized,int expectedWidth,int expectedHeight) {
         using(var art=new Bitmap(path)) {
             int w=art.Width,h=art.Height;
-            if(w!=1024 || h!=1536) throw new InvalidDataException("SOURCE_DIMENSIONS_CHANGED");
+            if(w!=expectedWidth || h!=expectedHeight) throw new InvalidDataException("SOURCE_DIMENSIONS_CHANGED");
             var labels=new int[w*h]; var pixels=new Color[w*h];
             var proposed=new bool[w*h];
             long transparent=0,partial=0;
@@ -139,7 +145,8 @@ public static class MidRuinMaskProposal {
 }
 '@
 foreach ($source in $sources) {
-    $selected = if ($decision) { [int[]]$source.decision.removeComponents } else { [int[]]@() }
-    [MidRuinMaskProposal]::Run($source.full,$output,$source.name,$source.hash,$selected,[bool]$decision)
+    [int[]]$selected = @()
+    if ($decision) { $selected = [int[]]$source.decision.removeComponents }
+    [MidRuinMaskProposal]::Run($source.full,$output,$source.name,$source.hash,$selected,[bool]$decision,$expectedWidth,$expectedHeight)
 }
 Write-Output "Masks and offline light/dark previews (not game screenshots): $output"

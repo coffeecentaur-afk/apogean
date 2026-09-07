@@ -1,0 +1,10 @@
+{
+  "recipeVersion": 1,
+  "reviewState": "agent-reviewed",
+  "sources": [{
+    "name": "Station",
+    "sourceSHA256": "E5E81D8B8B612ADF8DA814BA207B5868495239D18F631759E13EF47149357F75",
+    "removeComponents": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
+    "review": "Dark/light proposal inspected. 1 is exterior matte; 2/5 are openings between sign uprights; 3/4 are canopy openings; 6/7 are pump-hose openings; 8-17 are isolated neutral matte gaps at vegetation/pillar/sign edges near y705-759. Warm canopy chips, pale plaster, pump labels, dark shop recesses and rocks stay opaque. Edge RGB preparation is separate from this silhouette decision; it must be inspected again on both backdrops. This is an agent-reviewed art study, not user approval or runtime readiness."
+  }]
+}

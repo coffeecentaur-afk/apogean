@@ -105,6 +105,14 @@ selector, preserve their pixels, and check the footing separately from alpha.
 An upper-only crop may use explicitly empty padding in a ground gallery, never
 as a claim of authored deep coverage. Example: `ComponentAssembly-v1/README.md`.
 
+A reference can have preferred pixel grain but a rejected contour, while another
+has preferred architecture but excessive micro-detail. Record these separate
+preferences; do not freeze the first reference after the user qualifies it.
+Make one targeted bridge candidate, preserving originals and showing unchanged
+references at comparable native size. Passing alpha export must not be reported
+as solving the style mismatch. `WastesStationBridge-v1/README.md` records this
+bounded probe, including the returned opaque matte and explicit resampling.
+
 ### Native scale gate, not another offline approval loop
 
 When a user cannot judge scale from a board, supply a bounded native ground

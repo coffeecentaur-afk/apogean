@@ -1,0 +1,16 @@
+{
+  "recipe": "StationBridgeStudy-v1",
+  "width": 512,
+  "height": 460,
+  "sourceWidth": 1323,
+  "sourceHeight": 1189,
+  "sourceSHA256": "E1E6FF649F83A4997CAEF37A4065A576E115A15B4E959235362C7EAFAF597C30",
+  "referenceStationSHA256": "83C8EDE6580E6CEB2CEECD2C0F24078EFCADE3EB10680C8619BC3B1D9207C59B",
+  "referenceGarageSHA256": "AD30DA51EDF8CAE32822AFF52D67B28733D1AC965AF185BC7D01A4E1DEAEF890",
+  "scaleNumerator": 3,
+  "scaleDenominator": 8,
+  "offsetY": 40,
+  "approximateSoilY": 340,
+  "candidateSHA256": "81CD2A9EB7CC99E637CFCF2EEF610CB64AA3A8EC90D06A4723B51BF93D0F0861",
+  "scope": "Offline upper-only art review; nearest-center resample, not lossless export or runtime-ready foundation. Original references untouched. No game installation or visual acceptance."
+}

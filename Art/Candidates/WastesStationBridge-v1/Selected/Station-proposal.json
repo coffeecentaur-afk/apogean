@@ -1,0 +1,191 @@
+{
+  "recipeVersion": 1,
+  "sourceSHA256": "E5E81D8B8B612ADF8DA814BA207B5868495239D18F631759E13EF47149357F75",
+  "state": "agent-reviewed mask; edge-color candidate",
+  "width": 1323,
+  "height": 1189,
+  "selectedComponents": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "edgeColorChanges": 5690,
+  "sourceTransparentPixels": 0,
+  "sourcePartialPixels": 0,
+  "proposedRemoved": 879447,
+  "keptBounds": {
+    "minX": 98,
+    "minY": 265,
+    "maxX": 1298,
+    "maxY": 1145
+  },
+  "components": [
+    {
+      "id": 1,
+      "area": 807108,
+      "minX": 0,
+      "minY": 0,
+      "maxX": 1322,
+      "maxY": 1188,
+      "border": true
+    },
+    {
+      "id": 2,
+      "area": 1272,
+      "minX": 1056,
+      "minY": 397,
+      "maxX": 1120,
+      "maxY": 417,
+      "border": false
+    },
+    {
+      "id": 3,
+      "area": 42789,
+      "minX": 336,
+      "minY": 454,
+      "maxX": 569,
+      "maxY": 738,
+      "border": false
+    },
+    {
+      "id": 4,
+      "area": 14177,
+      "minX": 599,
+      "minY": 454,
+      "maxX": 728,
+      "maxY": 719,
+      "border": false
+    },
+    {
+      "id": 5,
+      "area": 13419,
+      "minX": 1056,
+      "minY": 502,
+      "maxX": 1120,
+      "maxY": 720,
+      "border": false
+    },
+    {
+      "id": 6,
+      "area": 335,
+      "minX": 439,
+      "minY": 698,
+      "maxX": 450,
+      "maxY": 732,
+      "border": false
+    },
+    {
+      "id": 7,
+      "area": 159,
+      "minX": 557,
+      "minY": 698,
+      "maxX": 562,
+      "maxY": 727,
+      "border": false
+    },
+    {
+      "id": 8,
+      "area": 10,
+      "minX": 299,
+      "minY": 705,
+      "maxX": 299,
+      "maxY": 714,
+      "border": false
+    },
+    {
+      "id": 9,
+      "area": 1,
+      "minX": 277,
+      "minY": 710,
+      "maxX": 277,
+      "maxY": 710,
+      "border": false
+    },
+    {
+      "id": 10,
+      "area": 9,
+      "minX": 1106,
+      "minY": 710,
+      "maxX": 1107,
+      "maxY": 714,
+      "border": false
+    },
+    {
+      "id": 11,
+      "area": 1,
+      "minX": 1062,
+      "minY": 711,
+      "maxX": 1062,
+      "maxY": 711,
+      "border": false
+    },
+    {
+      "id": 12,
+      "area": 3,
+      "minX": 293,
+      "minY": 716,
+      "maxX": 293,
+      "maxY": 718,
+      "border": false
+    },
+    {
+      "id": 13,
+      "area": 3,
+      "minX": 613,
+      "minY": 716,
+      "maxX": 613,
+      "maxY": 718,
+      "border": false
+    },
+    {
+      "id": 14,
+      "area": 2,
+      "minX": 615,
+      "minY": 716,
+      "maxX": 615,
+      "maxY": 717,
+      "border": false
+    },
+    {
+      "id": 15,
+      "area": 147,
+      "minX": 226,
+      "minY": 721,
+      "maxX": 237,
+      "maxY": 738,
+      "border": false
+    },
+    {
+      "id": 16,
+      "area": 5,
+      "minX": 183,
+      "minY": 746,
+      "maxX": 183,
+      "maxY": 750,
+      "border": false
+    },
+    {
+      "id": 17,
+      "area": 7,
+      "minX": 1231,
+      "minY": 757,
+      "maxX": 1233,
+      "maxY": 759,
+      "border": false
+    }
+  ]
+}

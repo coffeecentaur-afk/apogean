@@ -1,5 +1,11 @@
 # Depot component assembly — v1
 
+Latest review: garage design/cutout liked, but the Station/garage pair is not
+accepted for pixel-style cohesion. Station's broader grain is preferred while
+its rougher cutout is criticized. One separate Station bridge candidate is in
+`../../WastesStationBridge-v1/`; these source pixels remain unchanged. Technical
+checks below are historical evidence, not a later art-acceptance verdict.
+
 User direction: retain the earlier, cleaner depot BUILDING; use the rougher
 redraw's TERRAIN. This selection does not certify a Station pixel-style match.
 No new image generation, repainting, global grit filter or source edits.

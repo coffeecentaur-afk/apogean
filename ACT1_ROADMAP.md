@@ -23,7 +23,15 @@
 
 ## Current environmental gate
 
-**Latest user review:** overall native ruin scale is not the requested change;
+**Current:** user likes the garage's cleaner outline/design and Station's broader
+pixel clusters, but now rejects Station's rough cutout. Earlier immutable-Station
+direction is qualified. One new Station bridge is in
+`Art/Candidates/WastesStationBridge-v1/`: inspected hard-alpha extraction and
+comparable-size offline boards only. Current runtime art is unchanged. Pair
+cohesion remains unaccepted; garage itself is liked. Review the one candidate,
+then deep foundations/native checks if selected. No extra garage redraw loop.
+
+**Earlier user review:** overall native ruin scale is not the requested change;
 their fine realistic texture is. Station remains the approved pixel-art anchor.
 One motor-depot redraw is prepared in `Art/Candidates/WastesMidRuins-v2/PixelStyle-v1/`.
 Review its grouped shading at the existing size before revising the other two.

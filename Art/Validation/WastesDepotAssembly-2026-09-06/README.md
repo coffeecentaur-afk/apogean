@@ -1,5 +1,10 @@
 # Preferred depot building + rougher terrain — native ground check
 
+Latest user review: the garage itself is liked, but the pair is not accepted for
+cohesion. Station's larger pixel clusters and garage's cleaner perimeter are the
+new combined target. The separate StationBridge-v1 art study has NO native
+evidence yet. Do not use these old captures to certify that new image.
+
 `motor-depot.jpg` is an actual, unretouched tModLoader window capture: accepted
 Station left, real player gg center, component-assembled depot right. The depot
 retains the earlier quieter building pixels and the later rougher ground.
