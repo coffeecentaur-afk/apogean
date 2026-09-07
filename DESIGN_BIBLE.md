@@ -294,6 +294,15 @@ The user needed real character scale. Native ground-only pairs now exist in
 are not approved1408px-deep modules. Size/facing review, foundations and full
 parallax/routing proof still precede integration. Accepted Station remains intact.
 
+**Mid material-style correction:** the user likes the general size/look but
+finds the ruins too realistic and finely textured beside Station. Station is the
+fixed pixel-language reference: readable color clusters, grouped damage, clearer
+planes and restrained shading. More canvas pixels or smaller realistic detail
+are not improvements. Retain building scale and identities; revise one depot
+first, review it, then transfer the accepted language to shell/checkpoint. Keep
+Station unchanged. `Art/Candidates/WastesMidRuins-v2/PixelStyle-v1/` is the
+offline probe, not a new native render or complete deep module.
+
 **Requested Far revision, concept first:** replace the dominant repetitive gray
 rock-wall impression with cracked dusty earth and a demolished city/industrial
 horizon: collapsed building shells, broken urban infrastructure and quiet rubble

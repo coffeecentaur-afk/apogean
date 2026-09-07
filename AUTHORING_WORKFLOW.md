@@ -78,6 +78,17 @@ source/mask and assembled native-scale result before a disposable live fixture.
 
 ## Reference discipline
 
+### Pixel language is not object scale
+
+When a correctly sized object looks too realistic beside accepted scenery, keep
+its physical size and revise the material drawing: coherent pixel clusters,
+grouped damage, clear shading planes and deliberate highlights. Use the accepted
+asset unchanged in a native-size comparison. Neither higher resolution nor
+shrinking noisy realistic art proves a style match. Record actual generated
+dimensions and any fitting separately; do not describe changed geometry as a
+lossless repair. One revised object is the approval boundary before batch work.
+Example: `Art/Candidates/WastesMidRuins-v2/PixelStyle-v1/README.md`.
+
 ### Native scale gate, not another offline approval loop
 
 When a user cannot judge scale from a board, supply a bounded native ground

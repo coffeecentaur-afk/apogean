@@ -23,6 +23,14 @@
 
 ## Current environmental gate
 
+**Latest user review:** overall native ruin scale is not the requested change;
+their fine realistic texture is. Station remains the approved pixel-art anchor.
+One motor-depot redraw is prepared in `Art/Candidates/WastesMidRuins-v2/PixelStyle-v1/`.
+Review its grouped shading at the existing size before revising the other two.
+It has offline mask/export/fitting proof only. The earlier native technical
+evidence remains valid for the old sprites, not this candidate. No production
+promotion or extra biome work; then resume foundations and the existing order.
+
 **Latest checkpoint:** three ruin upper studies now have native ground-scale
 captures beside gg and the unchanged Station, after the user could not judge the
 offline comparison. Checkpoint faces the opposite way without reversing lighting

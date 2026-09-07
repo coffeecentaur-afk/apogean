@@ -44,6 +44,11 @@ upper-left lighting and the original cliff. Native ground-scale comparison with
 the real character and Station is available after the user could not judge
 an offline board: `Art/Validation/WastesMidScale-2026-09-06/README.md`.
 Size/facing and full integration remain separate review gates.
+Latest feedback accepts the general look/scale but requests a less realistic,
+more deliberately pixel-art material style matching Station. Do not enlarge
+the buildings or redraw Station. One depot style probe is ready outside Content
+in `PixelStyle-v1`; shell/checkpoint restyling waits for that review. The same
+distinction between pixel grain and physical size applies to later biome art.
 Sources remain under `Art/Candidates/WastesMidRuins-v2/`. No new traversable structure, faction
 mechanic, NPC or inventory item is part of this background work.
 

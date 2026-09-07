@@ -1,0 +1,82 @@
+{
+  "sourceSHA256": "6CBDBE740DBD73ACF85D50672F3ED45C63887AD010A505BEB90FF73861BCB034",
+  "width": 1317,
+  "height": 1194,
+  "status": "agent-reviewed component selection",
+  "criterion": "this source only: min RGB \u003E=225 and chroma \u003C=12; no erosion; separate recorded RGB edge donors",
+  "selected": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "edgeColorChanges": 3241,
+  "regions": [
+    {
+      "id": 1,
+      "area": 942647,
+      "minX": 0,
+      "minY": 0,
+      "maxX": 1316,
+      "maxY": 1193,
+      "border": true
+    },
+    {
+      "id": 2,
+      "area": 1,
+      "minX": 597,
+      "minY": 569,
+      "maxX": 597,
+      "maxY": 569,
+      "border": false
+    },
+    {
+      "id": 3,
+      "area": 11,
+      "minX": 862,
+      "minY": 605,
+      "maxX": 866,
+      "maxY": 607,
+      "border": false
+    },
+    {
+      "id": 4,
+      "area": 4,
+      "minX": 856,
+      "minY": 608,
+      "maxX": 859,
+      "maxY": 608,
+      "border": false
+    },
+    {
+      "id": 5,
+      "area": 5,
+      "minX": 851,
+      "minY": 609,
+      "maxX": 855,
+      "maxY": 609,
+      "border": false
+    },
+    {
+      "id": 6,
+      "area": 22,
+      "minX": 196,
+      "minY": 831,
+      "maxX": 196,
+      "maxY": 852,
+      "border": false
+    },
+    {
+      "id": 7,
+      "area": 16,
+      "minX": 1161,
+      "minY": 848,
+      "maxX": 1164,
+      "maxY": 852,
+      "border": false
+    }
+  ]
+}

@@ -172,15 +172,27 @@
     },
     {
       "id": "wastes-mid-ruins-scale-v1",
-      "status": "fixture-pass",
+      "status": "rejected",
       "static": "pass",
       "build": "pass",
       "liveFixture": "pass",
       "production": "pending",
-      "userReview": "pending",
+      "userReview": "rejected",
       "evidenceReference": "Art/Validation/WastesMidScale-2026-09-06/README.md",
       "evidenceScope": "One opposite-side checkpoint edit with all796 lower rows preserved; explicit-mask exact-alpha derivative. Three2/5 sampled upper studies beside1/1 Station,512x460. User needed game scale; actual2560x1369 ground-only paired renders include real character/terrain. Build0warnings/errors, each native pair observed, zero submitted-position/dimension failures, normal scenery restored, saved QA world. Static/live CLI defect controls pass. No regular-world art changed.",
-      "blockers": ["Await user size/facing verdict on actual captures, not the offline board. Forced ground-scale gallery suppresses regular Mid/Close and hides cropped bottoms under terrain; not final composition or deep coverage.", "Author deep foundations, stable quiet-spaced placement and test flight, lighting, real-biome/restoration routing and residency before promotion. Existing grove checkpoint mismatch remains unresolved and was not reset."]
+      "blockers": ["User accepts the general look/scale but rejects the fine realistic material style beside Station. Retain technical native passes; pixel-language revision is tracked separately in wastes-mid-depot-pixel-style-v1. Forced gallery is not final composition or deep coverage.", "Author deep foundations, stable quiet-spaced placement and test flight, lighting, real-biome/restoration routing and residency before promotion. Existing grove checkpoint mismatch remains unresolved and was not reset."]
+    },
+    {
+      "id": "wastes-mid-depot-pixel-style-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/WastesMidRuins-v2/PixelStyle-v1/README.md",
+      "evidenceScope": "One built-in depot redraw plus reviewed mask, recorded RGB edge preparation and explicit1/3 registered512x432 upper study beside unchanged Station and previous depot. Full source/export/sample provenance passes, four actual CLI defect controls reject expected reasons, all outputs reproduce exactly. Offline only; no Content PNG, build, native client or world changed.",
+      "blockers": ["User must judge the revised pixel language before revising the other two ruins. General size is retained approximately, not exact invariant preservation.", "Short offline study is not the512x460 native gallery pack or1408px-deep module. New native proof, foundations, spacing and full production gates remain pending."]
     },
     {
       "id": "wastes-terrain",

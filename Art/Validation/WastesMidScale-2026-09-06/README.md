@@ -4,6 +4,11 @@ Actual tModLoader window captures, not offline mockups. **Scale-only fixture**:
 the user could not judge the offline board without seeing the character in-game.
 This pass supplies that reference; it does not approve final composition.
 
+Subsequent user review: general look/scale is satisfactory, but ruin materials
+are too realistic/fine-grained beside Station. Retain these technical results;
+do not promote their artwork. One offline depot style correction is separately
+tracked in `../../Candidates/WastesMidRuins-v2/PixelStyle-v1/README.md`.
+
 ## Inspect
 
 - `checkpoint.jpg`: existing Station on the left; opposite-facing checkpoint on
