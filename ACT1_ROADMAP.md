@@ -8,19 +8,24 @@ arrival pod and shallow divot, then the Maw entrance/shallow slice. Immediate
 pickaxe recovery is approved; moving the pod does not move spawn, and relay
 repair/ship communication remain deferred. See `ARRIVAL_POD_CONTRACT.md` for
 the proposed native footprint, placement checks and ordered validation gates.
-Concept review comes before installation; runtime/production proof is pending.
-Latest: the 80x96/20-color pod and 90x108 sheet now pass an isolated native
+Concept direction comes before installation; final appearance may need an
+isolated native view. Production proof remains pending.
+Historical Native-v1: the 80x96/20-color pod and 90x108 sheet pass an isolated native
 fixture, 58 programmatic checks and save/reload. The user then withdrew art
 approval: too detailed, needs more pixelation. Preserve shape, simplify clusters;
 The user accepts A4's coarse style and asks for more grit/damage and impact
 terrain. September 8: user agrees to A5's damaged pod and separate shallow divot.
 `Art/Candidates/ArrivalPod-v1/Native-v2/` now contains the exact coarse candidate,
 transparent 80x96 art and 90x108 sheet, 19 colors in uniform 2x2 clusters. Static
-checks and old/new deterministic replay pass; native appearance review comes
-next. Player comparison is labelled offline, using an unchanged old capture
-crop, not a screenshot of the new candidate. Nothing new is installed.
+checks and old/new deterministic replay pass. Latest: user requested native
+judgment, so exact Native-v2 pins now build in an isolated package with zero
+warnings/errors. Only the pod item/tile textures changed; 408 other PNGs match.
+Existing pod checkpoint reload passes unchanged; actual day/overlap/night
+captures are in `Art/Validation/ArrivalPod-v2-2026-09-08/README.md`. Left gg beside
+the pod in daylight for user review. No repeated offline approval gate.
 Keep the family contracted until revised art and remaining behavior gates pass. No divot,
-worldgen or relay yet. See `Art/Validation/ArrivalPod-2026-09-07/README.md`.
+worldgen or relay yet. The 58 behavior checks in
+`Art/Validation/ArrivalPod-2026-09-07/README.md` are historical, not rerun this review.
 Historical background notes below retain their original evidence scope.
 
 ## Shipped foundation

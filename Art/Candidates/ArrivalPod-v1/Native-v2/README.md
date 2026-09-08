@@ -1,6 +1,16 @@
 # Arrival pod — exact coarse A5 candidate
 
-September 8, 2026. **Static candidate; user appearance review pending; not installed.**
+September 8, 2026. **Installed in isolated QA package for user-requested native
+appearance review; not approved or promoted to production.**
+
+The user needs an in-game view to judge scale. This exact unchanged candidate
+now renders in the existing Apogee Native Visual V3 fixture. Build passes with
+zero warnings/errors; saved pod checkpoint is unchanged. Day/player-overlap/night
+captures and scope are recorded in
+[native review evidence](../../../Validation/ArrivalPod-v2-2026-09-08/README.md).
+All 408 other Content PNGs match the prior package mirror. No worldgen or divot.
+The static preparation below is history; context-scale.png is still offline,
+not the new live evidence. Do not require another offline approval loop.
 
 The user agrees to the damaged-but-survivable pod and shallow generated impact
 divot. The opened hatch, occupant cradle, broken roof, broad scorch and dirty
@@ -78,10 +88,11 @@ pwsh -NoProfile -File Tools/Test-ArrivalPodNativePipeline.ps1
   Request-LiveValidation enum literal and DeadForestTree's 5 colors versus an
   expected minimum of 8. Neither unrelated test nor accepted tree was changed.
 
-The old Native-v1's 58 game-API checks do NOT certify new appearance. No game,
-world, Content asset or installed package changed this pass. The isolated build
-still only permits the old Native-v1 pins. Review first; then test this exact
-candidate in the existing disposable fixture, without rebuilding it.
+The old Native-v1's 58 game-API checks do NOT certify new appearance. At the
+static-preparation checkpoint no game/world/Content/installed package changed.
+The subsequent user-requested native review above adds explicit Native-v2 build
+pins and uses the existing fixture without rebuilding it. Mechanical checks
+are not relabeled as newly executed; artistic acceptance remains pending.
 
 ## Pinned inputs and outputs
 

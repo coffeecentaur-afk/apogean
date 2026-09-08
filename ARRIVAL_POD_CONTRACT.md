@@ -1,6 +1,6 @@
 # Arrival pod — bounded starting-area slice
 
-Status: **contracted; A5 crash-site direction agreed; Native-v2 coarse export awaiting appearance review**. This is
+Status: **contracted; Native-v2 installed in isolated QA for user-requested in-game appearance review**. This is
 the next slice after the accepted Wastes foreground/midground baseline. It
 does not require another background redraw or promote that QA bank globally.
 
@@ -21,7 +21,12 @@ shallow generated divot. This approves direction, not an exact native export.
 `Art/Candidates/ArrivalPod-v1/Native-v2/README.md` records the new 80x96 candidate:
 40x48 logical grid expanded into uniform 2x2 clusters, 19 used colors, no baked
 crater. Its 80x80 fitted silhouette preserves A5's wider proportions within the
-existing 5x6 furniture canvas. It is not installed. Native-v1's
+existing 5x6 furniture canvas. It is now installed only in the isolated QA build,
+with 408 other Content textures unchanged. Existing pod checkpoint reload and
+day/player-overlap/night native captures are recorded in
+`Art/Validation/ArrivalPod-v2-2026-09-08/README.md`. The user explicitly needs
+the in-game view before approval; do not insert another offline approval gate.
+Native-v1's historical (not rerun this review)
 58 behavior checks, save/reload and screenshots are recorded in
 `Art/Validation/ArrivalPod-2026-09-07/README.md`; they do not approve its art.
 
@@ -82,7 +87,8 @@ a palette filter alone makes finished Terraria art.
 The generated board is **concept-only**: any scale annotations are targets.
 Do not crop or resize the board into `Content`, assume its pixel grid is exact,
 or describe an illustration of a person as native in-game scale proof. Review
-an exact native-sized export separately before loading it.
+an exact native-sized export separately; when the user needs live scale to judge
+it, use the isolated native fixture before asking for final appearance approval.
 
 Native-v1 uses the retained color master, a separate explicit mask (including
 two narrow hinge corrections), then a labelled lossy nearest-neighbour size and
@@ -98,7 +104,8 @@ RGB. Final native pixels pass the shared hard-alpha, connected-footing and
 negative controls and two-variant deterministic replay are recorded in its
 README. The side-by-side player reference is an unchanged crop of the OLD
 native capture beside a separately labelled approximate-screen-scale NEW
-candidate, not a new in-game screenshot. Repeat native rendering after review.
+candidate, not a new in-game screenshot. The September 8 validation directory
+now supplies separate actual Native-v2 in-game captures; user review is pending.
 
 ## Bounded placement proposal
 
