@@ -9,6 +9,8 @@ pickaxe recovery is approved; moving the pod does not move spawn, and relay
 repair/ship communication remain deferred. See `ARRIVAL_POD_CONTRACT.md` for
 the proposed native footprint, placement checks and ordered validation gates.
 Concept review comes before installation; runtime/production proof is pending.
+Latest art direction: first pod's mechanical design/detail plus second pod's
+chunkier pixels; the blend is labelled A3, still review-only.
 Historical background notes below retain their original evidence scope.
 
 ## Shipped foundation

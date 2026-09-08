@@ -11,7 +11,7 @@
       "production": "pending",
       "userReview": "pending",
       "evidenceReference": "ARRIVAL_POD_CONTRACT.md",
-      "evidenceScope": "Starting-area slice follows accepted Wastes spacing. User explicitly permits immediate pickaxe recovery and relocation without changing spawn; relay unlocks later. Proposed 5x6-tile static, non-solid pod and bounded shallow-divot placement are design contracts only. Concept must be reviewed before native asset installation; no tile, item, world pass or save format changed.",
+      "evidenceScope": "Starting-area slice follows accepted Wastes spacing. Immediate pickaxe recovery and relocation without changing spawn approved; relay unlocks later. User prefers first pod concept design/detail with second revision pixel treatment; requested blend labelled A3, art review pending. Initial first-board technical rejection is not a rejection of its now-preferred architecture. Proposed 5x6-tile static non-solid furniture and shallow placement remain contracts only; no tile, item, world pass or save format changed.",
       "blockers": ["Review pod design at target scale; export and validate actual native frame sheet before installation. Proposed dimensions and placement limits are not live evidence.", "Prove native placement, support loss, single item recovery, re-placement, save/reload and multiplayer; then new-world sanctuary-safe placement. No legacy-world retrofit or relay implementation."]
     },
     {

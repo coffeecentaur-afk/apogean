@@ -5,8 +5,11 @@ the next slice after the accepted Wastes foreground/midground baseline. It
 does not require another background redraw or promote that QA bank globally.
 
 Review board and complete prompts: `Art/Candidates/ArrivalPod-v1/README.md`.
-One overly detailed first board was rejected; the coarser revision is awaiting
-user design review. Neither image is a native sprite or installed asset.
+User prefers the first board's design/detail and the second board's chunky
+pixel treatment. Blend those as **A3**. The initial technical rejection of the
+first board as an export is not rejection of its mechanical design; it is now
+the primary design reference. Neither source is a native sprite or installed
+asset, and the blend still needs review.
 
 ## Binding decisions
 
@@ -40,12 +43,19 @@ The following numbers are design targets to be proved, not engine evidence.
 | Collision / housing | Non-solid, non-solid-top; not a chair, bed, table, light or container |
 | Removal | Ordinary pickaxe, no boss/clearance gate; one item per whole object |
 
-Use simple readable pixel clusters, a dark silhouette and about 12–16 subdued
-colors. Scorched warm-gray / aged off-white plating, empty dark occupant cradle,
+Use simple readable pixel clusters, a dark silhouette and a restrained palette
+(A3 art target: about 16–20 subdued shades, not a verified export count).
+Scorched warm-gray / aged off-white plating, empty dark occupant cradle,
 one small dead screen. No company palette/emblem, bright active lights, weapons,
 fire, micro-scratches, checkerboard texture, white fringe or realistic painting.
 No recognizable copied game pod. Final native pixel sheet must be inspected
 against both dark/light backgrounds and beside an actual Terraria player.
+
+Preserve the first concept's layered doorway lip, inset hatch panel, hinges,
+seat/restraints, segmented heat shield and broad asymmetric scorch. Spend small
+pixel accents on those meaningful parts, not random surface grain. The second
+revision supplies cluster scale, not permission to erase construction detail.
+This is a deliberate redraw, not averaging images or applying a pixel filter.
 
 The generated board is **concept-only**: any scale annotations are targets.
 Do not crop or resize the board into `Content`, assume its pixel grid is exact,

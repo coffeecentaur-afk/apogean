@@ -1,25 +1,36 @@
 # Arrival pod A — review-only concept
 
 September 7. Next starting-area slice after the accepted Wastes spacing.
-Built-in image generation, with one targeted revision. No CLI/API fallback.
+Built-in image generation; A1, coarser A2 and user-requested blend A3.
+No CLI/API fallback. These are revisions of one Design A, not three pods.
 
-- `design-a-concept.png`: current coarser design board, pending user review.
-- `rejected-detailed-board.png`: initial board, rejected for over-fine texture
-  and incorrect relative-person scale. Retained for provenance, not an alternate
-  approved sprite.
-- `PROMPTS.md`: complete original and revision prompts.
+- `design-a3-blend.png`: current blend, pending user review; one pod with no
+  unreliable person-size guide. Preserves first mechanical design with a
+  more deliberate clustered rendering.
+- `design-a-concept.png`: A2; user prefers its chunkier pixel treatment, not
+  the missing construction detail.
+- `rejected-detailed-board.png`: A1; user prefers its DESIGN and retained
+  mechanical details. Filename records the earlier technical rejection for
+  fine texture/inaccurate scale, not a user rejection of its architecture.
+  Preserved unchanged as the primary design reference.
+- `PROMPTS.md`: initial and coarser-revision prompts.
+- `PROMPT_A3.md`: exact user-requested blend prompt and both input roles.
 - [Placement/behavior contract](../../../ARRIVAL_POD_CONTRACT.md).
 
 ## Inspection
 
-The revision preserves the opened shell, attached hatch, dark seat/cradle,
-dead communications screen, compact floor-contact base and unbranded finish.
-It uses larger readable clusters instead of the original fine texture.
+The user chose first-version design plus second-version pixel character, not
+either source wholesale. A3 retains a divided bevelled base, recessed empty
+seat/restraints, layered doorway, attached inset hatch and hinges, dead screen,
+short aerial and scorched unbranded plating. Meaningful mechanical detail is
+preserved rather than flattening the design to large featureless panels.
+Do not turn this into another round of generic grit or palette-only changes.
 
-This is an **opaque 1536×1024 concept board**, not a transparent sprite, native
-80×96 export, 90×108 tile sheet, in-game screenshot or frame-validation result.
-The pictured person and pixel scale remain illustrative; the labels describe
-targets, not measured runtime dimensions. Do not claim this establishes exact
+The sources are opaque 1536×1024 boards; A3 is a 1254×1254 RGB review board,
+not a transparent sprite, native 80×96 export, 90×108 tile sheet, in-game
+screenshot or frame-validation result. A3 deliberately omits the inaccurate
+person guide. Pixel scale remains illustrative, not measured runtime dimensions.
+Do not claim this establishes exact
 scale, alpha, palette count, tile grounding or Terraria rendering behavior.
 Do not crop or downscale the board directly into Content. A separate native
 export and reviewed 1:1 assembly must precede installation.
@@ -32,7 +43,7 @@ storage, weapons, communications functionality or faction branding.
 
 ## Next gate
 
-Ask whether the opened-pod design is right. After concept approval, author and
+Ask whether A3 balances the retained detail and chunky pixelwork. After approval, author and
 review the native assembly, then run an isolated placement/removal/reload
 fixture. No new world or game restart is needed to review this board. Fresh-world
 generation is later, following fixture acceptance and the bounded placement
