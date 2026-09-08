@@ -1,6 +1,7 @@
 param(
     [string]$Directory = (Join-Path $PSScriptRoot '../Art/Candidates/ArrivalPod-v1/Native-v1'),
-    [ValidateSet(1,2)][int]$PixelClusterSize = 1
+    [ValidateSet(1,2)][int]$PixelClusterSize = 1,
+    [switch]$RequireFlatFooting
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -39,6 +40,16 @@ try {
     if ($points.Count -lt 3000 -or $transparent -lt 500) { throw 'SILHOUETTE_OCCUPANCY' }
     if ($colors.Count -gt 20) { throw 'PALETTE_BUDGET' }
     if ($floor -lt 12) { throw 'FLOATING_FOOT' }
+    # A few lowest pixels can pass contact while most of a curved shell hovers.
+    # Flat-foot revision: continuous two-row contact beneath the main body,
+    # not the raised hinged hatch; 48px span inside the 80px object envelope.
+    if ($RequireFlatFooting) {
+        for ($y=94; $y -lt 96; $y++) {
+            for ($x=8; $x -lt 56; $x++) {
+                if ($art.GetPixel($x,$y).A -ne 255) { throw "FLAT_FOOTING_GAP at $x,$y" }
+            }
+        }
+    }
     for ($y=0; $y -lt 108; $y++) {
         for ($x=0; $x -lt 90; $x++) {
             if (($x%18 -ge 16 -or $y%18 -ge 16) -and $sheet.GetPixel($x,$y).ToArgb() -ne 0) { throw 'NONEMPTY_PADDING' }

@@ -1,6 +1,6 @@
 # Arrival pod — bounded starting-area slice
 
-Status: **contracted; Native-v2 installed in isolated QA for user-requested in-game appearance review**. This is
+Status: **contracted; Native-v3 footing repair installed in isolated QA, awaiting native review**. This is
 the next slice after the accepted Wastes foreground/midground baseline. It
 does not require another background redraw or promote that QA bank globally.
 
@@ -32,6 +32,11 @@ Native-v1's historical (not rerun this review)
 
 ## Binding decisions
 
+- Latest native review accepts the coarse damaged body but rejects the curved,
+  floating underside. Keep upper art unchanged. The pod needs broad flat metal
+  contact on flat terrain, not a single curved center touching the ground. V3
+  preserves upper88rows, repairs bottom8rows, and draws2px into the soil's native
+  top edge. New contact gate supplements, not replaces, native visual review.
 - Opened, damaged, unbranded arrival pod; the player has amnesia. Broken
   communications panel hints at future use without an active service now.
 - Real, non-solid world furniture behind players, not parallax or a solid
@@ -65,6 +70,7 @@ behavior while revising art, and repeat native appearance checks afterwards.
 | Placement origin | Local tile (2,5), bottom-centre |
 | Support | Five full floor tiles; later player placement may also support native platforms if validated |
 | Art origin | Feet end at the support line; no artificial levitation or ground embedded in the furniture PNG |
+| Current ground fit | Flat64px base, `DrawYOffset=2` into the native terrain edge; anchors unchanged |
 | Collision / housing | Non-solid, non-solid-top; not a chair, bed, table, light or container |
 | Removal | Ordinary pickaxe, no boss/clearance gate; one item per whole object |
 

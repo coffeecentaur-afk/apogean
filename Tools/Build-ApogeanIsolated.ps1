@@ -165,7 +165,9 @@ try {
 		$candidateRoot = (Resolve-Path -LiteralPath $ArrivalPodCandidateDirectory).Path
 		$v1Root = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/ArrivalPod-v1/Native-v1')).Path
 		$v2Root = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/ArrivalPod-v1/Native-v2')).Path
+		$v3Root = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/ArrivalPod-v1/Native-v3')).Path
 		$pixelClusterSize = 1
+		$flatFooting = $false
 		$entries = @(
 			@('ArrivalPod_Tile.png', 'ArrivalPodTile.png', '880E4B45CEF78E984246F7C84F878EC0711C948E8719B9B519970B946A7C4996'),
 			@('ArrivalPod.png', 'ArrivalPodItem.png', '63D4F04E0E76BE08B4997BEE2B4F919749415B1E3261D9DF8EF776070C310A8B')
@@ -177,8 +179,15 @@ try {
 				@('ArrivalPod_Tile.png', 'ArrivalPodTile.png', '6A60495AC6F473FFF6237B9BFDAC1AB88622CD2AC3794C148C4100605F1A65DC'),
 				@('ArrivalPod.png', 'ArrivalPodItem.png', '822A50B8EE634A671281F2CFC5AA3EE760031E0DA3757246C8216911D83B6407')
 			)
-		} elseif ($candidateRoot -ne $v1Root) { throw 'Pod build requires a specifically pinned Native-v1 or Native-v2 review candidate.' }
-		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-ArrivalPodNative.ps1') -Directory $candidateRoot -PixelClusterSize $pixelClusterSize
+		} elseif ($candidateRoot -eq $v3Root) {
+			$pixelClusterSize = 2
+			$flatFooting = $true
+			$entries = @(
+				@('ArrivalPod_Tile.png', 'ArrivalPodTile.png', '9EA7FE54A2B75C175AF995D7848B8EB9FEBE53BA3F8457525DBDE3C7EADAD678'),
+				@('ArrivalPod.png', 'ArrivalPodItem.png', '8F0C3E52F1367B8B2AFD71FD490954AA6504C1FDFFB2A173070C7E15E51A912D')
+			)
+		} elseif ($candidateRoot -ne $v1Root) { throw 'Pod build requires a specifically pinned Native-v1, Native-v2 or Native-v3 review candidate.' }
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-ArrivalPodNative.ps1') -Directory $candidateRoot -PixelClusterSize $pixelClusterSize -RequireFlatFooting:$flatFooting
 		if ($LASTEXITCODE -ne 0) { throw 'Pod atlas audit failed.' }
 		foreach ($entry in $entries) {
 			$asset = Join-Path $candidateRoot $entry[0]

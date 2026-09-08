@@ -176,7 +176,7 @@ namespace apogean.Content.Diagnostics
 			Check(Cells(p) == 0 && Drops().Count == 0, "clean-test-slot-and-no-preexisting-pod-drops");
 			TileObjectData data = TileObjectData.GetTileData(PodType, 0);
 			Check(data.Width == 5 && data.Height == 6 && data.CoordinateFullWidth == 90 && data.CoordinateFullHeight == 108 &&
-				data.Origin.X == 2 && data.Origin.Y == 5 && data.DrawYOffset == 0, "registered-atlas-and-origin");
+				data.Origin.X == 2 && data.Origin.Y == 5 && data.DrawYOffset == 2, "registered-atlas-and-origin");
 			Check(!Main.tileSolid[PodType] && !Main.tileSolidTop[PodType] && !Main.tileTable[PodType] &&
 				!Main.tileLighted[PodType], "non-solid-not-housing-or-light");
 			for (int x = 0; x < 5; x++)

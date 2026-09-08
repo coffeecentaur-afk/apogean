@@ -38,7 +38,9 @@ namespace apogean.Content.Tiles
 			TileObjectData.newTile.CoordinateWidth = 16;
 			TileObjectData.newTile.CoordinatePadding = 2;
 			TileObjectData.newTile.CoordinateHeights = [16, 16, 16, 16, 16, 16];
-			TileObjectData.newTile.DrawYOffset = 0;
+			// Terrain's native top edge has 0..2px visual recesses. Seat the flat
+			// base into that edge without moving anchors, collision or saved cells.
+			TileObjectData.newTile.DrawYOffset = 2;
 			TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile, 5, 0);
 			TileObjectData.newTile.AnchorTop = AnchorData.Empty;
 			TileObjectData.newTile.AnchorLeft = AnchorData.Empty;

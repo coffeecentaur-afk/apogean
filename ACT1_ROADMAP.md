@@ -2,6 +2,15 @@
 
 ## Current slice — starting-area pod, after accepted Wastes baseline
 
+Latest September8 correction: user likes the coarse v2 body, but its curved
+underside appears to float. Native-v3 preserves all upper88rows, replaces only
+the bottom8rows with a flat64px damaged-metal footing and uses a2px ground draw
+inset. Static red/green controls, isolated build, actual saved-fixture reload
+and58 native programmatic checks pass. Current appearance evidence:
+`Art/Validation/ArrivalPod-Footing-2026-09-08/`. Await native footing review;
+do not redraw the approved body, generate the divot or promote production yet.
+Earlier checkpoints below retain their original scope.
+
 September 7: user accepts the wider Mid spacing and says to move on. Freeze the
 current scenery/motion; do not reopen approved art. Next: one damaged, unbranded
 arrival pod and shallow divot, then the Maw entrance/shallow slice. Immediate
