@@ -40,8 +40,10 @@ Close moving more than Mid, and Mid more than Far throughout the climb. No
 timed catch-up, spring, opacity fade or shared full-camera-speed lock. Stopping
 must stop scenery; descent must retrace the same positions. Exact exit heights
 may move so land can leave view smoothly near Space. The QA candidate integrates
-a smooth response after the first 10% of ascent; native comfort needs its own
-review. Evidence: `Art/Validation/WastesSmoothFlight-2026-09-08/README.md`.
+a smooth response after the first 10% of ascent. September8 follow-up: the user
+accepts the installed motion, "works great". Freeze this bounded motion baseline;
+do not reopen tuning without a new defect. Broader integration gates remain
+separate. Evidence: `Art/Validation/WastesSmoothFlight-2026-09-08/README.md`.
 
 The user also accepts Native-v3 arrival-pod appearance: "Very good design."
 This closes the revised-footing art review, not the remaining manual placement,

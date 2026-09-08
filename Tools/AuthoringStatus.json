@@ -9,10 +9,10 @@
       "build": "pass",
       "liveFixture": "pass",
       "production": "pending",
-      "userReview": "pending",
+      "userReview": "accepted",
       "evidenceReference": "Art/Validation/WastesSmoothFlight-2026-09-08/README.md",
       "evidenceScope": "September8 approved broad altitude easing supersedes historical15/25/50 percent ceilings. First10 percent ground response, stable anchors, horizontal depth, spacing and all410 Content images unchanged. Actual old source fails slope regression; new179811 motion,1731 depth,5799 section assertions and10 source mutations pass. Final8DC9FB30 package builds cleanly. Nine native2560x1369 cases pass: ascent/descent, mid-hold-return, both running-camera traces, both diagonals and both ground pans;757 allowlisted records independently replayed. Zero matrix/depth/count failures, max0.01px matrix error. Native validator accepts2 controls and rejects7 defects. First incomplete Close trace retained red; corrected pre-cull diagnostics rerun. No art, reclamation, routing, pod or worldgen change.",
-      "blockers": ["User comfort review of the installed smooth flight remains pending. Eight raw screenshots and simulated-camera telemetry are not physical-input flight or subjective motion approval. Preserve accepted artwork; tune only if the user still perceives a problem.", "Known grove reload mismatch, legacy production-readiness failures, other native viewports/zoom/gravity, real-biome/cave routing, multiplayer and measured performance remain separate. No ordinary-world asset promotion."]
+      "blockers": ["September8 user accepts installed smooth-flight motion: works great. Bounded comfort review is closed; preserve this motion and the accepted artwork. Simulated-camera telemetry remains separate from the user's acceptance, not exhaustive physical-input coverage.", "Known grove reload mismatch, legacy production-readiness failures, other native viewports/zoom/gravity, real-biome/cave routing, multiplayer and measured performance remain separate. No ordinary-world asset promotion."]
     },
     {
       "id": "arrival-pod-v1",

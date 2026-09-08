@@ -1,5 +1,12 @@
 # Smooth Wastes flight — bounded QA candidate
 
+## User acceptance — September 8
+
+After the installed-build handoff, the user reports "works great". The bounded
+motion-comfort review is accepted. Preserve this projection and the accepted
+artwork; resume the pod's remaining behavior checks, then its shallow divot.
+This is user feedback, not a new automated test or broader production approval.
+
 ## Contract
 
 The user reports that scenery looks right during low flight, then suddenly
@@ -136,7 +143,7 @@ Client remains running, camera sequences inactive, no pending request.
 
 ## Remaining limits
 
-Native motion comfort requires user review. Other native viewports, zoom/gravity,
+Native motion comfort is accepted by the user. Other native viewports, zoom/gravity,
 multiplayer, physical running/flight, real-biome and deep-cave routing, measured
 performance and production-ground-profile coverage remain separate. No
 purification rendering, new artwork, ordinary-world retrofit, divot or Maw work.

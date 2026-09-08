@@ -1,15 +1,13 @@
 # Act 1 Delivery Roadmap
 
-## Current slice — smooth flight correction, then starting-area pod
+## Current slice — accepted smooth flight; resume starting-area pod
 
-September8: Native-v3 pod appearance is now accepted. Pause its remaining
-integration work for the user-reported abrupt scenery speed change at height
-ceilings. Correct only the vertical flight projection; approved art, spacing,
-horizontal depth and ground composition stay frozen. The integrated-response
-candidate replaces hard caps, without opacity fades or temporal lag. Check
-ascent, a mid-flight stop/return, descent and diagonal movement before asking
-for comfort review. See `Art/Validation/WastesSmoothFlight-2026-09-08/README.md`.
-After that review, resume remaining pod manual/actuator/slope/multiplayer gates
+September8: Native-v3 pod appearance and the subsequent smooth-flight motion
+are accepted. User's motion verdict: "works great". All nine native camera
+fixtures pass; freeze the installed motion, art, spacing, horizontal depth and
+ground composition. The integrated response replaces hard caps without opacity
+fades or temporal lag. See `Art/Validation/WastesSmoothFlight-2026-09-08/README.md`.
+Resume remaining pod manual/actuator/slope/multiplayer gates
 before the new-world divot. No production promotion, regular-world retrofit or
 Maw expansion is implied. The following checkpoints are historical.
 
