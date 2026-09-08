@@ -50,6 +50,17 @@ projection stateless; do not hide excessive depth response with a camera spring.
 specific correction. Camera-only traces are not physical-running or user-feel
 approval. Ceiling/coverage, routing and art gates remain separate.
 
+Position continuity alone does not certify motion. A hard clamp can keep every
+position correct while abruptly changing perceived speed. Test finite-difference
+response on both sides of every transition, layer depth ordering, a stopped
+camera and reverse/revisit positions. Integrate a continuous response when
+changing altitude behavior; do not hide the kink with a time-based spring.
+`Test-WastesSmoothFlight.ps1` executes the production arithmetic, while the
+native height validator independently reconstructs submitted positions. Its
+`flight-turnaround` case includes a mid-flight hold and a return. Historical
+hard-cap traces cannot certify the new profile. Numeric/native telemetry passes
+still need user comfort review; screenshots cannot prove continuous motion.
+
 ## Reusable tooling and dependency mods
 
 Standing user authorization (September7): a separate tModLoader mod may be

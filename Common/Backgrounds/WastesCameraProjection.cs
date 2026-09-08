@@ -26,44 +26,41 @@ namespace apogean.Common.Backgrounds
 			{
 				return CloseSoilY(surfaceTiles, cameraY, height, gameZoom) - CloseSoilRow;
 			}
-			// Preserve the approved slow parallax below the ceiling. Above it,
-			// evaluate that same composition at the ceiling and project its fixed
-			// world position with the remaining camera displacement. Never latch
-			// a first-visited frame: descent/teleport/reload must give the same Y.
 			float center = cameraY + height * .5f;
-			float cappedCenter = Math.Max(center, LockCameraCenterY(surfaceTiles, layer));
-			float cappedCamera = cappedCenter - height * .5f;
-			float delta = (float)((surfaceTiles - 50) * 16 - cappedCamera) - height * .55f;
-			float top = height * (.57f + layer * .025f) - 740 + delta * Vertical(layer);
-			return top + (cappedCenter - center) * gameZoom;
+			return height * (.57f + layer * .025f) - 740 - height * .05f * Vertical(layer)
+				+ FlightDisplacement(surfaceTiles, center, height, layer);
 		}
 
 		// Close is scenery just ahead of Mid, not a tile-speed foreground plane.
 		// Both camera movement and fixed terrain relief project through its depth.
-		// The ceiling restores full world motion so flight can leave it behind.
 		// No temporal filter: stopping, returning and reloading never cause catch-up.
 		public static float CloseSoilY(double surfaceTiles, float cameraY, int height,
 			float gameZoom, float? regionalGround = null)
 		{
 			float center = cameraY + height * .5f;
-			float ground = regionalGround ?? (float)((surfaceTiles - 50) * 16);
-			float capped = Math.Max(center, LockCameraCenterY(surfaceTiles, 2));
-			return height * .5f - GroundOffset * gameZoom + (ground - capped) * Vertical(2)
-				+ (capped - center) * gameZoom;
+			float reference = (float)((surfaceTiles - 50) * 16);
+			float ground = regionalGround ?? reference;
+			return height * .5f - GroundOffset * gameZoom + (ground - reference) * Vertical(2)
+				+ FlightDisplacement(surfaceTiles, center, height, 2);
 		}
 
-		// World-height staging, not an opacity envelope. Close locks before Mid;
-		// Far keeps its slow parallax longer. Lower ceilings make scenery leave view
-		// earlier without changing ground composition or dissolving it on ascent.
-		public static float LockCameraCenterY(double surfaceTiles, int layer)
+		// Integrate a smoothstep RESPONSE, rather than lerping two positions or
+		// spring-following the camera. Position, speed and acceleration are continuous.
+		// The first 10% of ascent preserves ordinary ground/jump parallax exactly.
+		// Beyond that, depth order remains Close > Mid > Far, even after leaving view.
+		// Space determines enough travel for the city to exit, not a full-speed clamp.
+		public static float FlightDisplacement(double surfaceTiles, float cameraCenterY, int height, int layer)
 		{
-			float fraction = layer switch
-			{
-				0 => .5f, 1 => .25f, 2 => .15f,
-				_ => throw new ArgumentOutOfRangeException(nameof(layer))
-			};
-			float ground = (float)((surfaceTiles - 50) * 16);
-			return ground - Math.Max(1, ground - SpaceBoundaryY(surfaceTiles)) * fraction;
+			double rate = Vertical(layer);
+			double ground = (surfaceTiles - 50) * 16;
+			double span = Math.Max(1, ground - SpaceBoundaryY(surfaceTiles));
+			double ascent = ground - cameraCenterY;
+			double u = Math.Max(0, (ascent / span - .1) / .9);
+			double integral = u < 1 ? u * u * u * (1 - .5 * u) : u - .5;
+			double farGroundTop = height * .57 - 740 - height * .05 * Vertical(0);
+			double amplitude = 2 * Math.Max(0, height + 64 - farGroundTop - span * Vertical(0));
+			double depth = layer switch { 0 => 1, 1 => 1.3, 2 => 1.6, _ => throw new ArgumentOutOfRangeException(nameof(layer)) };
+			return (float)(ascent * rate + amplitude * depth * integral);
 		}
 
 		// Normalized ascent from the fixed ground datum toward the upper-sky
@@ -86,7 +83,7 @@ namespace apogean.Common.Backgrounds
 		public static float SpaceBoundaryY(double surfaceTiles) =>
 			(float)((Math.Floor(surfaceTiles * (double).35f) + 1) * 16);
 
-		// Deliberately independent of player/camera altitude. The capped geometry
+		// Deliberately independent of player/camera altitude. The projected geometry
 		// leaves the viewport instead. Biome/style and future reclamation fades
 		// remain separate factors; entering Space must not force alpha to zero.
 		public static float LandOpacity(double surfaceTiles, float cameraCenterY, float playerCenterY, int layer)

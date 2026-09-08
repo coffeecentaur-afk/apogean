@@ -120,7 +120,7 @@ namespace apogean.Content.Backgrounds
 				Texture2D texture = layers[i].Value;
 				float top = WastesCameraProjection.Top(Main.worldSurface, worldCameraY, height, texture.Height, i, Main.GameViewMatrix.Zoom.Y);
 				cameraLab.ObserveHeightProjection(i, worldCameraY, top, width, height, Main.GameViewMatrix.Zoom.Y);
-				// Distant layers remain solid and leave view by capped world motion.
+				// Distant layers remain solid and leave view through smooth projection.
 				// The diagnostic still observes offscreen bounds; skip GPU draws only.
 				float phase = (float)(sampledX * horizontal % texture.Width);
 				if (phase < 0) phase += texture.Width;
@@ -168,7 +168,12 @@ namespace apogean.Content.Backgrounds
 					? WastesModularLayout.CloseTop(Main.worldSurface, cameraY, height, zoom, cell, SavedGroundAt)
 					: midTop;
 				if (layer == 2)
+				{
 					lab.ObserveCloseAnchor(cell, regionalGround ?? (float)((Main.worldSurface - 50) * 16));
+					// Observe projected bounds before culling; an offscreen hold is still
+					// part of the flight contract, not evidence of a missing draw.
+					lab.ObserveHeightProjection(layer, cameraY, top, width, height, zoom, regionalGround);
+				}
 				int count = newMid ? WastesRuinLayout.Count : layer == 1 ? 3 : 1;
 				for (int group = 0; group < count; group++)
 				{

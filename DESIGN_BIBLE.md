@@ -32,6 +32,21 @@ All sprite work uses hard opaque pixel clusters, limited palettes, readable nati
 
 ### Authoring evidence gate
 
+Current flight correction (September8) supersedes the historical 15%/25%/50%
+hard ceilings below. The user reports a sudden scenery speed change at each
+ceiling and approves a broad, altitude-based response transition. Preserve the
+accepted art, ground composition, horizontal depth and wider Mid spacing. Keep
+Close moving more than Mid, and Mid more than Far throughout the climb. No
+timed catch-up, spring, opacity fade or shared full-camera-speed lock. Stopping
+must stop scenery; descent must retrace the same positions. Exact exit heights
+may move so land can leave view smoothly near Space. The QA candidate integrates
+a smooth response after the first 10% of ascent; native comfort needs its own
+review. Evidence: `Art/Validation/WastesSmoothFlight-2026-09-08/README.md`.
+
+The user also accepts Native-v3 arrival-pod appearance: "Very good design."
+This closes the revised-footing art review, not the remaining manual placement,
+multiplayer or bounded production-divot gates. Do not redraw the approved pod.
+
 Latest foreground clarification (September7): the combined diagonal response
 feels too near/reactive even with stable section anchors. Push Close back toward
 Mid, remaining slightly nearer. The depth trial uses Close .20 horizontal/.06

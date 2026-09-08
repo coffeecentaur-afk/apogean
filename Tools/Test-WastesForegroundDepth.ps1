@@ -22,7 +22,7 @@ foreach ($surface in 250,500,649,700) {
     $ground=($surface-50)*16
     $space=([math]::Floor($surface * [double][single]0.35)+1)*16
     $cap=$ground-($ground-$space)*.15
-    Assert-Depth ([math]::Abs([apogean.Common.Backgrounds.WastesCameraProjection]::LockCameraCenterY($surface,2)-$cap) -lt .01) 'Close ceiling is 15% of the existing ascent reference'
+    # Keep the former 15% handover as a regression sample, not a hard ceiling.
     foreach ($height in 1080,1369,1440) {
         foreach ($zoom in 1.0,(4.0/3),2.0) {
             foreach ($anchorOffset in -128,0,600) {
@@ -31,7 +31,11 @@ foreach ($surface in 250,500,649,700) {
                 foreach ($center in ($ground+400),$ground,($cap+.25),$cap,($cap-.25),($cap-32),($cap-5000)) {
                     $camera=$center-$height*.5
                     $top=[apogean.Common.Backgrounds.WastesModularLayout]::CloseTop($surface,$camera,$height,$zoom,8,$localSampler)
-                    $expected=$height*.5-48*$zoom-330+($anchor-[math]::Max($center,$cap))*.06+[math]::Max(0.0,[double]($cap-$center))*$zoom
+                    $span=$ground-$space
+                    $u=[math]::Max(0.0,(($ground-$center)/$span-.1)/.9)
+                    $area=if($u -lt 1){[math]::Pow($u,3)-.5*[math]::Pow($u,4)}else{$u-.5}
+                    $extra=2*[math]::Max(0.0,$height+64-($height*.57-740-$height*.05*.012)-$span*.012)*1.6*$area
+                    $expected=$height*.5-48*$zoom-330+($anchor-$center)*.06+$extra
                     Assert-Depth ([math]::Abs($top-$expected) -lt .02) "depth plane mismatch: surface=$surface height=$height zoom=$zoom anchor=$anchor center=$center actual=$top expected=$expected"
                     $again=[apogean.Common.Backgrounds.WastesModularLayout]::CloseTop($surface,$camera,$height,$zoom,8,$localSampler)
                     Assert-Depth ($again -eq $top) 'no spring, delayed catch-up, or visit-dependent placement'

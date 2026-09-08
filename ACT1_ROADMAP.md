@@ -1,6 +1,17 @@
 # Act 1 Delivery Roadmap
 
-## Current slice — starting-area pod, after accepted Wastes baseline
+## Current slice — smooth flight correction, then starting-area pod
+
+September8: Native-v3 pod appearance is now accepted. Pause its remaining
+integration work for the user-reported abrupt scenery speed change at height
+ceilings. Correct only the vertical flight projection; approved art, spacing,
+horizontal depth and ground composition stay frozen. The integrated-response
+candidate replaces hard caps, without opacity fades or temporal lag. Check
+ascent, a mid-flight stop/return, descent and diagonal movement before asking
+for comfort review. See `Art/Validation/WastesSmoothFlight-2026-09-08/README.md`.
+After that review, resume remaining pod manual/actuator/slope/multiplayer gates
+before the new-world divot. No production promotion, regular-world retrofit or
+Maw expansion is implied. The following checkpoints are historical.
 
 Latest September8 correction: user likes the coarse v2 body, but its curved
 underside appears to float. Native-v3 preserves all upper88rows, replaces only

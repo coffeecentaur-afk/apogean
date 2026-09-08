@@ -7,11 +7,11 @@ $files = @('Common/Backgrounds/WastesCameraProjection.cs','Common/Backgrounds/Wa
 $mutations = @(
     @('tile-speed foreground','Common/Backgrounds/WastesCameraProjection.cs','2 => .06f','2 => 1f','Test-WastesForegroundDepth.ps1'),
     @('camera-close foreground','Common/Backgrounds/WastesParallaxContract.cs','2 => .20f','2 => .30f','Test-WastesForegroundDepth.ps1'),
-    @('unbounded foreground','Common/Backgrounds/WastesCameraProjection.cs','LockCameraCenterY(surfaceTiles, 2)','float.NegativeInfinity','Test-WastesForegroundDepth.ps1'),
-    @('previous higher ceilings','Common/Backgrounds/WastesCameraProjection.cs','0 => .5f, 1 => .25f','0 => .7f, 1 => 1f / 3f','Test-WastesHeightLock.ps1'),
-    @('no ceiling','Common/Backgrounds/WastesCameraProjection.cs','Math.Max(center, LockCameraCenterY(surfaceTiles, layer))','center','Test-WastesHeightLock.ps1'),
-    @('screen-following ceiling','Common/Backgrounds/WastesCameraProjection.cs','(cappedCenter - center) * gameZoom','0f','Test-WastesHeightLock.ps1'),
-    @('ignores zoom','Common/Backgrounds/WastesCameraProjection.cs','(cappedCenter - center) * gameZoom','(cappedCenter - center)','Test-WastesHeightLock.ps1'),
+    @('no exit excursion','Common/Backgrounds/WastesCameraProjection.cs','amplitude * depth * integral','0','Test-WastesHeightLock.ps1'),
+    @('abrupt response','Common/Backgrounds/WastesCameraProjection.cs','u < 1 ? u * u * u * (1 - .5 * u) : u - .5','u','Test-WastesHeightLock.ps1'),
+    @('depth order collapsed','Common/Backgrounds/WastesCameraProjection.cs','0 => 1, 1 => 1.3, 2 => 1.6','0 => 1.6, 1 => 1.3, 2 => 1','Test-WastesHeightLock.ps1'),
+    @('early ground movement','Common/Backgrounds/WastesCameraProjection.cs','(ascent / span - .1) / .9','(ascent / span + .2) / .9','Test-WastesHeightLock.ps1'),
+    @('ignores zoom','Common/Backgrounds/WastesCameraProjection.cs','GroundOffset * gameZoom','GroundOffset','Test-WastesForegroundDepth.ps1'),
     @('height fade returns','Common/Backgrounds/WastesCameraProjection.cs','return 1f;','return .5f;','Test-WastesHeightLock.ps1'),
     @('wrong section location','Common/Backgrounds/WastesModularLayout.cs','CloseWidth * .5','CloseWidth * .9','Test-WastesFixedSections.ps1'),
     @('renderer bypass','Content/Backgrounds/WastesLandscapeV1Renderer.cs','zoom, cell, SavedGroundAt)','zoom, 0, SavedGroundAt)','Test-WastesFixedSections.ps1')

@@ -31,7 +31,7 @@ namespace apogean.Content.Diagnostics
 		private readonly Dictionary<int, float> closeAnchors = new();
 		private int anchorChecks, anchorFailures, heightChecks, heightFailures, cappedChecks, exitedChecks;
 		private float flightGroundCenter, flightSpaceCenter;
-		private bool SpaceFlight => scenario is "space-ascent" or "space-descent";
+		private bool SpaceFlight => scenario is "space-ascent" or "space-descent" or "flight-turnaround";
 		private bool Running => scenario is "run-flat" or "run-diagonal";
 		private Vector2 runOrigin;
 		private readonly Dictionary<int, (float X, float Y, Vector2 Pixel)> runPrevious = new();
@@ -59,7 +59,7 @@ namespace apogean.Content.Diagnostics
 			if (Main.netMode != NetmodeID.SinglePlayer || Main.ActiveWorldFileData?.Name != "Apogee Native Visual V3")
 				throw new InvalidOperationException("Landscape camera checks require Apogee Native Visual V3 single-player.");
 			if (requested == "release") { Release(); return; }
-			if (requested is not ("ground" or "jump" or "wings" or "sky" or "left" or "right" or "sunset" or "night" or "rain" or "eclipse" or "pan-left" or "pan-right" or "ground-pan-left" or "ground-pan-right" or "phase-left" or "phase-right" or "diagonal-left" or "diagonal-right" or "run-flat" or "run-diagonal" or "mid-altitude" or "high-altitude" or "below-ground" or "underground" or "space-fade" or "space-edge" or "space-ascent" or "space-descent" or "scale-shell" or "scale-depot" or "scale-checkpoint"))
+			if (requested is not ("ground" or "jump" or "wings" or "sky" or "left" or "right" or "sunset" or "night" or "rain" or "eclipse" or "pan-left" or "pan-right" or "ground-pan-left" or "ground-pan-right" or "phase-left" or "phase-right" or "diagonal-left" or "diagonal-right" or "run-flat" or "run-diagonal" or "mid-altitude" or "high-altitude" or "below-ground" or "underground" or "space-fade" or "space-edge" or "space-ascent" or "space-descent" or "flight-turnaround" or "scale-shell" or "scale-depot" or "scale-checkpoint"))
 				throw new ArgumentOutOfRangeException(nameof(requested));
 			if (requested.StartsWith("scale-", StringComparison.Ordinal) && !WastesRuinScaleGallery.Available)
 				throw new InvalidOperationException("Scale study assets require an isolated QA build; no fallback art will be shown.");
@@ -187,25 +187,24 @@ namespace apogean.Content.Diagnostics
 				Mod.Logger.Info($"WASTES CLOSE ANCHOR SAMPLE: case={scenario}; cell={cell}; ground={ground:F3}; failed={failed}");
 		}
 
-		internal void ObserveHeightProjection(int layer, float cameraY, float top, int width, int height, float zoom)
+		internal void ObserveHeightProjection(int layer, float cameraY, float top, int width, int height, float zoom, float? regionalGround = null)
 		{
 			if (remaining <= 0) return;
 			float center = cameraY + height * .5f;
 			float ground = (float)((Main.worldSurface - 50) * 16);
 			float boundary = (float)((Math.Floor(Main.worldSurface * (double).35f) + 1) * 16);
-			float fraction = layer == 1 ? .25f : .5f;
-			float cap = ground - Math.Max(1, ground - boundary) * fraction;
-			float sample = Math.Max(center, cap);
-			float expected = height * (.57f + layer * .025f) - 740
-				+ (ground - sample - height * .05f) * (layer == 1 ? .03f : .012f)
-				+ (sample - center) * zoom + (layer == 1 ? 220 : 0);
+			float expected = layer == 2
+				? ExpectedCloseSoil(regionalGround ?? ground, cameraY, height, zoom) - 330
+				: height * (.57f + layer * .025f) - 740
+					+ (ground - center - height * .05f) * (layer == 1 ? .03f : .012f)
+					+ ExpectedFlightExtra(center, height, layer) + (layer == 1 ? 220 : 0);
 			bool failed = !float.IsFinite(top) || Math.Abs(expected - top) > .02f;
 			heightChecks++;
 			if (failed) heightFailures++;
-			if (center < cap) cappedChecks++;
+			if (center < ground - (ground - boundary) * .1f) cappedChecks++;
 			if (top >= height) exitedChecks++;
 			if (heightChecks <= 2 || (SpaceFlight && panTick % 60 == 0) || (failed && heightFailures == 1))
-				Mod.Logger.Info($"WASTES HEIGHT POSITION SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; cameraCenter={center:F3}; cap={cap:F3}; top={top:F3}; expected={expected:F3}; zoom={zoom:F3}; exited={top >= height}; failed={failed}; capFraction={fraction:F3}");
+				Mod.Logger.Info($"WASTES HEIGHT POSITION SAMPLE: case={scenario}; layer={layer}; viewport={width}x{height}; cameraCenter={center:F3}; ground={ground:F3}; space={boundary:F3}; regional={regionalGround ?? ground:F3}; top={top:F3}; expected={expected:F3}; zoom={zoom:F6}; exited={top >= height}; failed={failed}; tick={panTick}; profile=smooth-flight-v1");
 		}
 
 		// Permanent QA probe: project the *submitted* geometry through the engine's
@@ -242,10 +241,20 @@ namespace apogean.Content.Diagnostics
 		private static float ExpectedCloseSoil(float ground, float cameraY, int height, float zoom)
 		{
 			float center = cameraY + height * .5f;
-			float reference = (float)((Main.worldSurface - 50) * 16);
-			float boundary = (float)((Math.Floor(Main.worldSurface * (double).35f) + 1) * 16);
-			float cap = reference - Math.Max(1, reference - boundary) * .15f;
-			return height * .5f - 48 * zoom + (ground - Math.Max(center, cap)) * .06f + Math.Max(0, cap - center) * zoom;
+			return height * .5f - 48 * zoom + (ground - center) * .06f + ExpectedFlightExtra(center, height, 2);
+		}
+
+		// Independent diagnostic equation; never call production projection to
+		// certify itself. CLI replay independently checks these submitted positions.
+		private static float ExpectedFlightExtra(float center, int height, int layer)
+		{
+			double ground = (Main.worldSurface - 50) * 16;
+			double boundary = (Math.Floor(Main.worldSurface * (double).35f) + 1) * 16;
+			double span = Math.Max(1, ground - boundary);
+			double t = Math.Max(0, ((ground - center) / span - .1) / .9);
+			double area = t <= 1 ? Math.Pow(t, 3) - Math.Pow(t, 4) / 2 : t - .5;
+			double needed = Math.Max(0, height + 64 - (height * .57 - 740 - height * .05 * .012) - span * .012);
+			return (float)(2 * needed * (layer == 0 ? 1 : layer == 1 ? 1.3 : 1.6) * area);
 		}
 
 		internal void ObserveRunningMotion(int cell, float worldX, float cameraY, Vector2 submitted, Matrix matrix)
@@ -323,7 +332,7 @@ namespace apogean.Content.Diagnostics
 			if (ScaleGalleryIndex > 0)
 				Mod.Logger.Info($"WASTES SCALE RESULT: case={scenario}; samples={galleryChecks}; failures={galleryFailures}; artApproval=False; flightCoverage=False");
 			Mod.Logger.Info($"WASTES HEIGHT ALPHA RESULT: case={scenario}; viewport={Main.screenWidth}x{Main.screenHeight}; checks={landChecks}; spaceChecks={spaceChecks}; groundChecks={groundPresenceChecks}; partialFarChecks={partialFarChecks}; failures={landFailures}; artApproval=False");
-			Mod.Logger.Info($"WASTES HEIGHT POSITION RESULT: case={scenario}; viewport={Main.screenWidth}x{Main.screenHeight}; checks={heightChecks}; capped={cappedChecks}; exited={exitedChecks}; failures={heightFailures}; artApproval=False");
+			Mod.Logger.Info($"WASTES HEIGHT POSITION RESULT: case={scenario}; viewport={Main.screenWidth}x{Main.screenHeight}; checks={heightChecks}; eased={cappedChecks}; exited={exitedChecks}; failures={heightFailures}; artApproval=False; profile=smooth-flight-v1");
 			Mod.Logger.Info($"WASTES CLOSE ANCHOR RESULT: case={scenario}; checks={anchorChecks}; sections={closeAnchors.Count}; failures={anchorFailures}; artApproval=False");
 			Mod.Logger.Info($"WASTES MODULAR RESULT: case={scenario}; matrixChecks={moduleChecks}; frameChecks={moduleFrameChecks}; failures={moduleFailures}; maxPixelError={modulePixelError:F2}; artApproval=False; matrixFailures={moduleMatrixFailures}; depthFailures={moduleDepthFailures}; countFailures={moduleCountFailures}");
 			if (Running)
@@ -369,6 +378,13 @@ namespace apogean.Content.Diagnostics
 				float progress = Math.Min(panTick++ / 1200f, 1f);
 				float start = scenario == "space-ascent" ? 0 : 1.04f;
 				float end = scenario == "space-ascent" ? 1.04f : 0;
+				if (scenario == "flight-turnaround")
+				{
+					// 10s rise, 5s mid-flight pause, 10s retrace, 5s ground pause.
+					float altitude = panTick < 600 ? .65f * panTick / 600f
+						: panTick < 900 ? .65f : .65f * Math.Max(0, 1500 - panTick) / 600f;
+					start = end = altitude;
+				}
 				camera.Y = MathHelper.Lerp(flightGroundCenter, flightSpaceCenter,
 					MathHelper.Lerp(start, end, progress)) - Main.screenHeight * .5f;
 			}
