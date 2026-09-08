@@ -1,0 +1,2 @@
+ARRIVAL SITE LOAD: outcome=placed; no-generation-on-entry=True
+ARRIVAL SITE VIEW: world=Apogee Arrival QA A3; outcome=placed; bounds={X:4218 Y:418 Width:17 Height:15}; pod={X:4224 Y:422}; object30=True; spawn=4200,428; native-tiles=True; background-QA-override=True

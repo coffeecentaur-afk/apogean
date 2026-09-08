@@ -1,6 +1,6 @@
 # Arrival pod — bounded starting-area slice
 
-Status: **contracted; Native-v3 footing repair installed in isolated QA, awaiting native review**. This is
+Status: **pod appearance, pickup and replacement accepted; shallow divot implemented in isolated new-world QA, scene review pending**. This is
 the next slice after the accepted Wastes foreground/midground baseline. It
 does not require another background redraw or promote that QA bank globally.
 
@@ -30,9 +30,15 @@ Native-v1's historical (not rerun this review)
 58 behavior checks, save/reload and screenshots are recorded in
 `Art/Validation/ArrivalPod-2026-09-07/README.md`; they do not approve its art.
 
+September 8 current acceptance: user reports pickup works and placement looks
+good, and explicitly requests the divot next. Native-v3 art/footing is locked.
+Remaining actuator/sloped-anchor and multiplayer cases remain production gates,
+not a reason to repeat manual pickup review or block this requested generation
+probe. Current evidence: `Art/Validation/ArrivalDivot-2026-09-08/README.md`.
+
 ## Binding decisions
 
-- Latest native review accepts the coarse damaged body but rejects the curved,
+- Historical native review accepted the coarse damaged body but rejected the curved,
   floating underside. Keep upper art unchanged. The pod needs broad flat metal
   contact on flat terrain, not a single curved center touching the ground. V3
   preserves upper88rows, repairs bottom8rows, and draws2px into the soil's native
@@ -55,9 +61,8 @@ Native-v1's historical (not rerun this review)
 
 ## Proposed art / furniture contract
 
-The following layout has a statically checked and isolated native-tested
-candidate. Its visual approval is superseded; reuse the proven framing and
-behavior while revising art, and repeat native appearance checks afterwards.
+The following layout now has an accepted Native-v3 candidate. Older v1/v2 art
+approval is superseded, not v3. Preserve the proven artwork and framing.
 
 | Property | First candidate |
 | --- | --- |
@@ -113,34 +118,40 @@ native capture beside a separately labelled approximate-screen-scale NEW
 candidate, not a new in-game screenshot. The September 8 validation directory
 now supplies separate actual Native-v2 in-game captures; user review is pending.
 
-## Bounded placement proposal
+## Implemented bounded placement (candidate-gated)
 
-1. Read final Terraria spawn after vanilla `Final Cleanup`. Keep its coordinate,
-   support and at least a 6×5-tile open landing envelope untouched.
+1. Read final Terraria spawn after vanilla `Final Cleanup` and our Wastes pass.
+   Keep its coordinate and a 7×10-tile landing/support envelope untouched.
 2. Survey a finite set of nearby sites inside the existing 110×70-radius
    sanctuary: centre offsets ±10, ±14, ±18, ±22, ±26, ±30, ±34, ±38 tiles.
-   Order deterministically by distance, relief and a saved seed tie-break;
+   Order deterministically near-to-far; seed parity chooses which side is first;
    do not consume an unbounded retry loop or another feature's random stream.
-3. Pod footprint is 5×6. Proposed divot edit envelope is at most 13 tiles wide,
+3. Pod footprint is 5×6. Divot edit envelope is at most 13 tiles wide,
    two tiles deep, with an ordinary walk/jump route out. Full floor support
-   remains, no open shaft or newly released liquid. Zero-depth settled placement
-   is the first fallback when a divot is unsafe. Reject excessive relief.
+   remains, no open shaft or newly released liquid. First try the 13-wide,
+   two-deep bowl, then a 7-wide, one-deep bowl, then 7-wide undug placement.
+   At most 48 candidates; reject excessive relief rather than distorting land.
 4. Preflight **every actual edit** and padded object bound against completed
    structures, chests, furniture, unknown mod tiles/walls, liquid, ores and
    protected content. Only a narrow explicit natural-soil/grass/empty-cell
    allowlist may be edited. A new pod does not authorize deleting a Living Tree,
    burying a chest, uprooting arbitrary trees, replacing a structure or moving
-   spawn. Clear sparse replaceable ground cover only when explicitly allowed.
-5. The sanctuary is already registered with `GenVars.structures` by the world
-   plan system. A late naive `CanPlace` inside it would reject the pod against
-   our own protection. Survey/check the full pod/divot bound **before** registering
-   that owned sanctuary; reserve the accepted pod bound immediately, then add
-   the enclosing sanctuary. Persist the planned location and recheck the small
-   mutation envelope after Wastes conversion. Do not clear StructureMap entries,
+   spawn. Clear only vanilla single-tile plants and our DeadTuft, WastesBristle,
+   WastesRootShrub, with their complete native object/frame footprint either
+   inside or outside the clear mask. Never remove half a ground-cover object.
+   Sunflowers, native debris piles and unknown plants remain obstacles.
+5. The atlas's in-memory sanctuary already protects against our own producers.
+   Arrival Survey runs after Wastes but **before** registering our sanctuary in
+   `GenVars.structures`; foreign claims and other atlas landmarks remain intact.
+   Check `CanPlace` using the entire padded framing envelope, reserve the accepted
+   pod bound immediately, then register the enclosing sanctuary. Recheck before
+   stamping after compounds/ruins. Do not clear StructureMap entries,
    disable protections or bypass foreign reservations to make it fit.
 6. Stamp only the allowed divot cells, frame their support, then place the whole
    registered furniture through `WorldGen.PlaceObject`. Never paint furniture
    frame coordinates manually. Verify full object occupancy/support afterward.
+   Snapshot tile values, not Tile handles; restore the bounded snapshot on failure.
+   PostWorldGen verifies 30 cells, solid support, a dry route and step height.
 7. If all bounded candidates and the undug fallback fail, preserve the world,
    log a precise placement failure and fail the starting-area **QA acceptance**.
    Do not force a destructive placement or silently call the scene complete.
@@ -149,8 +160,11 @@ now supplies separate actual Native-v2 in-game captures; user review is pending.
 
 Placement plan is separate from the movable furniture. Mining must not make a
 saved plan regenerate the pod. Future relay identity is not designed now.
-Installation initially belongs only in a disposable construction fixture;
-the user has not approved edits to regular worlds.
+The `arrivalSiteV1` save/network record is historical outcome and coordinates,
+never a regeneration request. The feature activates only when ArrivalPodTile's
+pinned candidate assets are included by the isolated builder. The current
+request authorizes fresh disposable worlds, not retrofits of regular worlds.
+Sparse existing natural debris is preserved; new authored shrapnel is deferred.
 
 ## Validation order / stop conditions
 
@@ -177,7 +191,7 @@ the user has not approved edits to regular worlds.
 ## Implementation seams inspected
 
 - `Common/WorldGeneration/ApogeanWorldGenerationSystem.cs`: owns post-cleanup
-  pass order (Maw atlas → Wastes → compounds → ruins).
+  pass order (Maw atlas → Wastes → arrival survey → compounds → ruins → arrival stamp).
 - `Common/WorldGeneration/ApogeanWorldPlan.cs`: final-spawn sanctuary, large-world
   admission, shared saved atlas. New plan data needs explicit backward loading.
 - `Common/WorldGeneration/ApogeanWorldPlanSystem.cs`: sanctuary registration,

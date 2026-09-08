@@ -1,0 +1,29 @@
+ARRIVAL SITE SURVEY: x=4190; variant=0; surface-obstacle; last-obstacle=4188,424:tile=27:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4210; variant=0; surface-obstacle; last-obstacle=4204,424:tile=27:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4186; variant=0; surface-obstacle; last-obstacle=4180,428:tile=711:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4214; variant=0; surface-obstacle; last-obstacle=4210,413:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4182; variant=0; surface-obstacle; last-obstacle=4176,405:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4218; variant=0; surface-obstacle; last-obstacle=4212,411:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4178; variant=0; surface-obstacle; last-obstacle=4176,405:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4222; variant=0; surface-obstacle; last-obstacle=4218,425:tile=711:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4174; variant=0; surface-obstacle; last-obstacle=4176,405:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4226; variant=0; unsafe-envelope; last-obstacle=4218,425:tile=711:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4170; variant=0; surface-obstacle; last-obstacle=4164,408:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4230; variant=0; unsafe-envelope; last-obstacle=4237,431:tile=781:wall=59:liquid=0
+ARRIVAL SITE SURVEY: x=4166; variant=0; surface-obstacle; last-obstacle=4162,428:tile=185:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4234; variant=0; excess-relief; last-obstacle=none
+ARRIVAL SITE SURVEY: x=4162; variant=0; surface-obstacle; last-obstacle=4156,428:tile=186:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4238; variant=0; excess-relief; last-obstacle=none
+ARRIVAL SITE SURVEY: x=4190; variant=1; surface-obstacle; last-obstacle=4188,424:tile=27:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4210; variant=1; surface-obstacle; last-obstacle=4207,427:tile=185:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4186; variant=1; surface-obstacle; last-obstacle=4188,424:tile=27:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4214; variant=1; surface-obstacle; last-obstacle=4211,408:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4182; variant=1; surface-obstacle; last-obstacle=4179,428:tile=711:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4218; variant=1; surface-obstacle; last-obstacle=4218,425:tile=711:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4178; variant=1; surface-obstacle; last-obstacle=4176,405:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4222; variant=1; surface-obstacle; last-obstacle=4219,425:tile=711:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4174; variant=1; surface-obstacle; last-obstacle=4176,405:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4226; variant=1; accepted; last-obstacle=none
+ARRIVAL SITE: version=1; outcome=planned; reason=shallow-impact; bounds={X:4221 Y:418 Width:11 Height:14}; pod={X:4224 Y:421}; spawn=4200,428; spawn-unchanged=True
+ARRIVAL SITE: version=1; outcome=placed; reason=native-object-and-support-verified; bounds={X:4221 Y:418 Width:11 Height:14}; pod={X:4224 Y:421}; spawn=4200,428; spawn-unchanged=True
+ARRIVAL SITE POSTGEN: outcome=placed; object30=True; route=True; dry=True; version=1

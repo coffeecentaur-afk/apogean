@@ -16,7 +16,7 @@
     },
     {
       "id": "arrival-pod-v1",
-      "status": "contracted",
+      "status": "fixture-pass",
       "static": "pass",
       "build": "pass",
       "liveFixture": "pass",
@@ -24,7 +24,19 @@
       "userReview": "accepted",
       "evidenceReference": "Art/Validation/ArrivalPod-Footing-2026-09-08/README.md",
       "evidenceScope": "September 8 Native-v3 corrects user-reported floating curved base. Upper 7040 body/hatch pixels are identical to v2; bottom 8 rows rebuilt as crushed flat metal with 64px contact. DrawYOffset=2 seats against measured 2px soil-edge recesses without changing collision, anchor or spawn. Actual CLI rejects v2 and a broken-footing mutation; pinned generator replay and historical pipeline controls pass. Isolated build has zero warnings/errors; 408 surrounding Content PNGs unchanged. Fresh reload preserves the pod checkpoint, followed by all 58 programmatic native mechanical checks passing again; day/overlap/night captured. Existing grove reload mismatch remains failed and unrepaired; within-session pod guards pass, not a grove reload acceptance. No production asset promotion, ordinary-world retrofit, divot or relay implementation. User now accepts Native-v3 appearance; remaining behavior and integration gates are separate.",
-      "blockers": ["September8 user now accepts Native-v3 appearance: Very good design. Preserve body and footing; prior pending-review statement in historical evidence is superseded. No automatic production promotion.", "Manual inventory/pickup/re-placement visual checks, actuator and sloped-anchor cases, and multiplayer remain before bounded new-world sanctuary/divot integration. Preserve known grove mismatch without rebuilding/rebasing it. No regular-world retrofit or relay implementation."]
+      "blockers": ["September8 user accepts Native-v3 appearance and now explicitly confirms pickup and placement work. Manual review is closed; preserve body and footing. The no-divot statement in older evidenceScope is historical; arrival-divot-v1 owns current generation evidence.", "Actuator/sloped-anchor cases and multiplayer remain production checks, separately from the user-requested new-world divot probe. Preserve known grove mismatch without rebuilding/rebasing it. No regular-world retrofit or relay implementation."]
+    },
+    {
+      "id": "arrival-divot-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/ArrivalDivot-2026-09-08/README.md",
+      "evidenceScope": "New-world candidate path only. Post-Wastes survey before owned sanctuary registration; foreign claims retained. Bounded13-wide/two-deep,7-wide/one-deep,then undug variants;48 attempts maximum. Explicit whole-cover masks, value rollback, native PlaceObject, unchanged spawn.561 real-planner checks,7 source mutations and1 positive/7 defective live-validator controls pass. Generation-tested60372CB0 and finalB8EE0FD8 packages build with0warnings/errors;410 images and four generation files hash-identical. Same fixed A/B seeds both place with30-cell/support,route,dry postgen checks passing; initial failures retained. B2 actual view/save/reload/view passes. Final A3 native image/log confirms intact pod and corrected diagnostic shoulder standing height; final rebuild changes only QA teleport placement. No existing-world regeneration.",
+      "blockers": ["Review the actual shallow generated scene; no art or final production acceptance inferred from native placement telemetry.", "Broader seeds, compatibility/world settings, multiplayer and forced native rollback remain open. Safe no-slot fallback is reported, not concealed as success. New shrapnel art and relay work are deferred. Existing grove/legacy production failures remain untouched."]
     },
     {
       "id": "wastes-mid-spacing-v3",

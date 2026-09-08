@@ -1,0 +1,13 @@
+ARRIVAL SITE SURVEY: x=4190; variant=0; surface-obstacle; last-obstacle=4188,424:tile=27:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4210; variant=0; surface-obstacle; last-obstacle=4204,424:tile=27:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4186; variant=0; surface-obstacle; last-obstacle=4188,424:tile=27:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4214; variant=0; surface-obstacle; last-obstacle=4210,413:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4182; variant=0; surface-obstacle; last-obstacle=4176,405:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4218; variant=0; surface-obstacle; last-obstacle=4212,411:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4178; variant=0; surface-obstacle; last-obstacle=4176,405:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4222; variant=0; unsafe-envelope; last-obstacle=4214,432:tile=782:wall=2:liquid=0
+ARRIVAL SITE SURVEY: x=4174; variant=0; surface-obstacle; last-obstacle=4176,405:tile=5:wall=0:liquid=0
+ARRIVAL SITE SURVEY: x=4226; variant=0; accepted; last-obstacle=none
+ARRIVAL SITE: version=1; outcome=planned; reason=shallow-impact; bounds={X:4218 Y:418 Width:17 Height:15}; pod={X:4224 Y:422}; spawn=4200,428; spawn-unchanged=True
+ARRIVAL SITE: version=1; outcome=placed; reason=native-object-and-support-verified; bounds={X:4218 Y:418 Width:17 Height:15}; pod={X:4224 Y:422}; spawn=4200,428; spawn-unchanged=True
+ARRIVAL SITE POSTGEN: outcome=placed; object30=True; route=True; dry=True; version=1

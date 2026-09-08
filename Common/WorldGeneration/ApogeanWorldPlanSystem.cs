@@ -271,7 +271,8 @@ namespace apogean.Common.WorldGeneration
 			if (plan is null)
 				return;
 
-			GenVars.structures.AddProtectedStructure(plan.SpawnSanctuary, 8);
+			// ArrivalSiteSystem registers our sanctuary after the post-Wastes landing survey.
+			// RebuildProtections has already reserved it against every Apogean landmark producer.
 			for (int i = 0; i < plan.MawRuptures.Count; i++)
 			{
 				MawRupturePlan rupture = plan.MawRuptures[i];

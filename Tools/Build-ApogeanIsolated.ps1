@@ -194,7 +194,7 @@ try {
 			if ((Get-FileHash -LiteralPath $asset).Hash -ne $entry[2]) { throw 'Pod art differs from the pinned review candidate.' }
 			Copy-Item -LiteralPath $asset -Destination (Join-Path $mirrorRoot "Content/Tiles/Diagnostics/$($entry[1])")
 		}
-		Write-Host "Pinned pod review candidate included: $candidateRoot; $pixelClusterSize-pixel grid; isolated build only, no world generation or visual approval."
+		Write-Host "Pinned pod review candidate included: $candidateRoot; $pixelClusterSize-pixel grid; isolated build enables bounded new-world arrival QA, never existing-world regeneration."
 	}
 	Push-Location $mirrorRoot
 	try {

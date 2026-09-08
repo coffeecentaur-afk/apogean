@@ -14,6 +14,15 @@ This is the production rule for adding visual and gameplay content. It prevents 
 
 ## Retaining corrections
 
+Small spawn features must survey the final terrain produced by their owning
+conversion pass, before adding their own enclosing StructureMap reservation.
+Keep foreign reservations intact. Try finite authored size variants before
+declaring no slot; never solve a cramped seed by clearing trees or arbitrary
+furniture. Replaceable multi-tile ground cover must fit the entire actual clear
+mask, not merely intersect its bounding rectangle. The arrival planner's real
+source tests and seven mutations retain this rule; replay the SAME failed seed
+after a fix, then inspect native generation and save/reload independently.
+
 Turn each confirmed user correction into a visible requirement and a regression
 check where one is possible. Keep reusable method changes in the installed and
 Git-mirrored authoring skill; biome identity/composition in the bible; exact source

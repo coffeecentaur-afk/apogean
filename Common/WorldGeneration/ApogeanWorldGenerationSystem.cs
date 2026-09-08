@@ -29,6 +29,7 @@ namespace apogean.Common.WorldGeneration
 			// seen by the forest-column detector and leaves living grass and trees stranded beneath it.
 			if (ModContent.GetInstance<ApogeanWorldConfig>().RuinedSurface)
 				tasks.Insert(finalizationIndex++, new PassLegacy("A World Picked Clean", RuinedSurfaceSystem.GenerateWorld));
+			tasks.Insert(finalizationIndex++, new PassLegacy("Arrival Survey", ArrivalSiteSystem.Instance.Survey));
 
 			tasks.Insert(finalizationIndex++, new PassLegacy(
 				"Apogean Compounds",
@@ -36,6 +37,7 @@ namespace apogean.Common.WorldGeneration
 			tasks.Insert(finalizationIndex++, new PassLegacy(
 				"Apogean Ruins",
 				ModContent.GetInstance<RuinGen>().GenerateWorld));
+			tasks.Insert(finalizationIndex++, new PassLegacy("Your Arrival", ArrivalSiteSystem.Instance.Generate));
 		}
 
 		private static int FindPass(IReadOnlyList<GenPass> tasks, string name)

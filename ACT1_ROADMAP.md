@@ -1,6 +1,17 @@
 # Act 1 Delivery Roadmap
 
-## Current slice — accepted smooth flight; resume starting-area pod
+## Current slice — shallow arrival divot in native new-world QA
+
+September8 latest: user accepts pod pickup and replacement, and requests the
+divot next. The bounded generator now uses the accepted Native-v3 pod, final
+Wastes terrain, whole-object plant checks and protected spawn. Two fixed seeds
+pass native generation on the final package: full13-wide/two-deep and compact
+7-wide/one-deep. Evidence: `Art/Validation/ArrivalDivot-2026-09-08/README.md`.
+Scene review and broader production cases remain; no ordinary-world retrofit.
+After this bounded starting scene is accepted, move to the Maw entrance/shallow
+slice. Preserve the accepted pod and background art/motion; no relay work.
+
+## Historical — accepted smooth flight; resume starting-area pod
 
 September8: Native-v3 pod appearance and the subsequent smooth-flight motion
 are accepted. User's motion verdict: "works great". All nine native camera
