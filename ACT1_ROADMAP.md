@@ -1,5 +1,16 @@
 # Act 1 Delivery Roadmap
 
+## Current slice — starting-area pod, after accepted Wastes baseline
+
+September 7: user accepts the wider Mid spacing and says to move on. Freeze the
+current scenery/motion; do not reopen approved art. Next: one damaged, unbranded
+arrival pod and shallow divot, then the Maw entrance/shallow slice. Immediate
+pickaxe recovery is approved; moving the pod does not move spawn, and relay
+repair/ship communication remain deferred. See `ARRIVAL_POD_CONTRACT.md` for
+the proposed native footprint, placement checks and ordered validation gates.
+Concept review comes before installation; runtime/production proof is pending.
+Historical background notes below retain their original evidence scope.
+
 ## Shipped foundation
 
 - Faction relation scaffold, sealed compounds, dialogue UI, and a playable Matriarch prototype.

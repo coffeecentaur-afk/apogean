@@ -1,4 +1,12 @@
-# Wider Wastes Mid intervals — spacing-only trial
+# Wider Wastes Mid intervals — accepted bounded baseline
+
+## User acceptance — September 7
+
+"looks great move on now" approves the installed wider spacing. Preserve the
+current artwork, projection and layout. Proceed to the starting-area/drop-pod
+slice; do not reopen foreground overlap or another background-art iteration.
+This acceptance does not promote the optional bank into ordinary worlds or
+erase the remaining production matrix below.
 
 The user accepts the farther-back foreground: "that looks so much better i love
 it." That approves the0391BE79 package's movement/composition; the later native
@@ -115,8 +123,8 @@ repair, so no new game rebuild was required.
 ## Next boundary
 
 Native fixture is passed at this viewport, not all-biome production acceptance.
-The user still needs to judge the **new spacing**, not reapprove foreground
-motion or redraw artwork. Grove persistence, additional viewports/zoom/gravity,
+The user has accepted the **new spacing** and requested the next slice.
+Grove persistence, additional viewports/zoom/gravity,
 multiplayer, real-biome/deep-cave routing and measured performance remain open.
 Full Background gate was rerun: all component checks, including the new export
 regression, pass except the established production-readiness audit. That audit

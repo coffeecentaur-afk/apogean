@@ -3,16 +3,28 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "arrival-pod-v1",
+      "status": "specified",
+      "static": "pending",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "ARRIVAL_POD_CONTRACT.md",
+      "evidenceScope": "Starting-area slice follows accepted Wastes spacing. User explicitly permits immediate pickaxe recovery and relocation without changing spawn; relay unlocks later. Proposed 5x6-tile static, non-solid pod and bounded shallow-divot placement are design contracts only. Concept must be reviewed before native asset installation; no tile, item, world pass or save format changed.",
+      "blockers": ["Review pod design at target scale; export and validate actual native frame sheet before installation. Proposed dimensions and placement limits are not live evidence.", "Prove native placement, support loss, single item recovery, re-placement, save/reload and multiplayer; then new-world sanctuary-safe placement. No legacy-world retrofit or relay implementation."]
+    },
+    {
       "id": "wastes-mid-spacing-v3",
       "status": "fixture-pass",
       "static": "pass",
       "build": "pass",
       "liveFixture": "pass",
       "production": "pending",
-      "userReview": "pending",
+      "userReview": "accepted",
       "evidenceReference": "Art/Validation/WastesMidSpacing-2026-09-07/README.md",
-      "evidenceScope": "Spacing-only trial:10,000px period,2,000px landmark intervals,459-638px open gaps,32% lower density; all art/size/order/Close motion unchanged.176 layout cases and four negative CLI controls pass. After user closed game, FE1B5E8B package installed with zero warnings/errors. Eight native camera cases pass at2560x1369 with zero modular matrix/depth/count failures;1639 QA records replay through three validators. Nine raw screenshots retained with terrain-obscured limits labelled. User spacing review remains pending; approved foreground retained. Exporter PROJECTION SAMPLE omission fixed with red/green regression, not renderer changes.",
-      "blockers": ["User review of wider spacing remains pending, not the previously approved foreground. Additional viewports, zoom/gravity, real-biome/deep-cave routing, multiplayer and measured performance remain separate from this camera fixture.", "Known grove mismatch and legacy production/integration gates remain open. No ordinary-world promotion or grove rebuild. Do not change foreground height to prevent occasional overlap; user treats it as minor polish."]
+      "evidenceScope": "Spacing-only trial:10,000px period,2,000px landmark intervals,459-638px open gaps,32% lower density; all art/size/order/Close motion unchanged.176 layout cases and four negative CLI controls pass. After user closed game, FE1B5E8B package installed with zero warnings/errors. Eight native camera cases pass at2560x1369 with zero modular matrix/depth/count failures;1639 QA records replay through three validators. Nine raw screenshots retained with terrain-obscured limits labelled. User now accepts wider spacing: looks great move on now. Freeze this baseline and proceed to starting-area pod design. Exporter PROJECTION SAMPLE omission fixed with red/green regression, not renderer changes.",
+      "blockers": ["Additional viewports, zoom/gravity, real-biome/deep-cave routing, multiplayer and measured performance remain separate from this accepted camera fixture.", "Known grove mismatch and legacy production/integration gates remain open. No ordinary-world promotion or grove rebuild. Do not change foreground height to prevent occasional overlap; user treats it as minor polish."]
     },
     {
       "id": "wastes-stable-height-v2",
@@ -24,7 +36,7 @@
       "userReview": "accepted",
       "evidenceReference": "Art/Validation/WastesForegroundDepth-2026-09-07/README.md",
       "evidenceScope": "User accepts foreground movement/composition. Close .20/.06 and15% cap; Mid25%/Far50% and artwork unchanged.1735 depth,3150 height,5799 fixed-section assertions and10 source mutations pass. Subsequent FE1B5E8B spacing build passes all eight planned native cases at2560x1369: two running-camera traces, both ground pans/diagonals and ascent/descent. Zero modular matrix/depth/count failures;15 stable Close sections per pan. Earlier low-camera and diagonal failures do not reproduce in this bounded matrix. Evidence in WastesMidSpacing-2026-09-07, historical failures retained. Simulated camera response is not physical-running proof.",
-      "blockers": ["Keep approved art and response unchanged; wider Mid spacing has its own pending user review. No height fade, exposed-edge masking or last-row stretching. Occasional tall Close overlap is minor deferred polish.", "Full viewport/biome/deep-cave/zoom/gravity/multiplayer, measured performance and production-ground-profile gates remain open. Preserve known grove digest mismatch without rebuilding it. Native matrix pass does not promote the optional bank to ordinary worlds."]
+      "blockers": ["Keep approved art, response and now-accepted wider Mid spacing unchanged. No height fade, exposed-edge masking or last-row stretching. Occasional tall Close overlap is minor deferred polish.", "Full viewport/biome/deep-cave/zoom/gravity/multiplayer, measured performance and production-ground-profile gates remain open. Preserve known grove digest mismatch without rebuilding it. Native matrix pass does not promote the optional bank to ordinary worlds."]
     },
     {
       "id": "wastes-reclamation-backgrounds",

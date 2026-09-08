@@ -46,10 +46,11 @@ Follow-up spacing request: reduce Mid landmark frequency and enlarge its quiet
 gaps. Preserve the accepted foreground; occasional tall-bank overlap is minor
 deferred polish. The spacing-only trial changes the five-landmark period from
 6,800 to10,000px, keeping original art/size/order and parallax. No new world is
-needed. See `Art/Validation/WastesMidSpacing-2026-09-07/README.md`; wider-spacing
-native review is separate from the approved foreground response. This candidate
-now builds cleanly and passes the bounded eight-case camera matrix at2560x1369;
-new spacing appearance approval and ordinary-world promotion remain separate.
+needed. See `Art/Validation/WastesMidSpacing-2026-09-07/README.md`. The candidate
+builds cleanly and passes the bounded eight-case camera matrix at2560x1369.
+The user now accepts its appearance: "looks great move on now". Freeze the
+approved art, motion and spacing; proceed to the starting-area pod slice.
+Ordinary-world promotion and the remaining integration matrix stay separate.
 
 Wastes camera clarification (September7): foreground sections have stable
 world/terrain anchors, never a shared ground height resampled under the moving
@@ -132,7 +133,7 @@ The Wastes must remain a complete Terraria building biome rather than a set dres
 
 - The player wakes with amnesia beside an opened, damaged drop pod in a small shallow impact divot. Disturbed soil and sparse debris tell the arrival story without creating a large crater, an escape obstacle or a hazardous spawn. Keep an unobstructed player spawn and travel route.
 - The pod is real world furniture behind the player, not parallax artwork. Its initial design has no obvious corporate branding; its broken communications panel hints at later use. Show its native-scale design before installation.
-- Once removable, the pod drops intact as a placeable item. Relocation does not automatically change Terraria's world spawn or the player's bed spawn. The precise removal unlock, dimensions and placement contract still require specification before coding.
+- The user explicitly approved immediate removal with a normal pickaxe. The pod drops intact as a placeable item; relocation changes neither Terraria's world spawn nor the player's bed spawn. No first-boss gate or spawn-moving function. Its relay still unlocks later. `ARRIVAL_POD_CONTRACT.md` specifies the proposed 5x6-tile furniture and shallow-divot placement for the next art/fixture gate, not a completed implementation.
 - Generate the arrival scene only in a newly generated supported world. Preserve existing player terrain; rejoining or dying does not generate another impact scene.
 
 #### Future communications relay — specified, deferred
