@@ -1,6 +1,6 @@
 # Arrival pod — bounded starting-area slice
 
-Status: **contracted; A3 concept accepted, native implementation pending**. This is
+Status: **contracted; native behavior tested, A4 coarse style accepted; damaged A5 impact concept in review**. This is
 the next slice after the accepted Wastes foreground/midground baseline. It
 does not require another background redraw or promote that QA bank globally.
 
@@ -12,7 +12,13 @@ the primary design reference. Neither source is a native sprite or installed
 asset. The user now explicitly accepts the A3 blend: "perfect". Preserve it.
 The separate masked/fitted native candidate is recorded in
 `Art/Candidates/ArrivalPod-v1/Native-v1/README.md`; static checks pass, native-size
-appearance and actual renderer/behavior checks remain pending.
+appearance was accepted ("yes"), then explicitly withdrawn after native testing:
+"too detailed ... more pixelated". Keep the mechanical architecture, but reduce
+microtexture and use larger pixel clusters. A4's coarse direction is accepted;
+the subsequent A5 adds requested broad grit, broken plating and shallow impact
+ground, and remains review-only. Native-v1's
+58 behavior checks, save/reload and screenshots are recorded in
+`Art/Validation/ArrivalPod-2026-09-07/README.md`; they do not approve its art.
 
 ## Binding decisions
 
@@ -30,8 +36,9 @@ appearance and actual renderer/behavior checks remain pending.
 
 ## Proposed art / furniture contract
 
-The following contract now has a statically checked candidate. These checks do
-not yet prove the actual registered tile's drawing or behavior in Terraria.
+The following layout has a statically checked and isolated native-tested
+candidate. Its visual approval is superseded; reuse the proven framing and
+behavior while revising art, and repeat native appearance checks afterwards.
 
 | Property | First candidate |
 | --- | --- |

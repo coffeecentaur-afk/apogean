@@ -1,4 +1,15 @@
-# Arrival pod A3 — native-size candidate, not installed
+# Arrival pod A3 — native behavior tested; art approval superseded
+
+LATEST: user withdrew acceptance after native testing: too detailed, needs
+more pixelation. Keep this evidence, not this style as a production default.
+`../A4-CoarseReview/` holds the new review-only redraw. Technical proof is in
+`../../../Validation/ArrivalPod-2026-09-07/README.md` (58 runtime checks and
+save/reload). The approval/export notes below are historical.
+
+September 7 follow-up: user accepts this exact native preview ("yes"). Freeze
+the two approved image hashes. Tile/item behavior is now being implemented in
+an opt-in isolated QA build, not production world generation. The original
+export record below describes the preceding art-only step.
 
 The user approved A3 with "perfect". Its architecture and style are frozen.
 This directory contains the next, separate native-size review, not a new design

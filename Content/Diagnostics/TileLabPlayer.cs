@@ -113,6 +113,7 @@ namespace apogean.Content.Diagnostics
 				}
 				if (request == "qa-save-and-quit")
 				{
+					ModContent.GetInstance<ArrivalPodLab>().Release();
 					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
 					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
 					ModContent.GetInstance<VegetationVisualLab>().Release();
@@ -125,6 +126,14 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
 					Player.GetModPlayer<WastesLandscapeCameraLab>().Start(request.Substring("wastes-camera-".Length));
 					return;
+				}
+				if (request.StartsWith("arrival-pod-", System.StringComparison.Ordinal))
+				{
+					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
+					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
+					ModContent.GetInstance<VegetationVisualLab>().Release();
+					ModContent.GetInstance<ArrivalPodLab>().Run(request.Substring("arrival-pod-".Length));
+					return; // Never clears/rebuilds the preserved grove.
 				}
 				// Camera-only checks must not invalidate the saved grove checkpoint.
 				// Restore temporary state only before replacing fixture tiles.

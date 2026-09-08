@@ -7,6 +7,7 @@ param(
 	[string]$WastesDepotAssemblyDirectory = '',
 	[string]$WastesStationBridgeDirectory = '',
 	[string]$WastesMidDepthDirectory = '',
+	[string]$ArrivalPodCandidateDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -159,6 +160,22 @@ try {
 			}
 		}
 		Write-Host 'QA full-depth bank included; named disposable Wastes path only, no production art promotion.'
+	}
+	if ($ArrivalPodCandidateDirectory) {
+		$candidateRoot = (Resolve-Path -LiteralPath $ArrivalPodCandidateDirectory).Path
+		$approvedRoot = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/ArrivalPod-v1/Native-v1')).Path
+		if ($candidateRoot -ne $approvedRoot) { throw 'Pod build requires the approved Native-v1 candidate.' }
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-ArrivalPodNative.ps1') -Directory $candidateRoot
+		if ($LASTEXITCODE -ne 0) { throw 'Pod atlas audit failed.' }
+		foreach ($entry in @(
+			@('ArrivalPod_Tile.png', 'ArrivalPodTile.png', '880E4B45CEF78E984246F7C84F878EC0711C948E8719B9B519970B946A7C4996'),
+			@('ArrivalPod.png', 'ArrivalPodItem.png', '63D4F04E0E76BE08B4997BEE2B4F919749415B1E3261D9DF8EF776070C310A8B')
+		)) {
+			$asset = Join-Path $candidateRoot $entry[0]
+			if ((Get-FileHash -LiteralPath $asset).Hash -ne $entry[2]) { throw 'Pod art differs from user-approved hashes.' }
+			Copy-Item -LiteralPath $asset -Destination (Join-Path $mirrorRoot "Content/Tiles/Diagnostics/$($entry[1])")
+		}
+		Write-Host 'Approved pod candidate included in isolated build only; no world generation.'
 	}
 	Push-Location $mirrorRoot
 	try {

@@ -1,0 +1,7 @@
+Mods.apogean.Items.ArrivalPod: {
+	DisplayName: Damaged Arrival Pod
+	Tooltip: '''
+		An empty reentry cradle with a dead communications panel
+		Can be moved without changing your spawn point
+		'''
+}

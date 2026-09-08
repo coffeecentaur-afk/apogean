@@ -1,0 +1,76 @@
+[23:29:05.989] [Main Thread/INFO] [Terraria]: Entering world with player: gg, IsCloud=False, Width: 8400, Height: 2400, Evil: 1, GameMode: 0
+System.InvalidOperationException: Preserved grove differs after reload: expected=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4; actual=65A5229C530BD25CAC586039B2AADBA460DFDDC64C6E2DD320AD2639BCFDFFC8. No rebuild performed.
+[23:29:07.131] [Main Thread/ERROR] [apogean]: AUTOMATIC WASTES TERRAIN LAB BUILD FAILED
+System.InvalidOperationException: Preserved grove differs after reload: expected=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4; actual=65A5229C530BD25CAC586039B2AADBA460DFDDC64C6E2DD320AD2639BCFDFFC8. No rebuild performed.
+[23:29:17.462] [Main Thread/INFO] [apogean]: ARRIVAL POD MATRIX START: native-programmatic-API-tests
+[23:29:17.462] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: legacy-checkpoint-reproduces-terrain-frame-failure
+[23:29:17.462] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: saved-state-ignores-recomputed-terrain-frames
+[23:29:17.462] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: saved-state-rejects-pod-frame-damage
+[23:29:17.462] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: saved-state-rejects-paint-change
+[23:29:17.463] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: saved-state-rejects-missing-ground
+[23:29:17.463] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: snapshot-controls-restore-all-cells
+[23:29:17.463] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: clean-test-slot-and-no-preexisting-pod-drops
+[23:29:17.463] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: registered-atlas-and-origin
+[23:29:17.463] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: non-solid-not-housing-or-light
+[23:29:17.465] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-0-0-one-drop-no-remnants
+[23:29:17.466] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-0-1-one-drop-no-remnants
+[23:29:17.466] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-0-2-one-drop-no-remnants
+[23:29:17.467] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-0-3-one-drop-no-remnants
+[23:29:17.467] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-0-4-one-drop-no-remnants
+[23:29:17.468] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-0-5-one-drop-no-remnants
+[23:29:17.469] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-1-0-one-drop-no-remnants
+[23:29:17.470] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-1-1-one-drop-no-remnants
+[23:29:17.470] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-1-2-one-drop-no-remnants
+[23:29:17.471] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-1-3-one-drop-no-remnants
+[23:29:17.472] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-1-4-one-drop-no-remnants
+[23:29:17.473] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-1-5-one-drop-no-remnants
+[23:29:17.474] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-2-0-one-drop-no-remnants
+[23:29:17.475] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-2-1-one-drop-no-remnants
+[23:29:17.475] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-2-2-one-drop-no-remnants
+[23:29:17.476] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-2-3-one-drop-no-remnants
+[23:29:17.477] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-2-4-one-drop-no-remnants
+[23:29:17.478] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-2-5-one-drop-no-remnants
+[23:29:17.479] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-3-0-one-drop-no-remnants
+[23:29:17.480] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-3-1-one-drop-no-remnants
+[23:29:17.481] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-3-2-one-drop-no-remnants
+[23:29:17.482] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-3-3-one-drop-no-remnants
+[23:29:17.484] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-3-4-one-drop-no-remnants
+[23:29:17.485] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-3-5-one-drop-no-remnants
+[23:29:17.486] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-4-0-one-drop-no-remnants
+[23:29:17.487] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-4-1-one-drop-no-remnants
+[23:29:17.488] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-4-2-one-drop-no-remnants
+[23:29:17.490] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-4-3-one-drop-no-remnants
+[23:29:17.491] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-4-4-one-drop-no-remnants
+[23:29:17.492] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: copper-pick-power-cell-4-5-one-drop-no-remnants
+[23:29:17.493] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: reject-missing-anchor-0
+[23:29:17.494] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: support-loss-0-one-drop
+[23:29:17.494] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: reject-missing-anchor-1
+[23:29:17.497] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: support-loss-1-one-drop
+[23:29:17.497] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: reject-missing-anchor-2
+[23:29:17.498] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: support-loss-2-one-drop
+[23:29:17.498] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: reject-missing-anchor-3
+[23:29:17.500] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: support-loss-3-one-drop
+[23:29:17.500] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: reject-missing-anchor-4
+[23:29:17.501] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: support-loss-4-one-drop
+[23:29:17.502] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: liquid-0-placement-and-framing
+[23:29:17.503] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: liquid-0-recovery
+[23:29:17.503] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: liquid-1-placement-and-framing
+[23:29:17.504] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: liquid-1-recovery
+[23:29:17.504] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: native-explosion-veto
+[23:29:17.505] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: collision-free-full-footprint
+[23:29:17.505] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: recoverable-placeable-lava-safe-item
+[23:29:17.506] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: re-placement-then-removal-one-drop
+[23:29:17.506] [Main Thread/INFO] [apogean]: ARRIVAL POD CHECK PASS: world-and-bed-spawn-unchanged
+[23:29:17.506] [Main Thread/INFO] [apogean]: ARRIVAL POD MATRIX PASS: checks=58; checkpoint=273B29B0F2AF8EAA6628C85793FDA1587E5087B1FA5F6D6B6028F523EBF8BB8B; programmatic-native-APIs-not-manual-input; multiplayer-pending
+[23:29:17.507] [Main Thread/INFO] [apogean]: ARRIVAL POD VIEW: night=False; inside=False; bounds={X:4476 Y:540 Width:64 Height:24}; normal-tile-renderer=True
+[23:29:17.507] [Main Thread/INFO] [apogean]: ARRIVAL POD GROVE GUARD: unchanged=True; snapshot=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4:65A5229C530BD25CAC586039B2AADBA460DFDDC64C6E2DD320AD2639BCFDFFC8; not-a-reload-acceptance
+[23:29:42.307] [Main Thread/INFO] [apogean]: LIVE VALIDATION REQUEST CONSUMED: qa-save-and-quit
+[23:29:43.216] [.NET TP Worker/INFO] [StatusText]: Saving modded world data
+[23:31:11.723] [Main Thread/INFO] [Terraria]: Entering world with player: gg, IsCloud=False, Width: 8400, Height: 2400, Evil: 1, GameMode: 0
+[23:31:12.780] [Main Thread/ERROR] [apogean]: AUTOMATIC WASTES TERRAIN LAB BUILD FAILED
+System.InvalidOperationException: Preserved grove differs after reload: expected=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4; actual=65A5229C530BD25CAC586039B2AADBA460DFDDC64C6E2DD320AD2639BCFDFFC8. No rebuild performed.
+[23:31:13.298] [Main Thread/INFO] [apogean]: ARRIVAL POD RELOAD PASS: unchanged=273B29B0F2AF8EAA6628C85793FDA1587E5087B1FA5F6D6B6028F523EBF8BB8B; three-objects-and-empty-test-slot=True; no-build-on-load=True
+[23:31:13.299] [Main Thread/INFO] [apogean]: ARRIVAL POD VIEW: night=False; inside=False; bounds={X:4476 Y:540 Width:64 Height:24}; normal-tile-renderer=True
+[23:31:13.299] [Main Thread/INFO] [apogean]: ARRIVAL POD GROVE GUARD: unchanged=True; snapshot=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4:65A5229C530BD25CAC586039B2AADBA460DFDDC64C6E2DD320AD2639BCFDFFC8; not-a-reload-acceptance
+[23:32:07.547] [Main Thread/INFO] [apogean]: LIVE VALIDATION REQUEST CONSUMED: qa-save-and-quit
+[23:32:08.343] [.NET TP Worker/INFO] [StatusText]: Saving modded world data

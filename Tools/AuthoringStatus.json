@@ -6,13 +6,13 @@
       "id": "arrival-pod-v1",
       "status": "contracted",
       "static": "pass",
-      "build": "pending",
-      "liveFixture": "pending",
+      "build": "pass",
+      "liveFixture": "pass",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "Art/Candidates/ArrivalPod-v1/Native-v1/README.md",
-      "evidenceScope": "User accepts A3 concept: perfect. Native-size appearance review remains pending, not concept approval. Separate mask preserves source colors before explicit lossy 80x96/20-color fitting; 90x108 sheet, 30-cell pixel round-trip, hard alpha, connectivity and bottom contact pass. Real CLI controls reject 11 missing/defective inputs and overwrite; five image hashes reproduce. No runtime tile/item, save schema, worldgen, installed art or game build change. Immediate pickaxe recovery and unchanged spawn remain approved; relay later.",
-      "blockers": ["Review actual native-size fit and mask semantics without reopening accepted A3 design. Static checks do not prove appearance, renderer grounding or preservation of every thin feature.", "Implement/prove native placement, support loss, single item recovery, re-placement, save/reload and multiplayer; then new-world sanctuary-safe placement. No legacy-world retrofit or relay implementation."]
+      "evidenceReference": "Art/Validation/ArrivalPod-2026-09-07/README.md",
+      "evidenceScope": "Native-v1 built and installed only through an opt-in isolated package. 58 native programmatic checks and unchanged save/reload pass; day, player-overlap, blue-paint and night screenshots retained. Nine defective CLI log controls pass. Original V1 checkpoint failure retained and fixed by comparing persistent tile state rather than recomputed soil frames. User then withdrew art approval: too detailed, needs more pixelation. User then accepts A4 coarse style and requests grit, broken plating and impact terrain; A5 is review-only, not native or installed. Family remains contracted pending new art approval; technical success is not visual acceptance. Wastes assets unchanged; no worldgen or relay.",
+      "blockers": ["Review A5 damaged/impact direction in the accepted A4 coarse style, then fit an exact coarse pixel grid and show beside the player before replacing art. Preserve architecture, reduce tiny marks and panel seams. Native-v1 approval is superseded; do not promote it.", "Complete manual inventory/pickup/re-placement visual checks, actuator and sloped-anchor cases, and multiplayer before bounded new-world sanctuary/divot integration. Preserve known grove mismatch without rebuilding it. No regular-world retrofit or relay implementation."]
     },
     {
       "id": "wastes-mid-spacing-v3",
