@@ -1,6 +1,12 @@
 # Arrival pod — native behavior evidence, superseded art
 
-## Current decision
+## Later checkpoint
+
+September 8: crash-site direction agreed; exact coarse candidate is now in
+`../../Candidates/ArrivalPod-v1/Native-v2/`. It has static proof only and is not
+installed. The 58 checks and captures below remain exclusively Native-v1.
+
+## Decision at this native test
 
 The user accepted the native A3 export, authorized this isolated fixture, then
 withdrew visual approval after seeing it: too detailed, needs more pixelation.

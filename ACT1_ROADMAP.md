@@ -13,8 +13,13 @@ Latest: the 80x96/20-color pod and 90x108 sheet now pass an isolated native
 fixture, 58 programmatic checks and save/reload. The user then withdrew art
 approval: too detailed, needs more pixelation. Preserve shape, simplify clusters;
 The user accepts A4's coarse style and asks for more grit/damage and impact
-terrain. `Art/Candidates/ArrivalPod-v1/A5-ImpactReview/` is review-only, not installed.
-Keep the family contracted until the revised art passes review. No divot,
+terrain. September 8: user agrees to A5's damaged pod and separate shallow divot.
+`Art/Candidates/ArrivalPod-v1/Native-v2/` now contains the exact coarse candidate,
+transparent 80x96 art and 90x108 sheet, 19 colors in uniform 2x2 clusters. Static
+checks and old/new deterministic replay pass; native appearance review comes
+next. Player comparison is labelled offline, using an unchanged old capture
+crop, not a screenshot of the new candidate. Nothing new is installed.
+Keep the family contracted until revised art and remaining behavior gates pass. No divot,
 worldgen or relay yet. See `Art/Validation/ArrivalPod-2026-09-07/README.md`.
 Historical background notes below retain their original evidence scope.
 

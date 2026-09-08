@@ -1,4 +1,7 @@
-param([string]$Directory = (Join-Path $PSScriptRoot '../Art/Candidates/ArrivalPod-v1/Native-v1'))
+param(
+    [string]$Directory = (Join-Path $PSScriptRoot '../Art/Candidates/ArrivalPod-v1/Native-v1'),
+    [ValidateSet(1,2)][int]$PixelClusterSize = 1
+)
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
@@ -59,5 +62,16 @@ try {
         }
     }
     if ($remaining.Count -ne 0) { throw 'DETACHED_PIXELS' }
-    Write-Output "PASS: 80x96 art; 90x108 sheet; 30 cells round-trip exactly; $($colors.Count) colors; $floor grounded pixels; one connected silhouette. Static only, not native renderer proof."
+    # Coarse candidates must use an actual shared logical pixel grid, not merely
+    # fewer colors in the same dense texture. Includes transparent edge cells.
+    for ($y=0; $y -lt 96; $y++) {
+        for ($x=0; $x -lt 80; $x++) {
+            $cx = $x - ($x % $PixelClusterSize)
+            $cy = $y - ($y % $PixelClusterSize)
+            if ($art.GetPixel($x,$y).ToArgb() -ne $art.GetPixel($cx,$cy).ToArgb()) {
+                throw "COARSE_PIXEL_GRID at $x,$y"
+            }
+        }
+    }
+    Write-Output "PASS: 80x96 art; 90x108 sheet; 30 cells round-trip exactly; $($colors.Count) colors; $floor grounded pixels; one connected silhouette; $PixelClusterSize-pixel grid. Static only, not native renderer proof."
 } finally { $art.Dispose(); $sheet.Dispose() }

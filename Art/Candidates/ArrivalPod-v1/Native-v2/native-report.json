@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "sourceSHA256": "3EEC46AFFC7BB149B6A38528AFB93ABB79E27D24E61D97995A5A18768AEB1C67",
+  "maskProposalSHA256": "962B2BDAB1B4D381E1B8B8F4C4EB26777BE4D57D95751A5B460013F630527BB6",
+  "maskSHA256": "5F511ED81595102D60D92CE822F0D090F1E1D57DF317AF56B14BB2069AA853BF",
+  "maskThreshold": "R+G+B >= 384",
+  "hingeBridgePixels": 49040,
+  "maskRepair": "A5-specific base/hinge joins [470,716..1005,739], [895,390..940,434], [907,554..948,600]; fill enclosed holes with 4-connected exterior flood. hingeBridgePixels includes enclosed fill. Preserve cockpit RGB; exclude independent ground.",
+  "sourceBounds": [
+    423,
+    89,
+    725,
+    733
+  ],
+  "fittedSize": [
+    80,
+    80
+  ],
+  "destinationOffset": [
+    0,
+    16
+  ],
+  "nativeSize": [
+    80,
+    96
+  ],
+  "sheetSize": [
+    90,
+    108
+  ],
+  "coordinateHeights": [
+    16,
+    16,
+    16,
+    16,
+    16,
+    16
+  ],
+  "padding": 2,
+  "sampling": "Centre nearest-neighbour; aspect preserved within integer rounding; bottom aligned",
+  "palette": "20 fixed source-directed material colors; RGB weighted-nearest; no dithering",
+  "pixelClusterSize": 2,
+  "logicalCanvas": [
+    40,
+    48
+  ],
+  "originalPixelsPreserved": false,
+  "scope": "Exact-source mask cutout followed by explicit LOSSY size/palette fitting. Static candidate only; native art review and live furniture behavior pending.",
+  "nativeSHA256": "822A50B8EE634A671281F2CFC5AA3EE760031E0DA3757246C8216911D83B6407",
+  "sheetSHA256": "6A60495AC6F473FFF6237B9BFDAC1AB88622CD2AC3794C148C4100605F1A65DC"
+}

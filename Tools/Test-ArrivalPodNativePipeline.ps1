@@ -3,6 +3,7 @@ $ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.Drawing
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $baseline=Join-Path $repo 'Art/Candidates/ArrivalPod-v1/Native-v1'
+$coarse=Join-Path $repo 'Art/Candidates/ArrivalPod-v1/Native-v2'
 $validator=Join-Path $PSScriptRoot 'Test-ArrivalPodNative.ps1'
 $generator=Join-Path $PSScriptRoot 'New-ArrivalPodNative.ps1'
 $temp=Join-Path ([IO.Path]::GetTempPath()) ('ApogeanPodChecks-'+[Guid]::NewGuid().ToString('N'))
@@ -14,9 +15,12 @@ $pinned=@(
     (Join-Path $baseline 'native-report.json'), (Join-Path $baseline 'cutout.png.report.json'),
     (Join-Path $repo 'Art/Candidates/ArrivalPod-v1/design-a3-blend.png')
 )
+$coarseFiles=@('ArrivalPod.png','ArrivalPod_Tile.png','mask-proposal.png','mask.png','cutout.png','preview.png','context-scale.png','native-report.json','cutout.png.report.json')
+foreach($f in $coarseFiles){$pinned+=Join-Path $coarse $f}
+$pinned+=Join-Path $repo 'Art/Candidates/ArrivalPod-v1/A5-ImpactReview/design-a5-impact.png'
 $before=@{}; foreach($p in $pinned){$before[$p]=(Get-FileHash $p).Hash}
-function Invoke-Check([string]$Directory,[string]$Expected='') {
-    $lines=(& pwsh -NoProfile -File $validator -Directory $Directory 2>&1 | Out-String)
+function Invoke-Check([string]$Directory,[string]$Expected='',[int]$Cluster=1) {
+    $lines=(& pwsh -NoProfile -File $validator -Directory $Directory -PixelClusterSize $Cluster 2>&1 | Out-String)
     $result=$LASTEXITCODE
     if($Expected){
         if($result -eq 0 -or !$lines.Contains($Expected)){throw "NEGATIVE_CONTROL_FAILED: $Expected`n$lines"}
@@ -88,5 +92,40 @@ Invoke-Check $repeat
 foreach($f in @('mask.png','cutout.png','ArrivalPod.png','ArrivalPod_Tile.png','preview.png')){
     if((Get-FileHash (Join-Path $repeat $f)).Hash -ne (Get-FileHash (Join-Path $baseline $f)).Hash){throw "NONDETERMINISTIC: $f"}
 }
+Invoke-Check $coarse '' 2
+# The old (valid but overly detailed) native export must fail the new grid rule.
+Invoke-Check $baseline 'COARSE_PIXEL_GRID' 2
+foreach($defect in @('singleColor','singleHole')) {
+    $dir=Join-Path $temp $defect; [void](New-Item -ItemType Directory -Path $dir)
+    $art=[Drawing.Bitmap]::new((Join-Path $coarse 'ArrivalPod.png'))
+    $sheet=[Drawing.Bitmap]::new((Join-Path $coarse 'ArrivalPod_Tile.png'))
+    try {
+        if($art.GetPixel(40,60).A -ne 255){throw 'COARSE_CONTROL_ANCHOR_INVALID'}
+        $color=[Drawing.Color]::FromArgb(0,0,0,0)
+        if($defect -eq 'singleColor') {
+            $old=$art.GetPixel(40,60).ToArgb()
+            for($y=0;$y -lt 96;$y++){for($x=0;$x -lt 80;$x++){
+                $p=$art.GetPixel($x,$y)
+                if($p.A -eq 255 -and $p.ToArgb() -ne $old){$color=$p;break}
+            };if($color.A -eq 255){break}}
+        }
+        Set-PixelPair $art $sheet 40 60 $color
+        $art.Save((Join-Path $dir 'ArrivalPod.png'),[Drawing.Imaging.ImageFormat]::Png)
+        $sheet.Save((Join-Path $dir 'ArrivalPod_Tile.png'),[Drawing.Imaging.ImageFormat]::Png)
+    } finally {$art.Dispose();$sheet.Dispose()}
+    Invoke-Check $dir 'COARSE_PIXEL_GRID' 2
+}
+$coarseOverwrite=(& pwsh -NoProfile -File $generator -Variant Native-v2 -OutputDirectory $coarse 2>&1 | Out-String)
+if($LASTEXITCODE -eq 0 -or !$coarseOverwrite.Contains('OUTPUT_EXISTS')){throw 'COARSE_OVERWRITE_NOT_REJECTED'}
+$coarseProduction=(& pwsh -NoProfile -File $generator -Variant Native-v2 -OutputDirectory (Join-Path $repo 'Content/ForbiddenPodProbe') 2>&1 | Out-String)
+if($LASTEXITCODE -eq 0 -or !$coarseProduction.Contains('PRODUCTION_OUTPUT_FORBIDDEN')){throw 'COARSE_PRODUCTION_PATH_NOT_REJECTED'}
+if(Test-Path (Join-Path $repo 'Content/ForbiddenPodProbe')){throw 'PRODUCTION_DIRECTORY_CREATED'}
+$coarseRepeat=Join-Path $temp 'coarseRepeat'; [void](New-Item -ItemType Directory -Path $coarseRepeat)
+$coarseLog=(& pwsh -NoProfile -File $generator -Variant Native-v2 -OutputDirectory $coarseRepeat 2>&1 | Out-String)
+if($LASTEXITCODE -ne 0){throw "COARSE_REPEAT_FAILED: $coarseLog"}
+Invoke-Check $coarseRepeat '' 2
+foreach($f in @('mask.png','cutout.png','ArrivalPod.png','ArrivalPod_Tile.png','preview.png','context-scale.png','native-report.json','cutout.png.report.json')) {
+    if((Get-FileHash (Join-Path $coarseRepeat $f)).Hash -ne (Get-FileHash (Join-Path $coarse $f)).Hash){throw "COARSE_NONDETERMINISTIC: $f"}
+}
 foreach($p in $pinned){if((Get-FileHash $p).Hash -ne $before[$p]){throw "BASELINE_CHANGED: $p"}}
-Write-Output "PASS: valid baseline + repeated export, 11 defective/missing inputs rejected, overwrite refused, 5 image hashes reproduced, 9 inputs/outputs preserved. Temporary controls: $temp"
+Write-Output "PASS: both variants + repeated exports; 11 defective/missing inputs and 3 coarse-grid controls rejected; both variants refuse overwrite/Content. Original 5 image hashes and coarse 6 image/2 report hashes reproduced; $($pinned.Count) inputs/outputs preserved. Temporary controls: $temp"

@@ -1,6 +1,6 @@
 # Arrival pod — bounded starting-area slice
 
-Status: **contracted; native behavior tested, A4 coarse style accepted; damaged A5 impact concept in review**. This is
+Status: **contracted; A5 crash-site direction agreed; Native-v2 coarse export awaiting appearance review**. This is
 the next slice after the accepted Wastes foreground/midground baseline. It
 does not require another background redraw or promote that QA bank globally.
 
@@ -16,7 +16,12 @@ appearance was accepted ("yes"), then explicitly withdrawn after native testing:
 "too detailed ... more pixelated". Keep the mechanical architecture, but reduce
 microtexture and use larger pixel clusters. A4's coarse direction is accepted;
 the subsequent A5 adds requested broad grit, broken plating and shallow impact
-ground, and remains review-only. Native-v1's
+ground. September 8: user agrees to the damaged-but-survivable pod and separate
+shallow generated divot. This approves direction, not an exact native export.
+`Art/Candidates/ArrivalPod-v1/Native-v2/README.md` records the new 80x96 candidate:
+40x48 logical grid expanded into uniform 2x2 clusters, 19 used colors, no baked
+crater. Its 80x80 fitted silhouette preserves A5's wider proportions within the
+existing 5x6 furniture canvas. It is not installed. Native-v1's
 58 behavior checks, save/reload and screenshots are recorded in
 `Art/Validation/ArrivalPod-2026-09-07/README.md`; they do not approve its art.
 
@@ -29,6 +34,10 @@ ground, and remains review-only. Native-v1's
 - User approved immediate normal-pickaxe removal. Recover one intact placeable
   pod item; moving it never changes world spawn or any bed spawn.
 - A small, shallow impact divot and sparse debris, not a large crater.
+- Visibly broken plating/roof, a bent but attached hatch and broad soot/mud
+  suggest a bad landing without destroying the occupant cradle. The crater is
+  ordinary editable terrain: taking the pod leaves the scar behind; placing
+  the item somewhere else creates no new impact terrain.
 - Generate only during new supported-world creation. No on-load, on-death,
   join or respawn regeneration and no migration into existing worlds.
 - Relay repair, range, housing-based NPC coverage, shipping, shop/dialogue UI,
@@ -66,7 +75,9 @@ Preserve the first concept's layered doorway lip, inset hatch panel, hinges,
 seat/restraints, segmented heat shield and broad asymmetric scorch. Spend small
 pixel accents on those meaningful parts, not random surface grain. The second
 revision supplies cluster scale, not permission to erase construction detail.
-This is a deliberate redraw, not averaging images or applying a pixel filter.
+The approved A4/A5 concept edits establish the new art direction. The native
+candidate then uses explicitly lossy deterministic sampling, not a claim that
+a palette filter alone makes finished Terraria art.
 
 The generated board is **concept-only**: any scale annotations are targets.
 Do not crop or resize the board into `Content`, assume its pixel grid is exact,
@@ -78,6 +89,16 @@ two narrow hinge corrections), then a labelled lossy nearest-neighbour size and
 20-color fit. It is not a lossless conversion or newly drawn fine detail. Its
 80x90 fitted silhouette is bottom-aligned inside an 80x96 canvas. Only Art
 candidates were written; do not bypass the next visual review or live fixture.
+
+Native-v2 uses the A5 master and a new coordinate-locked mask. The generated mask
+incorrectly left interior ink lines/cockpit holes; source-specific base/hinge
+joins and enclosed-hole fill correct the selection without repainting source
+RGB. Final native pixels pass the shared hard-alpha, connected-footing and
+30-cell round-trip checks plus an actual 2x2-grid check. Three coarse-grid
+negative controls and two-variant deterministic replay are recorded in its
+README. The side-by-side player reference is an unchanged crop of the OLD
+native capture beside a separately labelled approximate-screen-scale NEW
+candidate, not a new in-game screenshot. Repeat native rendering after review.
 
 ## Bounded placement proposal
 
