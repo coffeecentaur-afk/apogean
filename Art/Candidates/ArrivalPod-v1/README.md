@@ -4,7 +4,7 @@ September 7. Next starting-area slice after the accepted Wastes spacing.
 Built-in image generation; A1, coarser A2 and user-requested blend A3.
 No CLI/API fallback. These are revisions of one Design A, not three pods.
 
-- `design-a3-blend.png`: current blend, pending user review; one pod with no
+- `design-a3-blend.png`: user-approved blend ("perfect"); one pod with no
   unreliable person-size guide. Preserves first mechanical design with a
   more deliberate clustered rendering.
 - `design-a-concept.png`: A2; user prefers its chunkier pixel treatment, not
@@ -15,6 +15,8 @@ No CLI/API fallback. These are revisions of one Design A, not three pods.
   Preserved unchanged as the primary design reference.
 - `PROMPTS.md`: initial and coarser-revision prompts.
 - `PROMPT_A3.md`: exact user-requested blend prompt and both input roles.
+- `Native-v1/README.md`: separate exact-size candidate, source/mask provenance,
+  static evidence and actual-pixel preview. Native-size visual review pending.
 - [Placement/behavior contract](../../../ARRIVAL_POD_CONTRACT.md).
 
 ## Inspection
@@ -43,9 +45,9 @@ storage, weapons, communications functionality or faction branding.
 
 ## Next gate
 
-Ask whether A3 balances the retained detail and chunky pixelwork. After approval, author and
-review the native assembly, then run an isolated placement/removal/reload
-fixture. No new world or game restart is needed to review this board. Fresh-world
+Do not ask to reapprove A3 or redraw the accepted design. Review its separately
+prepared native assembly, then run an isolated placement/removal/reload fixture.
+No new world or game restart is needed to review this board. Fresh-world
 generation is later, following fixture acceptance and the bounded placement
 checks; ordinary worlds remain untouched.
 

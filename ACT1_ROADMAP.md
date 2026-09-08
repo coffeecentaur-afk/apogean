@@ -9,8 +9,10 @@ pickaxe recovery is approved; moving the pod does not move spawn, and relay
 repair/ship communication remain deferred. See `ARRIVAL_POD_CONTRACT.md` for
 the proposed native footprint, placement checks and ordered validation gates.
 Concept review comes before installation; runtime/production proof is pending.
-Latest art direction: first pod's mechanical design/detail plus second pod's
-chunkier pixels; the blend is labelled A3, still review-only.
+Latest: user accepts A3 (first pod design/detail + second pixel treatment).
+Exact 80x96/20-color candidate and 90x108 tile sheet now pass static framing,
+alpha, connectivity and mutation controls; native-size appearance review and
+runtime furniture behavior remain pending. See `Art/Candidates/ArrivalPod-v1/Native-v1/README.md`.
 Historical background notes below retain their original evidence scope.
 
 ## Shipped foundation

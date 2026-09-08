@@ -1,6 +1,6 @@
 # Arrival pod — bounded starting-area slice
 
-Status: **specified; art review and native implementation pending**. This is
+Status: **contracted; A3 concept accepted, native implementation pending**. This is
 the next slice after the accepted Wastes foreground/midground baseline. It
 does not require another background redraw or promote that QA bank globally.
 
@@ -9,7 +9,10 @@ User prefers the first board's design/detail and the second board's chunky
 pixel treatment. Blend those as **A3**. The initial technical rejection of the
 first board as an export is not rejection of its mechanical design; it is now
 the primary design reference. Neither source is a native sprite or installed
-asset, and the blend still needs review.
+asset. The user now explicitly accepts the A3 blend: "perfect". Preserve it.
+The separate masked/fitted native candidate is recorded in
+`Art/Candidates/ArrivalPod-v1/Native-v1/README.md`; static checks pass, native-size
+appearance and actual renderer/behavior checks remain pending.
 
 ## Binding decisions
 
@@ -27,7 +30,8 @@ asset, and the blend still needs review.
 
 ## Proposed art / furniture contract
 
-The following numbers are design targets to be proved, not engine evidence.
+The following contract now has a statically checked candidate. These checks do
+not yet prove the actual registered tile's drawing or behavior in Terraria.
 
 | Property | First candidate |
 | --- | --- |
@@ -61,6 +65,12 @@ The generated board is **concept-only**: any scale annotations are targets.
 Do not crop or resize the board into `Content`, assume its pixel grid is exact,
 or describe an illustration of a person as native in-game scale proof. Review
 an exact native-sized export separately before loading it.
+
+Native-v1 uses the retained color master, a separate explicit mask (including
+two narrow hinge corrections), then a labelled lossy nearest-neighbour size and
+20-color fit. It is not a lossless conversion or newly drawn fine detail. Its
+80x90 fitted silhouette is bottom-aligned inside an 80x96 canvas. Only Art
+candidates were written; do not bypass the next visual review or live fixture.
 
 ## Bounded placement proposal
 

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "sourceSHA256": "8A8860FA62D702B3464BC3450443ED0688130E3F4B8192DA8F0F4E6E992511CB",
+  "maskProposalSHA256": "882A0072FEA17E59BB15C00D0AC1AC4A8CE90F4322C0F3A3289D1613B3A6281E",
+  "maskSHA256": "DC33B3819CADB10A9CDFA5B86249FCFDE8C77A6A6B24FBA9D1DD304D53947329",
+  "maskThreshold": "R+G+B >= 384",
+  "hingeBridgePixels": 450,
+  "sourceBounds": [
+    196,
+    162,
+    827,
+    940
+  ],
+  "fittedSize": [
+    80,
+    90
+  ],
+  "destinationOffset": [
+    0,
+    6
+  ],
+  "nativeSize": [
+    80,
+    96
+  ],
+  "sheetSize": [
+    90,
+    108
+  ],
+  "coordinateHeights": [
+    16,
+    16,
+    16,
+    16,
+    16,
+    16
+  ],
+  "padding": 2,
+  "sampling": "Centre nearest-neighbour; aspect preserved within integer rounding; bottom aligned",
+  "palette": "20 fixed source-directed material colors; RGB weighted-nearest; no dithering",
+  "originalPixelsPreserved": false,
+  "scope": "Exact-source mask cutout followed by explicit LOSSY size/palette fitting. Static candidate only; native art review and live furniture behavior pending.",
+  "nativeSHA256": "63D4F04E0E76BE08B4997BEE2B4F919749415B1E3261D9DF8EF776070C310A8B",
+  "sheetSHA256": "880E4B45CEF78E984246F7C84F878EC0711C948E8719B9B519970B946A7C4996"
+}

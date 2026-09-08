@@ -1,0 +1,9 @@
+# Arrival pod native mask prompt
+
+Built-in image-generation edit. Input: accepted `../design-a3-blend.png`, inspected before edit. Output: opaque same-size selection proposal only; color source retained. Subsequent deterministic threshold and hinge-mask corrections are documented in README.md and the source-specific tool.
+
+## Exact prompt
+
+Technical edit of the attached image: produce ONLY an opaque binary BLACK AND WHITE selection mask, registered exactly to this 1254×1254 reference image. Preserve the original 1254×1254 canvas, object position, scale, silhouette and every outer step. This is not a redraw of the pod and not new art. All pixels belonging to the central arrival pod become solid pure WHITE (#FFFFFF). All surrounding backdrop, title, footer, text, baseline or cast ground shadow becomes solid pure BLACK (#000000).
+The white shape includes the complete small bent aerial, hull and scorched left shell, dark open doorway INCLUDING its black recess and empty seat (interior dark pixels are still part of the furniture), hinges, open right-hand hatch INCLUDING its dark inner panel, and full bevelled grounded foot/heat shield. Preserve the narrow opaque connections through the hinges; any actual exterior sky gap underneath the open hatch is black. Follow the true external dark outline of the pod; do not remove its black border, expand it, simplify it, shift it or include the shadow spreading on the ground. No white outlines around text: remove title and footer completely.
+Output only this same-coordinate 1254×1254 flat mask: pure opaque black and pure opaque white, hard edges. No gray, color, gradients, antialiasing, transparency, checkerboard, annotations, rulers or extra objects. The source color image will be kept intact separately and masked by code, so accurate registration is essential.

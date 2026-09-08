@@ -4,15 +4,15 @@
   "families": [
     {
       "id": "arrival-pod-v1",
-      "status": "specified",
-      "static": "pending",
+      "status": "contracted",
+      "static": "pass",
       "build": "pending",
       "liveFixture": "pending",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "ARRIVAL_POD_CONTRACT.md",
-      "evidenceScope": "Starting-area slice follows accepted Wastes spacing. Immediate pickaxe recovery and relocation without changing spawn approved; relay unlocks later. User prefers first pod concept design/detail with second revision pixel treatment; requested blend labelled A3, art review pending. Initial first-board technical rejection is not a rejection of its now-preferred architecture. Proposed 5x6-tile static non-solid furniture and shallow placement remain contracts only; no tile, item, world pass or save format changed.",
-      "blockers": ["Review pod design at target scale; export and validate actual native frame sheet before installation. Proposed dimensions and placement limits are not live evidence.", "Prove native placement, support loss, single item recovery, re-placement, save/reload and multiplayer; then new-world sanctuary-safe placement. No legacy-world retrofit or relay implementation."]
+      "evidenceReference": "Art/Candidates/ArrivalPod-v1/Native-v1/README.md",
+      "evidenceScope": "User accepts A3 concept: perfect. Native-size appearance review remains pending, not concept approval. Separate mask preserves source colors before explicit lossy 80x96/20-color fitting; 90x108 sheet, 30-cell pixel round-trip, hard alpha, connectivity and bottom contact pass. Real CLI controls reject 11 missing/defective inputs and overwrite; five image hashes reproduce. No runtime tile/item, save schema, worldgen, installed art or game build change. Immediate pickaxe recovery and unchanged spawn remain approved; relay later.",
+      "blockers": ["Review actual native-size fit and mask semantics without reopening accepted A3 design. Static checks do not prove appearance, renderer grounding or preservation of every thin feature.", "Implement/prove native placement, support loss, single item recovery, re-placement, save/reload and multiplayer; then new-world sanctuary-safe placement. No legacy-world retrofit or relay implementation."]
     },
     {
       "id": "wastes-mid-spacing-v3",
