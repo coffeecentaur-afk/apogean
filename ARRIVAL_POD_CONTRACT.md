@@ -1,6 +1,6 @@
 # Arrival pod — bounded starting-area slice
 
-Status: **pod appearance, pickup and replacement accepted; shallow divot implemented in isolated new-world QA, scene review pending**. This is
+Status: **pod appearance, pickup, replacement and generated shallow divot accepted; bounded fixture-pass, broader production checks remain**. The user says "it looks great continue" on September8. This is
 the next slice after the accepted Wastes foreground/midground baseline. It
 does not require another background redraw or promote that QA bank globally.
 

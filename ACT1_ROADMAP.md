@@ -1,15 +1,23 @@
 # Act 1 Delivery Roadmap
 
-## Current slice — shallow arrival divot in native new-world QA
+## Current slice — Maw entrance and shallow baseline
+
+September8: user accepts the actual arrival divot, "it looks great continue".
+The bounded starting scene is fixture-pass; do not reopen pod or Wastes art.
+Next: `MAW_ENTRANCE_CONTRACT.md`, beginning with read-only inspection of the
+existing generated entrance and first120 tiles, then the first failing material
+or navigation contract. No new mobs, bosses or whole-world rewrite in this pass.
+
+## Accepted checkpoint — shallow arrival divot in native new-world QA
 
 September8 latest: user accepts pod pickup and replacement, and requests the
 divot next. The bounded generator now uses the accepted Native-v3 pod, final
 Wastes terrain, whole-object plant checks and protected spawn. Two fixed seeds
 pass native generation on the final package: full13-wide/two-deep and compact
 7-wide/one-deep. Evidence: `Art/Validation/ArrivalDivot-2026-09-08/README.md`.
-Scene review and broader production cases remain; no ordinary-world retrofit.
-After this bounded starting scene is accepted, move to the Maw entrance/shallow
-slice. Preserve the accepted pod and background art/motion; no relay work.
+Scene review is accepted; broader production cases remain, with no ordinary-world
+retrofit. Move to the Maw entrance/shallow slice. Preserve the accepted pod and
+background art/motion; no relay work.
 
 ## Historical — accepted smooth flight; resume starting-area pod
 

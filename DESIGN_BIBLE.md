@@ -45,9 +45,10 @@ accepts the installed motion, "works great". Freeze this bounded motion baseline
 do not reopen tuning without a new defect. Broader integration gates remain
 separate. Evidence: `Art/Validation/WastesSmoothFlight-2026-09-08/README.md`.
 
-The user also accepts Native-v3 arrival-pod appearance: "Very good design."
-This closes the revised-footing art review, not the remaining manual placement,
-multiplayer or bounded production-divot gates. Do not redraw the approved pod.
+The user accepts Native-v3 pod appearance, manual pickup/replacement and the
+native shallow divot (September8: "it looks great continue"). The bounded
+starting scene is fixture-pass; preserve its appearance. Broader integration
+and multiplayer checks remain. Proceed to the Maw entrance/shallow baseline.
 
 Latest foreground clarification (September7): the combined diagonal response
 feels too near/reactive even with stable section anchors. Push Close back toward
@@ -148,7 +149,7 @@ The Wastes must remain a complete Terraria building biome rather than a set dres
 
 #### Arrival pod — approved starting-area direction
 
-- September8 current: Native-v3 appearance/flat footing, manual pickup and replacement are accepted. Preserve that art. The requested shallow divot is now implemented in candidate-gated new-world QA: final Wastes survey, 13-wide/two-deep or compact 7-wide/one-deep bowl, safe undug fallback, unchanged spawn, native furniture placement. Failed placement preserves terrain. Scene review and broader production gates remain; older pending-v2/v3 statements below are historical. See `Art/Validation/ArrivalDivot-2026-09-08/README.md`.
+- September8 current: Native-v3 appearance/flat footing, manual pickup/replacement and generated divot appearance are accepted ("it looks great continue"). Preserve this scene. Candidate-gated new-world QA uses a final Wastes survey, 13-wide/two-deep or compact 7-wide/one-deep bowl, safe undug fallback, unchanged spawn and native furniture placement. Failed placement preserves terrain. Broader production gates remain; older pending-v2/v3 statements below are historical. Next: bounded Maw entrance/shallow area per `MAW_ENTRANCE_CONTRACT.md`. See `Art/Validation/ArrivalDivot-2026-09-08/README.md`.
 - The player wakes with amnesia beside an opened, damaged drop pod in a small shallow impact divot. Disturbed soil and sparse debris tell the arrival story without creating a large crater, an escape obstacle or a hazardous spawn. Keep an unobstructed player spawn and travel route.
 - The pod is real world furniture behind the player, not parallax artwork. Its initial design has no obvious corporate branding; its broken communications panel hints at later use. Show its native-scale design before production installation; an isolated in-game review is appropriate when the user needs actual scale to judge it.
 - Pod art clarification: preserve the seat, hinged open hatch, heat shield and unbranded shell through deliberate pixel clusters. A3's native appearance was initially accepted, then rejected as too detailed after live testing. The user accepts A4's coarser style and now agrees to A5's damaged-but-survivable crash direction: broad soot/mud patches, large chipped edges and exposed framing instead of tiny speckles or intricate panel lines. Native-v2 is a 2x2-grid candidate installed only in isolated QA for the user's requested in-game judgment; day/overlap/night evidence is in Art/Validation/ArrivalPod-v2-2026-09-08, but visual acceptance is pending. Keep the movable pod separate from shallow compressed terrain and scattered debris. Picking up the pod leaves the scar; replacing it neither creates a new scar nor moves spawn. Do not turn the spawn divot into a large crater or obstacle.

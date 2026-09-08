@@ -1,0 +1,23 @@
+Allowlisted client.log excerpts, not a complete log or global error-free claim.
+
+BEFORE REPAIR, A3:
+[17:54:41.181] [Main Thread/INFO] [apogean]: MAW ENTRANCE VIEW: case=surface; feet={X:3210 Y:443}; native-routing=True; no-terrain-edits=True
+[17:54:41.181] [Main Thread/INFO] [apogean]: MAW ENTRANCE: evidence=MawEntrance-7cc997cbedf34df399a176d5a80a981e.json; saved-mouth={3211, 443}; no-terrain-edits=True
+[17:55:37.934] [Main Thread/INFO] [apogean]: MAW ENTRANCE VIEW: case=shallow; feet={X:3223 Y:500}; native-routing=True; no-terrain-edits=True
+
+AFTER REPAIR, A3:
+[18:02:02.008] [Main Thread/INFO] [apogean]: MAW ENTRANCE VIEW: case=surface; feet={X:3210 Y:443}; native-routing=True; no-terrain-edits=True
+[18:02:02.008] [Main Thread/INFO] [apogean]: MAW ENTRANCE: evidence=MawEntrance-7ead91a76baf4f748ea4d1ef4efc9992.json; saved-mouth={3211, 443}; no-terrain-edits=True
+[18:02:34.814] [Main Thread/INFO] [apogean]: MAW ENTRANCE VIEW: case=shallow; feet={X:3223 Y:500}; native-routing=True; no-terrain-edits=True
+
+AFTER REPAIR, B2:
+[18:04:59.837] [Main Thread/INFO] [apogean]: MAW ENTRANCE VIEW: case=surface; feet={X:5441 Y:476}; native-routing=True; no-terrain-edits=True
+[18:04:59.837] [Main Thread/INFO] [apogean]: MAW ENTRANCE: evidence=MawEntrance-40d3f88798ae4c5695a52aec1268ecc1.json; saved-mouth={5438, 485}; no-terrain-edits=True
+[18:05:58.145] [Main Thread/INFO] [apogean]: MAW ENTRANCE VIEW: case=shallow; feet={X:5436 Y:554}; native-routing=True; no-terrain-edits=True
+
+Original runtime-path atlas test: FAIL 14988 native dirt-wall alpha mismatches.
+Repaired runtime-path atlas test: PASS 468x180, 28864 opaque pixels, 5 colors.
+Explicit old-atlas negative control: FAIL 14988 alpha mismatches (expected).
+Final isolated build: 0 warnings, 0 errors.
+All 14 Wastes terrain atlas checks: PASS.
+Status gate: PASS 40 families, 8 skill snapshots, generator ownership.

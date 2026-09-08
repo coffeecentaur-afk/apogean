@@ -1,5 +1,9 @@
 # Arrival divot — bounded new-world evidence
 
+September8 follow-up: user accepts the native scene, "it looks great continue".
+Bounded divot appearance review is closed. Preserve it; broader cases below
+remain production work. Next slice: the Maw entrance/shallow baseline.
+
 User accepts Native-v3 pod appearance, pickup and replacement and requests the
 shallow impact divot next. This slice changes terrain generation, not pod art,
 background motion or other scenery. Scene review and production promotion are
