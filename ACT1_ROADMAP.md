@@ -2,6 +2,15 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+Latest September9 implementation: one solid brittle fang now has a bounded
+native prototype, not generation integration. Source -> explicit shape/mask ->
+four-way atlas -> native fixture is recorded in
+`Art/Validation/MawFang-2026-09-09/README.md`. Starter-pick whole-object removal,
+single drops, support loss, native slopes/actuation and isolated-player damage
+pass;199 native API checks after save/reload. User art review and real traversal
+remain before mouth integration. No dependency, liquid, mob or boss work.
+Historical research-only/no-tooth statements below describe preceding passes.
+
 Latest September9 planning intake: solid authored tooth/fang hazards with
 starter-pick removal are agreed; do not substitute bone-textured squares or
 drop-through platforms. `RESEARCH_AUTHORING_TOOLING_2026-09-09.md` audits the

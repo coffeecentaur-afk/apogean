@@ -13,6 +13,16 @@ namespace apogean.Content.Diagnostics
 	/// </summary>
 	internal static class VanillaAtlasExporter
 	{
+		internal static string ExportSpikeReference()
+		{
+			if (Main.dedServ) throw new InvalidOperationException("Spike reference requires a graphics client.");
+			string directory = Path.Combine(Main.SavePath, "Captures", "ApogeanTileLabReferences");
+			Directory.CreateDirectory(directory);
+			Texture2D texture = Main.Assets.Request<Texture2D>($"Images/Tiles_{TileID.Spikes}", AssetRequestMode.ImmediateLoad).Value;
+			Export(texture, Path.Combine(directory, "Vanilla-Spikes-Tile.png"));
+			return $"{directory}; Spikes={TileID.Spikes}; atlas={texture.Width}x{texture.Height}; solid={Main.tileSolid[TileID.Spikes]}; frameImportant={Main.tileFrameImportant[TileID.Spikes]}; immediateDamage={TileID.Sets.TouchDamageImmediate[TileID.Spikes]}";
+		}
+
 		internal static string ExportTileLabReferences()
 		{
 			if (Main.dedServ)

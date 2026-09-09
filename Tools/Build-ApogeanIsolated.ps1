@@ -9,6 +9,7 @@ param(
 	[string]$WastesMidDepthDirectory = '',
 	[string]$ArrivalPodCandidateDirectory = '',
 	[string]$MawBoneCandidateDirectory = '',
+	[string]$MawFangCandidateDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -209,6 +210,19 @@ try {
 		if ($LASTEXITCODE -ne 0) { throw 'Bone atlas audit failed.' }
 		Copy-Item -LiteralPath $asset -Destination (Join-Path $mirrorRoot 'Content/Tiles/OssuaryBone.png')
 		Write-Host 'Approved bone overrides the existing tile texture in this QA package only; no world-generation changes.'
+	}
+	if ($MawFangCandidateDirectory) {
+		$candidateRoot = (Resolve-Path -LiteralPath $MawFangCandidateDirectory).Path
+		$allowedRoot = (Join-Path $sourceRoot 'Art/Candidates/MawTooth-v1') + [IO.Path]::DirectorySeparatorChar
+		if (-not $candidateRoot.StartsWith($allowedRoot, [StringComparison]::OrdinalIgnoreCase)) { throw 'Fang must be in the isolated tooth study.' }
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-MawFang.ps1') -CandidateDirectory $candidateRoot
+		if ($LASTEXITCODE -ne 0) { throw 'Fang contract/atlas audit failed.' }
+		$asset = Join-Path $candidateRoot 'MawFangTile.png'
+		if ((Get-FileHash -LiteralPath $asset).Hash -ne '52DFA889B6CFADED43D9997E870D2EBCA0BE991188E29AF29616CE226DBC3D68') { throw 'Fang candidate changed; review required.' }
+		$destination = Join-Path $mirrorRoot 'Content/Tiles/Diagnostics'
+		New-Item -ItemType Directory -Path $destination -Force | Out-Null
+		Copy-Item -LiteralPath $asset -Destination (Join-Path $destination 'MawFangTile.png')
+		Write-Host 'Candidate fang included only in this QA build; no world-generation changes.'
 	}
 	Push-Location $mirrorRoot
 	try {

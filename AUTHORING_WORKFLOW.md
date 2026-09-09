@@ -239,3 +239,22 @@ objection to its perspective; preserve that approval rather than restarting
 its design cycle. Its baked matte and unproven native-scale fit still require
 separate export/assembly gates. Never interpret a displayed checkerboard as an
 alpha result; inspect encoded pixels.
+
+## Tile hazard lesson retained — 2026-09-09
+
+Contract visual alpha, native solid/sloped cells and contact damage separately.
+An authored tooth need not occupy every cell of rectangular furniture. Native
+45-degree slope cells can retain standard movement while empty cells stay air.
+Never infer damage shape from PNG alpha or a successful TileFrame result.
+`MawFangShape` shares the frame/geometry contract; the compiler's independently
+rotated pixels caught a wrong slope-rotation mapping. Native SlopeCollision and
+Hurt probes then verify distinct physical/damage claims. Test mining every part,
+whole-object cleanup, single drops, support loss and persistence. Keep isolated
+player API tests separate from manual traversal and multiplayer certification.
+
+The source study's matte/native-size failure was solved with the established
+explicit-mask exporter after disclosed recontouring and palette fitting, not
+another automatic background-removal heuristic. A QA-only texture path keeps
+this prototype out of production assets and world generation. Preserve all
+accepted package overrides during every test build. Five corrupt-atlas CLI
+controls ensure a validator pass means more than a valid PNG file.

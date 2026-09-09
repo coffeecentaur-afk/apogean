@@ -234,6 +234,15 @@ native checks; transparent pixels do not define collision automatically.
 Damage amount, drop and exact mining speed remain tuning to contract. Keep
 supporting bone separate and harmless; no safe ledges or preplaced ropes.
 
+September9 prototype implementation: a32x48 solid/sloped fang with four
+orientations now passes a bounded native fixture. Proposed QA tuning is30
+contact damage, three starter-pick(power35) hits, one Bone drop for the whole
+object. These values are not user-approved final balance. Exact silhouette,
+framing, support, collision and Hurt evidence are recorded in
+`Art/Validation/MawFang-2026-09-09/README.md`; art review, real traversal and
+multiplayer remain. No generator change or new dependency; the mouth's dense
+teeth and no-safe-ledges composition still await integration.
+
 - **Maw Nodes** are visible, destructible growth sources. They thicken local contamination and enemy activity.
 - The Maw has extremely slow intrinsic frontier growth even without Nodes. Nodes are feeding and amplification organs: each greatly accelerates local spread, enemy density, nest production, and mutation pressure, but destroying every local Node never kills the biome.
 - Before the Nest Warden falls, a struck Node's sheath may reveal its amber inner organ but immediately seals without showing misleading normal damage. The Warden's cauterization component makes Nodes genuinely destructible.

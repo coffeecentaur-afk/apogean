@@ -113,6 +113,7 @@ namespace apogean.Content.Diagnostics
 				}
 				if (request == "qa-save-and-quit")
 				{
+					ModContent.GetInstance<MawFangLab>().Release();
 					ModContent.GetInstance<MawBoneLab>().Release();
 					ModContent.GetInstance<ArrivalPodLab>().Release();
 					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
@@ -135,6 +136,16 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<VegetationVisualLab>().Release();
 					ModContent.GetInstance<ArrivalPodLab>().Run(request.Substring("arrival-pod-".Length));
 					return; // Never clears/rebuilds the preserved grove.
+				}
+				if (request.StartsWith("maw-fang-", System.StringComparison.Ordinal))
+				{
+					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
+					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
+					ModContent.GetInstance<VegetationVisualLab>().Release();
+					ModContent.GetInstance<ArrivalPodLab>().Release();
+					ModContent.GetInstance<MawBoneLab>().Release();
+					ModContent.GetInstance<MawFangLab>().Run(request.Substring("maw-fang-".Length));
+					return; // Never fall through to the destructive legacy fixture replacement.
 				}
 				if (request.StartsWith("maw-bone-", System.StringComparison.Ordinal))
 				{

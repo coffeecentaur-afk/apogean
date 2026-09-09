@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-brittle-fang-v1",
+      "status": "fixture-pass",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/MawFang-2026-09-09/README.md",
+      "evidenceScope": "One original eight-color32x48 fang, explicit54x216 four-way atlas; AI source recontoured/palette-fitted before exact-mask export. Shared frame/shape contract plus five deliberately bad atlases rejected. Candidate-only package6A5670B5 builds cleanly, accepted Wastes/pod/bone bank retained. Separate empty-envelope46x30 gg/V3 fixture at4956,500.175 native API checks before reload; saved frames and expanded199 checks after reload. Three power35 hits from each of20 parts remove one whole fang and yield one Bone; four support-loss cases; native slope resolution/clear side/actuation; isolated Player.Hurt loses30HP then normal immunity blocks repeat. Day/night native captures; no custom tile renderer or extra lights. No mouth/ordinary-world generation or new library.",
+      "blockers": ["Native appearance review, manually controlled player movement/rope/mining feel, actual bombs, coatings/settings and multiplayer remain. Probe is an isolated Player instance; API checks do not certify real traversal. Angular wedge/rotated shading are prototype art. No placeable fang item or enemy-damage claim.", "Keep the pre-existing grove reload mismatch red without rebuild/rebaseline. Candidate registration changes its observed digest toE0036087; cause not diagnosed. Within-session guards unchanged. Preserve accepted Wastes/pod/divot, safe structural bone, no-safe-ledges direction; acid and entity work remain separate."]
+    },
+    {
       "id": "maw-structural-bone-v2",
       "status": "fixture-pass",
       "static": "pass",

@@ -15,6 +15,14 @@ Exact damage, drops and mining timing still need a bounded tuning contract.
 Tool/library research is recorded in `RESEARCH_AUTHORING_TOOLING_2026-09-09.md`;
 it neither installs dependencies nor replaces this next implementation gate.
 
+September9 implementation checkpoint: one candidate-only fang now has native
+evidence in `Art/Validation/MawFang-2026-09-09/README.md`. Explicit32x48 wedge,
+five occupied cells with two native slopes, four orientations; three starter-pick
+hits remove the whole object and one Bone drops.30 damage uses native Hurt with
+shape-aware contact. These are prototype values.199 native API checks after
+reload do not replace real player/rope traversal or user art review. No mouth
+integration, generated safe ledges/ropes, portable item or acid implementation.
+
 Latest September9: MaskedNative-v2 quiet bone is user-approved and installed
 ONLY in the isolated QA package. A separate empty-air material fixture passes13
 native API checks before/after reload, with day/night captures. Evidence:

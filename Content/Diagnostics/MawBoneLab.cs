@@ -33,6 +33,7 @@ namespace apogean.Content.Diagnostics
 			try {
 				switch (request) {
 					case "build": Build(); break;
+					case "reference": Mod.Logger.Info("MAW SPIKE REFERENCE: " + VanillaAtlasExporter.ExportSpikeReference()); break;
 					case "test": Test(); break;
 					case "day": View(false); break;
 					case "night": View(true); break;

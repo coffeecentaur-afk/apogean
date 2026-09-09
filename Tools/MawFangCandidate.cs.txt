@@ -1,0 +1,78 @@
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using apogean.Common.Geometry;
+
+public static class MawFangCandidate
+{
+    static readonly Color[] Palette = {
+        Color.FromArgb(49,39,33), Color.FromArgb(78,64,53), Color.FromArgb(105,87,68),
+        Color.FromArgb(130,114,92), Color.FromArgb(158,143,116), Color.FromArgb(185,170,137),
+        Color.FromArgb(214,198,159), Color.FromArgb(133,102,52)
+    };
+    static Color Fit(Color c) {
+        int best=int.MaxValue; Color result=Palette[0];
+        foreach(Color p in Palette) {
+            int d=(c.R-p.R)*(c.R-p.R)+(c.G-p.G)*(c.G-p.G)+(c.B-p.B)*(c.B-p.B);
+            if(d<best){best=d;result=p;}
+        }
+        return result;
+    }
+    static double Interpolate(double y, double[] ys, double[] xs) {
+        for(int i=1;i<ys.Length;i++) if(y<=ys[i]) return xs[i-1]+(xs[i]-xs[i-1])*(y-ys[i-1])/(ys[i]-ys[i-1]);
+        return xs[xs.Length-1];
+    }
+    public static void Compile(string source, string output) {
+        using(var art=new Bitmap(source)) using(var master=new Bitmap(54,216)) using(var mask=new Bitmap(54,216)) {
+            if(art.Width!=1024 || art.Height!=1536) throw new InvalidDataException("SOURCE_STUDY_DIMENSIONS");
+            using(var g=Graphics.FromImage(master))g.Clear(Palette[0]);
+            using(var g=Graphics.FromImage(mask))g.Clear(Color.Black);
+            // Explicit recontouring of the AI source into the physical wedge, NOT exact extraction.
+            // The source's black matte is never copied outside the authored binary silhouette.
+            double[] ys={122,250,400,650,800,1050,1215,1400};
+            double[] left={258,280,307,327,345,335,248,207};
+            double[] right={272,365,471,614,691,799,879,909};
+            using(var up=new Bitmap(48,48)) {
+                for(int y=0;y<48;y++) for(int x=0;x<32;x++) {
+                    int s=MawFangShape.Slope(x/16,y/16,0);
+                    if(!MawFangShape.PixelSolid(x%16,y%16,s))continue;
+                    int width=Math.Min(32,y+1);
+                    double sy=y<32?122+(1215-122)*y/31.0:1215+(1400-1215)*(y-32)/15.0;
+                    double l=Interpolate(sy,ys,left),r=Interpolate(sy,ys,right);
+                    int sx=(int)Math.Round(l+(r-l)*(x+0.5)/width);
+                    Color c=Fit(art.GetPixel(sx,(int)Math.Round(sy)));
+                    if(x==0 || x==width-1 || y==47)c=Palette[0];
+                    up.SetPixel(x,y,c);
+                }
+                for(int o=0;o<4;o++) for(int y=0;y<48;y++) for(int x=0;x<48;x++) {
+                    Color c=up.GetPixel(x,y); if(c.A==0)continue;
+                    int rx=x,ry=y; MawFangShape.Rotate(ref rx,ref ry,o,47);
+                    int ax=rx/16*18+rx%16, ay=(o*3+ry/16)*18+ry%16;
+                    master.SetPixel(ax,ay,c);mask.SetPixel(ax,ay,Color.White);
+                }
+            }
+            master.Save(Path.Combine(output,"color-master.png"),ImageFormat.Png);
+            mask.Save(Path.Combine(output,"frame-mask.png"),ImageFormat.Png);
+        }
+    }
+    public static void Preview(string atlasPath, string output) {
+        using(var atlas=new Bitmap(atlasPath)) using(var board=new Bitmap(512,256)) {
+            using(var g=Graphics.FromImage(board))g.Clear(Color.FromArgb(62,67,68));
+            for(int o=0;o<4;o++) for(int y=0;y<48;y++)for(int x=0;x<48;x++) {
+                Color c=atlas.GetPixel(x/16*18+x%16,(o*3+y/16)*18+y%16);if(c.A==0)continue;
+                for(int yy=0;yy<2;yy++)for(int xx=0;xx<2;xx++) board.SetPixel(20+o*122+x*2+xx,40+y*2+yy,c);
+            }
+            // 1x sprite and a labelled 42px player-height ruler; no fake in-game screenshot.
+            for(int y=0;y<48;y++)for(int x=0;x<48;x++){
+                Color c=atlas.GetPixel(x/16*18+x%16,y/16*18+y%16);if(c.A!=0)board.SetPixel(220+x,180+y,c);
+            }
+            using(var g=Graphics.FromImage(board))using(var pen=new Pen(Color.LightGray))using(var font=new Font("Consolas",10)) {
+                g.DrawString("OFFLINE atlas assembly: 2x / actual-size below",font,Brushes.White,8,8);
+                g.DrawLine(pen,278,186,278,228);g.DrawLine(pen,275,186,281,186);g.DrawLine(pen,275,228,281,228);
+                g.DrawString("42px player\nheight",font,Brushes.White,287,187);
+            }
+            board.Save(output,ImageFormat.Png);
+        }
+    }
+}
