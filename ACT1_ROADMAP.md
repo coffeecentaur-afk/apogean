@@ -2,6 +2,15 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+Latest September9 native appearance gate: at the user's request, the unchanged
+three-tooth family is now in a disposable native art gallery in gg/V3/SP.
+See `Art/Validation/MawToothFamily-2026-09-09/README.md`:52 native art checks
+pass before/after save-reload; day/night screenshots inspected. These specimens
+are harmless and nonsolid, not final hazard implementation. User detail review
+is pending; matching physics/mining proof and generation follow, not precede it.
+No normal-world or generation changes. Preserve the existing grove failure.
+The following not-installed statements describe earlier passes.
+
 Latest September9 family direction: short16x32, long16x48 and wide32x64
 art-only candidates in `Art/Candidates/MawToothFamily-v1/Native-v1/review.png`.
 Long unchanged; shared palette and reviewed source masks. Three positive CLI

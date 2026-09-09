@@ -6,13 +6,13 @@
       "id": "maw-tooth-family-v1",
       "status": "contracted",
       "static": "pass",
-      "build": "pending",
-      "liveFixture": "pending",
+      "build": "pass",
+      "liveFixture": "pass",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "Art/Candidates/MawToothFamily-v1/README.md",
-      "evidenceScope": "Art-only short16x32, unchanged long16x48, wide32x64 family. New built-in sources had baked checkerboards; reviewed explicit masks and exact exporter isolate them. Uniform native sampling/common8-color palette, no collision-driven reshaping. Three actual static CLI positives and21 rejected defects pass. Empty-mask and missed-tip failures retained. Offline native-pixel bank/ruler preview, not a game capture. No installed package, runtime/world or accepted-asset changes.",
-      "blockers": ["User silhouette review then matching native render/collision/hurt/mining/support/orientation/save-reload proof. Rejected wedge tests do not certify this family; no invisible rectangular collider or silent broadening.", "50/35/15 seeded clustered placement is a provisional later trial, not implemented or final tuning. Preserve no-safe-ledges direction, accepted art and unresolved grove failure. Acid/entities/bosses remain separate."]
+      "evidenceReference": "Art/Validation/MawToothFamily-2026-09-09/README.md",
+      "evidenceScope": "User-requested native APPEARANCE probe, not final hazard certification. Exact short16x32/long16x48/wide32x64 pixels unchanged. Optional nonsolid/non-damaging TileObjectData gallery only in gg/V3/SP. Build0warnings/errors; prior411 PNGs identical plus3 atlases. Eight complete objects and52 native frame/loaded-alpha/support checks pass before/after actual save-reload. Unedited day/night game captures inspected; capture backdrop is not final Maw routing. PackageD9F8581F. Existing grove mismatch remains RED and unchanged by this fixture; regular worlds/worldgen untouched.",
+      "blockers": ["User in-game detail/silhouette verdict pending. Final solid/hurt/mining/support-loss/orientation/multiplayer behavior is NOT tested by these harmless art specimens. Rejected wedge tests do not certify this family; no invisible rectangular collider or silent broadening.", "50/35/15 seeded clustered placement remains a provisional later trial. Preserve no-safe-ledges direction, accepted art and unresolved grove failure. Acid/entities/bosses remain separate."]
     },
     {
       "id": "maw-slim-tooth-v2",

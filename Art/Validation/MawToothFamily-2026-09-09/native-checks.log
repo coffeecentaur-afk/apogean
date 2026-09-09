@@ -1,0 +1,131 @@
+[16:43:17.939] [.NET TP Worker/INFO] [Terraria]: Loading World: Apogee Native Visual V3, IsCloud=False, Width: 8400, Height: 2400, Evil: 1, GameMode: 0
+System.InvalidOperationException: Preserved grove differs after reload: expected=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4; actual=97024EEE4AF0E65EBF1F0269CFEBB8C9781F89D93E21F7649861DBB2E2048B77. No rebuild performed.
+[16:43:19.876] [Main Thread/ERROR] [apogean]: AUTOMATIC WASTES TERRAIN LAB BUILD FAILED
+System.InvalidOperationException: Preserved grove differs after reload: expected=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4; actual=97024EEE4AF0E65EBF1F0269CFEBB8C9781F89D93E21F7649861DBB2E2048B77. No rebuild performed.
+[16:43:27.109] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: native-place-0
+[16:43:27.109] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: native-place-1
+[16:43:27.109] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: native-place-2
+[16:43:27.110] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: native-place-3
+[16:43:27.110] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: native-place-4
+[16:43:27.110] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: native-place-5
+[16:43:27.110] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: native-place-6
+[16:43:27.110] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: native-place-7
+[16:43:27.110] [Main Thread/INFO] [apogean]: MAW TOOTH ART BUILD: bounds={X:5296 Y:500 Width:64 Height:28}; eight native objects, empty-envelope=True; art only.
+[16:43:27.110] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: registered-frame-contract-0
+[16:43:27.110] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: art-only-nonsolid-no-hurt-0
+[16:43:27.110] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-atlas-size-0
+[16:43:27.111] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-native-alpha-count-0
+[16:43:27.111] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: registered-frame-contract-1
+[16:43:27.111] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: art-only-nonsolid-no-hurt-1
+[16:43:27.111] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-atlas-size-1
+[16:43:27.112] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-native-alpha-count-1
+[16:43:27.112] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: registered-frame-contract-2
+[16:43:27.112] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: art-only-nonsolid-no-hurt-2
+[16:43:27.112] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-atlas-size-2
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-native-alpha-count-2
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-0-0-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-0-0-1
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-0-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-1-0-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-1-0-1
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-1-0-2
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-1-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-0-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-0-1
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-0-2
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-0-3
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-1-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-1-1
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-1-2
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-1-3
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-2-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-2-1
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-3-0-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-3-0-1
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-3-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-4-0-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-4-0-1
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-4-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-5-0-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-5-0-1
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-5-0-2
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-5-0
+[16:43:27.113] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-0-0
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-0-1
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-0-2
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-0-3
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-1-0
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-1-1
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-1-2
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-1-3
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-6-0
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-6-1
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-7-0-0
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-7-0-1
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-7-0
+[16:43:27.114] [Main Thread/INFO] [apogean]: MAW TOOTH ART MATRIX PASS: 52 native art checks. No final solid/hurt/mining/multiplayer certification.
+[16:43:27.115] [Main Thread/INFO] [apogean]: MAW TOOTH ART GROVE GUARD: unchanged; historical reload failure remains separate.
+[16:44:00.174] [Main Thread/INFO] [apogean]: MAW TOOTH ART GROVE GUARD: unchanged; historical reload failure remains separate.
+[16:44:11.540] [Main Thread/INFO] [apogean]: MAW TOOTH ART GROVE GUARD: unchanged; historical reload failure remains separate.
+[16:44:18.773] [Main Thread/INFO] [apogean]: MAW TOOTH ART GROVE GUARD: unchanged; historical reload failure remains separate.
+[16:44:34.790] [Main Thread/INFO] [apogean]: LIVE VALIDATION REQUEST CONSUMED: qa-save-and-quit
+[16:44:35.573] [.NET TP Worker/INFO] [StatusText]: Saving world data
+[16:44:35.700] [.NET TP Worker/INFO] [StatusText]: Validating world save
+[16:44:35.768] [.NET TP Worker/INFO] [StatusText]: Saving modded world data
+[16:48:30.023] [.NET TP Worker/INFO] [Terraria]: Loading World: Apogee Native Visual V3, IsCloud=False, Width: 8400, Height: 2400, Evil: 1, GameMode: 0
+[16:48:31.790] [Main Thread/ERROR] [apogean]: AUTOMATIC WASTES TERRAIN LAB BUILD FAILED
+System.InvalidOperationException: Preserved grove differs after reload: expected=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4; actual=97024EEE4AF0E65EBF1F0269CFEBB8C9781F89D93E21F7649861DBB2E2048B77. No rebuild performed.
+[16:48:51.424] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: registered-frame-contract-0
+[16:48:51.424] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: art-only-nonsolid-no-hurt-0
+[16:48:51.424] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-atlas-size-0
+[16:48:51.424] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-native-alpha-count-0
+[16:48:51.424] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: registered-frame-contract-1
+[16:48:51.424] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: art-only-nonsolid-no-hurt-1
+[16:48:51.425] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-atlas-size-1
+[16:48:51.425] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-native-alpha-count-1
+[16:48:51.425] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: registered-frame-contract-2
+[16:48:51.425] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: art-only-nonsolid-no-hurt-2
+[16:48:51.425] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-atlas-size-2
+[16:48:51.425] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: loaded-native-alpha-count-2
+[16:48:51.425] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-0-0-0
+[16:48:51.425] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-0-0-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-0-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-1-0-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-1-0-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-1-0-2
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-1-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-0-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-0-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-0-2
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-0-3
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-1-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-1-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-1-2
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-2-1-3
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-2-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-2-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-3-0-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-3-0-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-3-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-4-0-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-4-0-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-4-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-5-0-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-5-0-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-5-0-2
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-5-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-0-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-0-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-0-2
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-0-3
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-1-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-1-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-1-2
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-6-1-3
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-6-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-6-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-7-0-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: placed-frame-7-0-1
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART CHECK PASS: root-support-7-0
+[16:48:51.426] [Main Thread/INFO] [apogean]: MAW TOOTH ART MATRIX PASS: 52 native art checks. No final solid/hurt/mining/multiplayer certification.
+[16:48:51.427] [Main Thread/INFO] [apogean]: MAW TOOTH ART GROVE GUARD: unchanged; historical reload failure remains separate.

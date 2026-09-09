@@ -113,6 +113,7 @@ namespace apogean.Content.Diagnostics
 				}
 				if (request == "qa-save-and-quit")
 				{
+					ModContent.GetInstance<MawToothArtLab>().Release();
 					ModContent.GetInstance<MawFangLab>().Release();
 					ModContent.GetInstance<MawBoneLab>().Release();
 					ModContent.GetInstance<ArrivalPodLab>().Release();
@@ -146,6 +147,17 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<MawBoneLab>().Release();
 					ModContent.GetInstance<MawFangLab>().Run(request.Substring("maw-fang-".Length));
 					return; // Never fall through to the destructive legacy fixture replacement.
+				}
+				if (request.StartsWith("maw-tooth-art-", System.StringComparison.Ordinal))
+				{
+					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
+					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
+					ModContent.GetInstance<VegetationVisualLab>().Release();
+					ModContent.GetInstance<ArrivalPodLab>().Release();
+					ModContent.GetInstance<MawBoneLab>().Release();
+					ModContent.GetInstance<MawFangLab>().Release();
+					ModContent.GetInstance<MawToothArtLab>().Run(request.Substring("maw-tooth-art-".Length));
+					return; // Never enter legacy fixture-clearing code.
 				}
 				if (request.StartsWith("maw-bone-", System.StringComparison.Ordinal))
 				{

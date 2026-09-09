@@ -244,7 +244,12 @@ separate. No automatic generation or installation from static art tests.
 
 September9 follow-up: develop a short16x32, long16x48 and wide32x64 family.
 Wide must read as a complete heavier fang, not the rejected broad wedge.
-`Art/Candidates/MawToothFamily-v1/README.md` owns the current art-only review.
+`Art/Candidates/MawToothFamily-v1/README.md` owns the source art contract.
+The user's subsequent request authorizes an IN-GAME appearance review before
+final art approval: `Art/Validation/MawToothFamily-2026-09-09/README.md` records
+the unchanged sprites in a native, harmless/nonsolid QA-only gallery. This is
+not a change to the final solid tooth hazard agreement. Review remains pending;
+do not substitute offline mockups or old wedge physics for the new native proof.
 Shared palette, embedded roots, continuous pointed silhouettes; long unchanged.
 After shape approval and matching native physics/mining proof, trial bounded
 seeded selection at50/35/15 in irregular inward-facing clusters. These weights

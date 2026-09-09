@@ -10,6 +10,7 @@ param(
 	[string]$ArrivalPodCandidateDirectory = '',
 	[string]$MawBoneCandidateDirectory = '',
 	[string]$MawFangCandidateDirectory = '',
+	[string]$MawToothArtCandidateDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -223,6 +224,23 @@ try {
 		New-Item -ItemType Directory -Path $destination -Force | Out-Null
 		Copy-Item -LiteralPath $asset -Destination (Join-Path $destination 'MawFangTile.png')
 		Write-Host 'Candidate fang included only in this QA build; no world-generation changes.'
+	}
+	if ($MawToothArtCandidateDirectory) {
+		$candidateRoot = (Resolve-Path -LiteralPath $MawToothArtCandidateDirectory).Path
+		$allowed = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/MawToothFamily-v1/Native-v1')).Path
+		if ($candidateRoot -ne $allowed) { throw 'Only the exact tooth family art study is authorized.' }
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-MawToothArtFixture.ps1')
+		if ($LASTEXITCODE -ne 0) { throw 'Tooth art contract failed.' }
+		$destination = Join-Path $mirrorRoot 'Content/Tiles/Diagnostics/MawToothArt'
+		New-Item -ItemType Directory -Path $destination -Force | Out-Null
+		$recipe = Get-Content -Raw -LiteralPath (Join-Path $candidateRoot 'recipe.json') | ConvertFrom-Json
+		foreach ($record in $recipe.records) {
+			if ($record.name -notin @('short','long','wide')) { throw 'Unknown tooth art variant.' }
+			$folder = Join-Path $candidateRoot $record.name
+			if ((Get-FileHash -LiteralPath (Join-Path $folder 'tooth.png')).Hash -ne $record.spriteSHA256) { throw 'Reviewed tooth pixels changed.' }
+			Copy-Item -LiteralPath (Join-Path $folder 'upright-art-atlas.png') -Destination (Join-Path $destination "$($record.name).png")
+		}
+		Write-Host 'Exact tooth family included as non-solid, non-damaging native art specimens only.'
 	}
 	Push-Location $mirrorRoot
 	try {
