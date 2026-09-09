@@ -23,7 +23,8 @@ native liquid reactions. The optional branch does not block entrance work.
 
 Current review candidate: `Art/Candidates/MawEntrance-v1/README.md`, a measured
 120x88 mouth cutaway with asymmetric retained basins, attached brittle teeth
-and dry ledges. Geometry checks pass; no game fixture or acceptance implied.
+and no generated safe ledges (latest user correction: use rope or break teeth).
+Candidate geometry checks pass; no game fixture or acceptance implied.
 Bone atlas baseline is red for missing exterior/isolated silhouettes. Next:
 review this composition, then focused bone/tooth art and native fixture before
 changing the existing shallow generator. Preserve the Stomach/full route.

@@ -34,6 +34,9 @@ the design without redistributing other artists' images as Apogean assets.
   always harmless. Ordinary supporting bone/ribs remain separate from teeth.
 - The four creature images are directions the user would like to implement;
   they are not completed sprite sheets or agreed AI specifications.
+- Latest layout correction: **no safe ledges**. Players use rope or break the
+  teeth to clear their route. Remove prebuilt resting shelves, not merely the
+  labels. Do not auto-place rope or silently turn all structural bone hazardous.
 
 ## Reading the entrance sketch
 

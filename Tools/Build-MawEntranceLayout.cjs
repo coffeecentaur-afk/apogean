@@ -70,9 +70,16 @@ function validate(spec) {
     for (let y=box.y; y<box.y+box.height; y++) for (let x=box.x; x<box.x+box.width; x++) if (at(x,y) !== 0) return false;
     return true;
   }
-  for (const box of [spec.player,...spec.dryLandings]) {
+  // The surface lip supplies the scale figure's starting point, not a
+  // generated resting shelf inside the descent.
+  for (const box of [spec.player]) {
     assert.ok(clear(box), 'Dry standing volume obstructed');
     for (let x=box.x;x<box.x+box.width;x++) assert.equal(at(x,box.y+box.height),1,'Dry landing lacks safe support');
+  }
+  assert.ok(!spec.dryLandings?.length, 'No generated safe ledges: remove reserved resting positions');
+  for (let y=22; y<h; y++) for (let x=40; x<84; x++) {
+    assert.ok(!(at(x,y)===1 && at(x+1,y)===1 && clear({x,y:y-3,width:2,height:3})),
+      `No generated safe ledges: two-tile resting shelf at ${x},${y}`);
   }
   assert.ok(clear(spec.exit), 'Exit obstructed');
   const visited=new Set(), queue=[[spec.player.x,spec.player.y]];
@@ -103,16 +110,17 @@ function validate(spec) {
 const proof=validate(layout);
 for (const [name,mutate] of [
   ['floating tooth', s=>s.teeth.push([[61,7,1,1]])],
-  ['blocked landing', s=>s.dryLandings[0].x=10],
+  ['blocked entrance', s=>s.player.x=10],
+  ['restored safe ledge', s=>s.terrain.push([[52,39],[56,39],[56,43],[52,43]])],
   ['leaking pool', s=>s.basins[0].surfaceY=0],
   ['blocked exit', s=>s.exit.x=0],
   ['false route annotation', s=>s.route[2]=[0,35]],
   ['out-of-bounds geometry', s=>s.terrain[0][0]=[-1,18]]
 ]) {
   const broken=structuredClone(layout); mutate(broken);
-  assert.throws(()=>validate(broken), undefined, `Negative control did not fail: ${name}`);
+  assert.throws(()=>validate(broken), name==='restored safe ledge' ? /No generated safe ledges/ : undefined, `Negative control did not fail: ${name}`);
 }
-console.log(JSON.stringify({status:'PASS: candidate geometry only', width:layout.width,height:layout.height,pools:proof.pools,teeth:proof.teeth,reachableStandingPositions:proof.reachableStandingPositions,negativeControls:6, nativeGameplayTested:false},null,2));
+console.log(JSON.stringify({status:'PASS: candidate geometry only', width:layout.width,height:layout.height,pools:proof.pools,teeth:proof.teeth,reachableStandingPositions:proof.reachableStandingPositions,generatedRestingShelves:0,negativeControls:7, nativeGameplayTested:false},null,2));
 const args=process.argv.slice(2);
 if (args.length) {
   assert.ok(args.length===2 && args[0]==='--preview', 'Usage: node Tools/Build-MawEntranceLayout.cjs [--preview absolute-output.html]');

@@ -4,6 +4,10 @@ Status: **candidate / user review pending**. Not a game screenshot, final pixel
 art, accepted dimensions, liquid implementation or generator output.
 Wayfinder #26. Source direction: `MAW_SKETCH_DIRECTION_2026-09-08.md`.
 
+Latest user correction: **no safe ledges; players use rope or break teeth**.
+The earlier two-landing proposal is rejected and retained only in Git history.
+This revision removes the actual resting shelves, not just their labels.
+
 The user's sketch replaces the existing thin dome with an open feeding throat,
 inward teeth and asymmetric flanking basins. This study makes that composition
 measurable before material artwork or generation changes. The proposed study
@@ -21,12 +25,15 @@ surface height and blend into native terrain. The Stomach is unchanged.
 - Eight attached brittle tooth clusters: three on raised exterior banks, five
   facing into the shallow descent. Shapes here are coarse tile footprints,
   not approved tooth sprites or a promise of full-rectangle damage hitboxes.
-- Two dry, wall-grown landing ledges; no free-standing placed platforms.
-  The player at the left lip is a conservative 2x3-tile clearance reference,
-  not a new character/hitbox specification. Outlined figures mark dry spaces.
+- No generated resting shelves or safe landing markers. Walls change direction
+  gradually without two-tile-wide safe floors in the throat. The player at the
+  surface lip is a conservative 2x3-tile scale reference, not a resting point
+  inside the descent or a new character/hitbox specification.
 - An open winding corridor connects to the existing lower Gullet. Dotted line
   shows available space, **not** a jump trajectory, safe free fall, required
-  path or installed rope. Normal tools/rope/platforms still need live playtest.
+  path or installed rope. The intended options are player-placed rope or mining
+  teeth to clear the route. Do not automatically supply either solution. Normal
+  player building remains available; no new tool restriction is implied.
 
 ## Single-source preview and checks
 
@@ -43,17 +50,27 @@ node Tools/Build-MawEntranceLayout.cjs
 node Tools/Build-MawEntranceLayout.cjs --preview ABSOLUTE-PATH/maw-entrance-layout.html
 ```
 
-September8 result: PASS. Both basins are enclosed at their proposed fill levels,
-all eight tooth clusters are connected and attached to solid terrain, the three
-standing volumes are dry with solid non-hazard support, and a 2x3 clearance
-search reaches the bottom exit. 3,322 clear standing positions are reachable
-under that search. Six deliberate failures are rejected: floating tooth,
-obstructed landing, leaking pool, blocked exit, false route annotation and
-out-of-bounds geometry. This is grid flood/clearance validation, **not Terraria
-movement, gravity, jump, grapple, damage or multiplayer simulation**.
+September8 revised result: PASS. Both basins are enclosed at their proposed
+fill levels, all eight tooth clusters are connected and attached to terrain,
+the surface scale figure has support, and a2x3 clearance search reaches the
+bottom exit. 3,436 clear positions are reachable under that search. The first
+revision fails the new no-ledge contract; the replacement passes. Seven
+deliberate failures are rejected: floating tooth, obstructed entrance, restored
+safe ledge, leaking pool, blocked exit, false route annotation and out-of-bounds
+geometry. The restored-shelf control must fail specifically for the no-ledge
+rule, not an unrelated error.
+
+The focused test checks for exposed, non-hazard two-tile floors with three tiles
+of clear headroom inside this candidate's descent window (x40–84, y22–87).
+Surface banks and basin floors are outside that resting-shelf constraint.
+One-tile raster steps and dangerous tooth projections are not guaranteed safe
+rests. This is grid clearance, **not Terraria movement, rope placement, mining,
+gravity, jump, grapple, damage or multiplayer simulation**. The installed legacy
+shelf generator and drop-limit validator remain unchanged; adapt those together
+when the approved entrance reaches native implementation.
 
 Preview inspected in installed Edge headless at 736px and 360px, light and dark:
-209 rendered cell-run/player rectangles, no page errors, no horizontal overflow.
+No page errors or horizontal overflow; only the surface scale figure remains.
 Readable labels remain in screen pixels; geometry scales to available width.
 Local preview/captures live in this task's visualization directory, not Content.
 

@@ -19,8 +19,11 @@ design backlog only; no runtime changes or fixture promotion from this intake.
 
 An asymmetric wound in already-dead land. Inward roots and pale structural bone
 suggest a feeding organism without literal lips, red meat or purple Corruption.
-A winding passage and wall-grown shelves reveal the next turn. Ordinary ropes,
-platforms and hooks remain useful; hardened material keeps Platinum-tier/bomb
+A winding passage has no generated safe resting ledges. The user explicitly
+wants players to use rope or break the easily mineable teeth to clear a route.
+Do not place ropes/platforms for them or add disguised resting shelves to meet
+an old free-fall limit. Ordinary player building and hooks remain available;
+hardened material keeps Platinum-tier/bomb
 access. Structural bone remains safe, but visibly exposed brittle teeth now
 hurt on contact and must be easy to mine away. This overrides the earlier
 blanket harmless-static-bone rule, not the Mawstone mining gate. Later amber
@@ -72,3 +75,9 @@ September8 continuation: `Art/Candidates/MawEntrance-v1/README.md` holds a
 fails the new edge-diversity baseline (240 full-square frame bodies, no contour).
 Do not install the layout or new bone/tooth artwork before visual review and
 the scoped native fixture. No material, generator or installed package changed.
+
+Latest correction: safe ledges in the initial proposal were rejected. The
+candidate removes them and the clear-space markers, and checks for unintended
+two-tile resting shelves in the descent. The installed legacy shelf generator
+and its fall-length validator are still unchanged; revise together when the
+approved shallow shape reaches implementation. Do not report native completion.
