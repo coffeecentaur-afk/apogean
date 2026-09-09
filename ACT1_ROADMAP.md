@@ -8,6 +8,13 @@ Next: `MAW_ENTRANCE_CONTRACT.md`, beginning with read-only inspection of the
 existing generated entrance and first120 tiles, then the first failing material
 or navigation contract. No new mobs, bosses or whole-world rewrite in this pass.
 
+Latest September8 input: the user's entrance drawing now guides the next mouth
+preview; exposed teeth are easy-to-mine contact hazards, and side basins should
+hold real acid water if feasible. `MAW_SKETCH_DIRECTION_2026-09-08.md` records
+the visual interpretation and four creature inspirations. Mob roles/tiers are
+proposals for the later entity slice, not new spawn entries. Keep terrain and
+hazard fixtures ahead of those dependents; preserve accepted Wastes/pod work.
+
 ## Accepted checkpoint — shallow arrival divot in native new-world QA
 
 September8 latest: user accepts pod pickup and replacement, and requests the

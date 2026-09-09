@@ -58,6 +58,10 @@ _Avoid_: Mawstone, core membrane
 Hardened structural Maw terrain and bone that require approximately Platinum-tier pickaxe power or ordinary explosives.
 _Avoid_: Frayed growth, progression membrane
 
+**Maw tooth**:
+A brittle, exposed biting spike along the Maw's banks and throat, dangerous on contact but easily chipped away. It is distinct from the harmless supporting bone of ribs, bridges and arches.
+_Avoid_: Structural bone, progression membrane
+
 **Core membrane**:
 An explicit biological progression gate that cannot be removed with ordinary pickaxes or explosives until its associated encounter unlocks it.
 _Avoid_: Mawstone, arbitrary unbreakable terrain

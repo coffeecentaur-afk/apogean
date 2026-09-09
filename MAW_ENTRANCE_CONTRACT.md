@@ -9,14 +9,24 @@ Freeze the accepted Wastes camera/art and Native-v3 pod. Next is the existing
 major Maw's surface entrance and first roughly120 tiles of descent, not another
 world overhaul. Broad production/compatibility gates remain independent.
 
+Latest September8 design input: `MAW_SKETCH_DIRECTION_2026-09-08.md` records
+the user's two-page drawing/reference PDF and explicit acid-water/teeth
+clarifications. Use that open tooth-lined throat and flanking basin composition
+for the next preview, not the existing thin dome. New creature references are
+design backlog only; no runtime changes or fixture promotion from this intake.
+
 ## Player promise
 
 An asymmetric wound in already-dead land. Inward roots and pale structural bone
 suggest a feeding organism without literal lips, red meat or purple Corruption.
 A winding passage and wall-grown shelves reveal the next turn. Ordinary ropes,
 platforms and hooks remain useful; hardened material keeps Platinum-tier/bomb
-access. Static bone is safe. Later amber organs supply spaced light; ordinary
-turf and bone do not glow. Do not fill the gullet with fake acid blocks.
+access. Structural bone remains safe, but visibly exposed brittle teeth now
+hurt on contact and must be easy to mine away. This overrides the earlier
+blanket harmless-static-bone rule, not the Mawstone mining gate. Later amber
+organs supply spaced light; ordinary turf and bone do not glow. The user wants
+real yellow/orange acid water in flanking basins if feasible, never fake acid
+blocks; liquid mechanics still require their separate bounded prototype.
 
 ## First gate: observe the actual generator
 
