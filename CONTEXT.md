@@ -70,6 +70,10 @@ _Avoid_: Mawstone, arbitrary unbreakable terrain
 A reserved depression in an authored Maw chamber for an optional later prototype of localized amber digestive fluid. Environmental Alpha never fills it with fake solid acid tiles, and neither the basin nor any future liquid is required for progression.
 _Avoid_: Acid block, universal Maw water, pressure system
 
+**Maw acid**:
+The yellow-orange digestive fluid intended to remain corrosive when moved out of the Maw, including for enemy traps. Mixing with other liquid neutralizes its acidity; the exact mixing outcome remains a design question.
+_Avoid_: Acid block, all Maw water, permanent hazardous region
+
 **The Stomach**:
 The broad pre-Hardmode Matriarch arena suspended immediately above the Underworld inside the Burning Root. It ends the Gullet and is not itself an open entrance into Hell.
 _Avoid_: Burning Root when referring only to the arena, Matriarch box

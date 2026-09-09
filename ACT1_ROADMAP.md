@@ -14,6 +14,11 @@ hold real acid water if feasible. `MAW_SKETCH_DIRECTION_2026-09-08.md` records
 the visual interpretation and four creature inspirations. Mob roles/tiers are
 proposals for the later entity slice, not new spawn entries. Keep terrain and
 hazard fixtures ahead of those dependents; preserve accepted Wastes/pod work.
+Further clarification makes portable enemy-trap acid the optional target;
+leaving the Maw alone does not neutralize it. Mixing behavior and transport
+require a separate feasibility gate, not a return to fixed hazardous regions.
+Wayfinder #27 tracks that branch. No liquid implementation or evidence promotion
+from this discussion.
 
 ## Accepted checkpoint — shallow arrival divot in native new-world QA
 

@@ -25,7 +25,10 @@ the design without redistributing other artists' images as Apogean assets.
 - Follow-up asks whether a custom liquid can retain all water properties and
   simply cause damage. Do not present damaging real water as impossible: the
   open complexity is independent acid identity during transport/mixing and
-  localized rendering. No fixed-region or biome-wide policy is accepted yet.
+  localized rendering. Latest follow-up selects portability for player-built
+  enemy traps outside the Maw; the fixed-region suggestion does not satisfy
+  that target. The feature may still be deferred if reliable transport is too
+  costly. Mixing with other liquids is proposed to neutralize acidity.
 - The Maw's exposed teeth hurt on contact, like Dungeon spikes, but should be
   easy to mine. This supersedes the previous blanket rule that static bone is
   always harmless. Ordinary supporting bone/ribs remain separate from teeth.
@@ -76,12 +79,55 @@ dangerous is not proof of damage.
 
 ## Acid-water boundary
 
+### Latest follow-up: portable trap fluid, optional until proved
+
+Wayfinder #27 owns this optional feasibility branch; #26 remains the entrance.
+
+The user wants to collect/move acid out of the Maw and use it to hurt enemies
+in base traps. Leaving the biome must not neutralize unmixed acid. This replaces
+the earlier proposed fixed-basin policy, not the prohibition on fake acid tiles.
+Adding damage to players alone would not fulfill the trap use case.
+
+User-proposed simplification: contact/mixing with ordinary water or other
+liquids removes acidity and takes the other liquid's properties. Record this
+as the desired simplification, not proof it is a built-in feature. Neutralization
+does not remove the need to track acid during pure flow, bucket transfer, pumps,
+save/load and multiplayer. A stationary coordinate flag is not portable acid.
+
+One consequence needs confirmation: **convert to the other liquid** is not
+the same as **remove acidity, then let native liquid reactions happen**.
+For example, treating acid as neutralized water during lava contact can create
+the usual solid product instead of more lava. The latter is the recommendation,
+not an accepted override of the user's proposal. An explicit question is open.
+
+Also uncontracted: how much liquid a mixing event neutralizes. Do not silently
+make one drop erase an entire connected lake, nor promise quantity-limited
+neutralization without a real amount/transfer model. A one-drop test must reveal
+propagation before this rule is chosen. No concentration simulation, dilution
+ratios, new chemical products or renewable acid generator is approved yet.
+
+Enemy-trap balance proposals: one non-stacking environmental damage source,
+normal hostile-enemy proof first, then explicit boss/Maw-native/friendly-NPC
+rules. Exact damage, immunities, kill credit/loot, collection recipe and unlock
+remain open. Player contact remains hazardous; PvP and friendly-NPC harm are
+not granted by a request for enemy traps. Carrying acid does not imply Maw
+biome spread or automatic terrain corrosion.
+
+Recommended future feasibility fixture (not implemented): one acid source,
+one empty receiving basin outside the Maw, one neighboring ordinary-water
+control, and one normal hostile target. Prove controlled drain/flow, collection
+and replacement, pumps, partial mixing, neutralization visual/harm agreement,
+save/reload and a second client. No new liquid ID, global liquid overhaul or
+dependency is installed from this design discussion. Preserve the entrance
+terrain work; optional acid must not hold the whole Maw slice hostage.
+
 Keep real liquid behavior as the desired result. The old `MawAcidPool` tile
 prototype is not an acceptable shortcut. Reserve shaped basins in the entrance
 design independently from whether their liquid prototype is ready. No acid
 progression gate, new pressure system, global unsafe water or invented fifth
-liquid ID. Basin-bound damage/rendering versus biome-wide acid is a separate
-design choice; do not silently poison every player-built pool in the Maw.
+liquid ID. Portable acid must remain distinguishable from unrelated water;
+do not silently poison every player-built pool in the Maw. The earlier
+basin-bound alternative is insufficient for the new trap requirement.
 
 See `RESEARCH_MAW_BASIN_REVISIT_2026-09-08.md` for the bounded recheck. Any
 real-water prototype needs visible boundaries, actual liquid-height overlap,

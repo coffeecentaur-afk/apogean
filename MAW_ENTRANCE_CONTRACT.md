@@ -27,6 +27,10 @@ blanket harmless-static-bone rule, not the Mawstone mining gate. Later amber
 organs supply spaced light; ordinary turf and bone do not glow. The user wants
 real yellow/orange acid water in flanking basins if feasible, never fake acid
 blocks; liquid mechanics still require their separate bounded prototype.
+Follow-up: acid should be portable for enemy traps outside the Maw, with
+neutralization on mixing proposed as the simplifying rule. A fixed-basin hazard
+is not a substitute; exact mixing semantics and transport remain uncontracted.
+Keep that optional feasibility branch separate from mouth/teeth progress.
 
 ## First gate: observe the actual generator
 
