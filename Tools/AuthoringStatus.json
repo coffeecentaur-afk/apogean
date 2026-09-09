@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-structural-bone-v2",
+      "status": "fixture-pass",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "accepted",
+      "evidenceReference": "Art/Validation/MawBone-2026-09-09/README.md",
+      "evidenceScope": "User approves quieter MaskedNative-v2 material and native asset iteration, not finished rib morphology. Exact pinned atlas is isolated QA override; production PNG and world generator unchanged. Build6493031F zero warnings/errors,409 other Content PNGs identical to accepted package. Single-player gg/V3 finite empty-envelope80x38 fixture has340 bone cells.13 native API assertions pass before and after save/reload; saved material checksum unchanged. Day/night native captures inspected: edges, slopes, half-block, blue paint, actuation, bone/Mawstone join. No custom renderer or injected lighting; player equipment emits warm light. Capture uses native forest/active resource-pack backdrop, not Maw background evidence.",
+      "blockers": ["Native user appearance review, contextual rib shapes, further merge/settings permutations and actual bomb/item-drop/multiplayer tests remain. Explosion permission is not a bomb simulation; programmatic PickTile tests are not manual mining.", "Brittle teeth and raised-mouth integration are not implemented by this fixture. Known grove reload mismatch remains red/unchanged; within-session grove guards pass only. No accepted Wastes/pod, regular worlds, optional acid or entities changed."]
+    },
+    {
       "id": "maw-structural-wall-v1",
       "status": "fixture-pass",
       "static": "pass",

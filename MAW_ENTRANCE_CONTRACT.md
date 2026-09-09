@@ -4,6 +4,14 @@ Wayfinder implementation issue: #26. Closed design issue #9 is context, not
 proof that this scene is finished. Native audit and first wall repair evidence:
 `Art/Validation/MawEntrance-2026-09-08/README.md`.
 
+Latest September9: MaskedNative-v2 quiet bone is user-approved and installed
+ONLY in the isolated QA package. A separate empty-air material fixture passes13
+native API checks before/after reload, with day/night captures. Evidence:
+`Art/Validation/MawBone-2026-09-09/README.md`. This supersedes the no-install
+statement below for bone only. It does not approve finished ribs, change the
+mouth generator or prove brittle teeth. The user authorizes further asset/native
+iterations; do not re-ask existing layout, slate-tissue or quiet-bone decisions.
+
 September9: user approves the raised, tooth-packed layout. Keep its51 groups
 and24/22-tile solid rim rise as the working composition, with no safe ledges.
 New material review and a separate12-control native-topology pipeline are in

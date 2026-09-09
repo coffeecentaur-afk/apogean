@@ -2,13 +2,17 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
-Latest September9 follow-up: localized cooler slate tissue direction approved.
-Original bone material is simplified in `Art/Candidates/MawBone-v1/MaskedNative-v2`;
-five-color native export, same masks/compiler, actual1x/2x comparison against v1.
-Both sources pass eleven workflow checks. The quieter candidate is still NOT
-art-approved, installed or native-rendered. Next: actual-art review, small
-bone/tooth fixture, then approved mouth integration. Preserve grey/black/brown/
-amber; chalk/rust additions remain proposals. No mob or acid expansion.
+Latest September9: user approves the quieter MaskedNative-v2 bone and authorizes
+asset creation/native property tests. Bone now passes a bounded material fixture:
+13 native programmatic checks repeated after save/reload, plus day/night captures.
+See `Art/Validation/MawBone-2026-09-09/README.md`. Only this bone texture differs
+from the accepted QA package's410 images; production Content/generator unchanged.
+This is NOT finished rib morphology, teeth, native user art approval, or the full
+Maw. Next: separate brittle-tooth contract/atlas and native hazard/mining fixture,
+then approved mouth integration. Preserve grey/black/brown/amber and accepted
+localized slate tissue; chalk/rust additions remain proposals. No mob/acid branch.
+
+Historical checkpoints below retain their original evidence scope.
 
 September9: latest layout approved (raised24/22-tile rims,51 tooth groups,
 no safe ledges). Do not re-ask that layout choice. New bone/tooth material

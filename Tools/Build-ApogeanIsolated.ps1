@@ -8,6 +8,7 @@ param(
 	[string]$WastesStationBridgeDirectory = '',
 	[string]$WastesMidDepthDirectory = '',
 	[string]$ArrivalPodCandidateDirectory = '',
+	[string]$MawBoneCandidateDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -195,6 +196,19 @@ try {
 			Copy-Item -LiteralPath $asset -Destination (Join-Path $mirrorRoot "Content/Tiles/Diagnostics/$($entry[1])")
 		}
 		Write-Host "Pinned pod review candidate included: $candidateRoot; $pixelClusterSize-pixel grid; isolated build enables bounded new-world arrival QA, never existing-world regeneration."
+	}
+	if ($MawBoneCandidateDirectory) {
+		$candidateRoot = (Resolve-Path -LiteralPath $MawBoneCandidateDirectory).Path
+		$approvedRoot = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/MawBone-v1/MaskedNative-v2')).Path
+		if ($candidateRoot -ne $approvedRoot) { throw 'Only the reviewed MaskedNative-v2 bone is authorized for this fixture.' }
+		$asset = Join-Path $candidateRoot 'OssuaryBone-candidate.png'
+		if ((Get-FileHash -LiteralPath $asset).Hash -ne '5B4721D3A914EE5AEFD9D56AF95C0F883052BFB633005BC842E5CD101A5CF19E') {
+			throw 'Bone differs from the approved candidate.'
+		}
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-OssuaryBoneAtlas.ps1') -Atlas $asset
+		if ($LASTEXITCODE -ne 0) { throw 'Bone atlas audit failed.' }
+		Copy-Item -LiteralPath $asset -Destination (Join-Path $mirrorRoot 'Content/Tiles/OssuaryBone.png')
+		Write-Host 'Approved bone overrides the existing tile texture in this QA package only; no world-generation changes.'
 	}
 	Push-Location $mirrorRoot
 	try {

@@ -1,6 +1,14 @@
 # Maw bone / brittle teeth — material review, September 9
 
-Status: **new art pending review; offline topology and masked-source probes pass**.
+Status: **quiet v2 material approved; bounded native bone fixture passes**.
+Latest September9 user approval permits asset creation/native property tests.
+`MaskedNative-v2` is installed in the isolated QA package only, with13 native
+API checks repeated after save/reload and day/night captures. Evidence:
+`Art/Validation/MawBone-2026-09-09/README.md`. No production Content, mouth
+generator or teeth implementation changed. Native user appearance approval and
+finished ribs remain distinct. Wayfinder#26 stays open.
+
+Historical source checkpoints below retain their original scope.
 Latest September9 follow-up: user approves the localized cooler slate tissue in
 `DepthDirection-v1`, preserving the grey/black/brown/amber foundation. The other
 new materials remain proposals. `MaskedSource-v2` and `MaskedNative-v2` revise
@@ -86,9 +94,9 @@ generation is not run by this test.
 ## Next bounded gate
 
 Do not reopen the approved mouth shape or localized slate tissue direction.
-Review v2's quieter actual texture, then inspect exact exported frames in the
-small native fixture before production promotion. No new full-biome redraw or
-mob implementation from this study.
+V2 review and bounded bone fixture are now complete. Continue to the separate
+brittle-tooth contract/atlas and native hazard fixture before mouth integration.
+No new full-biome redraw or mob implementation from this study.
 The Stone-based diagnostic must not accidentally become the final bone.
 
 Keep exposed brittle teeth separate from hardened structural bone. Tooth

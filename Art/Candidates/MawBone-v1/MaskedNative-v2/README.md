@@ -1,8 +1,12 @@
 # Quieter bone — native-mask candidate v2
 
-Status: **static checks pass; actual-art review and native fixture pending**.
-No production atlas, installed package, world generation, mining rule or tooth
-behavior changed. Supporting bone remains separate from brittle tooth hazards.
+Status: **user approves this material; bounded native bone fixture passes**.
+September9: installed through a pinned isolated QA override; production atlas,
+world generation, mining rule and tooth behavior remain unchanged.13 native
+API checks pass before/after save/reload, with actual day/night captures in
+`Art/Validation/MawBone-2026-09-09/README.md`. Native user appearance review and
+finished rib morphology are not implied. Supporting bone stays separate from
+brittle tooth hazards. The following source/static observations remain valid.
 
 Only the source artwork changed. The original-color compiler and explicit-mask
 exporter were NOT changed to force this result. All288x270 native alpha remains
@@ -27,9 +31,9 @@ simulation. `comparison.png.json` pins the inputs and selection rule.
 
 Inspection: v2 has broader quiet material and less mottling than v1. It remains
 a flat material repeat, not proof that finished structural ribs look convincing
-in context. Native exterior shading, grass/stone merges, painted/actuated tiles,
-all slopes and half-blocks still need their own disposable game fixture.
-Do not treat a quieter picture or unchanged alpha as approval of those cases.
+in context. Native edges, four slopes, a half-block, paint, actuation and the
+bone/Mawstone join now have a disposable fixture. This does not exhaust all
+grass/stone merge permutations, settings, final ribs or native user review.
 
 `Tools/Test-MaskedTerrainCandidate.ps1` now accepts a separately pinned source
 without dropping its v1 default regression. Both source versions pass all11
@@ -46,5 +50,6 @@ pwsh -NoProfile -File Tools/Test-MaskedTerrainCandidate.ps1 -ReferenceAtlas 'ABS
 pwsh -NoProfile -File Tools/Compare-MaskedBoneCandidates.ps1 -BeforeDirectory Art/Candidates/MawBone-v1/MaskedNative-v1 -AfterDirectory Art/Candidates/MawBone-v1/MaskedNative-v2 -OutputPath 'ABSOLUTE-REPO/Art/Candidates/MawBone-v1/NEW-COMPARISON.png'
 ```
 
-Next gate: show this actual texture comparison; on acceptance move to one
-small bone/tooth native fixture. No new concept batch, biome family or mob work.
+Next gate: separate brittle-tooth atlas and hazard fixture, then approved mouth
+integration. Do not re-ask this material's offline approval or mistake the
+flat material fixture for final morphology. No new full-biome/mob branch.

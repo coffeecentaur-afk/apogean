@@ -211,6 +211,14 @@ host material and parasite growth should distinguish creatures. Amber remains a
 connecting cue rather than a compulsory full-body palette. Original-color
 terrain now has a native-mask cutout probe; static export is not art approval.
 
+September9 follow-up: user approves the quieter five-color MaskedNative-v2
+structural bone and permits asset creation with native property tests to inform
+design. Keep original source color separate from engine-derived alpha masks.
+The bounded bone fixture now has native evidence; this is not acceptance of
+every asset, finished rib shapes, teeth, or the generated mouth. Supporting
+bone remains hardened/safe/non-emissive; exposed brittle teeth are a separate
+easy-to-mine contact hazard. See `Art/Validation/MawBone-2026-09-09/README.md`.
+
 - **Maw Nodes** are visible, destructible growth sources. They thicken local contamination and enemy activity.
 - The Maw has extremely slow intrinsic frontier growth even without Nodes. Nodes are feeding and amplification organs: each greatly accelerates local spread, enemy density, nest production, and mutation pressure, but destroying every local Node never kills the biome.
 - Before the Nest Warden falls, a struck Node's sheath may reveal its amber inner organ but immediately seals without showing misleading normal damage. The Warden's cauterization component makes Nodes genuinely destructible.
