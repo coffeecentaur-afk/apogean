@@ -4,6 +4,14 @@ Wayfinder implementation issue: #26. Closed design issue #9 is context, not
 proof that this scene is finished. Native audit and first wall repair evidence:
 `Art/Validation/MawEntrance-2026-09-08/README.md`.
 
+Latest September9 family direction: short16x32, long16x48, wide32x64 whole
+fangs with shared materials. `Art/Candidates/MawToothFamily-v1/README.md`
+owns art review/static evidence, not runtime or generation proof. User shape
+review and matching physics checks precede provisional50/35/15 seeded placement.
+Cluster irregularly, embed roots and orient inward; no camera-driven randomness,
+safe ledges or supplied ropes. The old broad native fang below was visually
+REJECTED as a broken fragment. Its tests do not certify these new shapes.
+
 Latest September9 tooth agreement: authored fang/horn silhouettes are the target,
 not bone-textured square blocks. Begin with solid teeth, exposed contact damage
 and ordinary starter-pick removal; no drop-through platform behavior in v1.

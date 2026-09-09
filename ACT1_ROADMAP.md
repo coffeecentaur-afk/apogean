@@ -2,6 +2,14 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+Latest September9 family direction: short16x32, long16x48 and wide32x64
+art-only candidates in `Art/Candidates/MawToothFamily-v1/Native-v1/review.png`.
+Long unchanged; shared palette and reviewed source masks. Three positive CLI
+checks and21 rejected defects pass. User shape review precedes installation
+and matching native hazard/mining proof, then seeded rooted generation.
+50/35/15 weights are provisional. Old broad wedge remains visually rejected,
+not an approved broken variant.
+
 Latest September9 art correction: v1 fang appearance REJECTED as a wide broken
 fragment. `Art/Candidates/MawTooth-v2/README.md` is the single16x48 intact-tooth
 candidate, shown with actual terrain pixels/player-height ruler before installing.

@@ -1,0 +1,42 @@
+{
+  "boneSHA256": "5B4721D3A914EE5AEFD9D56AF95C0F883052BFB633005BC842E5CD101A5CF19E",
+  "dirtSHA256": "5E172307DF01C4183B4A36407890CE0D88BC10154D50726F0761487C7A07A2F7",
+  "rootOcclusionPixels": 4,
+  "longPreserved": true,
+  "records": [
+    {
+      "canvas": [
+        16,
+        32
+      ],
+      "sourceMaskSHA256": "243CFD1EE1B7686C6C86F84B15B520F65E1B8E0EA8B24A867B6266E9EF002B3C",
+      "fitting": "source=886x1774; mask=explicit binary; bbox=203,200,477,1466; uniform source pixels/native pixel=45.8125; sample columns=11; centered offset=2; samplePhaseX=0.5; palette fit=8; no silhouette warp",
+      "spriteSHA256": "74DB3AB10C7EB5262AB2D04280C978E0543BC03F1EA5B07F79D62D508CFC4958",
+      "sourceSHA256": "DE970048243C0B61D42E3692837AEB4760CC8BCD98C8AEB5B065E2EAB1A40D59",
+      "name": "short"
+    },
+    {
+      "canvas": [
+        16,
+        48
+      ],
+      "sourceMaskSHA256": "native-alpha",
+      "fitting": "source=724x2172; mask=alpha128; bbox=201,128,370,1949; uniform source pixels/native pixel=40.604166666666664; sample columns=10; centered offset=3; samplePhaseX=0.5; palette fit=8; no silhouette warp",
+      "spriteSHA256": "E2C5E9D6EEB2D6D3EA81DE2B3E26C5532D2BD1449847730838E4B24BFC3DA903",
+      "sourceSHA256": "C29FC9C9CD74EA976CADFD866E5513B98C618D30F6F27810A9B8E4A321FE5B7A",
+      "name": "long"
+    },
+    {
+      "canvas": [
+        32,
+        64
+      ],
+      "sourceMaskSHA256": "9E4034D65883BE68FD76A402A7D33EAC7A51B63D0A449DC46390E4048C894C77",
+      "fitting": "source=887x1774; mask=explicit binary; bbox=178,31,551,1722; uniform source pixels/native pixel=26.90625; sample columns=21; centered offset=5; samplePhaseX=0.7; palette fit=8; no silhouette warp",
+      "spriteSHA256": "03EB7E3ED504F973A154C8EB7C4CCDE71488B18E676B6F033EC424995F68566F",
+      "sourceSHA256": "B873663803A3B79CF77FF314A09C1F05BF3042162FD5F5730BB569B57879B60E",
+      "name": "wide"
+    }
+  ],
+  "artOnly": true
+}

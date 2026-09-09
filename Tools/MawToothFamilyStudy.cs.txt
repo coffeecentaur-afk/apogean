@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+
+public static class MawToothFamilyStudy
+{
+    // Source-specific proposal for these two pinned warm-bone/neutral-checker studies.
+    // Not a general background-removal tool. Review the proposed contour before export.
+    public static string ProposeMask(string sourcePath,string outputPath) {
+        using(var source=new Bitmap(sourcePath))using(var mask=new Bitmap(source.Width,source.Height)) {
+            int w=source.Width,h=source.Height; bool[] warm=new bool[w*h],seen=new bool[w*h];
+            for(int y=0;y<h;y++)for(int x=0;x<w;x++){
+                Color c=source.GetPixel(x,y); warm[y*w+x]=c.A==255 && c.R-c.B>=10 && c.G-c.B>=5 && c.R>=c.G;
+            }
+            var largest=new List<int>(); var queue=new Queue<int>();
+            for(int n=0;n<w*h;n++) {
+                if(!warm[n]||seen[n])continue;
+                var component=new List<int>();seen[n]=true;queue.Enqueue(n);
+                while(queue.Count>0){int p=queue.Dequeue();component.Add(p);int x=p%w,y=p/w;
+                    foreach(int q in new[]{x>0?p-1:-1,x<w-1?p+1:-1,y>0?p-w:-1,y<h-1?p+w:-1})
+                        if(q>=0 && warm[q] && !seen[q]){seen[q]=true;queue.Enqueue(q);}
+                }
+                if(component.Count>largest.Count)largest=component;
+            }
+            if(largest.Count<10000)throw new InvalidDataException("NO_TOOTH_COMPONENT");
+            int[] left=new int[h],right=new int[h];for(int y=0;y<h;y++){left[y]=w;right[y]=-1;}
+            foreach(int p in largest){int y=p/w,x=p%w;left[y]=Math.Min(left[y],x);right[y]=Math.Max(right[y],x);}
+            using(var g=Graphics.FromImage(mask))g.Clear(Color.Black);
+            int count=0;for(int y=0;y<h;y++)for(int x=left[y];x<=right[y];x++){mask.SetPixel(x,y,Color.White);count++;}
+            mask.Save(outputPath,ImageFormat.Png);
+            return $"source={w}x{h}; largest warm component={largest.Count}; filled silhouette pixels={count}; RGB warmth10/5; four-connected component; row envelopes include internal pale bone; source-specific REVIEW REQUIRED";
+        }
+    }
+    static void Stamp(Bitmap target,Bitmap source,int dx,int dy,int zoom=1) {
+        for(int y=0;y<source.Height;y++)for(int x=0;x<source.Width;x++) {
+            Color c=source.GetPixel(x,y);if(c.A==0)continue;
+            for(int yy=0;yy<zoom;yy++)for(int xx=0;xx<zoom;xx++)target.SetPixel(dx+x*zoom+xx,dy+y*zoom+yy,c);
+        }
+    }
+    public static void Atlas(string folder) {
+        using(var sprite=new Bitmap(Path.Combine(folder,"tooth.png")))using(var atlas=new Bitmap(sprite.Width/16*18,sprite.Height/16*18)) {
+            for(int y=0;y<sprite.Height;y++)for(int x=0;x<sprite.Width;x++)atlas.SetPixel(x/16*18+x%16,y/16*18+y%16,sprite.GetPixel(x,y));
+            atlas.Save(Path.Combine(folder,"upright-art-atlas.png"),ImageFormat.Png);
+        }
+    }
+    public static void Board(string folder,string bonePath,string dirtPath) {
+        using(var shortTooth=new Bitmap(Path.Combine(folder,"short/tooth.png")))
+        using(var longTooth=new Bitmap(Path.Combine(folder,"long/tooth.png")))
+        using(var wideTooth=new Bitmap(Path.Combine(folder,"wide/tooth.png")))
+        using(var bone=new Bitmap(bonePath))using(var dirt=new Bitmap(dirtPath))
+        using(var scene=new Bitmap(368,144))using(var board=new Bitmap(800,608)) {
+            using(var g=Graphics.FromImage(scene))g.Clear(Color.FromArgb(39,36,36));
+            int[] surface={148,144,132,128,120,116,112,104,100,96,92,88,84,80,80,84,88,92,96,100,104,108,112};
+            // Hand-authored art-review bank only, not worldgen, collision or weighted-placement code.
+            Stamp(scene,shortTooth,80,surface[5]-32+4);
+            Stamp(scene,shortTooth,112,surface[7]-32+4);
+            Stamp(scene,longTooth,144,surface[9]-48+4);
+            Stamp(scene,wideTooth,208,surface[13]-64+4);
+            Stamp(scene,shortTooth,272,surface[17]-32+4);
+            for(int x=0;x<368;x++)for(int y=surface[x/16];y<144;y++) {
+                int localY=y-surface[x/16];bool socket=(x>=80&&x<96)||(x>=112&&x<128)||(x>=144&&x<160)||(x>=208&&x<240)||(x>=272&&x<288);
+                Bitmap material=socket && localY<16?bone:dirt;
+                int ax=(1+x/16%3)*18+x%16,ay=(localY<16?0:18)+localY%16;
+                Color c=material.GetPixel(ax,ay);if(c.A>0)scene.SetPixel(x,y,c);
+            }
+            using(var g=Graphics.FromImage(scene))using(var p=new Pen(Color.FromArgb(131,153,160))) {
+                g.DrawLine(p,335,26,335,67);g.DrawLine(p,332,26,338,26);g.DrawLine(p,332,67,338,67);
+            }
+            scene.Save(Path.Combine(folder,"bank-native.png"),ImageFormat.Png);
+            using(var g=Graphics.FromImage(board))using(var title=new Font("Consolas",15))using(var body=new Font("Consolas",10)) {
+                g.Clear(Color.FromArgb(29,28,30));
+                g.DrawString("MAW TOOTH FAMILY / OFFLINE ART REVIEW",title,Brushes.Wheat,20,14);
+                g.DrawString("Short 16x32 | Long 16x48 | Wide 32x64 | ruler = 42px player height",body,Brushes.LightGray,20,47);
+                g.DrawString("1x exported pixels: short, short, long, wide, short",body,Brushes.LightGray,20,67);
+                g.DrawString("2x nearest-neighbor enlargement of the identical bank",body,Brushes.LightGray,20,240);
+                g.DrawString("One rooted family, existing Maw dirt/bone pixels. The long tooth is unchanged.",body,Brushes.LightGray,20,563);
+                g.DrawString("Hand-assembled art preview. No live rendering, collision or generation proof.",body,Brushes.LightGray,20,585);
+            }
+            Stamp(board,scene,20,88);Stamp(board,scene,20,264,2);
+            board.Save(Path.Combine(folder,"review.png"),ImageFormat.Png);
+        }
+    }
+}

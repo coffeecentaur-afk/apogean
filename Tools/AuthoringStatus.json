@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-tooth-family-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pending",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Candidates/MawToothFamily-v1/README.md",
+      "evidenceScope": "Art-only short16x32, unchanged long16x48, wide32x64 family. New built-in sources had baked checkerboards; reviewed explicit masks and exact exporter isolate them. Uniform native sampling/common8-color palette, no collision-driven reshaping. Three actual static CLI positives and21 rejected defects pass. Empty-mask and missed-tip failures retained. Offline native-pixel bank/ruler preview, not a game capture. No installed package, runtime/world or accepted-asset changes.",
+      "blockers": ["User silhouette review then matching native render/collision/hurt/mining/support/orientation/save-reload proof. Rejected wedge tests do not certify this family; no invisible rectangular collider or silent broadening.", "50/35/15 seeded clustered placement is a provisional later trial, not implemented or final tuning. Preserve no-safe-ledges direction, accepted art and unresolved grove failure. Acid/entities/bosses remain separate."]
+    },
+    {
       "id": "maw-slim-tooth-v2",
       "status": "contracted",
       "static": "pass",

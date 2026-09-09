@@ -242,6 +242,15 @@ it to fit a collision wedge. `Art/Candidates/MawTooth-v2/README.md` records the
 exact-pixel offline study; shape approval and matching native physics remain
 separate. No automatic generation or installation from static art tests.
 
+September9 follow-up: develop a short16x32, long16x48 and wide32x64 family.
+Wide must read as a complete heavier fang, not the rejected broad wedge.
+`Art/Candidates/MawToothFamily-v1/README.md` owns the current art-only review.
+Shared palette, embedded roots, continuous pointed silhouettes; long unchanged.
+After shape approval and matching native physics/mining proof, trial bounded
+seeded selection at50/35/15 in irregular inward-facing clusters. These weights
+are provisional. No new generation/installation from passing art checks,
+invisible full-column collider, silent wedge reshaping or safe ledges.
+
 Historical September9 prototype implementation: a32x48 solid/sloped fang with four
 orientations now passes a bounded native fixture. Proposed QA tuning is30
 contact damage, three starter-pick(power35) hits, one Bone drop for the whole

@@ -20,29 +20,45 @@ public static class MawSlimToothStudy
         return best;
     }
     public static string Prepare(string path,string directory) {
-        using(var source=new Bitmap(path)) using(var master=new Bitmap(16,48)) using(var mask=new Bitmap(16,48)) {
+        return Prepare(path,directory,16,48,null);
+    }
+    public static string Prepare(string path,string directory,int canvasWidth,int canvasHeight,string sourceMaskPath) {
+        return Prepare(path,directory,canvasWidth,canvasHeight,sourceMaskPath,0.5);
+    }
+    public static string Prepare(string path,string directory,int canvasWidth,int canvasHeight,string sourceMaskPath,double samplePhaseX) {
+        if(samplePhaseX<0 || samplePhaseX>=1)throw new ArgumentOutOfRangeException(nameof(samplePhaseX));
+        using(var source=new Bitmap(path)) using(var sourceMask=String.IsNullOrEmpty(sourceMaskPath)?null:new Bitmap(sourceMaskPath))
+        using(var master=new Bitmap(canvasWidth,canvasHeight)) using(var mask=new Bitmap(canvasWidth,canvasHeight)) {
+            if(sourceMask!=null && (sourceMask.Size!=source.Size)) throw new InvalidDataException("SOURCE_MASK_SIZE");
             int left=source.Width, right=-1, top=source.Height, bottom=-1;
             for(int y=0;y<source.Height;y++) for(int x=0;x<source.Width;x++) {
-                if(source.GetPixel(x,y).A<128) continue;
+                if(!Kept(source,sourceMask,x,y)) continue;
                 left=Math.Min(left,x);right=Math.Max(right,x);top=Math.Min(top,y);bottom=Math.Max(bottom,y);
             }
             if(right<left) throw new InvalidDataException("EMPTY_SOURCE_ALPHA");
-            double scale=(bottom-top+1)/48.0;
-            int width=(int)Math.Ceiling((right-left+1)/scale), offset=(16-width)/2;
-            if(width>16) throw new InvalidDataException("SOURCE_TOO_WIDE_DO_NOT_RECONTOUR");
+            double scale=(bottom-top+1)/(double)canvasHeight;
+            int width=(int)Math.Ceiling((right-left+1)/scale), offset=(canvasWidth-width)/2;
+            if(width>canvasWidth) throw new InvalidDataException("SOURCE_TOO_WIDE_DO_NOT_RECONTOUR");
             using(var g=Graphics.FromImage(master))g.Clear(Palette[0]);
             using(var g=Graphics.FromImage(mask))g.Clear(Color.Black);
             // One uniform sample grid across the entire source, never row-by-row warping.
-            for(int y=0;y<48;y++) for(int x=0;x<width;x++) {
-                int sx=left+(int)Math.Floor((x+0.5)*scale), sy=top+(int)Math.Floor((y+0.5)*scale);
+            for(int y=0;y<canvasHeight;y++) for(int x=0;x<width;x++) {
+                int sx=left+(int)Math.Floor((x+samplePhaseX)*scale), sy=top+(int)Math.Floor((y+0.5)*scale);
                 if(sx>right || sy>bottom) continue;
-                Color c=source.GetPixel(sx,sy); if(c.A<128)continue;
+                Color c=source.GetPixel(sx,sy); if(!Kept(source,sourceMask,sx,sy))continue;
                 master.SetPixel(offset+x,y,Fit(c));mask.SetPixel(offset+x,y,Color.White);
             }
             master.Save(Path.Combine(directory,"color-master.png"),ImageFormat.Png);
             mask.Save(Path.Combine(directory,"mask.png"),ImageFormat.Png);
-            return $"source={source.Width}x{source.Height}; alpha threshold=128; bbox={left},{top},{right-left+1},{bottom-top+1}; uniform source pixels/native pixel={scale:R}; sample columns={width}; centered offset={offset}; palette fit=8; no silhouette warp";
+            return $"source={source.Width}x{source.Height}; mask={(sourceMask==null?"alpha128":"explicit binary")}; bbox={left},{top},{right-left+1},{bottom-top+1}; uniform source pixels/native pixel={scale:R}; sample columns={width}; centered offset={offset}; samplePhaseX={samplePhaseX:R}; palette fit=8; no silhouette warp";
         }
+    }
+    static bool Kept(Bitmap source,Bitmap mask,int x,int y) {
+        if(mask==null)return source.GetPixel(x,y).A>=128;
+        Color c=mask.GetPixel(x,y);
+        if(c.ToArgb()==Color.Black.ToArgb())return false;
+        if(c.ToArgb()==Color.White.ToArgb())return true;
+        throw new InvalidDataException("SOURCE_MASK_NOT_BINARY");
     }
     static void Stamp(Bitmap target,Bitmap source,int dx,int dy,int sx,int sy,int width,int height,int zoom=1) {
         for(int y=0;y<height;y++)for(int x=0;x<width;x++){
