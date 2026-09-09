@@ -41,6 +41,15 @@ output. The Background gate now runs the actual exporter CLI controls and city
 candidate pixel checks. A source-specific mask proposal is not a universal color
 key, and edge-color preparation must retain its own change record.
 
+Terrain can reuse that SAME cutout exporter, but a background silhouette is not
+a tile frame contract. The bounded bone experiment in
+`Art/Candidates/MawBone-v1/MaskedNative-v1` separates original color fitting from
+native per-frame masks, then mutation-tests exact output and provenance. It is
+not a general terrain compiler: each tile/wall/grass family still needs its own
+layout. Its initial repeat is visually too speckled despite passing static
+checks. Do not promote the experiment or clone it across families until the art
+and native fixture gates pass. Keep lossy fitting distinct from exact masking.
+
 Camera regression rule: give parallax sections absolute identities and stable
 world anchors; a saved terrain snapshot alone is insufficient if the renderer
 samples it at the moving camera. Track the same section through level pans,

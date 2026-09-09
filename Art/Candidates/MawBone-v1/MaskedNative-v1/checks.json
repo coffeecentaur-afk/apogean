@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "checks": [
+    "PASS two real CLI runs reproduce five PNGs exactly",
+    "PASS report distinguishes static evidence from pending art/native approval",
+    "PASS CLI rejects SOURCE_HASH_MISMATCH",
+    "PASS CLI rejects REFERENCE_HASH_MISMATCH",
+    "PASS CLI rejects OUTPUT_EXISTS",
+    "PASS CLI rejects OUTPUT_OUTSIDE_CANDIDATES",
+    "PASS verifier rejects NATIVE_MASK_CHANGED",
+    "PASS verifier rejects MASKED_SOURCE_CHANGED",
+    "PASS verifier rejects COLOR_SOCKET_MISMATCH",
+    "PASS verifier rejects CANVAS_CHANGED",
+    "PASS source, native reference and production atlas unchanged"
+  ],
+  "count": 11,
+  "nativeRendered": false,
+  "artApproved": false
+}

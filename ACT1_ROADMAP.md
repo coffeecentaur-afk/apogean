@@ -2,6 +2,13 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+Latest September9 continuation: original material + exact native-mask export
+probe is saved in `Art/Candidates/MawBone-v1/MaskedNative-v1`; eleven workflow
+checks pass. Art remains too speckled, not approved/installed/native-rendered.
+DepthDirection-v1 proposes slate/chalk/rust secondary materials while preserving
+grey/black/brown/amber. Next: quieter original bone pixels, art review, small
+bone/tooth fixture, then approved mouth integration. No mob or acid expansion.
+
 September9: latest layout approved (raised24/22-tile rims,51 tooth groups,
 no safe ledges). Do not re-ask that layout choice. New bone/tooth material
 study awaits review in `Art/Candidates/MawBone-v1/`; its separate native-mask

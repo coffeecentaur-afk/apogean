@@ -1,0 +1,149 @@
+// Development-only image packing. No Terraria/game API and no production writer.
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
+
+public static class TerrainMaskMaterialCompiler
+{
+    private static readonly Color[] Palette = {
+        Color.FromArgb(41,39,34), Color.FromArgb(59,53,43),
+        Color.FromArgb(81,72,58), Color.FromArgb(98,90,76),
+        Color.FromArgb(115,107,92), Color.FromArgb(135,126,107),
+        Color.FromArgb(157,146,123), Color.FromArgb(182,170,142),
+        Color.FromArgb(162,120,54)
+    };
+    private static Color Nearest(Color c) {
+        int best = int.MaxValue; Color result = Palette[0];
+        foreach (Color p in Palette) {
+            int r = c.R-p.R, g = c.G-p.G, b = c.B-p.B;
+            int distance = r*r + g*g + b*b;
+            if (distance < best) { best = distance; result = p; }
+        }
+        return result;
+    }
+    public static int[] Prepare(string source, string reference, string directory) {
+        using (var art = new Bitmap(source))
+        using (var native = new Bitmap(reference)) {
+            if (native.Width != 288 || native.Height != 270)
+                throw new InvalidDataException("REFERENCE_DIMENSIONS");
+            if (art.Width < 64 || art.Height < 64 || art.Width > 4096 || art.Height > 4096)
+                throw new InvalidDataException("SOURCE_DIMENSIONS");
+            // This is declared lossy fitting, never a claim of native AI output.
+            var sampled = new Color[64,64];
+            for (int y=0;y<64;y++) for (int x=0;x<64;x++) {
+                Color p=art.GetPixel((2*x+1)*art.Width/128,(2*y+1)*art.Height/128);
+                if (p.A!=255) throw new InvalidDataException("SOURCE_SAMPLE_NOT_OPAQUE");
+                sampled[x,y]=Nearest(p);
+            }
+            using (var swatch = new Bitmap(128,128,PixelFormat.Format32bppArgb))
+            using (var master = new Bitmap(288,270,PixelFormat.Format32bppArgb))
+            using (var mask = new Bitmap(288,270,PixelFormat.Format32bppArgb)) {
+                for(int y=0;y<128;y++) for(int x=0;x<128;x++)
+                    swatch.SetPixel(x,y,sampled[x/2,y/2]);
+                for(int y=0;y<270;y++) for(int x=0;x<288;x++) {
+                    Color n=native.GetPixel(x,y);
+                    if(n.A!=0 && n.A!=255) throw new InvalidDataException("REFERENCE_SOFT_ALPHA");
+                    // The engine reference owns ALL mask pixels, not AI contours.
+                    mask.SetPixel(x,y,n.A==255?Color.White:Color.Black);
+                    int col=x/18,row=y/18;
+                    int dx=Math.Min(x%18,15)/2,dy=Math.Min(y%18,15)/2;
+                    int variant=((row*16+col)*37)%64;
+                    Color c=sampled[(variant%8)*8+dx,(variant/8)*8+dy];
+                    // Compatible two-native-pixel edge sockets, sampled from one
+                    // shared material strip. Never outline a complete tile frame.
+                    // All candidate variants share these colors; alpha stays native.
+                    if(dy==0 || dy==7) c=sampled[24+dx,3];
+                    if(dx==0 || dx==7) c=sampled[24,3+dy];
+                    if((dx==0 || dx==7) && (dy==0 || dy==7)) c=sampled[24,3];
+                    master.SetPixel(x,y,c);
+                }
+                swatch.Save(Path.Combine(directory,"material-native.png"),ImageFormat.Png);
+                master.Save(Path.Combine(directory,"color-master.png"),ImageFormat.Png);
+                mask.Save(Path.Combine(directory,"frame-mask.png"),ImageFormat.Png);
+            }
+            return new[]{art.Width,art.Height};
+        }
+    }
+    public static int[] Verify(string masterPath, string maskPath, string atlasPath, string referencePath) {
+        using(var master=new Bitmap(masterPath))
+        using(var mask=new Bitmap(maskPath))
+        using(var atlas=new Bitmap(atlasPath))
+        using(var reference=new Bitmap(referencePath)) {
+            if(atlas.Width!=288 || atlas.Height!=270 || mask.Size!=atlas.Size || master.Size!=atlas.Size || reference.Size!=atlas.Size)
+                throw new InvalidDataException("CANVAS_CHANGED");
+            int opaque=0,transparent=0,seamChecks=0;
+            for(int y=0;y<270;y++) for(int x=0;x<288;x++) {
+                bool visible=reference.GetPixel(x,y).A==255;
+                if(mask.GetPixel(x,y).ToArgb()!=(visible?Color.White:Color.Black).ToArgb())
+                    throw new InvalidDataException("NATIVE_MASK_CHANGED");
+                int expected=visible?master.GetPixel(x,y).ToArgb():0;
+                if(atlas.GetPixel(x,y).ToArgb()!=expected)
+                    throw new InvalidDataException("MASKED_SOURCE_CHANGED");
+                if(visible) opaque++; else transparent++;
+            }
+            // Every pair of variants is compatible, not just the demo's neighbors.
+            // Tests color endpoints only; native partial masks and slopes need live proof.
+            for(int a=0;a<240;a++) for(int b=0;b<240;b++) for(int k=0;k<16;k++) {
+                int ax=(a%16)*18,ay=(a/16)*18,bx=(b%16)*18,by=(b/16)*18;
+                if(master.GetPixel(ax+15,ay+k)!=master.GetPixel(bx,by+k) ||
+                   master.GetPixel(ax+k,ay+15)!=master.GetPixel(bx+k,by))
+                    throw new InvalidDataException("COLOR_SOCKET_MISMATCH");
+                seamChecks+=2;
+            }
+            return new[]{opaque,transparent,seamChecks};
+        }
+    }
+    private static bool Full(Bitmap b,int col,int row) {
+        for(int y=0;y<16;y++) for(int x=0;x<16;x++)
+            if(b.GetPixel(col*18+x,row*18+y).A!=255) return false;
+        return true;
+    }
+    private static bool Partial(Bitmap b,int col,int row) {
+        int count=0;
+        for(int y=0;y<16;y++) for(int x=0;x<16;x++)
+            if(b.GetPixel(col*18+x,row*18+y).A==255) count++;
+        return count>0 && count<256;
+    }
+    private static void Tile(Graphics g,Bitmap atlas,int index,int x,int y,int scale) {
+        g.DrawImage(atlas,new Rectangle(x,y,16*scale,16*scale),
+            new Rectangle(index%16*18,index/16*18,16,16),GraphicsUnit.Pixel);
+    }
+    public static void Preview(string directory) {
+        using(var atlas=new Bitmap(Path.Combine(directory,"OssuaryBone-candidate.png")))
+        using(var mask=new Bitmap(Path.Combine(directory,"frame-mask.png")))
+        using(var swatch=new Bitmap(Path.Combine(directory,"material-native.png")))
+        using(var board=new Bitmap(1040,690,PixelFormat.Format32bppArgb))
+        using(var g=Graphics.FromImage(board))
+        using(var title=new Font("Segoe UI",19,FontStyle.Bold))
+        using(var label=new Font("Segoe UI",11)) {
+            g.Clear(Color.FromArgb(27,29,32));
+            g.InterpolationMode=InterpolationMode.NearestNeighbor;
+            g.PixelOffsetMode=PixelOffsetMode.Half;
+            g.SmoothingMode=SmoothingMode.None;
+            g.DrawString("Maw bone - actual masked candidate pixels",title,Brushes.White,20,12);
+            g.DrawString("OFFLINE REVIEW. No game lighting, tile framing simulation or collision proof.",label,Brushes.LightGray,20,48);
+            g.DrawString("Material - 1x",label,Brushes.LightGray,20,88);
+            g.DrawImageUnscaled(swatch,20,118);
+            g.DrawString("Native binary mask - 1x",label,Brushes.LightGray,320,88);
+            g.DrawImageUnscaled(mask,320,118);
+            g.DrawString("Exported atlas - 1x",label,Brushes.LightGray,670,88);
+            g.DrawImageUnscaled(atlas,670,118);
+            int[] full=new int[240],partial=new int[240]; int nf=0,np=0;
+            for(int n=0;n<240;n++) {
+                if(Full(atlas,n%16,n/16)) full[nf++]=n;
+                else if(Partial(atlas,n%16,n/16)) partial[np++]=n;
+            }
+            if(nf<2 || np<16) throw new InvalidDataException("PREVIEW_FRAME_COVERAGE");
+            g.DrawString("Interior-frame repeat test - 2x",label,Brushes.LightGray,20,410);
+            for(int row=0;row<7;row++) for(int col=0;col<12;col++)
+                Tile(g,atlas,full[(col*17+row*7)%nf],20+col*32,442+row*32,2);
+            g.DrawString("First16 contoured frames - 4x (not a world arrangement)",label,Brushes.LightGray,440,410);
+            for(int n=0;n<16;n++) Tile(g,atlas,partial[n],440+n%8*72,450+n/8*76,4);
+            g.DrawString("Shared edge colors prevent pixel discontinuity; visible repetition still needs review.",label,Brushes.LightGray,440,626);
+            g.DrawString("Ordinary bone stays safe/non-glowing. Teeth are a separate pending hazard.",label,Brushes.LightGray,440,650);
+            board.Save(Path.Combine(directory,"preview.png"),ImageFormat.Png);
+        }
+    }
+}

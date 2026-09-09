@@ -200,6 +200,15 @@ The Underworld does not use `ModUndergroundBackgroundStyle`; Terraria draws a se
 
 The Maw is the hostile biome created by the distributed Broodmass organism, not a recolored Corruption. The neutral Wastes beneath the rest of the world are a separate biome and do not spread.
 
+September9 art clarification: preserve the dead grey/black/brown/amber surface
+identity. Explore localized deeper materials and mutations, not just Helix/Maw
+palette swaps on identical creatures. The slate membrane, chalky parasite
+casings and rusty heat-weathering in `Art/Candidates/MawBone-v1/DepthDirection-v1`
+are proposals awaiting review, not new biome tiers or gameplay. Actual anatomy,
+host material and parasite growth should distinguish creatures. Amber remains a
+connecting cue rather than a compulsory full-body palette. Original-color
+terrain now has a native-mask cutout probe; static export is not art approval.
+
 - **Maw Nodes** are visible, destructible growth sources. They thicken local contamination and enemy activity.
 - The Maw has extremely slow intrinsic frontier growth even without Nodes. Nodes are feeding and amplification organs: each greatly accelerates local spread, enemy density, nest production, and mutation pressure, but destroying every local Node never kills the biome.
 - Before the Nest Warden falls, a struck Node's sheath may reveal its amber inner organ but immediately seals without showing misleading normal damage. The Warden's cauterization component makes Nodes genuinely destructible.

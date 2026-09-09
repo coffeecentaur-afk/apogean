@@ -1,6 +1,13 @@
 # Maw bone / brittle teeth — material review, September 9
 
-Status: **new art pending review; offline topology probe passes**.
+Status: **new art pending review; offline topology and masked-source probes pass**.
+Latest September9 continuation: `DepthDirection-v1` proposes localized deeper
+materials while preserving the user's grey/black/brown/amber foundation.
+`MaskedSource-v1` and `MaskedNative-v1` test original material color through the
+existing exact-mask exporter. The first native repeat is too speckled for final
+bone and is NOT approved or installed. Its eleven pipeline checks pass, but
+that does not certify visual quality. These latest candidates follow the older
+illustration/topology checkpoint below; that illustration is not an atlas.
 Wayfinder #26 remains open. Nothing here is installed, generated in a world, or
 native-gameplay evidence. The user approved the preceding raised entrance layout
 (51 tooth groups; rim crests24/22 tiles above ground), not this new artwork.
@@ -76,9 +83,10 @@ generation is not run by this test.
 
 ## Next bounded gate
 
-Review this material direction once. If accepted, translate it into an original,
-limited-palette native-frame source using the checked topology. Then assemble
-and inspect the exact exported frames at gameplay scale before installation.
+Review the depth material proposal without reopening the approved mouth shape.
+Quiet the original-color candidate's speckled interior, preserving the checked
+native mask. Then inspect exact exported frames at gameplay scale before
+installation. No new full-biome redraw or mob implementation from this study.
 The Stone-based diagnostic must not accidentally become the final bone.
 
 Keep exposed brittle teeth separate from hardened structural bone. Tooth
