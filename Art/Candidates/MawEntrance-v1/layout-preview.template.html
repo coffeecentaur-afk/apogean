@@ -1,0 +1,60 @@
+<section id="maw-entrance-study-v1">
+  <h3>Maw entrance · proposed cutaway</h3>
+  <div class="text-small">120 tiles across · blue figure = 2 × 3 tiles · geometry only, not final art</div>
+  <svg class="maw-scene" role="img" aria-label="Tile-scale Maw entrance: broad left basin A, smaller right basin B, separate retaining lips, attached teeth, two dry wall ledges and an open winding throat. Blue player at the lip provides scale."></svg>
+  <div class="maw-legend text-small">
+    <span><i class="terrain-swatch"></i>Solid bank / safe ledge</span>
+    <span><i class="tooth-swatch"></i>Brittle tooth</span>
+    <span><i class="pool-swatch"></i>Reserved acid basin</span>
+    <span><i class="route-swatch"></i>Open descent</span>
+  </div>
+</section>
+<style>
+#maw-entrance-study-v1 .maw-scene{display:block;width:100%;overflow:visible}
+#maw-entrance-study-v1 .maw-legend{display:flex;flex-wrap:wrap;gap:8px 18px}
+#maw-entrance-study-v1 .maw-legend span{display:inline-flex;align-items:center;gap:6px}
+#maw-entrance-study-v1 .maw-legend i{display:inline-block;width:12px;height:12px}
+#maw-entrance-study-v1 .terrain-swatch{background:color-mix(in srgb,var(--orange) 28%,var(--background))}
+#maw-entrance-study-v1 .tooth-swatch{background:var(--foreground);clip-path:polygon(0 100%,0 0,100% 55%)}
+#maw-entrance-study-v1 .pool-swatch{background:var(--yellow)}
+#maw-entrance-study-v1 .route-swatch{border-bottom:2px dashed var(--blue);height:4px!important}
+#maw-entrance-study-v1 .maw-scene text{fill:var(--foreground);font-size:var(--font-size-sm,12px)}
+</style>
+<script>
+(()=>{
+  const root=document.getElementById('maw-entrance-study-v1');
+  const svg=root.querySelector('.maw-scene');
+  const data=__MAW_LAYOUT__;
+  const NS='http://www.w3.org/2000/svg';
+  const el=(tag,attrs,parent=svg)=>{const n=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,v);parent.appendChild(n);return n;};
+  function draw(){
+    const width=root.getBoundingClientRect().width;
+    if(!width)return;
+    const scale=(width-16)/data.width, top=30, height=data.height*scale+70;
+    svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
+    svg.style.height=`${height}px`;
+    svg.replaceChildren();
+    const x=v=>8+v*scale,y=v=>top+v*scale;
+    const label=(text,xx,yy,anchor='start')=>{const n=el('text',{x:xx,y:yy,'text-anchor':anchor});n.textContent=text;};
+    el('line',{x1:x(0),y1:y(data.groundY),x2:x(120),y2:y(data.groundY),stroke:'var(--border)','stroke-dasharray':'3 5'});
+    const colors={1:'color-mix(in srgb,var(--orange) 25%,var(--background))',2:'var(--foreground)',3:'color-mix(in srgb,var(--yellow) 68%,var(--background))'};
+    const group=el('g',{'shape-rendering':'crispEdges'});
+    for(const [xx,yy,ww,kind] of data.runs)el('rect',{x:x(xx),y:y(yy),width:ww*scale+.03,height:scale+.03,fill:colors[kind]},group);
+    for(const poly of data.terrain)el('polyline',{points:poly.map(([xx,yy])=>`${x(xx)},${y(yy)}`).join(' '),fill:'none',stroke:'var(--orange)','stroke-width':1,opacity:.7});
+    el('polyline',{points:data.route.map(([xx,yy])=>`${x(xx)},${y(yy)}`).join(' '),fill:'none',stroke:'var(--blue)','stroke-width':1.5,'stroke-dasharray':'3 5',opacity:.75});
+    for(const [i,box] of [data.player,...data.dryLandings].entries()){
+      el('rect',{x:x(box.x),y:y(box.y),width:box.width*scale,height:box.height*scale,fill:i?'none':'var(--blue)',stroke:'var(--blue)','stroke-width':1,'stroke-dasharray':i?'2 2':'none'});
+    }
+    label('A',x(23),y(23),'middle'); label('B',x(99),y(22),'middle');
+    label('Player',x(43),y(5),'end');
+    el('line',{x1:x(43),y1:y(6),x2:x(44),y2:y(9),stroke:'var(--blue)'});
+    label('Dry ledges',x(11),y(43));
+    el('line',{x1:x(32),y1:y(42),x2:x(53),y2:y(39),stroke:'var(--foreground)','stroke-width':1});
+    label('To existing Gullet',x(65),height-9,'middle');
+    const by=height-25;
+    el('path',{d:`M${x(1)},${by-3}v6 M${x(1)},${by}H${x(11)} M${x(11)},${by-3}v6`,stroke:'var(--foreground)',fill:'none'});
+    label('10 tiles',x(1),height-9);
+  }
+  new ResizeObserver(draw).observe(root);draw();
+})();
+</script>

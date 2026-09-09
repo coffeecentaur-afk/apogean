@@ -71,7 +71,7 @@ A reserved depression in an authored Maw chamber for an optional later prototype
 _Avoid_: Acid block, universal Maw water, pressure system
 
 **Maw acid**:
-The yellow-orange digestive fluid intended to remain corrosive when moved out of the Maw, including for enemy traps. Mixing with other liquid neutralizes its acidity; the exact mixing outcome remains a design question.
+The yellow-orange digestive fluid intended to remain corrosive when moved out of the Maw, including for enemy traps. Mixing neutralizes its acidity, after which ordinary liquid reactions apply.
 _Avoid_: Acid block, all Maw water, permanent hazardous region
 
 **The Stomach**:

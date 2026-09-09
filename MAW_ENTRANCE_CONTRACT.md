@@ -28,8 +28,9 @@ organs supply spaced light; ordinary turf and bone do not glow. The user wants
 real yellow/orange acid water in flanking basins if feasible, never fake acid
 blocks; liquid mechanics still require their separate bounded prototype.
 Follow-up: acid should be portable for enemy traps outside the Maw, with
-neutralization on mixing proposed as the simplifying rule. A fixed-basin hazard
-is not a substitute; exact mixing semantics and transport remain uncontracted.
+neutralization followed by ordinary Terraria liquid reactions confirmed as the
+simplifying rule. A fixed-basin hazard is not a substitute; how much fluid is
+neutralized per contact and reliable transport remain uncontracted.
 Keep that optional feasibility branch separate from mouth/teeth progress.
 
 ## First gate: observe the actual generator
@@ -65,3 +66,9 @@ No ordinary worlds, cached grove fixture or accepted spawn cells are rebuilt.
 
 Stop at an art decision or failed foundation and retain the evidence. Inspection
 tools/build success are not implementation or visual acceptance of the Maw.
+
+September8 continuation: `Art/Candidates/MawEntrance-v1/README.md` holds a
+120x88-tile mouth study and clearance-only validation. Production OssuaryBone
+fails the new edge-diversity baseline (240 full-square frame bodies, no contour).
+Do not install the layout or new bone/tooth artwork before visual review and
+the scoped native fixture. No material, generator or installed package changed.

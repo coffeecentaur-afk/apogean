@@ -18,7 +18,15 @@ Further clarification makes portable enemy-trap acid the optional target;
 leaving the Maw alone does not neutralize it. Mixing behavior and transport
 require a separate feasibility gate, not a return to fixed hazardous regions.
 Wayfinder #27 tracks that branch. No liquid implementation or evidence promotion
-from this discussion.
+from this discussion. Follow-up agreement selects neutralization followed by
+native liquid reactions. The optional branch does not block entrance work.
+
+Current review candidate: `Art/Candidates/MawEntrance-v1/README.md`, a measured
+120x88 mouth cutaway with asymmetric retained basins, attached brittle teeth
+and dry ledges. Geometry checks pass; no game fixture or acceptance implied.
+Bone atlas baseline is red for missing exterior/isolated silhouettes. Next:
+review this composition, then focused bone/tooth art and native fixture before
+changing the existing shallow generator. Preserve the Stomach/full route.
 
 ## Accepted checkpoint — shallow arrival divot in native new-world QA
 

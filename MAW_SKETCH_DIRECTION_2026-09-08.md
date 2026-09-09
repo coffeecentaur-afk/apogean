@@ -94,11 +94,11 @@ as the desired simplification, not proof it is a built-in feature. Neutralizatio
 does not remove the need to track acid during pure flow, bucket transfer, pumps,
 save/load and multiplayer. A stationary coordinate flag is not portable acid.
 
-One consequence needs confirmation: **convert to the other liquid** is not
-the same as **remove acidity, then let native liquid reactions happen**.
-For example, treating acid as neutralized water during lava contact can create
-the usual solid product instead of more lava. The latter is the recommendation,
-not an accepted override of the user's proposal. An explicit question is open.
+Confirmed by the user's follow-up agreement: **remove acidity, then let native
+liquid reactions happen**, rather than literally converting acid into the
+other liquid. For example, neutralized water meeting lava can produce the
+usual solid product instead of becoming more lava. This settles the desired
+mixing outcome, not transfer coverage or a completed implementation.
 
 Also uncontracted: how much liquid a mixing event neutralizes. Do not silently
 make one drop erase an entire connected lake, nor promise quantity-limited
@@ -171,5 +171,10 @@ uncontracted until the creature's tier and role are chosen.
 4. Investigate real-water basins separately; integrate only after their own
    proof. Finish this slice's own Maw scenery/amber baseline.
 5. Then contract and prototype one selected creature, not the whole roster.
+
+The next scale proposal and its finite geometry checks are recorded in
+`Art/Candidates/MawEntrance-v1/README.md`. Its dimensions and eight tooth
+clusters are proposals, not approved world-generation parameters. The bone
+baseline is now explicitly red for missing exterior edge silhouettes.
 
 This update creates no runtime changes and advances no native evidence state.
