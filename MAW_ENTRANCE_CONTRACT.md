@@ -4,6 +4,17 @@ Wayfinder implementation issue: #26. Closed design issue #9 is context, not
 proof that this scene is finished. Native audit and first wall repair evidence:
 `Art/Validation/MawEntrance-2026-09-08/README.md`.
 
+Latest September9 tooth agreement: authored fang/horn silhouettes are the target,
+not bone-textured square blocks. Begin with solid teeth, exposed contact damage
+and ordinary starter-pick removal; no drop-through platform behavior in v1.
+The visual outline, solid/sloped occupancy, support and hurt region need their
+own native overlay/checks. Test up/down/left/right, rope clearance, hurt cooldown,
+support removal and save/reload before integrating the approved mouth. Empty
+space around the visible tooth must not become a large invisible hazard.
+Exact damage, drops and mining timing still need a bounded tuning contract.
+Tool/library research is recorded in `RESEARCH_AUTHORING_TOOLING_2026-09-09.md`;
+it neither installs dependencies nor replaces this next implementation gate.
+
 Latest September9: MaskedNative-v2 quiet bone is user-approved and installed
 ONLY in the isolated QA package. A separate empty-air material fixture passes13
 native API checks before/after reload, with day/night captures. Evidence:

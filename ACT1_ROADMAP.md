@@ -2,6 +2,19 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+Latest September9 planning intake: solid authored tooth/fang hazards with
+starter-pick removal are agreed; do not substitute bone-textured squares or
+drop-through platforms. `RESEARCH_AUTHORING_TOOLING_2026-09-09.md` audits the
+existing tools and proposes an accepted-asset/build manifest, native shape/hurt
+inspection and consolidated QA entrypoint. No tool implementation or dependency
+adoption in that research pass. Preserve the current tooth -> native fixture ->
+mouth integration order. Boss source/video research and encounter validation
+are explicitly DEFERRED preparation for the encounter phase; do not lose that
+request or start it ahead of the terrain foundation. Biomes reuse the process,
+not the Wastes' imagery; retain their individual environment direction.
+Wayfinder #28 tracks that deferred boss preparation; #26 remains the current
+Maw entrance implementation issue, and #27 is the separate optional acid branch.
+
 Latest September9: user approves the quieter MaskedNative-v2 bone and authorizes
 asset creation/native property tests. Bone now passes a bounded material fixture:
 13 native programmatic checks repeated after save/reload, plus day/night captures.

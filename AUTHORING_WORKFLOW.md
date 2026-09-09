@@ -2,6 +2,12 @@
 
 This is the production rule for adding visual and gameplay content. It prevents a mechanically valid placeholder from silently becoming the foundation for another unfinished family.
 
+September9 tooling audit: `RESEARCH_AUTHORING_TOOLING_2026-09-09.md` records
+proposed accepted-build manifests, shape/hazard overlays and consolidation of
+existing QA tools. These are not implemented gates yet. No new editor/library
+or automatic visual approval is implied. Add the smallest reusable check while
+solving the next family; do not turn workflow improvement into an engine detour.
+
 ## One-family loop
 
 1. **Specify the player promise.** State what the player sees, understands, does, and receives. Name the closest Terraria behavior that must remain familiar.

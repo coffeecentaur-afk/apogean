@@ -11,6 +11,13 @@ Keep Apogean's content identity separate from shared infrastructure; document
 API/version/install/save/multiplayer boundaries and validate the integration.
 The workflow records the extraction gate. No library is created by this decision.
 
+September9 follow-up: user wants workflow/dependency options researched and
+future boss-code/video analysis retained. `RESEARCH_AUTHORING_TOOLING_2026-09-09.md`
+records the audit and proposed small tooling improvements; no dependency is
+adopted. Reuse authoring/render/validation methods across biomes, not identical
+scenery. The jungle remains a living, overgrown survivor. Boss research is a
+later preparation gate, not authorization to skip the current Maw tooth slice.
+
 ## Pillars
 
 1. **Terraria remains Terraria.** The mod expands the adventure rather than replacing its familiar exploration, building, classes, and boss progression.
@@ -218,6 +225,14 @@ The bounded bone fixture now has native evidence; this is not acceptance of
 every asset, finished rib shapes, teeth, or the generated mouth. Supporting
 bone remains hardened/safe/non-emissive; exposed brittle teeth are a separate
 easy-to-mine contact hazard. See `Art/Validation/MawBone-2026-09-09/README.md`.
+
+Latest tooth agreement: use recognizable authored tooth/fang/horn silhouettes,
+not square blocks merely textured as bone. The first implementation is solid,
+with exposed contact damage and starter-pick removal, not a drop-through
+platform. Visible shape, solid occupancy and hurt region require separate
+native checks; transparent pixels do not define collision automatically.
+Damage amount, drop and exact mining speed remain tuning to contract. Keep
+supporting bone separate and harmless; no safe ledges or preplaced ropes.
 
 - **Maw Nodes** are visible, destructible growth sources. They thicken local contamination and enemy activity.
 - The Maw has extremely slow intrinsic frontier growth even without Nodes. Nodes are feeding and amplification organs: each greatly accelerates local spread, enemy density, nest production, and mutation pressure, but destroying every local Node never kills the biome.
