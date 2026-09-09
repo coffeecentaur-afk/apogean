@@ -37,6 +37,9 @@ the design without redistributing other artists' images as Apogean assets.
 - Latest layout correction: **no safe ledges**. Players use rope or break the
   teeth to clear their route. Remove prebuilt resting shelves, not merely the
   labels. Do not auto-place rope or silently turn all structural bone hazardous.
+- Next correction: **a ton of teeth**, with the "lips"/opening ridges much
+  higher, similar in composition to a Sarlacc pit. Use a dense tooth fringe and
+  tall enclosing rim as inspiration, not a copied creature or new mechanics.
 
 ## Reading the entrance sketch
 
@@ -176,8 +179,9 @@ uncontracted until the creature's tier and role are chosen.
 5. Then contract and prototype one selected creature, not the whole roster.
 
 The next scale proposal and its finite geometry checks are recorded in
-`Art/Candidates/MawEntrance-v1/README.md`. Its dimensions and eight tooth
-clusters are proposals, not approved world-generation parameters. The bone
+`Art/Candidates/MawEntrance-v1/README.md`. Its revised120x112 footprint,51 tooth
+groups and24/22-tile raised crests are proposals, not approved world-generation
+parameters. The previous low rim/eight-tooth proposal is superseded. The bone
 baseline is now explicitly red for missing exterior edge silhouettes.
 
 This update creates no runtime changes and advances no native evidence state.

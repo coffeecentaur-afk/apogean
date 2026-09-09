@@ -1,7 +1,7 @@
 <section id="maw-entrance-study-v1">
-  <h3>Maw entrance · no resting ledges</h3>
+  <h3>Maw entrance · raised, tooth-packed rim</h3>
   <div class="text-small">120 tiles across · blue figure = 2 × 3 tiles · geometry only, not final art</div>
-  <svg class="maw-scene" role="img" aria-label="Tile-scale Maw entrance: broad left basin A, smaller right basin B, separate retaining lips and attached teeth along a winding throat without safe resting ledges. Players use rope or mine teeth to clear their route. Blue player at the surface lip provides scale."></svg>
+  <svg class="maw-scene" role="img" aria-label="Tile-scale Maw entrance: tall inward-curling rim ridges rise above two side basins. Closely spaced teeth crowd both ridges and the throat, without resting ledges. Players use rope or mine teeth. Blue player on the outside surface provides scale."></svg>
   <div class="maw-legend text-small">
     <span><i class="terrain-swatch"></i>Solid bank</span>
     <span><i class="tooth-swatch"></i>Brittle tooth</span>
@@ -44,9 +44,10 @@
     el('polyline',{points:data.route.map(([xx,yy])=>`${x(xx)},${y(yy)}`).join(' '),fill:'none',stroke:'var(--blue)','stroke-width':1.5,'stroke-dasharray':'3 5',opacity:.75});
     const box=data.player;
     el('rect',{x:x(box.x),y:y(box.y),width:box.width*scale,height:box.height*scale,fill:'var(--blue)',stroke:'var(--blue)','stroke-width':1});
-    label('A',x(23),y(23),'middle'); label('B',x(99),y(22),'middle');
-    label('Player',x(43),y(5),'end');
-    el('line',{x1:x(43),y1:y(6),x2:x(44),y2:y(9),stroke:'var(--blue)'});
+    label('A',x(23),y(data.basins[0].surfaceY+3),'middle'); label('B',x(99),y(data.basins[1].surfaceY+3),'middle');
+    label('Player',x(box.x),y(box.y-4));
+    el('line',{x1:x(box.x+2),y1:y(box.y-3),x2:x(box.x+1),y2:y(box.y),stroke:'var(--blue)'});
+    label(`Rims +${data.rimHeights[0]} / +${data.rimHeights[1]} tiles`,x(60),y(4),'middle');
     label('To existing Gullet',x(65),height-9,'middle');
     const by=height-25;
     el('path',{d:`M${x(1)},${by-3}v6 M${x(1)},${by}H${x(11)} M${x(11)},${by-3}v6`,stroke:'var(--foreground)',fill:'none'});

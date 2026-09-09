@@ -18,7 +18,10 @@ design backlog only; no runtime changes or fixture promotion from this intake.
 ## Player promise
 
 An asymmetric wound in already-dead land. Inward roots and pale structural bone
-suggest a feeding organism without literal lips, red meat or purple Corruption.
+suggest a feeding organism without red meat or purple Corruption. Latest user
+direction raises the thick opening ridges into much taller inward-curving
+"lips" and packs both rim and throat with teeth, taking composition inspiration
+from the Sarlacc pit. Do not add a copied creature or extra mechanics.
 A winding passage has no generated safe resting ledges. The user explicitly
 wants players to use rope or break the easily mineable teeth to clear a route.
 Do not place ropes/platforms for them or add disguised resting shelves to meet
@@ -71,7 +74,7 @@ Stop at an art decision or failed foundation and retain the evidence. Inspection
 tools/build success are not implementation or visual acceptance of the Maw.
 
 September8 continuation: `Art/Candidates/MawEntrance-v1/README.md` holds a
-120x88-tile mouth study and clearance-only validation. Production OssuaryBone
+120x112-tile raised-rim mouth study and clearance-only validation. Production OssuaryBone
 fails the new edge-diversity baseline (240 full-square frame bodies, no contour).
 Do not install the layout or new bone/tooth artwork before visual review and
 the scoped native fixture. No material, generator or installed package changed.
@@ -81,3 +84,8 @@ candidate removes them and the clear-space markers, and checks for unintended
 two-tile resting shelves in the descent. The installed legacy shelf generator
 and its fall-length validator are still unchanged; revise together when the
 approved shallow shape reaches implementation. Do not report native completion.
+
+Latest preview:51 tooth groups rather than eight; solid rim crests24/22 tiles
+above surrounding ground rather than6/4. Exact quantities are proposed scale,
+not release tuning. Both retained basins and the existing below-ground depth
+are unchanged. No safe shelves, preplaced rope or ordinary-world retrofit.

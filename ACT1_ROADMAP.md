@@ -22,7 +22,9 @@ from this discussion. Follow-up agreement selects neutralization followed by
 native liquid reactions. The optional branch does not block entrance work.
 
 Current review candidate: `Art/Candidates/MawEntrance-v1/README.md`, a measured
-120x88 mouth cutaway with asymmetric retained basins, attached brittle teeth
+120x112 mouth cutaway with asymmetric retained basins,51 brittle tooth groups
+and raised rim crests24/22 tiles above ground (proposed scale for the newest
+Sarlacc-like composition request),
 and no generated safe ledges (latest user correction: use rope or break teeth).
 Candidate geometry checks pass; no game fixture or acceptance implied.
 Bone atlas baseline is red for missing exterior/isolated silhouettes. Next:
