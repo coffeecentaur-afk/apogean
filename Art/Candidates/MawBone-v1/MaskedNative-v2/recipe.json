@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "sourceSHA256": "FE73348B438CFCE260AF7CEFE1771E1445E2EA06FE8C243269C3EEBC57C080FF",
+  "referenceSHA256": "48907D0C61D9B68997C33FD25B0BAADB0A2D8276B6E759761C14E6B153C917EC",
+  "sourceWidth": 1254,
+  "sourceHeight": 1254,
+  "fittedMaterialWidth": 128,
+  "fittedMaterialHeight": 128,
+  "fitting": "Lossy64x64 nearest-center sampling, nine-color quantization,2x2 native color clusters;64 source patches with shared two-pixel edge sockets.",
+  "palette": [
+    "#292722",
+    "#3b352b",
+    "#51483a",
+    "#625a4c",
+    "#736b5c",
+    "#877e6b",
+    "#9d927b",
+    "#b6aa8e",
+    "#a27836"
+  ],
+  "mask": "Exact binary visibility of the pinned native connected-terrain reference. No imported reference RGB.",
+  "atlasWidth": 288,
+  "atlasHeight": 270,
+  "opaquePixels": 44104,
+  "transparentPixels": 33656,
+  "pairwiseColorSocketChecks": 1843200,
+  "exactMaskExport": true,
+  "nativeRendered": false,
+  "artApproved": false,
+  "limitation": "Color sockets do not prove absence of visual repetition, correct gameplay frames, lighting, merges, slopes or tooth behavior.",
+  "compilerSHA256": "646968F88961F13D94B7CD68C6ED915FFC68581188EBBF52D57DD313B71723DF"
+}

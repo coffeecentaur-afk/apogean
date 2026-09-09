@@ -1,12 +1,14 @@
 param(
-    [Parameter(Mandatory)][string]$ReferenceAtlas
+    [Parameter(Mandatory)][string]$ReferenceAtlas,
+    [string]$SourcePath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'Art/Candidates/MawBone-v1/MaskedSource-v1/material-source.png'),
+    [ValidatePattern('^[A-Fa-f0-9]{64}$')][string]$SourceSHA256 = '09DABAA17B0D4ABBFED3338B7BAB22361D9C6C36A330BDB73D69E0598B748221'
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $repo=Split-Path -Parent $PSScriptRoot
-$source=Join-Path $repo 'Art/Candidates/MawBone-v1/MaskedSource-v1/material-source.png'
+$source=(Resolve-Path -LiteralPath $SourcePath).Path
 $reference=(Resolve-Path -LiteralPath $ReferenceAtlas).Path
-$sourceHash='09DABAA17B0D4ABBFED3338B7BAB22361D9C6C36A330BDB73D69E0598B748221'
+$sourceHash=$SourceSHA256
 $referenceHash='48907D0C61D9B68997C33FD25B0BAADB0A2D8276B6E759761C14E6B153C917EC'
 $production=Join-Path $repo 'Content/Tiles/OssuaryBone.png'
 $productionHash=(Get-FileHash -LiteralPath $production).Hash
@@ -31,7 +33,7 @@ foreach($file in @('material-native.png','color-master.png','frame-mask.png','Os
 }
 $results.Add('PASS two real CLI runs reproduce five PNGs exactly')
 $report=Get-Content -LiteralPath (Join-Path $first 'recipe.json') -Raw | ConvertFrom-Json
-if(-not $report.exactMaskExport -or $report.nativeRendered -or $report.artApproved -or $report.opaquePixels -ne 44104 -or $report.pairwiseColorSocketChecks -ne 1843200){throw 'INCORRECT_EVIDENCE_REPORT'}
+if(-not $report.exactMaskExport -or $report.nativeRendered -or $report.artApproved -or $report.opaquePixels -ne 44104 -or $report.pairwiseColorSocketChecks -ne 1843200 -or $report.sourceSHA256 -ine $sourceHash -or $report.referenceSHA256 -ine $referenceHash){throw 'INCORRECT_EVIDENCE_REPORT'}
 $results.Add('PASS report distinguishes static evidence from pending art/native approval')
 Invoke-Candidate (Join-Path $scratch 'bad-source') ('0'*64) $referenceHash 'SOURCE_HASH_MISMATCH'
 Invoke-Candidate (Join-Path $scratch 'bad-reference') $sourceHash ('0'*64) 'REFERENCE_HASH_MISMATCH'
@@ -81,7 +83,7 @@ if((Get-FileHash -LiteralPath $production).Hash -ne $productionHash -or
    (Get-FileHash -LiteralPath $reference).Hash -ne $referenceHash){throw 'INPUT_OR_PRODUCTION_CHANGED'}
 $results.Add('PASS source, native reference and production atlas unchanged')
 # Retain unique bounded scratch evidence; no recursive deletion or repo writes.
-[ordered]@{schemaVersion=1; checks=@($results); count=$results.Count; nativeRendered=$false; artApproved=$false} |
+[ordered]@{schemaVersion=2; sourceSHA256=$sourceHash; referenceSHA256=$referenceHash; checks=@($results); count=$results.Count; nativeRendered=$false; artApproved=$false} |
     ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $scratch 'checks.json') -Encoding utf8
 $results
 Write-Output "Evidence: $scratch"

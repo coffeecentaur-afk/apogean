@@ -1,12 +1,14 @@
 # Maw bone / brittle teeth — material review, September 9
 
 Status: **new art pending review; offline topology and masked-source probes pass**.
-Latest September9 continuation: `DepthDirection-v1` proposes localized deeper
-materials while preserving the user's grey/black/brown/amber foundation.
-`MaskedSource-v1` and `MaskedNative-v1` test original material color through the
-existing exact-mask exporter. The first native repeat is too speckled for final
-bone and is NOT approved or installed. Its eleven pipeline checks pass, but
-that does not certify visual quality. These latest candidates follow the older
+Latest September9 follow-up: user approves the localized cooler slate tissue in
+`DepthDirection-v1`, preserving the grey/black/brown/amber foundation. The other
+new materials remain proposals. `MaskedSource-v2` and `MaskedNative-v2` revise
+only the overly speckled bone material, keeping the compiler/native mask intact.
+The five-color result is quieter; `MaskedNative-v2/comparison.png` shows identical
+frame arrangements at1x/2x. Art approval/native fixture still pending; NOT installed.
+Both v1 and v2 pass eleven pipeline checks, but that does not certify visual
+quality. Keep the rejected noisy v1 as a reference. These candidates follow the older
 illustration/topology checkpoint below; that illustration is not an atlas.
 Wayfinder #26 remains open. Nothing here is installed, generated in a world, or
 native-gameplay evidence. The user approved the preceding raised entrance layout
@@ -83,10 +85,10 @@ generation is not run by this test.
 
 ## Next bounded gate
 
-Review the depth material proposal without reopening the approved mouth shape.
-Quiet the original-color candidate's speckled interior, preserving the checked
-native mask. Then inspect exact exported frames at gameplay scale before
-installation. No new full-biome redraw or mob implementation from this study.
+Do not reopen the approved mouth shape or localized slate tissue direction.
+Review v2's quieter actual texture, then inspect exact exported frames in the
+small native fixture before production promotion. No new full-biome redraw or
+mob implementation from this study.
 The Stone-based diagnostic must not accidentally become the final bone.
 
 Keep exposed brittle teeth separate from hardened structural bone. Tooth

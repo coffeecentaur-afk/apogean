@@ -202,9 +202,11 @@ The Maw is the hostile biome created by the distributed Broodmass organism, not 
 
 September9 art clarification: preserve the dead grey/black/brown/amber surface
 identity. Explore localized deeper materials and mutations, not just Helix/Maw
-palette swaps on identical creatures. The slate membrane, chalky parasite
-casings and rusty heat-weathering in `Art/Candidates/MawBone-v1/DepthDirection-v1`
-are proposals awaiting review, not new biome tiers or gameplay. Actual anatomy,
+palette swaps on identical creatures. Follow-up approval confirms the cooler
+slate-blue membrane in `Art/Candidates/MawBone-v1/DepthDirection-v1` as localized
+deeper tissue, not an all-blue biome or uniform enemy recolor. Chalky parasite
+casings and rusty heat-weathering remain supporting proposals; none of these
+create new biome tiers or gameplay. Actual anatomy,
 host material and parasite growth should distinguish creatures. Amber remains a
 connecting cue rather than a compulsory full-body palette. Original-color
 terrain now has a native-mask cutout probe; static export is not art approval.

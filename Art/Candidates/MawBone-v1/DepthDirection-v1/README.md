@@ -1,4 +1,9 @@
-# Maw depth materials — proposed, not approved
+# Maw depth materials — slate tissue direction approved
+
+September9 follow-up: user answers yes to whether the cooler slate tissue in
+the middle panel fits their vision. Treat that localized tissue direction as
+approved; do not re-ask it. This is not blanket approval of exact pixel density,
+all other proposed materials, tile sheets, new enemies or implementation.
 
 September 9 user direction: keep the dead grey/black/brown/amber base; explore
 secondary colors and other mutations deeper in the Maw. Mutants should differ
@@ -11,7 +16,7 @@ The opaque charcoal backdrop is intentional. Do not infer exact palette count,
 native pixels, tile dimensions, lighting values or playable geometry from it.
 This is a material close-up, NOT a new entrance design or a scale reference.
 
-Proposed art direction for review:
+Direction board (slate membrane approved; other new materials remain proposals):
 
 | Region | Shared foundation | Local variation, not a biome-wide recolor |
 | --- | --- | --- |
@@ -19,7 +24,7 @@ Proposed art direction for review:
 | Gullet / ossuary chambers | The same bone and earth persist | Cool slate-blue folded membrane; chalky parasite casings; amber glands |
 | Stomach / Burning Root | Soot-dark structure with grey still visible | Rust/copper-brown heat-weathering, compressed folds, amber organ pockets |
 
-These materials are proposals, not new ores, enemies, liquid types or unlocks.
+These materials do not introduce ores, enemies, liquid types or unlocks.
 The endgame Deep Maw remains its separate later content scope; descending the
 pre-Hardmode Gullet does not automatically unlock that endgame ecosystem.
 Do not label every wild mutant as a Helix product. Corporate lab designations
