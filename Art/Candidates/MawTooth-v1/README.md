@@ -1,5 +1,10 @@
 # Maw fang v1 — prototype, not approved production art
 
+September9 visual review: **rejected**. The complete tooth reads as a broad,
+broken fragment. User requests a narrower, pointier whole tooth with a longer
+shaft. V2 is an art-first review in `../MawTooth-v2/`; do not infer it inherits
+v1's native collision proof. Historical results below remain scoped to v1.
+
 Original AI study: `source.png`, generated using `prompt.txt` on September9.
 SHA256 `3EE52DF9AA906B98B9F5B067B858C6D1B71E1B9292E954B795EDC6097150A954`.
 It is1024x1536 and has a rendered dark matte. It did NOT satisfy the requested

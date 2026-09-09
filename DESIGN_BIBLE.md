@@ -234,7 +234,15 @@ native checks; transparent pixels do not define collision automatically.
 Damage amount, drop and exact mining speed remain tuning to contract. Keep
 supporting bone separate and harmless; no safe ledges or preplaced ropes.
 
-September9 prototype implementation: a32x48 solid/sloped fang with four
+September9 native art review supersedes the pending verdict below: the user
+rejects the broad fang because it reads as a broken fragment. Next candidate
+uses a16x48 one-block-wide canvas, sharp continuous taper, extended shaft and
+an embedded root. Preserve the original tooth shape rather than recontouring
+it to fit a collision wedge. `Art/Candidates/MawTooth-v2/README.md` records the
+exact-pixel offline study; shape approval and matching native physics remain
+separate. No automatic generation or installation from static art tests.
+
+Historical September9 prototype implementation: a32x48 solid/sloped fang with four
 orientations now passes a bounded native fixture. Proposed QA tuning is30
 contact damage, three starter-pick(power35) hits, one Bone drop for the whole
 object. These values are not user-approved final balance. Exact silhouette,

@@ -1,6 +1,6 @@
 # Solid brittle fang — bounded v1
 
-Status: bounded native fixture-pass; user art review and traversal pending. No mouth generation
+Status: user-rejected appearance; historical bounded native mechanical pass. No mouth generation
 or production art promotion. Current user agreement: teeth should look like
 teeth/horns, hurt, and be easily mined; no safe ledges or supplied rope.
 

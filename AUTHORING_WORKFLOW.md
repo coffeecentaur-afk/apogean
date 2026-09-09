@@ -242,6 +242,15 @@ alpha result; inspect encoded pixels.
 
 ## Tile hazard lesson retained — 2026-09-09
 
+Native fang review rejects the broad wedge despite its mechanical passes.
+Do not recontour approved anatomy into the easiest collision shape and call
+that the same asset. V2 retains a single uniform sampling grid and validates
+its exact art-only atlas against the sprite, independently of any collider.
+Judge the reduced pixels against terrain and player scale; a large source is
+not the approval artifact. Keep rejected technical evidence, mark visual
+rejection, and re-prove physics for a changed silhouette. Tests for a severed
+shaft/blunt tip detect mistakes but cannot decide whether the tooth looks good.
+
 Contract visual alpha, native solid/sloped cells and contact damage separately.
 An authored tooth need not occupy every cell of rectangular furniture. Native
 45-degree slope cells can retain standard movement while empty cells stay air.

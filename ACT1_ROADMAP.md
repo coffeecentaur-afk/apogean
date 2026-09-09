@@ -2,6 +2,14 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+Latest September9 art correction: v1 fang appearance REJECTED as a wide broken
+fragment. `Art/Candidates/MawTooth-v2/README.md` is the single16x48 intact-tooth
+candidate, shown with actual terrain pixels/player-height ruler before installing.
+Static export/reassembly and seven defective-input CLI controls pass. Review
+pending; no build or live proof for v2. Next: shape approval, matching native
+render/collision probe, then mouth integration. Preserve old technical evidence
+without applying its wedge collision verdict to the new silhouette.
+
 Latest September9 implementation: one solid brittle fang now has a bounded
 native prototype, not generation integration. Source -> explicit shape/mask ->
 four-way atlas -> native fixture is recorded in

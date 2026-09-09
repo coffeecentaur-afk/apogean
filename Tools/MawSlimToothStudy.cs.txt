@@ -1,0 +1,86 @@
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+
+public static class MawSlimToothStudy
+{
+    // Candidate-only fitting. No MawFangShape, native slope mask or runtime registration.
+    static readonly Color[] Palette = {
+        Color.FromArgb(48,39,33), Color.FromArgb(78,67,54), Color.FromArgb(108,96,77),
+        Color.FromArgb(140,127,103), Color.FromArgb(170,158,129), Color.FromArgb(198,187,157),
+        Color.FromArgb(218,207,178), Color.FromArgb(144,111,56)
+    };
+    static Color Fit(Color color) {
+        Color best=Palette[0]; int distance=int.MaxValue;
+        foreach(Color p in Palette) {
+            int d=(p.R-color.R)*(p.R-color.R)+(p.G-color.G)*(p.G-color.G)+(p.B-color.B)*(p.B-color.B);
+            if(d<distance) { distance=d; best=p; }
+        }
+        return best;
+    }
+    public static string Prepare(string path,string directory) {
+        using(var source=new Bitmap(path)) using(var master=new Bitmap(16,48)) using(var mask=new Bitmap(16,48)) {
+            int left=source.Width, right=-1, top=source.Height, bottom=-1;
+            for(int y=0;y<source.Height;y++) for(int x=0;x<source.Width;x++) {
+                if(source.GetPixel(x,y).A<128) continue;
+                left=Math.Min(left,x);right=Math.Max(right,x);top=Math.Min(top,y);bottom=Math.Max(bottom,y);
+            }
+            if(right<left) throw new InvalidDataException("EMPTY_SOURCE_ALPHA");
+            double scale=(bottom-top+1)/48.0;
+            int width=(int)Math.Ceiling((right-left+1)/scale), offset=(16-width)/2;
+            if(width>16) throw new InvalidDataException("SOURCE_TOO_WIDE_DO_NOT_RECONTOUR");
+            using(var g=Graphics.FromImage(master))g.Clear(Palette[0]);
+            using(var g=Graphics.FromImage(mask))g.Clear(Color.Black);
+            // One uniform sample grid across the entire source, never row-by-row warping.
+            for(int y=0;y<48;y++) for(int x=0;x<width;x++) {
+                int sx=left+(int)Math.Floor((x+0.5)*scale), sy=top+(int)Math.Floor((y+0.5)*scale);
+                if(sx>right || sy>bottom) continue;
+                Color c=source.GetPixel(sx,sy); if(c.A<128)continue;
+                master.SetPixel(offset+x,y,Fit(c));mask.SetPixel(offset+x,y,Color.White);
+            }
+            master.Save(Path.Combine(directory,"color-master.png"),ImageFormat.Png);
+            mask.Save(Path.Combine(directory,"mask.png"),ImageFormat.Png);
+            return $"source={source.Width}x{source.Height}; alpha threshold=128; bbox={left},{top},{right-left+1},{bottom-top+1}; uniform source pixels/native pixel={scale:R}; sample columns={width}; centered offset={offset}; palette fit=8; no silhouette warp";
+        }
+    }
+    static void Stamp(Bitmap target,Bitmap source,int dx,int dy,int sx,int sy,int width,int height,int zoom=1) {
+        for(int y=0;y<height;y++)for(int x=0;x<width;x++){
+            Color c=source.GetPixel(sx+x,sy+y); if(c.A==0)continue;
+            for(int yy=0;yy<zoom;yy++)for(int xx=0;xx<zoom;xx++)target.SetPixel(dx+x*zoom+xx,dy+y*zoom+yy,c);
+        }
+    }
+    public static void Assemble(string directory,string bonePath,string dirtPath) {
+        using(var tooth=new Bitmap(Path.Combine(directory,"tooth.png")))using(var atlas=new Bitmap(18,54)) {
+            for(int y=0;y<48;y++)for(int x=0;x<16;x++)atlas.SetPixel(x,y/16*18+y%16,tooth.GetPixel(x,y));
+            atlas.Save(Path.Combine(directory,"upright-art-atlas.png"),ImageFormat.Png);
+            using(var bone=new Bitmap(bonePath))using(var dirt=new Bitmap(dirtPath))using(var scene=new Bitmap(280,100))using(var board=new Bitmap(920,560)) {
+                using(var g=Graphics.FromImage(scene))g.Clear(Color.FromArgb(39,36,36));
+                // Left is whole isolated sprite. Center is the same art rooted four pixels into bone.
+                Stamp(scene,tooth,28,24,0,0,16,48);
+                Stamp(scene,tooth,128,24,0,0,16,48);
+                for(int row=0;row<2;row++)for(int col=0;col<9;col++) {
+                    int px=68+col*16, py=68+row*16;
+                    Bitmap material=row==0 && col>=3 && col<=5?bone:dirt;
+                    // Actual atlas cells: three top/interior variants. Not an engine framing simulation.
+                    Stamp(scene,material,px,py,(1+col%3)*18,row*18,16,16);
+                }
+                using(var g=Graphics.FromImage(scene))using(var p=new Pen(Color.FromArgb(131,153,160))) {
+                    g.DrawLine(p,240,26,240,67);g.DrawLine(p,237,26,243,26);g.DrawLine(p,237,67,243,67);
+                }
+                scene.Save(Path.Combine(directory,"native-assembly.png"),ImageFormat.Png);
+                using(var g=Graphics.FromImage(board))using(var title=new Font("Consolas",15))using(var body=new Font("Consolas",11)) {
+                    g.Clear(Color.FromArgb(29,28,30));
+                    g.DrawString("SLIM MAW TOOTH / OFFLINE ART REVIEW",title,Brushes.Wheat,20,15);
+                    g.DrawString("1x pixels: whole tooth | same tooth embedded | 42px player-height ruler",body,Brushes.LightGray,20,48);
+                    g.DrawString("3x nearest-neighbor enlargement of the identical assembly",body,Brushes.LightGray,20,180);
+                    g.DrawString("16x48 canvas. Terrain uses existing Maw dirt + approved bone atlas pixels.",body,Brushes.LightGray,20,520);
+                    g.DrawString("No game lighting, collision, live test or installation claimed.",body,Brushes.LightGray,20,540);
+                }
+                Stamp(board,scene,20,72,0,0,280,100);
+                Stamp(board,scene,20,210,0,0,280,100,3);
+                board.Save(Path.Combine(directory,"review.png"),ImageFormat.Png);
+            }
+        }
+    }
+}
