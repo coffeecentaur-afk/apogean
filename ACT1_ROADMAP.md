@@ -2,6 +2,13 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+September9: latest layout approved (raised24/22-tile rims,51 tooth groups,
+no safe ledges). Do not re-ask that layout choice. New bone/tooth material
+study awaits review in `Art/Candidates/MawBone-v1/`; its separate native-mask
+diagnostic passes12 real-CLI controls. Neither is installed or native-validated.
+Next: accepted original art in exact frames, then the small bone/tooth fixture
+before shallow generation. Keep optional acid #27 separate.
+
 September8: user accepts the actual arrival divot, "it looks great continue".
 The bounded starting scene is fixture-pass; do not reopen pod or Wastes art.
 Next: `MAW_ENTRANCE_CONTRACT.md`, beginning with read-only inspection of the
@@ -26,9 +33,9 @@ Current review candidate: `Art/Candidates/MawEntrance-v1/README.md`, a measured
 and raised rim crests24/22 tiles above ground (proposed scale for the newest
 Sarlacc-like composition request),
 and no generated safe ledges (latest user correction: use rope or break teeth).
-Candidate geometry checks pass; no game fixture or acceptance implied.
+Candidate geometry checks pass; layout now accepted, no game fixture implied.
 Bone atlas baseline is red for missing exterior/isolated silhouettes. Next:
-review this composition, then focused bone/tooth art and native fixture before
+focused bone/tooth art review and native fixture before
 changing the existing shallow generator. Preserve the Stomach/full route.
 
 ## Accepted checkpoint — shallow arrival divot in native new-world QA

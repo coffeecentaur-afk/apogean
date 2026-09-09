@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "date": "2026-09-09",
+  "scope": "Offline topology/compiler/validator controls only. Stone-colored-as-bone diagnostic, not original art or native rendering.",
+  "nativeGameplayTested": false,
+  "artApproved": false,
+  "referenceSha256": "48907D0C61D9B68997C33FD25B0BAADB0A2D8276B6E759761C14E6B153C917EC",
+  "candidateSha256": "0DCBC23CA240F09C86561EF83CFAE3F8693E2D87EAB4DD2F5B7CE20EA7F3615F",
+  "productionBoneSha256": "E4642E92EEED642EFFCF5E835A7D6CF2B14ECB83CF7A094D808EBF2FC19C0906",
+  "productionUnchanged": true,
+  "controls": [
+    {
+      "case": "compiled native topology",
+      "expectedPass": true,
+      "exitCode": 0,
+      "output": "TMODLOADER ATLAS: PASS — 288x270, 44104 opaque pixels, 5 colors\r\nBONE EDGE BASELINE: occupied=183 full=72 contoured=111 uniqueMasks=74\r\nPASS: edge diversity exists. Exact frame mapping, native merge/slope behavior and art approval still require separate evidence."
+    },
+    {
+      "case": "native Stone positive control",
+      "expectedPass": true,
+      "exitCode": 0,
+      "output": "TMODLOADER ATLAS: PASS — 288x270, 44104 opaque pixels, 10 colors\r\nBONE EDGE BASELINE: occupied=183 full=72 contoured=111 uniqueMasks=74\r\nPASS: edge diversity exists. Exact frame mapping, native merge/slope behavior and art approval still require separate evidence."
+    },
+    {
+      "case": "recreated square-frame defect",
+      "expectedPass": false,
+      "exitCode": 1,
+      "output": "TMODLOADER ATLAS: PASS — 288x270, 61440 opaque pixels, 1 colors\r\nBONE EDGE BASELINE: occupied=240 full=240 contoured=0 uniqueMasks=1\r\nFAIL: all populated frame bodies are the same opaque square; no exterior/isolated edge silhouette is available."
+    },
+    {
+      "case": "one lost native pixel",
+      "expectedPass": false,
+      "exitCode": 1,
+      "output": "TMODLOADER ATLAS: FAIL (1 problems)\r\n - Atlas changes native alpha topology at 1 pixels"
+    },
+    {
+      "case": "one added native pixel",
+      "expectedPass": false,
+      "exitCode": 1,
+      "output": "TMODLOADER ATLAS: FAIL (1 problems)\r\n - Atlas changes native alpha topology at 1 pixels"
+    },
+    {
+      "case": "opaque white fringe",
+      "expectedPass": false,
+      "exitCode": 1,
+      "output": "TMODLOADER ATLAS: FAIL (1 problems)\r\n - Atlas contains 1 opaque-white pixels"
+    },
+    {
+      "case": "magenta exporter key",
+      "expectedPass": false,
+      "exitCode": 1,
+      "output": "TMODLOADER ATLAS: PASS — 288x270, 44104 opaque pixels, 6 colors\r\nFAIL: visible exporter key at 0,0."
+    },
+    {
+      "case": "legacy pink exporter key",
+      "expectedPass": false,
+      "exitCode": 1,
+      "output": "TMODLOADER ATLAS: PASS — 288x270, 44104 opaque pixels, 6 colors\r\nFAIL: visible exporter key at 0,0."
+    },
+    {
+      "case": "soft contour",
+      "expectedPass": false,
+      "exitCode": 1,
+      "output": "TMODLOADER ATLAS: FAIL (1 problems)\r\n - Atlas contains 1 soft-alpha pixels"
+    },
+    {
+      "case": "palette budget",
+      "expectedPass": false,
+      "exitCode": 1,
+      "output": "TMODLOADER ATLAS: FAIL (1 problems)\r\n - Atlas uses 25 opaque colors; maximum is 16"
+    },
+    {
+      "case": "empty artwork",
+      "expectedPass": false,
+      "exitCode": 1,
+      "output": "TMODLOADER ATLAS: FAIL (2 problems)\r\n - Atlas contains no opaque artwork\r\n - Atlas changes native alpha topology at 44104 pixels"
+    },
+    {
+      "case": "wrong stride envelope",
+      "expectedPass": false,
+      "exitCode": 1,
+      "output": "TMODLOADER ATLAS: FAIL (3 problems)\r\n - Width is 286, expected 288\r\n - Atlas contains no opaque artwork\r\n - Reference is 288x270, atlas is 286x270"
+    }
+  ]
+}

@@ -1,14 +1,29 @@
 param(
-    [string]$Atlas = (Join-Path (Split-Path -Parent $PSScriptRoot) 'Content/Tiles/OssuaryBone.png')
+    [string]$Atlas = (Join-Path (Split-Path -Parent $PSScriptRoot) 'Content/Tiles/OssuaryBone.png'),
+    [string]$ReferenceAtlas
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $shell = (Get-Process -Id $PID).Path
-& $shell -NoProfile -File (Join-Path $PSScriptRoot 'Test-TModLoaderAtlas.ps1') -Atlas $Atlas -ExpectedWidth 288 -ExpectedHeight 270 -MaximumOpaqueColors 16
+$referenceArguments = @()
+if ($ReferenceAtlas) { $referenceArguments = @('-ReferenceAtlas', $ReferenceAtlas) }
+& $shell -NoProfile -File (Join-Path $PSScriptRoot 'Test-TModLoaderAtlas.ps1') -Atlas $Atlas -ExpectedWidth 288 -ExpectedHeight 270 -MaximumOpaqueColors 16 @referenceArguments
 if ($LASTEXITCODE -ne 0) { exit 1 }
 Add-Type -AssemblyName System.Drawing
 $bitmap = [Drawing.Bitmap]::new((Resolve-Path -LiteralPath $Atlas).Path)
 try {
+    # Exporter keys are not visible bone colors. Do not change the shared
+    # validator's behavior for already accepted unrelated atlas families.
+    for ($y = 0; $y -lt $bitmap.Height; $y++) {
+        for ($x = 0; $x -lt $bitmap.Width; $x++) {
+            $p = $bitmap.GetPixel($x, $y)
+            if ($p.A -gt 0 -and (($p.R -eq 255 -and $p.G -eq 0 -and $p.B -eq 255) -or
+                ($p.R -eq 247 -and $p.G -eq 119 -and $p.B -eq 249))) {
+                Write-Host "FAIL: visible exporter key at $x,$y." -ForegroundColor Red
+                exit 1
+            }
+        }
+    }
     $occupied = 0; $full = 0; $contoured = 0
     $masks = [Collections.Generic.HashSet[string]]::new()
     for ($row = 0; $row -lt 15; $row++) {

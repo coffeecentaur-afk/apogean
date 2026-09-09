@@ -1,7 +1,9 @@
 # Maw entrance v1 — tile-scale layout study
 
-Status: **candidate / user review pending**. Not a game screenshot, final pixel
-art, accepted dimensions, liquid implementation or generator output.
+Status: **layout approved September9; native implementation pending**. The user
+accepted the raised51-tooth-group,24/22-tile-rim preview. This approves its
+composition/working scale, not release tuning, final sprites, liquid mechanics
+or generator output. New bone/tooth material review is in `../MawBone-v1/`.
 Wayfinder #26. Source direction: `MAW_SKETCH_DIRECTION_2026-09-08.md`.
 
 Latest user direction: **many more teeth and much higher opening ridges**, with
@@ -20,7 +22,7 @@ existing protected reservation; no promise to stamp a flat rectangle into a
 world or replace the full navigation spine. Final banks must follow surveyed
 surface height and blend into native terrain. The Stomach is unchanged.
 
-## Proposed geometry
+## Approved working geometry (not native validation)
 
 - Broad left basin A: 124 reserved cells; smaller right basin B: 62 cells.
   Yellow means **proposed acid basin**, not functioning acid. Raised retaining
@@ -33,7 +35,7 @@ surface height and blend into native terrain. The Stomach is unchanged.
 - Left/right solid rim crests rise24/22 tiles above the surrounding ground
   (previously6/4), before the crown teeth are counted. Thick asymmetric banks
   curl inward without a roof closing the mouth. These heights and the current
-  count are concrete preview choices, not approved production tuning.
+  count are accepted working preview choices, not final production tuning.
 - No generated resting shelves or safe landing markers. Walls change direction
   gradually without two-tile-wide safe floors in the throat. The player at the
   outside surface is a conservative 2x3-tile scale reference, not a resting point
@@ -122,7 +124,7 @@ Do not weaken structural bone or silently make all bone damage the player.
 
 ## Next gate
 
-1. User reviews the open mouth, basin positions and player-relative scale.
+1. Layout review complete September9: open mouth, dense teeth and raised rims.
 2. Author a focused structural bone candidate and a clearly distinct brittle
    tooth candidate; preserve a verified framing contract instead of recoloring
    every square in the old sheet. Show genuinely new art before installing it.

@@ -4,6 +4,11 @@ Status: design intake, not implemented or visually accepted as game assets.
 Tracks Wayfinder #26 and the later entity-design queue. Preserve the accepted
 Wastes, arrival pod/divot, existing route reservations and wall-binding repair.
 
+September9: the raised51-group entrance layout is approved as a working
+composition. No safe ledges; rope or tooth mining. Material study and separate
+offline topology evidence: `Art/Candidates/MawBone-v1/README.md`. That art
+still awaits review; no new gameplay, creature or acid implementation.
+
 ## Source and interpretation boundary
 
 The user supplied a two-page `Daily Notes.pdf`: page 1 has the current game

@@ -4,6 +4,12 @@ Wayfinder implementation issue: #26. Closed design issue #9 is context, not
 proof that this scene is finished. Native audit and first wall repair evidence:
 `Art/Validation/MawEntrance-2026-09-08/README.md`.
 
+September9: user approves the raised, tooth-packed layout. Keep its51 groups
+and24/22-tile solid rim rise as the working composition, with no safe ledges.
+New material review and a separate12-control native-topology pipeline are in
+`Art/Candidates/MawBone-v1/README.md`. The concept is not an atlas, and the
+palette-mapped Stone diagnostic is not final art. No native promotion or install.
+
 September 8: the user accepts the generated arrival divot and says continue.
 Freeze the accepted Wastes camera/art and Native-v3 pod. Next is the existing
 major Maw's surface entrance and first roughly120 tiles of descent, not another
@@ -85,7 +91,7 @@ two-tile resting shelves in the descent. The installed legacy shelf generator
 and its fall-length validator are still unchanged; revise together when the
 approved shallow shape reaches implementation. Do not report native completion.
 
-Latest preview:51 tooth groups rather than eight; solid rim crests24/22 tiles
+Accepted working preview:51 tooth groups rather than eight; solid rim crests24/22 tiles
 above surrounding ground rather than6/4. Exact quantities are proposed scale,
 not release tuning. Both retained basins and the existing below-ground depth
 are unchanged. No safe shelves, preplaced rope or ordinary-world retrofit.
