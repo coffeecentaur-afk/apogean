@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent;
@@ -21,6 +23,7 @@ namespace apogean.Content.Diagnostics
         private double oldTime;
         private Vector2 oldPosition;
         private int captureDelay = -1, checks;
+        private bool curveProof;
         private static bool IsQa => Main.netMode == NetmodeID.SinglePlayer && Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" && Main.LocalPlayer.name == "gg";
         private MawToothClusterTile Cluster => ModContent.GetInstance<MawToothClusterTile>();
         private int ItemType => ModContent.ItemType<MawToothCluster>();
@@ -37,6 +40,10 @@ namespace apogean.Content.Diagnostics
                     case "build": Build(); Test(); View(false); break;
                     case "test": Test(); break;
                     case "reload": Test(); View(false); break;
+                    case "audit": Audit(); break;
+                    case "curves": Test(false); break;
+                    case "proof": CurveProof(); break;
+                    case "proof-view": CurveProof(true); break;
                     case "day": View(false); break;
                     case "night": View(true); break;
                     case "capture": Require(); captureDelay = 45; break;
@@ -94,7 +101,7 @@ namespace apogean.Content.Diagnostics
         {
             for(int x=0;x<4;x++) for(int y=0;y<4;y++) {
                 Tile t = Main.tile[p.X+x,p.Y+y];
-                if (!t.HasTile || t.TileType!=Cluster.Type || t.TileFrameX!=facing*72+x*18 || t.TileFrameY!=y*18) throw new InvalidOperationException($"Wrong facing/frame {facing} at {p}.");
+                if (!t.HasTile || t.TileType!=Cluster.Type || t.TileFrameX!=facing*72+x*18 || t.TileFrameY!=y*18) throw new InvalidOperationException($"Wrong facing/frame {facing} at {p}, cell {x},{y}: hasTile={t.HasTile}, type={t.TileType}, expectedType={Cluster.Type}, frame={t.TileFrameX},{t.TileFrameY}.");
             }
         }
         private int Count(Point p)
@@ -117,11 +124,51 @@ namespace apogean.Content.Diagnostics
             Check(Count(p)==0 && drops.Count==1 && drops[0].stack==1,name);
             drops[0].TurnToAir(); // Only our one newly asserted QA test drop.
         }
-        private void Test()
+        private void Audit()
+        {
+            Require();
+            for(int k=0;k<DisplayLocations.Length;k++) {
+                Point p=At(DisplayLocations[k].X,DisplayLocations[k].Y);
+                try { Frames(p,k<4?k:0); Mod.Logger.Info($"MAW ORIENTATION AUDIT: legacy display {k} intact at {p}."); }
+                catch(InvalidOperationException e) { Mod.Logger.Warn("MAW ORIENTATION AUDIT: legacy layout mismatch; "+e.Message); }
+            }
+            for(int x=bounds.X+3;x<bounds.X+45;x++)for(int y=bounds.Y+1;y<bounds.Y+32;y++) {
+                Tile t=Main.tile[x,y];
+                if(t.HasTile && t.TileType==Cluster.Type && t.TileFrameX%72==0 && t.TileFrameY==0) {
+                    Point p=new(x,y);Frames(p,t.TileFrameX/72);
+                    Mod.Logger.Info($"MAW ORIENTATION AUDIT: complete actual cluster {p}, variant {t.TileFrameX/72}.");
+                }
+            }
+            Mod.Logger.Info("MAW ORIENTATION AUDIT: read-only complete. Legacy layout assertions retained, not rebaselined.");
+        }
+        private string DisplaySnapshot()
+        {
+            using var bytes=new MemoryStream();using var writer=new BinaryWriter(bytes);
+            for(int x=bounds.X+3;x<bounds.X+45;x++)for(int y=bounds.Y+1;y<bounds.Y+38;y++) {
+                Tile t=Main.tile[x,y];writer.Write(t.HasTile);
+                if(t.HasTile){writer.Write(t.TileType);writer.Write(t.TileFrameX);writer.Write(t.TileFrameY);}
+                writer.Write(t.WallType);writer.Write(t.WallFrameX);writer.Write(t.WallFrameY);
+                writer.Write(t.LiquidAmount);writer.Write(t.LiquidType);writer.Write((byte)t.Slope);writer.Write(t.IsHalfBlock);
+                writer.Write(t.HasActuator);writer.Write(t.IsActuated);writer.Write(t.RedWire);writer.Write(t.BlueWire);writer.Write(t.GreenWire);writer.Write(t.YellowWire);
+                writer.Write(t.TileColor);writer.Write(t.WallColor);
+            }
+            writer.Flush();return Convert.ToHexString(SHA256.HashData(bytes.ToArray()));
+        }
+        private void RequireEmptyTrial(Point p)
+        {
+            for(int x=p.X-1;x<p.X+5;x++)for(int y=p.Y-1;y<p.Y+5;y++) {
+                Tile t=Main.tile[x,y];
+                if(t.HasTile || t.WallType!=WallID.None || t.LiquidAmount>0 || t.HasActuator || t.IsActuated || t.RedWire || t.BlueWire || t.GreenWire || t.YellowWire)
+                    throw new InvalidOperationException($"Trial envelope occupied at {x},{y}; no clearing allowed.");
+            }
+        }
+        private void Test(bool historical=true)
         {
             Require(); checks=0;
-            for(int k=0;k<DisplayLocations.Length;k++) Frames(At(DisplayLocations[k].X,DisplayLocations[k].Y),k<4?k:0);
+            string displayBefore=DisplaySnapshot();
+            if(historical)for(int k=0;k<DisplayLocations.Length;k++) Frames(At(DisplayLocations[k].X,DisplayLocations[k].Y),k<4?k:0);
             Point p=At(72,16);
+            RequireEmptyTrial(p);
             Check(Count(p)==0 && Drops().Count==0,"empty-trial-and-no-existing-drops");
             Main.instance.LoadTiles(Cluster.Type); var texture=TextureAssets.Tile[Cluster.Type].Value;
             Check(texture.Width==Cluster.AtlasWidth && texture.Height==144,$"native-{Cluster.AtlasWidth}x144-atlas");
@@ -171,9 +218,33 @@ namespace apogean.Content.Diagnostics
                 for(int cell=0;cell<4;cell++){Point support=MawToothClusterTile.Support(p,facing,cell);WorldGen.KillTile(support.X,support.Y,noItem:true);}
                 Check(!PlaceNative(p,facing),$"unsupported-air-rejected-{facing}");
             }
-            for(int k=0;k<DisplayLocations.Length;k++) Frames(At(DisplayLocations[k].X,DisplayLocations[k].Y),k<4?k:0);
+            if(historical)for(int k=0;k<DisplayLocations.Length;k++) Frames(At(DisplayLocations[k].X,DisplayLocations[k].Y),k<4?k:0);
             if (Cluster.VariantCount == 8) TestPlayerCurves(p);
-            Mod.Logger.Info($"MAW ORIENTATION MATRIX PASS: {checks} checks; {Cluster.VariantCount*4096} actual texture/contact comparisons; six displays intact. Native APIs, not manual/multiplayer certification.");
+            Check(displayBefore==DisplaySnapshot(),"existing-display-region-unchanged");RequireEmptyTrial(p);
+            Mod.Logger.Info($"MAW ORIENTATION MATRIX PASS: {checks} checks; {Cluster.VariantCount*4096} actual texture/contact comparisons; existing display region unchanged. Historical layout checked={historical}. Native APIs, not manual/multiplayer certification.");
+        }
+        private void CurveProof(bool requireExisting=false)
+        {
+            Require();if(Cluster.VariantCount!=8)throw new InvalidOperationException("Eight-variant package required.");
+            if(requireExisting && !curveProof)throw new InvalidOperationException("No saved curve proof; refusing to create during reload verification.");
+            string before=DisplaySnapshot();
+            Point Position(int variant)=>At(54+12*(variant%4),variant<4?6:22);
+            if(!curveProof) {
+                // Validate ALL envelopes before placing any new disposable specimen.
+                for(int v=0;v<8;v++)RequireEmptyTrial(Position(v));
+                for(int v=0;v<8;v++) {
+                    Point p=Position(v);
+                    for(int cell=0;cell<4;cell++)Ground(MawToothClusterTile.Support(p,v,cell));
+                    Place(p,v);
+                }
+                curveProof=true;
+                Mod.Logger.Info("MAW ORIENTATION PROOF: created eight native placements in previously empty right-hand area; original gallery not rebuilt.");
+            }
+            for(int v=0;v<8;v++)Frames(Position(v),v);
+            if(before!=DisplaySnapshot())throw new InvalidOperationException("Curve proof altered original display region.");
+            Mod.Logger.Info($"MAW ORIENTATION PROOF PASS: eight saved variants intact; requireExisting={requireExisting}; original display region unchanged.");
+            View(false);
+            Main.LocalPlayer.Teleport(new Vector2((bounds.X+76)*16,(bounds.Y+32)*16-Main.LocalPlayer.height),1);Main.LocalPlayer.velocity=Vector2.Zero;
         }
         private void TestPlayerCurves(Point p)
         {
@@ -232,8 +303,8 @@ namespace apogean.Content.Diagnostics
             captureDelay=-1;if(!viewing)return;Main.dayTime=oldDay;Main.time=oldTime;Main.raining=oldRain;Main.eclipse=oldEclipse;
             if(IsQa)Main.LocalPlayer.Teleport(oldPosition,1);viewing=false;
         }
-        public override void SaveWorldData(TagCompound tag){if(IsQa && !bounds.IsEmpty)tag["mawClusterOrientationV1"]=new TagCompound{["x"]=bounds.X,["y"]=bounds.Y};}
-        public override void LoadWorldData(TagCompound tag){if(Main.ActiveWorldFileData?.Name=="Apogee Native Visual V3" && tag.ContainsKey("mawClusterOrientationV1")){var t=tag.GetCompound("mawClusterOrientationV1");bounds=new Rectangle(t.GetInt("x"),t.GetInt("y"),104,42);}}
-        public override void ClearWorld(){bounds=Rectangle.Empty;viewing=false;captureDelay=-1;}
+        public override void SaveWorldData(TagCompound tag){if(IsQa && !bounds.IsEmpty)tag["mawClusterOrientationV1"]=new TagCompound{["x"]=bounds.X,["y"]=bounds.Y,["curveProofV4"]=curveProof};}
+        public override void LoadWorldData(TagCompound tag){if(Main.ActiveWorldFileData?.Name=="Apogee Native Visual V3" && tag.ContainsKey("mawClusterOrientationV1")){var t=tag.GetCompound("mawClusterOrientationV1");bounds=new Rectangle(t.GetInt("x"),t.GetInt("y"),104,42);curveProof=t.GetBool("curveProofV4");}}
+        public override void ClearWorld(){bounds=Rectangle.Empty;viewing=false;captureDelay=-1;curveProof=false;}
     }
 }

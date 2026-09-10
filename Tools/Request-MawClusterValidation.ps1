@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][ValidateSet('build','test','day','night','capture','reload','release','save-and-quit','orientation-build','orientation-test','orientation-day','orientation-night','orientation-capture','orientation-reload','orientation-release')][string]$Case)
+param([Parameter(Mandatory)][ValidateSet('build','test','day','night','capture','reload','release','save-and-quit','orientation-build','orientation-test','orientation-day','orientation-night','orientation-capture','orientation-reload','orientation-release','orientation-audit','orientation-curves','orientation-proof','orientation-proof-view')][string]$Case)
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $path=Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games/Terraria/tModLoader/Captures/ApogeanLiveValidation.request'

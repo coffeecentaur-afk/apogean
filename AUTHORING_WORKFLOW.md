@@ -293,3 +293,12 @@ another automatic background-removal heuristic. A QA-only texture path keeps
 this prototype out of production assets and world generation. Preserve all
 accepted package overrides during every test build. Five corrupt-atlas CLI
 controls ensure a validator pass means more than a valid PNG file.
+
+Saved interactive galleries can legitimately drift during playtesting. When a
+historical layout assertion fails, audit actual native tiles/frames read-only
+before diagnosing an atlas regression. Preserve that failed assertion; do not
+restore the display, rewrite its baseline, or claim who moved it without proof.
+Run independent placement tests only in a fully empty tile/wall/liquid/wire
+envelope and compare preserved display contents before/after. Persistence proof
+must refuse to create missing specimens on reload. V4's orientation-curves and
+proof-view demonstrate this distinction; neither repairs the old grove failure.

@@ -240,9 +240,10 @@ On either solid wall: player below object center means point up/back down;
 player above means point down/back up. Exact-height tie provisionally points up.
 Stay fixed afterward, including other players passing and save/reload. Applies
 to all retained short/long/wide/cluster models. Individual specimens still need
-their own final placement/hazard implementation; only cluster code is staged.
-Native-v4 preserves old frames/roots and adds both curves; source/static proof,
-NOT installation or a new native pass. Read its candidate README.
+their own final placement/hazard implementation. Cluster Native-v4 is now an
+installed QA candidate:619 native API checks and actual eight-bank save/reopen
+pass. Old frames/roots retained. Manual/MP/art/worldgen gates remain separate.
+Read Art/Validation/MawToothCluster-2026-09-09/PlayerCurves-v4/README.md.
 
 ART approval reopened: teeth too detailed; the material called "moss stone"
 looks like autumn leaves. Preserve originals and simplify ONE proof's shading

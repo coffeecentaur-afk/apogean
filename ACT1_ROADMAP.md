@@ -4,9 +4,10 @@
 
 September9 LATEST: floor/ceiling BACKS follow facing, tips oppose it. Wall tips
 up when placing from below, down from above. Stay fixed after placement.
-Native-v4 stages eight banks with37 actual-policy checks, exact atlas/contact
-tests, seven negative controls and clean SOURCE compilation. Not installed or
-native-tested. Read Art/Candidates/MawToothCluster-v1/Native-v4/README.md first.
+Native-v4 is installed for QA:37 actual-policy checks, seven negative controls,
+clean full build,619 native API checks and eight variants saved/reopened intact.
+Read Art/Validation/MawToothCluster-2026-09-09/PlayerCurves-v4/README.md first.
+Manual/MP/worldgen pending. Old display-layout drift is recorded, not reset.
 Tooth detail and leaf-like Maw material art approval reopened: ONE simpler
 native-scale proof before batches. Retain individual models, whose final
 placement/physics are still pending. Acid/bosses/new generation stay separate.

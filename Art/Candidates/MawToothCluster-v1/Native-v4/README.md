@@ -1,4 +1,11 @@
-# Player-directed tooth curves — source staging only
+# Player-directed tooth curves — installed QA candidate
+
+September9 UPDATE: full build and native API fixture pass; all eight saved
+variants survive actual save/reopen. See
+`Art/Validation/MawToothCluster-2026-09-09/PlayerCurves-v4/README.md` for619 native
+checks, exact package hash, remaining manual/MP/art gates, and historical
+display-layout drift. Use orientation-audit/curves/proof-view, never rebuild.
+The staging record below is historical, not current install status.
 
 Confirmed: rounded BACKS follow facing on floors/ceilings, points lean opposite.
 On either wall, player below the object center means tip up; above means tip
@@ -37,11 +44,11 @@ Tools/New-MawClusterPlayerCurves.ps1 reproduces exact curves into a FRESH folder
 deterministic replay and refusal of existing outputs/Content destinations are
 also tested. Run all focused checks with
 `Tools/Invoke-ApogeanContentGate.ps1 -Profile MawTeeth`. No regenerated anatomy.
-Installed package STILL rooted-v3:
+At source-staging time, installed package was STILL rooted-v3:
 01FF09E0F2B37FEB916EC6D44225C2DD7F7EF767B09F040CD4AB908F0CAA8C41.
 No game restart, world edit, Content PNG edit or simplified-art installation.
 
-## Next gate
+## Historical install instructions (superseded by live evidence above)
 
 Preserve ALL build overrides in Art/Validation/MawToothCluster-2026-09-09/Rooted-v3/README.md;
 change only MawToothClusterCandidateDirectory to this folder. The abbreviated
