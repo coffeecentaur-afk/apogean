@@ -254,6 +254,16 @@ into either side. Preview offsets and alpha-contact offsets match that shift.
 Saved18px-stride frames are unchanged; the placed draw bank is separate.
 Validate actual terrain-contour overlap AND required anatomical handedness,
 not just anchor validity or mathematically correct quarter-turns.
+Latest tooth lesson: support orientation and curve direction are separate.
+Select player-relative curves once through the placing item's native style;
+never use live player position while drawing or checking existing support.
+Test both native preview and saved style, both recoverable styles and unchanged
+placement after the player moves. Preserve old frame IDs when extending banks.
+Current user explicitly wants rounded BACKS toward facing, not tips. An exact
+atlas transform only proves placement preparation, not simpler-art approval.
+Use the isolated builder's CompileOnly path when checking code while the user
+plays; that compiles without packaging/installing. Full QA installs still need
+the complete accepted override set and scoped native permission/proof.
 Maw cluster regression keeps the rejected ceiling-gap capture, a bounded
 daylight pixel detector, and native placed-offset assertions. Preserve the
 source art and keep render, solidity and contact regions independent.

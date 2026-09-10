@@ -234,13 +234,27 @@ placement is not the same contract. Keep approved pixels, thorn-style contact
 and easy whole-item recovery. Four-way native framing/support/hurt/reload proof
 precedes seeded dispersal through the mouth. Acid remains optional/separate.
 
-Confirmed wall anatomy: on BOTH vertical faces, rounded backs sit underneath
-and pointed tips curl upward into the passage. Left/right mirror each other;
-do not obtain the right side by another quarter turn that points it downward.
+LATEST user override: choose curves at PLACEMENT time. Floor/ceiling rounded
+BACKS follow player facing; sharp points lean OPPOSITE (explicitly confirmed).
+On either solid wall: player below object center means point up/back down;
+player above means point down/back up. Exact-height tie provisionally points up.
+Stay fixed afterward, including other players passing and save/reload. Applies
+to all retained short/long/wide/cluster models. Individual specimens still need
+their own final placement/hazard implementation; only cluster code is staged.
+Native-v4 preserves old frames/roots and adds both curves; source/static proof,
+NOT installation or a new native pass. Read its candidate README.
+
+ART approval reopened: teeth too detailed; the material called "moss stone"
+looks like autumn leaves. Preserve originals and simplify ONE proof's shading
+and mineral body before batches. QA room supports are MawDirt; verify the actual
+reported material before replacing it. Mechanical mirroring is not a redraw.
+
+Historical fixed wall anatomy: both backs underneath/tips upward, left/right
+mirrored. This is now superseded by player-directed curves above.
 Roots must overlap the terrain's visible contour, not merely its tile boundary.
 Native-v3 uses4px root burial; original individual and floor/ceiling art stays.
 
-September9 latest: the user accepts the native short/long/wide tooth artwork
+Earlier September9: the user accepted the native short/long/wide tooth artwork
 ("they look great") and requests a densely packed placeable group. Preserve
 these pixels and individual assets. A separate five-tooth cluster item uses
 explicitly approved THORN-STYLE behavior: hurts players on contact, not a solid

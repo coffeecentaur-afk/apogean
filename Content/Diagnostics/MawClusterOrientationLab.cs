@@ -83,7 +83,7 @@ namespace apogean.Content.Diagnostics
         {
             var origin = MawToothClusterTile.PlacementOrigin(facing);
             // No forced alternate: exercise the same anchor chooser as item placement.
-            return WorldGen.PlaceObject(p.X+origin.X,p.Y+origin.Y,Cluster.Type,mute:true);
+            return WorldGen.PlaceObject(p.X+origin.X,p.Y+origin.Y,Cluster.Type,mute:true,style:facing/4);
         }
         private void Place(Point p,int facing)
         {
@@ -124,24 +124,24 @@ namespace apogean.Content.Diagnostics
             Point p=At(72,16);
             Check(Count(p)==0 && Drops().Count==0,"empty-trial-and-no-existing-drops");
             Main.instance.LoadTiles(Cluster.Type); var texture=TextureAssets.Tile[Cluster.Type].Value;
-            Check(texture.Width==416 && texture.Height==144,"native-416x144-atlas");
-            Color[] pixels=new Color[416*144];texture.GetData(pixels);
-            for(int facing=0;facing<4;facing++) {
+            Check(texture.Width==Cluster.AtlasWidth && texture.Height==144,$"native-{Cluster.AtlasWidth}x144-atlas");
+            Color[] pixels=new Color[Cluster.AtlasWidth*144];texture.GetData(pixels);
+            for(int facing=0;facing<Cluster.VariantCount;facing++) {
                 for(int cell=0;cell<4;cell++)Ground(MawToothClusterTile.Support(p,facing,cell));
                 Place(p,facing);Check(true,$"automatic-anchor-choice-{facing}");
                 var data=TileObjectData.GetTileData(Main.tile[p.X,p.Y]); Point inset=MawToothClusterTile.Inset(facing);
                 Check(data.DrawXOffset==inset.X && data.DrawYOffset==inset.Y,$"embedded-root-offset-{facing}");
                 int nativeWidth=0,nativeY=0,nativeHeight=0;short nativeFrameX=Main.tile[p.X,p.Y].TileFrameX,nativeFrameY=0;
                 TileLoader.SetDrawPositions(p.X,p.Y,ref nativeWidth,ref nativeY,ref nativeHeight,ref nativeFrameX,ref nativeFrameY);
-                bool wall = facing == 1 || facing == 3;
+                bool wall = facing % 4 == 1 || facing % 4 == 3;
                 Check(nativeY==inset.Y && nativeWidth==(wall?24:16) && nativeHeight==16 && nativeFrameX==facing*(wall?104:72) && nativeFrameY==(wall?72:0),$"actual-placed-draw-offset-{facing}");
                 int opaque=0;Point hit=default;
                 for(int y=0;y<64;y++)for(int x=0;x<64;x++) {
-                    Color source=pixels[(y/16*18+y%16)*416+facing*72+x/16*18+x%16];
+                    Color source=pixels[(y/16*18+y%16)*Cluster.AtlasWidth+facing*72+x/16*18+x%16];
                     bool expected=source.A==255;
                     if(wall) {
-                        int drawCellX=x/16*26, pad=facing==3?8:0;
-                        Color placed=pixels[(72+y/16*18+y%16)*416+facing*104+drawCellX+x%16+pad];
+                        int drawCellX=x/16*26, pad=facing%4==3?8:0;
+                        Color placed=pixels[(72+y/16*18+y%16)*Cluster.AtlasWidth+facing*104+drawCellX+x%16+pad];
                         int screenX=x/16*16-(nativeWidth-16)/2+x%16+pad;
                         if(placed!=source || screenX!=x+inset.X)throw new InvalidOperationException("Native wall draw bank differs from preview/contact.");
                     }
@@ -172,7 +172,48 @@ namespace apogean.Content.Diagnostics
                 Check(!PlaceNative(p,facing),$"unsupported-air-rejected-{facing}");
             }
             for(int k=0;k<DisplayLocations.Length;k++) Frames(At(DisplayLocations[k].X,DisplayLocations[k].Y),k<4?k:0);
-            Mod.Logger.Info($"MAW ORIENTATION MATRIX PASS: {checks} checks; 16384 actual texture/contact comparisons; six displays intact. Native APIs, not manual/multiplayer certification.");
+            if (Cluster.VariantCount == 8) TestPlayerCurves(p);
+            Mod.Logger.Info($"MAW ORIENTATION MATRIX PASS: {checks} checks; {Cluster.VariantCount*4096} actual texture/contact comparisons; six displays intact. Native APIs, not manual/multiplayer certification.");
+        }
+        private void TestPlayerCurves(Point p)
+        {
+            Player player=Main.LocalPlayer;Vector2 position=player.position;int direction=player.direction;
+            int targetX=Player.tileTargetX,targetY=Player.tileTargetY;
+            var oldPreview=new Terraria.DataStructures.TileObjectPreviewData();oldPreview.CopyFrom(TileObject.objectPreview);
+            Item testItem=new();testItem.SetDefaults(ItemType);var modItem=(MawToothCluster)testItem.ModItem;
+            try {
+                for(int face=0;face<4;face++) {
+                    for(int cell=0;cell<4;cell++)Ground(MawToothClusterTile.Support(p,face,cell));
+                    var origin=MawToothClusterTile.PlacementOrigin(face);
+                    Player.tileTargetX=p.X+origin.X;Player.tileTargetY=p.Y+origin.Y;
+                    foreach(int dir in new[]{-1,1})foreach(int dy in new[]{-64,0,64}) {
+                        player.direction=dir;player.position.Y=p.Y*16+32+dy-player.height/2f;
+                        // Independent expected truth table; exercise the actual item hook,
+                        // native anchor chooser and native saved style, not just policy math.
+                        int expected=face==0?(dir==1?0:1):face==2?(dir==-1?0:1):(dy<0?1:0);
+                        modItem.HoldItem(player);
+                        Check(testItem.placeStyle==expected,$"held-curve-{face}-{dir}-{dy}");
+                        Check(modItem.CanUseItem(player) && testItem.placeStyle==expected,$"click-curve-{face}-{dir}-{dy}");
+                        Check(TileObject.CanPlace(Player.tileTargetX,Player.tileTargetY,Cluster.Type,testItem.placeStyle,dir,out TileObject placement),$"native-cursor-placement-{face}-{dir}-{dy}");
+                        int variant=expected*4+face;
+                        Check(TileObjectData.GetTileData(Cluster.Type,expected,placement.alternate).CalculatePlacementStyle(expected,placement.alternate,placement.random)==variant,$"selected-placement-style-{variant}");
+                        Check(TileObject.CanPlace(Player.tileTargetX,Player.tileTargetY,Cluster.Type,testItem.placeStyle,dir,out _,onlyCheck:true),$"native-preview-valid-{variant}");
+                        var preview=TileObject.objectPreview;
+                        Check(preview.Style==expected && preview.Alternate==placement.alternate,$"native-preview-style-agrees-{variant}");
+                        Check(WorldGen.PlaceObject(Player.tileTargetX,Player.tileTargetY,Cluster.Type,mute:true,style:testItem.placeStyle,direction:dir),$"native-place-selected-style-{variant}");
+                        Frames(p,variant);
+                        player.direction=-dir;player.position.Y+=128;
+                        WorldGen.RangeFrame(p.X-1,p.Y-1,p.X+5,p.Y+5);
+                        Frames(p,variant);Check(true,$"curve-stays-fixed-after-player-moves-{variant}");
+                        WorldGen.KillTile(p.X,p.Y);Removed(p,$"selected-style-one-item-{variant}");
+                    }
+                    for(int cell=0;cell<4;cell++){Point support=MawToothClusterTile.Support(p,face,cell);WorldGen.KillTile(support.X,support.Y,noItem:true);}
+                }
+            } finally {
+                player.position=position;player.direction=direction;
+                Player.tileTargetX=targetX;Player.tileTargetY=targetY;
+                TileObject.objectPreview.CopyFrom(oldPreview);
+            }
         }
         private void View(bool night)
         {

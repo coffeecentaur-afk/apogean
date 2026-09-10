@@ -1,0 +1,19 @@
+{
+  "schema": 4,
+  "atlasSize": [
+    832,
+    144
+  ],
+  "variants": 8,
+  "styleMultiplier": 4,
+  "styleWrapLimit": 8,
+  "savedCellStride": 18,
+  "wallDrawRegionY": 72,
+  "wallDrawCellStride": 26,
+  "wallDrawWidth": 24,
+  "legacyStyles": "0..3 unchanged",
+  "newStyles": "4..7: floor/ceiling horizontal reflection; walls vertical reflection",
+  "sourceSHA256": "92CD5A5BA67AA141ED4D138297374EC131B0EC1EA7D42F5FC3D2197A322808E2",
+  "atlasSHA256": "C1407476E0B1DFE35E5864458B1A3C650FEFD4A67F0D521412BC3F6585A3A3B6",
+  "maskSHA256": "32C095D97105EE252185999A27358E9FA0453D90B5556D15BDB468503AE19F27"
+}

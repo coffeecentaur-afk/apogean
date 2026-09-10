@@ -17,6 +17,8 @@ namespace apogean.Content.Tiles
 		public const string AssetRoot = "Content/Tiles/Diagnostics/MawToothCluster/";
 		public const int Size = 64, DrawInset = 4, ContactDamage = 30;
 		internal byte[] ContactMask { get; private set; }
+		internal int VariantCount => ContactMask.Length / (Size * Size);
+		internal int AtlasWidth => VariantCount * 104;
 		public override string Texture => Mod.Name + "/" + AssetRoot + "cluster-atlas";
 		internal static bool Included(Mod mod) => mod.FileExists(AssetRoot + "contact-mask.bin") &&
 			(mod.FileExists(AssetRoot + "cluster-atlas.png") || mod.FileExists(AssetRoot + "cluster-atlas.rawimg"));
@@ -24,7 +26,7 @@ namespace apogean.Content.Tiles
 		public override void SetStaticDefaults()
 		{
 			ContactMask = Mod.GetFileBytes(AssetRoot + "contact-mask.bin");
-			if (ContactMask.Length != 4 * Size * Size || Array.Exists(ContactMask, b => b > 1)) throw new InvalidOperationException("Invalid four-way cluster contact mask.");
+			if ((ContactMask.Length != 4 * Size * Size && ContactMask.Length != 8 * Size * Size) || Array.Exists(ContactMask, b => b > 1)) throw new InvalidOperationException("Invalid cluster contact mask.");
 			Main.tileFrameImportant[Type] = true;
 			Main.tileSolid[Type] = false; Main.tileSolidTop[Type] = false;
 			Main.tileNoAttach[Type] = true; Main.tileBlockLight[Type] = false;
@@ -39,7 +41,7 @@ namespace apogean.Content.Tiles
 			TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16, 16 };
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.StyleMultiplier = 4;
-			TileObjectData.newTile.StyleWrapLimit = 4;
+			TileObjectData.newTile.StyleWrapLimit = VariantCount;
 			TileObjectData.newTile.DrawYOffset = DrawInset;
 			TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile, 4, 0);
 			TileObjectData.newTile.AnchorTop = AnchorData.Empty;
@@ -62,6 +64,7 @@ namespace apogean.Content.Tiles
 				TileObjectData.addAlternate(facing);
 			}
 			TileObjectData.addTile(Type);
+			RegisterItemDrop(ModContent.ItemType<MawToothCluster>(), 0, 1);
 			AddMapEntry(new Color(170, 158, 129), ModContent.GetInstance<MawToothCluster>().DisplayName);
 			// DefaultToPlaceableTile owns native one-item recovery; never duplicate in KillMultiTile.
 		}
@@ -69,20 +72,21 @@ namespace apogean.Content.Tiles
 		public override bool IsTileDangerous(int i, int j, Player player) => !Main.tile[i, j].IsActuated;
 		public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
 		{
-			int facing = Main.tile[i, j].TileFrameX / 72;
+			int variant = Main.tile[i, j].TileFrameX / 72;
+			int facing = variant % 4;
 			offsetY = Inset(facing).Y;
 			if (facing == 1 || facing == 3) {
 				// Native TileDrawing centers width24 on the16px tile. Asymmetric
 				// transparent padding moves the visible pixels into support by4px.
 				// Saved frames and item previews still use the upper18px-stride bank.
 				width = 24;
-				tileFrameX = (short)(facing * 104 + Main.tile[i, j].TileFrameX % 72 / 18 * 26);
+				tileFrameX = (short)(variant * 104 + Main.tile[i, j].TileFrameX % 72 / 18 * 26);
 				tileFrameY = (short)(72 + Main.tile[i, j].TileFrameY);
 			}
 		}
-		internal static Point Inset(int facing) => facing switch { 1 => new(-4, 0), 3 => new(4, 0), 2 => new(0, -4), _ => new(0, 4) };
-		internal static Point16 PlacementOrigin(int facing) => facing switch { 1 => new(0, 1), 2 => new(1, 0), 3 => new(3, 1), _ => new(1, 3) };
-		internal static Point Support(Point root, int facing, int cell) => facing switch {
+		internal static Point Inset(int facing) => (facing % 4) switch { 1 => new(-4, 0), 3 => new(4, 0), 2 => new(0, -4), _ => new(0, 4) };
+		internal static Point16 PlacementOrigin(int facing) => (facing % 4) switch { 1 => new(0, 1), 2 => new(1, 0), 3 => new(3, 1), _ => new(1, 3) };
+		internal static Point Support(Point root, int facing, int cell) => (facing % 4) switch {
 			1 => new(root.X - 1, root.Y + cell), 2 => new(root.X + cell, root.Y - 1),
 			3 => new(root.X + 4, root.Y + cell), _ => new(root.X + cell, root.Y + 4)
 		};
@@ -91,7 +95,7 @@ namespace apogean.Content.Tiles
 			origin = default;
 			if (!WorldGen.InWorld(i, j, 1)) return false;
 			Tile t = Main.tile[i, j];
-			if (!t.HasTile || t.TileType != Type || t.TileFrameX < 0 || t.TileFrameX >= 288 || t.TileFrameY < 0 || t.TileFrameY >= 72 || t.TileFrameX % 18 != 0 || t.TileFrameY % 18 != 0) return false;
+			if (!t.HasTile || t.TileType != Type || t.TileFrameX < 0 || t.TileFrameX >= VariantCount * 72 || t.TileFrameY < 0 || t.TileFrameY >= 72 || t.TileFrameX % 18 != 0 || t.TileFrameY % 18 != 0) return false;
 			origin = new Point(i - t.TileFrameX % 72 / 18, j - t.TileFrameY / 18);
 			return WorldGen.InWorld(origin.X, origin.Y, 1) && WorldGen.InWorld(origin.X + 3, origin.Y + 3, 1);
 		}
@@ -99,7 +103,7 @@ namespace apogean.Content.Tiles
 		{
 			if (!TryOrigin(root.X, root.Y, out Point actualRoot) || actualRoot != root) return false;
 			int facing = Main.tile[root.X, root.Y].TileFrameX / 72;
-			Point inset = Inset(facing);
+			Point inset = Inset(facing % 4);
 			int left = Math.Max(0, hitbox.Left - root.X * 16 - inset.X), top = Math.Max(0, hitbox.Top - root.Y * 16 - inset.Y);
 			int right = Math.Min(Size, hitbox.Right - root.X * 16 - inset.X), bottom = Math.Min(Size, hitbox.Bottom - root.Y * 16 - inset.Y);
 			for (int y = top; y < bottom; y++) for (int x = left; x < right; x++) {

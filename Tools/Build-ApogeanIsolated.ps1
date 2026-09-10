@@ -12,7 +12,8 @@ param(
 	[string]$MawFangCandidateDirectory = '',
 	[string]$MawToothArtCandidateDirectory = '',
 	[string]$MawToothClusterCandidateDirectory = '',
-	[switch]$KeepWorkspace
+	[switch]$KeepWorkspace,
+	[switch]$CompileOnly
 )
 
 Set-StrictMode -Version Latest
@@ -245,9 +246,11 @@ try {
 	}
 	if ($MawToothClusterCandidateDirectory) {
 		$candidateRoot = (Resolve-Path -LiteralPath $MawToothClusterCandidateDirectory).Path
-		$allowed = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/MawToothCluster-v1/Native-v3')).Path
-		if ($candidateRoot -ne $allowed) { throw 'Only the contracted cluster candidate is authorized.' }
-		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-MawClusterRootedCandidate.ps1') -CandidateDirectory $candidateRoot
+		$legacy = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/MawToothCluster-v1/Native-v3')).Path
+		$curves = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/MawToothCluster-v1/Native-v4')).Path
+		if ($candidateRoot -ne $legacy -and $candidateRoot -ne $curves) { throw 'Only a contracted cluster candidate is authorized.' }
+		$validator = if ($candidateRoot -eq $curves) { 'Test-MawClusterPlayerCurves.ps1' } else { 'Test-MawClusterRootedCandidate.ps1' }
+		& pwsh -NoProfile -File (Join-Path $sourceRoot "Tools/$validator") -CandidateDirectory $candidateRoot
 		if ($LASTEXITCODE -ne 0) { throw 'Cluster art/mask contract failed.' }
 		$destination = Join-Path $mirrorRoot 'Content/Tiles/Diagnostics/MawToothCluster'
 		New-Item -ItemType Directory -Path $destination -Force | Out-Null
@@ -258,7 +261,13 @@ try {
 	}
 	Push-Location $mirrorRoot
 	try {
-		& dotnet build '.\apogean.csproj' -v:minimal
+		if ($CompileOnly) {
+			# Local tML targets package/install AfterTargets=Build. Compile only,
+			# retaining their framework/reference defaults but never calling Build.
+			& dotnet build '.\apogean.csproj' -v:minimal -t:Compile
+		} else {
+			& dotnet build '.\apogean.csproj' -v:minimal
+		}
 		if ($LASTEXITCODE -ne 0) {
 			throw "The isolated Apogean build failed (exit code $LASTEXITCODE)."
 		}

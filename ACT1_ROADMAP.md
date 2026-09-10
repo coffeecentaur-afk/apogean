@@ -2,7 +2,16 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
-September9 current: individual family and floor-cluster appearance accepted.
+September9 LATEST: floor/ceiling BACKS follow facing, tips oppose it. Wall tips
+up when placing from below, down from above. Stay fixed after placement.
+Native-v4 stages eight banks with37 actual-policy checks, exact atlas/contact
+tests, seven negative controls and clean SOURCE compilation. Not installed or
+native-tested. Read Art/Candidates/MawToothCluster-v1/Native-v4/README.md first.
+Tooth detail and leaf-like Maw material art approval reopened: ONE simpler
+native-scale proof before batches. Retain individual models, whose final
+placement/physics are still pending. Acid/bosses/new generation stay separate.
+
+Historical September9: individual family and floor-cluster appearance accepted.
 Four-face v2 is visually rejected for wall gaps and downward-curving right teeth.
 Native-v3 keeps both wall backs below/upward tips (mirrored left/right) and
 embeds roots4px into terrain. Its 202 native checks pass before/after reload;

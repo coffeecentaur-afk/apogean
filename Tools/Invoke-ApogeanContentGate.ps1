@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('Status', 'Tree', 'Terrain', 'Background', 'Entity', 'Structure', 'Boss', 'Quest', 'All')]
+    [ValidateSet('Status', 'Tree', 'Terrain', 'MawTeeth', 'Background', 'Entity', 'Structure', 'Boss', 'Quest', 'All')]
     [string]$Profile = 'All',
     [switch]$Build
 )
@@ -11,6 +11,7 @@ $hostExecutable = (Get-Process -Id $PID).Path
 $profiles = @{
     Status = @('Tools/Test-AuthoringStatus.ps1', 'Tools/Test-VersionedSkills.ps1', 'Tools/Test-GeneratorOwnership.ps1')
     Tree = @('Tools/Test-TreeProductionReadiness.ps1')
+    MawTeeth = @('Tools/Test-MawToothPlacement.ps1', 'Tools/Test-MawClusterPlayerCurves.ps1', 'Tools/Test-MawPlayerCurveValidators.ps1')
     Terrain = @('Tools/Test-WastesTerrainAtlases.ps1', 'Tools/Test-MawStructuralWall.ps1', 'Tools/Test-MawFang.ps1', 'Tools/Test-MawFangValidator.ps1', 'Tools/Test-RigidPlantAtlas.ps1', 'Tools/Test-ReportedVisualRegressions.ps1', 'Tools/Test-SurfaceRegression.ps1')
     Background = @('Tools/Test-MaskedBackgroundExport.ps1', 'Tools/Test-WastesCityMask.ps1', 'Tools/Test-WastesHeightLock.ps1', 'Tools/Test-WastesForegroundDepth.ps1', 'Tools/Test-WastesRunningLiveValidator.ps1', 'Tools/Test-WastesTelemetryExport.ps1', 'Tools/Test-WastesRuinLayoutValidator.ps1', 'Tools/Test-WastesFixedSections.ps1', 'Tools/Test-WastesHeightMutations.ps1', 'Tools/Test-ForestRestoration.ps1', 'Tools/Test-BackgroundHdContracts.ps1', 'Tools/Test-BackgroundProductionReadiness.ps1')
     Entity = @('Tools/Test-ReportedVisualRegressions.ps1')
@@ -19,7 +20,7 @@ $profiles = @{
     Quest = @('Tools/Test-QuestDialoguePipeline.ps1')
 }
 
-$selectedProfiles = if ($Profile -eq 'All') { @('Status', 'Tree', 'Terrain', 'Background', 'Entity', 'Structure', 'Boss', 'Quest') } else { @($Profile) }
+$selectedProfiles = if ($Profile -eq 'All') { @('Status', 'Tree', 'Terrain', 'MawTeeth', 'Background', 'Entity', 'Structure', 'Boss', 'Quest') } else { @($Profile) }
 $scripts = [Collections.Generic.List[string]]::new()
 foreach ($selected in $selectedProfiles) {
     foreach ($script in $profiles[$selected]) {
