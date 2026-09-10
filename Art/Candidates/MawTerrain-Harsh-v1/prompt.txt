@@ -1,0 +1,27 @@
+Use case: stylized-concept.
+Asset type: one cohesive material-direction review board for the Maw terrain in an original Terraria-style 2D pixel-art mod. This is an art review board, NOT a ready-to-load engine atlas.
+
+Primary request: design HARSH, BRITTLE, ANGULAR terrain, with clearly visible chunky pixel clusters and tactile broken surfaces. Simpler pixels must NOT mean soft rounded shapes. The client rejected smooth/soft material design. Do not make autumn leaves or piles of leaf flakes. Grey, black and dead brown mineral terrain with restrained amber infestation; not all-yellow rock.
+
+Composition: landscape board, four columns by three rows. A discreet title "MAW / TERRAIN STUDY". Twelve clearly separated panels on a flat muted dark-blue-grey review background. Each panel has one large orthographic front-facing continuous material patch with a broken exposed upper edge, and a small matching DARKER, LOWER-CONTRAST wall swatch underneath. No perspective, no cubes, no lighting gradients. Plain small pixel-font labels below each panel, exactly as follows, reading left to right:
+Row 1: "SOIL", "STONE", "GRASS", "SAND"
+Row 2: "MUD", "CLAY", "SNOW", "ICE"
+Row 3: "BONE", "FIBERS", "MEMBRANE", "AMBER"
+
+Material identities:
+SOIL: dense dry dark umber earth, compact rough clods, broad clustered shadows, occasional torn ochre root strand.
+STONE: cold dead grey and near-black fractured rock, sharp interlocking fracture planes, sparse ochre fissures, rock must read as rock rather than moss or foliage.
+GRASS: very thin ragged straw-ochre parasitic fibrous crust over dark soil; jagged broken stalks at upper edge, a few hanging torn strings. Not golden autumn leaves and not a thick bright-yellow carpet.
+SAND: dirty taupe crushed mineral grains grouped into broad compact clusters and short broken dune ridges; distinguish from rock without tiny confetti noise.
+MUD: nearly black-brown compressed silt with horizontal torn seams and a few embedded stringy roots; broad hard-edged shapes, no glossy rounded lumps.
+CLAY: dry muted grey-brown ceramic-like cracked plates, larger flatter shapes than soil, polygonal brittle breaks.
+SNOW: contaminated ash-grey and desaturated bone-white crust with cold charcoal shadows and occasional ochre inclusions; fractured rime, retain snow identity without leaf texture.
+ICE: smoky desaturated steel-blue ice, sharp fractured translucent-looking planes drawn with opaque flat palette steps, amber trapped in a few narrow fissures; NO bloom, glassy 3D gloss or gradients.
+BONE: pale dirty grey-brown hardened ossified mass, long directional stress cracks, angular splintered exposed edge, small restrained dark pores. Not a checkerboard of skulls, not cobblestone.
+FIBERS: dry torn ochre and umber tendon strands tensioned across dark crevices, uneven grouped striations, sharp frayed ends; no red flesh.
+MEMBRANE: localized deeper-Maw muted slate-blue skin drawn taut across angular dark recesses with torn attachment edges. Keep faceted angular pixel shadows, not bulbous rounded cushions or silky airbrush.
+AMBER: rare bright honey-yellow mineral/organic pockets trapped inside dark cracked host rock. Jagged fractured shells and small warm yellow cores, most of the swatch remains dark host material. Actual light emission will be code-controlled later; no broad diffuse halo in art.
+
+Pixel discipline: looks authored on a roughly 384x256 native review canvas then nearest-neighbor enlarged about fourfold. Coarse readable clusters appropriate to a 16x16 Terraria tile, limited flat ramps, roughly 5-7 shades per material. Deliberate sharp contour stair steps, NOT a high-resolution realistic painting overlaid with pixel noise. Do not draw grid lines around individual world tiles; one continuous material patch per panel. Subtle motif variation. Recognizable connected material over more than one tile. Tactile grit from shapes and fractures, not fine randomized white dots. Enough contrast to distinguish terrain from matching darker walls.
+
+Avoid: soft rounded stones, pillow shading, smooth gradients, antialiasing, painterly brushwork, photographic microdetail, autumn leaf moss, red gore, saturated purple, bright white edge halos, fake checkerboard transparency, regular bricks, graph-paper grids, isometric blocks, environment scenery, characters, corporate logos, excessive labels.

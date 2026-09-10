@@ -2,6 +2,14 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+September9 latest ART gate: user requested the treatment across Maw terrain and
+rejected the softer direction. Art/Candidates/MawTerrain-Harsh-v1/README.md owns a
+new twelve-material concept board plus proposed darker walls. This is not approved,
+exported as native atlases or installed. Review direction, then make one connected
+soil/stone/grass-and-wall proof before extending the family. Previous tooth
+placement evidence below remains valid for that package; no art, mechanics,
+worldgen, acid or mob integration was performed in this concept pass.
+
 September9 LATEST: floor/ceiling BACKS follow facing, tips oppose it. Wall tips
 up when placing from below, down from above. Stay fixed after placement.
 Native-v4 is installed for QA:37 actual-policy checks, seven negative controls,

@@ -207,6 +207,15 @@ The Underworld does not use `ModUndergroundBackgroundStyle`; Terraria draws a se
 
 The Maw is the hostile biome created by the distributed Broodmass organism, not a recolored Corruption. The neutral Wastes beneath the rest of the world are a separate biome and do not spread.
 
+September9 latest art correction: the user requested the artwork treatment across
+Maw terrain but rejected the softer design. Simplifying native pixel detail must
+not automatically soften the material shapes. The proposed response uses brittle
+fractures, torn fibers and localized amber in distinct host materials, preserving
+the dead grey/black/brown identity and previously accepted local depth accents.
+See Art/Candidates/MawTerrain-Harsh-v1/README.md. Its twelve-family board is a new
+unapproved concept, not twelve implemented tiles or validated atlases. Retain the
+art-review gate and native mask contracts before replacing production assets.
+
 September9 art clarification: preserve the dead grey/black/brown/amber surface
 identity. Explore localized deeper materials and mutations, not just Helix/Maw
 palette swaps on identical creatures. Follow-up approval confirms the cooler
