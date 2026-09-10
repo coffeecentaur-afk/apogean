@@ -9,9 +9,9 @@
       "build": "pass",
       "liveFixture": "pass",
       "production": "pending",
-      "userReview": "pending",
+      "userReview": "accepted",
       "evidenceReference": "Art/Validation/MawMaterials-2026-09-09/README.md",
-      "evidenceScope": "Approved harsh board translated to12 original native material studies plus12 walls. Engine-mask packing preserves saved frames.148945920 pixel checks;1326272 runtime-map cases;8 compiler mutation controls. Corrected package2558EE6F loads;3444 actual tile draws and1680 wall frames pass before/after real save-reopen. All3 rows/night captured unchanged.416 previous PNGs unchanged. Candidate-only renderer proof, not production gameplay or final appearance acceptance.",
+      "evidenceScope": "Approved harsh board translated to12 original native material studies plus12 walls. Engine-mask packing preserves saved frames.148945920 pixel checks;1326272 runtime-map cases;8 compiler mutation controls. Corrected package2558EE6F loads;3444 actual tile draws and1680 wall frames pass before/after real save-reopen. All3 rows/night captured unchanged.416 previous PNGs unchanged. User then says looks great and pauses until tomorrow: native gallery appearance accepted, not production gameplay or natural-context certification.",
       "blockers": ["Natural-context appearance/repetition and mixed grass-soil slope/merge proof before production. Complete hanging roots separately. Sand/amber are art-only solids; drops, falling/projectiles, light, purification, multiplayer and memory acceptance pending.245.79MiB diagnostic textures must not be blindly duplicated into shipping content.", "Known grove cross-reload mismatch remains RED with changing observed digests; only within-request guards pass. No saved fixture rebuild, ordinary-world change or generation/acid/boss expansion."]
     },
     {

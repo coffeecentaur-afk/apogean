@@ -1,6 +1,8 @@
 # Harsh Maw materials — native QA
 
-Date: September9 local / September10 UTC. State: **renderer fixture pass; production and user appearance acceptance pending**.
+Date: September9 local / September10 UTC. State: **renderer fixture pass; native gallery appearance accepted; production pending**.
+
+User follow-up: "looks great! im going to sleep now so we shall work on this tomorrow". Approval applies to the demonstrated native materials. Pause here; no overnight run or automation. Resume with one bounded mixed natural Maw section, actual grass/soil corner slopes and material boundaries. Preserve this art instead of reopening the same style approval. Remaining gameplay/memory/generation gates below are unchanged.
 
 The approved harsh board now has twelve original material fields compiled into twelve native tile candidates and twelve matching darker wall candidates. They are installed in the disposable QA package. Existing Maw terrain/generation is not replaced yet.
 

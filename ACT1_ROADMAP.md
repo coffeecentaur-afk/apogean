@@ -8,7 +8,9 @@ IMPLEMENTATION.md tracks sources, packed masks, native evidence and remaining
 gates. Stone v2 has a saved/reloaded native fixture; the full family has 24
 compiled diagnostic tile/wall atlases and a saved/reopened separate gallery:
 3444 native draws/1680 wall frames pass. See Art/Validation/MawMaterials-2026-09-09.
-Next is native appearance review and a mixed natural section, especially real
+User subsequently accepted the native result ("looks great!") and paused work
+until tomorrow. Preserve the approved materials; no overnight work requested.
+Next is a mixed natural section, especially real
 grass/soil corner slopes and repetition. An art-only gallery
 does not certify sand physics, organ emission, purification or world generation.
 Existing tooth behavior is retained.
