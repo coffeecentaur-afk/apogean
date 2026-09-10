@@ -2,6 +2,13 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+September9 current: individual family and floor-cluster appearance accepted.
+Extend the same cluster item to all four solid-terrain faces before generation.
+Keep original individual sprites; no redraw or repeated art-approval loop.
+`Art/Candidates/MawToothCluster-v1/README.md` owns the exact four-way atlas,
+native anchor/damage contract and remaining gates. Old broad wedge remains
+rejected. Optional acid #27 does not block thorn-style tooth hazards.
+
 Latest September9 native appearance gate: at the user's request, the unchanged
 three-tooth family is now in a disposable native art gallery in gg/V3/SP.
 See `Art/Validation/MawToothFamily-2026-09-09/README.md`:52 native art checks

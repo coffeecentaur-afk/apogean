@@ -11,6 +11,7 @@ param(
 	[string]$MawBoneCandidateDirectory = '',
 	[string]$MawFangCandidateDirectory = '',
 	[string]$MawToothArtCandidateDirectory = '',
+	[string]$MawToothClusterCandidateDirectory = '',
 	[switch]$KeepWorkspace
 )
 
@@ -241,6 +242,19 @@ try {
 			Copy-Item -LiteralPath (Join-Path $folder 'upright-art-atlas.png') -Destination (Join-Path $destination "$($record.name).png")
 		}
 		Write-Host 'Exact tooth family included as non-solid, non-damaging native art specimens only.'
+	}
+	if ($MawToothClusterCandidateDirectory) {
+		$candidateRoot = (Resolve-Path -LiteralPath $MawToothClusterCandidateDirectory).Path
+		$allowed = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/MawToothCluster-v1/Native-v2')).Path
+		if ($candidateRoot -ne $allowed) { throw 'Only the contracted cluster candidate is authorized.' }
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-MawToothCluster.ps1') -CandidateDirectory $candidateRoot
+		if ($LASTEXITCODE -ne 0) { throw 'Cluster art/mask contract failed.' }
+		$destination = Join-Path $mirrorRoot 'Content/Tiles/Diagnostics/MawToothCluster'
+		New-Item -ItemType Directory -Path $destination -Force | Out-Null
+		foreach ($name in @('cluster.png','cluster-atlas.png','contact-mask.bin')) {
+			Copy-Item -LiteralPath (Join-Path $candidateRoot $name) -Destination (Join-Path $destination $name)
+		}
+		Write-Host 'Placeable thorn-style cluster included in this candidate package only.'
 	}
 	Push-Location $mirrorRoot
 	try {

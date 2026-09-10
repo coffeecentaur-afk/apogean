@@ -1,0 +1,68 @@
+[18:42:01.742] [.NET TP Worker/INFO] [Terraria]: Loading World: Apogee Native Visual V3, IsCloud=False, Width: 8400, Height: 2400, Evil: 1, GameMode: 0
+System.InvalidOperationException: Preserved grove differs after reload: expected=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4; actual=BFE03BFD4509E9B076D48B742B8B55F5E6EFEF713B74534D6BC625F2BA375541. No rebuild performed.
+[18:42:03.679] [Main Thread/ERROR] [apogean]: AUTOMATIC WASTES TERRAIN LAB BUILD FAILED
+System.InvalidOperationException: Preserved grove differs after reload: expected=87B951FEB5C9FA9056E12F69F6862C946A7624328210500971B319E56B9929E4; actual=BFE03BFD4509E9B076D48B742B8B55F5E6EFEF713B74534D6BC625F2BA375541. No rebuild performed.
+[18:42:05.229] [Main Thread/INFO] [apogean]: MAW CLUSTER BUILD: {X:5556 Y:500 Width:60 Height:24}; empty envelope; one group and three adjacent groups.
+[18:42:05.231] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: empty-trial-slot-no-preexisting-drops
+[18:42:05.231] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: registered-object-contract
+[18:42:05.231] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: thorn-not-solid-starter-pick
+[18:42:05.231] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: native-placeable-stackable-item
+[18:42:05.231] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: occupied-placement-rejected
+[18:42:05.231] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: loaded-atlas-size
+[18:42:05.232] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: all-4096-render-pixels-vs-contact-points
+[18:42:05.233] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: exterior-air-safe
+[18:42:05.233] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: no-invisible-solid-wall
+[18:42:05.233] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: actuated-part-no-contact
+[18:42:05.234] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: native-hurt-health-loss-30
+[18:42:05.234] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: native-immunity-no-overlap-multihit
+[18:42:05.234] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: explosion-permission
+[18:42:05.235] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: initial-one-item-recovery
+[18:42:05.236] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-0-0
+[18:42:05.236] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-0-0
+[18:42:05.237] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-0-1
+[18:42:05.237] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-0-1
+[18:42:05.239] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-0-2
+[18:42:05.239] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-0-2
+[18:42:05.239] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-0-3
+[18:42:05.240] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-0-3
+[18:42:05.240] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-1-0
+[18:42:05.241] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-1-0
+[18:42:05.241] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-1-1
+[18:42:05.241] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-1-1
+[18:42:05.242] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-1-2
+[18:42:05.242] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-1-2
+[18:42:05.243] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-1-3
+[18:42:05.243] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-1-3
+[18:42:05.245] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-2-0
+[18:42:05.245] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-2-0
+[18:42:05.246] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-2-1
+[18:42:05.246] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-2-1
+[18:42:05.247] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-2-2
+[18:42:05.247] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-2-2
+[18:42:05.248] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-2-3
+[18:42:05.248] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-2-3
+[18:42:05.249] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-3-0
+[18:42:05.249] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-3-0
+[18:42:05.250] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-3-1
+[18:42:05.250] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-3-1
+[18:42:05.251] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-3-2
+[18:42:05.251] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-3-2
+[18:42:05.252] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: starter-pick-at-most-three-hits-3-3
+[18:42:05.253] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: whole-object-one-drop-3-3
+[18:42:05.253] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: missing-support-rejected-0
+[18:42:05.254] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: support-loss-single-recovery-0
+[18:42:05.254] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: missing-support-rejected-1
+[18:42:05.255] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: support-loss-single-recovery-1
+[18:42:05.255] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: missing-support-rejected-2
+[18:42:05.257] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: support-loss-single-recovery-2
+[18:42:05.257] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: missing-support-rejected-3
+[18:42:05.258] [Main Thread/INFO] [apogean]: MAW CLUSTER CHECK PASS: support-loss-single-recovery-3
+[18:42:05.258] [Main Thread/INFO] [apogean]: MAW CLUSTER MATRIX PASS: 54 checks plus4096 native pixel/contact comparisons; four displays intact. Programmatic APIs, not manual/multiplayer certification.
+[18:42:05.258] [Main Thread/INFO] [apogean]: MAW CLUSTER GROVE GUARD: unchanged; historical reload failure not rebaselined.
+[18:52:03.060] [.NET TP Worker/INFO] [StatusText]: Saving world data
+[18:52:03.195] [.NET TP Worker/INFO] [StatusText]: Validating world save
+[18:52:03.265] [.NET TP Worker/INFO] [StatusText]: Saving modded world data
+[18:52:09.410] [Main Thread/INFO] [apogean]: LIVE VALIDATION REQUEST CONSUMED: qa-save-and-quit
+[18:52:10.012] [.NET TP Worker/INFO] [StatusText]: Saving world data
+[18:52:10.139] [.NET TP Worker/INFO] [StatusText]: Validating world save
+[18:52:10.192] [.NET TP Worker/INFO] [StatusText]: Saving modded world data

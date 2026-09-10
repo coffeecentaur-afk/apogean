@@ -242,6 +242,16 @@ alpha result; inspect encoded pixels.
 
 ## Tile hazard lesson retained — 2026-09-09
 
+Alternate attachment metadata does not prove placed draw offsets. In installed
+tML2026.7, TileLoader.SetDrawPositions initializes from base style0. A correct
+ceiling anchor/preview can still inherit the floor's downward draw offset.
+Test the actual TileLoader call and a native socket screenshot, not only
+GetTileData(placedTile). Keep horizontal contacts aligned with actual rendering;
+flush side roots are preferable to moving only their damage mask/preview.
+Maw cluster regression keeps the rejected ceiling-gap capture, a bounded
+daylight pixel detector, and native placed-offset assertions. Preserve the
+source art and keep render, solidity and contact regions independent.
+
 Native fang review rejects the broad wedge despite its mechanical passes.
 Do not recontour approved anatomy into the easiest collision shape and call
 that the same asset. V2 retains a single uniform sampling grid and validates

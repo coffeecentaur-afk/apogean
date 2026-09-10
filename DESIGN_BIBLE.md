@@ -226,7 +226,25 @@ every asset, finished rib shapes, teeth, or the generated mouth. Supporting
 bone remains hardened/safe/non-emissive; exposed brittle teeth are a separate
 easy-to-mine contact hazard. See `Art/Validation/MawBone-2026-09-09/README.md`.
 
-Latest tooth agreement: use recognizable authored tooth/fang/horn silhouettes,
+September9 attachment clarification: the user likes the cluster and retains
+all short/long/wide individual models for a mixed natural hazard family. The
+same recoverable cluster must attach to solid floors, ceilings and either
+vertical terrain face, pointing into open space. Background-wall-only floating
+placement is not the same contract. Keep approved pixels, thorn-style contact
+and easy whole-item recovery. Four-way native framing/support/hurt/reload proof
+precedes seeded dispersal through the mouth. Acid remains optional/separate.
+
+September9 latest: the user accepts the native short/long/wide tooth artwork
+("they look great") and requests a densely packed placeable group. Preserve
+these pixels and individual assets. A separate five-tooth cluster item uses
+explicitly approved THORN-STYLE behavior: hurts players on contact, not a solid
+wall, easily mined as one recoverable item. This is an exception for the grouped
+item, not silent replacement of the earlier solid individual-fang experiment.
+Empty spaces around the teeth must not hurt. Test native whole-object pickup,
+re-placement, support loss and immunity; worldgen remains a later gate. No safe
+ledges or progression/recipe changes are implied by placeability.
+
+Historical tooth agreement: use recognizable authored tooth/fang/horn silhouettes,
 not square blocks merely textured as bone. The first implementation is solid,
 with exposed contact damage and starter-pick removal, not a drop-through
 platform. Visible shape, solid occupancy and hurt region require separate

@@ -1,0 +1,43 @@
+{
+  "size": [
+    64,
+    64
+  ],
+  "cells": [
+    4,
+    4
+  ],
+  "drawOffsetY": 4,
+  "assembly": "integer translated approved pixels; source-over ordering; no new art or filtering",
+  "parts": [
+    {
+      "variant": "long",
+      "x": 1,
+      "bottom": 64
+    },
+    {
+      "variant": "short",
+      "x": 10,
+      "bottom": 64
+    },
+    {
+      "variant": "wide",
+      "x": 17,
+      "bottom": 64
+    },
+    {
+      "variant": "long",
+      "x": 38,
+      "bottom": 64
+    },
+    {
+      "variant": "short",
+      "x": 47,
+      "bottom": 64
+    }
+  ],
+  "opaque": 1478,
+  "spriteSHA256": "92CD5A5BA67AA141ED4D138297374EC131B0EC1EA7D42F5FC3D2197A322808E2",
+  "atlasSHA256": "92485B1433D634F9CF031B04098669ADFA87B6F6459EE93BB8D610EC17AEE96C",
+  "maskSHA256": "886F58A6536DED6E4EDE02A2013E66FD7A1A8E33ADC83D35146A7EEF9DF02FF5"
+}

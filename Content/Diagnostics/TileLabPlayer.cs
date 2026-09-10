@@ -113,6 +113,8 @@ namespace apogean.Content.Diagnostics
 				}
 				if (request == "qa-save-and-quit")
 				{
+					ModContent.GetInstance<MawClusterOrientationLab>().Release();
+					ModContent.GetInstance<MawToothClusterLab>().Release();
 					ModContent.GetInstance<MawToothArtLab>().Release();
 					ModContent.GetInstance<MawFangLab>().Release();
 					ModContent.GetInstance<MawBoneLab>().Release();
@@ -147,6 +149,24 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<MawBoneLab>().Release();
 					ModContent.GetInstance<MawFangLab>().Run(request.Substring("maw-fang-".Length));
 					return; // Never fall through to the destructive legacy fixture replacement.
+				}
+				if (request.StartsWith("maw-cluster-", System.StringComparison.Ordinal))
+				{
+					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
+					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
+					ModContent.GetInstance<VegetationVisualLab>().Release();
+					ModContent.GetInstance<ArrivalPodLab>().Release();
+					ModContent.GetInstance<MawBoneLab>().Release();
+					ModContent.GetInstance<MawFangLab>().Release();
+					ModContent.GetInstance<MawToothArtLab>().Release();
+					if (request.StartsWith("maw-cluster-orientation-", System.StringComparison.Ordinal)) {
+						ModContent.GetInstance<MawToothClusterLab>().Release();
+						ModContent.GetInstance<MawClusterOrientationLab>().Run(request.Substring("maw-cluster-orientation-".Length));
+					} else {
+						ModContent.GetInstance<MawClusterOrientationLab>().Release();
+						ModContent.GetInstance<MawToothClusterLab>().Run(request.Substring("maw-cluster-".Length));
+					}
+					return; // Never enter legacy fixture-clearing code.
 				}
 				if (request.StartsWith("maw-tooth-art-", System.StringComparison.Ordinal))
 				{

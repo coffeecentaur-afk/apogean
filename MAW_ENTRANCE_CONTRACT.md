@@ -4,6 +4,23 @@ Wayfinder implementation issue: #26. Closed design issue #9 is context, not
 proof that this scene is finished. Native audit and first wall repair evidence:
 `Art/Validation/MawEntrance-2026-09-08/README.md`.
 
+Latest attachment contract: keep individual short/long/wide models AND the
+approved cluster. One cluster item automatically selects floor, left solid
+wall, ceiling or right solid wall anchors; floor/ceiling roots embed4px and
+side roots sit flush with support. The
+tips point into open space. Full four-cell solid support in this first group;
+not background-wall-only floating decorations or platform supports. Preserve
+old floor instances and item identity. Native automatic selection, full-frame
+mask contacts, any-segment one-item recovery, support loss and saved attachment
+are separate gates before mouth integration. Acid stays on Wayfinder #27.
+
+Latest: native short/long/wide art is user-accepted. The requested densely
+packed, placeable group is a separate thorn-style hazard (explicitly confirmed):
+non-solid, pixel-shaped contact damage, easy whole-object recovery as one item.
+Contract/source: Art/Candidates/MawToothCluster-v1/README.md. Preserve original
+fang shapes and the separate solid-individual experiment; do not confuse this
+new collision choice with completed orientation or mouth-generation proof.
+
 Latest September9 family direction: short16x32, long16x48, wide32x64 whole
 fangs with shared materials. `Art/Candidates/MawToothFamily-v1/README.md`
 owns art review/static evidence, not runtime or generation proof. User shape

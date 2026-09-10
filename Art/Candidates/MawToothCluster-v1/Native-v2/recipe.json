@@ -1,0 +1,71 @@
+{
+  "schema": 2,
+  "size": [
+    64,
+    64
+  ],
+  "cells": [
+    4,
+    4
+  ],
+  "atlasSize": [
+    288,
+    72
+  ],
+  "orientations": [
+    "floor",
+    "left-wall",
+    "ceiling",
+    "right-wall"
+  ],
+  "drawOffsets": [
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      -4
+    ],
+    [
+      0,
+      0
+    ]
+  ],
+  "assembly": "integer translated approved pixels; source-over ordering; no new art or filtering",
+  "parts": [
+    {
+      "variant": "long",
+      "x": 1,
+      "bottom": 64
+    },
+    {
+      "variant": "short",
+      "x": 10,
+      "bottom": 64
+    },
+    {
+      "variant": "wide",
+      "x": 17,
+      "bottom": 64
+    },
+    {
+      "variant": "long",
+      "x": 38,
+      "bottom": 64
+    },
+    {
+      "variant": "short",
+      "x": 47,
+      "bottom": 64
+    }
+  ],
+  "opaque": 5912,
+  "spriteSHA256": "92CD5A5BA67AA141ED4D138297374EC131B0EC1EA7D42F5FC3D2197A322808E2",
+  "atlasSHA256": "28C0D832BFEC23AEECD567C6A9496D47EC56E8F855D47AA19F900018CC7FF7A8",
+  "maskSHA256": "3CB9DC7C7A419671B9C519FFA39BB8696C149E2CA344995B6AE6957988618418"
+}

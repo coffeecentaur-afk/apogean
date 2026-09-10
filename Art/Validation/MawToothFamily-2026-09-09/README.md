@@ -29,6 +29,15 @@ Official reference checked September9:
 https://docs.tmodloader.net/docs/stable/class_tile_object_data.html
 This documents multitile coordinate/anchor metadata, not custom fang collision.
 
+## User review follow-up
+
+The user subsequently accepts the native short/long/wide artwork ("they look
+great"), asks for a grouped placeable item, and explicitly confirms keeping
+all individual models. Preserve these exact sprites. This accepts appearance,
+not the final solid/hazard behavior of these harmless gallery specimens.
+The grouped thorn-style item has separate four-way/native behavior evidence
+in `Art/Validation/MawToothCluster-2026-09-09/README.md`.
+
 ## Results — September9, 2026
 
 - Installed QA package SHA256:

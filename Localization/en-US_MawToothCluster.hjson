@@ -1,0 +1,15 @@
+Mods: {
+  apogean: {
+    Items: {
+      MawToothCluster: {
+        DisplayName: Maw Tooth Cluster
+        Tooltip: '''
+          A tightly packed bed of brittle Maw teeth
+          Attaches to solid floors, ceilings, and either side of walls
+          Hurts players on contact; does not block movement
+          Mine any part to recover the entire cluster
+          '''
+      }
+    }
+  }
+}

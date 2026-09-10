@@ -3,16 +3,28 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-tooth-cluster-four-way-v2",
+      "status": "fixture-pass",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/MawToothCluster-2026-09-09/README.md",
+      "evidenceScope": "User accepted cluster appearance and thorn-style contact/easy recovery, then requested floor, ceiling and both solid-wall attachments while retaining individual models. Same approved pixels, four rotated native atlases and pixel contact masks. Eight negative static controls; clean build. Saved gg/V3 room passes202 native checks and16384 loaded-texture/contact comparisons. Actual TileLoader draw-offset check and native screenshot caught/corrected ceiling gap. No forced alternate, no solid invisible rectangle, no whole-world edits. New four-way appearance awaits user review.",
+      "blockers": ["QA candidate, not generated Maw integration. Manual cursor/item placement and multiplayer remain unverified; native API tests are not that certification. Individual short/long/wide art remains preserved, with its own physics gate still open.", "Known grove reload mismatch remains RED and was not rebaselined. Next mixed-mouth distribution must preserve no safe ledges and route around protected structures; acid is separate."]
+    },
+    {
       "id": "maw-tooth-family-v1",
       "status": "contracted",
       "static": "pass",
       "build": "pass",
       "liveFixture": "pass",
       "production": "pending",
-      "userReview": "pending",
+      "userReview": "accepted",
       "evidenceReference": "Art/Validation/MawToothFamily-2026-09-09/README.md",
       "evidenceScope": "User-requested native APPEARANCE probe, not final hazard certification. Exact short16x32/long16x48/wide32x64 pixels unchanged. Optional nonsolid/non-damaging TileObjectData gallery only in gg/V3/SP. Build0warnings/errors; prior411 PNGs identical plus3 atlases. Eight complete objects and52 native frame/loaded-alpha/support checks pass before/after actual save-reload. Unedited day/night game captures inspected; capture backdrop is not final Maw routing. PackageD9F8581F. Existing grove mismatch remains RED and unchanged by this fixture; regular worlds/worldgen untouched.",
-      "blockers": ["User in-game detail/silhouette verdict pending. Final solid/hurt/mining/support-loss/orientation/multiplayer behavior is NOT tested by these harmless art specimens. Rejected wedge tests do not certify this family; no invisible rectangular collider or silent broadening.", "50/35/15 seeded clustered placement remains a provisional later trial. Preserve no-safe-ledges direction, accepted art and unresolved grove failure. Acid/entities/bosses remain separate."]
+      "blockers": ["User accepted the in-game art and explicitly wants these separate models retained alongside clusters. Final solid/hurt/mining/support-loss/orientation/multiplayer behavior is NOT tested by these harmless art specimens or the separate cluster. Rejected wedge tests do not certify this family; no invisible rectangular collider or silent broadening.", "50/35/15 seeded clustered placement remains a provisional later trial. Preserve no-safe-ledges direction, accepted art and unresolved grove failure. Acid/entities/bosses remain separate."]
     },
     {
       "id": "maw-slim-tooth-v2",
