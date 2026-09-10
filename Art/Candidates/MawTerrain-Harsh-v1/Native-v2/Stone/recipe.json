@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "material": "stone",
+  "sourcePath": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawTerrain-Harsh-v1\\Native-v1\\stone-source.png",
+  "sourceSHA256": "D68A5B21DFC51AC4BBA5A0F454CB834D6CE4A0EE377580BDE233D9500A50D0A9",
+  "referencePath": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanTileLabReferences\\Vanilla-Stone-Tile.png",
+  "referenceSHA256": "48907D0C61D9B68997C33FD25B0BAADB0A2D8276B6E759761C14E6B153C917EC",
+  "atlasSHA256": "5C21958CF3FF6793577337E28E3177675D8BB970905A9A0ADA03141F4E5A19AF",
+  "nativeWidth": 288,
+  "nativeHeight": 270,
+  "phaseCountX": 8,
+  "phaseCountY": 8,
+  "width": 2304,
+  "height": 2160,
+  "rawBytes": 19906560,
+  "checkedPixels": 4976640,
+  "fitting": "Uniform128x128 center sampling;12 colors;only four-pixel outer strips blend opposite edges for periodic continuity. No whole-field mirroring. Lossy fitting, not source-pixel identity.",
+  "topology": "Pinned native Stone alpha replicated in64 banks. No reference RGB.",
+  "nativeRendered": false,
+  "installed": false
+}

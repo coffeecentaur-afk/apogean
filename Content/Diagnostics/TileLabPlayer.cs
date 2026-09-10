@@ -113,6 +113,8 @@ namespace apogean.Content.Diagnostics
 				}
 				if (request == "qa-save-and-quit")
 				{
+					ModContent.GetInstance<MawMaterialFamilyLab>().Release();
+					ModContent.GetInstance<MawMaterialLab>().Release();
 					ModContent.GetInstance<MawClusterOrientationLab>().Release();
 					ModContent.GetInstance<MawToothClusterLab>().Release();
 					ModContent.GetInstance<MawToothArtLab>().Release();
@@ -178,6 +180,27 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<MawFangLab>().Release();
 					ModContent.GetInstance<MawToothArtLab>().Run(request.Substring("maw-tooth-art-".Length));
 					return; // Never enter legacy fixture-clearing code.
+				}
+				if (request.StartsWith("maw-family-", System.StringComparison.Ordinal))
+				{
+					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
+					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
+					ModContent.GetInstance<VegetationVisualLab>().Release();
+					ModContent.GetInstance<ArrivalPodLab>().Release();
+					ModContent.GetInstance<MawBoneLab>().Release();
+					ModContent.GetInstance<MawMaterialLab>().Release();
+					ModContent.GetInstance<MawMaterialFamilyLab>().Run(request.Substring("maw-family-".Length));
+					return;
+				}
+				if (request.StartsWith("maw-material-", System.StringComparison.Ordinal))
+				{
+					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
+					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
+					ModContent.GetInstance<VegetationVisualLab>().Release();
+					ModContent.GetInstance<ArrivalPodLab>().Release();
+					ModContent.GetInstance<MawBoneLab>().Release();
+					ModContent.GetInstance<MawMaterialLab>().Run(request.Substring("maw-material-".Length));
+					return; // Never clear old galleries to make room for an art test.
 				}
 				if (request.StartsWith("maw-bone-", System.StringComparison.Ordinal))
 				{

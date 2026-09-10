@@ -212,9 +212,13 @@ Maw terrain but rejected the softer design. Simplifying native pixel detail must
 not automatically soften the material shapes. The proposed response uses brittle
 fractures, torn fibers and localized amber in distinct host materials, preserving
 the dead grey/black/brown identity and previously accepted local depth accents.
-See Art/Candidates/MawTerrain-Harsh-v1/README.md. Its twelve-family board is a new
-unapproved concept, not twelve implemented tiles or validated atlases. Retain the
-art-review gate and native mask contracts before replacing production assets.
+See Art/Candidates/MawTerrain-Harsh-v1/README.md. The user subsequently approved
+this twelve-family board and requested implementation as close as possible to it.
+That directory's IMPLEMENTATION.md tracks native evidence. Keep each material's
+own structure, not one recolored pattern. Original art supplies the pixels and
+native frame masks supply topology; grass and overlapping walls have separate
+contracts. Diagnostic art does not certify production mechanics or generation.
+Ordinary materials remain non-emissive; localized amber and dormancy stay separate.
 
 September9 art clarification: preserve the dead grey/black/brown/amber surface
 identity. Explore localized deeper materials and mutations, not just Helix/Maw

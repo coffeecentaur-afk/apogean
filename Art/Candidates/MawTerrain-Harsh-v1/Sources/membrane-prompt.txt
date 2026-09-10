@@ -1,0 +1,5 @@
+Use case: style-transfer. Asset type: opaque terrain material source for a Terraria tModLoader atlas.
+Input image: approved Maw terrain study, STYLE REFERENCE only. Derive ONLY the MEMBRANE panel, bottom row column 3. Torn slate-blue-grey fibrous membranes and taut thin webbed sheets across near-black fractured stone. Thin visible stretch lines and some clear dark holes, sharp ripped edges. Unsettling desiccated biological material, not purple magic or red flesh.
+Primary request: one full square edge-to-edge material texture. Match the reference coarse pixel clusters and palette. No exposed top edge, cutaway scene, margins, text or other panels.
+Style: orthographic side-view pixel art on a consistent 128 by 128 logical grid, enlarged nearest-neighbor. Broad forms span 12–28 logical pixels. Small limited ramps, deliberate pixel clusters, restrained highlights.
+Opaque entire canvas. No checkerboard, no gradients, no antialiasing, no photographic noise, no white speckles, no perspective or cast scene shadows. This is usable production source texture, not a presentation.

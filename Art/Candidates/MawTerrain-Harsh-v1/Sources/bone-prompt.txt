@@ -1,0 +1,5 @@
+Use case: style-transfer. Asset type: opaque terrain material source for a Terraria tModLoader atlas.
+Input image: approved Maw terrain study, STYLE REFERENCE only. Derive ONLY the BONE panel, bottom left. Dense structural bone matrix with angular overlapping ivory ribs and plates, taupe shaded pits and pores, chipped chalk edges. Bone is thick structural rib material, NOT a field of pointed teeth; tooth hazards are separate already-authored assets. Keep grey brown dirty ivory, not white sparkles.
+Primary request: one full square edge-to-edge material texture. Match the reference coarse pixel clusters and palette. No exposed top edge, cutaway scene, margins, text or other panels.
+Style: orthographic side-view pixel art on a consistent 128 by 128 logical grid, enlarged nearest-neighbor. Broad forms span 12–28 logical pixels. Small limited ramps, deliberate pixel clusters, restrained highlights.
+Opaque entire canvas. No checkerboard, no gradients, no antialiasing, no photographic noise, no white speckles, no perspective or cast scene shadows. This is usable production source texture, not a presentation.

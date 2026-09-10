@@ -1,0 +1,94 @@
+// Build-only color preparation. Native reference RGB is never imported.
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Collections.Generic;
+
+public static class WorldMaterialCompiler
+{
+    private static readonly Color[] Palette = {
+        Color.FromArgb(17,18,20), Color.FromArgb(27,28,31),
+        Color.FromArgb(39,40,44), Color.FromArgb(51,52,58),
+        Color.FromArgb(65,65,73), Color.FromArgb(81,80,88),
+        Color.FromArgb(101,99,105), Color.FromArgb(126,121,121),
+        Color.FromArgb(62,43,22), Color.FromArgb(103,67,29),
+        Color.FromArgb(159,102,38), Color.FromArgb(201,144,60)
+    };
+    private static Color Fit(Color c) {
+        int best=int.MaxValue; Color chosen=Palette[0];
+        foreach(var p in Palette) {
+            int r=c.R-p.R,g=c.G-p.G,b=c.B-p.B,d=r*r+g*g+b*b;
+            if(d<best){best=d;chosen=p;}
+        }
+        return chosen;
+    }
+    private static Color Mix(Color a,Color b,double weight) => Color.FromArgb(
+        (int)Math.Round(a.R*(1-weight)+b.R*weight),
+        (int)Math.Round(a.G*(1-weight)+b.G*weight),
+        (int)Math.Round(a.B*(1-weight)+b.B*weight));
+    public static void Build(string source,string reference,string output) {
+        using(var src=new Bitmap(source))
+        using(var mask=new Bitmap(reference))
+        using(var material=new Bitmap(128,128,PixelFormat.Format32bppArgb))
+        using(var atlas=new Bitmap(2304,2160,PixelFormat.Format32bppArgb)) {
+            if(mask.Width!=288||mask.Height!=270) throw new InvalidDataException("REFERENCE_DIMENSIONS");
+            if(src.Width<128||src.Height<128||src.Width>4096||src.Height>4096)
+                throw new InvalidDataException("SOURCE_DIMENSIONS");
+            var sampled=new Color[128,128];
+            for(int y=0;y<128;y++)for(int x=0;x<128;x++) {
+                Color p=src.GetPixel((2*x+1)*src.Width/256,(2*y+1)*src.Height/256);
+                if(p.A!=255)throw new InvalidDataException("SOURCE_ALPHA");
+                sampled[x,y]=p;
+            }
+            // Preserve the full source field instead of mirroring entire quadrants.
+            // Only a four-pixel periodic boundary strip blends opposite samples.
+            // This is disclosed lossy seam preparation, NOT exact source extraction.
+            for(int y=0;y<128;y++) for(int x=0;x<128;x++) {
+                int ex=Math.Min(x,127-x),ey=Math.Min(y,127-y);
+                double wx=ex<4?(4-ex)/8.0:0,wy=ey<4?(4-ey)/8.0:0;
+                Color a=Mix(sampled[x,y],sampled[127-x,y],wx);
+                Color b=Mix(sampled[x,127-y],sampled[127-x,127-y],wx);
+                material.SetPixel(x,y,Fit(Mix(a,b,wy)));
+            }
+            for(int y=0;y<2160;y++) for(int x=0;x<2304;x++) {
+                int rx=x%288,ry=y%270; Color m=mask.GetPixel(rx,ry);
+                if(m.A!=0&&m.A!=255)throw new InvalidDataException("REFERENCE_ALPHA");
+                if(m.A==255) atlas.SetPixel(x,y,material.GetPixel(x/288*16+rx%18%16,y/270*16+ry%18%16));
+            }
+            material.Save(Path.Combine(output,"material-native.png"),ImageFormat.Png);
+            atlas.Save(Path.Combine(output,"atlas.png"),ImageFormat.Png);
+        }
+    }
+    public static int Verify(string output,string reference) {
+        using(var mask=new Bitmap(reference))
+        using(var mat=new Bitmap(Path.Combine(output,"material-native.png")))
+        using(var atlas=new Bitmap(Path.Combine(output,"atlas.png"))) {
+            if(mask.Width!=288||mask.Height!=270||mat.Width!=128||mat.Height!=128||
+               atlas.Width!=2304||atlas.Height!=2160)throw new InvalidDataException("DIMENSIONS");
+            var allowed=new HashSet<int>(); foreach(var p in Palette)allowed.Add(p.ToArgb());
+            int count=0;
+            for(int y=0;y<2160;y++)for(int x=0;x<2304;x++) {
+                int rx=x%288,ry=y%270; int alpha=mask.GetPixel(rx,ry).A;
+                var p=atlas.GetPixel(x,y);
+                if(p.A!=alpha)throw new InvalidDataException("ALPHA_TOPOLOGY");
+                if(alpha==0) { if(p.ToArgb()!=0)throw new InvalidDataException("TRANSPARENT_RGB"); }
+                else {
+                    if(!allowed.Contains(p.ToArgb()))throw new InvalidDataException("PALETTE");
+                    Color expected=mat.GetPixel((x/288*16+rx%18)%128,(y/270*16+ry%18)%128);
+                    // Padding can contain native contour alpha; only rendered
+                    // sixteen-pixel bodies use the world-space continuation.
+                    if(rx%18>=16||ry%18>=16)
+                        expected=mat.GetPixel(x/288*16+rx%18%16,y/270*16+ry%18%16);
+                    if(p.ToArgb()!=expected.ToArgb())throw new InvalidDataException("WORLD_COLOR");
+                }
+                count++;
+            }
+            for(int k=0;k<128;k++) {
+                if(mat.GetPixel(0,k)!=mat.GetPixel(127,k)||mat.GetPixel(k,0)!=mat.GetPixel(k,127))
+                    throw new InvalidDataException("PERIOD_BOUNDARY");
+            }
+            return count;
+        }
+    }
+}

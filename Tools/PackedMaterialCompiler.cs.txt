@@ -1,0 +1,138 @@
+using System;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Collections.Generic;
+
+// Build-only source fitting and alpha-mask packing. No world or game save access.
+public static class PackedMaterialCompiler
+{
+    static int Distance(Color a, Color b) {
+        int r=a.R-b.R,g=a.G-b.G,d=a.B-b.B; return r*r+g*g+d*d;
+    }
+    static Color Mix(Color a, Color b, double w) => Color.FromArgb(
+        (int)Math.Round(a.R*(1-w)+b.R*w),(int)Math.Round(a.G*(1-w)+b.G*w),(int)Math.Round(a.B*(1-w)+b.B*w));
+    static int Nearest(Color c, Color[] p) {
+        int best=0,score=int.MaxValue;
+        for(int k=0;k<p.Length;k++){int d=Distance(c,p[k]);if(d<score){score=d;best=k;}}
+        return best;
+    }
+    public static void Prepare(string source, string output) {
+        using(var src=new Bitmap(source)) using(var dst=new Bitmap(128,128,PixelFormat.Format32bppArgb)) {
+            if(src.Width<128||src.Height<128||src.Width>4096||src.Height>4096)throw new InvalidDataException("SOURCE_SIZE");
+            var samples=new Color[16384];
+            for(int y=0;y<128;y++)for(int x=0;x<128;x++) {
+                Color c=src.GetPixel((2*x+1)*src.Width/256,(2*y+1)*src.Height/256);
+                if(c.A!=255)throw new InvalidDataException("SOURCE_ALPHA");
+                samples[y*128+x]=c;
+            }
+            // Deterministic sixteen-color fitting, seeded by farthest colors.
+            var palette=new Color[16]; palette[0]=samples[0];
+            for(int k=1;k<16;k++) {
+                int far=-1,index=0;
+                for(int n=0;n<samples.Length;n++) {
+                    int d=int.MaxValue; for(int a=0;a<k;a++) d=Math.Min(d,Distance(samples[n],palette[a]));
+                    if(d>far){far=d;index=n;}
+                }
+                palette[k]=samples[index];
+            }
+            for(int iteration=0;iteration<8;iteration++) {
+                long[,] sums=new long[16,4];
+                foreach(Color c in samples){int k=Nearest(c,palette);sums[k,0]+=c.R;sums[k,1]+=c.G;sums[k,2]+=c.B;sums[k,3]++;}
+                for(int k=0;k<16;k++)if(sums[k,3]>0)palette[k]=Color.FromArgb(
+                    (int)(sums[k,0]/sums[k,3]),(int)(sums[k,1]/sums[k,3]),(int)(sums[k,2]/sums[k,3]));
+            }
+            for(int y=0;y<128;y++)for(int x=0;x<128;x++) {
+                int ex=Math.Min(x,127-x),ey=Math.Min(y,127-y);
+                double wx=ex<4?(4-ex)/8.0:0,wy=ey<4?(4-ey)/8.0:0;
+                Color a=Mix(samples[y*128+x],samples[y*128+127-x],wx);
+                Color b=Mix(samples[(127-y)*128+x],samples[(127-y)*128+127-x],wx);
+                dst.SetPixel(x,y,palette[Nearest(Mix(a,b,wy),palette)]);
+            }
+            dst.Save(output,ImageFormat.Png);
+        }
+    }
+    static byte Role(Color c, bool grass) {
+        if(c.A==0)return 0;
+        if(c.A!=255)throw new InvalidDataException("REFERENCE_ALPHA");
+        // Exported green membership is a semantic mask, never imported RGB.
+        // White specialized masks become soil, not visible white seams.
+        if(grass && c.G>c.R && c.G>c.B)return 2;
+        return 1;
+    }
+    static Color Pixel(Bitmap material, Bitmap overlay, byte role, int px, int py, bool wall) {
+        if(role==0)return Color.FromArgb(0,0,0,0);
+        Bitmap source=role==2?overlay:material;
+        Color c=source.GetPixel((px%128+128)%128,(py%128+128)%128);
+        if(wall)return Color.FromArgb(c.R*62/100,c.G*62/100,c.B*62/100);
+        return c;
+    }
+    public static int[] Build(string materialPath,string referencePath,string output,bool grass,bool wall,string overlayPath) {
+        using(var material=new Bitmap(materialPath)) using(var reference=new Bitmap(referencePath))
+        using(var overlay=new Bitmap(grass?overlayPath:materialPath)) {
+            int body=wall?32:16, nativePitch=wall?36:18,pitch=body+2;
+            int cols=reference.Width/nativePitch,rows=reference.Height/nativePitch;
+            if(material.Width!=128||material.Height!=128||overlay.Width!=128||overlay.Height!=128 ||
+               reference.Width!=(wall?468:288)||reference.Height!=(wall?180:grass?1980:270))throw new InvalidDataException("REFERENCE_DIMENSIONS");
+            var masks=new List<byte[]>();var lookup=new Dictionary<string,int>();var map=new int[cols*rows];
+            for(int fy=0;fy<rows;fy++)for(int fx=0;fx<cols;fx++) {
+                var mask=new byte[body*body];
+                for(int y=0;y<body;y++)for(int x=0;x<body;x++)mask[y*body+x]=Role(reference.GetPixel(fx*nativePitch+x,fy*nativePitch+y),grass);
+                string key=Convert.ToBase64String(mask);int id;
+                if(!lookup.TryGetValue(key,out id)){id=masks.Count;lookup.Add(key,id);masks.Add(mask);}
+                map[fy*cols+fx]=id;
+            }
+            int across=64;
+            while(((masks.Count*64+across-1)/across)*pitch>8192 && across<256)across*=2;
+            int width=across*pitch,height=((masks.Count*64+across-1)/across)*pitch;
+            if(masks.Count>1760||width>8192||height>8192)throw new InvalidDataException("TEXTURE_BUDGET masks="+masks.Count);
+            using(var atlas=new Bitmap(width,height,PixelFormat.Format32bppArgb)) {
+                for(int m=0;m<masks.Count;m++)for(int phase=0;phase<64;phase++)
+                for(int y=0;y<body;y++)for(int x=0;x<body;x++)
+                    atlas.SetPixel((m*64+phase)%across*pitch+x,(m*64+phase)/across*pitch+y,Pixel(material,overlay,masks[m][y*body+x],
+                        phase%8*16+x-(wall?8:0),phase/8*16+y-(wall?8:0),wall));
+                atlas.Save(Path.Combine(output,"atlas.png"),ImageFormat.Png);
+            }
+            using(var writer=new BinaryWriter(File.Create(Path.Combine(output,"map.bin")))) {
+                writer.Write(0x4D415750);writer.Write(width);writer.Write(height);writer.Write(cols);writer.Write(rows);
+                writer.Write(body);writer.Write(pitch);writer.Write(masks.Count);foreach(int id in map)writer.Write(id);
+            }
+            return new[]{width,height,masks.Count,cols*rows};
+        }
+    }
+    public static long Verify(string materialPath,string referencePath,string output,bool grass,bool wall,string overlayPath) {
+        using(var mat=new Bitmap(materialPath))using(var reference=new Bitmap(referencePath))
+        using(var overlay=new Bitmap(grass?overlayPath:materialPath))using(var atlas=new Bitmap(Path.Combine(output,"atlas.png")))
+        using(var r=new BinaryReader(File.OpenRead(Path.Combine(output,"map.bin")))) {
+            if(r.ReadInt32()!=0x4D415750)throw new InvalidDataException("MAGIC");
+            int width=r.ReadInt32(),height=r.ReadInt32(),cols=r.ReadInt32(),rows=r.ReadInt32(),body=r.ReadInt32(),pitch=r.ReadInt32(),masks=r.ReadInt32();
+            int across=width/pitch;
+            if(atlas.Width!=width||atlas.Height!=height||body!=(wall?32:16)||pitch!=body+2||
+               (across!=64&&across!=128&&across!=256)||width!=across*pitch||
+               height!=((masks*64+across-1)/across)*pitch||width>8192||height>8192||masks>1760)
+                throw new InvalidDataException("DIMENSIONS");
+            int np=wall?36:18;
+            if(cols!=reference.Width/np||rows!=reference.Height/np||r.BaseStream.Length!=32L+cols*rows*4)throw new InvalidDataException("MAP_LENGTH");
+            long checkedPixels=0;
+            for(int frame=0;frame<cols*rows;frame++) {
+                int id=r.ReadInt32();if(id<0||id>=masks)throw new InvalidDataException("INDEX");
+                for(int phase=0;phase<64;phase++)for(int y=0;y<pitch;y++)for(int x=0;x<pitch;x++) {
+                    Color expected=Color.FromArgb(0,0,0,0);
+                    if(x<body&&y<body)expected=Pixel(mat,overlay,Role(reference.GetPixel(frame%cols*np+x,frame/cols*np+y),grass),
+                        phase%8*16+x-(wall?8:0),phase/8*16+y-(wall?8:0),wall);
+                    if(atlas.GetPixel((id*64+phase)%across*pitch+x,(id*64+phase)/across*pitch+y).ToArgb()!=expected.ToArgb())throw new InvalidDataException("PIXEL_CONTRACT");
+                    checkedPixels++;
+                }
+            }
+            if(mat.Width!=128||mat.Height!=128)throw new InvalidDataException("FIELD_SIZE");
+            var colors=new HashSet<int>();
+            for(int y=0;y<128;y++)for(int x=0;x<128;x++) {
+                Color c=mat.GetPixel(x,y);if(c.A!=255||c.ToArgb()==Color.White.ToArgb()||c.ToArgb()==Color.Magenta.ToArgb())throw new InvalidDataException("FIELD_COLOR");
+                colors.Add(c.ToArgb());
+            }
+            if(colors.Count>16)throw new InvalidDataException("PALETTE");
+            for(int k=0;k<128;k++)if(mat.GetPixel(0,k)!=mat.GetPixel(127,k)||mat.GetPixel(k,0)!=mat.GetPixel(k,127))throw new InvalidDataException("PERIOD_BOUNDARY");
+            return checkedPixels;
+        }
+    }
+}

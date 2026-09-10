@@ -1,12 +1,13 @@
 # Maw terrain: harsh material direction v1
 
-Date: 2026-09-09. Status: **concept review pending, not installed**.
+Date: 2026-09-09. Status: **concept approved; native material implementation in QA**.
 
 The user requested the artwork treatment across all Maw terrain, then clarified:
 "the softer design is interesting but not what im looking for".
 This board proposes sharp fractured material planes, torn fibers and restrained
-amber rather than softer rounded shapes. That interpretation still needs review;
-do not record the newly generated board as user-approved.
+amber rather than softer rounded shapes. The user subsequently approved this
+board and requested implementation as close as possible to it. Preserve this
+specific reference; concept approval does not automatically approve every export.
 
 ## Deliverable and provenance
 
@@ -59,7 +60,7 @@ alpha, slope, blend, item-scale or native-render pass is claimed.
 
 ## Next bounded gate
 
-1. User reviews this harder material direction.
+1. Harder material direction approved by the user.
 2. Export one soil/stone/grass connected proof with actual native masks, including
    slope-to-dirt transitions and darker walls. Do not crop this board into an atlas.
 3. Validate actual family topology, merge seams, native-scale light/dark views,
@@ -73,5 +74,7 @@ does not require preserving its repeated material pattern. Grass and wall masks
 must retain their own separate contracts. Ordinary soil, stone and supporting
 bone remain non-emissive; amber organ emission is a separate gameplay contract.
 
-No Content files, code, live package, saves, placement behavior, world generation,
-acid, mobs or bosses changed in this art pass.
+The original concept-only pass changed no Content or runtime. The subsequent
+implementation adds diagnostic assets and a separate disposable-world gallery.
+See [implementation and native evidence](IMPLEMENTATION.md). Production terrain,
+generation, acid, mobs, bosses and existing tooth behavior remain unchanged.

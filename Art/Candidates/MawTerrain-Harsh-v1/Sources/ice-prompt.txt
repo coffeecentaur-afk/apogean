@@ -1,0 +1,5 @@
+Use case: style-transfer. Asset type: opaque terrain material source for a Terraria tModLoader atlas.
+Input image: approved Maw terrain study, STYLE REFERENCE only. Derive ONLY the ICE panel, row 2 column 4. Hard angular slate-blue ice plates separated by dark fissures, cool pale blue-grey edge facets, very sparse amber strings in a few fissures. Big crystalline fractured masses not rounded rocks or soft snow. No glossy realistic reflections.
+Primary request: one full square, edge-to-edge material texture, no top surface edge, no cutaway scene, no labels or other swatches. Match the reference's hand-pixelled coarse clusters closely.
+Style: orthographic side-view pixel material on a consistent 128 by 128 logical pixel grid enlarged with nearest-neighbor. Fracture masses 12–28 logical pixels, mostly flat limited tone planes. Clear chunky pixels, subdued jagged edge texture.
+No text, no border, no gradients, no anti-aliasing, no drawn checkerboard, no perspective, no photographic noise, no tiny white speckles. Opaque entire canvas. Keep each material's distinct structure. This is production source art, not a concept board.

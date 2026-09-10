@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "captureOrigin": "Terraria CaptureManager; original files unchanged",
+  "captures": [
+    {
+      "file": "stone-v1-rejected.png",
+      "originalName": "Apogean Maw Material 20260910-015443.png",
+      "sha256": "8BA9A36D59FE0592D334D130030A8A5AB9DC9576E9A9E560F7A7C3A66C0DDE47"
+    },
+    {
+      "file": "stone-v2-day.png",
+      "originalName": "Apogean Maw Material 20260910-020632.png",
+      "sha256": "5DA3AF7FD513C1A511DA52D1DBA8FDC88505FC61A8D5007A446A9BDF1DA223EF"
+    },
+    {
+      "file": "stone-v2-night.png",
+      "originalName": "Apogean Maw Material 20260910-020738.png",
+      "sha256": "74BFA11FC4A50A48B8AFC3833E7AA57901B249B7B663F3AB0B188160F28215DE"
+    },
+    {
+      "file": "family-row1.png",
+      "originalName": "Apogean Maw Family row1 20260910-023226.png",
+      "sha256": "8A878F238C6D794DA82755ABEDA2238C3F84F39DD9CE17C3E46E68BA7072A72A"
+    },
+    {
+      "file": "family-row2.png",
+      "originalName": "Apogean Maw Family row2 20260910-023246.png",
+      "sha256": "56B66797C3D22941431ACFD928A2313C7789FF3B691FBD1A874675556B3819E7"
+    },
+    {
+      "file": "family-row3.png",
+      "originalName": "Apogean Maw Family row3 20260910-023312.png",
+      "sha256": "9E484975EF5C814C1005F7C660453F6FBAFD91142C90F8D0CEEAEE72638DC165"
+    },
+    {
+      "file": "family-row3-night.png",
+      "originalName": "Apogean Maw Family row3 20260910-023331.png",
+      "sha256": "300D74783BFFD7F999CFD99491635CD82425A8335188425FB6FE7359B22C090A"
+    },
+    {
+      "file": "family-row1-reloaded.png",
+      "originalName": "Apogean Maw Family row1 20260910-023509.png",
+      "sha256": "7FD90989A8C3135391D112DAEDDF5C46C0DB2D8B7AEA603E70B17A44C71CF9AD"
+    }
+  ],
+  "sourceArt": [
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/terrain-study.png",
+      "sha256": "0993BAB7546E10EBE139418E906BB2DA31B1695070FA3F0CE04C963554E7413B"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Native-v1/stone-source.png",
+      "sha256": "D68A5B21DFC51AC4BBA5A0F454CB834D6CE4A0EE377580BDE233D9500A50D0A9"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Native-v1/stone-prompt.txt",
+      "sha256": "BBF8BDAA45EAA7C2E85E8E51CE6A893608EA53DE2070D9A610CC9834E748DE9E"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/soil.png",
+      "sha256": "2152531694590793BFCC3E806BE3F26CE26F3627BA1D59DB4D506E188C801A00"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/soil-prompt.txt",
+      "sha256": "A46EB8CA4C3169472238586267DE7805BE01065A191F6FDEB6E2E030E36BD1BA"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/sand.png",
+      "sha256": "7A653B6BCDCB684970B81C2B9AE572D5CF7B17D3E1FE1A113AD734E3DE96BBD9"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/sand-prompt.txt",
+      "sha256": "625B5D3FA9F70C860C126F3D648FA554855AEAA6DC7BFF43EEFEFA1A782B942E"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/mud.png",
+      "sha256": "0CF5CE5EEB269C7AA076D001D18E7E05EA08C17C5B77E04FFB4511D0CB1441DB"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/mud-prompt.txt",
+      "sha256": "ED3636C6DA09BB06DCCD92AB71EC3F6F68A20C7143EEE5FB248DDB9E92070B5F"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/clay.png",
+      "sha256": "51F563608EA653399C84F4BE2F210299E7229804417B5D18951A6C25AC6B3E7A"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/clay-prompt.txt",
+      "sha256": "E524FF3223C3D10F27320DF8E0159EF49C33E8FD2F9649F7C5F842FCD2A8D3F2"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/snow.png",
+      "sha256": "9AEDD16E0CD7FB336FF7CD1D0986A8217667364ABFB5F23E10D85D914F7BBE96"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/snow-prompt.txt",
+      "sha256": "94DA7760D9267A2EBAA83629EF2A7E134AA83B3D3D35343BDD10F662AE4F860E"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/ice.png",
+      "sha256": "A720054C93CF99FDE2F0AE11BB246BC5EA5131C3BEFFB9ECDE6873641D077FD6"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/ice-prompt.txt",
+      "sha256": "7123279E082177678D24CFDC5F152168345F2FF7CE5A1D1F3E3263BE25DAAA31"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/bone.png",
+      "sha256": "CE1EE089C53E2663844A342BFEC4771DB94A205CD4E51F69274D63361FE04774"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/bone-prompt.txt",
+      "sha256": "7132CA842EF629182C9225CB627A29B3191E74DCC3757567AAC8DD1C1E1C56C4"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/fibers.png",
+      "sha256": "A0CBE36F883580CDD760C69810130AE3AED306E52FE4D338699482EDE1D39018"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/fibers-prompt.txt",
+      "sha256": "1041512B85621F88E34948BBAEFB136E2B63E10B4A60C55023E3E04EAD96D2F4"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/membrane.png",
+      "sha256": "2B02AA027297C4D44385D31E41A53AF348A09502C312153F34F3B0407FBB1147"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/membrane-prompt.txt",
+      "sha256": "66F8251D8EDC1B11A780BEFD2F63FD8BBC031EA175EE9DE8C5ACD1D1851326BD"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/amber.png",
+      "sha256": "819AADF3C0E572D1B0E58932AF7F692A42564FE9CA5939A366CF84977052C87D"
+    },
+    {
+      "file": "Art/Candidates/MawTerrain-Harsh-v1/Sources/amber-prompt.txt",
+      "sha256": "E1D362C6452D1107523C87181D46A9838AEC83E3756FC0502F50FC521ADDD6D1"
+    }
+  ]
+}

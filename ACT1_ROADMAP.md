@@ -2,13 +2,16 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
-September9 latest ART gate: user requested the treatment across Maw terrain and
-rejected the softer direction. Art/Candidates/MawTerrain-Harsh-v1/README.md owns a
-new twelve-material concept board plus proposed darker walls. This is not approved,
-exported as native atlases or installed. Review direction, then make one connected
-soil/stone/grass-and-wall proof before extending the family. Previous tooth
-placement evidence below remains valid for that package; no art, mechanics,
-worldgen, acid or mob integration was performed in this concept pass.
+September9 latest ART gate: the user approved the harsher twelve-material board
+and requested faithful implementation. Art/Candidates/MawTerrain-Harsh-v1/
+IMPLEMENTATION.md tracks sources, packed masks, native evidence and remaining
+gates. Stone v2 has a saved/reloaded native fixture; the full family has 24
+compiled diagnostic tile/wall atlases and a saved/reopened separate gallery:
+3444 native draws/1680 wall frames pass. See Art/Validation/MawMaterials-2026-09-09.
+Next is native appearance review and a mixed natural section, especially real
+grass/soil corner slopes and repetition. An art-only gallery
+does not certify sand physics, organ emission, purification or world generation.
+Existing tooth behavior is retained.
 
 September9 LATEST: floor/ceiling BACKS follow facing, tips oppose it. Wall tips
 up when placing from below, down from above. Stay fixed after placement.
