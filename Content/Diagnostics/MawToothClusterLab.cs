@@ -123,10 +123,10 @@ namespace apogean.Content.Diagnostics
 			Item item=new(ItemType); Check(item.createTile==Cluster.Type && item.consumable && item.maxStack==9999,"native-placeable-stackable-item");
 			Place(p); Check(!WorldGen.PlaceObject(p.X+1,p.Y+3,Cluster.Type,mute:true),"occupied-placement-rejected");
 			Main.instance.LoadTiles(Cluster.Type); var texture=TextureAssets.Tile[Cluster.Type].Value;
-			Check(texture.Width==288 && texture.Height==72,"loaded-atlas-size");
-			Color[] pixels=new Color[288*72];texture.GetData(pixels); int opaque=0; Point hit=default;
+			Check(texture.Width==416 && texture.Height==144,"loaded-atlas-size");
+			Color[] pixels=new Color[416*144];texture.GetData(pixels); int opaque=0; Point hit=default;
 			for(int y=0;y<64;y++) for(int x=0;x<64;x++) {
-				Color color=pixels[(y/16*18+y%16)*288+x/16*18+x%16]; bool expected=color.A==255;
+				Color color=pixels[(y/16*18+y%16)*416+x/16*18+x%16]; bool expected=color.A==255;
 				Rectangle point=new(p.X*16+x,p.Y*16+y+4,1,1);
 				if(Cluster.TouchesAt(point,p)!=expected || Cluster.ContactMask[y*64+x]!=(expected?1:0)) throw new InvalidOperationException($"Pixel contact mismatch {x},{y}");
 				if(expected){opaque++;if(y<56)hit=new Point(x,y);} // Hurt probe stays above the buried root.

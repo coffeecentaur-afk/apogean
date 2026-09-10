@@ -3,16 +3,28 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
-      "id": "maw-tooth-cluster-four-way-v2",
+      "id": "maw-tooth-cluster-rooted-v3",
       "status": "fixture-pass",
       "static": "pass",
       "build": "pass",
       "liveFixture": "pass",
       "production": "pending",
       "userReview": "pending",
+      "evidenceReference": "Art/Validation/MawToothCluster-2026-09-09/Rooted-v3/README.md",
+      "evidenceScope": "User confirms both wall backs below and tips upward; right mirrors left. Original floor/ceiling and individual sprites preserved. Four-pixel roots use native centered draw cells, matching preview/contact. Six negative static controls; clean build; 202 native checks and16384 contacts before/after actual save-reload. Native daylight screenshot passes40 wall socket rows and77 ceiling pixels. No room rebuild; other415 content images unchanged.",
+      "blockers": ["New in-game wall appearance and manual item placement await user review; multiplayer is not certified. Individual tooth physics and generated mouth integration remain separate gates.", "Known preserved-grove reload mismatch remains RED and unchanged. No normal worlds, generation, acid or boss changes."]
+    },
+    {
+      "id": "maw-tooth-cluster-four-way-v2",
+      "status": "rejected",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "rejected",
       "evidenceReference": "Art/Validation/MawToothCluster-2026-09-09/README.md",
       "evidenceScope": "User accepted cluster appearance and thorn-style contact/easy recovery, then requested floor, ceiling and both solid-wall attachments while retaining individual models. Same approved pixels, four rotated native atlases and pixel contact masks. Eight negative static controls; clean build. Saved gg/V3 room passes202 native checks and16384 loaded-texture/contact comparisons. Actual TileLoader draw-offset check and native screenshot caught/corrected ceiling gap. No forced alternate, no solid invisible rectangle, no whole-world edits. New four-way appearance awaits user review.",
-      "blockers": ["QA candidate, not generated Maw integration. Manual cursor/item placement and multiplayer remain unverified; native API tests are not that certification. Individual short/long/wide art remains preserved, with its own physics gate still open.", "Known grove reload mismatch remains RED and was not rebaselined. Next mixed-mouth distribution must preserve no safe ledges and route around protected structures; acid is separate."]
+      "blockers": ["User rejected side-wall terrain gaps and downward right-wall curve. Historical mechanical pass does not accept the appearance. Rooted-v3 supersedes this candidate; original individual models remain accepted.", "Known grove reload mismatch remains RED and was not rebaselined. Next mixed-mouth distribution must preserve no safe ledges and route around protected structures; acid is separate."]
     },
     {
       "id": "maw-tooth-family-v1",

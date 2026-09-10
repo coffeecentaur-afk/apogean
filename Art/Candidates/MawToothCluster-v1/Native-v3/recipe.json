@@ -1,0 +1,37 @@
+{
+  "schema": 3,
+  "atlasSize": [
+    416,
+    144
+  ],
+  "savedCellStride": 18,
+  "previewSize": [
+    288,
+    72
+  ],
+  "wallDrawRegionY": 72,
+  "wallDrawCellStride": 26,
+  "wallDrawWidth": 24,
+  "drawOffsets": [
+    [
+      0,
+      4
+    ],
+    [
+      -4,
+      0
+    ],
+    [
+      0,
+      -4
+    ],
+    [
+      4,
+      0
+    ]
+  ],
+  "rightWall": "horizontal mirror of left; backs underneath, tips curl upward",
+  "sourceSHA256": "92CD5A5BA67AA141ED4D138297374EC131B0EC1EA7D42F5FC3D2197A322808E2",
+  "atlasSHA256": "736C875B715A74734C155785EF099238226C0C91CCF4360ADDB1F895ECBC5357",
+  "maskSHA256": "A7D9B2D54F03F87CED8DB0B2A4B51B584CD0398EB41B0DFA4413161D3FDAF300"
+}

@@ -245,9 +245,9 @@ try {
 	}
 	if ($MawToothClusterCandidateDirectory) {
 		$candidateRoot = (Resolve-Path -LiteralPath $MawToothClusterCandidateDirectory).Path
-		$allowed = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/MawToothCluster-v1/Native-v2')).Path
+		$allowed = (Resolve-Path -LiteralPath (Join-Path $sourceRoot 'Art/Candidates/MawToothCluster-v1/Native-v3')).Path
 		if ($candidateRoot -ne $allowed) { throw 'Only the contracted cluster candidate is authorized.' }
-		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-MawToothCluster.ps1') -CandidateDirectory $candidateRoot
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-MawClusterRootedCandidate.ps1') -CandidateDirectory $candidateRoot
 		if ($LASTEXITCODE -ne 0) { throw 'Cluster art/mask contract failed.' }
 		$destination = Join-Path $mirrorRoot 'Content/Tiles/Diagnostics/MawToothCluster'
 		New-Item -ItemType Directory -Path $destination -Force | Out-Null

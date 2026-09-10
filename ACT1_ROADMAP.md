@@ -3,7 +3,11 @@
 ## Current slice — Maw entrance and shallow baseline
 
 September9 current: individual family and floor-cluster appearance accepted.
-Extend the same cluster item to all four solid-terrain faces before generation.
+Four-face v2 is visually rejected for wall gaps and downward-curving right teeth.
+Native-v3 keeps both wall backs below/upward tips (mirrored left/right) and
+embeds roots4px into terrain. Its 202 native checks pass before/after reload;
+the corrected daylight socket passes40 root samples. User appearance/manual
+placement review remains before generation, not another source-art redraw.
 Keep original individual sprites; no redraw or repeated art-approval loop.
 `Art/Candidates/MawToothCluster-v1/README.md` owns the exact four-way atlas,
 native anchor/damage contract and remaining gates. Old broad wedge remains

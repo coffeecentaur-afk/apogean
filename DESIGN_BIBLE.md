@@ -234,6 +234,12 @@ placement is not the same contract. Keep approved pixels, thorn-style contact
 and easy whole-item recovery. Four-way native framing/support/hurt/reload proof
 precedes seeded dispersal through the mouth. Acid remains optional/separate.
 
+Confirmed wall anatomy: on BOTH vertical faces, rounded backs sit underneath
+and pointed tips curl upward into the passage. Left/right mirror each other;
+do not obtain the right side by another quarter turn that points it downward.
+Roots must overlap the terrain's visible contour, not merely its tile boundary.
+Native-v3 uses4px root burial; original individual and floor/ceiling art stays.
+
 September9 latest: the user accepts the native short/long/wide tooth artwork
 ("they look great") and requests a densely packed placeable group. Preserve
 these pixels and individual assets. A separate five-tooth cluster item uses

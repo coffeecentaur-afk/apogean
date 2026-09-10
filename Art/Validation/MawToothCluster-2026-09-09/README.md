@@ -1,5 +1,10 @@
 # Maw tooth cluster — four-face native fixture
 
+**Superseded visual verdict:** the user rejected v2's wall gaps and right-side
+downward curl. Keep the evidence below as historical. Current correction and
+native render: [Rooted-v3](Rooted-v3/README.md). The old flush-side prescription
+and Native-v2 build command are NOT the current implementation.
+
 September 9, 2026 local time. User accepts the tooth family and grouped art,
 confirms thorn-style contact, easy whole-cluster pickup, and asks for floors,
 ceilings and both walls. Keep the individual short/long/wide models unchanged.

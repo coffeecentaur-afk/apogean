@@ -69,13 +69,18 @@ namespace apogean.Content.Tiles
 		public override bool IsTileDangerous(int i, int j, Player player) => !Main.tile[i, j].IsActuated;
 		public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
 		{
-			// tML2026.7 TileLoader initializes from style0, not the placed alternate.
-			// Keep native per-cell drawing/paint/Echo; only correct the root offset.
-			offsetY = Inset(Main.tile[i, j].TileFrameX / 72).Y;
+			int facing = Main.tile[i, j].TileFrameX / 72;
+			offsetY = Inset(facing).Y;
+			if (facing == 1 || facing == 3) {
+				// Native TileDrawing centers width24 on the16px tile. Asymmetric
+				// transparent padding moves the visible pixels into support by4px.
+				// Saved frames and item previews still use the upper18px-stride bank.
+				width = 24;
+				tileFrameX = (short)(facing * 104 + Main.tile[i, j].TileFrameX % 72 / 18 * 26);
+				tileFrameY = (short)(72 + Main.tile[i, j].TileFrameY);
+			}
 		}
-		// Native placed drawing has no horizontal offset hook. Side roots sit flush;
-		// don't move just the preview/contact mask or invent a second tile renderer.
-		internal static Point Inset(int facing) => facing switch { 1 or 3 => Point.Zero, 2 => new(0, -4), _ => new(0, 4) };
+		internal static Point Inset(int facing) => facing switch { 1 => new(-4, 0), 3 => new(4, 0), 2 => new(0, -4), _ => new(0, 4) };
 		internal static Point16 PlacementOrigin(int facing) => facing switch { 1 => new(0, 1), 2 => new(1, 0), 3 => new(3, 1), _ => new(1, 3) };
 		internal static Point Support(Point root, int facing, int cell) => facing switch {
 			1 => new(root.X - 1, root.Y + cell), 2 => new(root.X + cell, root.Y - 1),

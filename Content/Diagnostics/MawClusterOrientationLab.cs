@@ -124,8 +124,8 @@ namespace apogean.Content.Diagnostics
             Point p=At(72,16);
             Check(Count(p)==0 && Drops().Count==0,"empty-trial-and-no-existing-drops");
             Main.instance.LoadTiles(Cluster.Type); var texture=TextureAssets.Tile[Cluster.Type].Value;
-            Check(texture.Width==288 && texture.Height==72,"native-288x72-atlas");
-            Color[] pixels=new Color[288*72];texture.GetData(pixels);
+            Check(texture.Width==416 && texture.Height==144,"native-416x144-atlas");
+            Color[] pixels=new Color[416*144];texture.GetData(pixels);
             for(int facing=0;facing<4;facing++) {
                 for(int cell=0;cell<4;cell++)Ground(MawToothClusterTile.Support(p,facing,cell));
                 Place(p,facing);Check(true,$"automatic-anchor-choice-{facing}");
@@ -133,10 +133,18 @@ namespace apogean.Content.Diagnostics
                 Check(data.DrawXOffset==inset.X && data.DrawYOffset==inset.Y,$"embedded-root-offset-{facing}");
                 int nativeWidth=0,nativeY=0,nativeHeight=0;short nativeFrameX=Main.tile[p.X,p.Y].TileFrameX,nativeFrameY=0;
                 TileLoader.SetDrawPositions(p.X,p.Y,ref nativeWidth,ref nativeY,ref nativeHeight,ref nativeFrameX,ref nativeFrameY);
-                Check(nativeY==inset.Y && nativeWidth==16 && nativeHeight==16,$"actual-placed-draw-offset-{facing}");
+                bool wall = facing == 1 || facing == 3;
+                Check(nativeY==inset.Y && nativeWidth==(wall?24:16) && nativeHeight==16 && nativeFrameX==facing*(wall?104:72) && nativeFrameY==(wall?72:0),$"actual-placed-draw-offset-{facing}");
                 int opaque=0;Point hit=default;
                 for(int y=0;y<64;y++)for(int x=0;x<64;x++) {
-                    bool expected=pixels[(y/16*18+y%16)*288+facing*72+x/16*18+x%16].A==255;
+                    Color source=pixels[(y/16*18+y%16)*416+facing*72+x/16*18+x%16];
+                    bool expected=source.A==255;
+                    if(wall) {
+                        int drawCellX=x/16*26, pad=facing==3?8:0;
+                        Color placed=pixels[(72+y/16*18+y%16)*416+facing*104+drawCellX+x%16+pad];
+                        int screenX=x/16*16-(nativeWidth-16)/2+x%16+pad;
+                        if(placed!=source || screenX!=x+inset.X)throw new InvalidOperationException("Native wall draw bank differs from preview/contact.");
+                    }
                     Rectangle probe=new(p.X*16+inset.X+x,p.Y*16+inset.Y+y,1,1);
                     if(Cluster.TouchesAt(probe,p)!=expected || Cluster.Touching(probe)!=expected)throw new InvalidOperationException($"Hurt/render mismatch {facing} {x},{y}");
                     if(expected){opaque++;if(x>7 && x<56 && y>7 && y<56)hit=new Point(x,y);}

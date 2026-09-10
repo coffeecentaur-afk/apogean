@@ -1,6 +1,26 @@
 # Placeable Maw tooth cluster
 
-## Latest: four-face attachment
+## Latest: rooted, mirrored four-face attachment (Native-v3)
+
+V2's wall appearance was rejected. The user confirms rounded backs BELOW and
+tips curling UP on both walls, with left/right mirrored. V3 keeps the exact
+floor and ceiling pixels and mirrors the left wall to produce the right wall.
+The original short/long/wide models remain unchanged.
+
+All four faces now embed4px into support. Preview/saved-frame coordinates still
+occupy the upper288x72 region (18px cell stride). The atlas is416x144 with a
+second placed-wall region atY72:104px styles,26px stride,24px draw cells.
+Native TileDrawing centers wider cells;8 transparent pixels on the outside
+produce the correct4px inset. No custom draw pass or saved-frame migration.
+The same inset is used for item preview and exact-pixel contact.
+
+Six negative CLI controls plus exact59904-pixel/16384-mask validation and8192
+centered-cell projections accompany the native checks. Evidence and limits:
+[Rooted-v3 validation](../../Validation/MawToothCluster-2026-09-09/Rooted-v3/README.md).
+Use Native-v3 with the full override build command in that record. Do not
+rebuild the saved room or the user-modified older floor gallery.
+
+## Historical v2: four-face attachment, rejected wall appearance
 
 User accepts the grouped appearance, wants floor/ceiling/both solid-wall
 placement, and explicitly retains all three individual models for future

@@ -246,8 +246,14 @@ Alternate attachment metadata does not prove placed draw offsets. In installed
 tML2026.7, TileLoader.SetDrawPositions initializes from base style0. A correct
 ceiling anchor/preview can still inherit the floor's downward draw offset.
 Test the actual TileLoader call and a native socket screenshot, not only
-GetTileData(placedTile). Keep horizontal contacts aligned with actual rendering;
-flush side roots are preferable to moving only their damage mask/preview.
+GetTileData(placedTile). Keep horizontal contacts aligned with actual rendering.
+Follow-up disproved flush side roots: Maw soil recedes2px inside its tile, so
+15/40 sampled root rows still exposed sky. Native-v3 uses centered24px draw
+cells with8px asymmetric transparent padding to bury the visible16px cell4px
+into either side. Preview offsets and alpha-contact offsets match that shift.
+Saved18px-stride frames are unchanged; the placed draw bank is separate.
+Validate actual terrain-contour overlap AND required anatomical handedness,
+not just anchor validity or mathematically correct quarter-turns.
 Maw cluster regression keeps the rejected ceiling-gap capture, a bounded
 daylight pixel detector, and native placed-offset assertions. Preserve the
 source art and keep render, solidity and contact regions independent.
