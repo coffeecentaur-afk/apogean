@@ -224,6 +224,14 @@ intent, recommended boundaries and native test matrix. Optional blending and
 lighting mods are references/compatibility candidates, not required remedies
 for invalid atlases. No new runtime or generation acceptance from this review.
 
+Implementation checkpoint: a separate QA study now demonstrates bounded
+four-sided maturation of already-Maw soil and preserves buried soil, stone and
+bone. It does not set the biome's infection rate or implement vines. Three
+rough bone arcs are geometry studies, not approved anatomy or a descent route.
+The requested thicker rooted grass, attachment-edge repair and equipment-aware
+traversal still precede generation. Exact evidence lives in
+`Art/Validation/MawFiberRib-2026-09-11/README.md`, not a new art/lore decision.
+
 ### Earlier material and hazard evidence
 
 September9 latest art correction: the user requested the artwork treatment across

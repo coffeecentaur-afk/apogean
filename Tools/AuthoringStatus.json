@@ -4,27 +4,27 @@
   "families": [
     {
       "id": "maw-living-fiber-grass",
-      "status": "specified",
-      "static": "pending",
-      "build": "pending",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
       "liveFixture": "pending",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "MAW_FIBER_RIB_DIRECTION.md",
-      "evidenceScope": "September11 user likes overall materials and requests thicker, less choppy fiber grass wrapping floors, side faces and ceilings, with later fibrous hanging vines. Existing soil/grass/stone identities remain. This is direction acceptance, not new artwork, spreading-grass implementation or native proof. Local maturation and true infection are separate; current node-only spread does not satisfy the Bible's intrinsic frontier baseline.",
-      "blockers": ["Close existing mixed-material and diagonal holes before one four-face native grass/vine fixture. Preserve host hardness, wall/tile distinction, support, bounded growth, two-stage purification and protected terrain. Do not enable a new spread rate or bridge containment with decorative vines.", "Original material pixels remain approved but requested thicker growth needs its own native appearance review. Mining/cuts, support loss, coatings, actual updates, same-world reload and multiplayer are unproven. Optional blending/lighting mods cannot replace a correct standalone atlas/render contract."]
+      "evidenceReference": "Art/Validation/MawFiberRib-2026-09-11/README.md",
+      "evidenceScope": "One separate gg/V3/SP study at7596,240; current52870164 package clean with466 pinned assets unchanged.38 pure-policy checks pass. Actual bounded commands grow8 seeds to247 grass cells, wrap the isolated soil perimeter on all four faces and preserve its buried center and unseeded air-gap island. All6912 cell states and63 bone cells match after save/reopen at step48. This is QA-only maturation using existing art, not an infection timer, vines, thickened artwork or whole-family acceptance.",
+      "blockers": ["New bone/soil/grass attachment-edge openings remain distinct from the repaired bone/study-fiber joins. Diagnose exact native neighborhoods and grass overlays. Thicker rooted, less choppy surface artwork still needs its own native review; no approved pixel was regenerated this pass.", "Real protection adapters, growth cadence/dormancy, intrinsic node-independent infection, purification/coatings, support loss, vines and multiplayer remain unproven. No worldgen promotion or shader dependency. Preserve the saved study; do not rebuild it."]
     },
     {
       "id": "maw-structural-rib-descent",
-      "status": "specified",
+      "status": "contracted",
       "static": "pending",
-      "build": "pending",
+      "build": "pass",
       "liveFixture": "pending",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "MAW_FIBER_RIB_DIRECTION.md",
-      "evidenceScope": "September11 permits irregular natural bone footholds and a deep rib-cage motif while preserving hazardous descent. Supporting bone is harmless; separate exposed teeth damage and are easily mined. Refines prior no-safe-ledges language to forbid a regular safety staircase and supplied ropes, not all usable rib surfaces. No geometry, world, package or runtime proof changed.",
-      "blockers": ["After material joins pass, prove one shallow native rib/tooth section with real unprepared, rope/mining, hook, double-jump and fall-protection traversal. No forced damage, named-accessory hard gate, invisible spikes or regularly alternating shelves. Stomach and enclosed outlet reservations remain unchanged.", "Legacy PlaceGulletShelves and 120-tile fall validator need a coordinated replacement after the proof, not automatic reapproval. Art scale, anchor shape, coatings, seed stability, saved-world persistence and multiplayer remain pending."]
+      "evidenceReference": "Art/Validation/MawFiberRib-2026-09-11/README.md",
+      "evidenceScope": "Three unequal rough bone arcs exist only in one new96x72 disposable native study.63 real bone cells survive bounded grass growth and same-world save/reopen. Screenshots expose remaining root-edge gaps. The camera holds the character still; no movement, hazard or final morphology claim. Existing Gullet generator and Stomach/outlet reservations unchanged.",
+      "blockers": ["Repair actual bone/soil/grass attachment edges and review anatomical silhouette before rib/tooth traversal with unprepared, rope/mining, hook, double-jump and fall-protection setups. No forced damage, named-accessory gate, invisible spikes or regular safety staircase.", "Legacy PlaceGulletShelves and 120-tile fall validator need coordinated replacement after real traversal proof. Coatings, generation/seed stability, host integration and multiplayer remain pending. Do not rebuild the saved study or treat its three rough arcs as a final Gullet template."]
     },
     {
       "id": "maw-playable-materials-native-v1",
@@ -35,8 +35,8 @@
       "production": "pending",
       "userReview": "pending",
       "evidenceReference": "Art/Validation/MawPlayable-2026-09-11/README.md",
-      "evidenceScope": "Separate saved gg/V3/SP fixture; accepted artwork unchanged. Opt-in actual terrain preview shares existing atlas objects. Build1751EED9 clean;466 pinned asset bytes unchanged. Saved layout retained;3709 native draws/949504 tile pixels/870400 wall pixels/4111 shared-asset cells pass.449 actual API properties pass; native sand falls and settles after42 ticks with exact restoration. Dirt/Mud classifications repair8 excess-gap joins;12 native comparisons and deliberate missing-classification controls pass. This is fixture verification, not full worldgen or manual/MP certification.",
-      "blockers": ["Native whole-scene review still sees openings at mixed fiber/bone study interfaces and diagonal joins. Resolve these;12 base-mask cases do not certify them. Final4BB0544A clean-session suite passes all6 native requests with post-cleanup completion markers at19:46UTC. Coatings/settings, bombs, manual/MP, memory and worldgen remain. Fibers/membrane/amber are still studies; preview default off.", "User likes overall material direction but requests thicker living fiber and improved joins; separate specified families retain these pending changes. Known old grove cross-reload mismatch remains RED; do not rebuild/rebaseline. No normal worlds, acid, mobs or boss expansion. Mouth integration follows bounded terrain proof with irregular rib footholds, never a safe repeating staircase."]
+      "evidenceScope": "Separate saved gg/V3/SP fixture; accepted artwork and original layout unchanged. Current52870164 build clean;466 pinned assets preserved.3709 native draws/949504 tile pixels/870400 wall pixels/4111 shared-asset cells and449 actual API properties pass. Sand falls/settles after42 ticks with exact cleanup. Additional narrow bone/study-fiber and bone/study-membrane relations pass420 trials and24 deliberate missing-rule cases;0/1599 fully enclosed tissue cells have base holes. Six-request suite passes before/after new-study save/reopen. See JOIN_CHECKPOINT.md; not all interfaces, manual/MP or worldgen certification.",
+      "blockers": ["The sampled exposed soil/stone contour matches native76/76 base-alpha pixels and was not force-filled. The separate new rib study still exposes bone/actual-soil/grass attachment-edge openings; don't generalize repaired inert study pairs to them. Coatings/settings, bombs, manual/MP, memory and worldgen remain. Fibers/membrane/amber are studies; preview default off.", "User requests thicker living fiber; separate contracted families retain pending art/growth/route work. Known old grove cross-reload mismatch remains RED; do not rebuild/rebaseline. No normal worlds, acid, mobs or boss expansion. Mouth integration follows bounded terrain proof with irregular rib footholds, never a safe repeating staircase."]
     },
     {
       "id": "maw-harsh-materials-packed-v2",

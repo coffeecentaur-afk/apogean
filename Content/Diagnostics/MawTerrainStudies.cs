@@ -21,6 +21,18 @@ namespace apogean.Content.Diagnostics
                 Mod.AddContent(new MawTerrainStudyWall(key));
             }
         }
+        public override void PostSetupContent()
+        {
+            if (!MawPackedPreview.Enabled) return;
+            // These two exact relations were isolated by native corner probes.
+            // No blanket merge-all and no new rule for already-correct pairs.
+            int bone = MawPackedPreview.TileType("bone");
+            foreach (string key in new[] { "fibers", "membrane" }) {
+                int tissue = Tile(key).Type;
+                Main.tileMerge[bone][tissue] = true;
+                Main.tileMerge[tissue][bone] = true;
+            }
+        }
         internal static MawTerrainStudyTile Tile(string key) => (MawTerrainStudyTile)ModContent.Find<ModTile>("apogean/Study_" + key);
         internal static MawTerrainStudyWall Wall(string key) => (MawTerrainStudyWall)ModContent.Find<ModWall>("apogean/StudyWall_" + key);
     }

@@ -65,6 +65,23 @@ CLI controls stub the sender in a temporary copy and never touch the game.
 Native suite success still requires visual inspection; it does not certify
 decorative/inert study interfaces, manual play, multiplayer or generation.
 
+For mixed-material holes, `Request-MawNaturalValidation.ps1 -Playable -Case joins`
+adds actual saved-frame inspection and a restored5x5 trial pad. First allow the
+scene to draw normally; cold frame0,0 is not a valid saved visual verdict. Test
+both neighbor orders and all internal corners, independently toggle pair merge
+and ChecksForMerge, and remove the proven relation as a red control. Compare
+exposed neighborhoods against the same native layout rather than demanding zero
+alpha at every contour. Air has no base draw. Grass overlays require separate
+accounting; neither raw base-alpha counts nor opaque walls prove them correct.
+
+`Test-MawFiberGrowthPolicy.ps1` is now in the MawMaterials gate: planning must
+not mutate its input or cascade through newly grown cells in one step. It tests
+bounded, four-face growth, buried host preservation, disabled/protected cells,
+and air-gap rejection. `Request-MawFiberValidation.ps1` owns ONE separate gg/V3
+study. Save the original layout contract plus explicit growth steps; validate
+actual cells before every write and after reload, and refuse rebuilds. Its
+camera is held still for rendering: never cite that scene as traversal proof.
+
 Turn each confirmed user correction into a visible requirement and a regression
 check where one is possible. Keep reusable method changes in the installed and
 Git-mirrored authoring skill; biome identity/composition in the bible; exact source

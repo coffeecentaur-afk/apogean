@@ -1,5 +1,11 @@
 # Next bounded join check
 
+**September11 continuation:** the two observed bone/study-fiber and
+bone/study-membrane interior defects are repaired with native negative-control
+proof. `JOIN_CHECKPOINT.md` supersedes this file's pending status for those
+two relationships only. The new fiber/rib study's bone/soil/grass attachment
+edges remain a separate open check. Keep the original requirements below.
+
 Subsequent user review likes the material direction but requests living fiber
 grass and irregular structural ribs. See `MAW_FIBER_RIB_DIRECTION.md` at repo
 root. This does not waive the observed openings or change either saved fixture.

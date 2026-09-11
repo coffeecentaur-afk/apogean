@@ -6,7 +6,7 @@ $source=(Resolve-Path -LiteralPath $LogPath).Path
 $inputStream=[IO.File]::Open($source,[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::ReadWrite)
 $snapshot=[IO.MemoryStream]::new()
 try{$inputStream.CopyTo($snapshot);$logBytes=$snapshot.ToArray()}finally{$inputStream.Dispose();$snapshot.Dispose()}
-$lines=@([Text.Encoding]::UTF8.GetString($logBytes) -split '\r?\n' | Where-Object {$_ -match '\[apogean\]: MAW (NATURAL|LAB REQUEST|LAB COMPLETE|PROPERTY|PRODUCTION PROPERTIES|PROPERTIES RESTORE|SAND|SEAM)'})
+$lines=@([Text.Encoding]::UTF8.GetString($logBytes) -split '\r?\n' | Where-Object {$_ -match '\[apogean\]: MAW (NATURAL|LAB REQUEST|LAB COMPLETE|PROPERTY|PRODUCTION PROPERTIES|PROPERTIES RESTORE|SAND|SEAM|JOIN|FIBER)'})
 if(-not $lines.Count){throw 'No matching native Maw evidence in this log.'}
 $record=[ordered]@{
     schemaVersion=1

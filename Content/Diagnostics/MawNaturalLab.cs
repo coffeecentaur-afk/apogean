@@ -63,6 +63,7 @@ namespace apogean.Content.Diagnostics
                     case "properties": Properties(); break;
                     case "sand": StartSand(); break;
                     case "seams": Seams(); break;
+                    case "joins": Joins(); break;
                     case "natural": panel = 0; View(false); break;
                     case "corners": panel = 1; View(false); break;
                     case "night": View(true); break;
@@ -328,6 +329,16 @@ namespace apogean.Content.Diagnostics
                     throw new InvalidOperationException("Sand probe changed grove.");
                 Mod.Logger.Info($"MAW SAND RESTORE PASS: original authored layout restored; exact whole digest={Fingerprint()==sandBefore}; native control growth={biological}; original saved checkpoint and grove unchanged.");
             } catch(Exception ex) { Mod.Logger.Error("MAW SAND RESTORE FAIL; no repair or rebaseline: "+ex.Message); }
+        }
+
+        private void Joins()
+        {
+            RequireFixture(); ValidateLayout(Layout()); string before = Fingerprint();
+            try { MawMaterialJoinChecks.Run(At(8, 99), new Rectangle(bounds.X, bounds.Y, Width, 49), Mod.Logger); }
+            finally {
+                if (Fingerprint() != before) throw new InvalidOperationException("Mixed join probe changed saved fixture.");
+                Mod.Logger.Info("MAW JOIN RESTORE: original fixture unchanged; temporary rules restored.");
+            }
         }
 
         private string Fingerprint(MawNaturalLayout.Cell[,] plan = null)

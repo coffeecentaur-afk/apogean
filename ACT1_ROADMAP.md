@@ -2,6 +2,17 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+September11 implementation checkpoint: two bone/study-material merge rules are
+fixed and proven with420 native comparisons plus missing-rule red controls.
+The approved pixels and old fixture hashes are unchanged. One separate96x72
+fiber/rib study now runs bounded four-face growth on actual Maw soil:8 seeded
+grass cells become247, with63 bone cells unchanged. Save/reopen preserves all
+6912 expected cells. This is QA-only; no new growth timer, vines or worldgen.
+Next: the new bone/soil/grass root-edge gaps, thicker rooted grass art, then
+actual rib/tooth traversal and coatings. Do not repeat/rebuild the study or
+promote rough arcs to the Gullet. See the MawPlayable JOIN_CHECKPOINT and
+MawFiberRib-2026-09-11 README for exact evidence and commands.
+
 September11 user review after the completed two-hour pass: overall material
 direction liked; fiber should become thicker living grass wrapping terrain and
 later hanging vines. Bone is structural rib/cavern support; teeth remain easy
@@ -10,7 +21,8 @@ staircase. `MAW_FIBER_RIB_DIRECTION.md` records this refinement and separates
 local fiber growth from currently incomplete node-independent frontier spread.
 Next: observed mixed-material/diagonal joins, then one four-face fiber/native
 shallow-rib proof. Optional blending/shader compatibility follows a correct
-standalone renderer. No new runtime evidence, dependency or worldgen promotion.
+standalone renderer. This review itself did not promote runtime or worldgen;
+the scoped implementation evidence is recorded above. No dependency added.
 
 September11 autonomous continuation supersedes the overnight pause below.
 Preserve the accepted harsh material pixels. A separate mixed art fixture and

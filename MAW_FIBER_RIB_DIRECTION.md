@@ -1,9 +1,21 @@
 # Maw living fiber and structural ribs
 
 September 11, 2026 user review after the two-hour native material pass.
-Design intake and implementation brief, NOT a new installed asset or a runtime
-acceptance report. Wayfinder #26 remains open. Keep the accepted harsh material
-palette and the earlier red native evidence.
+Design intake and implementation brief. The initial intake was not runtime
+acceptance; the scoped implementation checkpoint below is now available.
+Wayfinder #26 remains open. Keep the accepted harsh material palette and the
+earlier red native evidence.
+
+## Implementation checkpoint — same-day continuation
+
+The two bone/study-fiber and bone/study-membrane internal join defects are fixed
+without changing artwork:420 native trials, missing-rule negative controls and
+the six-request suite pass. See MawPlayable-2026-09-11/JOIN_CHECKPOINT.md.
+One new fiber/rib study at7596,240 uses actual MawDirt/MawGrass:247 grown grass
+cells,63 unchanged bone cells, all6912 cell states preserved after save/reopen.
+It has no production growth hook, vines or new worldgen. The new bone-to-soil/
+grass root-edge openings, thicker grass artwork and actual traversal remain
+open. Art/Validation/MawFiberRib-2026-09-11/README.md owns evidence and next steps.
 
 ## Confirmed direction
 
@@ -120,6 +132,6 @@ evidence are development responsibilities, not repeated aesthetic questions.
 ## Research / next action
 
 `RESEARCH_MAW_FIBER_BLENDING_2026-09-11.md` records primary-source engine and
-companion-mod findings. Borrow methods, not assets. Next coding work remains the
-bounded actual-frame interface repair; the new growth/rib specification does
-not promote the current material gallery to production world generation.
+companion-mod findings. Borrow methods, not assets. Next coding work is the new
+study's attachment-edge repair, then the thicker grass/native art pass. The
+growth/rib checkpoint does not promote the material gallery to world generation.
