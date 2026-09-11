@@ -1,5 +1,9 @@
 # Next bounded join check
 
+Subsequent user review likes the material direction but requests living fiber
+grass and irregular structural ribs. See `MAW_FIBER_RIB_DIRECTION.md` at repo
+root. This does not waive the observed openings or change either saved fixture.
+
 The12 passing comparisons only sample straight soil/material base-mask strips.
 They must not be used as proof that every native interface is seamless. The
 final screenshot shows sky-colored openings at some bone/fiber intersections
@@ -46,5 +50,6 @@ natural-panel layout and must not replace saved-world verification.
    Keep the raw48px capture-border artifact separate from terrain defects.
 
 Once this passes: coatings/settings checks, then bounded raised-mouth native
-integration using the already approved teeth/lips/no-safe-ledges contract.
+integration using the approved teeth/lips contract and September11 refinement:
+irregular rib footholds are allowed, but not a regular safety staircase.
 Nothing here authorizes a new art direction, normal-world rebuild or acid work.

@@ -2,6 +2,16 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+September11 user review after the completed two-hour pass: overall material
+direction liked; fiber should become thicker living grass wrapping terrain and
+later hanging vines. Bone is structural rib/cavern support; teeth remain easy
+to mine and hazardous. Irregular rib footholds are allowed, not a safe repeating
+staircase. `MAW_FIBER_RIB_DIRECTION.md` records this refinement and separates
+local fiber growth from currently incomplete node-independent frontier spread.
+Next: observed mixed-material/diagonal joins, then one four-face fiber/native
+shallow-rib proof. Optional blending/shader compatibility follows a correct
+standalone renderer. No new runtime evidence, dependency or worldgen promotion.
+
 September11 autonomous continuation supersedes the overnight pause below.
 Preserve the accepted harsh material pixels. A separate mixed art fixture and
 a separate playable fixture now exist in gg/V3/SP; both retain original saved

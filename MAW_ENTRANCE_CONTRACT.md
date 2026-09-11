@@ -4,6 +4,15 @@ Wayfinder implementation issue: #26. Closed design issue #9 is context, not
 proof that this scene is finished. Native audit and first wall repair evidence:
 `Art/Validation/MawEntrance-2026-09-08/README.md`.
 
+September11 current refinement: `MAW_FIBER_RIB_DIRECTION.md` makes fiber the
+living grass/creeping coat and bone the structural cavern skeleton. Irregular
+rib footholds are allowed; the earlier no-safe-ledges wording means no regular
+safety staircase or supplied rope, not zero usable surfaces. The user still
+wants preparation, hazards and intentional rope/mining/mobility. Keep the
+Stomach and its sealed outlet. This is specified, not generated or live-tested.
+Fix current material joins, then one four-face fiber and shallow-rib proof.
+Historical narrower shelf bans below do not override this latest direction.
+
 Latest attachment contract: keep individual short/long/wide models AND the
 approved cluster. One cluster item automatically selects floor, left solid
 wall, ceiling or right solid wall anchors; floor/ceiling roots embed4px and
@@ -80,10 +89,11 @@ suggest a feeding organism without red meat or purple Corruption. Latest user
 direction raises the thick opening ridges into much taller inward-curving
 "lips" and packs both rim and throat with teeth, taking composition inspiration
 from the Sarlacc pit. Do not add a copied creature or extra mechanics.
-A winding passage has no generated safe resting ledges. The user explicitly
-wants players to use rope or break the easily mineable teeth to clear a route.
-Do not place ropes/platforms for them or add disguised resting shelves to meet
-an old free-fall limit. Ordinary player building and hooks remain available;
+A winding passage has irregular structural ribs, some usable as footholds,
+but no regular safe staircase. Players use rope, hooks, mobility or break the
+easily mineable teeth to clear a route. Do not place ropes/platforms for them
+or add disguised resting shelves to meet an old free-fall limit. Ordinary
+player building and hooks remain available;
 hardened material keeps Platinum-tier/bomb
 access. Structural bone remains safe, but visibly exposed brittle teeth now
 hurt on contact and must be easy to mine away. This overrides the earlier

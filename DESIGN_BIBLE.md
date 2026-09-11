@@ -207,6 +207,25 @@ The Underworld does not use `ModUndergroundBackgroundStyle`; Terraria draws a se
 
 The Maw is the hostile biome created by the distributed Broodmass organism, not a recolored Corruption. The neutral Wastes beneath the rest of the world are a separate biome and do not spread.
 
+### Current fiber and rib direction — September 11
+
+The user likes the mixed material direction, while requesting thicker, less
+choppy **living fiber grass** on surface soil, wrapping exposed floors, sides
+and ceilings with a later fibrous-vine family. Preserve separate soil/stone/bone
+host identities and fix the observed material joins; growth is not a blanket
+retexture or permission for a new infection rate. Bone forms structural cavern
+ribs and spike bases, while distinct, easily mined teeth supply contact damage.
+Irregular natural rib footholds are allowed. This refines earlier "no safe
+ledges" language: no regular safety staircase or supplied ropes, not a ban on
+all usable rib surfaces. Preparation through rope, mining, hooks and mobility
+should matter; no forced damage or mandatory named accessory. The Stomach and
+enclosed outlet remain intact. `MAW_FIBER_RIB_DIRECTION.md` owns the confirmed
+intent, recommended boundaries and native test matrix. Optional blending and
+lighting mods are references/compatibility candidates, not required remedies
+for invalid atlases. No new runtime or generation acceptance from this review.
+
+### Earlier material and hazard evidence
+
 September9 latest art correction: the user requested the artwork treatment across
 Maw terrain but rejected the softer design. Simplifying native pixel detail must
 not automatically soften the material shapes. The proposed response uses brittle
@@ -333,10 +352,10 @@ teeth and no-safe-ledges composition still await integration.
 - Supported large worlds receive one major Rupture, one guaranteed Maw Outgrowth, and a second Outgrowth only when uncontested space remains. Outgrowths are small regional patches, not additional Gullets, and required Brood Nests remain inside the primary Maw. The major Rupture is an authored vertical scar that penetrates natural surface, underground, cavern, and Underworld terrain rather than repainting only the first soil row. Its terrain, walls, hazards, and scenery change with depth while remaining one continuous landmark. Growth is slow before Hardmode and bounded thereafter.
 - The major Rupture uses a **Feeding Wound** grammar: one readable, winding central gullet surrounded by irregular side chambers, braided passages, and pale bone-supported loops. It is neither a straight Corruption chasm nor a field of round Crimson cavities.
 - Its depth language progresses from an asymmetric surface mouth, through tendon bridges and amber glands, into broad ossuary chambers and hardened pressure channels, then terminates in a localized **Burning Root** region of the Underworld.
-- The initial surface Maw occupies roughly 340–440 tiles, with a 70–100 tile Feeding Wound. The Gullet ordinarily preserves 20–30 clear tiles, opens to 35–50 around bends, and uses 50–90 tile side chambers. Latest user correction supersedes the earlier safe-descent/short-drop assumption: players use rope or break teeth to clear their route; no generated safe resting ledges.
+- The initial surface Maw occupies roughly 340–440 tiles, with a 70–100 tile Feeding Wound. The Gullet ordinarily preserves 20–30 clear tiles, opens to 35–50 around bends, and uses 50–90 tile side chambers. Players use rope, tooth-mining, hooks and mobility to negotiate it. September11 permits irregular structural rib footholds, not a regular sequence of guaranteed safe drops.
 - The Burning Root contains **the Stomach**, a roughly 180–240 by 90–130 tile natural Matriarch cavity whose lowest shell remains approximately 30–60 tiles above the Underworld ceiling (targeting about 40). It has no generated platforms or mandatory repair objective; players clear and build it like a large evil-biome boss space.
 - The Stomach ends the Gullet rather than opening directly into Hell. A narrow, enclosed intestinal descent continues below it toward the world floor; players deliberately breach its Platinum-tier Mawstone wall if they want to enter ordinary Underworld terrain.
-- Do not add alternating ossuary shelves, safe landing platforms or preplaced rope to solve the Gullet for the player. Keep irregular walls and easily mineable hazardous teeth. Traversal validation must test the intended rope/mining options, not force safe shelves to satisfy a drop-length cap. The existing generator/validator still need this correction when the new shape is implemented.
+- Do not add regularly alternating ossuary shelves, manufactured safe landing platforms or preplaced rope to solve the Gullet for the player. Irregular natural ribs may support deliberate landings; teeth and geometry keep descent hazardous. Traversal validation must test the intended rope/mining/mobility options, not force safe shelves to satisfy a drop-length cap. The existing generator/validator still need this correction when the new shape is implemented.
 - Latest entrance direction: substantially taller raised "lips"/rim ridges and a dense abundance of teeth around the crown and down the throat, with the Sarlacc pit as a composition reference. Keep original Maw anatomy/materials and the two asymmetrical side basins; no copied creature, beak or additional mechanics. September9: the user approves the preview's51 tooth groups and rim crests24/22 tiles above local ground as the working composition, not final release tuning or native evidence. No safe ledges; rope or breaking teeth remains the intended player solution. New bone/tooth material art has its own review in `Art/Candidates/MawBone-v1/`; never promote an illustration or the separate Stone-topology diagnostic as final tiles.
 - A compact Rupture preserves the Feeding Wound, navigable Gullet, and Matriarch cavity at the Underworld ceiling while reducing width, side chambers, and the amount of Root that penetrates Hell. Only failure to fit this coherent minimum may reject world generation.
 - The surface mouth is implied by geology and composition rather than drawn as literal lips: bone stakes, leaning ruins, cracked terrain, and inward-pointing roots form the gullet silhouette.
