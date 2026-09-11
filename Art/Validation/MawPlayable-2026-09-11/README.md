@@ -6,6 +6,10 @@ The user accepted the harsh twelve-material artwork, then authorized a two-hour
 autonomous verification window. This is the next integration probe, not another
 art redesign or a claim that Maw world generation is finished.
 
+Final handoff: the QA world is saved and the client is at the main menu.
+See [the next bounded join check](NEXT_JOIN_CHECK.md) for the observed remaining
+openings, read-only interface inventory and required regression coverage.
+
 Only gg / Apogee Native Visual V3 / single-player was used. Created ONCE at
 X7156 Y360, 128x104 tiles in empty space. Original saved layout digest:
 `9B29BC48D04974A2397997F8522F26AB55BE600BD90756BB8B5E83FB18BAFEB2`.

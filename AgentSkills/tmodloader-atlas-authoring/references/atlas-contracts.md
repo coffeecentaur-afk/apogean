@@ -17,6 +17,7 @@
 
 - Test full grass beside a sloped neighbor over the real substrate, in both orders and all four slopes. Isolated slopes do not cover this junction.
 - Check the actual engine-selected frames at mixed-material joins. Equality with the alpha mask of the selected frame cannot establish that the engine selected the correct merge frame. Compare with native controls; distinguish base-mask metrics from complete draw/overlay evidence.
+- Inventory the material pairs the real fixture actually contains. Straight central-edge samples do not certify diagonal inner corners, complete tile edges or intersections with inert study assets. Preserve observed holes as explicit remaining cases; never hide them with an added wall or a blanket merge rule.
 - Keep art-only specimens separate from playable tile proofs. Exercise native mining/drop, conversion and collision paths on the actual registered types. Falling-block claims require real update ticks from support loss through projectile identity to the returned tile, not just a registered flag or manually invoked AI.
 - Saved biological control banks need narrowly scoped growth allowances. Replay the original layout and keep its creation digest; mutation-test allowed growth versus forbidden tile, wall, coating and geometry changes. Never refresh a failed baseline to the current world.
 - Pin every accepted texture AND associated frame map before a QA package is installed. Validate missing/altered assets through the real build entrypoint. Large shared atlases should prove runtime texture reuse before production adoption.
