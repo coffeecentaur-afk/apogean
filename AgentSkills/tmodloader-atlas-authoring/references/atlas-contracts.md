@@ -13,6 +13,15 @@
 - Exporter-only colors can be meaningful to vanilla drawing code and meaningless to a `ModTile`. Any visible pure-white or magenta pixel is a failed fixture unless intentionally authored.
 - Validate grass-to-substrate merges, exposed edges, corners, half blocks, and slopes separately.
 
+## Native integration regressions
+
+- Test full grass beside a sloped neighbor over the real substrate, in both orders and all four slopes. Isolated slopes do not cover this junction.
+- Check the actual engine-selected frames at mixed-material joins. Equality with the alpha mask of the selected frame cannot establish that the engine selected the correct merge frame. Compare with native controls; distinguish base-mask metrics from complete draw/overlay evidence.
+- Keep art-only specimens separate from playable tile proofs. Exercise native mining/drop, conversion and collision paths on the actual registered types. Falling-block claims require real update ticks from support loss through projectile identity to the returned tile, not just a registered flag or manually invoked AI.
+- Saved biological control banks need narrowly scoped growth allowances. Replay the original layout and keep its creation digest; mutation-test allowed growth versus forbidden tile, wall, coating and geometry changes. Never refresh a failed baseline to the current world.
+- Pin every accepted texture AND associated frame map before a QA package is installed. Validate missing/altered assets through the real build entrypoint. Large shared atlases should prove runtime texture reuse before production adoption.
+- Preserve unedited native captures, including failed captures. An incomplete lighting/camera capture is not evidence that off-camera materials work; center the fixture or capture smaller panels and inspect again.
+
 ## Furniture
 
 - Compute sheet width from object width, coordinate width, padding, style count, and horizontal/vertical style layout.

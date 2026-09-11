@@ -69,6 +69,14 @@ multiplayer claim is implied. The test uses an initially empty5x5 trial space
 inside the fixture, removes only its two created cells/new drops, and verifies
 the fixture digest is exactly unchanged afterward.
 
+Repair retest at18:44:43 UTC: **441/441 pass** on package
+`5CE92A72DBCDCB43C2651BC6BCD0339E89DB7DC20ED762A7A6ED1A449CF87DA4`.
+The thirteen ordinary dust assignments now use matching native soil, mineral,
+sand, ice, snow or mud particles. `properties-dust-repaired.json` preserves the
+verbatim scoped native results. No texture changes. These441 checks do not yet
+cover the older deep Gullet wall's purification or legacy turf's soil framing;
+those are being added as explicit cases during playable-material integration.
+
 ## Native captures (unaltered copies)
 
 | File | Original capture | SHA256 |

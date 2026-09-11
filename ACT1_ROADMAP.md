@@ -2,6 +2,20 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+September11 autonomous continuation supersedes the overnight pause below.
+Preserve the accepted harsh material pixels. A separate mixed art fixture and
+a separate playable fixture now exist in gg/V3/SP; both retain original saved
+layouts. The playable preview reuses the atlas bank and is opt-in at build time.
+Native properties now pass449/449; actual sand support-loss/fall/settlement
+passes42 real ticks with exact cleanup. Mining-dust, legacy-wall purification
+and legacy-turf framing defects were found and repaired. Dirt/Mud engine
+classifications fix eight excess-gap joins:12 native comparisons pass; removing
+both classifications reproduces8 failures, removing Mud alone reproduces2.
+This remains below production integration. See the September11
+MawNatural/MawPlayable evidence, not the historical gallery counts below.
+Next: complete bounded join/coating/render checks, then integrate the approved
+mouth in a disposable terrain fixture. No regular-world generation yet.
+
 September9 latest ART gate: the user approved the harsher twelve-material board
 and requested faithful implementation. Art/Candidates/MawTerrain-Harsh-v1/
 IMPLEMENTATION.md tracks sources, packed masks, native evidence and remaining

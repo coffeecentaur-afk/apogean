@@ -108,6 +108,8 @@ namespace apogean.Content.Diagnostics
 				File.Delete(requestPath);
 				if (!request.StartsWith("maw-natural-", System.StringComparison.Ordinal))
 					ModContent.GetInstance<MawNaturalLab>().Release();
+				if (!request.StartsWith("maw-playable-", System.StringComparison.Ordinal))
+					ModContent.GetInstance<MawPlayableLab>().Release();
 				if (request.StartsWith("vegetation-view-", System.StringComparison.Ordinal))
 				{
 					ModContent.GetInstance<VegetationVisualLab>().Start(request.Substring("vegetation-view-".Length));
@@ -184,7 +186,7 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<MawToothArtLab>().Run(request.Substring("maw-tooth-art-".Length));
 					return; // Never enter legacy fixture-clearing code.
 				}
-				if (request.StartsWith("maw-natural-", System.StringComparison.Ordinal))
+				if (request.StartsWith("maw-natural-", System.StringComparison.Ordinal) || request.StartsWith("maw-playable-", System.StringComparison.Ordinal))
 				{
 					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
 					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
@@ -193,7 +195,9 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<MawBoneLab>().Release();
 					ModContent.GetInstance<MawMaterialLab>().Release();
 					ModContent.GetInstance<MawMaterialFamilyLab>().Release();
-					ModContent.GetInstance<MawNaturalLab>().Run(request.Substring("maw-natural-".Length));
+					if(request.StartsWith("maw-playable-", System.StringComparison.Ordinal))
+						ModContent.GetInstance<MawPlayableLab>().Run(request.Substring("maw-playable-".Length));
+					else ModContent.GetInstance<MawNaturalLab>().Run(request.Substring("maw-natural-".Length));
 					return;
 				}
 				if (request.StartsWith("maw-family-", System.StringComparison.Ordinal))

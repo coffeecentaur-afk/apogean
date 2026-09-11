@@ -17,6 +17,12 @@ namespace apogean.Content.Tiles
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
+			// Legacy worldgen turf must use the same grass/soil contract as MawGrass.
+			TileID.Sets.Grass[Type] = true;
+			TileID.Sets.NeedsGrassFraming[Type] = true;
+			TileID.Sets.NeedsGrassFramingDirt[Type] = ModContent.TileType<MawDirt>();
+			Main.tileMerge[Type][ModContent.TileType<MawDirt>()] = true;
+			Main.tileMerge[ModContent.TileType<MawDirt>()][Type] = true;
 			Main.tileMerge[Type][TileID.Dirt] = true;
 			Main.tileMerge[TileID.Dirt][Type] = true;
 			TileID.Sets.Conversion.Grass[Type] = true;

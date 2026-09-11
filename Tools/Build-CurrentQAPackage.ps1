@@ -1,4 +1,4 @@
-param([switch]$CompileOnly,[switch]$KeepWorkspace)
+param([switch]$CompileOnly,[switch]$KeepWorkspace,[switch]$PackedMawPreview)
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
@@ -20,6 +20,7 @@ $options=@{
     AssetSnapshotPath='Tools/Manifests/QAAssets-2026-09-09.json'
     CompileOnly=$CompileOnly
     KeepWorkspace=$KeepWorkspace
+    PackedMawPreview=$PackedMawPreview
 }
 foreach($key in @($options.Keys)) {
     if($key -like '*Directory' -or $key -eq 'AssetSnapshotPath'){$options[$key]=Join-Path $root $options[$key]}

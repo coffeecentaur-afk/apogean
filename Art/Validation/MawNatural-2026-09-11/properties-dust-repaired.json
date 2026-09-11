@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-11T18:45:31.7683776Z",
+  "sourceLogSha256": "6F70335B8DC3B173E7005763CF50F8F1BE3AC1CFB338DA97ED1268C53766EA88",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[13:44:43.046] [Main Thread/INFO] [apogean]: MAW NATURAL LAYOUT: all authored cells match original plan; 284 ordinary vanilla control growth cells. Maw cells remain exact.",
+    "[13:44:43.050] [Main Thread/INFO] [apogean]: MAW PROPERTY MATERIAL FINISHED: soil",
+    "[13:44:43.051] [Main Thread/INFO] [apogean]: MAW PROPERTY MATERIAL FINISHED: stone",
+    "[13:44:43.051] [Main Thread/INFO] [apogean]: MAW PROPERTY MATERIAL FINISHED: grass",
+    "[13:44:43.051] [Main Thread/INFO] [apogean]: MAW PROPERTY MATERIAL FINISHED: sand",
+    "[13:44:43.051] [Main Thread/INFO] [apogean]: MAW PROPERTY MATERIAL FINISHED: ice",
+    "[13:44:43.052] [Main Thread/INFO] [apogean]: MAW PROPERTY MATERIAL FINISHED: snow",
+    "[13:44:43.052] [Main Thread/INFO] [apogean]: MAW PROPERTY MATERIAL FINISHED: mud",
+    "[13:44:43.052] [Main Thread/INFO] [apogean]: MAW PROPERTY MATERIAL FINISHED: clay",
+    "[13:44:43.052] [Main Thread/INFO] [apogean]: MAW PROPERTY MATERIAL FINISHED: legacy-turf",
+    "[13:44:43.053] [Main Thread/INFO] [apogean]: MAW PRODUCTION PROPERTIES: 441/441 passed; failures=. Native API tests, not hand-played, falling simulation, bomb simulation or multiplayer certification.",
+    "[13:44:43.055] [Main Thread/INFO] [apogean]: MAW PROPERTIES RESTORE: original fixture unchanged; no saved hash reset.",
+    "[13:44:43.055] [Main Thread/INFO] [apogean]: MAW NATURAL GROVE GUARD: unchanged; old reload failure is still separate/RED."
+  ]
+}

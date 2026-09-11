@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-11T19:18:11.6268177Z",
+  "sourceLogSha256": "AB4193C5D490AA29D693CB5D807091AEC05471F2894755E76C41DC550E0FE120",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[14:17:37.085] [Main Thread/INFO] [apogean]: MAW LAB REQUEST: MawPlayableLab/seams; productionTypes=True",
+    "[14:17:37.086] [Main Thread/INFO] [apogean]: MAW NATURAL LAYOUT: all authored cells match original plan; 229 ordinary vanilla control growth cells. Maw cells remain exact.",
+    "[14:17:37.098] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/stone; axis=X; native base gaps=0/64; Maw base gaps=16/64; excess=True.",
+    "[14:17:37.098] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/stone; axis=Y; native base gaps=0/64; Maw base gaps=16/64; excess=True.",
+    "[14:17:37.102] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/sand; axis=X; native base gaps=0/64; Maw base gaps=12/64; excess=True.",
+    "[14:17:37.102] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/sand; axis=Y; native base gaps=0/64; Maw base gaps=16/64; excess=True.",
+    "[14:17:37.105] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/mud; axis=X; native base gaps=0/64; Maw base gaps=16/64; excess=True.",
+    "[14:17:37.105] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/mud; axis=Y; native base gaps=0/64; Maw base gaps=16/64; excess=True.",
+    "[14:17:37.115] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/clay; axis=X; native base gaps=0/64; Maw base gaps=16/64; excess=True.",
+    "[14:17:37.116] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/clay; axis=Y; native base gaps=0/64; Maw base gaps=16/64; excess=True.",
+    "[14:17:37.119] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/snow; axis=X; native base gaps=16/64; Maw base gaps=16/64; excess=False.",
+    "[14:17:37.120] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/snow; axis=Y; native base gaps=16/64; Maw base gaps=16/64; excess=False.",
+    "[14:17:37.123] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/ice; axis=X; native base gaps=16/64; Maw base gaps=16/64; excess=False.",
+    "[14:17:37.123] [Main Thread/INFO] [apogean]: MAW SEAM SAMPLE: soil/ice; axis=Y; native base gaps=16/64; Maw base gaps=16/64; excess=False.",
+    "[14:17:37.123] [Main Thread/INFO] [apogean]: MAW SEAM BASEMASK RESULT: 4/12 no excess compared with native controls; 8 require draw/merge review. Not whole-scene visual acceptance.",
+    "[14:17:37.126] [Main Thread/INFO] [apogean]: MAW SEAM RESTORE: original fixture unchanged.",
+    "[14:17:37.126] [Main Thread/INFO] [apogean]: MAW NATURAL GROVE GUARD: unchanged; old reload failure is still separate/RED."
+  ]
+}

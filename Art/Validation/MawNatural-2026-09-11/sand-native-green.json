@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-11T19:14:03.7657413Z",
+  "sourceLogSha256": "6B2E86F317B82CB56F17E3F38B0ADA8DCA0B984B6BB5A01D863DF2B842CAD8F2",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[14:13:34.016] [Main Thread/INFO] [apogean]: MAW LAB REQUEST: MawPlayableLab/sand; productionTypes=True",
+    "[14:13:34.017] [Main Thread/INFO] [apogean]: MAW NATURAL LAYOUT: all authored cells match original plan; 215 ordinary vanilla control growth cells. Maw cells remain exact.",
+    "[14:13:34.021] [Main Thread/INFO] [apogean]: MAW SAND START: source={X:7220 Y:366}; expected landing={X:7220 Y:385}; empty owned envelope={X:7218 Y:362 Width:5 Height:25}; real game ticks, native support removal.",
+    "[14:13:34.021] [Main Thread/INFO] [apogean]: MAW NATURAL GROVE GUARD: unchanged; old reload failure is still separate/RED.",
+    "[14:13:34.700] [Main Thread/INFO] [apogean]: MAW SAND PHYSICS PASS: native support loss -> identity 0 -> downward motion -> exactly one MawSand at {X:7220 Y:385}; 42 actual game ticks.",
+    "[14:13:34.701] [Main Thread/INFO] [apogean]: MAW SAND CLEANUP: owned supports/sand/projectile released; caller must independently verify original fixture hash.",
+    "[14:13:34.703] [Main Thread/INFO] [apogean]: MAW NATURAL LAYOUT: all authored cells match original plan; 215 ordinary vanilla control growth cells. Maw cells remain exact.",
+    "[14:13:34.706] [Main Thread/INFO] [apogean]: MAW SAND RESTORE PASS: original authored layout restored; exact whole digest=True; native control growth=215; original saved checkpoint and grove unchanged."
+  ]
+}

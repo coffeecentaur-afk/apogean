@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using apogean.Content.Items.Placeable;
 using apogean.Content.Projectiles;
+using apogean.Content.Diagnostics;
 
 namespace apogean.Content.Tiles
 {
@@ -192,11 +193,19 @@ namespace apogean.Content.Tiles
 
 	public abstract class MawNaturalTile : ModTile
 	{
+		public override string Texture => MawPackedPreview.Texture(MawPackedPreview.TileKey(Name), false, base.Texture);
+		public override void SetDrawPositions(int i,int j,ref int width,ref int offsetY,ref int height,ref short tileFrameX,ref short tileFrameY) =>
+			MawPackedPreview.TileDraw(MawPackedPreview.TileKey(Name),i,j,ref tileFrameX,ref tileFrameY);
+		public override void SetSpriteEffects(int i,int j,ref SpriteEffects spriteEffects) {
+			if(MawPackedPreview.Enabled)spriteEffects=SpriteEffects.None;
+		}
 		protected abstract Color MapColor { get; }
 		protected abstract int VanillaEquivalent { get; }
 		protected abstract int PurifiedTile { get; }
 		protected abstract int ItemDrop { get; }
-		protected virtual int TileDust => DustID.AmberBolt;
+		// Ordinary ground sheds mineral/soil dust, never magic-projectile light.
+		// Emissive amber organs own their particles separately.
+		protected virtual int TileDust => DustID.Dirt;
 		protected virtual float Resistance => 1.15f;
 
 		public override void SetStaticDefaults()
@@ -228,7 +237,20 @@ namespace apogean.Content.Tiles
 		}
 	}
 
-	public sealed class MawDirt : MawNaturalTile { protected override Color MapColor => new(89, 67, 39); protected override int VanillaEquivalent => TileID.Dirt; protected override int PurifiedTile => ModContent.TileType<WastesSoil>(); protected override int ItemDrop => ModContent.ItemType<MawDirtBlock>(); }
+	public sealed class MawDirt : MawNaturalTile
+	{
+		protected override Color MapColor => new(89, 67, 39);
+		protected override int VanillaEquivalent => TileID.Dirt;
+		protected override int PurifiedTile => ModContent.TileType<WastesSoil>();
+		protected override int ItemDrop => ModContent.ItemType<MawDirtBlock>();
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+			// Native framing must recognize the substrate, not only ordinary
+			// Terraria dirt. Otherwise soil/material joins select exposed edges.
+			TileID.Sets.Dirt[Type] = true;
+		}
+	}
 	public sealed class MawGrass : MawNaturalTile
 	{
 		protected override Color MapColor => new(142, 99, 28);
@@ -281,6 +303,7 @@ namespace apogean.Content.Tiles
 		protected override int VanillaEquivalent => TileID.IceBlock;
 		protected override int PurifiedTile => ModContent.TileType<WastesIce>();
 		protected override int ItemDrop => ModContent.ItemType<MawIceBlock>();
+		protected override int TileDust => DustID.Ice;
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -298,6 +321,19 @@ namespace apogean.Content.Tiles
 		protected override int TileDust => DustID.Snow;
 		public override void SetStaticDefaults() { base.SetStaticDefaults(); TileID.Sets.Snow[Type] = true; }
 	}
-	public sealed class MawMud : MawNaturalTile { protected override Color MapColor => new(78, 62, 34); protected override int VanillaEquivalent => TileID.Mud; protected override int PurifiedTile => ModContent.TileType<WastesMud>(); protected override int ItemDrop => ModContent.ItemType<MawMudBlock>(); protected override int TileDust => DustID.Mud; }
+	public sealed class MawMud : MawNaturalTile
+	{
+		protected override Color MapColor => new(78, 62, 34);
+		protected override int VanillaEquivalent => TileID.Mud;
+		protected override int PurifiedTile => ModContent.TileType<WastesMud>();
+		protected override int ItemDrop => ModContent.ItemType<MawMudBlock>();
+		protected override int TileDust => DustID.Mud;
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+			// Native merge framing distinguishes mud from a generic solid block.
+			TileID.Sets.Mud[Type] = true;
+		}
+	}
 	public sealed class MawClay : MawNaturalTile { protected override Color MapColor => new(120, 88, 52); protected override int VanillaEquivalent => TileID.ClayBlock; protected override int PurifiedTile => ModContent.TileType<WastesSoil>(); protected override int ItemDrop => ModContent.ItemType<MawClayBlock>(); }
 }

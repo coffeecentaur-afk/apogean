@@ -13,6 +13,7 @@ param(
 	[string]$MawToothArtCandidateDirectory = '',
 	[string]$MawToothClusterCandidateDirectory = '',
 	[string]$AssetSnapshotPath = '',
+	[switch]$PackedMawPreview,
 	[switch]$KeepWorkspace,
 	[switch]$CompileOnly
 )
@@ -268,12 +269,14 @@ try {
 	}
 	Push-Location $mirrorRoot
 	try {
+		$buildOptions = @()
+		if ($PackedMawPreview) { $buildOptions += '-p:ApogeanMawPackedQA=true' }
 		if ($CompileOnly) {
 			# Local tML targets package/install AfterTargets=Build. Compile only,
 			# retaining their framework/reference defaults but never calling Build.
-			& dotnet build '.\apogean.csproj' -v:minimal -t:Compile
+			& dotnet build '.\apogean.csproj' -v:minimal -t:Compile @buildOptions
 		} else {
-			& dotnet build '.\apogean.csproj' -v:minimal
+			& dotnet build '.\apogean.csproj' -v:minimal @buildOptions
 		}
 		if ($LASTEXITCODE -ne 0) {
 			throw "The isolated Apogean build failed (exit code $LASTEXITCODE)."

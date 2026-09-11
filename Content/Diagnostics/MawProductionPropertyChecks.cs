@@ -58,7 +58,8 @@ namespace apogean.Content.Diagnostics
                 ("sand",W<MawSandWallUnsafe>(),W<WastesSandWallUnsafe>(),WallID.Sandstone),
                 ("ice",W<MawIceWallUnsafe>(),W<WastesIceWallUnsafe>(),WallID.IceUnsafe),
                 ("snow",W<MawSnowWallUnsafe>(),W<WastesSnowWallUnsafe>(),WallID.SnowWallUnsafe),
-                ("mud",W<MawMudWallUnsafe>(),W<WastesMudWallUnsafe>(),WallID.MudUnsafe)
+                ("mud",W<MawMudWallUnsafe>(),W<WastesMudWallUnsafe>(),WallID.MudUnsafe),
+                ("legacy-gullet",W<MawWallUnsafe>(),W<WastesDirtWallUnsafe>(),WallID.DirtUnsafe)
             };
             bool[] items = new bool[Main.maxItems]; for(int i=0;i<items.Length;i++)items[i]=Main.item[i].active;
             void ClearDrops() {
@@ -111,6 +112,7 @@ namespace apogean.Content.Diagnostics
                 Check(!MawConversionSystem.ConvertAt(p.X,p.Y,true,true) && Main.tile[p].TileType==T<KesslerBlock>() && Main.tile[p].WallType==W<KesslerBulkheadWall>(),"conversion-preserves-corporate-material");
                 Check(TileID.Sets.Falling[T<MawSand>()] && TileID.Sets.FallingBlockProjectile[T<MawSand>()]!=null,"sand-falling-registration-only");
                 Check(TileID.Sets.NeedsGrassFraming[T<MawGrass>()] && TileID.Sets.NeedsGrassFramingDirt[T<MawGrass>()]==T<MawDirt>(),"grass-native-soil-framing");
+                Check(TileID.Sets.NeedsGrassFraming[T<EngraftTurf>()] && TileID.Sets.NeedsGrassFramingDirt[T<EngraftTurf>()]==T<MawDirt>(),"legacy-turf-native-soil-framing");
                 // This is a policy check, not a simulated dust/light engine result.
                 foreach(var m in materials)Check(TileLoader.GetTile(m.Maw).DustType!=DustID.AmberBolt,m.Name+"/ordinary-mining-not-amber-projectile-dust");
                 foreach(var w in walls)Check(WallLoader.GetWall(w.Maw).DustType!=DustID.AmberBolt,w.Name+"/ordinary-wall-not-amber-projectile-dust");

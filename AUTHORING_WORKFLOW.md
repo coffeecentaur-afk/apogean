@@ -41,6 +41,30 @@ Prove those allowances with real cell mutations and exact state restoration.
 Mixed full-grass/slope/soil corners must pass, not just isolated slope artwork.
 Keep art-study tests distinct from shipping-tile mining/drop/conversion tests.
 
+The explicit `-PackedMawPreview` QA build routes actual Maw types to the SAME
+approved study texture objects; it is off in default builds. Only use the
+disposable world while that preview is installed. The playable fixture is a
+separate saved envelope, not a conversion/rebuild of the original art gallery.
+Run `Request-MawNaturalValidation.ps1 -Playable -Case properties` for real tile
+APIs and `-Case sand` for finite native physics ticks. Their exact restoration
+guards are part of the result. Flags alone do not certify falling or mining.
+`-Case seams` compares engine-selected inner join masks to native controls;
+this can fail even when every atlas pixel matches its own selected frame.
+Inspect the complete native scene after a merge repair before visual acceptance.
+Use `Export-MawNativeEvidence.ps1` to keep verbatim scoped records, including
+failures; it refuses to overwrite old evidence.
+
+Use `Invoke-ApogeanContentGate.ps1 -Profile MawMaterials` for the offline atlas,
+runtime-map, mutation and orchestration gates (no native input). Then, only in
+the approved loaded QA world, `Invoke-MawNativeSuite.ps1 -EvidencePath <new.json>`
+runs six finite native requests. Each must produce its own NEW log result;
+old green lines and request-file consumption alone cannot pass. Native completion
+must be logged after restoration guards; sand also needs later physics/cleanup.
+Its seven isolated
+CLI controls stub the sender in a temporary copy and never touch the game.
+Native suite success still requires visual inspection; it does not certify
+decorative/inert study interfaces, manual play, multiplayer or generation.
+
 Turn each confirmed user correction into a visible requirement and a regression
 check where one is possible. Keep reusable method changes in the installed and
 Git-mirrored authoring skill; biome identity/composition in the bible; exact source

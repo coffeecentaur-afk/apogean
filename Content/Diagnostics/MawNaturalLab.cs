@@ -15,8 +15,19 @@ namespace apogean.Content.Diagnostics
 {
     // A bounded renderer regression, NOT a world-generation template. Existing
     // terrain/galleries are never cleared, repaired, moved or rebaselined here.
-    public sealed class MawNaturalLab : ModSystem
+    public class MawNaturalLab : ModSystem
     {
+        protected virtual bool ProductionTypes => false;
+        private string SaveKey => ProductionTypes ? "mawPlayableFixtureV1" : "mawNaturalFixtureV1";
+        private MawNaturalLayout.Cell[,] Layout() {
+            var plan=MawNaturalLayout.Create();
+            if(ProductionTypes) {
+                // Encased sand, not floating inert study sand. This support is
+                // in the material bank, not a player ledge inside the throat.
+                for(int x=0;x<Width;x++) if(plan[x,48].Tile=="sand")plan[x,49].Tile="stone";
+            }
+            return plan;
+        }
         private const int Width = MawNaturalLayout.Width, Height = MawNaturalLayout.Height;
         private Rectangle bounds;
         private string checkpoint;
@@ -24,11 +35,14 @@ namespace apogean.Content.Diagnostics
         private double oldTime;
         private Vector2 oldPosition;
         private int panel, captureDelay = -1;
+        private MawSandPhysicsProbe sandProbe;
+        private string sandBefore, sandGroveBefore;
         private static bool IsQa => Main.netMode == NetmodeID.SinglePlayer &&
             Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" && Main.LocalPlayer.name == "gg";
         private Point At(int x, int y) => new(bounds.X + x, bounds.Y + y);
-        private static int Material(string key) => MawTerrainStudies.Tile(key).Type;
-        private static int ResolveTile(string key) => key switch {
+        private int Material(string key) => ProductionTypes ? MawPackedPreview.TileType(key) : MawTerrainStudies.Tile(key).Type;
+        private ModWall ResolveWall(string key) => ProductionTypes ? MawPackedPreview.Wall(key) : MawTerrainStudies.Wall(key);
+        private int ResolveTile(string key) => key switch {
             "vanilla-grass" => TileID.Grass, "vanilla-dirt" => TileID.Dirt,
             "vanilla-brick" => TileID.GrayBrick, _ => Material(key)
         };
@@ -36,6 +50,9 @@ namespace apogean.Content.Diagnostics
         internal void Run(string request)
         {
             if (!IsQa) throw new InvalidOperationException("Natural lab requires gg/V3/single-player.");
+            if(ProductionTypes && !MawPackedPreview.Enabled)throw new InvalidOperationException("Playable preview requires the explicit PackedMawPreview build.");
+            Mod.Logger.Info($"MAW LAB REQUEST: {Name}/{request}; productionTypes={ProductionTypes}");
+            if(sandProbe!=null && request!="release")throw new InvalidOperationException("Wait for the active sand probe, or release it.");
             string grove = ModContent.GetInstance<VegetationVisualLab>().CheckpointSnapshot();
             try {
                 switch (request) {
@@ -44,6 +61,8 @@ namespace apogean.Content.Diagnostics
                     case "reload": Test(); break;
                     case "negative": RejectMutations(); break;
                     case "properties": Properties(); break;
+                    case "sand": StartSand(); break;
+                    case "seams": Seams(); break;
                     case "natural": panel = 0; View(false); break;
                     case "corners": panel = 1; View(false); break;
                     case "night": View(true); break;
@@ -56,6 +75,9 @@ namespace apogean.Content.Diagnostics
                     throw new InvalidOperationException("Natural lab changed the preserved grove.");
                 Mod.Logger.Info("MAW NATURAL GROVE GUARD: unchanged; old reload failure is still separate/RED.");
             }
+            // Reached only after synchronous checks AND restoration guards.
+            // Asynchronous sand still needs its later PHYSICS/RESTORE records.
+            Mod.Logger.Info($"MAW LAB COMPLETE: {Name}/{request}");
         }
 
         private static bool Empty(Rectangle area)
@@ -73,8 +95,8 @@ namespace apogean.Content.Diagnostics
             Point p = At(x, y);
             Tile t = Main.tile[p];
             if (t.HasTile) throw new InvalidOperationException($"Refusing occupied fixture cell {p}.");
-            // These are inert study cells and native dirt/grass controls. Explicit
-            // state avoids random plant placement and native grass growth RNG.
+            // Authored study or playable cells plus vanilla controls. Native
+            // framing follows placement; later biology is verified separately.
             t.HasTile = true; t.TileType = (ushort)type;
             t.TileFrameX = t.TileFrameY = 0; t.Slope = SlopeType.Solid; t.IsHalfBlock = false;
         }
@@ -83,7 +105,7 @@ namespace apogean.Content.Diagnostics
         {
             if (!bounds.IsEmpty || checkpoint != null) throw new InvalidOperationException("Saved fixture exists; refusing rebuild.");
             Rectangle grove = ModContent.GetInstance<VegetationVisualLab>().PreservedBounds; grove.Inflate(16, 16);
-            foreach (int dx in new[] { 2080, -2240, 2320, -2480, 2560, -2720 }) {
+            foreach (int dx in ProductionTypes ? new[] { 2960, -2960, 3200, -3200 } : new[] { 2080, -2240, 2320, -2480, 2560, -2720 }) {
                 foreach (int dy in new[] { -180, -240, -300 }) {
                     Rectangle site = new(Main.spawnTileX + dx, Main.spawnTileY + dy, Width, Height);
                     Rectangle envelope = site; envelope.Inflate(4, 4);
@@ -95,14 +117,14 @@ namespace apogean.Content.Diagnostics
             }
             if (bounds.IsEmpty) throw new InvalidOperationException("No empty natural-lab envelope; nothing cleared.");
 
-            var plan = MawNaturalLayout.Create();
+            var plan = Layout();
             for (int x = 0; x < Width; x++) for (int y = 0; y < Height; y++) {
                 var cell = plan[x, y];
                 if (cell.Tile != null) {
                     Set(x, y, ResolveTile(cell.Tile)); Tile t = Main.tile[At(x, y)];
                     t.Slope = (SlopeType)cell.Slope; t.IsHalfBlock = cell.Half;
                 }
-                if (cell.Wall != null) Main.tile[At(x, y)].WallType = (ushort)MawTerrainStudies.Wall(cell.Wall).Type;
+                if (cell.Wall != null) Main.tile[At(x, y)].WallType = (ushort)ResolveWall(cell.Wall).Type;
             }
             WorldGen.RangeFrame(bounds.Left - 1, bounds.Top - 1, bounds.Right + 1, bounds.Bottom + 1);
             for (int x = bounds.Left; x < bounds.Right; x++) for (int y = bounds.Top; y < bounds.Bottom; y++) WorldGen.SquareWallFrame(x, y);
@@ -122,12 +144,12 @@ namespace apogean.Content.Diagnostics
         {
             RequireFixture();
             string before = Fingerprint();
-            var plan = MawNaturalLayout.Create();
+            var plan = Layout();
             // Reconstruct the original creation digest from the original layout,
             // not today's world. Never replace a failed saved digest with today's.
             if (Fingerprint(plan) != checkpoint) throw new InvalidOperationException($"Original-layout contract changed: saved={checkpoint}; reconstructed={Fingerprint(plan)}. No rebaseline.");
             int dynamicControlCells = ValidateLayout(plan);
-            int draws = 0, walls = 0, pixels = 0;
+            int draws = 0, walls = 0, pixels = 0, wallPixels = 0, sharedAssets = 0;
             var seen = new HashSet<string>();
             var cache = new Dictionary<Texture2D, Color[]>();
             Color[] Data(Texture2D texture) {
@@ -136,16 +158,24 @@ namespace apogean.Content.Diagnostics
             }
             for (int x = bounds.Left; x < bounds.Right; x++) for (int y = bounds.Top; y < bounds.Bottom; y++) {
                 Tile t = Main.tile[x, y];
-                if (t.HasTile && TileLoader.GetTile(t.TileType) is MawTerrainStudyTile tile) {
-                    seen.Add(tile.Name);
+                ModTile definition=t.HasTile?TileLoader.GetTile(t.TileType):null;
+                string key=definition is MawTerrainStudyTile ? definition.Name.Substring("Study_".Length) :
+                    ProductionTypes && definition!=null ? MawPackedPreview.TileKey(definition.Name) : null;
+                if (key!=null) {
+                    var map=MawTerrainStudies.Tile(key).Map;
+                    seen.Add(key);
                     short fx = t.TileFrameX, fy = t.TileFrameY; int width = 16, height = 16, offset = 0;
-                    if (!tile.Map.TryMap(x, y, fx, fy, out short expectedX, out short expectedY)) throw new InvalidOperationException($"Unmapped {tile.Name} {fx},{fy}");
+                    if (!map.TryMap(x, y, fx, fy, out short expectedX, out short expectedY)) throw new InvalidOperationException($"Unmapped {key} {fx},{fy}");
                     TileLoader.SetDrawPositions(x, y, ref width, ref offset, ref height, ref fx, ref fy);
                     if (fx != expectedX || fy != expectedY || width != 16 || height != 16 || offset != 0) throw new InvalidOperationException("Actual draw geometry mismatch");
                     Texture2D texture = TextureAssets.Tile[t.TileType].Value;
-                    if (texture.Width != tile.Map.Width || texture.Height != tile.Map.Height) throw new InvalidOperationException("Loaded atlas dimensions mismatch");
-                    int nativeType = tile.Name switch { "Study_soil" => TileID.Dirt, "Study_grass" => TileID.Grass, "Study_sand" => TileID.Sand,
-                        "Study_mud" => TileID.Mud, "Study_snow" => TileID.SnowBlock, "Study_ice" => TileID.IceBlock, _ => TileID.Stone };
+                    if(ProductionTypes && definition is not MawTerrainStudyTile) {
+                        if(!ReferenceEquals(texture,TextureAssets.Tile[MawTerrainStudies.Tile(key).Type].Value))throw new InvalidOperationException("Playable tile duplicated approved texture: "+key);
+                        sharedAssets++;
+                    }
+                    if (texture.Width != map.Width || texture.Height != map.Height) throw new InvalidOperationException("Loaded atlas dimensions mismatch");
+                    int nativeType = key switch { "soil" => TileID.Dirt, "grass" => TileID.Grass, "sand" => TileID.Sand,
+                        "mud" => TileID.Mud, "snow" => TileID.SnowBlock, "ice" => TileID.IceBlock, _ => TileID.Stone };
                     Main.instance.LoadTiles(nativeType);
                     Texture2D native = TextureAssets.Tile[nativeType].Value;
                     Color[] actual = Data(texture), reference = Data(native);
@@ -153,14 +183,35 @@ namespace apogean.Content.Diagnostics
                         Color a = actual[(fy + py) * texture.Width + fx + px];
                         Color b = reference[(t.TileFrameY + py) * native.Width + t.TileFrameX + px];
                         if (a.A != b.A || (a.A != 0 && ((a.R > 245 && a.G > 245 && a.B > 245) || (a.R > 245 && a.B > 245 && a.G < 10))))
-                            throw new InvalidOperationException($"NATIVE_MASK_OR_EXPORT_KEY {tile.Name} at {x},{y} pixel {px},{py} native {t.TileFrameX},{t.TileFrameY}");
+                            throw new InvalidOperationException($"NATIVE_MASK_OR_EXPORT_KEY {key} at {x},{y} pixel {px},{py} native {t.TileFrameX},{t.TileFrameY}");
                         pixels++;
                     }
                     if (!Main.tileSolid[t.TileType] || Main.tileLighted[t.TileType]) throw new InvalidOperationException("Art study unexpectedly lost solidity or gained emission");
                     draws++;
                 }
-                if (WallLoader.GetWall(t.WallType) is MawTerrainStudyWall wall) {
-                    if (!wall.Map.TryMap(x, y, t.WallFrameX, t.WallFrameY, out _, out _)) throw new InvalidOperationException("Unmapped wall frame");
+                ModWall wall=WallLoader.GetWall(t.WallType);
+                string wallKey=wall is MawTerrainStudyWall ? wall.Name.Substring("StudyWall_".Length) :
+                    ProductionTypes && wall!=null ? MawPackedPreview.WallKey(wall.Name) : null;
+                if (wallKey!=null) {
+                    var map=MawTerrainStudies.Wall(wallKey).Map;
+                    if (!map.TryMap(x, y, t.WallFrameX, t.WallFrameY, out short wx, out short wy)) throw new InvalidOperationException("Unmapped wall frame");
+                    Texture2D texture=TextureAssets.Wall[t.WallType].Value;
+                    if(texture.Width!=map.Width || texture.Height!=map.Height)throw new InvalidOperationException("Loaded wall dimensions mismatch");
+                    if(ProductionTypes && wall is not MawTerrainStudyWall) {
+                        if(!ReferenceEquals(texture,TextureAssets.Wall[MawTerrainStudies.Wall(wallKey).Type].Value))throw new InvalidOperationException("Playable wall duplicated approved texture: "+wallKey);
+                        sharedAssets++;
+                    }
+                    int nativeWall=wallKey switch { "soil" or "grass"=>WallID.DirtUnsafe, "sand"=>WallID.Sandstone,
+                        "mud"=>WallID.MudUnsafe, "snow"=>WallID.SnowWallUnsafe, "ice"=>WallID.IceUnsafe, _=>WallID.Stone };
+                    Main.instance.LoadWall(nativeWall);
+                    Texture2D native=TextureAssets.Wall[nativeWall].Value;
+                    Color[] actual=Data(texture),reference=Data(native);
+                    for(int py=0;py<32;py++)for(int px=0;px<32;px++) {
+                        Color a=actual[(wy+py)*texture.Width+wx+px],b=reference[(t.WallFrameY+py)*native.Width+t.WallFrameX+px];
+                        if(a.A!=b.A || (a.A!=0 && ((a.R>245 && a.G>245 && a.B>245)||(a.R>245 && a.B>245 && a.G<10))))
+                            throw new InvalidOperationException($"NATIVE_WALL_MASK_OR_KEY {wallKey} at {x},{y} pixel{px},{py}");
+                        wallPixels++;
+                    }
                     walls++;
                 }
             }
@@ -176,6 +227,7 @@ namespace apogean.Content.Diagnostics
             if (seen.Count != 12 || draws < 2000 || walls < 500) throw new InvalidOperationException("Natural fixture incomplete");
             if (Fingerprint() != before) throw new InvalidOperationException("Read-only test changed fixture");
             Mod.Logger.Info($"MAW NATURAL MATRIX PASS: {draws} actual tile draws; {pixels} loaded alpha/key pixels; {walls} wall frames; 10 paired mixed-substrate cases; 12 materials; {dynamicControlCells} vanilla-only biological control changes; original checkpoint={checkpoint}. Visual contact/repetition still requires screenshots. No gameplay promotion.");
+            Mod.Logger.Info($"MAW NATURAL WALL/ASSET PASS: {wallPixels} loaded wall alpha/key pixels; {sharedAssets} playable cells reference the SAME already-loaded study texture objects, with no duplicate atlas bank.");
             cache.Clear();
         }
 
@@ -191,7 +243,7 @@ namespace apogean.Content.Diagnostics
                      (expected == -1 && actual is TileID.Plants or TileID.Plants2 or TileID.Vines));
                 bool bad = (actual != expected && !controlGrowth) || (byte)t.Slope != cell.Slope || t.IsHalfBlock != cell.Half ||
                     t.TileColor != PaintID.None || t.IsActuated || t.IsTileInvisible || t.IsTileFullbright ||
-                    t.WallType != (cell.Wall == null ? WallID.None : MawTerrainStudies.Wall(cell.Wall).Type) ||
+                    t.WallType != (cell.Wall == null ? WallID.None : ResolveWall(cell.Wall).Type) ||
                     t.WallColor != PaintID.None || t.IsWallInvisible || t.IsWallFullbright || t.LiquidAmount != 0 ||
                     t.HasActuator || t.RedWire || t.BlueWire || t.GreenWire || t.YellowWire;
                 if (bad) { if (unexpected++ < 20) Mod.Logger.Error($"MAW NATURAL CELL DIFF: {At(x,y)} expected={cell.Tile ?? "empty"},slope{cell.Slope},half{cell.Half}; actual={actual},slope{(byte)t.Slope},half{t.IsHalfBlock}; wall={t.WallType}"); }
@@ -204,7 +256,7 @@ namespace apogean.Content.Diagnostics
 
         private void RejectMutations()
         {
-            RequireFixture(); var plan = MawNaturalLayout.Create();
+            RequireFixture(); var plan = Layout();
             if (Fingerprint(plan) != checkpoint) throw new InvalidOperationException("Original plan changed; controls refused.");
             ValidateLayout(plan);
             string before = Fingerprint(); int checks = 0;
@@ -240,7 +292,7 @@ namespace apogean.Content.Diagnostics
 
         private void Properties()
         {
-            RequireFixture(); var plan = MawNaturalLayout.Create();
+            RequireFixture(); var plan = Layout();
             if (Fingerprint(plan) != checkpoint) throw new InvalidOperationException("Original plan changed; properties refused.");
             ValidateLayout(plan); string before = Fingerprint();
             try { MawProductionPropertyChecks.Run(At(8, 99), Mod.Logger); }
@@ -248,6 +300,34 @@ namespace apogean.Content.Diagnostics
                 if (Fingerprint() != before) throw new InvalidOperationException("Property checks changed saved fixture.");
                 Mod.Logger.Info("MAW PROPERTIES RESTORE: original fixture unchanged; no saved hash reset.");
             }
+        }
+
+        private void StartSand()
+        {
+            RequireFixture(); ValidateLayout(Layout());
+            sandBefore=Fingerprint(); sandGroveBefore=ModContent.GetInstance<VegetationVisualLab>().CheckpointSnapshot();
+            sandProbe=new MawSandPhysicsProbe(new Rectangle(bounds.X+62,bounds.Y+2,5,25),Mod.Logger);
+        }
+        private void Seams()
+        {
+            RequireFixture();ValidateLayout(Layout());string before=Fingerprint();
+            try { MawMergeCoverageChecks.Run(At(8,99),Mod.Logger); }
+            finally {
+                if(Fingerprint()!=before)throw new InvalidOperationException("Join trial changed fixture; no rebaseline.");
+                Mod.Logger.Info("MAW SEAM RESTORE: original fixture unchanged.");
+            }
+        }
+        private void FinishSand()
+        {
+            if(sandProbe==null)return;
+            sandProbe.Cancel();sandProbe=null;
+            try {
+                if(Fingerprint(Layout())!=checkpoint)throw new InvalidOperationException("Original saved layout changed.");
+                int biological=ValidateLayout(Layout());
+                if(ModContent.GetInstance<VegetationVisualLab>().CheckpointSnapshot()!=sandGroveBefore)
+                    throw new InvalidOperationException("Sand probe changed grove.");
+                Mod.Logger.Info($"MAW SAND RESTORE PASS: original authored layout restored; exact whole digest={Fingerprint()==sandBefore}; native control growth={biological}; original saved checkpoint and grove unchanged.");
+            } catch(Exception ex) { Mod.Logger.Error("MAW SAND RESTORE FAIL; no repair or rebaseline: "+ex.Message); }
         }
 
         private string Fingerprint(MawNaturalLayout.Cell[,] plan = null)
@@ -261,7 +341,7 @@ namespace apogean.Content.Diagnostics
                         int type = ResolveTile(cell.Tile); w.Write(TileLoader.GetTile(type)?.FullName ?? $"Terraria/{type}");
                         w.Write(cell.Slope); w.Write(cell.Half); w.Write((byte)0); w.Write(false); w.Write(false); w.Write(false);
                     }
-                    w.Write(cell.Wall == null ? "Terraria/0" : MawTerrainStudies.Wall(cell.Wall).FullName);
+                    w.Write(cell.Wall == null ? "Terraria/0" : ResolveWall(cell.Wall).FullName);
                     w.Write((byte)0); w.Write(false); w.Write(false); w.Write((byte)0);
                     for (int n = 0; n < 5; n++) w.Write(false);
                     continue;
@@ -280,37 +360,49 @@ namespace apogean.Content.Diagnostics
             RequireFixture();
             if (!viewing) { oldPosition = Main.LocalPlayer.position; oldDay = Main.dayTime; oldTime = Main.time; oldRain = Main.raining; oldEclipse = Main.eclipse; viewing = true; }
             Main.dayTime = !night; Main.time = night ? 16000 : 27000; Main.raining = false; Main.eclipse = false;
-            Main.LocalPlayer.Teleport(new Vector2((bounds.X + 64) * 16, (bounds.Y + (panel == 0 ? 60 : 93)) * 16 - Main.LocalPlayer.height), 1);
+            Main.LocalPlayer.Teleport(ViewPosition(), 1);
             Main.LocalPlayer.velocity = Vector2.Zero;
-            Main.NewText(panel == 0 ? "Maw material context — inert art study; not generated Gullet geometry." : "Native Grass/Dirt above; Maw Grass/Soil below. All four slopes both orders, half, stairs.", Color.Wheat);
+            Main.NewText(panel == 0 ? (ProductionTypes ? "Maw playable material preview — nine real terrain types; fibers/membrane/amber still studies. Not Gullet worldgen." : "Maw material context — inert art study; not generated Gullet geometry.") : "Native Grass/Dirt above; Maw Grass/Soil below. All four slopes both orders, half, stairs.", Color.Wheat);
         }
 
         public override void PostUpdateEverything()
         {
+            if(IsQa && sandProbe!=null) { sandProbe.Tick(); if(sandProbe.Finished)FinishSand(); }
+            // Renderer-only view: keep the camera/light cache centered on the
+            // captured panel instead of falling below it during the warm-up.
+            // Release restores the caller's position/time. This is NOT a walk test.
+            if (IsQa && viewing) { Main.LocalPlayer.position = ViewPosition(); Main.LocalPlayer.velocity = Vector2.Zero; }
             if (!IsQa || captureDelay < 0 || captureDelay-- != 0) return; captureDelay = -1;
             CaptureManager.Instance.Capture(new CaptureSettings {
                 Area = new Rectangle(bounds.X, bounds.Y + (panel == 0 ? 0 : 63), Width, panel == 0 ? 62 : 33),
                 Biome = new CaptureBiome(0, 0, Main.LocalPlayer.CurrentSceneEffect.tileColorStyle),
                 CaptureBackground = true, CaptureEntities = true, UseScaling = true,
-                OutputName = $"Apogean Maw Natural {panel} " + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")
+                OutputName = $"Apogean {Name} {panel} " + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")
             });
         }
+        private Vector2 ViewPosition() => new((bounds.X + 64) * 16, (bounds.Y + (panel == 0 ? 30 : 80)) * 16 - Main.LocalPlayer.height);
         internal void Release()
         {
+            if(IsQa)FinishSand();
             captureDelay = -1; if (!viewing) return;
             Main.dayTime = oldDay; Main.time = oldTime; Main.raining = oldRain; Main.eclipse = oldEclipse;
             if (IsQa) Main.LocalPlayer.Teleport(oldPosition, 1); viewing = false;
         }
         public override void SaveWorldData(TagCompound tag)
         {
+            if(IsQa)FinishSand();
             if (Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" && checkpoint != null)
-                tag["mawNaturalFixtureV1"] = new TagCompound { ["x"] = bounds.X, ["y"] = bounds.Y, ["checkpoint"] = checkpoint };
+                tag[SaveKey] = new TagCompound { ["x"] = bounds.X, ["y"] = bounds.Y, ["checkpoint"] = checkpoint };
         }
         public override void LoadWorldData(TagCompound tag)
         {
-            if (Main.ActiveWorldFileData?.Name != "Apogee Native Visual V3" || !tag.ContainsKey("mawNaturalFixtureV1")) return;
-            TagCompound saved = tag.GetCompound("mawNaturalFixtureV1"); bounds = new Rectangle(saved.GetInt("x"), saved.GetInt("y"), Width, Height); checkpoint = saved.GetString("checkpoint");
+            if (Main.ActiveWorldFileData?.Name != "Apogee Native Visual V3" || !tag.ContainsKey(SaveKey)) return;
+            TagCompound saved = tag.GetCompound(SaveKey); bounds = new Rectangle(saved.GetInt("x"), saved.GetInt("y"), Width, Height); checkpoint = saved.GetString("checkpoint");
         }
-        public override void ClearWorld() { bounds = Rectangle.Empty; checkpoint = null; viewing = false; captureDelay = -1; panel = 0; }
+        public override void ClearWorld() { bounds = Rectangle.Empty; checkpoint = null; viewing = false; captureDelay = -1; panel = 0; sandProbe=null; }
+    }
+    public sealed class MawPlayableLab : MawNaturalLab
+    {
+        protected override bool ProductionTypes => true;
     }
 }

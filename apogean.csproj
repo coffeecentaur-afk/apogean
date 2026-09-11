@@ -9,6 +9,9 @@
 	</PropertyGroup>
 
 	<!-- References -->
+	<PropertyGroup Condition="'$(ApogeanMawPackedQA)' == 'true'">
+		<DefineConstants>$(DefineConstants);APOGEAN_MAW_PACKED_QA</DefineConstants>
+	</PropertyGroup>
 	<ItemGroup>
 		
 	</ItemGroup>

@@ -14,6 +14,7 @@ namespace apogean.Content.Tiles
 		protected override int PurifiedTile => ModContent.TileType<WastesStone>();
 		protected override int ItemDrop => ModContent.ItemType<MawstoneBlock>();
 		protected override float Resistance => 2.4f;
+		protected override int TileDust => DustID.Stone;
 
 		public override void SetStaticDefaults()
 		{

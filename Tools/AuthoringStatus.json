@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-playable-materials-native-v1",
+      "status": "fixture-pass",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/MawPlayable-2026-09-11/README.md",
+      "evidenceScope": "Separate saved gg/V3/SP fixture; accepted artwork unchanged. Opt-in actual terrain preview shares existing atlas objects. Build1751EED9 clean;466 pinned asset bytes unchanged. Saved layout retained;3709 native draws/949504 tile pixels/870400 wall pixels/4111 shared-asset cells pass.449 actual API properties pass; native sand falls and settles after42 ticks with exact restoration. Dirt/Mud classifications repair8 excess-gap joins;12 native comparisons and deliberate missing-classification controls pass. This is fixture verification, not full worldgen or manual/MP certification.",
+      "blockers": ["Native whole-scene review still sees openings at mixed fiber/bone study interfaces and diagonal joins. Resolve these;12 base-mask cases do not certify them. Final4BB0544A clean-session suite passes all6 native requests with post-cleanup completion markers at19:46UTC. Coatings/settings, bombs, manual/MP, memory and worldgen remain. Fibers/membrane/amber are still studies; preview default off.", "Known old grove cross-reload mismatch remains RED; do not rebuild/rebaseline. No normal worlds, acid, mobs or boss expansion. Mouth integration follows bounded terrain proof and preserves no safe ledges."]
+    },
+    {
       "id": "maw-harsh-materials-packed-v2",
       "status": "fixture-pass",
       "static": "pass",
@@ -12,7 +24,7 @@
       "userReview": "accepted",
       "evidenceReference": "Art/Validation/MawMaterials-2026-09-09/README.md",
       "evidenceScope": "Approved harsh board translated to12 original native material studies plus12 walls. Engine-mask packing preserves saved frames.148945920 pixel checks;1326272 runtime-map cases;8 compiler mutation controls. Corrected package2558EE6F loads;3444 actual tile draws and1680 wall frames pass before/after real save-reopen. All3 rows/night captured unchanged.416 previous PNGs unchanged. User then says looks great and pauses until tomorrow: native gallery appearance accepted, not production gameplay or natural-context certification.",
-      "blockers": ["Natural-context appearance/repetition and mixed grass-soil slope/merge proof before production. Complete hanging roots separately. Sand/amber are art-only solids; drops, falling/projectiles, light, purification, multiplayer and memory acceptance pending.245.79MiB diagnostic textures must not be blindly duplicated into shipping content.", "Known grove cross-reload mismatch remains RED with changing observed digests; only within-request guards pass. No saved fixture rebuild, ordinary-world change or generation/acid/boss expansion."]
+      "blockers": ["See separate September11 playable fixture for mixed-context/native mining/drop/conversion/sand proof; this original gallery itself remains inert art. Complete hanging roots separately. Amber/organ emission, multiplayer, full memory and natural generation remain pending.245.79MiB diagnostic textures must not be blindly duplicated into shipping content.", "Known grove cross-reload mismatch remains RED with changing observed digests; only within-request guards pass. No saved fixture rebuild, ordinary-world change or generation/acid/boss expansion."]
     },
     {
       "id": "maw-tooth-player-curves-v4",
