@@ -29,6 +29,18 @@ mask, not merely intersect its bounding rectangle. The arrival planner's real
 source tests and seven mutations retain this rule; replay the SAME failed seed
 after a fix, then inspect native generation and save/reload independently.
 
+September11 verification additions: use `Tools/Build-CurrentQAPackage.ps1` for
+the pinned QA override set. It checks all466 texture/map bytes BEFORE packaging;
+missing overrides must fail instead of silently reviving old placeholders.
+`New-QAAssetSnapshot.ps1` never replaces a baseline. Its validator has seven
+actual CLI positive/negative cases. Byte continuity is not visual acceptance.
+For living native comparison fixtures, replay the original layout and retain
+the original creation hash. Allow only explicitly specified biological changes
+in the control bank; reject structural/material/coating changes everywhere else.
+Prove those allowances with real cell mutations and exact state restoration.
+Mixed full-grass/slope/soil corners must pass, not just isolated slope artwork.
+Keep art-study tests distinct from shipping-tile mining/drop/conversion tests.
+
 Turn each confirmed user correction into a visible requirement and a regression
 check where one is possible. Keep reusable method changes in the installed and
 Git-mirrored authoring skill; biome identity/composition in the bible; exact source

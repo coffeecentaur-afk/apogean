@@ -106,6 +106,8 @@ namespace apogean.Content.Diagnostics
 			{
 				request = File.ReadAllText(requestPath).Trim().ToLowerInvariant();
 				File.Delete(requestPath);
+				if (!request.StartsWith("maw-natural-", System.StringComparison.Ordinal))
+					ModContent.GetInstance<MawNaturalLab>().Release();
 				if (request.StartsWith("vegetation-view-", System.StringComparison.Ordinal))
 				{
 					ModContent.GetInstance<VegetationVisualLab>().Start(request.Substring("vegetation-view-".Length));
@@ -113,6 +115,7 @@ namespace apogean.Content.Diagnostics
 				}
 				if (request == "qa-save-and-quit")
 				{
+					ModContent.GetInstance<MawNaturalLab>().Release();
 					ModContent.GetInstance<MawMaterialFamilyLab>().Release();
 					ModContent.GetInstance<MawMaterialLab>().Release();
 					ModContent.GetInstance<MawClusterOrientationLab>().Release();
@@ -181,6 +184,18 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<MawToothArtLab>().Run(request.Substring("maw-tooth-art-".Length));
 					return; // Never enter legacy fixture-clearing code.
 				}
+				if (request.StartsWith("maw-natural-", System.StringComparison.Ordinal))
+				{
+					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
+					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
+					ModContent.GetInstance<VegetationVisualLab>().Release();
+					ModContent.GetInstance<ArrivalPodLab>().Release();
+					ModContent.GetInstance<MawBoneLab>().Release();
+					ModContent.GetInstance<MawMaterialLab>().Release();
+					ModContent.GetInstance<MawMaterialFamilyLab>().Release();
+					ModContent.GetInstance<MawNaturalLab>().Run(request.Substring("maw-natural-".Length));
+					return;
+				}
 				if (request.StartsWith("maw-family-", System.StringComparison.Ordinal))
 				{
 					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
@@ -194,6 +209,7 @@ namespace apogean.Content.Diagnostics
 				}
 				if (request.StartsWith("maw-material-", System.StringComparison.Ordinal))
 				{
+					ModContent.GetInstance<MawMaterialFamilyLab>().Release();
 					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
 					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
 					ModContent.GetInstance<VegetationVisualLab>().Release();

@@ -12,6 +12,7 @@ param(
 	[string]$MawFangCandidateDirectory = '',
 	[string]$MawToothArtCandidateDirectory = '',
 	[string]$MawToothClusterCandidateDirectory = '',
+	[string]$AssetSnapshotPath = '',
 	[switch]$KeepWorkspace,
 	[switch]$CompileOnly
 )
@@ -258,6 +259,12 @@ try {
 			Copy-Item -LiteralPath (Join-Path $candidateRoot $name) -Destination (Join-Path $destination $name)
 		}
 		Write-Host 'Placeable thorn-style cluster included in this candidate package only.'
+	}
+	if ($AssetSnapshotPath) {
+		# Check the assembled bytes BEFORE Build can package/install them. A valid
+		# source tree alone does not prove the QA candidate overrides were retained.
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-QAAssetSnapshot.ps1') -BuildRoot $mirrorRoot -SnapshotPath $AssetSnapshotPath
+		if ($LASTEXITCODE -ne 0) { throw 'Pinned QA asset continuity failed; package not built/installed.' }
 	}
 	Push-Location $mirrorRoot
 	try {
