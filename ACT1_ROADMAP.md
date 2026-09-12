@@ -39,6 +39,13 @@ pocket/lower ribs remain visually underlit; do not approve obscured geometry.
 Restricted character build-denial and unchanged save state pass. Broader shallow
 route, interaction, artwork and generation gates remain open.
 
+At20:37UTC I adds two232-update native outbound connector walks with the same
+100HP starter character:66 falling ticks,12 settled, zero tooth contacts. Raw
+schema3 traces pass independently; the original119-update entry still passes.
+No passage is widened and no rope/platform/physics override is supplied. Return
+ascent remains an equipment/building task pending testing, not an implied pass.
+H's1.6× light candidate remains provisional; dark hazards are not visually passed.
+
 September11 evening continuation: bone/actual-soil/grass root seams now pass
 24 native comparisons and two deliberately disabled-rule checks. Existing
 playable suite stays green. A separate saved anatomy comparison adds tapered

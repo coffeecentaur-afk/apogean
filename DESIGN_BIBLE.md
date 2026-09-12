@@ -229,6 +229,10 @@ player light. This is an unresolved implementation/readability issue, not a new
 art direction or permission to flatten the cavern with fullbright lighting.
 Retain dark gray/brown geology and sparse warm amber; judge hazards and rib joins
 in native views before accepting distribution or promoting the generator.
+The provisional1.6× amber trial is not a production brightness decision. A
+separate labeled inspection lamp may expose texture/shape defects in held QA
+views; it must never be reported as natural hazard readability or saved into
+the biome. Keep that art inspection distinct from actual awake/dormant controls.
 
 The user likes the mixed material direction, while requesting thicker, less
 choppy **living fiber grass** on surface soil, wrapping exposed floors, sides

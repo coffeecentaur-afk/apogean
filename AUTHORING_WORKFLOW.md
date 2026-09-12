@@ -28,6 +28,9 @@ captures at the same camera and never alter progression to force a comparison.
 Movement evidence must retain actual tick samples and health, not just a PASS
 header. Validators must reject contradictory sample/summary data and malformed
 baseline fields. A scoped QA character should reject construction requests.
+Hold time/weather as well as camera for sequential light comparisons. A held
+player can remain in place while ambient daylight changes. Restoring emission
+does not imply identical rendered RGB unless the other light sources are fixed.
 Texture tests must follow the actual binding: keep production fallback topology
 separate from opt-in packed atlas mapping instead of testing an unused PNG.
 

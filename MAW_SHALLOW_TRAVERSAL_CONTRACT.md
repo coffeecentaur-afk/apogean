@@ -168,6 +168,29 @@ G proves differing awake/dormant illumination; it does not approve the dim pocke
 New ambient spawns are suppressed during this character's scene visit only;
 existing actors are never killed. This is terrain isolation, not enemy balancing.
 
+## I connector-out trial (pending native evidence)
+
+The explicit `motion-connector-out` command uses the unchanged v1 scene, starting
+on existing supported terrain at local pixel(1312,646), beside the pocket opening.
+No new ledge is added. Native left/right/release inputs steer toward the center
+of the two-tile shaft at x70, then toward the lower connector exit at x59 after
+the entire body clears y63. A simple stopping-distance estimate decides when to
+release input; it is not a substitute physics solver. Terraria still owns actual
+velocity, gravity, wall collisions, damage and floor landing. No jump is supplied.
+This is only outbound/downward travel, not the return ascent or manual-play proof.
+
+The controller retains the360-update/10-second budget. Its envelope is local
+x54..90/y36..72 tiles. Trace schema3 names the route and records both directional
+inputs. The independent validator requires the exact supported start, continuous
+samples, actual left/falling inputs and12 stable ticks on the existing lower floor
+at y69. Old entry schema1/2 evidence remains valid without rewriting any originals.
+Three synthetic baselines/28 deliberate defects test the validator, not Terraria.
+
+Held views now hold noon/rain/eclipse as well as the camera; this avoids H's
+advancing ambient-sky confound. Free movement does not freeze time or apply the
+amber preview. Release restores the pre-visit time/weather and clears1.6× preview.
+No changed emission strength is approved for production by this trial.
+
 Canonical integration reference only:
 `Common/WorldGeneration/ApogeanWorldGenerationSystem.cs` orders Maw after vanilla
 Final Cleanup, then optional Wastes, Arrival Survey, Compounds, Ruins and Arrival.

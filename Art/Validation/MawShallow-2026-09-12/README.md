@@ -143,3 +143,57 @@ The old structural-wall test now recognizes the specific packed-preview wrapper
 and verifies its production fallback branch (468×180 native dirt-wall topology).
 Three resolver positives/five negatives pass. This does not certify packed art;
 the other broad background/world-integrity failures remain open.
+
+## H provisional light-strength comparison
+
+Package `7268E441BC2E419B2BD100E300C69461D7D61F0238F7A400A2BE0CE3B3877401`
+entered V3/Plain at15:19:05 Central and passed exact reload. Same fixed geometry,
+466 unchanged art/map pins. Held-view-only `light-*-bright` requests multiply
+the existing amber emission by1.6; no production brightness or progression edit.
+The pure scope matrix passes951 checks, including exclusion outside the scene.
+
+Unedited native `h-pocket-awake-bright.png` and `h-pocket-dormant-bright.png`
+are comparison evidence, not final art approval. Stronger amber helps locally,
+but several teeth and most of the connector remain difficult to see. Increasing
+one distant light does not establish adequate hazard lighting everywhere.
+At local99,35, awake142/80/18 and dormant45/25/5 were measured with Plain baseline
+and zero other actors. Max emission is(.88,.496,.088) versus(.2816,.15872,.02816),
+preserving the32% dormant ratio. Both commands leave globalDormant=True.
+
+`light-natural` at15:27:43 restores scale1 and actual dormant emission exactly.
+The red-channel controls return to G's36/36/28/26. Other sampled channels differ:
+the held camera did not freeze the advancing world clock, so changing ambient
+sky light confounds an exact cross-run RGB comparison. Retain this limitation;
+the next harness must hold time as well as camera for controlled art comparisons.
+Release clears preview strength/state. Neither1.6 brightness nor new art is
+promoted. Native H save/preservation records are archived separately.
+
+## I outbound connector movement
+
+Package `6772E191152F1DD54E469BDD5C9AB13FDFC350E73294DE24E350704D1D2FB861`,
+mirror c14449df02604389bb253b4284c2b990, zero warnings/errors and466 unchanged pins.
+V3/Plain entered15:35:38 Central; actual saved-state reload passed15:35:55.
+Two runs at15:36:20 and15:36:55 both pass232 actual/controlled updates,66 falling,
+12 settled, zero tooth contact and100→100 HP. The unmodified files are
+`motion-i-connector-pass-1.json` and `motion-i-connector-pass-2.json`.
+Both independently pass the route-aware trace validator. The actual samples
+show the body stopping against the first shaft wall, reaching the middle floor,
+passing the two-tile throat and settling on the lower floor. No tile was cleared,
+body snapped, velocity assigned during travel or jump/rope/equipment supplied.
+
+Entry regression `motion-i-entry-pass.json` also passes119 updates/46 falling/
+12 settled/zero contact/100HP. Native movement and exported-validator checks are
+separate from manual feel, difficulty, return ascent and full Gullet traversal.
+The controlled lighting follow-up and I pre-save checks are recorded next.
+
+I held-noon lighting sequence restores all four sampled RGBA colors exactly
+after natural → awake1.6× → natural (15:38:57 /15:40:01 /15:41:45 Central).
+Natural samples are36/20/7,36/20/9,28/18/18,26/17/17; zero other actors and
+unchanged starter baseline throughout. `i-pocket-awake-bright-noon.png` is the
+unedited controlled capture. It remains locally underlit away from the organ;
+this does not resolve the visual gate. H's clock-confounded comparison remains
+retained, not rewritten. Subsequent inspection lighting will be explicitly
+labeled as an art diagnostic, never a natural-light or difficulty pass.
+
+Pristine passes15:42:34 and native save15:42:56–57 retains originalF3CC4D2B /
+actual24163E65. `native-i-presave.json` retains68 scoped verbatim records.

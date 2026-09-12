@@ -192,3 +192,20 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
   unrelated background/world-integrity REDs remain. All466 art pins untouched.
   Next: bounded rib/connector readability and interaction proof, no generator
   promotion or new-world replacement yet.
+- 20:19–20:32UTC: H7268E441 loads V3/Plain and reopens unchanged saved terrain.
+  Bounded1.6× amber preview improves local light but does not make all teeth/roots
+  readable; keep provisional. Dormancy ratio and natural emission restoration
+  pass. Advancing ambient sky confounds exact RGB comparison; next held views
+  will hold noon. Captures and58 scoped records retained. Pristine11648cells and
+  native save15:31:53Central retain24163E65; normal menu exit verified.
+- I source adds one actual-player outbound connector input sequence and schema3
+  directional traces; no geometry/assets/physics changed. Static shallow gate
+  passes11930plan/953scope checks plus28 rejected trace defects; both prior G
+  native traces still pass. New package build/native trial pending.
+- 20:35–20:43UTC: I6772E191 enters V3/Plain directly. Both232-update outbound
+  connector runs pass66 falling/12 settled/zero tooth contact/100HP retained;
+  original119-update entry regression also passes. Independent JSON validation
+  passes all three. Fixed-noon natural/bright/natural sequence restores all four
+  RGBA samples exactly. Dim-away-from-organ appearance stays unresolved. Saved
+  pristine11648 cells and actual24163E65 at15:42:56–57Central;68 scoped records
+  plus raw traces/capture retained. No terrain/art/generator promotion.

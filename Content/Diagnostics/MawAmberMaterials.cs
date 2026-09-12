@@ -39,7 +39,7 @@ namespace apogean.Content.Diagnostics
             Tile t=Main.tile[i,j];
             if(!t.HasUnactuatedTile||t.TileType!=Type||t.IsTileInvisible)return Vector3.Zero;
             var map=MawTerrainStudies.Tile("amber").Map;
-            return map.TryMap(i,j,t.TileFrameX,t.TileFrameY,out short x,out short y)?MawAmberMaterials.Light(emission.Count(x,y),dormant):Vector3.Zero;
+            return map.TryMap(i,j,t.TileFrameX,t.TileFrameY,out short x,out short y)?MawAmberMaterials.Light(emission.Count(x,y),dormant)*ModContent.GetInstance<MawShallowTraversalLab>().LightScaleAt(i,j):Vector3.Zero;
         }
         public override void ModifyLight(int i,int j,ref float r,ref float g,ref float b)
         {Vector3 light=Emission(i,j,MawAmberMaterials.Dormant(i,j));r=light.X;g=light.Y;b=light.Z;}
@@ -61,7 +61,7 @@ namespace apogean.Content.Diagnostics
             Tile t=Main.tile[i,j];
             if(t.WallType!=Type||t.IsWallInvisible||(t.HasUnactuatedTile&&Main.tileSolid[t.TileType]))return Vector3.Zero;
             var map=MawTerrainStudies.Wall("amber").Map;
-            return map.TryMap(i,j,t.WallFrameX,t.WallFrameY,out short x,out short y)?MawAmberMaterials.Light(emission.Count(x,y),dormant,.75f):Vector3.Zero;
+            return map.TryMap(i,j,t.WallFrameX,t.WallFrameY,out short x,out short y)?MawAmberMaterials.Light(emission.Count(x,y),dormant,.75f)*ModContent.GetInstance<MawShallowTraversalLab>().LightScaleAt(i,j):Vector3.Zero;
         }
         public override void ModifyLight(int i,int j,ref float r,ref float g,ref float b)
         {Vector3 light=Emission(i,j,MawAmberMaterials.Dormant(i,j));r=light.X;g=light.Y;b=light.Z;}
