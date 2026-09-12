@@ -8,6 +8,20 @@ existing QA tools. These are not implemented gates yet. No new editor/library
 or automatic visual approval is implied. Add the smallest reusable check while
 solving the next family; do not turn workflow improvement into an engine detour.
 
+## Cave compositor lesson — September12
+
+Verify the installed draw order before borrowing a surface/Underworld hook.
+Ordinary caves, native walls, back water and front water have different owners.
+First prove the seam with an explicit reversible dry pattern in an existing cave;
+then test source art under a recorded camera/matrix. Do not carve away native
+walls to conceal an incorrect draw position. Registered shader visibility does
+not necessarily mean scheduled overlay membership; the Q/R guard regression
+retains that actual failure. Photo capture can omit a layer that normal frames
+show, so name the capture path in evidence. Command reports may carry stale
+last-frame telemetry: collect settled samples before claiming zoom/pan proof.
+Keep darkness/lighting and liquid coverage separate from successful occlusion.
+See `Art/Validation/MawCaveBackdrop-2026-09-12/README.md` and the `MawCave` gate.
+
 ## Contour lesson — September12
 
 Separate geometry from material revision. Keep the disliked shape as a control

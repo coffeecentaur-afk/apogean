@@ -1,4 +1,4 @@
-param([switch]$CompileOnly,[switch]$KeepWorkspace,[switch]$PackedMawPreview,[switch]$MawAnatomyStudy,
+param([switch]$CompileOnly,[switch]$KeepWorkspace,[switch]$PackedMawPreview,[switch]$MawAnatomyStudy,[switch]$MawCaveBackdropStudy,
  [string]$MawAnatomyCandidateDirectory='Art/Candidates/MawRibSurface-v1/Native-v1')
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
@@ -24,6 +24,7 @@ $options=@{
     KeepWorkspace=$KeepWorkspace
     PackedMawPreview=$PackedMawPreview
     MawAnatomyStudy=$MawAnatomyStudy
+    MawCaveBackdropStudy=$MawCaveBackdropStudy
     MawAnatomyCandidateDirectory=$MawAnatomyCandidateDirectory
 }
 foreach($key in @($options.Keys)) {

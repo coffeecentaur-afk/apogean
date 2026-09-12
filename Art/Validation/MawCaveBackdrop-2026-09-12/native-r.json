@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-12T23:29:22.9496745Z",
+  "sourceLogSha256": "1C418F91A269294382E77BFB7D6A19B8152F33AEF7F433BBA686433688549405",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[18:19:43.713] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: locate; mode=baseline; callbacks=0; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-231943-678-05822e.json",
+    "[18:19:59.696] [Main Thread/INFO] [apogean]: MAW CAVE OVERLAY INVENTORY: [{\"key\":\"Sandstorm\",\"mode\":\"FadeOut\",\"visible\":true,\"opacity\":0,\"scheduled\":false,\"priority\":\"High\",\"layer\":\"Landscape\"},{\"key\":\"Blizzard\",\"mode\":\"FadeOut\",\"visible\":true,\"opacity\":0,\"scheduled\":false,\"priority\":\"High\",\"layer\":\"Landscape\"},{\"key\":\"apogean:qa-dry-cave-seam-v1\",\"mode\":\"Inactive\",\"visible\":false,\"opacity\":0,\"scheduled\":false,\"priority\":\"VeryLow\",\"layer\":\"Background\"}]",
+    "[18:19:59.700] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: pattern; mode=pattern; callbacks=0; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-231959-698-629201.json",
+    "[18:20:35.861] [Main Thread/INFO] [apogean]: MAW CAVE OVERLAY INVENTORY: [{\"key\":\"Sandstorm\",\"mode\":\"FadeOut\",\"visible\":true,\"opacity\":0,\"scheduled\":false,\"priority\":\"High\",\"layer\":\"Landscape\"},{\"key\":\"Blizzard\",\"mode\":\"FadeOut\",\"visible\":true,\"opacity\":0,\"scheduled\":false,\"priority\":\"High\",\"layer\":\"Landscape\"},{\"key\":\"apogean:qa-dry-cave-seam-v1\",\"mode\":\"Active\",\"visible\":true,\"opacity\":1,\"scheduled\":true,\"priority\":\"VeryLow\",\"layer\":\"Background\"}]",
+    "[18:20:35.867] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: art; mode=art; callbacks=2169; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-232035-862-966029.json",
+    "[18:20:51.361] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: report; mode=art; callbacks=3099; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-232051-358-2fb0ac.json",
+    "[18:21:27.010] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: pan; mode=art; callbacks=5238; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-232127-008-5bafba.json",
+    "[18:21:43.543] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: report; mode=art; callbacks=6230; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-232143-541-7fc36b.json",
+    "[18:26:34.944] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: zoom; mode=art; callbacks=23714; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-232634-942-83d825.json",
+    "[18:26:53.544] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: report; mode=art; callbacks=24830; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-232653-542-7eb829.json",
+    "[18:27:09.044] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: normal-zoom; mode=art; callbacks=25760; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-232709-042-ae88e5.json",
+    "[18:27:20.927] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: origin; mode=art; callbacks=26473; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-232720-925-16d918.json",
+    "[18:27:30.744] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: report; mode=art; callbacks=27062; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-232730-742-0e934f.json",
+    "[18:27:49.861] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: baseline; mode=baseline; callbacks=28209; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-232749-859-acf7b6.json",
+    "[18:28:11.562] [Main Thread/INFO] [apogean]: MAW CAVE PROBE COMPLETE: release; mode=off; callbacks=28209; report=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\cave-probe-20260912-232811-559-182f24.json",
+    "[18:28:32.979] [.NET TP Worker/INFO] [apogean]: MAW RIB CONTOUR SAVE: creation=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; actual=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; failed=False.",
+    "[18:28:32.981] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state."
+  ],
+  "caughtRenderFailures": []
+}

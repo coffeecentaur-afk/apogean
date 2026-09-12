@@ -213,6 +213,13 @@ Underground backgrounds are routed by both biome and depth. Wastes, desert, snow
 
 Surface compositions may crossfade through their parallax layers. Underground backgrounds use hard texture-set selection, so visible borders require authored transition bands, neutral seam textures, or bounded biome hysteresis rather than random switching.
 
+September12 technical cave study does not change this direction: an explicit dry
+overlay can be placed behind ordinary cave tiles/walls, but its darkness, water
+boundaries and final art are not accepted. Preserve biome-specific geology and
+hazard readability; do not make the cave fullbright to expose background art or
+erase natural walls to reveal it. The Q/R probe is not a production renderer.
+See `MAW_CAVE_BACKDROP_PROBE_CONTRACT.md` for that narrow evidence boundary.
+
 The global ruined Underworld backdrop is called **the Ruined Deep**. It reads as a buried pre-war refinery and transit horizon swallowed by soot, slag, and lava: distant fractured cavern columns and factory silhouettes, middle-depth broken pipe bridges and towers, and a close field of collapsed rails, winches, cables, and amber work lamps. Its palette is near-black soot, burnt umber, oxidized iron, and restrained amber rather than Maw flesh or Corruption purple. Broad negative space keeps combat and foreground tiles readable. The Burning Root and Stomach remain unique world geometry and never repeat as panorama decoration.
 
 The Underworld does not use `ModUndergroundBackgroundStyle`; Terraria draws a separate five-depth Hell panorama. Apogee replaces that panorama through one client-only custom-sky compositor in the final remaining background depth band, after vanilla Hell layers but before tiles, liquids, entities, and UI. Its opaque far layer and hard-alpha middle/close layers tile horizontally at distinct parallax rates. A dedicated Underworld fixture must prove complete widescreen coverage, clean alpha, layer order, and safe gameplay rendering before the compositor may become the production default.

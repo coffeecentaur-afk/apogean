@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "sourceSHA256": "3E8BF03E2E1489147830E65CEC507C30C9AC5A58D6CBAC1A177CE417341ACFA0",
+  "maskSHA256": "3BA224F902BE76A5E31BEB98F549BB1671509E8EA57B1252854719CDE9F3FCDD",
+  "colorSHA256": "2879A0FCECA6913A5A77ED84B422B0E678151C435A348FA6140B300640BD8CC6",
+  "sourceTransparent": 1102583,
+  "sourcePartial": 470281,
+  "sourceOpaque": 0,
+  "hiddenRgbNonzero": 826855,
+  "keptBounds": [
+    40,
+    71,
+    1475,
+    883
+  ],
+  "keptPixels": 420648,
+  "minimumAlpha": 128,
+  "nonempty": true,
+  "review": "proposal",
+  "rule": "Pinned source alpha threshold only; RGB unchanged in color-master, alpha explicitly hardened to255 before reviewed mask export. No RGB key, dilation, or claim that every partial pixel is extraneous.",
+  "scope": "Inspect thin fibers, enclosed gaps and complete underside on both backings before exact export. Art/pixel density/depth separate."
+}

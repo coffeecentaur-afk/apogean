@@ -15,6 +15,7 @@ param(
 	[string]$AssetSnapshotPath = '',
 	[switch]$PackedMawPreview,
 	[switch]$MawAnatomyStudy,
+	[switch]$MawCaveBackdropStudy,
 	[string]$MawAnatomyCandidateDirectory = '',
 	[switch]$KeepWorkspace,
 	[switch]$CompileOnly
@@ -297,6 +298,18 @@ try {
 		if($LASTEXITCODE -ne 0){throw 'Amber metadata compilation failed.'}
 		# All466 prior assets were checked before adding these seven study files.
 		Write-Host 'Separate anatomy study: five art/map additions plus two small emission tables; accepted asset bank unchanged.'
+	}
+	if ($MawCaveBackdropStudy) {
+		if(-not $PackedMawPreview){throw 'Cave backdrop study requires packed QA.'}
+		$asset=Join-Path $sourceRoot 'Art/Candidates/MawCaveBackground-v1/PixelStudy-v1/master-pixel2.png'
+		$pin='D9388320C53DCFFB5E617B05E5521EA264B784552584CBE44391BF24409A5B09'
+		if((Get-FileHash -LiteralPath $asset).Hash -ne $pin){throw 'CAVE_MASTER_PIN_MISMATCH'}
+		$destination=Join-Path $mirrorRoot 'Content/Diagnostics/CaveBackdrop'
+		New-Item -ItemType Directory -Path $destination -Force | Out-Null
+		$copied=Join-Path $destination 'master.png'
+		Copy-Item -LiteralPath $asset -Destination $copied
+		if((Get-FileHash -LiteralPath $copied).Hash -ne $pin){throw 'CAVE_MASTER_COPY_MISMATCH'}
+		Write-Host 'One separate cave compositor study texture; existing pinned art unchanged. No production route.'
 	}
 	Push-Location $mirrorRoot
 	try {

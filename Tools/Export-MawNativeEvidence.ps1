@@ -12,12 +12,12 @@ $decoded=[Text.Encoding]::UTF8.GetString($logBytes)
 # Restrict this to draw stacks, not arbitrary telemetry elsewhere in client.log.
 $renderFailures=@([regex]::Matches($decoded,'(?m)^\[[^\r\n]*\[tML\]: Silently Caught Exception:[\s\S]*?(?=^\[|\z)') |
     ForEach-Object { $_.Value.TrimEnd() } |
-    Where-Object { $_ -match 'Terraria\.ModLoader\.SurfaceBackgroundStylesLoader\.DrawCloseBackground|Terraria\.Main\.DrawLiquid' })
+    Where-Object { $_ -match 'Terraria\.ModLoader\.SurfaceBackgroundStylesLoader\.DrawCloseBackground|Terraria\.Main\.DrawLiquid|MawCaveBackdropProbe.*\.Draw|Terraria\.Graphics\.Effects\.OverlayManager\.Draw' })
 $includeStack=$false
 $lines=@(foreach($line in ($decoded -split '\r?\n')) {
     if($line -match '^\[') {
         $includeStack=$line -match '\[apogean\]: LIVE VALIDATION REQUEST FAILED: (maw-|qa-perf-)|\[apogean\]: (QA PERFORMANCE|MAW SHALLOW MOTION) EXPORT FAILED'
-        if($includeStack -or $line -match '\[apogean\]: MAW (NATURAL|LAB REQUEST|LAB COMPLETE|PROPERTY|PRODUCTION PROPERTIES|PROPERTIES RESTORE|SAND|SEAM|JOIN|FIBER|RIB|ANATOMY|HANGING|AMBER|SHALLOW)|\[apogean\]: QA (PERFORMANCE|RENDER ALLOCATION|RENDER CACHE IDENTITY)|\[apogean\]: \[DEBUG-closewidth\]'){$line}
+        if($includeStack -or $line -match '\[apogean\]: MAW (CAVE|NATURAL|LAB REQUEST|LAB COMPLETE|PROPERTY|PRODUCTION PROPERTIES|PROPERTIES RESTORE|SAND|SEAM|JOIN|FIBER|RIB|ANATOMY|HANGING|AMBER|SHALLOW)|\[apogean\]: QA (PERFORMANCE|RENDER ALLOCATION|RENDER CACHE IDENTITY)|\[apogean\]: \[DEBUG-closewidth\]'){$line}
     } elseif($includeStack) {$line}
 })
 if(-not $lines.Count){throw 'No matching native Maw evidence in this log.'}

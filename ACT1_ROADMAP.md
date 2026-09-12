@@ -2,6 +2,14 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+23:29UTC update: Q/R ordinary-cave dry seam study completed. Original Q
+activation refusal retained and repaired by actual scheduled-overlay membership,
+not shader visibility. R native pattern/art, camera/zoom and release retain
+alignment and exact cave fingerprint. Terrain-study saves remain unchanged.
+Full cave art/lighting/liquid/routing remain pending; no production renderer.
+Next independent gate is remaining material growth/support or route-interaction
+coverage, not an unbounded rewrite of this provisional cave art.
+
 22:40UTC update: P bounded native conversion throughput passes four16/32/32/16
 patch runs, real two-step tile/wall purification and preserved properties.
 Exact temporary restoration and existing saved studies verified. Raw reports

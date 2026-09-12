@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "sourceSHA256": "3E8BF03E2E1489147830E65CEC507C30C9AC5A58D6CBAC1A177CE417341ACFA0",
+  "maskSHA256": "08A3FA494480EF6EE531F178C02B6E898D85900DAB8BB15C464EA0EFCC09FB68",
+  "sourceTransparent": 1102583,
+  "sourcePartial": 470281,
+  "sourceOpaque": 0,
+  "hiddenRgbNonzero": 826855,
+  "keptBounds": [
+    1536,
+    1024,
+    -1536,
+    -1024
+  ],
+  "review": "proposal",
+  "rule": "This pinned source only: keep alpha255, remove alpha0..254. No RGB key, dilation, recoloring or claim that source partial pixels are all extraneous.",
+  "scope": "Inspect thin fibers, enclosed gaps and complete underside on both backings before exact export. Art/pixel density/depth separate."
+}

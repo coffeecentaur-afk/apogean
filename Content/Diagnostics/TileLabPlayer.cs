@@ -105,6 +105,8 @@ namespace apogean.Content.Diagnostics
 				Main.screenPosition = shallowCamera;
 			if (ModContent.GetInstance<MawRibContourStudy>().TryCamera(out Vector2 contourCamera))
 				Main.screenPosition = contourCamera;
+			if (ModContent.GetInstance<MawCaveBackdropProbe>().TryCamera(out Vector2 caveCamera))
+				Main.screenPosition = caveCamera;
 			ModContent.GetInstance<QAPerformanceLab>().ApplyCamera();
 		}
 
@@ -132,6 +134,8 @@ namespace apogean.Content.Diagnostics
 				}
 				if (ModContent.GetInstance<QAPerformanceLab>().Recording)
 					throw new System.InvalidOperationException("Finish or stop the passive performance sample before another QA command.");
+				if (!request.StartsWith("maw-cave-", System.StringComparison.Ordinal))
+					ModContent.GetInstance<MawCaveBackdropProbe>().Release();
 				if (!request.StartsWith("maw-shallow-", System.StringComparison.Ordinal))
 					ModContent.GetInstance<MawShallowTraversalLab>().Release();
 				if (!request.StartsWith("maw-contour-", System.StringComparison.Ordinal))
@@ -167,7 +171,7 @@ namespace apogean.Content.Diagnostics
 					Mod.Logger.Info("LIVE VALIDATION REQUEST CONSUMED: qa-save-and-quit");
 					return;
 				}
-				if (request.StartsWith("maw-shallow-", System.StringComparison.Ordinal) || request.StartsWith("maw-contour-", System.StringComparison.Ordinal))
+				if (request.StartsWith("maw-shallow-", System.StringComparison.Ordinal) || request.StartsWith("maw-contour-", System.StringComparison.Ordinal) || request.StartsWith("maw-cave-", System.StringComparison.Ordinal))
 				{
 					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
 					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
@@ -180,7 +184,9 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<MawFangLab>().Release();
 					ModContent.GetInstance<MawBoneLab>().Release();
 					ModContent.GetInstance<ArrivalPodLab>().Release();
-					if(request.StartsWith("maw-contour-", System.StringComparison.Ordinal))
+					if(request.StartsWith("maw-cave-", System.StringComparison.Ordinal))
+						ModContent.GetInstance<MawCaveBackdropProbe>().Run(request.Substring("maw-cave-".Length));
+					else if(request.StartsWith("maw-contour-", System.StringComparison.Ordinal))
 						ModContent.GetInstance<MawRibContourStudy>().Run(request.Substring("maw-contour-".Length));
 					else ModContent.GetInstance<MawShallowTraversalLab>().Run(request.Substring("maw-shallow-".Length));
 					return;

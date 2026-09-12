@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-09-12T23:20:51.3573943Z",
+  "request": "report",
+  "mode": "art",
+  "held": true,
+  "zoomed": false,
+  "pan": {
+    "x": 0,
+    "y": 0
+  },
+  "region": {
+    "X": 4660,
+    "Y": 689,
+    "Width": 96,
+    "Height": 64
+  },
+  "attempts": 130,
+  "searchMilliseconds": 2.7909,
+  "original": "F651FA609E4139509751F9086914205C2B440E9068B4A297B090E31B7689C60E",
+  "current": "F651FA609E4139509751F9086914205C2B440E9068B4A297B090E31B7689C60E",
+  "lastFrame": {
+    "mode": "art",
+    "callbacks": 3000,
+    "dryCells": 5730,
+    "excludedCells": 414,
+    "runs": 103,
+    "drawToScreen": false,
+    "offScreenRange": 192,
+    "camera": {
+      "x": 74048,
+      "y": 10851
+    },
+    "screenWidth": 2560,
+    "screenHeight": 1369,
+    "viewport": {
+      "X": 0,
+      "Y": 0,
+      "Width": 2560,
+      "Height": 1369
+    },
+    "zoom": {
+      "x": 1.3333334,
+      "y": 1.3333334
+    },
+    "matrix": [
+      1.3333334,
+      0,
+      0,
+      1.3333334,
+      -426.66147,
+      -228.16147
+    ],
+    "defaultSampler": "Point",
+    "renderTargetCount": 1
+  },
+  "overlayMode": "Active",
+  "opacity": 1,
+  "limits": "QA-only callback/occlusion probe. No world writes or player teleport; fixed inspection lights. Natural simulation may change cells. Scale1 pre-transform world pixels; 1.25 alternate matrix. Dry exclusion only. Photo CaptureManager omits Overlay; inspect completed normal game frames. No production art/routing/repeat/lighting/wet-scene approval."
+}

@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-cave-backdrop-seam-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/MawCaveBackdrop-2026-09-12/README.md",
+      "evidenceScope": "QA-only dry overlay in an existing cave. Q activation refusal retained; R checks scheduled membership without altering other effects. Native baseline/pattern/art, one diagonal shift, alternate matrix zoom, restoration/release and exact selected-region fingerprint pass. Thirteen raw R JSON and17 scoped log records, zero relevant caught draw failures. Normal frames inspected in task, not saved image artifacts. Cached2560x1369 only,64 fixed inspection lights, conservative two-tile liquid exclusion; no world writes or player teleport.",
+      "blockers": ["Flat/banded candidate and bright art in dark apertures are not final art/lighting. Wet-region boundaries retain native background. No production promotion.", "Full direct/cached viewport, repeat/parallax, liquid, routing, entity overlap, compatibility, performance and lifecycle matrix remains open. Native photo capture omits the overlay. Stop this bounded seam probe; choose production compositor scope separately."]
+    },
+    {
       "id": "maw-rib-contour-v1",
       "status": "contracted",
       "static": "pass",

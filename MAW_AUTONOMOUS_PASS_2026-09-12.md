@@ -78,6 +78,20 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- Q/R,23:12–23:29UTC: bounded dry ordinary-cave overlay proof, existing96x64
+  region4660,689. Q refused a visible but unscheduled shader before any draw;
+  retain failure and zero callbacks. Installed code research and80-case guard
+  test distinguish registered visibility from manager membership. R activates
+  without touching other effects; cached normal frames show pattern/art behind
+  native terrain, walls, pots/webs/rail. One diagonal shift and1.25 extra zoom
+  retain alignment; origin/zoom/baseline/release restore. Thirteen raw R JSON,
+ 17 scoped records/zero caught draw failures; every region hashF651FA60 equal.
+  Native save23:28:32 retains6F7998FF/24163E65, normal menu exit. R019B5515,
+  Q A6A5AF99 wrappers0warnings/errors,466 base pins+7anatomy+1explicitstudy.
+  Candidate looks flat/banded; dark-area art and wet-boundary seams remain open.
+  Source/shelf alpha studies preserved; neither is production approval. Stop
+  this bounded proof, retain workflow lesson and continue independent coverage.
+
 - P,22:36–22:40UTC: packageC2C0BCD9, mirror400adea2a1144d659a8c80d8706dec14,
   adds only a bounded QA conversion probe. Four16/32/32/16 native patches pass
   2304/9216/9216/2304 cell conversions with5123/20483 assertions per size;
