@@ -1,4 +1,7 @@
-param([Parameter(Mandatory)][ValidateSet('build','step','mature','test','reload','view','capture','release')][string]$Case)
+param([Parameter(Mandatory)][ValidateSet('build','step','mature','test','reload','joins','view','capture','release',
+    'anatomy-build','anatomy-test','anatomy-reload','anatomy-view','anatomy-capture','anatomy-release',
+    'anatomy-vines-build','anatomy-vines-grow','anatomy-vines-test','anatomy-vines-reload','anatomy-vines-view','anatomy-vines-probe','anatomy-vines-audit',
+    'anatomy-amber-build','anatomy-amber-test','anatomy-amber-reload','anatomy-amber-awake','anatomy-amber-dormant','anatomy-amber-sample')][string]$Case)
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $path=Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games/Terraria/tModLoader/Captures/ApogeanLiveValidation.request'

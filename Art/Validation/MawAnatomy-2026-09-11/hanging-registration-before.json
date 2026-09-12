@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-12T00:00:11.7203984Z",
+  "sourceLogSha256": "570FEBAA4751197482CA192BA45EE91440E50BE03AFAD39F141AC7CF0BE5FBDD",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[18:59:05.383] [Main Thread/INFO] [apogean]: MAW ANATOMY REQUEST: test",
+    "[18:59:05.384] [Main Thread/INFO] [apogean]: MAW ANATOMY STATE PASS: all7600 cells exact; 14 native slopes; 378 unsafe wall cells; digest=B510E9D585CAC1CE7E9FED527E5FB8DDFA9DC211CB8D0105FE67DF91209F7FD9. Not traversal/art approval.",
+    "[18:59:05.386] [Main Thread/INFO] [apogean]: MAW ANATOMY PHYSICS PASS: 308 assertions; 294 native slope/half-block comparisons; non-solid mutation detected in 36 samples; scratch restored. No player traversal or multiplayer claim.",
+    "[18:59:05.387] [Main Thread/INFO] [apogean]: MAW ANATOMY STATE PASS: all7600 cells exact; 14 native slopes; 378 unsafe wall cells; digest=B510E9D585CAC1CE7E9FED527E5FB8DDFA9DC211CB8D0105FE67DF91209F7FD9. Not traversal/art approval.",
+    "[18:59:05.387] [Main Thread/INFO] [apogean]: MAW ANATOMY COMPLETE: test",
+    "[18:59:29.666] [Main Thread/INFO] [apogean]: MAW ANATOMY REQUEST: vines-build",
+    "[18:59:29.667] [Main Thread/INFO] [apogean]: MAW ANATOMY STATE PASS: all7600 cells exact; 14 native slopes; 378 unsafe wall cells; digest=B510E9D585CAC1CE7E9FED527E5FB8DDFA9DC211CB8D0105FE67DF91209F7FD9. Not traversal/art approval.",
+    "[18:59:29.668] [Main Thread/INFO] [apogean]: MAW HANGING STATE PASS: all2000 cells; steps=0; fibers=0; exact ordered frames; no auto-rebaseline.",
+    "[18:59:29.668] [Main Thread/INFO] [apogean]: MAW HANGING BUILD: {X:7396 Y:176 Width:100 Height:20}; seven roots; separate empty envelope; no natural growth timer.",
+    "[18:59:29.668] [Main Thread/INFO] [apogean]: MAW ANATOMY COMPLETE: vines-build",
+    "[18:59:40.516] [Main Thread/INFO] [apogean]: MAW ANATOMY REQUEST: vines-test",
+    "[18:59:40.516] [Main Thread/INFO] [apogean]: MAW HANGING STATE PASS: all2000 cells; steps=0; fibers=0; exact ordered frames; no auto-rebaseline.",
+    "[18:59:52.400] [Main Thread/INFO] [apogean]: MAW ANATOMY REQUEST: vines-grow",
+    "[18:59:52.400] [Main Thread/INFO] [apogean]: MAW HANGING STATE PASS: all2000 cells; steps=0; fibers=0; exact ordered frames; no auto-rebaseline."
+  ]
+}

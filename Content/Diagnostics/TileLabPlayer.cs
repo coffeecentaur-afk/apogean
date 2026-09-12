@@ -91,6 +91,12 @@ namespace apogean.Content.Diagnostics
 			}
 		}
 
+		public override void ModifyScreenPosition()
+		{
+			if (ModContent.GetInstance<MawAnatomyLab>().TryLightingCamera(out Vector2 camera))
+				Main.screenPosition = camera;
+		}
+
 		private void ConsumeLiveValidationRequest()
 		{
 			if (Main.netMode != NetmodeID.SinglePlayer ||
@@ -106,6 +112,8 @@ namespace apogean.Content.Diagnostics
 			{
 				request = File.ReadAllText(requestPath).Trim().ToLowerInvariant();
 				File.Delete(requestPath);
+				if (!request.StartsWith("maw-fiber-anatomy-", System.StringComparison.Ordinal))
+					ModContent.GetInstance<MawAnatomyLab>().Release();
 				if (!request.StartsWith("maw-fiber-", System.StringComparison.Ordinal))
 					ModContent.GetInstance<MawFiberRibLab>().Release();
 				if (!request.StartsWith("maw-natural-", System.StringComparison.Ordinal))

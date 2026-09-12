@@ -32,6 +32,11 @@ namespace apogean.Content.Diagnostics
                 Main.tileMerge[bone][tissue] = true;
                 Main.tileMerge[tissue][bone] = true;
             }
+            // Native rib-root probes isolate two additional requirements:
+            // substrate joins use the dirt path; rooted grass needs its pair.
+            Main.tileMergeDirt[bone] = true;
+            int grass = MawPackedPreview.TileType("grass");
+            Main.tileMerge[bone][grass] = Main.tileMerge[grass][bone] = true;
         }
         internal static MawTerrainStudyTile Tile(string key) => (MawTerrainStudyTile)ModContent.Find<ModTile>("apogean/Study_" + key);
         internal static MawTerrainStudyWall Wall(string key) => (MawTerrainStudyWall)ModContent.Find<ModWall>("apogean/StudyWall_" + key);

@@ -2,6 +2,25 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+September11 evening continuation: bone/actual-soil/grass root seams now pass
+24 native comparisons and two deliberately disabled-rule checks. Existing
+playable suite stays green. A separate saved anatomy comparison adds tapered
+cortical ribs, a full fiber cap over rooted soil, and six matching unsafe wall
+swatches. Art remains pending; no old fixture or Gullet template was replaced.
+Hanging fiber now passes212 scratch lifecycle checks, but one saved strand lost
+its lower suffix: keep that scene RED pending diagnosis, never rebuild it.
+Amber terrain/wall lighting passes470 native checks and actual save/reopen;
+same-condition awake/dormant captures show the intended dimming. No world
+progression flag was changed. Next: rib/cap art review and the preserved vine
+failure, then an equipment-sensitive shallow rib/tooth traversal proof.
+See `Art/Validation/MawAnatomy-2026-09-11/README.md`; this supersedes the root-gap
+next step in the earlier checkpoint below, not its historical evidence.
+The final native comparison also includes a separate paler cortical v2 bank;
+neither rib version is final art. Exact resume commands, preserved RED strands,
+current package and next boundaries are in that folder's `NEXT_SESSION.md`.
+The whole QA bank reports1.7GB attributed RAM at startup; texture residency
+needs profiling before multiplying the system across more biomes.
+
 September11 implementation checkpoint: two bone/study-material merge rules are
 fixed and proven with420 native comparisons plus missing-rule red controls.
 The approved pixels and old fixture hashes are unchanged. One separate96x72

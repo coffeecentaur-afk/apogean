@@ -1,0 +1,62 @@
+[18:26:16.299] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=original; root=20,27; savedBaseHoles=24; reframed=16; native=0; extra=16; grass overlays excluded.
+[18:26:16.299] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=original; root=23,28; savedBaseHoles=76; reframed=60; native=16; extra=44; grass overlays excluded.
+[18:26:16.299] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=original; root=49,44; savedBaseHoles=0; reframed=0; native=0; extra=0; grass overlays excluded.
+[18:26:16.317] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=original; root=45,46; savedBaseHoles=160; reframed=136; native=56; extra=80; grass overlays excluded.
+[18:26:16.317] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=original; other=soil; axis=0; order=0; holes=84; native=0; extra=84.
+[18:26:16.318] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=original; other=soil; axis=0; order=1; holes=84; native=0; extra=84.
+[18:26:16.318] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=original; other=soil; axis=1; order=0; holes=48; native=0; extra=48.
+[18:26:16.318] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=original; other=soil; axis=1; order=1; holes=48; native=0; extra=48.
+[18:26:16.319] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=original; other=grass; axis=0; order=0; holes=72; native=0; extra=72.
+[18:26:16.319] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=original; other=grass; axis=0; order=1; holes=108; native=0; extra=108.
+[18:26:16.319] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=original; other=grass; axis=1; order=0; holes=72; native=0; extra=72.
+[18:26:16.319] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=original; other=grass; axis=1; order=1; holes=72; native=0; extra=72.
+[18:26:16.319] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=soil-only; root=20,27; savedBaseHoles=24; reframed=8; native=0; extra=8; grass overlays excluded.
+[18:26:16.320] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=soil-only; root=23,28; savedBaseHoles=76; reframed=60; native=16; extra=44; grass overlays excluded.
+[18:26:16.320] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=soil-only; root=49,44; savedBaseHoles=0; reframed=0; native=0; extra=0; grass overlays excluded.
+[18:26:16.320] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=soil-only; root=45,46; savedBaseHoles=160; reframed=136; native=56; extra=80; grass overlays excluded.
+[18:26:16.320] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=soil-only; other=soil; axis=0; order=0; holes=24; native=0; extra=24.
+[18:26:16.321] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=soil-only; other=soil; axis=0; order=1; holes=60; native=0; extra=60.
+[18:26:16.321] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=soil-only; other=soil; axis=1; order=0; holes=24; native=0; extra=24.
+[18:26:16.321] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=soil-only; other=soil; axis=1; order=1; holes=24; native=0; extra=24.
+[18:26:16.321] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=soil-only; other=grass; axis=0; order=0; holes=72; native=0; extra=72.
+[18:26:16.321] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=soil-only; other=grass; axis=0; order=1; holes=108; native=0; extra=108.
+[18:26:16.321] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=soil-only; other=grass; axis=1; order=0; holes=72; native=0; extra=72.
+[18:26:16.322] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=soil-only; other=grass; axis=1; order=1; holes=72; native=0; extra=72.
+[18:26:16.322] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=grass-only; root=20,27; savedBaseHoles=24; reframed=16; native=0; extra=16; grass overlays excluded.
+[18:26:16.322] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=grass-only; root=23,28; savedBaseHoles=76; reframed=40; native=16; extra=24; grass overlays excluded.
+[18:26:16.322] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=grass-only; root=49,44; savedBaseHoles=0; reframed=0; native=0; extra=0; grass overlays excluded.
+[18:26:16.323] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=grass-only; root=45,46; savedBaseHoles=160; reframed=84; native=56; extra=28; grass overlays excluded.
+[18:26:16.323] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=grass-only; other=soil; axis=0; order=0; holes=84; native=0; extra=84.
+[18:26:16.323] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=grass-only; other=soil; axis=0; order=1; holes=84; native=0; extra=84.
+[18:26:16.323] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=grass-only; other=soil; axis=1; order=0; holes=48; native=0; extra=48.
+[18:26:16.323] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=grass-only; other=soil; axis=1; order=1; holes=48; native=0; extra=48.
+[18:26:16.324] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=grass-only; other=grass; axis=0; order=0; holes=0; native=0; extra=0.
+[18:26:16.324] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=grass-only; other=grass; axis=0; order=1; holes=0; native=0; extra=0.
+[18:26:16.324] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=grass-only; other=grass; axis=1; order=0; holes=0; native=0; extra=0.
+[18:26:16.324] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=grass-only; other=grass; axis=1; order=1; holes=0; native=0; extra=0.
+[18:26:16.325] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=both; root=20,27; savedBaseHoles=24; reframed=8; native=0; extra=8; grass overlays excluded.
+[18:26:16.325] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=both; root=23,28; savedBaseHoles=76; reframed=40; native=16; extra=24; grass overlays excluded.
+[18:26:16.325] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=both; root=49,44; savedBaseHoles=0; reframed=0; native=0; extra=0; grass overlays excluded.
+[18:26:16.325] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=both; root=45,46; savedBaseHoles=160; reframed=84; native=56; extra=28; grass overlays excluded.
+[18:26:16.326] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=both; other=soil; axis=0; order=0; holes=24; native=0; extra=24.
+[18:26:16.326] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=both; other=soil; axis=0; order=1; holes=60; native=0; extra=60.
+[18:26:16.326] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=both; other=soil; axis=1; order=0; holes=24; native=0; extra=24.
+[18:26:16.326] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=both; other=soil; axis=1; order=1; holes=24; native=0; extra=24.
+[18:26:16.327] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=both; other=grass; axis=0; order=0; holes=0; native=0; extra=0.
+[18:26:16.327] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=both; other=grass; axis=0; order=1; holes=0; native=0; extra=0.
+[18:26:16.327] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=both; other=grass; axis=1; order=0; holes=0; native=0; extra=0.
+[18:26:16.327] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=both; other=grass; axis=1; order=1; holes=0; native=0; extra=0.
+[18:26:16.327] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=restored; root=20,27; savedBaseHoles=24; reframed=16; native=0; extra=16; grass overlays excluded.
+[18:26:16.328] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=restored; root=23,28; savedBaseHoles=76; reframed=60; native=16; extra=44; grass overlays excluded.
+[18:26:16.328] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=restored; root=49,44; savedBaseHoles=0; reframed=0; native=0; extra=0; grass overlays excluded.
+[18:26:16.328] [Main Thread/INFO] [apogean]: MAW RIB JOIN: trial=restored; root=45,46; savedBaseHoles=160; reframed=136; native=56; extra=80; grass overlays excluded.
+[18:26:16.329] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=restored; other=soil; axis=0; order=0; holes=84; native=0; extra=84.
+[18:26:16.329] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=restored; other=soil; axis=0; order=1; holes=84; native=0; extra=84.
+[18:26:16.329] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=restored; other=soil; axis=1; order=0; holes=48; native=0; extra=48.
+[18:26:16.329] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=restored; other=soil; axis=1; order=1; holes=48; native=0; extra=48.
+[18:26:16.329] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=restored; other=grass; axis=0; order=0; holes=72; native=0; extra=72.
+[18:26:16.330] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=restored; other=grass; axis=0; order=1; holes=108; native=0; extra=108.
+[18:26:16.330] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=restored; other=grass; axis=1; order=0; holes=72; native=0; extra=72.
+[18:26:16.330] [Main Thread/INFO] [apogean]: MAW RIB ENCLOSED: trial=restored; other=grass; axis=1; order=1; holes=72; native=0; extra=72.
+[18:26:16.330] [Main Thread/INFO] [apogean]: MAW RIB JOIN PROBE COMPLETE: all rules restored; scratch envelope empty; saved scene unchanged. Compare native captures separately.
+[18:26:16.338] [Main Thread/INFO] [apogean]: MAW FIBER COMPLETE: joins

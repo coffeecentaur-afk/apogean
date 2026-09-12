@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "mode": "separate-diagnostic-only",
+  "entries": [
+    {
+      "name": "rib",
+      "folder": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawRibSurface-v2\\Native-v1\\rib",
+      "material": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawRibSurface-v2\\Native-v1\\rib-field.png",
+      "reference": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanTileLabReferences\\Vanilla-Stone-Tile.png",
+      "grass": false,
+      "overlay": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawTerrain-Harsh-v1\\Packed-v1\\Fields\\fibers.png",
+      "size": [
+        1152,
+        1350,
+        75,
+        240
+      ],
+      "checks": 4976640,
+      "pins": [
+        {
+          "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawRibSurface-v2\\source.png",
+          "sha256": "E2071A08818D722B44BE96B05BE11E152AE9E6C24601E39DE5863B92098788E3"
+        },
+        {
+          "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawRibSurface-v2\\Native-v1\\rib-field.png",
+          "sha256": "E6984E8D20D65C0BC3BA359C16E52373051D91A47EF32599BF049C89B1E0E53C"
+        },
+        {
+          "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanTileLabReferences\\Vanilla-Stone-Tile.png",
+          "sha256": "48907D0C61D9B68997C33FD25B0BAADB0A2D8276B6E759761C14E6B153C917EC"
+        },
+        {
+          "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawTerrain-Harsh-v1\\Packed-v1\\Fields\\fibers.png",
+          "sha256": "D17AA2612C260BE49CD5696B45EB0F4B3C4A2710C1C543332E8526E33F694139"
+        },
+        {
+          "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawRibSurface-v2\\Native-v1\\rib\\atlas.png",
+          "sha256": "D6171AD952628A16D3ACAF5F9ADBE6D3BEF7184CB27CE8745C275810470F723F"
+        },
+        {
+          "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawRibSurface-v2\\Native-v1\\rib\\map.bin",
+          "sha256": "1E89A598CB285EB29A75C7E7E18253075F5F2650B92B08CA94C636843C87D69D"
+        }
+      ]
+    },
+    {
+      "name": "cap",
+      "folder": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawRibSurface-v2\\Native-v1\\cap",
+      "material": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawTerrain-Harsh-v1\\Packed-v1\\Fields\\fibers.png",
+      "reference": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanTileLabReferences\\Vanilla-Grass-Tile.png",
+      "grass": true,
+      "overlay": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawTerrain-Harsh-v1\\Packed-v1\\Fields\\fibers.png",
+      "size": [
+        1152,
+        7290,
+        405,
+        1760
+      ],
+      "checks": 36495360,
+      "pins": [
+        {
+          "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawRibSurface-v2\\source.png",
+          "sha256": "E2071A08818D722B44BE96B05BE11E152AE9E6C24601E39DE5863B92098788E3"
+        },
+        {
+          "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawTerrain-Harsh-v1\\Packed-v1\\Fields\\fibers.png",
+          "sha256": "D17AA2612C260BE49CD5696B45EB0F4B3C4A2710C1C543332E8526E33F694139"
+        },
+        {
+          "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanTileLabReferences\\Vanilla-Grass-Tile.png",
+          "sha256": "384133D259AABF985A5EE9D1CF18CE6338C3960761B157CF3CC2E0030C3040B3"
+        },
+        {
+          "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawRibSurface-v2\\Native-v1\\cap\\atlas.png",
+          "sha256": "113B84EC30809A7BCAAE7F6918BD926F2307E0E0CA7A12680A9EA0776986819D"
+        },
+        {
+          "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Art\\Candidates\\MawRibSurface-v2\\Native-v1\\cap\\map.bin",
+          "sha256": "464BCCE32B2FB2E26CCA5C4CCC677D52537DD528537BC9129C6D199F4677A786"
+        }
+      ]
+    }
+  ]
+}

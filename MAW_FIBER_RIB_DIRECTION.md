@@ -6,7 +6,35 @@ acceptance; the scoped implementation checkpoint below is now available.
 Wayfinder #26 remains open. Keep the accepted harsh material palette and the
 earlier red native evidence.
 
+## Latest review — September11 evening work window
+
+The user likes the material family and difficult rib-assisted descent, but the
+porous mass texture repeats as disconnected bone fragments on narrow shafts.
+Retain that material for bone masses; test one quieter continuous cortical
+shaft with native tapered/hammered ends. Repair attachment gaps independently.
+The surface should read full fiber coat -> rooted fiber/soil -> plain soil.
+Existing side-face fiber is liked and must stay. Hanging strands are requested;
+climbability is a suggested, unresolved gameplay variant rather than default
+free climbing equipment. Matching unsafe background walls and localized amber
+organs that dim in existing dormancy are next, separate from parallax scenes.
+
+Autonomous window:2026-09-11 23:09:50 through2026-09-12 01:09:50UTC
+(two hours, the user's final estimate). Native work remains gg/V3/SP only.
+At the deadline save, checkpoint screenshots/tests, update Wayfinder and pause.
+Do not rebuild the saved fiber study, promote unreviewed art to ordinary worlds,
+install visual dependencies, or change boss/progression/acid scope.
+
 ## Implementation checkpoint — same-day continuation
+
+Evening refinement: the newer anatomy evidence supersedes the root-gap next
+step below. Native dirt-merge plus reciprocal grass relation repairs the four
+sampled roots with deliberate missing-rule controls. A separate saved cortical
+rib/thick-cap comparison passes native slope checks; art still awaits review.
+The rigid six-section fiber candidate passes212 scratch lifecycle checks, but
+one saved strand is shorter and stays RED. Amber siblings reuse approved atlas
+art and dim through existing dormancy, proven in separate saved light chambers.
+See `Art/Validation/MawAnatomy-2026-09-11/README.md`. Neither art nor a frozen
+fixture is grounds to replace the Gullet generator or its traversal validator.
 
 The two bone/study-fiber and bone/study-membrane internal join defects are fixed
 without changing artwork:420 native trials, missing-rule negative controls and
@@ -133,5 +161,7 @@ evidence are development responsibilities, not repeated aesthetic questions.
 
 `RESEARCH_MAW_FIBER_BLENDING_2026-09-11.md` records primary-source engine and
 companion-mod findings. Borrow methods, not assets. Next coding work is the new
-study's attachment-edge repair, then the thicker grass/native art pass. The
-growth/rib checkpoint does not promote the material gallery to world generation.
+saved vine event diagnosis and the rib/cap art review, then a bounded rib/tooth
+traversal proof. The sampled attachment-edge repair is now covered by the
+evening evidence above. Do not repeat it or promote the material gallery to
+world generation based on a frozen render.

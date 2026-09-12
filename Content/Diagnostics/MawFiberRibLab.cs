@@ -145,6 +145,7 @@ namespace apogean.Content.Diagnostics
         internal void Run(string request)
         {
             if(!IsQa||!MawPackedPreview.Enabled)throw new InvalidOperationException("Fiber/rib study requires packed gg/V3/SP.");
+            if(request.StartsWith("anatomy-",StringComparison.Ordinal)) { Release();ModContent.GetInstance<MawAnatomyLab>().Run(request.Substring(8));return; }
             string grove=ModContent.GetInstance<VegetationVisualLab>().CheckpointSnapshot();
             Mod.Logger.Info("MAW FIBER REQUEST: "+request);
             try {
@@ -153,6 +154,7 @@ namespace apogean.Content.Diagnostics
                     case "step":Grow();break;
                     case "mature":for(int n=0;n<16;n++)Grow();break;
                     case "test":case "reload":Validate();break;
+                    case "joins":Validate();MawRibJoinChecks.Run(bounds,Mod.Logger);Validate();break;
                     case "view":Validate();View();break;
                     case "capture":Validate();captureDelay=60;break;
                     case "release":Release();break;

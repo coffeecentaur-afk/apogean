@@ -14,6 +14,8 @@ param(
 	[string]$MawToothClusterCandidateDirectory = '',
 	[string]$AssetSnapshotPath = '',
 	[switch]$PackedMawPreview,
+	[switch]$MawAnatomyStudy,
+	[string]$MawAnatomyCandidateDirectory = '',
 	[switch]$KeepWorkspace,
 	[switch]$CompileOnly
 )
@@ -266,6 +268,35 @@ try {
 		# source tree alone does not prove the QA candidate overrides were retained.
 		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-QAAssetSnapshot.ps1') -BuildRoot $mirrorRoot -SnapshotPath $AssetSnapshotPath
 		if ($LASTEXITCODE -ne 0) { throw 'Pinned QA asset continuity failed; package not built/installed.' }
+	}
+	if ($MawAnatomyStudy) {
+		if(-not $PackedMawPreview){throw 'Anatomy study requires packed QA; not production.'}
+		$candidate=if($MawAnatomyCandidateDirectory){[IO.Path]::GetFullPath($MawAnatomyCandidateDirectory)}else{Join-Path $sourceRoot 'Art/Candidates/MawRibSurface-v1/Native-v1'}
+		$candidatePrefix=[IO.Path]::GetFullPath((Join-Path $sourceRoot 'Art/Candidates'))+[IO.Path]::DirectorySeparatorChar
+		if(-not $candidate.StartsWith($candidatePrefix,[StringComparison]::OrdinalIgnoreCase)){throw 'Anatomy input must be a project candidate.'}
+		Write-Host "Separate anatomy material bank: $candidate"
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-MawAnatomyCandidate.ps1') -CandidateDirectory $candidate
+		if($LASTEXITCODE -ne 0){throw 'Anatomy candidate contract failed.'}
+		$destination=Join-Path $mirrorRoot 'Content/Diagnostics/Anatomy'
+		New-Item -ItemType Directory -Path $destination -Force | Out-Null
+		foreach($key in @('rib','cap')) {
+			Copy-Item -LiteralPath (Join-Path $candidate "$key/atlas.png") -Destination (Join-Path $destination "$key.png")
+			Copy-Item -LiteralPath (Join-Path $candidate "$key/map.bin") -Destination (Join-Path $destination "$key.bin")
+			foreach($pair in @(@('atlas.png',"$key.png"),@('map.bin',"$key.bin"))) {
+				if((Get-FileHash -LiteralPath (Join-Path $candidate "$key/$($pair[0])")).Hash -ne (Get-FileHash -LiteralPath (Join-Path $destination $pair[1])).Hash){throw 'ANATOMY_COPY_MISMATCH'}
+			}
+		}
+		$vine=Join-Path $sourceRoot 'Art/Candidates/MawHangingFiber-v1/Native-v1'
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-MawHangingFiberCandidate.ps1') -CandidateDirectory $vine
+		if($LASTEXITCODE -ne 0){throw 'Hanging fiber candidate rejected.'}
+		Copy-Item -LiteralPath (Join-Path $vine 'atlas.png') -Destination (Join-Path $destination 'hanging-fiber.png')
+		if((Get-FileHash -LiteralPath (Join-Path $vine 'atlas.png')).Hash -ne (Get-FileHash -LiteralPath (Join-Path $destination 'hanging-fiber.png')).Hash){throw 'VINE_COPY_MISMATCH'}
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/Test-MawAmberEmission.ps1')
+		if($LASTEXITCODE -ne 0){throw 'Amber lookup policy failed.'}
+		& pwsh -NoProfile -File (Join-Path $sourceRoot 'Tools/New-MawAmberEmission.ps1') -TileAtlas (Join-Path $mirrorRoot 'Content/Diagnostics/Materials/amber/Tile.png') -WallAtlas (Join-Path $mirrorRoot 'Content/Diagnostics/Materials/amber/Wall.png') -OutputDirectory $destination
+		if($LASTEXITCODE -ne 0){throw 'Amber metadata compilation failed.'}
+		# All466 prior assets were checked before adding these seven study files.
+		Write-Host 'Separate anatomy study: five art/map additions plus two small emission tables; accepted asset bank unchanged.'
 	}
 	Push-Location $mirrorRoot
 	try {

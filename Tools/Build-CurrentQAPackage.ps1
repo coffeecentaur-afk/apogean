@@ -1,4 +1,5 @@
-param([switch]$CompileOnly,[switch]$KeepWorkspace,[switch]$PackedMawPreview)
+param([switch]$CompileOnly,[switch]$KeepWorkspace,[switch]$PackedMawPreview,[switch]$MawAnatomyStudy,
+ [string]$MawAnatomyCandidateDirectory='Art/Candidates/MawRibSurface-v1/Native-v1')
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
@@ -21,6 +22,8 @@ $options=@{
     CompileOnly=$CompileOnly
     KeepWorkspace=$KeepWorkspace
     PackedMawPreview=$PackedMawPreview
+    MawAnatomyStudy=$MawAnatomyStudy
+    MawAnatomyCandidateDirectory=$MawAnatomyCandidateDirectory
 }
 foreach($key in @($options.Keys)) {
     if($key -like '*Directory' -or $key -eq 'AssetSnapshotPath'){$options[$key]=Join-Path $root $options[$key]}
