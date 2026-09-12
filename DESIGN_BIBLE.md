@@ -39,6 +39,12 @@ All sprite work uses hard opaque pixel clusters, limited palettes, readable nati
 
 ### Authoring evidence gate
 
+September12 Maw inspection separates art readability from natural light: one
+explicit QA lamp may reveal contours but cannot approve hazard visibility.
+Preserve the current material palette while testing smoother continuous rib
+undersides in a separate specimen. Rendering errors must be traced to native
+state before changing accepted art or parallax; see `AUTHORING_WORKFLOW.md`.
+
 Current flight correction (September8) supersedes the historical 15%/25%/50%
 hard ceilings below. The user reports a sudden scenery speed change at each
 ceiling and approves a broad, altitude-based response transition. Preserve the

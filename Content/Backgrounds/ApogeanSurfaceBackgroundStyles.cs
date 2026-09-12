@@ -39,9 +39,10 @@ namespace apogean.Content.Backgrounds
 		public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b)
 		{
 			int variant = RuinedBackgroundSelectionSystem.Instance.GetVariant(Biome);
-			return BackgroundTextureLoader.GetBackgroundSlot(Mod, UsesHdRenderer
+			int texture = BackgroundTextureLoader.GetBackgroundSlot(Mod, UsesHdRenderer
 				? "Content/Backgrounds/Diagnostics/HD/Transparent"
 				: $"Content/Backgrounds/{Biome}/V{variant}_Close");
+			return ApogeanCloseBackgroundDimensions.Resolve(texture, scale);
 		}
 
 		public override bool PreDrawCloseBackground(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
@@ -89,11 +90,14 @@ namespace apogean.Content.Backgrounds
 				? "Content/Backgrounds/Diagnostics/HD/Transparent"
 				: $"Content/Backgrounds/Diagnostics/{Biome}ConceptV0_Mid");
 
-		public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b) =>
-			BackgroundTextureLoader.GetBackgroundSlot(Mod,
+		public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b)
+		{
+			int texture = BackgroundTextureLoader.GetBackgroundSlot(Mod,
 				UsesHdRenderer
 					? "Content/Backgrounds/Diagnostics/HD/Transparent"
 					: $"Content/Backgrounds/Diagnostics/{Biome}ConceptV0_Close");
+			return ApogeanCloseBackgroundDimensions.Resolve(texture, scale);
+		}
 
 		public override bool PreDrawCloseBackground(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
 		{

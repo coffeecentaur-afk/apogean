@@ -9,6 +9,13 @@ approval remains pending. Hanging fibers are non-climbable in this pass. New
 disposable seed worlds are allowed after mechanical gates, generator opt-in only.
 Do not duplicate saved studies or erase the historical vine/grove failures.
 
+21:26UTC checkpoint: J inspection captures expose squared rib underside notches;
+no material redesign is approved by a diagnostic lamp. L naturally reproduced
+a loaded Maw background with zero cached dimensions; M's narrow owned-slot
+guard passes native zero-width and transition regression without that exception.
+Historical RED and repaired-run logs remain separate. Next is a fresh rib-contour
+study, not a shallowV1 rebuild or general-world generation promotion.
+
 September12 first-hour checkpoint: identical soil/grass walls now share one
 native texture reference (13.265MiB less logical texel allocation, not a measured
 RAM/VRAM claim). Cached study lookups return unchanged native frames/light with

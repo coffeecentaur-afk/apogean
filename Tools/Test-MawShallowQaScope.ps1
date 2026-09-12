@@ -29,6 +29,13 @@ namespace apogean.Content.Diagnostics {
                     Check(MawShallowQaScope.LightScale(applies,bright)==(expected&&bright?1.6f:1f),"bounded light scale");
             }
             Check(!MawShallowQaScope.PreviewApplies(true,true,true,10,20,10,20,0,4),"empty preview");
+            foreach(string request in new[]{"maw-shallow-inspect-on","maw-shallow-inspect-off"}) {
+                Check(MawShallowQaScope.Request(MawShallowQaScope.Plain,request),"inspection request allowed");
+                Check(!MawShallowQaScope.Request("ordinary",request),"inspection request denied");
+            }
+            for(int bits=0;bits<32;bits++) Check(
+                MawShallowQaScope.InspectionApplies((bits&1)!=0,(bits&2)!=0,(bits&4)!=0,(bits&8)!=0,(bits&16)!=0)==(bits==31),
+                "inspection cannot leak from held plain view");
             return checks;
         }
     }

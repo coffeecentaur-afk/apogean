@@ -8,6 +8,17 @@ existing QA tools. These are not implemented gates yet. No new editor/library
 or automatic visual approval is implied. Add the smallest reusable check while
 solving the next family; do not turn workflow improvement into an engine detour.
 
+## Render-failure lesson — September12
+
+A QA command can complete before the following draw throws. Preserve caught
+engine draw stacks separately from request completion in native evidence.
+Instrument actual style/slot/loaded size/cached size/stride before assuming the
+art or camera is responsible. The Maw fallback naturally reproduced cached0x0
+for a loaded952x480 asset; the bounded owned-slot guard and its zero-width native
+control are recorded in `RESEARCH_BACKGROUND_CLOSE_DIVISOR_2026-09-12.md`.
+Do not enlarge transparent placeholders or patch every biome speculatively.
+Keep the regression test; remove temporary failure injection after proof.
+
 ## One-family loop
 
 1. **Specify the player promise.** State what the player sees, understands, does, and receives. Name the closest Terraria behavior that must remain familiar.
@@ -31,6 +42,11 @@ baseline fields. A scoped QA character should reject construction requests.
 Hold time/weather as well as camera for sequential light comparisons. A held
 player can remain in place while ambient daylight changes. Restoring emission
 does not imply identical rendered RGB unless the other light sources are fixed.
+For a shape inspection, label temporary light sources explicitly and keep them
+separate from natural-light comparisons. Request completion is not render health:
+retain subsequent caught draw exceptions as failures even when the request says
+COMPLETE. The evidence exporter has a narrow caught-render-failure channel and
+synthetic controls that exclude unrelated telemetry.
 Texture tests must follow the actual binding: keep production fallback topology
 separate from opt-in packed atlas mapping instead of testing an unused PNG.
 

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-12T21:20:31.5115931Z",
+  "sourceLogSha256": "6849242BD55E40A274A53912A9FCE02D64C72A9CE2AD458A7680642481385A41",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[16:18:23.651] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: rib1",
+    "[16:18:23.666] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[16:18:23.666] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: rib1",
+    "[16:18:23.685] [Main Thread/WARN] [apogean]: [DEBUG-closewidth] style=apogean/EngraftRuinedBackgroundStyle; styleSlot=17; textureSlot=490; asset=Content\\Backgrounds\\Engraft\\V0_Close; state=Loaded; cached=0x0; actual=952x480; scale=1.25; stride=0; alpha=1; camera={X:17536 Y:2942.125}. Read-only observation before LoadBackground/sky callback.",
+    "[16:18:36.050] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: close-width-control",
+    "[16:18:36.053] [Main Thread/WARN] [apogean]: MAW SHALLOW BG CONTROL ARMED: one Engraft close selector invocation only; 240-update expiry; cached width restored on next draw/update/release. No texture, tile or player changes.",
+    "[16:18:36.060] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[16:18:36.060] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: close-width-control",
+    "[16:19:46.316] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: pristine",
+    "[16:19:46.321] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[16:19:46.328] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[16:19:46.328] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: pristine",
+    "[16:20:14.798] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state."
+  ],
+  "caughtRenderFailures": [
+    "[16:18:23.687] [Main Thread/WARN] [tML]: Silently Caught Exception: \nSystem.DivideByZeroException: Attempted to divide by zero.\n   at Terraria.ModLoader.SurfaceBackgroundStylesLoader.DrawCloseBackground(Int32 style) in tModLoader\\Terraria\\ModLoader\\BackgroundLoaders.cs:line 323\r\n   at Terraria.Main.DrawSurfaceBG() in tModLoader\\Terraria\\Main.cs:line 51678\r\n   at Terraria.Main.DrawBG() in tModLoader\\Terraria\\Main.cs:line 55541\r\n   at Terraria.Main.DoDraw(GameTime gameTime) in tModLoader\\Terraria\\Main.cs:line 53661\r\n   at Terraria.Main.Draw_Inner(GameTime gameTime) in tModLoader\\Terraria\\Main.cs:line 53241\r\n   at Terraria.Main.Draw(GameTime gameTime) in tModLoader\\Terraria\\Main.cs:line 53228\r\n   at Microsoft.Xna.Framework.Game.Tick() in D:\\a\\tModLoader\\tModLoader\\FNA\\src\\Game.cs:line 562\r\n   at Microsoft.Xna.Framework.Game.RunLoop() in D:\\a\\tModLoader\\tModLoader\\FNA\\src\\Game.cs:line 878\r\n   at Microsoft.Xna.Framework.Game.Run() in D:\\a\\tModLoader\\tModLoader\\FNA\\src\\Game.cs:line 419\r\n   at Terraria.Program.RunGame() in tModLoader\\Terraria\\Program.cs:line 271\r\n   at Terraria.Program.LaunchGame_(Boolean isServer) in tModLoader\\Terraria\\Program.cs:line 245\r\n   at Terraria.Program.LaunchGame(String[] args, Boolean monoArgs) in tModLoader\\Terraria\\Program.cs:line 218\r\n   at Terraria.MonoLaunch.Main_End(String[] args) in tModLoader\\Terraria\\MonoLaunch.cs:line 79\r\n   at Terraria.MonoLaunch.<>c__DisplayClass1_0.<Main>b__1() in tModLoader\\Terraria\\MonoLaunch.cs:line 65"
+  ]
+}

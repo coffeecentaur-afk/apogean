@@ -16,6 +16,7 @@ namespace apogean.Content.Diagnostics
                 "maw-shallow-play" or "maw-shallow-motion-entry" or "maw-shallow-motion-connector-out" or "maw-shallow-light" or
                 "maw-shallow-light-awake" or "maw-shallow-light-dormant" or "maw-shallow-light-natural" or
                 "maw-shallow-light-awake-bright" or "maw-shallow-light-dormant-bright" or
+                "maw-shallow-inspect-on" or "maw-shallow-inspect-off" or
                 "maw-shallow-capture" or "maw-shallow-release";
 
         internal static bool PreviewApplies(bool context, bool held, bool visiting, int x, int y,
@@ -24,5 +25,7 @@ namespace apogean.Content.Diagnostics
 
         // One provisional light-only comparison, never a global brightness setting.
         internal static float LightScale(bool previewApplies, bool bright) => previewApplies && bright ? 1.6f : 1f;
+        internal static bool InspectionApplies(bool context, bool held, bool visiting, bool baseline, bool enabled) =>
+            context && held && visiting && baseline && enabled;
     }
 }

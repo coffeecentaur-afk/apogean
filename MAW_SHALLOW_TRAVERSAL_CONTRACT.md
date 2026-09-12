@@ -168,7 +168,7 @@ G proves differing awake/dormant illumination; it does not approve the dim pocke
 New ambient spawns are suppressed during this character's scene visit only;
 existing actors are never killed. This is terrain isolation, not enemy balancing.
 
-## I connector-out trial (pending native evidence)
+## I connector-out trial (two native outbound passes; not return-route proof)
 
 The explicit `motion-connector-out` command uses the unchanged v1 scene, starting
 on existing supported terrain at local pixel(1312,646), beside the pocket opening.
@@ -190,6 +190,17 @@ Held views now hold noon/rain/eclipse as well as the camera; this avoids H's
 advancing ambient-sky confound. Free movement does not freeze time or apply the
 amber preview. Release restores the pre-visit time/weather and clears1.6× preview.
 No changed emission strength is approved for production by this trial.
+
+## J inspection-only light
+
+`inspect-on/off` require a held, starter-baseline Plain visit. One neutral point
+light is emitted at the player, not fullbright, tile lighting edits or granted
+equipment. Capture filenames carry `-inspection`. These images judge material
+and shape, never natural readability or encounter difficulty. Amber preview
+commands refuse to run while this lamp is active. Free movement, release and
+world clear disable it. Native J verified capture illumination and exact four-
+sample natural-light restoration after disabling. These checks do not excuse
+the separate caught close-background render error retained in J evidence.
 
 Canonical integration reference only:
 `Common/WorldGeneration/ApogeanWorldGenerationSystem.cs` orders Maw after vanilla

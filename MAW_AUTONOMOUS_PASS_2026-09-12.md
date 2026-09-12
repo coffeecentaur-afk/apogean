@@ -78,6 +78,27 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- J,20:51–20:59UTC: installed QA hash
+  `F025192E400EF4B93F0DEBB88ABF5F08A9FB66257DF7BD304A588C1CD7F0EFB3`,
+  mirror7357424448e94635974f8497460e12a4; zero compile warnings/errors and466
+  unchanged art/map pins. Held Plain-only inspection point light adds no equipment
+  or terrain. Native rib1/rib2/rib3/pocket captures show the light; no retouching.
+  All three ribs have squared underside notches; do not promote their silhouettes.
+  Top natural capture retains thick cap/soil layering. No art/worldgen acceptance.
+- J lamp guard: `light-awake` while inspection active was correctly rejected.
+  After `inspect-off`, four natural RGB controls exactly restored to I's noon
+  values36/20/7,36/20/9,28/18/18,26/17/17. Plain baselineTrue, actors0,
+  global dormancyTrue unchanged.72 scoped records plus raw captures in shallow
+  evidence folder. Pristine all11648cells passed; native save15:58:50–51Central
+  retained originalF3CC4D2B and interaction24163E65. Menu Exit verified closed.
+- J discovered separate caught render failure before lamp activation:
+  DivideByZeroException in SurfaceBackgroundStylesLoader.DrawCloseBackground
+  line323 at15:53:15.662Central after rib1 teleport. Background-render health
+  remains RED. Exporter now retains narrowly relevant caught draw stacks even
+  when a QA request completes; synthetic test also rejects unrelated telemetry
+  and preserves previous outputs. Research sidecar owns only new
+  `RESEARCH_BACKGROUND_CLOSE_DIVISOR_2026-09-12.md`; main owns fixes/native proof.
+
 - 17:46:58 UTC: window started; paused heartbeat updated with exact hard stop.
 - Research sidecar owns only `RESEARCH_MAW_TEXTURE_RESIDENCY_2026-09-12.md`.
   Main agent owns all code/builds/game actions and vine reproduction.
@@ -209,3 +230,26 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
   RGBA samples exactly. Dim-away-from-organ appearance stays unresolved. Saved
   pristine11648 cells and actual24163E65 at15:42:56–57Central;68 scoped records
   plus raw traces/capture retained. No terrain/art/generator promotion.
+- 20:52–20:59UTC: J F025192E adds held-Plain single-point inspection light.
+  Five raw images distinguish squared rib undersides from inadequate natural
+  illumination. Amber preview correctly refuses while lamp is active; disabling
+  restores four noon RGB controls exactly.72 raw records and exact24163E65 save.
+  A separate caught line323 background exception precedes lamp activation.
+- 21:06–21:15UTC: K D1DD27DD read-only probe sees valid952x480 cache; no failure.
+  Retain five records and exact native save, not a claim that intermittent bug is gone.
+- 21:18–21:20UTC: L CA130BC9 naturally reproduces loaded952x480 but cached0x0
+  immediately before DrawCloseBackground integer divide-by-zero. Explicit control
+  was requested later and never injected.13 native records/caught stack retained;
+  pristine and exact24163E65 save succeed. Pinned runtime research confirms the
+  async-request metadata path; transparent2x2 placeholder is not the culprit.
+- 21:24–21:26UTC: M923AAA55 repairs selected owned fallback metadata from loaded
+  dimensions; unavailable textures return-1. Native rib1 and deliberate one-call
+  zero-width control pass without caught errors, followed by rib2/rib3/pocket/rib1
+  replay, reload/pristine and exact native save.33 records retained.565 pure/stub
+  resolver checks and caught-draw evidence exporter controls added to gates.
+  Temporary probe/injection removed after proof; cleanup source build still due.
+  No approved textures, terrain specimens or world-generation layout changed.
+  Next: fresh rib-contour study, never mutate/rebaseline saved shallowV1.
+- 21:29UTC: cleanup source compile passes0warnings/errors; installed M hash
+  unchanged. Temporary diagnostic source removed, not any art or saved specimen.
+  Native replay without instrumentation will accompany the next candidate build.

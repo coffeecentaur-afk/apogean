@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-12T21:15:13.8433512Z",
+  "sourceLogSha256": "A8E80D7548DA76CF41F23DD855EDB2E2FABEF3268D135554C2469DBEF9ED30BB",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[16:07:00.390] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: rib1",
+    "[16:07:00.406] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[16:07:00.406] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: rib1",
+    "[16:07:00.425] [Main Thread/WARN] [apogean]: [DEBUG-closewidth] style=apogean/EngraftRuinedBackgroundStyle; styleSlot=17; textureSlot=446; asset=Content\\Backgrounds\\Engraft\\V0_Close; state=Loaded; cached=952x480; actual=952x480; scale=1.25; stride=2380; alpha=1; camera={X:17536 Y:2942.125}. Read-only observation before LoadBackground/sky callback.",
+    "[16:15:01.348] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state."
+  ],
+  "caughtRenderFailures": []
+}

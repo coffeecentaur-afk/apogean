@@ -13,7 +13,7 @@ $profiles = @{
     Status = @('Tools/Test-AuthoringStatus.ps1', 'Tools/Test-VersionedSkills.ps1', 'Tools/Test-GeneratorOwnership.ps1')
     Tree = @('Tools/Test-TreeProductionReadiness.ps1')
     Performance = @('Tools/Test-QAPerformanceStatistics.ps1', 'Tools/Test-QARequestPublication.ps1', 'Tools/Test-QASharedWallAssets.ps1')
-    MawShallow = @('Tools/Test-MawShallowTraversalPlan.ps1', 'Tools/Test-MawShallowMotionTrace.ps1', 'Tools/Test-MawShallowQaScope.ps1')
+    MawShallow = @('Tools/Test-MawShallowTraversalPlan.ps1', 'Tools/Test-MawShallowMotionTrace.ps1', 'Tools/Test-MawShallowQaScope.ps1', 'Tools/Test-MawEvidenceRenderFailures.ps1', 'Tools/Test-CloseBackgroundDimensions.ps1')
     MawTeeth = @('Tools/Test-MawToothPlacement.ps1', 'Tools/Test-MawClusterPlayerCurves.ps1', 'Tools/Test-MawPlayerCurveValidators.ps1')
     MawAnatomy = @('Tools/Test-MawAnatomyPlan.ps1', 'Tools/Test-MawAnatomyCandidate.ps1', 'Tools/Test-MawAnatomyMutations.ps1', 'Tools/Test-MawHangingFiberCandidate.ps1', 'Tools/Test-MawAmberEmission.ps1', 'Tools/Test-MawAmberCompiler.ps1')
     MawMaterials = @('Tools/Test-PackedMawMaterials.ps1', 'Tools/Test-PackedMaterialMap.ps1', 'Tools/Test-PackedMaterialMutations.ps1', 'Tools/Test-QAAssetSnapshotMutations.ps1', 'Tools/Test-MawNativeSuite.ps1', 'Tools/Test-MawFiberGrowthPolicy.ps1')
@@ -24,6 +24,7 @@ $profiles = @{
     Boss = @('Tools/Test-BossAuthoringPipeline.ps1')
     Quest = @('Tools/Test-QuestDialoguePipeline.ps1')
 }
+$profiles.Background += 'Tools/Test-CloseBackgroundDimensions.ps1'
 
 $selectedProfiles = if ($Profile -eq 'All') { @('Status', 'Tree', 'Terrain', 'MawMaterials', 'MawAnatomy', 'MawShallow', 'MawTeeth', 'Performance', 'Background', 'Entity', 'Structure', 'Boss', 'Quest') } else { @($Profile) }
 $scripts = [Collections.Generic.List[string]]::new()

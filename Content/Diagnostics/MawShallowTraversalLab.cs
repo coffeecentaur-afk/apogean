@@ -25,7 +25,7 @@ namespace apogean.Content.Diagnostics
         private Vector2 oldPosition;
         private int panel, captureDelay = -1;
         private bool? previewDormant;
-        private bool previewBright;
+        private bool previewBright, inspectionLamp;
         internal static bool IsQa => MawShallowQaScope.Context(Main.ActiveWorldFileData?.Name,
             Main.LocalPlayer.name, Main.netMode == NetmodeID.SinglePlayer, Main.gameMenu);
         internal bool PlainVisit => IsQa && MawPackedPreview.Enabled && visiting && Main.LocalPlayer.name == MawShallowQaScope.Plain;
@@ -34,6 +34,8 @@ namespace apogean.Content.Diagnostics
         internal float LightScaleAt(int x,int y) => MawShallowQaScope.LightScale(
             MawShallowQaScope.PreviewApplies(IsQa && MawPackedPreview.Enabled,viewing,visiting,
                 x,y,bounds.X,bounds.Y,bounds.Width,bounds.Height),previewBright);
+        private bool InspectionActive => MawShallowQaScope.InspectionApplies(PlainVisit,viewing,visiting,
+            MawShallowMotionProbe.PlainBaseline(Main.LocalPlayer),inspectionLamp);
         private static MawToothClusterTile Teeth => ModContent.GetInstance<MawToothClusterTile>();
         internal Rectangle MotionBounds => bounds;
         private static int TileType(string key) => key switch {
@@ -238,9 +240,17 @@ namespace apogean.Content.Diagnostics
                     case "build": Build(); break;
                     case "test": BodyClearance(); break;
                     case "light": LightReport(); break;
+                    case "inspect-on": case "inspect-off":
+                        Require();
+                        if (!viewing || !PlainVisit || !MawShallowMotionProbe.PlainBaseline(Main.LocalPlayer))
+                            throw new InvalidOperationException("Inspection lamp requires held Plain QA view; no equipment is modified.");
+                        inspectionLamp = request == "inspect-on"; previewDormant=null; previewBright=false;
+                        Mod.Logger.Info($"MAW SHALLOW INSPECTION: lamp={inspectionLamp}; one neutral inspection light at held player; NOT natural illumination, torch-equipment or difficulty evidence; no world tiles changed.");
+                        break;
                     case "light-awake": case "light-dormant": case "light-natural":
                     case "light-awake-bright": case "light-dormant-bright":
                         Require();
+                        if (inspectionLamp) throw new InvalidOperationException("Turn inspection lamp off before natural amber comparisons.");
                         if (!viewing || Main.LocalPlayer.name != MawShallowQaScope.Plain || !MawShallowMotionProbe.PlainBaseline(Main.LocalPlayer))
                             throw new InvalidOperationException("Lighting preview requires held plain-character view with starter-only loadout/no buffs.");
                         previewDormant = request == "light-natural" ? null : request is "light-dormant" or "light-dormant-bright";
@@ -285,7 +295,7 @@ namespace apogean.Content.Diagnostics
             Rectangle view=Pixels(Panel);
             foreach(NPC n in Main.ActiveNPCs) if(view.Intersects(n.Hitbox))actors++;
             foreach(Projectile p in Main.ActiveProjectiles) if(view.Intersects(p.Hitbox))actors++;
-            Mod.Logger.Info($"MAW SHALLOW LIGHT: worldDormant={worldDormant}; preview={previewDormant?.ToString() ?? "natural"}; scale={LightScaleAt(bounds.X,bounds.Y)}; emitters tile={litTiles}/{tiles}, wall={litWalls}/{walls}; strongest={strongest}; plainBaseline={MawShallowMotionProbe.PlainBaseline(Main.LocalPlayer)}; otherActorsInView={actors}. No progression or art changed; actors/player light can invalidate comparisons.");
+            Mod.Logger.Info($"MAW SHALLOW LIGHT: worldDormant={worldDormant}; preview={previewDormant?.ToString() ?? "natural"}; scale={LightScaleAt(bounds.X,bounds.Y)}; inspection={InspectionActive}; day={Main.dayTime}; time={Main.time}; emitters tile={litTiles}/{tiles}, wall={litWalls}/{walls}; strongest={strongest}; plainBaseline={MawShallowMotionProbe.PlainBaseline(Main.LocalPlayer)}; otherActorsInView={actors}. Inspection light is NOT natural illumination; actors/player light can invalidate comparisons.");
             foreach (Point local in new[] { new Point(28,49), new Point(31,49), new Point(99,35), new Point(98,35) }) {
                 Point p = At(local.X, local.Y);
                 Mod.Logger.Info($"MAW SHALLOW LIGHT SAMPLE: local={local}; rendered={Lighting.GetColor(p.X,p.Y)}; camera={Main.screenPosition}; only visible warm samples certify illumination.");
@@ -309,7 +319,8 @@ namespace apogean.Content.Diagnostics
                 throw new InvalidOperationException("Visit destination obstructed; not clearing it.");
             if (!hold && !Collision.SolidCollision(destination + new Vector2(0, 2), Main.LocalPlayer.width, Main.LocalPlayer.height)) throw new InvalidOperationException("Entry footing missing; not creating a ledge.");
             if (!visiting) { oldPosition = Main.LocalPlayer.position; oldDay = Main.dayTime; oldTime = Main.time; oldRain = Main.raining; oldEclipse = Main.eclipse; visiting = true; }
-            viewing = hold; Main.LocalPlayer.Teleport(destination, 1); Main.LocalPlayer.velocity = Vector2.Zero;
+            viewing = hold; if(!hold) inspectionLamp=false;
+            Main.LocalPlayer.Teleport(destination, 1); Main.LocalPlayer.velocity = Vector2.Zero;
             Main.dayTime = true; Main.time = 27000; Main.raining = false; Main.eclipse = false;
             Main.NewText(hold ? "Shallow Maw prototype — HELD CAMERA, not traversal proof." : "Shallow Maw prototype — free controls; hazardous teeth. No equipment or safety route supplied.", Color.Wheat);
         }
@@ -321,7 +332,7 @@ namespace apogean.Content.Diagnostics
         internal void Release()
         {
             if (!Main.gameMenu) Main.LocalPlayer.GetModPlayer<MawShallowMotionProbe>().Cancel("scene-release");
-            captureDelay = -1; viewing = false; previewDormant = null; previewBright=false; if (!visiting) return;
+            captureDelay = -1; viewing = false; previewDormant = null; previewBright=inspectionLamp=false; if (!visiting) return;
             if (IsQa) { Main.LocalPlayer.Teleport(oldPosition, 1); Main.LocalPlayer.velocity = Vector2.Zero; }
             Main.dayTime = oldDay; Main.time = oldTime; Main.raining = oldRain; Main.eclipse = oldEclipse; visiting = false;
         }
@@ -332,10 +343,11 @@ namespace apogean.Content.Diagnostics
                 Main.LocalPlayer.position = ViewPosition; Main.LocalPlayer.velocity = Vector2.Zero;
                 // A stationary camera alone is not a controlled lighting comparison.
                 Main.dayTime = true; Main.time = 27000; Main.raining = false; Main.eclipse = false;
+                if (InspectionActive) Lighting.AddLight(Main.LocalPlayer.Center,1.2f,1.1f,.9f);
             }
             if (captureDelay < 0 || captureDelay-- != 0) return;
             CaptureManager.Instance.Capture(new CaptureSettings { Area = Panel, Biome = new CaptureBiome(0, 0, Main.LocalPlayer.CurrentSceneEffect.tileColorStyle),
-                CaptureBackground = true, CaptureEntities = true, UseScaling = true, OutputName = "Apogean Maw Shallow " + panel + " " + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss") });
+                CaptureBackground = true, CaptureEntities = true, UseScaling = true, OutputName = "Apogean Maw Shallow " + panel + (InspectionActive ? "-inspection" : "") + " " + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss") });
         }
         public override void SaveWorldData(TagCompound tag)
         {
@@ -351,7 +363,7 @@ namespace apogean.Content.Diagnostics
             var t = tag.GetCompound(SaveKey); bounds = new(t.GetInt("x"), t.GetInt("y"), P.Width, P.Height);
             creation = t.GetString("original"); savedState = t.GetString("savedState"); failed = t.GetBool("failed") || t.GetInt("version") != P.Version;
         }
-        public override void ClearWorld() { bounds = Rectangle.Empty; creation = savedState = null; failed = viewing = visiting = previewBright = false; previewDormant = null; captureDelay = -1; }
+        public override void ClearWorld() { bounds = Rectangle.Empty; creation = savedState = null; failed = viewing = visiting = previewBright = inspectionLamp = false; previewDormant = null; captureDelay = -1; }
     }
 
     // Art/traversal fixture isolation only, not production spawn balancing.

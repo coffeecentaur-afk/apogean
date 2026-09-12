@@ -3,6 +3,51 @@
 Status: **contracted**, not visual/traversal acceptance or world-generation integration.
 One new empty-space fixture, gg / Apogee Native Visual V3 / single-player only.
 
+## K–M close-background stability
+
+K (`D1DD27DDA6F9DAA273ADF65486C0430235BBA3162BA74A898281317BE95CA8AE`)
+observed the Maw fallback loaded/cached952x480, no exception; five native records
+and exact safe-save in `native-k-save.json`. One successful restart did not
+disprove the intermittent failure.
+
+L (`CA130BC91ED5329BA8B5B0C1400561BC03DAD22B437E5F86249E77CA0568CDC4`)
+reproduced loaded actual952x480/cached0x0/stride0 at16:18:23.685 Central, then
+the native line323 divide-by-zero. This occurred before any control command;
+the later zero-width control did not inject because width was already zero.
+`native-l-zero-cache-red.json` retains13 records and the caught stack. Pristine
+and16:20:14 save retained originalF3CC4D2B/actual24163E65.
+
+M (`923AAA55118BD7C6FBD2A2C90D8214A1DF927E77D0E16363A7FF4DB3D9418449`)
+repairs only the chosen owned texture's cache from its loaded dimensions, or
+skips it while unavailable. At16:24:55, the explicit one-call zero-width control
+completed without the exception; restored952/stride2380 follows in the log.
+Rib1/rib2/rib3/pocket transitions and reload/pristine pass; safe-save16:26:14–15
+retains exact state. `native-m-close-guard-green.json` has33 records and no caught
+render failures. Temporary instrumentation was then removed from source. This
+is a scoped stability fix, not final artwork, natural lighting or worldgen proof.
+All466 art/map pins were unchanged throughout J–M.
+
+## J close inspection — shape correction still needed
+
+Installed hash `F025192E400EF4B93F0DEBB88ABF5F08A9FB66257DF7BD304A588C1CD7F0EFB3`.
+`native-j-presave.json` has72 scoped records, including the deliberately refused
+amber preview while the lamp was active, plus a separately caught engine draw
+failure. Plain100HP/starter baseline, no other actors in the held pocket.
+
+- `j-rib1-inspection.png`, `j-rib2-inspection.png`, `j-rib3-inspection.png`:
+  actual native captures with one temporary point light. Squared underside
+  notches interrupt the single-bone contour. Shape correction remains pending.
+- `j-pocket-inspection.png`: separate ceiling/floor hazards and wall context.
+  Inspection light is not proof of natural illumination or traversal difficulty.
+- `j-top-natural.png`: cap/rooted transition/soil at noon, no inspection lamp.
+  This floating QA fixture is not a generated biome/background-routing proof.
+
+Lamp off restores four natural RGB samples exactly to I noon controls. All11648
+cells and old16 fixture bounds unchanged. Native save15:58:50–51Central retained
+originalF3CC4D2B and actual24163E65, failedFalse; game exited normally.
+The line323 DrawCloseBackground divide-by-zero happened before lamp activation;
+it is preserved and remains RED until its own reproduction/fix passes.
+
 ## First native build D
 
 Installed package SHA256:
