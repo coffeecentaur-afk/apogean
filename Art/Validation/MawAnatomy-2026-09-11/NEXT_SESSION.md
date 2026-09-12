@@ -1,5 +1,10 @@
 # Next session — preserve evidence, advance one remaining gate
 
+STOPPED at the user's return on September11 evening: they are gaming and
+explicitly requested saving until tomorrow. QA world is saved, tModLoader
+was closed normally, and the two-hour heartbeat is PAUSED. Do not resume
+computer control or automatic development until the user asks again.
+
 Repo: Apogean ModSources, not the unrelated PrismLauncher working directory.
 Read this directory's README, current ACT1_ROADMAP and the applicable authoring
 skills. The two-hour September11 work window ends01:09:50UTC September12.
@@ -87,3 +92,10 @@ Startup reports1.7GB attributed RAM for the whole Apogean QA content bank. This
 is not a measured incremental cost of today's features, a VRAM measurement or
 a performance pass. Record and profile residency before multiplying this bank
 across more biomes. Reuse approved texture objects; do not hide this cost.
+
+Last completed offline follow-up: `Tools/Measure-QATextureInventory.ps1`
+inventories PNG dimensions and hashes without loading the game or changing
+assets. Its actual CLI tests pass. The CA03 build has444 PNG paths totaling
+762.9MiB if each has one decoded RGBA8 base level, with78.7MiB of identical-file
+opportunity. This is NOT observed residency or guaranteed savings. See
+`texture-inventory-ca03.json`; no optimization/deletion was applied.

@@ -168,3 +168,19 @@ this includes raw IDs/frames and is not a portable cross-build baseline.
 The missing depth4–6 pattern remains; there was no replacement/re-growth.
 Native save completed at19:55:12 America/Chicago, then the game returned to
 the menu and exited normally. No regular world was opened.
+
+## Last offline follow-up / user return
+
+The new read-only texture inventory tool and its actual CLI controls pass
+small-image arithmetic, duplicate-file detection, overwrite protection and
+truncated-header rejection. The preserved CA03 mirror contains444 PNG paths:
+762.9MiB of hypothetical RGBA8 base-level image data, including78.7MiB shared
+by byte-identical files under different paths. The two7290px-tall grass/cap
+atlases are the largest individual fields at32.0MiB each. This is an inventory,
+not full PNG decoding, mipmap accounting, live RAM/VRAM, simultaneous residency
+or guaranteed savings. No assets were removed or changed. Full path/hash data:
+`texture-inventory-ca03.json`.
+
+The user returned and requested pausing until tomorrow to play games. The
+schedule was paused immediately; only this handoff/Git checkpoint followed.
+Resume from `NEXT_SESSION.md` only when asked.
