@@ -105,6 +105,7 @@ namespace apogean.Content.Diagnostics
 				Main.screenPosition = shallowCamera;
 			if (ModContent.GetInstance<MawRibContourStudy>().TryCamera(out Vector2 contourCamera))
 				Main.screenPosition = contourCamera;
+			ModContent.GetInstance<QAPerformanceLab>().ApplyCamera();
 		}
 
 		private void ConsumeLiveValidationRequest()

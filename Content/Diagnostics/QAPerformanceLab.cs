@@ -16,7 +16,8 @@ using Terraria.ModLoader;
 namespace apogean.Content.Diagnostics
 {
     // Opt-in instrumentation, not a production performance feature. No forcing
-    // GC, texture requests/readbacks, movement, world writes or graphics changes.
+    // GC, texture requests/readbacks, player movement, world writes or graphics settings.
+    // Explicit shallow comparison adds identical synthetic lights and optional camera motion.
     public sealed class QAPerformanceLab : ModSystem
     {
         private const int Capacity = 16384;
@@ -27,6 +28,11 @@ namespace apogean.Content.Diagnostics
         private bool running;
         internal bool Recording => running;
         private object before;
+        private string scenario = "passive", fixtureBefore;
+        private Rectangle fixture;
+        private Vector2 cameraMin, cameraMax;
+        private int cameraCallbacks;
+        private bool Shallow => scenario is "shallow-static" or "shallow-sweep";
         private static bool IsQa => !Main.gameMenu && Main.netMode == NetmodeID.SinglePlayer &&
             Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" && Main.LocalPlayer.name == "gg" && MawPackedPreview.Enabled;
         private static double Seconds(long from, long to) => (to - from) / (double)Stopwatch.Frequency;
@@ -40,14 +46,23 @@ namespace apogean.Content.Diagnostics
             } else if (command == "snapshot") {
                 if (running) throw new InvalidOperationException("Do not allocate a texture inventory during a timing sample.");
                 Write("snapshot", new { schemaVersion = 1, utc = DateTime.UtcNow, scope = Scope(), memory = Memory(), textures = Textures() });
-            } else if (command == "start") {
+            } else if (command is "start" or "shallow-static" or "shallow-sweep") {
                 if (running) throw new InvalidOperationException("Performance sample already running.");
+                scenario = command == "start" ? "passive" : command;
+                fixtureBefore = null; fixture = Rectangle.Empty;
+                if (Shallow) {
+                    var lab = ModContent.GetInstance<MawShallowTraversalLab>();
+                    if (!lab.PerformanceReady) throw new InvalidOperationException("Select an existing held shallow panel before the synthetic comparison; pending capture is forbidden.");
+                    fixture = lab.PreservedBounds;
+                    fixtureBefore = MawShallowTraversalLab.Fingerprint(new[] { fixture });
+                }
                 updates = new double[Capacity]; draws = new double[Capacity];
                 updateCount = drawCount = overflow = pausedCallbacks = inactiveCallbacks = captureCallbacks = 0;
+                cameraCallbacks = 0; cameraMin = new(float.MaxValue); cameraMax = new(float.MinValue);
                 updateStart = lastDraw = 0;
                 before = new { memory = Memory(), scope = Scope() };
                 started = Stopwatch.GetTimestamp(); running = true;
-                Mod.Logger.Info("QA PERFORMANCE START: 2s warmup + 30s passive scene sample. Avoid captures, new QA commands and focus changes until COMPLETE.");
+                Mod.Logger.Info($"QA PERFORMANCE START: scenario={scenario}; 2s warmup + 30s sample. Shallow scenarios use the same64 fixed neutral lights; optional diagonal camera sweep, NOT traversal. Avoid captures, new QA commands and focus changes until COMPLETE.");
             } else if (command == "stop") {
                 if (!running) throw new InvalidOperationException("No performance sample to stop.");
                 Finish("manual-stop");
@@ -63,8 +78,15 @@ namespace apogean.Content.Diagnostics
         {
             if (!running) return;
             long now = Stopwatch.GetTimestamp();
-            if (!IsQa) { Finish("left-qa-context"); return; }
+            if (!IsQa || Shallow && !ModContent.GetInstance<MawShallowTraversalLab>().PerformanceReady) { Finish("left-qa-context"); return; }
             double elapsed = Seconds(started, now);
+            if (Shallow) {
+                // Identical bounded stimulus in both arms. Includes this instrumentation
+                // overhead; not natural lighting, player equipment or normal gameplay cost.
+                for (int x = 7; x < 112; x += 14)
+                    for (int y = 3; y < 104; y += 14)
+                        Lighting.AddLight(new Vector2((fixture.X+x)*16,(fixture.Y+y)*16),1.2f,1.1f,.9f);
+            }
             if (elapsed >= WarmupSeconds && updateStart > 0) {
                 if (updateCount < Capacity) updates[updateCount++] = Seconds(updateStart, now) * 1000;
                 else overflow++;
@@ -82,6 +104,7 @@ namespace apogean.Content.Diagnostics
             if (!Main.instance.IsActive) inactiveCallbacks++;
             if (CaptureManager.Instance.IsCapturing) captureCallbacks++;
             if (elapsed >= WarmupSeconds) {
+                cameraMin = Vector2.Min(cameraMin, Main.screenPosition); cameraMax = Vector2.Max(cameraMax, Main.screenPosition); cameraCallbacks++;
                 if (lastDraw != 0) {
                     if (drawCount < Capacity) draws[drawCount++] = Seconds(lastDraw, now) * 1000;
                     else overflow++;
@@ -92,15 +115,30 @@ namespace apogean.Content.Diagnostics
             if (elapsed >= WarmupSeconds + SampleSeconds) Finish("duration-complete");
         }
 
+        internal void ApplyCamera()
+        {
+            if (!running || !Shallow || !IsQa || !ModContent.GetInstance<MawShallowTraversalLab>().PerformanceReady) return;
+            var offset = QACameraSweep.Offset(Seconds(started, Stopwatch.GetTimestamp()), scenario == "shallow-sweep");
+            Main.screenPosition += new Vector2(offset.X, offset.Y);
+        }
+
         private void Finish(string reason)
         {
             if (!running) return;
             running = false; // File IO/serialization is outside the measured interval.
             long ended = Stopwatch.GetTimestamp();
+            string fixtureAfter = Shallow && IsQa ? MawShallowTraversalLab.Fingerprint(new[] { fixture }) : null;
+            bool geometryUnchanged = !Shallow || fixtureBefore == fixtureAfter;
+            bool cameraCoverage = !Shallow || cameraCallbacks > 0 && (scenario == "shallow-static"
+                ? (cameraMax-cameraMin).Length() < 1
+                : cameraMax.X-cameraMin.X >= QACameraSweep.AmplitudeX*1.9f && cameraMax.Y-cameraMin.Y >= QACameraSweep.AmplitudeY*1.9f);
             bool usable = reason == "duration-complete" && updateCount >= 300 && drawCount >= 300 &&
-                overflow == 0 && pausedCallbacks == 0 && inactiveCallbacks == 0 && captureCallbacks == 0;
+                overflow == 0 && pausedCallbacks == 0 && inactiveCallbacks == 0 && captureCallbacks == 0 && geometryUnchanged && cameraCoverage;
             var result = new {
-                schemaVersion = 1, utc = DateTime.UtcNow, reason, usable, elapsedSeconds = Seconds(started, ended),
+                schemaVersion = 2, utc = DateTime.UtcNow, reason, usable, elapsedSeconds = Seconds(started, ended),
+                scenario, geometryUnchanged, fixtureBefore, fixtureAfter, cameraCoverage, cameraCallbacks,
+                cameraRange = cameraCallbacks > 0 ? new { minX=cameraMin.X,minY=cameraMin.Y,maxX=cameraMax.X,maxY=cameraMax.Y } : null,
+                synthetic = Shallow ? new { neutralLights=64, periodSeconds=QACameraSweep.PeriodSeconds, amplitudeX=QACameraSweep.AmplitudeX, amplitudeY=QACameraSweep.AmplitudeY, moving=scenario=="shallow-sweep" } : null,
                 warmupSeconds = WarmupSeconds, targetSampleSeconds = SampleSeconds, overflow, pausedCallbacks, inactiveCallbacks, captureCallbacks,
                 before, after = new { memory = Memory(), scope = Scope() },
                 worldUpdateSlice = QASampleStatistics.Describe(updates, updateCount),
@@ -123,6 +161,7 @@ namespace apogean.Content.Diagnostics
             zoom = new { x = Main.GameViewMatrix.Zoom.X, y = Main.GameViewMatrix.Zoom.Y },
             camera = new { x = Main.screenPosition.X, y = Main.screenPosition.Y },
             player = new { x = Main.LocalPlayer.position.X, y = Main.LocalPlayer.position.Y },
+            actors = new { npcs = Main.npc.Count(n => n.active), projectiles = Main.projectile.Count(p => p.active) },
             Main.dayTime, Main.raining, Main.gamePaused,
             processId = Environment.ProcessId, is64Bit = Environment.Is64BitProcess,
             runtime = Environment.Version.ToString(),

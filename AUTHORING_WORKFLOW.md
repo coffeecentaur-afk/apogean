@@ -31,6 +31,13 @@ Keep the regression test; remove temporary failure injection after proof.
 
 ## One-family loop
 
+Performance comparisons must declare their workload, keep inspection/captures
+outside timing, record actual camera coverage and reject incomplete runs. Compare
+stationary/moving arms under identical artificial lighting before attributing
+cost to motion. Preserve actor changes and high-tail samples as confounders.
+Independent replay must verify raw summaries, not trust a `usable` flag. See
+`PERFORMANCE_VALIDATION.md`; this is not an art or low-end acceptance shortcut.
+
 1. **Specify the player promise.** State what the player sees, understands, does, and receives. Name the closest Terraria behavior that must remain familiar.
 2. **Contract the engine behavior.** Record the owning tModLoader type, exact dimensions/framing, authority, lifetime, placement bounds, failure behavior, and test fixture.
 3. **Build the smallest probe.** Author one tile, tree set, room, background composition, enemy, or boss state that can disprove the riskiest assumption.

@@ -39,6 +39,7 @@ namespace apogean.Content.Diagnostics
         private static MawToothClusterTile Teeth => ModContent.GetInstance<MawToothClusterTile>();
         internal Rectangle MotionBounds => bounds;
         internal Rectangle PreservedBounds => bounds;
+        internal bool PerformanceReady => IsQa && viewing && visiting && !failed && creation != null && captureDelay < 0;
         private static int TileType(string key) => key switch {
             "rib" or "cap" => MawAnatomyMaterials.Tile(key).Type,
             "amber" => ModContent.TileType<MawAmberLitTile>(), _ => MawPackedPreview.TileType(key)

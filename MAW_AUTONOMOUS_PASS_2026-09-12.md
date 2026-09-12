@@ -78,6 +78,18 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- O,22:06–22:17UTC: bounded shallow stationary/synthetic diagonal camera recorder
+  built and tested; package216E80DA, mirrorc6eda13fd0b948b9acc6445d1eea2ebf,
+  zero warnings/errors,466 pins unchanged. Four32s runs static/sweep/sweep/static
+  all meet sample-health/coverage/unchanged-geometry guards; no interval>33.333ms.
+  Natural actors vary3–5; later update tails rise in both arms, so no isolated
+  sweep regression or optimization claim. Fifth visual smoke run deliberately
+  manual-stopped and retained as unusable. Independent raw replay+11 adverse
+  controls added. Native402textures/771179636logicalbytes unchanged; separate
+  process/GPU counters retained, not per-mod ownership/savings/low-end proof.
+  Pristine/reload+all17historic bounds pass; both scene hashes saved unchanged,
+  game closed normally. See Art/Validation/MawPerformance-2026-09-12/README.md.
+
 - J,20:51–20:59UTC: installed QA hash
   `F025192E400EF4B93F0DEBB88ABF5F08A9FB66257DF7BD304A588C1CD7F0EFB3`,
   mirror7357424448e94635974f8497460e12a4; zero compile warnings/errors and466

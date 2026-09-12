@@ -50,12 +50,32 @@ samples. An available-but-inactive GPU row is not a measurement of Apogean alone
 
 ## Ordered workload matrix
 
+### Bounded shallow render comparison (September12 provisional)
+
+`shallow-static` and `shallow-sweep` are explicit recorder cases, still restricted
+to packed gg/V3/single-player. Select the existing shallow `rib2` held view first.
+Both use64 fixed neutral inspection lights across the112x104 fixture. The sweep
+adds a smooth10-second diagonal camera cycle (+/-160px horizontal, +/-320px
+vertical), without moving the held player. These are synthetic renderer/lighting
+workloads, NOT player traversal, natural amber illumination or a worst-case world.
+
+Run static/sweep/sweep/static, with no screenshots, focus changes or other work
+during each2s warmup+30s interval. Between runs inspect fresh COMPLETE and exports.
+Schema2 records actual camera extent and rejects missing sweep coverage or a
+drifting static control; it compares fixture fingerprints before/after. Context
+loss, manual stop, pauses, captures and insufficient samples remain invalid.
+Keep invalid results. The lights and offsets stop with the bounded recorder.
+Screenshot verification happens separately from timing. Record NPC/projectile
+counts, held player, zoom, settings and package so unlike scenes are not compared.
+The update slice includes diagnostic-light overhead in both arms. This comparison
+does not replace dense production growth, generation, multiplayer or soak tests.
+
 | Workload | Needed evidence | Current coverage |
 |---|---|---|
 | Load/menu | Startup peak from launch, settled snapshots, package/settings pins | Late-startup/menu samples only; no complete launch peak |
 | Ordinary terrain drawing | Fixed camera, repeated equal settings, raw cadence/update samples | Baseline Wastes and two anatomy stationary samples |
-| Dense Maw drawing | Actual loaded mixed materials/walls, fiber, amber and teeth; normal and dense variants | Pending |
-| Movement | Reproducible horizontal/diagonal traversal, same route/speed/zoom; no scripted camera changes confused with frame spikes | Pending |
+| Dense Maw drawing | Actual loaded mixed materials/walls, fiber, amber and teeth; normal and dense variants | O shallow fixed64-light scene measured; not scaled density/growth stress |
+| Movement | Reproducible horizontal/diagonal traversal, same route/speed/zoom; no scripted camera changes confused with frame spikes | O synthetic camera sweep measured; actual moving gameplay pending |
 | Paint/coatings | First new key, repeated same key, multiple keys, return/reload; native target census | Pending |
 | Growth/conversion | Fixed number of actual native operations and touched cells; clustered worst case and idle empty case | Pending |
 | Generation/save | Smallest supported, normal and cramped legal worlds; fixed seed/version, attempt bounds, operation count, time and peak memory | Pending; generator remains opt-in |
@@ -87,6 +107,7 @@ textures. Whole-world scans do not belong in per-frame draw hooks. Growth and
 conversion need finite work budgets and must retain unfinished work correctly.
 
 Current dated evidence and caveats: `Art/Validation/MawAnatomy-2026-09-12/README.md`.
+O synthetic scene extension: `Art/Validation/MawPerformance-2026-09-12/README.md`.
 Loading/paint/atlas mechanisms: `RESEARCH_MAW_TEXTURE_RESIDENCY_2026-09-12.md`.
 No dense-scene, lifetime, generation, multiplayer or final-performance approval is
 implied by the initial instrumentation checkpoint.
