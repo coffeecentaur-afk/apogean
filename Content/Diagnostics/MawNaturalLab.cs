@@ -30,6 +30,7 @@ namespace apogean.Content.Diagnostics
         }
         private const int Width = MawNaturalLayout.Width, Height = MawNaturalLayout.Height;
         private Rectangle bounds;
+        internal Rectangle PreservedBounds => bounds;
         private string checkpoint;
         private bool viewing, oldDay, oldRain, oldEclipse;
         private double oldTime;

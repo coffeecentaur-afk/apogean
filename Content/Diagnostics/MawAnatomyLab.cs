@@ -13,6 +13,7 @@ namespace apogean.Content.Diagnostics
     public sealed class MawAnatomyLab : ModSystem
     {
         private Rectangle bounds;
+        internal Rectangle PreservedBounds => bounds;
         private string digest;
         private bool viewing,oldDay,oldRain,oldEclipse;
         private bool viewingVines,viewingAmber;

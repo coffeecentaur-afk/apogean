@@ -95,6 +95,8 @@ namespace apogean.Content.Diagnostics
 		{
 			if (ModContent.GetInstance<MawAnatomyLab>().TryLightingCamera(out Vector2 camera))
 				Main.screenPosition = camera;
+			if (ModContent.GetInstance<MawShallowTraversalLab>().TryCamera(out Vector2 shallowCamera))
+				Main.screenPosition = shallowCamera;
 		}
 
 		private void ConsumeLiveValidationRequest()
@@ -119,6 +121,8 @@ namespace apogean.Content.Diagnostics
 				}
 				if (ModContent.GetInstance<QAPerformanceLab>().Recording)
 					throw new System.InvalidOperationException("Finish or stop the passive performance sample before another QA command.");
+				if (!request.StartsWith("maw-shallow-", System.StringComparison.Ordinal))
+					ModContent.GetInstance<MawShallowTraversalLab>().Release();
 				if (!request.StartsWith("maw-fiber-anatomy-", System.StringComparison.Ordinal))
 					ModContent.GetInstance<MawAnatomyLab>().Release();
 				if (!request.StartsWith("maw-fiber-", System.StringComparison.Ordinal))
@@ -148,6 +152,22 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<VegetationVisualLab>().Release();
 					WorldGen.SaveAndQuit();
 					Mod.Logger.Info("LIVE VALIDATION REQUEST CONSUMED: qa-save-and-quit");
+					return;
+				}
+				if (request.StartsWith("maw-shallow-", System.StringComparison.Ordinal))
+				{
+					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
+					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
+					ModContent.GetInstance<VegetationVisualLab>().Release();
+					ModContent.GetInstance<MawMaterialFamilyLab>().Release();
+					ModContent.GetInstance<MawMaterialLab>().Release();
+					ModContent.GetInstance<MawClusterOrientationLab>().Release();
+					ModContent.GetInstance<MawToothClusterLab>().Release();
+					ModContent.GetInstance<MawToothArtLab>().Release();
+					ModContent.GetInstance<MawFangLab>().Release();
+					ModContent.GetInstance<MawBoneLab>().Release();
+					ModContent.GetInstance<ArrivalPodLab>().Release();
+					ModContent.GetInstance<MawShallowTraversalLab>().Run(request.Substring("maw-shallow-".Length));
 					return;
 				}
 				if (request.StartsWith("wastes-camera-", System.StringComparison.Ordinal))

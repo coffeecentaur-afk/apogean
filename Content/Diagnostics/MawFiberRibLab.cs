@@ -17,6 +17,7 @@ namespace apogean.Content.Diagnostics
         private const int Width = 96, Height = 72, Budget = 8;
         private const string SaveKey = "mawFiberRibStudyV1";
         private Rectangle bounds;
+        internal Rectangle PreservedBounds => bounds;
         private string originalDigest;
         private int steps, captureDelay = -1;
         private bool viewing, oldDay, oldRain, oldEclipse;

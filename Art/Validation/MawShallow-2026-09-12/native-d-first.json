@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-12T19:18:23.4988515Z",
+  "sourceLogSha256": "FF4A9FF13DDB6FC4CCEB29630D9D41C35181EF5CE7E88741E84A9BE142BA4973",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[14:11:18.196] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: build",
+    "[14:11:18.205] [Main Thread/INFO] [apogean]: MAW SHALLOW SNAPSHOT PASS: native value storage survived a temporary tile/wire/coating mutation; restored before placement.",
+    "[14:11:18.222] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[14:11:18.222] [Main Thread/INFO] [apogean]: MAW SHALLOW BUILD: bounds={X:1116 Y:180 Width:112 Height:104}; envelope={X:1104 Y:168 Width:136 Height:128}; attempts=1; original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; existing textures only; no worldgen.",
+    "[14:11:18.238] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[14:11:18.238] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: build",
+    "[14:11:38.861] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: test",
+    "[14:11:38.866] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[14:11:38.869] [Main Thread/INFO] [apogean]: MAW SHALLOW BODY PASS: 2947 native20x42 collision/contact probes; entry connected to lower Gullet and pocket. Spatial adjacency only, NOT swept physics, jumping or fall survival.",
+    "[14:11:38.881] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[14:11:38.881] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: test",
+    "[14:11:56.943] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: top",
+    "[14:11:56.960] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[14:11:56.960] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: top",
+    "[14:12:23.295] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: capture",
+    "[14:12:23.309] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[14:12:23.309] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: capture",
+    "[14:12:39.309] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: bottom",
+    "[14:12:39.322] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[14:12:39.322] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: bottom",
+    "[14:12:52.226] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: capture",
+    "[14:12:52.242] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[14:12:52.242] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: capture"
+  ]
+}

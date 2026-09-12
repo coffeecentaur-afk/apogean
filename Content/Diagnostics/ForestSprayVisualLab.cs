@@ -20,6 +20,7 @@ namespace apogean.Content.Diagnostics
 		private int tick, column, spawned, partialFrames, mismatchedFrames, missingFrames, incomingFrames, outgoingFrames, frames;
 		private float lastOpacity = -1;
 		private Rectangle bounds;
+		internal Rectangle PreservedBounds => bounds;
 		private Vector2 holdPosition;
 		private bool previousDay, previousEclipse, previousRain;
 		private double previousTime;

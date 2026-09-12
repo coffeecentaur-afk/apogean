@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-shallow-traversal-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "MAW_SHALLOW_TRAVERSAL_CONTRACT.md",
+      "evidenceScope": "Pure112x104 template and independent swept20x42 oracle pass. D native first-site placement at1116,180 proves value-storage rollback,11648 exact cells/eight cluster variants,2947 actual body-clearance probes and16 preserved old fixture bounds. E actual save/reload passes unchanged24163E65 interaction state. Four close native captures retained. Two128-tick native motion traces fail by coasting past the first rib; original failures retained. No new art bank or generator edits.",
+      "blockers": ["F earlier release passes two native113-update entry walks/falls/landings and independent trace validation; zero contact, unchanged500HP/endgame gg equipment. This corrects the input probe, not full traversal or difficulty. Close art views are confounded by Solar armor/harpies and dormant lighting; no art acceptance. Winding connector, return, unprepared/rope/mining/hook/double-jump/fall-protection comparisons, multiplayer and generator integration remain separate.", "Creation identity must never be replaced by the interaction snapshot. Existing sixteen saved study bounds are excluded and guarded; old grove/vine failures remain RED. Provisional cortical art remains unapproved. See Art/Validation/MawShallow-2026-09-12/README.md."]
+    },
+    {
       "id": "qa-performance-instrumentation-v1",
       "status": "contracted",
       "static": "pass",
@@ -12,7 +24,7 @@
       "userReview": "pending",
       "evidenceReference": "Art/Validation/MawAnatomy-2026-09-12/README.md",
       "evidenceScope": "Passive native texture/process/GC inventory and2s-warmup/30s draw-callback/update-slice recorder. Baseline A:403 distinct textures/785088628 logical Color bytes and three usable stationary samples. Comparison B native snapshot:402 textures/771179636 bytes; all four soil/grass wall consumers share one texture reference. Exactly one duplicate allocation removed without changed pixels/maps; no RAM/VRAM saving claim. Independent math/request/asset-alias failing controls pass. Process GPU counters are process-wide, not per-mod ownership.",
-      "blockers": ["Do not count stationary high-end-PC data as stress, FPS/presentation/GPU, low-end, long-session, worldgen or multiplayer approval. B repeated timing has no observed stationary regression. C six native draw/light allocation cases return0 bytes/4096 calls with unchanged outputs; legacy resolver control allocates. In-process mod unload/reload and dense/moving/soak tests remain pending.", "User saved regular aga and approved switch; V3/gg verified18:26UTC. No QA writes/tests in aga. B process visited aga first, so process memory is not a matched fresh-launch A/B comparison. Do not reduce approved art to conceal resource regressions."]
+      "blockers": ["Do not count stationary high-end-PC data as stress, FPS/presentation/GPU, low-end, long-session, worldgen or multiplayer approval. B repeated timing has no observed stationary regression. C six native draw/light allocation cases return0 bytes/4096 calls with unchanged outputs; legacy resolver control allocates. Actual in-process Force Reload then V3 reload passes all24 cache identities/six allocation cases again and retains402 textures. Dense/moving/soak tests remain pending.", "User saved regular aga and approved switch; V3/gg verified18:26UTC. No QA writes/tests in aga. B process visited aga first, so process memory is not a matched fresh-launch A/B comparison. Do not reduce approved art to conceal resource regressions."]
     },
     {
       "id": "maw-living-fiber-grass",

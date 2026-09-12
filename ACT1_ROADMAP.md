@@ -19,6 +19,19 @@ vine suffix, but the original event remains unattributed and preserved RED.
 Next is a new bounded rib/tooth passage, not replacement of an old fixture.
 See `Art/Validation/MawAnatomy-2026-09-12/README.md` for build pins and raw evidence.
 
+September12 shallow checkpoint: the new112x104 scene at1116,180 now survives
+actual save/reload with all11648 cells/eight tooth variants intact; old16 study
+bounds remain preserved. Native body-clearance adjacency passes, but two actual
+entry walks coast past the first rib. Keep this branch contracted/RED, with both
+failed traces retained. An input-only earlier release is under test. The narrow
+connector, return, equipment matrix and final art are not certified. Close rib
+views are partly obscured by Solar armor/ambient harpies; improve test isolation
+before art judgment. C's actual content reload separately passed cache identity
+and zero-allocation checks. See `Art/Validation/MawShallow-2026-09-12/README.md`.
+At19:38UTC the F input-only correction passes two113-update native landings and
+independent trace validation, leaving terrain unchanged. The broader shallow
+gate stays contracted/pending; the original two failed traces remain retained.
+
 September11 evening continuation: bone/actual-soil/grass root seams now pass
 24 native comparisons and two deliberately disabled-rule checks. Existing
 playable suite stays green. A separate saved anatomy comparison adds tapered

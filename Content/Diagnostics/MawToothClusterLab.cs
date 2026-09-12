@@ -16,6 +16,7 @@ namespace apogean.Content.Diagnostics
 	public sealed class MawToothClusterLab : ModSystem
 	{
 		private Rectangle bounds;
+		internal Rectangle PreservedBounds => bounds;
 		private bool viewing, oldDay, oldRain, oldEclipse;
 		private double oldTime;
 		private Vector2 oldPosition;

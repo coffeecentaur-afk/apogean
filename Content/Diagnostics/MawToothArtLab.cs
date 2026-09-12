@@ -14,6 +14,7 @@ namespace apogean.Content.Diagnostics
 	public sealed class MawToothArtLab : ModSystem
 	{
 		private Rectangle bounds;
+		internal Rectangle PreservedBounds => bounds;
 		private bool viewing, previousDay, previousRain, previousEclipse;
 		private double previousTime;
 		private Vector2 previousPosition;

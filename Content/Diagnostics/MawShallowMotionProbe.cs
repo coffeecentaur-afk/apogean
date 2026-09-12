@@ -1,0 +1,110 @@
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Text.Json;
+using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace apogean.Content.Diagnostics
+{
+    // Explicit short QA input sequence. Terraria owns acceleration, gravity,
+    // slopes, collision and damage. Never assign position/velocity during it.
+    public sealed class MawShallowMotionProbe : ModPlayer
+    {
+        private const int Limit = 360;
+        private Sample[] samples;
+        private (int type, int prefix)[] equipmentState;
+        private Rectangle scene;
+        private int count, controlled, airborne, settled, startLife;
+        private long started;
+        private bool active, braked;
+        private Vector2 start;
+        private string equipment;
+        private readonly record struct Sample(int Tick, float X, float Y, float Vx, float Vy,
+            bool Right, bool Grounded, bool Teeth, int Life);
+        internal bool Active => active;
+        private bool Context => Player.whoAmI == Main.myPlayer && !Main.gameMenu &&
+            Main.netMode == NetmodeID.SinglePlayer && Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" &&
+            Player.name == "gg" && MawPackedPreview.Enabled;
+        private string Equipment()
+        {
+            string result = "";
+            foreach (Item i in Player.armor) result += i.type + ":" + i.prefix + ",";
+            return result;
+        }
+        private bool SameEquipment()
+        {
+            if (equipmentState == null || Player.armor.Length != equipmentState.Length) return false;
+            for (int i=0;i<equipmentState.Length;i++)
+                if (Player.armor[i].type != equipmentState[i].type || Player.armor[i].prefix != equipmentState[i].prefix) return false;
+            return true;
+        }
+        internal void Start(Rectangle bounds)
+        {
+            if (!Context || active || Player.dead || Player.mount.Active || Player.width != 20 || Player.height != 42 || Player.gravDir != 1 || Player.pulley || Player.grapCount != 0)
+                throw new InvalidOperationException("Entry motion requires living unmounted/unhooked gg with ordinary20x42 gravity; no loadout is changed.");
+            if (ModContent.GetInstance<QAPerformanceLab>().Recording) throw new InvalidOperationException("Do not overlap this input probe with passive timings.");
+            scene = bounds; start = Player.position; startLife = Player.statLife; equipment = Equipment();
+            samples=new Sample[Limit]; equipmentState=new (int,int)[Player.armor.Length];
+            for(int i=0;i<equipmentState.Length;i++) equipmentState[i]=(Player.armor[i].type,Player.armor[i].prefix);
+            count = controlled = airborne = settled = 0; braked = false; started = Stopwatch.GetTimestamp(); active = true;
+            Mod.Logger.Info($"MAW SHALLOW MOTION START: max360 updates/10s; actual player inputs only; start={start}; equipment={equipment}; no gear, immunity, speed, gravity or damage overrides. Existing loadout is NOT an unprepared-player control.");
+        }
+        public override void SetControls()
+        {
+            if (!active) return;
+            if (!Context || Player.dead || Main.gamePaused || !Main.instance.IsActive ||
+                Stopwatch.GetElapsedTime(started).TotalSeconds > 10 || Player.mount.Active || Player.gravDir != 1 || Player.pulley || Player.grapCount != 0) {
+                Cancel("context-pause-timeout-or-movement-mode"); return;
+            }
+            // Two native traces at x32 coasted beyond the rib before landing.
+            // Release at x30 so native momentum still has room to dissipate;
+            // there is no velocity override, snap-to-surface or terrain change.
+            if (Player.Center.X >= (scene.X + 30) * 16) braked = true;
+            Player.controlRight = !braked; Player.controlLeft = false;
+            Player.controlUp = Player.controlDown = Player.controlJump = false;
+            Player.controlHook = Player.controlMount = Player.controlUseItem = Player.controlUseTile = Player.controlThrow = false;
+            controlled++;
+        }
+        public override void PostUpdate()
+        {
+            if (!active) return;
+            if (!Context || count >= Limit) { Cancel("context-or-tick-budget"); return; }
+            if (!SameEquipment()) { Cancel("equipment-changed"); return; }
+            Vector2 local = Player.position - scene.Location.ToVector2() * 16;
+            bool grounded = Math.Abs(Player.velocity.Y) < .001f && Collision.SolidCollision(Player.position + new Vector2(0,2),20,42);
+            bool tooth = ModContent.GetInstance<apogean.Content.Tiles.MawToothClusterTile>().Touching(Player.Hitbox);
+            samples[count] = new(count,local.X,local.Y,Player.velocity.X,Player.velocity.Y,Player.controlRight,grounded,tooth,Player.statLife);
+            count++;
+            if (Player.velocity.Y > .25f) airborne++;
+            if (braked && grounded && Player.position.Y - start.Y > 200) settled++; else settled = 0;
+            if (local.X < 4*16 || local.X > 108*16 || local.Y < 0 || local.Y > 48*16 || Player.dead) { Cancel("left-entry-test-envelope-or-died"); return; }
+            if (settled >= 12) Finish("landed", true);
+            else if (count >= Limit) Finish("tick-budget", false);
+        }
+        internal void Cancel(string reason) { if (active) Finish(reason,false); }
+        private void Finish(string reason, bool landed)
+        {
+            if (!active) return; active = false;
+            Player.controlRight = false;
+            bool pass = landed && controlled > 0 && airborne > 10 && count >= 12 &&
+                SameEquipment() && Player.position.Y - start.Y > 200;
+            try {
+                string folder = Path.Combine(Main.SavePath,"Captures");
+                string path = Path.Combine(folder,"Apogean Maw Shallow Motion " + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss-fff") + ".json");
+                var evidence = new { schemaVersion=1, utc=DateTime.UtcNow, reason, pass, controlled, airborne, settled,
+                    scope="One actual entry walk/fall/landing using existing gg loadout. NOT full traversal, unprepared control, manual play or difficulty acceptance.",
+                    world=Main.ActiveWorldFileData?.Name, player=Player.name, equipment, startLife, endLife=Player.statLife,
+                    scene=new {scene.X,scene.Y,scene.Width,scene.Height}, samples=samples.AsSpan(0,count).ToArray() };
+                string temp=path+".partial";
+                using (var f=new FileStream(temp,FileMode.CreateNew,FileAccess.Write,FileShare.None)) JsonSerializer.Serialize(f,evidence,new JsonSerializerOptions {WriteIndented=true});
+                File.Move(temp,path);
+                Mod.Logger.Info($"MAW SHALLOW MOTION {(pass ? "PASS" : "STOP")}: {reason}; {count} actual updates/{controlled} controlled; airborne={airborne}; settled={settled}; life={startLife}->{Player.statLife}; evidence={Path.GetFileName(path)}.");
+            } catch(Exception e) { Mod.Logger.Error("MAW SHALLOW MOTION EXPORT FAILED: result not certified.",e); }
+            finally { samples=null; equipmentState=null; }
+        }
+        public override void Initialize() { active=false; count=0; samples=null; equipmentState=null; }
+    }
+}

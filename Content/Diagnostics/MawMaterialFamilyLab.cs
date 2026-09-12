@@ -14,6 +14,7 @@ namespace apogean.Content.Diagnostics
     public sealed class MawMaterialFamilyLab : ModSystem
     {
         private Rectangle bounds;
+        internal Rectangle PreservedBounds => bounds;
         private string checkpoint;
         private int row, captureDelay = -1;
         private bool viewing, oldDay, oldRain, oldEclipse;

@@ -139,3 +139,40 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
   Exporter retains124 scoped material/performance records; natural/playable
   request sender migrated to the already-tested atomic handoff. Next is the
   first owned GitHub checkpoint, content-reload identity and new shallow scene.
+- 18:45–18:55 UTC: a0ac478 pushed to main; Wayfinder#26 comment5647940549
+  confirmed. Native Force Reload in the same process passed24 current cache
+  identities and all6 allocation cases again. Snapshot still402 textures. Safe
+  save validated13:54:15 Central, then game closed. No historical fixture repaired.
+- Next bounded slice: reviewed pure112x104 shallow plan and its independent
+ 20x42 swept-body tests. Main added isolated native placement/view/free-control,
+ collision/contact and separate creation-versus-interaction save contracts.
+ Existing laboratories expose read-only bounds solely for exclusion and guards.
+ During review corrected a draft Tile-handle rollback to actual native value
+ storage (same rule as the existing Solar probe); the draft was never installed.
+ Current source build/native placement and visual proof still pending.
+- 19:11–19:19 UTC: D8737E1D2 enters V3/gg directly. New shallow scene placed
+  at1116,180,112x104 on first empty candidate; all11648 cells/eight native cluster
+  variants match.2947 actual standing-body collision/contact probes connect the
+  descent and pocket (spatial only). Old16 fixture bounds unchanged. Wide upper
+  and lower captures retained; dark pocket/lower ribs remain visually unresolved.
+  Pristine recheck passed before safe save14:19:20–21 Central. Original layout
+  identity and actual saved state24163E65 are separate; reload still pending.
+- 19:22 UTC: isolated build E3A1A0F2A installed, no warnings/errors,466 art/map
+  pins unchanged. Adds closer views/read-only light data and a bounded native
+  player-input probe, not new art or geometry. Earlier compile-only attempt
+  caught int-prefix/byte storage mismatch; corrected to int without narrowing.
+  Pure shallow gate plus nine synthetic trace-validator negatives pass. Native
+  E reload/light/motion checks are next; no production generation promoted.
+- 19:28–19:32 UTC: E exact save/reload and11648-cell pristine checks pass.
+  Close views retained; dormant amber plus Solar-equipped player/nearby harpies
+  confound clean art-lighting judgment. Two native128-tick entry tests reproduce
+  the same momentum overshoot past the first rib; actual JSON validator rejects
+  both. Both failures and all four close captures retained. Safe-save validated
+  with unchanged24163E65 state, then game closed. F changes only the bounded
+  controller's release point x32→x30; no art, terrain, equipment or physics edit.
+- 19:37–19:39 UTC: F8FC97196 passes two113-tick actual entry descents,50 falling
+  ticks/12 settled, unchanged500HP/loadout,0 tooth contacts. Independent native
+  trace validator passes both, and11648-cell pristine recheck passes. Kept two
+  E failures. Gate now rejects unrecognized arguments (caught accidental-Family
+  triggering All); correct-Profile MawShallow passes. Accidental broad run finds
+  old structural-wall resolver and background-readiness REDs, retained separately.

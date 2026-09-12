@@ -182,3 +182,19 @@ uses the same tested atomic publishing path as fiber/performance/fang senders.
 Next: actual content-reload cache identity, then the separate provisional shallow
 passage. No terrain art, old fixture layout, worldgen or runtime dependency was
 promoted by this checkpoint.
+
+### Same-process content reload — C
+
+At13:51:10–11 Central, native Manage Mods → Force Reload unloaded/reloaded the
+installed C package without a rebuild or changing enabled mods. PID21008 stayed
+the same. Only gg/V3 was entered afterwards, at13:52:08. The allocation probe at
+13:52:34 again measured all6 cases, skipped0, with0 hook bytes/4096 calls and
+unchanged outputs; all24 cache references match the current registrations before
+and after. Positive legacy resolver controls still allocate. This is one real
+content-reload lifecycle check, not a leak/stress certification.
+
+`native-c-after-content-reload.json` retains the scoped probe records.
+`snapshot-c-after-content-reload.json` retains402 unique textures and771,179,636
+logical Color bytes, with no pending textures. Process private3,634,143,232 and
+working1,759,711,232 bytes are observations only, not causal savings. The QA save
+validated at13:54:15 before game shutdown. Historical grove failure remains RED.

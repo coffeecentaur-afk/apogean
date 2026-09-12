@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-12T19:38:53.9946851Z",
+  "sourceLogSha256": "EA958BBA8D42399DAB5AB2F73D6667F9B8209FFF0730E47883015B674B606E60",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[14:37:19.420] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: motion-entry",
+    "[14:37:19.428] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[14:37:19.429] [Main Thread/INFO] [apogean]: MAW SHALLOW MOTION START: max360 updates/10s; actual player inputs only; start={X:18176 Y:3030}; equipment=2763:0,2764:0,2765:0,1613:0,1253:0,5000:0,821:0,0:0,0:0,0:0,1135:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,; no gear, immunity, speed, gravity or damage overrides. Existing loadout is NOT an unprepared-player control.",
+    "[14:37:19.443] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[14:37:19.443] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: motion-entry",
+    "[14:37:21.326] [Main Thread/INFO] [apogean]: MAW SHALLOW MOTION PASS: landed; 113 actual updates/113 controlled; airborne=50; settled=12; life=500->500; evidence=Apogean Maw Shallow Motion 20260912-193721-288.json.",
+    "[14:38:00.750] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: motion-entry",
+    "[14:38:00.755] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[14:38:00.755] [Main Thread/INFO] [apogean]: MAW SHALLOW MOTION START: max360 updates/10s; actual player inputs only; start={X:18176 Y:3030}; equipment=2763:0,2764:0,2765:0,1613:0,1253:0,5000:0,821:0,0:0,0:0,0:0,1135:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,; no gear, immunity, speed, gravity or damage overrides. Existing loadout is NOT an unprepared-player control.",
+    "[14:38:00.766] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[14:38:00.766] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: motion-entry",
+    "[14:38:02.626] [Main Thread/INFO] [apogean]: MAW SHALLOW MOTION PASS: landed; 113 actual updates/113 controlled; airborne=50; settled=12; life=500->500; evidence=Apogean Maw Shallow Motion 20260912-193802-621.json.",
+    "[14:38:14.183] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: pristine",
+    "[14:38:14.187] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[14:38:14.197] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[14:38:14.198] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: pristine",
+    "[14:38:40.533] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: release",
+    "[14:38:40.545] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[14:38:40.545] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: release"
+  ]
+}

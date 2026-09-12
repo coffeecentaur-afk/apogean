@@ -17,6 +17,7 @@ namespace apogean.Content.Diagnostics
 	public sealed class ArrivalPodLab : ModSystem
 	{
 		private Rectangle bounds;
+		internal Rectangle PreservedBounds => bounds;
 		private string checkpoint;
 		private string legacyCheckpoint;
 		private bool viewing, previousDay, previousRain, previousEclipse;
