@@ -16,7 +16,8 @@ namespace apogean.Content.Diagnostics
             if(!MawPackedPreview.Enabled||!Mod.FileExists("Content/Diagnostics/Anatomy/amber-tile-light.bin"))return;
             Mod.AddContent(new MawAmberLitTile());Mod.AddContent(new MawAmberLitWall());
         }
-        internal static bool Dormant(int i,int j)=>ModContent.GetInstance<MawAmberLightStudy>().StateAt(i,j)??MawActivityState.IsDormant;
+        internal static bool Dormant(int i,int j)=>ModContent.GetInstance<MawShallowTraversalLab>().StateAt(i,j)??
+            ModContent.GetInstance<MawAmberLightStudy>().StateAt(i,j)??MawActivityState.IsDormant;
         internal static Vector3 Light(int count,bool dormant,float scale=1f)=>new Vector3(.55f,.31f,.055f)*PackedEmissionMap.Strength(count,dormant)*scale;
     }
     [Autoload(false)]

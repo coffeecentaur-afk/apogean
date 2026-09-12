@@ -32,6 +32,13 @@ At19:38UTC the F input-only correction passes two113-update native landings and
 independent trace validation, leaving terrain unchanged. The broader shallow
 gate stays contracted/pending; the original two failed traces remain retained.
 
+At20:10UTC G adds two119-update100HP starter-character entrance landings and
+clean held awake/dormant comparisons without glowing equipment. Both native
+motion JSON files pass independent validation. Amber dimming works, but the
+pocket/lower ribs remain visually underlit; do not approve obscured geometry.
+Restricted character build-denial and unchanged save state pass. Broader shallow
+route, interaction, artwork and generation gates remain open.
+
 September11 evening continuation: bone/actual-soil/grass root seams now pass
 24 native comparisons and two deliberately disabled-rule checks. Existing
 playable suite stays green. A separate saved anatomy comparison adds tapered

@@ -142,13 +142,31 @@ normal visit teleport to existing supported footing. It runs right until the
 body is over the first rib, releases input, then observes native falling and
 landing. Limit360 updates/10seconds; scope/focus/pause/mount/hook/equipment
 changes abort. The existing gg loadout is recorded, not called unprepared.
+G additionally accepts the native-created Classic `Maw QA Plain` character,
+with runtime starter-only inventory/no equipment/buffs and100HP/20mana baseline
+checks at start and throughout movement. It never removes/grants items or changes
+health. The new character cannot build scenes or run unrelated laboratories.
 
 `Test-MawShallowMotionTrace.ps1` independently rejects incomplete controls,
 discontinuous positions, false/unstable landings, missing falling, wrong context
 and missing ticks. Its no-argument self-test uses synthetic validator data and
-nine rejected defects, never native evidence. The native JSON must separately
+twenty-one rejected defects, never native evidence. Per-sample health must agree
+with the final summary; Plain evidence needs actual booleans and100HP bounds.
+The native JSON must separately
 pass via `-Path`. One successful landing does not certify the winding connector,
 full descent, return route, all loadouts, manual feel or difficulty.
+
+## Clean lighting preview
+
+Plain held views may request `light-awake`, `light-dormant` or `light-natural`.
+These are unsaved QA-bounds-only emission overrides, not world progression.
+Release stops the override; moving rather than held views use actual world state.
+Light reports retain global/preview state, baseline and nearby actor counts.
+Only zero-actor, starter-baseline comparisons at the same settled camera are
+clean controls. Native measurements and visible readability are separate gates.
+G proves differing awake/dormant illumination; it does not approve the dim pocket.
+New ambient spawns are suppressed during this character's scene visit only;
+existing actors are never killed. This is terrain isolation, not enemy balancing.
 
 Canonical integration reference only:
 `Common/WorldGeneration/ApogeanWorldGenerationSystem.cs` orders Maw after vanilla

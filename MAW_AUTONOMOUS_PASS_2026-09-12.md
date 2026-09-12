@@ -176,3 +176,19 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
   E failures. Gate now rejects unrecognized arguments (caught accidental-Family
   triggering All); correct-Profile MawShallow passes. Accidental broad run finds
   old structural-wall resolver and background-readiness REDs, retained separately.
+- 19:45 UTC:696d270 pushed with D/E/F evidence and Wayfinder#26 updated.
+  Broad All run retains three failures: structural-wall path reader, old
+  background-readiness and world-visual-integrity checks. No blanket pass.
+- 20:00–20:10 UTC: G D23C5B83 enters V3 with new native-created Maw QA Plain.
+  No gear/save-file editing or automatic grove restoration. Two119-tick entry
+  descents pass with100→100HP,46 airborne/12 settled/zero tooth contact.
+  Clean awake/dormant captures prove amber brightness differs but pocket/lower
+  rib visibility is still inadequate for visual approval. No progression/art
+  changes. Explicit forbidden-build request is rejected; pristine state remains.
+  Safe-save20:10:07–08UTC retains24163E65, then game closed normally.
+- Tool improvements: contradictory sample/header health now rejected,21 synthetic
+  trace defects fail as intended; native G traces pass independently. Specific
+  structural-wall fallback resolver repaired, actual468x180 topology passes;
+  unrelated background/world-integrity REDs remain. All466 art pins untouched.
+  Next: bounded rib/connector readability and interaction proof, no generator
+  promotion or new-world replacement yet.

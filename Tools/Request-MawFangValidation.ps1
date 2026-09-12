@@ -3,4 +3,8 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $request=if ($Case -eq 'save-and-quit') {'qa-save-and-quit'} else {"maw-fang-$Case"}
 & (Join-Path $PSScriptRoot 'Publish-QARequest.ps1') -Request $request
-Write-Host "Queued $request. Only gg / Apogee Native Visual V3 / SP. Inspect native log for consumption; queueing is not proof."
+if ($Case -eq 'save-and-quit') {
+ Write-Host 'Queued safe exit. Inspect native save completion; queueing is not proof. Maw QA Plain is also allowed to save its disposable world.'
+} else {
+ Write-Host "Queued $request. Only gg / Apogee Native Visual V3 / SP. Inspect native log for consumption; queueing is not proof."
+}

@@ -20,6 +20,17 @@ solving the next family; do not turn workflow improvement into an engine detour.
 
 ## Retaining corrections
 
+Separate gear lighting from terrain lighting. Use an explicitly disposable
+starter-only character for native light controls; record buffs, equipment and
+nearby actors without stripping the user's player. An emission-hook pass does
+not approve a blacked-out hazard or root seam. Preserve awake/dormant native
+captures at the same camera and never alter progression to force a comparison.
+Movement evidence must retain actual tick samples and health, not just a PASS
+header. Validators must reject contradictory sample/summary data and malformed
+baseline fields. A scoped QA character should reject construction requests.
+Texture tests must follow the actual binding: keep production fallback topology
+separate from opt-in packed atlas mapping instead of testing an unused PNG.
+
 Small spawn features must survey the final terrain produced by their owning
 conversion pass, before adding their own enclosing StructureMap reservation.
 Keep foreign reservations intact. Try finite authored size variants before

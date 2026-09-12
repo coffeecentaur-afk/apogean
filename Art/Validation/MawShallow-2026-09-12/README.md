@@ -94,3 +94,52 @@ parameter binding; the same actual invocation now exits1 before running anything
 The documented `-Profile MawShallow` passes. The accidental broad run also flags
 the legacy structural-wall resolver and background production-readiness tests;
 neither is declared green or used to overwrite accepted QA art.
+
+## G clean-character comparison and safeguards
+
+Package `D23C5B8312AFF6197913349B9F364F72F79915D11F01822FC531A57B9A74B080`
+was built from mirror e54b14506c1c4e8db932606e3e988a08 with zero warnings/errors
+and466 unchanged art/map pins. A new native-UI-created Classic character,
+**Maw QA Plain**, entered V3 at15:00:33 Central. No save-file editing, equipment
+stripping or modification of gg. Runtime verifies100 max HP,20 base mana,
+starter copper tools only, no armor/accessories/pets/wings/buffs. Cheat Sheet
+is still loaded; this is not a vanilla-only modpack certification.
+
+The character skips automatic fixture construction/restoration and accepts only
+existing shallow checks and safe exit. A deliberate `maw-shallow-build` request
+at15:09:26 was rejected before lab side effects. Pristine checks before/after
+pass all11648 cells. Keep that expected exception in `native-g-presave.json`
+(92 scoped records), not as an unexplained crash or an omitted failure.
+
+`motion-g-plain-pass-1.json` and `motion-g-plain-pass-2.json` independently pass
+119 actual updates,46 airborne,12 settled,0 tooth contact,100→100 HP. Terraria
+owns physics/damage; the probe supplies right/release input only. These confirm
+the first rib landing with a starter character, not the connector/full descent,
+return journey, hook/rope comparison, manual controls or difficulty balance.
+
+Held pocket views use the same camera and no NPC/projectile in the panel.
+`g-pocket-awake.png` and `g-pocket-dormant.png` are unedited native captures.
+The preview changes only the QA bounds while held; globalDormant staysTrue.
+Release clears the unsaved override. Natural dormancy and forced dormancy
+produce the same four sampled RGB values. At local99,35: awake89/50/18 versus
+dormant28/18/18; at28,49:114/64/11 versus36/20/7. Registered emission maxima
+are(.55,.31,.055) awake and(.176,.0992,.0176) dormant,16/18 tile and16/36 wall
+emitters. This verifies a real lighting difference, NOT adequate visibility.
+The pocket teeth remain too dim for approval without player lighting.
+`g-rib1-awake.png` and `g-rib2-awake.png` expose the same limitation; rib1 is
+visible in incoming daylight, rib2 is substantially obscured. The held character
+position is not traversal evidence. Existing actors are never destroyed; new
+ambient spawns are suppressed only during this character's QA visit.
+
+Pristine checks and15:10:07–08 native save retain interaction digest24163E65
+and original creationF3CC4D2B. Menu and normal game exit visually verified.
+
+Tool regression: trace validation now checks per-sample health, integer values,
+actual boolean baseline fields and agreement with the final health summary.
+A modified in-memory copy of the F native trace previously passed despite
+last-sample1HP/header500HP; it now fails. All raw originals remain unchanged.
+Two synthetic validator baselines and21 rejected defects pass separately.
+The old structural-wall test now recognizes the specific packed-preview wrapper
+and verifies its production fallback branch (468×180 native dirt-wall topology).
+Three resolver positives/five negatives pass. This does not certify packed art;
+the other broad background/world-integrity failures remain open.

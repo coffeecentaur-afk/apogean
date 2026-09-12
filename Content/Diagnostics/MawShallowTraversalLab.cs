@@ -24,8 +24,12 @@ namespace apogean.Content.Diagnostics
         private double oldTime;
         private Vector2 oldPosition;
         private int panel, captureDelay = -1;
-        private static bool IsQa => !Main.gameMenu && Main.netMode == NetmodeID.SinglePlayer &&
-            Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" && Main.LocalPlayer.name == "gg";
+        private bool? previewDormant;
+        internal static bool IsQa => MawShallowQaScope.Context(Main.ActiveWorldFileData?.Name,
+            Main.LocalPlayer.name, Main.netMode == NetmodeID.SinglePlayer, Main.gameMenu);
+        internal bool PlainVisit => IsQa && MawPackedPreview.Enabled && visiting && Main.LocalPlayer.name == MawShallowQaScope.Plain;
+        internal bool? StateAt(int x, int y) => MawShallowQaScope.PreviewApplies(IsQa, viewing, visiting,
+            x,y,bounds.X,bounds.Y,bounds.Width,bounds.Height) ? previewDormant : null;
         private static MawToothClusterTile Teeth => ModContent.GetInstance<MawToothClusterTile>();
         internal Rectangle MotionBounds => bounds;
         private static int TileType(string key) => key switch {
@@ -115,6 +119,7 @@ namespace apogean.Content.Diagnostics
         }
         private void Build()
         {
+            if (Main.LocalPlayer.name != "gg") throw new InvalidOperationException("Plain QA cannot construct scenes.");
             if (!bounds.IsEmpty || creation != null) throw new InvalidOperationException("Shallow scene already reserved; no rebuild or rebaseline.");
             var plan = P.Create(); var cells = plan.ExportCells(); var clusters = plan.ExportClusters();
             plan.ValidateExport(cells, clusters);
@@ -217,7 +222,9 @@ namespace apogean.Content.Diagnostics
         internal void Run(string request)
         {
             if (!IsQa || !MawAnatomyMaterials.Available || !MawPackedPreview.Enabled || ModContent.GetInstance<QAPerformanceLab>().Recording)
-                throw new InvalidOperationException("Shallow commands require idle packed gg/V3/SP.");
+                throw new InvalidOperationException("Shallow commands require idle packed gg or Maw QA Plain/V3/SP.");
+            if (!MawShallowQaScope.Request(Main.LocalPlayer.name, "maw-shallow-" + request))
+                throw new InvalidOperationException("Shallow request denied for this QA character.");
             if (Main.LocalPlayer.GetModPlayer<MawShallowMotionProbe>().Active && request != "release")
                 throw new InvalidOperationException("Finish or release the bounded motion probe before another shallow command.");
             Rectangle[] old = Historical(); string before = Fingerprint(old);
@@ -227,6 +234,13 @@ namespace apogean.Content.Diagnostics
                     case "build": Build(); break;
                     case "test": BodyClearance(); break;
                     case "light": LightReport(); break;
+                    case "light-awake": case "light-dormant": case "light-natural":
+                        Require();
+                        if (!viewing || Main.LocalPlayer.name != MawShallowQaScope.Plain || !MawShallowMotionProbe.PlainBaseline(Main.LocalPlayer))
+                            throw new InvalidOperationException("Lighting preview requires held plain-character view with starter-only loadout/no buffs.");
+                        previewDormant = request == "light-natural" ? null : request == "light-dormant";
+                        Mod.Logger.Info($"MAW SHALLOW LIGHT MODE: preview={previewDormant?.ToString() ?? "natural"}; only bounds={bounds}; globalDormant={apogean.Common.Maw.MawActivityState.IsDormant} unchanged. Wait for lighting to settle before measuring.");
+                        break;
                     case "pristine": ValidatePristine(); break;
                     case "audit": Require(); Mod.Logger.Info($"MAW SHALLOW AUDIT: original={creation}; actual={Fingerprint(new[] { bounds })}; saved={savedState}; no repair."); break;
                     case "reload": Require(); if (savedState == null || savedState != Fingerprint(new[] { bounds })) throw new InvalidOperationException("Shallow pre-save/post-load state mismatch; retained."); Mod.Logger.Info("MAW SHALLOW RELOAD PASS: actual contents match saved interaction state; original contract retained separately."); break;
@@ -248,7 +262,8 @@ namespace apogean.Content.Diagnostics
         private void LightReport()
         {
             Require(); int tiles = 0, walls = 0, litTiles = 0, litWalls = 0; Vector3 strongest = Vector3.Zero;
-            bool dormant = apogean.Common.Maw.MawActivityState.IsDormant;
+            bool worldDormant = apogean.Common.Maw.MawActivityState.IsDormant;
+            bool dormant = previewDormant ?? worldDormant;
             var tile = ModContent.GetInstance<MawAmberLitTile>(); var wall = ModContent.GetInstance<MawAmberLitWall>();
             for (int x = bounds.Left; x < bounds.Right; x++) for (int y = bounds.Top; y < bounds.Bottom; y++) {
                 Tile t = Main.tile[x, y]; Vector3 a = Vector3.Zero, b = Vector3.Zero;
@@ -256,7 +271,11 @@ namespace apogean.Content.Diagnostics
                 if (t.WallType == wall.Type) { walls++; b = wall.Emission(x, y, dormant); if (b.X > 0) litWalls++; }
                 strongest = Vector3.Max(strongest, Vector3.Max(a, b));
             }
-            Mod.Logger.Info($"MAW SHALLOW LIGHT: worldDormant={dormant}; emitters tile={litTiles}/{tiles}, wall={litWalls}/{walls}; strongest={strongest}. No progression, art or brightness changed.");
+            int actors=0;
+            Rectangle view=Pixels(Panel);
+            foreach(NPC n in Main.ActiveNPCs) if(view.Intersects(n.Hitbox))actors++;
+            foreach(Projectile p in Main.ActiveProjectiles) if(view.Intersects(p.Hitbox))actors++;
+            Mod.Logger.Info($"MAW SHALLOW LIGHT: worldDormant={worldDormant}; preview={previewDormant?.ToString() ?? "natural"}; emitters tile={litTiles}/{tiles}, wall={litWalls}/{walls}; strongest={strongest}; plainBaseline={MawShallowMotionProbe.PlainBaseline(Main.LocalPlayer)}; otherActorsInView={actors}. No progression or art changed; actors/player light can invalidate comparisons.");
             foreach (Point local in new[] { new Point(28,49), new Point(31,49), new Point(99,35), new Point(98,35) }) {
                 Point p = At(local.X, local.Y);
                 Mod.Logger.Info($"MAW SHALLOW LIGHT SAMPLE: local={local}; rendered={Lighting.GetColor(p.X,p.Y)}; camera={Main.screenPosition}; only visible warm samples certify illumination.");
@@ -292,7 +311,7 @@ namespace apogean.Content.Diagnostics
         internal void Release()
         {
             if (!Main.gameMenu) Main.LocalPlayer.GetModPlayer<MawShallowMotionProbe>().Cancel("scene-release");
-            captureDelay = -1; viewing = false; if (!visiting) return;
+            captureDelay = -1; viewing = false; previewDormant = null; if (!visiting) return;
             if (IsQa) { Main.LocalPlayer.Teleport(oldPosition, 1); Main.LocalPlayer.velocity = Vector2.Zero; }
             Main.dayTime = oldDay; Main.time = oldTime; Main.raining = oldRain; Main.eclipse = oldEclipse; visiting = false;
         }
@@ -318,6 +337,17 @@ namespace apogean.Content.Diagnostics
             var t = tag.GetCompound(SaveKey); bounds = new(t.GetInt("x"), t.GetInt("y"), P.Width, P.Height);
             creation = t.GetString("original"); savedState = t.GetString("savedState"); failed = t.GetBool("failed") || t.GetInt("version") != P.Version;
         }
-        public override void ClearWorld() { bounds = Rectangle.Empty; creation = savedState = null; failed = viewing = visiting = false; captureDelay = -1; }
+        public override void ClearWorld() { bounds = Rectangle.Empty; creation = savedState = null; failed = viewing = visiting = false; previewDormant = null; captureDelay = -1; }
+    }
+
+    // Art/traversal fixture isolation only, not production spawn balancing.
+    // Existing actors are never killed or despawned by this hook.
+    public sealed class MawShallowAmbientGate : GlobalNPC
+    {
+        public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
+        {
+            if (player.whoAmI != Main.myPlayer || !ModContent.GetInstance<MawShallowTraversalLab>().PlainVisit) return;
+            spawnRate = int.MaxValue; maxSpawns = 0;
+        }
     }
 }

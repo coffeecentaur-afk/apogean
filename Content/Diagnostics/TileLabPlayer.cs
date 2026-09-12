@@ -40,6 +40,12 @@ namespace apogean.Content.Diagnostics
 			// This existing disposable validation world is our deterministic client-render harness.
 			// Delaying one second lets the player and camera finish settling before the active fixture is built.
 			string worldName = Main.ActiveWorldFileData?.Name;
+			if (worldName == AutomaticWorldName && Player.name == MawShallowQaScope.Plain) {
+				_automaticBuildDelay = -1;
+				_automaticCampusFixture = false;
+				Mod.Logger.Info("MAW PLAIN QA: request-only character; no automatic grove restoration or fixture construction.");
+				return;
+			}
 			bool automaticWorld = worldName == AutomaticWorldName;
 			_automaticCampusFixture = worldName == AutomaticCampusWorldName;
 			_automaticBuildDelay = automaticWorld || _automaticCampusFixture ? 60 : -1;
@@ -114,6 +120,8 @@ namespace apogean.Content.Diagnostics
 			{
 				request = File.ReadAllText(requestPath).Trim().ToLowerInvariant();
 				File.Delete(requestPath);
+				if (Player.name == MawShallowQaScope.Plain && !MawShallowQaScope.Request(Player.name, request))
+					throw new System.InvalidOperationException("Plain QA character only accepts existing shallow-scene checks and safe exit; no builds or other laboratories.");
 				if (request.StartsWith("qa-perf-", System.StringComparison.Ordinal)) {
 					// Passive measurements must not release or move the scene they measure.
 					ModContent.GetInstance<QAPerformanceLab>().Run(request.Substring("qa-perf-".Length));

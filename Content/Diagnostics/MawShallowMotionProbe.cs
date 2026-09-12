@@ -19,15 +19,23 @@ namespace apogean.Content.Diagnostics
         private Rectangle scene;
         private int count, controlled, airborne, settled, startLife;
         private long started;
-        private bool active, braked;
+        private bool active, braked, baselineStart;
         private Vector2 start;
         private string equipment;
         private readonly record struct Sample(int Tick, float X, float Y, float Vx, float Vy,
             bool Right, bool Grounded, bool Teeth, int Life);
         internal bool Active => active;
-        private bool Context => Player.whoAmI == Main.myPlayer && !Main.gameMenu &&
-            Main.netMode == NetmodeID.SinglePlayer && Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" &&
-            Player.name == "gg" && MawPackedPreview.Enabled;
+        private bool Context => Player.whoAmI == Main.myPlayer && MawShallowTraversalLab.IsQa && MawPackedPreview.Enabled;
+        internal static bool PlainBaseline(Player p)
+        {
+            if (p.name != MawShallowQaScope.Plain || p.difficulty != 0 || p.statLifeMax != 100 ||
+                p.statLifeMax2 != 100 || p.statManaMax != 20 || p.wingsLogic != 0) return false;
+            foreach(Item i in p.armor) if(!i.IsAir) return false;
+            foreach(Item i in p.miscEquips) if(!i.IsAir) return false;
+            foreach(Item i in p.inventory) if(!i.IsAir && i.type is not (ItemID.CopperShortsword or ItemID.CopperPickaxe or ItemID.CopperAxe)) return false;
+            for(int i=0;i<p.buffType.Length;i++) if(p.buffType[i]!=0 && p.buffTime[i]>0) return false;
+            return true;
+        }
         private string Equipment()
         {
             string result = "";
@@ -44,13 +52,15 @@ namespace apogean.Content.Diagnostics
         internal void Start(Rectangle bounds)
         {
             if (!Context || active || Player.dead || Player.mount.Active || Player.width != 20 || Player.height != 42 || Player.gravDir != 1 || Player.pulley || Player.grapCount != 0)
-                throw new InvalidOperationException("Entry motion requires living unmounted/unhooked gg with ordinary20x42 gravity; no loadout is changed.");
+                throw new InvalidOperationException("Entry motion requires living unmounted/unhooked QA player with ordinary20x42 gravity; no loadout is changed.");
+            baselineStart=PlainBaseline(Player);
+            if(Player.name==MawShallowQaScope.Plain && !baselineStart) throw new InvalidOperationException("Plain motion requires fresh Classic100HP starter-only inventory, no equipment/buffs. Nothing is removed or granted.");
             if (ModContent.GetInstance<QAPerformanceLab>().Recording) throw new InvalidOperationException("Do not overlap this input probe with passive timings.");
             scene = bounds; start = Player.position; startLife = Player.statLife; equipment = Equipment();
             samples=new Sample[Limit]; equipmentState=new (int,int)[Player.armor.Length];
             for(int i=0;i<equipmentState.Length;i++) equipmentState[i]=(Player.armor[i].type,Player.armor[i].prefix);
             count = controlled = airborne = settled = 0; braked = false; started = Stopwatch.GetTimestamp(); active = true;
-            Mod.Logger.Info($"MAW SHALLOW MOTION START: max360 updates/10s; actual player inputs only; start={start}; equipment={equipment}; no gear, immunity, speed, gravity or damage overrides. Existing loadout is NOT an unprepared-player control.");
+            Mod.Logger.Info($"MAW SHALLOW MOTION START: max360 updates/10s; actual player inputs only; player={Player.name}; plainBaseline={baselineStart}; start={start}; equipment={equipment}; no gear, immunity, speed, gravity or damage overrides. Not whole-descent or difficulty approval.");
         }
         public override void SetControls()
         {
@@ -73,6 +83,7 @@ namespace apogean.Content.Diagnostics
             if (!active) return;
             if (!Context || count >= Limit) { Cancel("context-or-tick-budget"); return; }
             if (!SameEquipment()) { Cancel("equipment-changed"); return; }
+            if (baselineStart && !PlainBaseline(Player)) { Cancel("plain-baseline-changed"); return; }
             Vector2 local = Player.position - scene.Location.ToVector2() * 16;
             bool grounded = Math.Abs(Player.velocity.Y) < .001f && Collision.SolidCollision(Player.position + new Vector2(0,2),20,42);
             bool tooth = ModContent.GetInstance<apogean.Content.Tiles.MawToothClusterTile>().Touching(Player.Hitbox);
@@ -94,8 +105,9 @@ namespace apogean.Content.Diagnostics
             try {
                 string folder = Path.Combine(Main.SavePath,"Captures");
                 string path = Path.Combine(folder,"Apogean Maw Shallow Motion " + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss-fff") + ".json");
-                var evidence = new { schemaVersion=1, utc=DateTime.UtcNow, reason, pass, controlled, airborne, settled,
-                    scope="One actual entry walk/fall/landing using existing gg loadout. NOT full traversal, unprepared control, manual play or difficulty acceptance.",
+                var evidence = new { schemaVersion=2, utc=DateTime.UtcNow, reason, pass, controlled, airborne, settled,
+                    baselineStart, baselineEnd=PlainBaseline(Player),
+                    scope="One actual entry walk/fall/landing. Plain baseline is asserted separately; NOT full traversal, manual play, vanilla-only modpack or difficulty acceptance.",
                     world=Main.ActiveWorldFileData?.Name, player=Player.name, equipment, startLife, endLife=Player.statLife,
                     scene=new {scene.X,scene.Y,scene.Width,scene.Height}, samples=samples.AsSpan(0,count).ToArray() };
                 string temp=path+".partial";
