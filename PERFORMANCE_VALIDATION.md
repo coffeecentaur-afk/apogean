@@ -77,7 +77,7 @@ does not replace dense production growth, generation, multiplayer or soak tests.
 | Dense Maw drawing | Actual loaded mixed materials/walls, fiber, amber and teeth; normal and dense variants | O shallow fixed64-light scene measured; not scaled density/growth stress |
 | Movement | Reproducible horizontal/diagonal traversal, same route/speed/zoom; no scripted camera changes confused with frame spikes | O synthetic camera sweep measured; actual moving gameplay pending |
 | Paint/coatings | First new key, repeated same key, multiple keys, return/reload; native target census | Pending |
-| Growth/conversion | Fixed number of actual native operations and touched cells; clustered worst case and idle empty case | Pending |
+| Growth/conversion | Fixed number of actual native operations and touched cells; clustered worst case and idle empty case | P synchronous16²/32² conversion patches pass; incremental scheduling/growth/idle pending |
 | Generation/save | Smallest supported, normal and cramped legal worlds; fixed seed/version, attempt bounds, operation count, time and peak memory | Pending; generator remains opt-in |
 | Lifetime/soak | Repeated enter/leave of the same QA world and regions; compare settled retained allocations across cycles | Pending |
 | Multiplayer/modpacks | Server tick cost, independent client memory, representative mod combination | Pending |
@@ -108,6 +108,7 @@ conversion need finite work budgets and must retain unfinished work correctly.
 
 Current dated evidence and caveats: `Art/Validation/MawAnatomy-2026-09-12/README.md`.
 O synthetic scene extension: `Art/Validation/MawPerformance-2026-09-12/README.md`.
+P bounded conversion extension: `Art/Validation/MawConversionLoad-2026-09-12/README.md`.
 Loading/paint/atlas mechanisms: `RESEARCH_MAW_TEXTURE_RESIDENCY_2026-09-12.md`.
 No dense-scene, lifetime, generation, multiplayer or final-performance approval is
 implied by the initial instrumentation checkpoint.

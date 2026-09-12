@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-09-12T22:37:02.8621746Z",
+  "pass": true,
+  "error": null,
+  "side": 16,
+  "cycles": 3,
+  "completedCells": 2304,
+  "checks": 5123,
+  "negativeControls": 1,
+  "restored": true,
+  "historyUnchanged": true,
+  "before": "55E4DE015BFB39FC4087C686A7F65660B427B6E950D1899C2E34C080AD2E0338",
+  "after": "55E4DE015BFB39FC4087C686A7F65660B427B6E950D1899C2E34C080AD2E0338",
+  "totalMs": 34.7467,
+  "origin": {
+    "x": 1396,
+    "y": 60
+  },
+  "phases": [
+    {
+      "cycle": 0,
+      "phase": 1,
+      "cells": 256,
+      "budgetCells": 32,
+      "validated": true,
+      "conversionBatchMs": [
+        0.6748,
+        0.31,
+        0.3045,
+        0.3124,
+        0.3112,
+        0.3879,
+        0.3196,
+        0.2658
+      ],
+      "statistics": {
+        "Count": 8,
+        "MeanMs": 0.36077499999999996,
+        "P50Ms": 0.3112,
+        "P95Ms": 0.6748,
+        "P99Ms": 0.6748,
+        "MaxMs": 0.6748,
+        "Over33Ms": 0,
+        "Over50Ms": 0
+      },
+      "threadAllocatedBytes": 56704
+    },
+    {
+      "cycle": 0,
+      "phase": 2,
+      "cells": 256,
+      "budgetCells": 32,
+      "validated": true,
+      "conversionBatchMs": [
+        0.2678,
+        0.2039,
+        0.158,
+        0.1565,
+        0.1593,
+        0.1565,
+        0.1554,
+        0.1382
+      ],
+      "statistics": {
+        "Count": 8,
+        "MeanMs": 0.17445,
+        "P50Ms": 0.1565,
+        "P95Ms": 0.2678,
+        "P99Ms": 0.2678,
+        "MaxMs": 0.2678,
+        "Over33Ms": 0,
+        "Over50Ms": 0
+      },
+      "threadAllocatedBytes": 51248
+    },
+    {
+      "cycle": 0,
+      "phase": 3,
+      "cells": 256,
+      "budgetCells": 32,
+      "validated": true,
+      "conversionBatchMs": [
+        0.2507,
+        0.1644,
+        0.1629,
+        0.1637,
+        0.165,
+        0.1646,
+        0.1658,
+        0.1484
+      ],
+      "statistics": {
+        "Count": 8,
+        "MeanMs": 0.17318750000000002,
+        "P50Ms": 0.1644,
+        "P95Ms": 0.2507,
+        "P99Ms": 0.2507,
+        "MaxMs": 0.2507,
+        "Over33Ms": 0,
+        "Over50Ms": 0
+      },
+      "threadAllocatedBytes": 50720
+    },
+    {
+      "cycle": 1,
+      "phase": 1,
+      "cells": 256,
+      "budgetCells": 32,
+      "validated": true,
+      "conversionBatchMs": [
+        0.3049,
+        0.3443,
+        0.3487,
+        0.3478,
+        0.3514,
+        0.3481,
+        0.3332,
+        0.2898
+      ],
+      "statistics": {
+        "Count": 8,
+        "MeanMs": 0.333525,
+        "P50Ms": 0.3443,
+        "P95Ms": 0.3514,
+        "P99Ms": 0.3514,
+        "MaxMs": 0.3514,
+        "Over33Ms": 0,
+        "Over50Ms": 0
+      },
+      "threadAllocatedBytes": 48944
+    },
+    {
+      "cycle": 1,
+      "phase": 2,
+      "cells": 256,
+      "budgetCells": 32,
+      "validated": true,
+      "conversionBatchMs": [
+        0.1472,
+        0.1659,
+        0.1646,
+        0.1653,
+        0.1638,
+        0.1644,
+        0.158,
+        0.1365
+      ],
+      "statistics": {
+        "Count": 8,
+        "MeanMs": 0.1582125,
+        "P50Ms": 0.1638,
+        "P95Ms": 0.1659,
+        "P99Ms": 0.1659,
+        "MaxMs": 0.1659,
+        "Over33Ms": 0,
+        "Over50Ms": 0
+      },
+      "threadAllocatedBytes": 48944
+    },
+    {
+      "cycle": 1,
+      "phase": 3,
+      "cells": 256,
+      "budgetCells": 32,
+      "validated": true,
+      "conversionBatchMs": [
+        0.1401,
+        0.1613,
+        0.1592,
+        0.1603,
+        0.1637,
+        0.1619,
+        0.1597,
+        0.1429
+      ],
+      "statistics": {
+        "Count": 8,
+        "MeanMs": 0.15613749999999998,
+        "P50Ms": 0.1597,
+        "P95Ms": 0.1637,
+        "P99Ms": 0.1637,
+        "MaxMs": 0.1637,
+        "Over33Ms": 0,
+        "Over50Ms": 0
+      },
+      "threadAllocatedBytes": 47296
+    },
+    {
+      "cycle": 2,
+      "phase": 1,
+      "cells": 256,
+      "budgetCells": 32,
+      "validated": true,
+      "conversionBatchMs": [
+        0.2986,
+        0.3466,
+        0.3476,
+        0.3619,
+        0.3673,
+        0.3637,
+        0.3873,
+        0.2945
+      ],
+      "statistics": {
+        "Count": 8,
+        "MeanMs": 0.3459375,
+        "P50Ms": 0.3476,
+        "P95Ms": 0.3873,
+        "P99Ms": 0.3873,
+        "MaxMs": 0.3873,
+        "Over33Ms": 0,
+        "Over50Ms": 0
+      },
+      "threadAllocatedBytes": 48944
+    },
+    {
+      "cycle": 2,
+      "phase": 2,
+      "cells": 256,
+      "budgetCells": 32,
+      "validated": true,
+      "conversionBatchMs": [
+        0.1475,
+        0.1631,
+        0.1606,
+        0.172,
+        0.166,
+        0.1627,
+        0.1609,
+        0.1358
+      ],
+      "statistics": {
+        "Count": 8,
+        "MeanMs": 0.158575,
+        "P50Ms": 0.1609,
+        "P95Ms": 0.172,
+        "P99Ms": 0.172,
+        "MaxMs": 0.172,
+        "Over33Ms": 0,
+        "Over50Ms": 0
+      },
+      "threadAllocatedBytes": 48944
+    },
+    {
+      "cycle": 2,
+      "phase": 3,
+      "cells": 256,
+      "budgetCells": 32,
+      "validated": true,
+      "conversionBatchMs": [
+        0.1409,
+        0.1661,
+        0.1609,
+        0.163,
+        0.1623,
+        0.1631,
+        0.1616,
+        0.1483
+      ],
+      "statistics": {
+        "Count": 8,
+        "MeanMs": 0.158275,
+        "P50Ms": 0.1616,
+        "P95Ms": 0.1661,
+        "P99Ms": 0.1661,
+        "MaxMs": 0.1661,
+        "Over33Ms": 0,
+        "Over50Ms": 0
+      },
+      "threadAllocatedBytes": 47296
+    }
+  ],
+  "limitations": "Synchronous disposable native conversion throughput. Batch timings exclude setup/checks/restore; phase allocations INCLUDE validation. Not frame/update scheduling, spread speed, GPU, multiplayer, visual or low-end acceptance."
+}

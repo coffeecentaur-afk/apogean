@@ -78,6 +78,20 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- P,22:36–22:40UTC: packageC2C0BCD9, mirror400adea2a1144d659a8c80d8706dec14,
+  adds only a bounded QA conversion probe. Four16/32/32/16 native patches pass
+  2304/9216/9216/2304 cell conversions with5123/20483 assertions per size;
+  real source→Maw→Wastes→vanilla hooks retain shape/paint/wires/coatings.
+  Every owned scratch envelope restored exactly, history unchanged. Deliberate
+  unconverted-cell exception is expected; old grove failure remains RED.
+  Independent reports reject16 optimistic mutations; static budget7759 sampled
+  assertions. Shallow11648-cell pristine/reload and contour reload pass, save
+  retains24163E65/6F7998FF; normal menu exit. Four raw reports/22 scoped records.
+  Native full32-square probe55–63ms is not production per-frame work; keep
+  scheduling, growth, visuals and low-end acceptance separate.466 art pins intact.
+  Wrapper completion output lost on compaction; installed assembly/native load
+  verified, no invented wrapper exit. Build a new package only for needed code.
+
 - O,22:06–22:17UTC: bounded shallow stationary/synthetic diagonal camera recorder
   built and tested; package216E80DA, mirrorc6eda13fd0b948b9acc6445d1eea2ebf,
   zero warnings/errors,466 pins unchanged. Four32s runs static/sweep/sweep/static

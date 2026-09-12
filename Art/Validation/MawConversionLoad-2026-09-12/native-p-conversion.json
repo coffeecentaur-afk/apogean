@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-12T22:40:27.6678035Z",
+  "sourceLogSha256": "F86FE6F41C9C4870C2EE8574749E4D93F6C4447731471C9ACDF3EA892CEFBBEB",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[17:37:02.900] [Main Thread/INFO] [apogean]: QA PERFORMANCE CONVERSION EXPORT: C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\conversion-20260912-223702-862-db90f2.json",
+    "[17:37:02.900] [Main Thread/INFO] [apogean]: QA PERFORMANCE CONVERSION COMPLETE: pass=True; side=16; cells=2304; restored=True; historyUnchanged=True; totalMs=34.747. Synchronous probe, not update scheduling.",
+    "[17:37:23.041] [Main Thread/INFO] [apogean]: QA PERFORMANCE CONVERSION EXPORT: C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\conversion-20260912-223723-038-f40d4b.json",
+    "[17:37:23.042] [Main Thread/INFO] [apogean]: QA PERFORMANCE CONVERSION COMPLETE: pass=True; side=32; cells=9216; restored=True; historyUnchanged=True; totalMs=63.277. Synchronous probe, not update scheduling.",
+    "[17:37:40.601] [Main Thread/INFO] [apogean]: QA PERFORMANCE CONVERSION EXPORT: C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\conversion-20260912-223740-597-f9e432.json",
+    "[17:37:40.601] [Main Thread/INFO] [apogean]: QA PERFORMANCE CONVERSION COMPLETE: pass=True; side=32; cells=9216; restored=True; historyUnchanged=True; totalMs=55.082. Synchronous probe, not update scheduling.",
+    "[17:37:41.082] [Main Thread/INFO] [apogean]: QA PERFORMANCE CONVERSION EXPORT: C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\conversion-20260912-223741-081-5d8021.json",
+    "[17:37:41.082] [Main Thread/INFO] [apogean]: QA PERFORMANCE CONVERSION COMPLETE: pass=True; side=16; cells=2304; restored=True; historyUnchanged=True; totalMs=22.850. Synchronous probe, not update scheduling.",
+    "[17:38:12.053] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: pristine",
+    "[17:38:12.060] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[17:38:12.069] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all17 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[17:38:12.069] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: pristine",
+    "[17:38:13.088] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: reload",
+    "[17:38:13.092] [Main Thread/INFO] [apogean]: MAW SHALLOW RELOAD PASS: actual contents match saved interaction state; original contract retained separately.",
+    "[17:38:13.101] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all17 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[17:38:13.101] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: reload",
+    "[17:38:13.607] [Main Thread/INFO] [apogean]: MAW RIB CONTOUR REQUEST: reload",
+    "[17:38:13.609] [Main Thread/INFO] [apogean]: MAW RIB CONTOUR RELOAD PASS: exact saved state.",
+    "[17:38:13.620] [Main Thread/INFO] [apogean]: MAW RIB CONTOUR PRESERVATION: 8 earlier bounds unchanged, including shallowV1.",
+    "[17:38:13.620] [Main Thread/INFO] [apogean]: MAW RIB CONTOUR COMPLETE: reload",
+    "[17:39:22.630] [.NET TP Worker/INFO] [apogean]: MAW RIB CONTOUR SAVE: creation=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; actual=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; failed=False.",
+    "[17:39:22.632] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state."
+  ],
+  "caughtRenderFailures": []
+}

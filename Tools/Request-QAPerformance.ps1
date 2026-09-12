@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][ValidateSet('snapshot','start','stop','allocations','shallow-static','shallow-sweep')][string]$Case)
+param([Parameter(Mandatory)][ValidateSet('snapshot','start','stop','allocations','shallow-static','shallow-sweep','conversions-small','conversions-large')][string]$Case)
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 & (Join-Path $PSScriptRoot 'Publish-QARequest.ps1') -Request "qa-perf-$Case"

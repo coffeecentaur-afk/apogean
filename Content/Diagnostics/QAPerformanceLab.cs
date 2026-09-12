@@ -40,7 +40,10 @@ namespace apogean.Content.Diagnostics
         internal void Run(string command)
         {
             if (!IsQa) throw new InvalidOperationException("Performance recorder requires packed gg/V3/single-player.");
-            if (command == "allocations") {
+            if (command is "conversions-small" or "conversions-large") {
+                if(running)throw new InvalidOperationException("Do not run conversion probes during timing.");
+                MawConversionLoadStudy.Run(command=="conversions-small"?16:32,Mod.Logger);
+            } else if (command == "allocations") {
                 if (running) throw new InvalidOperationException("Do not run an allocation probe during passive timing.");
                 MawRenderAllocationProbe.Run(Mod);
             } else if (command == "snapshot") {

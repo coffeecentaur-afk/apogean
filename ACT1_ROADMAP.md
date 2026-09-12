@@ -2,6 +2,13 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+22:40UTC update: P bounded native conversion throughput passes four16/32/32/16
+patch runs, real two-step tile/wall purification and preserved properties.
+Exact temporary restoration and existing saved studies verified. Raw reports
+and independent replay retained. This is synchronous throughput, not per-update
+spread/growth or production performance acceptance. Next: remaining independent
+growth/support coverage, then the provisional cave-background branch.
+
 22:17UTC update: O synthetic stationary/moving render comparison retained four
 healthy timed samples and one deliberately stopped visual smoke. No isolated
 camera-sweep regression measured; variable actors and hardware limits documented.

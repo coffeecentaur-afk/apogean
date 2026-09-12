@@ -394,6 +394,14 @@ this prototype out of production assets and world generation. Preserve all
 accepted package overrides during every test build. Five corrupt-atlas CLI
 controls ensure a validator pass means more than a valid PNG file.
 
+Native batch probes must preserve an initially empty owned envelope exactly,
+including invisible air flags/frames. Keep setup/assertions/restoration separate
+from timed native calls; a synchronous throughput result is not a per-update
+budget guarantee. Record raw phase timings even when a later assertion fails.
+Replay statistics/counts/verdicts independently and mutation-test optimistic
+reports. Label expected negative-control exceptions and retain real failures;
+do not confuse a logged control with a new engine defect or conceal either.
+
 Saved interactive galleries can legitimately drift during playtesting. When a
 historical layout assertion fails, audit actual native tiles/frames read-only
 before diagnosing an atlas regression. Preserve that failed assertion; do not
