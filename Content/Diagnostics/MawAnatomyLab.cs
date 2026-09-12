@@ -88,6 +88,7 @@ namespace apogean.Content.Diagnostics
                     case "vines-grow":ModContent.GetInstance<MawHangingFiberStudy>().Grow();break;
                     case "vines-test":ModContent.GetInstance<MawHangingFiberStudy>().Test();break;
                     case "vines-probe":ModContent.GetInstance<MawHangingFiberStudy>().Test(false);break;
+                    case "vines-solar":ModContent.GetInstance<MawHangingFiberStudy>().TestSolarCut();break;
                     case "vines-audit":ModContent.GetInstance<MawHangingFiberStudy>().Audit();break;
                     case "vines-reload":ModContent.GetInstance<MawHangingFiberStudy>().Validate();break;
                     case "vines-view":ModContent.GetInstance<MawHangingFiberStudy>().Validate();View();viewingVines=true;break;

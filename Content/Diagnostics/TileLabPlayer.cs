@@ -112,6 +112,13 @@ namespace apogean.Content.Diagnostics
 			{
 				request = File.ReadAllText(requestPath).Trim().ToLowerInvariant();
 				File.Delete(requestPath);
+				if (request.StartsWith("qa-perf-", System.StringComparison.Ordinal)) {
+					// Passive measurements must not release or move the scene they measure.
+					ModContent.GetInstance<QAPerformanceLab>().Run(request.Substring("qa-perf-".Length));
+					return;
+				}
+				if (ModContent.GetInstance<QAPerformanceLab>().Recording)
+					throw new System.InvalidOperationException("Finish or stop the passive performance sample before another QA command.");
 				if (!request.StartsWith("maw-fiber-anatomy-", System.StringComparison.Ordinal))
 					ModContent.GetInstance<MawAnatomyLab>().Release();
 				if (!request.StartsWith("maw-fiber-", System.StringComparison.Ordinal))

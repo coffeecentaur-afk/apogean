@@ -207,7 +207,21 @@ The Underworld does not use `ModUndergroundBackgroundStyle`; Terraria draws a se
 
 The Maw is the hostile biome created by the distributed Broodmass organism, not a recolored Corruption. The neutral Wastes beneath the rest of the world are a separate biome and do not spread.
 
+September12 cave-layout direction: side caverns should connect through narrow,
+winding, player-sized passages to other caverns and/or the main Gullet. Smaller
+cave pockets branch from those passages, making full exploration more involved
+than following the main descent. Teeth and other established hazards make the
+connectors dangerous; do not seal them with impossible collision or introduce
+mandatory unavoidable damage. Preserve preparation, mining and player-built
+route options. Prove one bounded shallow connector before broad generation.
+
 ### Current fiber and rib direction — September 11
+
+September12 decision: hanging fibers stay short, cuttable and non-climbable for
+the current Maw pass; they do not supply free rope traversal. Provisional rib/
+fiber art may be selected for disposable native studies while the user is away.
+Final art/feel and ordinary-world deployment are not thereby approved. See
+`MAW_AUTONOMOUS_PASS_2026-09-12.md` for the bounded implementation authority.
 
 The user likes the mixed material direction, while requesting thicker, less
 choppy **living fiber grass** on surface soil, wrapping exposed floors, sides

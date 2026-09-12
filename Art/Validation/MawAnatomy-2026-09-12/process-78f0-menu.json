@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "phase": "menu",
+  "processId": 21008,
+  "processStartedUtc": "2026-09-12T18:37:38.4281706Z",
+  "sampleCount": 3,
+  "intervalMilliseconds": 1000,
+  "gpuProvider": "Win32_PerfRawData_GPUPerformanceCounters_GPUProcessMemory",
+  "gpuError": null,
+  "scope": "Read-only process-wide counters. Not exact mod ownership or driver residency guarantees; empty GPU rows mean unavailable, not zero.",
+  "records": [
+    {
+      "utc": "2026-09-12T18:38:19.1485575Z",
+      "privateBytes": 3944583168,
+      "workingSetBytes": 2099593216,
+      "peakWorkingSetBytes": 2639409152,
+      "cpuSeconds": 23.421875,
+      "gpu": [
+        {
+          "instance": "pid_21008_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1507016704,
+          "sharedBytes": 6795264,
+          "committedBytes": 1744187392
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:38:20.1935254Z",
+      "privateBytes": 3944583168,
+      "workingSetBytes": 2099597312,
+      "peakWorkingSetBytes": 2639409152,
+      "cpuSeconds": 23.6875,
+      "gpu": [
+        {
+          "instance": "pid_21008_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1507016704,
+          "sharedBytes": 6795264,
+          "committedBytes": 1744187392
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:38:21.2196174Z",
+      "privateBytes": 3944583168,
+      "workingSetBytes": 2099597312,
+      "peakWorkingSetBytes": 2639409152,
+      "cpuSeconds": 23.875,
+      "gpu": [
+        {
+          "instance": "pid_21008_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1507016704,
+          "sharedBytes": 6795264,
+          "committedBytes": 1744187392
+        }
+      ]
+    }
+  ]
+}

@@ -2,6 +2,23 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+September12: eleven-hour pass authorized, ending2026-09-13 04:46:58UTC.
+`MAW_AUTONOMOUS_PASS_2026-09-12.md` owns the bounded queue and current authority.
+Provisional art/native scenes are allowed without waiting; final visual/feel
+approval remains pending. Hanging fibers are non-climbable in this pass. New
+disposable seed worlds are allowed after mechanical gates, generator opt-in only.
+Do not duplicate saved studies or erase the historical vine/grove failures.
+
+September12 first-hour checkpoint: identical soil/grass walls now share one
+native texture reference (13.265MiB less logical texel allocation, not a measured
+RAM/VRAM claim). Cached study lookups return unchanged native frames/light with
+zero measured per-call allocations in six tested paths. Repeated stationary
+samples and native material regressions pass; dense/moving/lifecycle/performance
+acceptance remains separate. A scratch SolarCounter burst reproduces the damaged
+vine suffix, but the original event remains unattributed and preserved RED.
+Next is a new bounded rib/tooth passage, not replacement of an old fixture.
+See `Art/Validation/MawAnatomy-2026-09-12/README.md` for build pins and raw evidence.
+
 September11 evening continuation: bone/actual-soil/grass root seams now pass
 24 native comparisons and two deliberately disabled-rule checks. Existing
 playable suite stays green. A separate saved anatomy comparison adds tapered

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -14,13 +16,21 @@ namespace apogean.Content.Diagnostics
         internal static readonly string[] Materials = {
             "soil", "stone", "grass", "sand", "mud", "clay", "snow", "ice", "bone", "fibers", "membrane", "amber"
         };
+        // The same registered instances, not additional maps or texture assets.
+        // Resolve by the existing key without constructing names in draw/light hooks.
+        private static readonly Dictionary<string, MawTerrainStudyTile> tiles = new(StringComparer.Ordinal);
+        private static readonly Dictionary<string, MawTerrainStudyWall> walls = new(StringComparer.Ordinal);
         public override void Load()
         {
+            tiles.Clear(); walls.Clear();
             foreach (string key in Materials) {
-                Mod.AddContent(new MawTerrainStudyTile(key));
-                Mod.AddContent(new MawTerrainStudyWall(key));
+                var tile = new MawTerrainStudyTile(key);
+                if (Mod.AddContent(tile)) tiles.Add(key, tile);
+                var wall = new MawTerrainStudyWall(key);
+                if (Mod.AddContent(wall)) walls.Add(key, wall);
             }
         }
+        public override void Unload() { tiles.Clear(); walls.Clear(); }
         public override void PostSetupContent()
         {
             if (!MawPackedPreview.Enabled) return;
@@ -38,8 +48,12 @@ namespace apogean.Content.Diagnostics
             int grass = MawPackedPreview.TileType("grass");
             Main.tileMerge[bone][grass] = Main.tileMerge[grass][bone] = true;
         }
-        internal static MawTerrainStudyTile Tile(string key) => (MawTerrainStudyTile)ModContent.Find<ModTile>("apogean/Study_" + key);
-        internal static MawTerrainStudyWall Wall(string key) => (MawTerrainStudyWall)ModContent.Find<ModWall>("apogean/StudyWall_" + key);
+        internal static MawTerrainStudyTile Tile(string key) => tiles[key];
+        internal static MawTerrainStudyWall Wall(string key) => walls[key];
+        // Both wall sources/maps are byte-identical. ReLogic shares by request
+        // path, not pixel hash. Keep content IDs/maps distinct, texture canonical.
+        // Assert-QASharedWallAssets guards this alias at the QA build entrypoint.
+        internal static string WallTexture(string key) => "apogean/Content/Diagnostics/Materials/" + (key == "grass" ? "soil" : key) + "/Wall";
     }
 
     [Autoload(false)]
@@ -85,7 +99,7 @@ namespace apogean.Content.Diagnostics
         internal PackedMaterialMap Map { get; private set; }
         public MawTerrainStudyWall(string key) => this.key = key;
         public override string Name => "StudyWall_" + key;
-        public override string Texture => "apogean/Content/Diagnostics/Materials/" + key + "/Wall";
+        public override string Texture => MawTerrainStudies.WallTexture(key);
         public override void Load() => Map = new PackedMaterialMap(Mod.GetFileBytes("Content/Diagnostics/Materials/" + key + "/Wall.bin"));
         public override void SetStaticDefaults()
         {

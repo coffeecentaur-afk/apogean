@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "phase": "startup",
+  "processId": 18264,
+  "processStartedUtc": "2026-09-12T18:01:56.5705653Z",
+  "sampleCount": 15,
+  "intervalMilliseconds": 1000,
+  "gpuProvider": "Win32_PerfRawData_GPUPerformanceCounters_GPUProcessMemory",
+  "gpuError": null,
+  "scope": "Read-only process-wide counters. Not exact mod ownership or driver residency guarantees; empty GPU rows mean unavailable, not zero.",
+  "records": [
+    {
+      "utc": "2026-09-12T18:02:21.1851493Z",
+      "privateBytes": 3896000512,
+      "workingSetBytes": 2062393344,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 19.953125,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1453244416,
+          "sharedBytes": 7315456,
+          "committedBytes": 1690935296
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:22.2318831Z",
+      "privateBytes": 3896000512,
+      "workingSetBytes": 2062397440,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 20.203125,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1453244416,
+          "sharedBytes": 7315456,
+          "committedBytes": 1690935296
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:23.2584252Z",
+      "privateBytes": 3895906304,
+      "workingSetBytes": 2062323712,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 20.484375,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1453244416,
+          "sharedBytes": 7315456,
+          "committedBytes": 1690935296
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:24.2857519Z",
+      "privateBytes": 3896627200,
+      "workingSetBytes": 2063028224,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 20.84375,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1453244416,
+          "sharedBytes": 7315456,
+          "committedBytes": 1690935296
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:25.3003645Z",
+      "privateBytes": 3896688640,
+      "workingSetBytes": 2063048704,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 21.125,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1453244416,
+          "sharedBytes": 7315456,
+          "committedBytes": 1690935296
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:26.3201670Z",
+      "privateBytes": 3896688640,
+      "workingSetBytes": 2063093760,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 21.453125,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1453244416,
+          "sharedBytes": 7315456,
+          "committedBytes": 1690935296
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:27.3473847Z",
+      "privateBytes": 3897339904,
+      "workingSetBytes": 2063085568,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 21.828125,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1453244416,
+          "sharedBytes": 7315456,
+          "committedBytes": 1690935296
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:28.3643078Z",
+      "privateBytes": 3936714752,
+      "workingSetBytes": 2085507072,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 22.125,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1507270656,
+          "sharedBytes": 8712192,
+          "committedBytes": 1746358272
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:29.3934861Z",
+      "privateBytes": 3937144832,
+      "workingSetBytes": 2085949440,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 22.46875,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1507270656,
+          "sharedBytes": 8712192,
+          "committedBytes": 1746358272
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:30.4092279Z",
+      "privateBytes": 3935375360,
+      "workingSetBytes": 2084270080,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 22.84375,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1507270656,
+          "sharedBytes": 8712192,
+          "committedBytes": 1746358272
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:31.4443255Z",
+      "privateBytes": 3935256576,
+      "workingSetBytes": 2084204544,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 23.203125,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1507270656,
+          "sharedBytes": 8712192,
+          "committedBytes": 1746358272
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:32.4747391Z",
+      "privateBytes": 3935256576,
+      "workingSetBytes": 2084208640,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 23.46875,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1507270656,
+          "sharedBytes": 8712192,
+          "committedBytes": 1746358272
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:33.4989401Z",
+      "privateBytes": 3935256576,
+      "workingSetBytes": 2084212736,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 23.75,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1507270656,
+          "sharedBytes": 8712192,
+          "committedBytes": 1746358272
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:34.5151336Z",
+      "privateBytes": 3927027712,
+      "workingSetBytes": 2075254784,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 24.03125,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1507270656,
+          "sharedBytes": 8712192,
+          "committedBytes": 1746358272
+        }
+      ]
+    },
+    {
+      "utc": "2026-09-12T18:02:35.5453756Z",
+      "privateBytes": 3927027712,
+      "workingSetBytes": 2075258880,
+      "peakWorkingSetBytes": 2706067456,
+      "cpuSeconds": 24.3125,
+      "gpu": [
+        {
+          "instance": "pid_18264_luid_0x00000000_0x000147FE_phys_0",
+          "dedicatedBytes": 1507270656,
+          "sharedBytes": 8712192,
+          "committedBytes": 1746358272
+        }
+      ]
+    }
+  ]
+}

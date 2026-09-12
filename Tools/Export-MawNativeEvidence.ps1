@@ -9,8 +9,8 @@ try{$inputStream.CopyTo($snapshot);$logBytes=$snapshot.ToArray()}finally{$inputS
 $includeStack=$false
 $lines=@(foreach($line in ([Text.Encoding]::UTF8.GetString($logBytes) -split '\r?\n')) {
     if($line -match '^\[') {
-        $includeStack=$line -match '\[apogean\]: LIVE VALIDATION REQUEST FAILED: maw-'
-        if($includeStack -or $line -match '\[apogean\]: MAW (NATURAL|LAB REQUEST|LAB COMPLETE|PROPERTY|PRODUCTION PROPERTIES|PROPERTIES RESTORE|SAND|SEAM|JOIN|FIBER|RIB|ANATOMY|HANGING|AMBER)'){$line}
+        $includeStack=$line -match '\[apogean\]: LIVE VALIDATION REQUEST FAILED: (maw-|qa-perf-)|\[apogean\]: QA PERFORMANCE EXPORT FAILED'
+        if($includeStack -or $line -match '\[apogean\]: MAW (NATURAL|LAB REQUEST|LAB COMPLETE|PROPERTY|PRODUCTION PROPERTIES|PROPERTIES RESTORE|SAND|SEAM|JOIN|FIBER|RIB|ANATOMY|HANGING|AMBER)|\[apogean\]: QA (PERFORMANCE|RENDER ALLOCATION|RENDER CACHE IDENTITY)'){$line}
     } elseif($includeStack) {$line}
 })
 if(-not $lines.Count){throw 'No matching native Maw evidence in this log.'}

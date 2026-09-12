@@ -32,7 +32,7 @@ namespace apogean.Content.Diagnostics
             "MawMudWallUnsafe"=>"mud", "MawSnowWallUnsafe"=>"snow", "MawIceWallUnsafe"=>"ice", _=>null
         };
         internal static string Texture(string key, bool wall, string fallback) => Enabled && key!=null ?
-            "apogean/Content/Diagnostics/Materials/"+key+(wall?"/Wall":"/Tile") : fallback;
+            (wall ? MawTerrainStudies.WallTexture(key) : "apogean/Content/Diagnostics/Materials/"+key+"/Tile") : fallback;
         internal static void TileDraw(string key,int i,int j,ref short fx,ref short fy)
         {
             if(Enabled && key!=null && MawTerrainStudies.Tile(key).Map.TryMap(i,j,fx,fy,out short x,out short y)){fx=x;fy=y;}

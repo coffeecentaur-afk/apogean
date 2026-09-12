@@ -144,6 +144,174 @@ namespace apogean.Content.Diagnostics
             if(strictScene)Validate();
             Mod.Logger.Info($"MAW HANGING LIFECYCLE PASS: {checks} native checks; support/cut/coating/length, dry-growth gates and native Liquid.AddWater contact; scratch restored. strictScene={strictScene}; a scratch-only pass does not clear a red saved exhibit. Fluid-flow time evolution and multiplayer remain untested.");
         }
+        // Value copies, not Tile.Clone(): Tile is a handle into shared tile data.
+        // Preserve even stale air frames/liquid flags in the seven owned cells.
+        private readonly record struct SolarCell(TileTypeData Type,WallTypeData Wall,
+            TileWallWireStateData State,LiquidData Liquid,TileWallBrightnessInvisibilityData Coating)
+        {
+            internal static SolarCell Read(Point p)
+            {
+                Tile t=Main.tile[p];
+                return new(t.Get<TileTypeData>(),t.Get<WallTypeData>(),t.Get<TileWallWireStateData>(),
+                    t.Get<LiquidData>(),t.Get<TileWallBrightnessInvisibilityData>());
+            }
+            internal void Restore(Point p)
+            {
+                Tile t=Main.tile[p];
+                t.Get<TileTypeData>()=Type;t.Get<WallTypeData>()=Wall;t.Get<TileWallWireStateData>()=State;
+                t.Get<LiquidData>()=Liquid;t.Get<TileWallBrightnessInvisibilityData>()=Coating;
+            }
+        }
+        internal void TestSolarCut()
+        {
+            if(Main.dedServ||Main.gameMenu||WorldGen.gen||Main.netMode!=NetmodeID.SinglePlayer||
+                Main.ActiveWorldFileData?.Name!="Apogee Native Visual V3"||Main.LocalPlayer.name!="gg"||
+                !Main.LocalPlayer.active||Main.LocalPlayer.dead||Main.LocalPlayer.channel||
+                !MawPackedPreview.Enabled||!MawAnatomyMaterials.Available||probe.HasValue)
+                throw new InvalidOperationException("Solar fiber probe requires idle gg/V3/SP, packed anatomy and no other vine probe.");
+            Rectangle savedBounds=CheckedBounds();int savedSteps=steps;string before=Fingerprint();
+            Point root=new(Bounds.X+92,Bounds.Y+4);
+            Rectangle scratch=new(root.X-2,root.Y-2,5,12);
+            // Installed tML 2026.07.3.0 / 666f699: SolarCounter (608) defaults
+            // to 160x160; Kill IL5bfc-5c0b calls Damage, without resizing it.
+            // CutTilesAt IL0000-0041 scans floor(left/top)..floor(right/bottom)
+            // INCLUSIVELY, including the extra boundary tile at the far edge.
+            Rectangle lower=new(root.X*16+8-80,(root.Y+4)*16,160,160);
+            Rectangle outside=new(lower.X,(root.Y+8)*16,160,160);
+            Rectangle CutScan(Rectangle hitbox)=>new(hitbox.Left/16,hitbox.Top/16,
+                hitbox.Right/16-hitbox.Left/16+1,hitbox.Bottom/16-hitbox.Top/16+1);
+            Rectangle envelope=Rectangle.Union(scratch,Rectangle.Union(CutScan(lower),CutScan(outside)));
+            envelope.Inflate(3,3); // Includes scratch framing and neighbors of every potential cut.
+            if(!WorldGen.InWorld(envelope.Left,envelope.Top,30)||!WorldGen.InWorld(envelope.Right,envelope.Bottom,30))
+                throw new InvalidOperationException("Solar cutting/framing envelope outside safe world bounds.");
+            Rectangle pixels=new(envelope.X*16,envelope.Y*16,envelope.Width*16,envelope.Height*16);
+            bool Owned(int x,int y)=>x==root.X&&y>=root.Y&&y<=root.Y+6;
+            var original=new SolarCell[envelope.Width*envelope.Height];
+            int Index(int x,int y)=>(y-envelope.Top)*envelope.Width+x-envelope.Left;
+            for(int x=envelope.Left;x<envelope.Right;x++)for(int y=envelope.Top;y<envelope.Bottom;y++) {
+                if(!Empty(Main.tile[x,y]))throw new InvalidOperationException($"Solar cutting/framing envelope occupied at {x},{y}; no writes.");
+                original[Index(x,y)]=SolarCell.Read(new Point(x,y));
+            }
+            void GuardActors(Projectile owned=null)
+            {
+                foreach(Player player in Main.player)if(player.active&&pixels.Intersects(player.Hitbox))
+                    throw new InvalidOperationException("Player in Solar cutting/framing envelope; no burst.");
+                foreach(NPC npc in Main.npc)if(npc.active&&pixels.Intersects(npc.Hitbox))
+                    throw new InvalidOperationException("NPC in Solar cutting/framing envelope; no burst.");
+                foreach(Projectile p in Main.projectile)if(p.active&&!ReferenceEquals(p,owned)&&pixels.Intersects(p.Hitbox))
+                    throw new InvalidOperationException("Unowned projectile in Solar cutting/framing envelope; no burst.");
+            }
+            GuardActors();int checks=0,bursts=0;bool ownsScratch=false;
+            void Require(bool condition,string name)
+            {
+                if(!condition)throw new InvalidOperationException("Solar fiber check: "+name);
+                checks++;
+            }
+            void CheckUnowned()
+            {
+                for(int x=envelope.Left;x<envelope.Right;x++)for(int y=envelope.Top;y<envelope.Bottom;y++)
+                    if(!Owned(x,y)&&SolarCell.Read(new Point(x,y))!=original[Index(x,y)])
+                        throw new InvalidOperationException($"Solar probe changed unowned envelope cell {x},{y}; not cleared or repaired.");
+            }
+            int fiber=Fiber,anchor=MawPackedPreview.TileType("grass");
+            Require(MawHangingFiber.MaxLength==6&&Main.tileCut[fiber]&&!Main.tileSolid[fiber]&&!Main.tileSolidTop[fiber],"six cuttable non-solid segments");
+            var mature=new SolarCell[7];
+            void CheckStrand(int length,string stage)
+            {
+                Require(MawHangingFiber.Anchor(Main.tile[root]),stage+" anchor retained");
+                for(int d=1;d<=6;d++) {
+                    Point p=new(root.X,root.Y+d);Tile t=Main.tile[p];
+                    Require(d<=length ? t.HasUnactuatedTile&&t.TileType==fiber&&t.TileFrameX==0&&
+                        t.TileFrameY==(d-1)*18&&SolarCell.Read(p)==mature[d] : Empty(t),stage+" d"+d);
+                }
+                CheckUnowned();
+            }
+            void FrameRepeatedly(int length,string stage)
+            {
+                // Ordinary neighbor framing, never section-framing the saved exhibit.
+                for(int pass=0;pass<3;pass++) {
+                    for(int d=0;d<=7;d++)WorldGen.SquareTileFrame(root.X,root.Y+d,resetFrame:false);
+                    CheckStrand(length,stage+" pass"+pass);
+                }
+            }
+            void Burst(Rectangle expected,string stage)
+            {
+                GuardActors();CheckUnowned();
+                // NewProjectile scans from slot zero, and replaces an existing
+                // projectile if the pool is full. Never enter that fallback.
+                int slot=-1;
+                for(int n=0;n<Main.maxProjectiles;n++)if(!Main.projectile[n].active){slot=n;break;}
+                Require(slot>=0,"free projectile slot before "+stage);
+                int owner=Main.myPlayer;
+                // Fresh native identity arrays contain zero, not necessarily -1.
+                // Preserve the old binding, while refusing to overwrite a live identity.
+                int binding=Main.projectileIdentity[owner,slot];
+                Require(binding<0||binding>=Main.maxProjectiles||!Main.projectile[binding].active||
+                    Main.projectile[binding].owner!=owner||Main.projectile[binding].identity!=slot,
+                    "no live identity binding before "+stage);
+                Projectile owned=Main.projectile[slot]; // Retain ownership even if OnSpawn throws.
+                bool mining=Terraria.GameContent.Achievements.AchievementsHelper.CurrentlyMining;
+                var cutting=DelegateMethods.tilecut_0;var ignore=DelegateMethods.tileCutIgnore;
+                try {
+                    int actual=Projectile.NewProjectile(Main.LocalPlayer.GetSource_Misc("Apogean Solar fiber scratch"),
+                        new Vector2(expected.Center.X,expected.Center.Y),Vector2.Zero,ProjectileID.SolarCounter,1,0f,owner);
+                    Require(actual==slot&&ReferenceEquals(Main.projectile[slot],owned)&&owned.active&&
+                        owned.identity==slot&&owned.owner==owner&&owned.type==ProjectileID.SolarCounter,"owned native SolarCounter "+stage);
+                    Require(owned.aiStyle==ProjAIStyleID.SolarEffect&&owned.friendly&&!owned.hostile&&!owned.npcProj&&!owned.minion&&
+                        !owned.tileCollide&&owned.damage==1&&owned.velocity==Vector2.Zero&&owned.Hitbox==expected,
+                        "unaltered 160x160 Solar defaults "+stage);
+                    // Solar has no special Damage_GetHitbox inflation in this
+                    // binary. Reject a mod's enlarged damage box before Kill.
+                    Rectangle damage=owned.Hitbox;ProjectileLoader.ModifyDamageHitbox(owned,ref damage);
+                    Require(damage==expected&&owned.Hitbox==expected,"native damage bounds "+stage);
+                    GuardActors(owned);CheckUnowned();
+                    owned.Kill(); // Native Kill -> Damage -> CutTiles -> CutTilesAt. No direct tile kill.
+                    Require(!owned.active&&owned.timeLeft==0,"native projectile terminated "+stage);
+                    bursts++;
+                } finally {
+                    // Never invoke Kill again from cleanup: it would repeat damage.
+                    // The preselected inactive object is exclusively owned by this synchronous call.
+                    owned.active=false;owned.timeLeft=0;
+                    if(Main.projectileIdentity[owner,slot]==slot||Main.projectileIdentity[owner,slot]==-1)
+                        Main.projectileIdentity[owner,slot]=binding;
+                    Terraria.GameContent.Achievements.AchievementsHelper.CurrentlyMining=mining;
+                    DelegateMethods.tilecut_0=cutting;DelegateMethods.tileCutIgnore=ignore;
+                }
+                Require(!Main.projectile[slot].active&&Main.projectileIdentity[owner,slot]==binding,"no projectile/identity leftover "+stage);
+            }
+            try {
+                // Seed exactly one new scratch root/strand. Never call Build,
+                // Grow or Validate on the preserved, deliberately red exhibit.
+                probe=root;ownsScratch=true;
+                for(int d=0;d<=6;d++) {
+                    Tile t=Main.tile[root.X,root.Y+d];t.HasTile=true;t.TileType=(ushort)(d==0?anchor:fiber);
+                    t.Slope=SlopeType.Solid;t.IsHalfBlock=false;t.TileFrameX=0;t.TileFrameY=(short)(d==0?0:(d-1)*18);
+                }
+                for(int d=0;d<=7;d++)WorldGen.SquareTileFrame(root.X,root.Y+d,resetFrame:false);
+                for(int d=0;d<=6;d++) {
+                    Point p=new(root.X,root.Y+d);mature[d]=SolarCell.Read(p);
+                    Rectangle cell=new(p.X*16,p.Y*16,16,16);
+                    Require(lower.Intersects(cell)==(d>=4)&&CutScan(lower).Contains(p)==(d>=4),"only d4+ in damage/cutting bounds, d"+d);
+                    Require(!outside.Intersects(cell)&&!CutScan(outside).Contains(p),"outside-envelope negative geometry, d"+d);
+                }
+                CheckStrand(6,"initial six");FrameRepeatedly(6,"framing-only control");
+                Burst(outside,"outside-envelope negative");CheckStrand(6,"outside-envelope negative");
+                FrameRepeatedly(6,"framing after negative");
+                Burst(lower,"lower d4+ positive");CheckStrand(3,"native Solar cut");
+                FrameRepeatedly(3,"framing after cut");Require(bursts==2,"both native bursts executed");
+            } finally {
+                probe=null;
+                if(ownsScratch)for(int d=0;d<=6;d++)original[Index(root.X,root.Y+d)].Restore(new Point(root.X,root.Y+d));
+                // Read-only outside the seven owned cells, including on failure.
+                string after=Fingerprint();
+                if(Bounds!=savedBounds||steps!=savedSteps||before!=after)
+                    throw new InvalidOperationException("Solar probe changed the preserved exhibit fingerprint/state; no rebaseline or repair.");
+                CheckUnowned();
+                for(int d=0;d<=6;d++)if(SolarCell.Read(new Point(root.X,root.Y+d))!=original[Index(root.X,root.Y+d)])
+                    throw new InvalidOperationException("Solar probe did not restore an owned scratch cell.");
+            }
+            Mod.Logger.Info($"MAW HANGING SOLAR PASS: {checks} checks; native SolarCounter NewProjectile/Kill x{bursts}; outside-envelope negative kept6; lower d4+ damage/cutting kept d1-3 and removed d4-6; three repeated framing passes at each stage; scratch/identity restored; preserved fingerprint={before}. Mechanism reproduction only: original Solar event, capture trigger and multiplayer NOT proven; original exhibit remains RED.");
+        }
         public override void SaveWorldData(TagCompound tag)
         {
             if(Main.ActiveWorldFileData?.Name=="Apogee Native Visual V3"&&!Bounds.IsEmpty)tag["mawHangingFiberV1"]=new TagCompound{["x"]=Bounds.X,["y"]=Bounds.Y,["steps"]=steps};

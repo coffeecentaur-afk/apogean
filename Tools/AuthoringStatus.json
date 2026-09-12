@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "qa-performance-instrumentation-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/MawAnatomy-2026-09-12/README.md",
+      "evidenceScope": "Passive native texture/process/GC inventory and2s-warmup/30s draw-callback/update-slice recorder. Baseline A:403 distinct textures/785088628 logical Color bytes and three usable stationary samples. Comparison B native snapshot:402 textures/771179636 bytes; all four soil/grass wall consumers share one texture reference. Exactly one duplicate allocation removed without changed pixels/maps; no RAM/VRAM saving claim. Independent math/request/asset-alias failing controls pass. Process GPU counters are process-wide, not per-mod ownership.",
+      "blockers": ["Do not count stationary high-end-PC data as stress, FPS/presentation/GPU, low-end, long-session, worldgen or multiplayer approval. B repeated timing has no observed stationary regression. C six native draw/light allocation cases return0 bytes/4096 calls with unchanged outputs; legacy resolver control allocates. In-process mod unload/reload and dense/moving/soak tests remain pending.", "User saved regular aga and approved switch; V3/gg verified18:26UTC. No QA writes/tests in aga. B process visited aga first, so process memory is not a matched fresh-launch A/B comparison. Do not reduce approved art to conceal resource regressions."]
+    },
+    {
       "id": "maw-living-fiber-grass",
       "status": "contracted",
       "static": "pass",
@@ -36,7 +48,7 @@
       "userReview": "pending",
       "evidenceReference": "Art/Validation/MawAnatomy-2026-09-11/README.md",
       "evidenceScope": "Separate16x96 hard-alpha eight-color strand; six native sections. Seven registered roots at7396,176 matured to42 segments and rendered. Initial180 native lifecycle checks pass; expanded212 scratch-only checks include native Liquid.AddWater contact, cuts, purification, actuation, paint/coatings, dry-growth/length/support limits. Saved root3 later loses depths4-6; original red exhibit preserved, not rebuilt. Scratch-only pass does not clear saved-state failure.",
-      "blockers": ["Diagnose unexpected saved strand cut with passive callsite logging; valid dry root/prefix alone do not prove the cause. No auto-rebaseline. Native art review, time-evolving liquids and multiplayer pending.", "No random growth, drops, rope flag, sway or worldgen. Climbability remains unresolved; do not turn decorative strands into a supplied safe descent."]
+      "blockers": ["Original saved cut remains unattributed and RED. September12 native SolarCounter creation/Kill reproduces the same suffix cut in a separate guarded scratch envelope:114 checks and restoration pass, outside-envelope negative leaves all six. Original39 segments/fingerprint unchanged. This proves a mechanism, not the original event or capture trigger. Native art review, time-evolving liquids and multiplayer pending.", "September12 user approval resolves this pass: short, cuttable, non-solid, non-damaging and non-climbable. No random growth, drops, rope flag, sway or worldgen; no supplied safe descent. Future climbability is a separate decision."]
     },
     {
       "id": "maw-amber-lighting-v1",

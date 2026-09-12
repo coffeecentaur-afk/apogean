@@ -3,6 +3,7 @@ param([switch]$CompileOnly,[switch]$KeepWorkspace,[switch]$PackedMawPreview,[swi
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
+& (Join-Path $PSScriptRoot 'Assert-QASharedWallAssets.ps1')
 # Named immutable preset: accepted September 9 pixels with current source code.
 # Do not silently repoint this snapshot when a continuity check fails.
 $options=@{
