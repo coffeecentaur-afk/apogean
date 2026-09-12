@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-rib-contour-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "MAW_RIB_CONTOUR_CONTRACT.md",
+      "evidenceScope": "Separate124x82 empty-air comparison, three lengths and both directions with retained old controls. Native slope geometry only; existing material/art bank unchanged.642664 mostly pixel assertions reject old underside notches and check continuous candidate/mirrors/roots/tips. N isolated build0warnings/errors and466 unchanged asset pins. Native592 solids/10168 cells, exact save/reopen, three diagnostic1x captures and unchanged older scenes pass. Large underside cut-ins are removed.66 native records/zero caught draw failures; clean background code replay also passes. No final rib material/art approval.",
+      "blockers": ["A pure pixel contour is not a renderer or collision verdict. Inspect native1x before changing art; no promotion of cortical texture, old shallowV1 or world generation.", "Final shape/material review, complete traversal/difficulty, ordinary-world integration and multiplayer remain separate."]
+    },
+    {
       "id": "maw-shallow-traversal-v1",
       "status": "contracted",
       "static": "pass",

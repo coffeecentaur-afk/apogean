@@ -38,6 +38,7 @@ namespace apogean.Content.Diagnostics
             MawShallowMotionProbe.PlainBaseline(Main.LocalPlayer),inspectionLamp);
         private static MawToothClusterTile Teeth => ModContent.GetInstance<MawToothClusterTile>();
         internal Rectangle MotionBounds => bounds;
+        internal Rectangle PreservedBounds => bounds;
         private static int TileType(string key) => key switch {
             "rib" or "cap" => MawAnatomyMaterials.Tile(key).Type,
             "amber" => ModContent.TileType<MawAmberLitTile>(), _ => MawPackedPreview.TileType(key)
@@ -47,12 +48,12 @@ namespace apogean.Content.Diagnostics
         private Point At(int x, int y) => new(bounds.X + x, bounds.Y + y);
         private Rectangle Envelope { get { Rectangle r = bounds; r.Inflate(12, 12); return r; } }
         private static Rectangle Pixels(Rectangle r) => new(r.X * 16, r.Y * 16, r.Width * 16, r.Height * 16);
-        private static bool Empty(Tile t) => !t.HasTile && t.WallType == WallID.None && t.LiquidAmount == 0 &&
+        internal static bool Empty(Tile t) => !t.HasTile && t.WallType == WallID.None && t.LiquidAmount == 0 &&
             !t.HasActuator && !t.IsActuated && !t.RedWire && !t.BlueWire && !t.GreenWire && !t.YellowWire &&
             t.TileColor == PaintID.None && t.WallColor == PaintID.None && !t.IsTileInvisible && !t.IsWallInvisible &&
             !t.IsTileFullbright && !t.IsWallFullbright;
 
-        private static Rectangle[] Historical() => new[] {
+        internal static Rectangle[] Historical() => new[] {
             ModContent.GetInstance<VegetationVisualLab>().PreservedBounds,
             ModContent.GetInstance<ForestSprayVisualLab>().PreservedBounds,
             ModContent.GetInstance<ArrivalPodLab>().PreservedBounds,
@@ -68,9 +69,10 @@ namespace apogean.Content.Diagnostics
             ModContent.GetInstance<MawFiberRibLab>().PreservedBounds,
             ModContent.GetInstance<MawAnatomyLab>().PreservedBounds,
             ModContent.GetInstance<MawHangingFiberStudy>().Bounds,
-            ModContent.GetInstance<MawAmberLightStudy>().Bounds
+            ModContent.GetInstance<MawAmberLightStudy>().Bounds,
+            ModContent.GetInstance<MawRibContourStudy>().PreservedBounds
         };
-        private static string Fingerprint(IEnumerable<Rectangle> areas)
+        internal static string Fingerprint(IEnumerable<Rectangle> areas)
         {
             using var stream = new MemoryStream(); using var w = new BinaryWriter(stream);
             foreach (Rectangle r in areas) {
@@ -99,7 +101,7 @@ namespace apogean.Content.Diagnostics
             foreach (var t in clusters) { w.Write(t.Root.X); w.Write(t.Root.Y); w.Write(t.Variant); }
             w.Flush(); return Convert.ToHexString(SHA256.HashData(stream.ToArray()));
         }
-        private static bool ActorsAbsent(Rectangle envelope)
+        internal static bool ActorsAbsent(Rectangle envelope)
         {
             Rectangle area = Pixels(envelope); area.Inflate(96, 96);
             foreach (Player p in Main.ActivePlayers) if (area.Intersects(p.Hitbox)) return false;
@@ -109,7 +111,7 @@ namespace apogean.Content.Diagnostics
             return true;
         }
         // Terraria Tile is a handle into shared storage, not a value snapshot.
-        private readonly record struct CellState(TileTypeData Type, WallTypeData Wall,
+        internal readonly record struct CellState(TileTypeData Type, WallTypeData Wall,
             TileWallWireStateData State, LiquidData Liquid, TileWallBrightnessInvisibilityData Coating)
         {
             internal static CellState Read(int x, int y) {
@@ -273,7 +275,7 @@ namespace apogean.Content.Diagnostics
                 }
             } finally {
                 if (before != Fingerprint(old)) throw new InvalidOperationException("Historical fixture state changed during shallow command; not repaired.");
-                Mod.Logger.Info("MAW SHALLOW PRESERVATION: all16 historical bounds semantically unchanged during command, including old failed fixtures.");
+                Mod.Logger.Info($"MAW SHALLOW PRESERVATION: all{old.Length} historical bounds semantically unchanged during command, including old failed fixtures.");
             }
             Mod.Logger.Info("MAW SHALLOW COMPLETE: " + request);
         }
@@ -372,7 +374,7 @@ namespace apogean.Content.Diagnostics
     {
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
         {
-            if (player.whoAmI != Main.myPlayer || !ModContent.GetInstance<MawShallowTraversalLab>().PlainVisit) return;
+            if (player.whoAmI != Main.myPlayer || !(ModContent.GetInstance<MawShallowTraversalLab>().PlainVisit || ModContent.GetInstance<MawRibContourStudy>().PlainVisit)) return;
             spawnRate = int.MaxValue; maxSpawns = 0;
         }
     }

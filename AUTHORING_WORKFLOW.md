@@ -8,6 +8,16 @@ existing QA tools. These are not implemented gates yet. No new editor/library
 or automatic visual approval is implied. Add the smallest reusable check while
 solving the next family; do not turn workflow improvement into an engine detour.
 
+## Contour lesson — September12
+
+Separate geometry from material revision. Keep the disliked shape as a control
+in a new saved gallery, at identical material/length/direction/lighting. A
+continuous native top and underside envelope removes large rib notches without
+regenerating approved art. Validate mirrored slope occupancy offline, then inspect
+both directions at native1x. A shape pass does not approve its internal texture,
+natural illumination, player traversal or production generation. Count large
+pixel-test totals honestly as pixel comparisons rather than independent cases.
+
 ## Render-failure lesson — September12
 
 A QA command can complete before the following draw throws. Preserve caught

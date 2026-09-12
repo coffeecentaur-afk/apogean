@@ -13,7 +13,7 @@ namespace apogean.Content.Diagnostics {
             foreach(string player in new[]{"gg",MawShallowQaScope.Plain,"Maw QA Plain2",null})
             foreach(bool single in new[]{true,false}) foreach(bool menu in new[]{true,false})
                 Check(MawShallowQaScope.Context(world,player,single,menu)==(world==MawShallowQaScope.World && (player=="gg"||player==MawShallowQaScope.Plain)&&single&&!menu),"world/player/mode guard");
-            foreach(string request in new[]{"maw-shallow-build","maw-shallow-unknown","vegetation-view-build","qa-perf-start","kessler-campus",null})
+            foreach(string request in new[]{"maw-shallow-build","maw-contour-build","maw-contour-unknown","maw-shallow-unknown","vegetation-view-build","qa-perf-start","kessler-campus",null})
                 Check(!MawShallowQaScope.Request(MawShallowQaScope.Plain,request),"plain cannot mutate other scenes");
             foreach(string request in new[]{"qa-save-and-quit","maw-shallow-pristine","maw-shallow-motion-entry","maw-shallow-motion-connector-out","maw-shallow-light-awake","maw-shallow-light-dormant","maw-shallow-light-awake-bright","maw-shallow-light-dormant-bright","maw-shallow-release"}) {
                 Check(MawShallowQaScope.Request(MawShallowQaScope.Plain,request),"plain allowed request");
@@ -32,6 +32,10 @@ namespace apogean.Content.Diagnostics {
             foreach(string request in new[]{"maw-shallow-inspect-on","maw-shallow-inspect-off"}) {
                 Check(MawShallowQaScope.Request(MawShallowQaScope.Plain,request),"inspection request allowed");
                 Check(!MawShallowQaScope.Request("ordinary",request),"inspection request denied");
+            }
+            foreach(string request in new[]{"pristine","reload","short","medium","long","inspect-on","inspect-off","capture","release"}) {
+                Check(MawShallowQaScope.Request(MawShallowQaScope.Plain,"maw-contour-"+request),"existing contour checks allowed");
+                Check(!MawShallowQaScope.Request("ordinary","maw-contour-"+request),"ordinary contour denied");
             }
             for(int bits=0;bits<32;bits++) Check(
                 MawShallowQaScope.InspectionApplies((bits&1)!=0,(bits&2)!=0,(bits&4)!=0,(bits&8)!=0,(bits&16)!=0)==(bits==31),

@@ -253,3 +253,20 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 - 21:29UTC: cleanup source compile passes0warnings/errors; installed M hash
   unchanged. Temporary diagnostic source removed, not any art or saved specimen.
   Native replay without instrumentation will accompany the next candidate build.
+- 21:35UTC: checkpoint05a07be committed/pushed with J-M evidence and the scoped
+  background resolver. Wayfinder26 updated; no unrelated files staged.
+- N F1D5D110 builds0warnings/errors with466 unchanged pins. Separate rib-contour
+  study uses native top/underside slopes, retaining old controls beside three
+  lengths/mirrors.642664 mostly pixel checks reject old notches;1009 scope checks.
+  At21:46UTC it reserves124x82 at1116,60 after2 candidates,592 solid cells and
+  10168 exact-cell checks. Eight nonempty historical bounds remain unchanged.
+  Native save21:47:30UTC retains creation/actual6F7998FF and shallow24163E65.
+  Legacy grove checkpoint still refuses to rebuild; this is not a new regression.
+  Plain native comparisons and clean background transition replay are next.
+- 21:48–21:53UTC: N Plain exact contour reload/pristine passes; three unedited
+  native1x diagnostic captures show removed underside notches on all lengths and
+  both mirrors. Cortical bands/root contrast still await art review. Clean
+  no-injector shallow rib1/rib2/rib3/pocket/rib1/reload/pristine sequence passes;
+  final save retains contour6F7998FF/shallow24163E65,66 records/0 relevant caught
+  draw failures. Game exits normally. Next independent task: moving-scene
+  performance work, not another speculative rib-art regeneration.

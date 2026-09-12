@@ -17,7 +17,11 @@ namespace apogean.Content.Diagnostics
                 "maw-shallow-light-awake" or "maw-shallow-light-dormant" or "maw-shallow-light-natural" or
                 "maw-shallow-light-awake-bright" or "maw-shallow-light-dormant-bright" or
                 "maw-shallow-inspect-on" or "maw-shallow-inspect-off" or
-                "maw-shallow-capture" or "maw-shallow-release";
+                "maw-shallow-capture" or "maw-shallow-release" or
+                "maw-contour-pristine" or "maw-contour-reload" or
+                "maw-contour-short" or "maw-contour-medium" or "maw-contour-long" or
+                "maw-contour-inspect-on" or "maw-contour-inspect-off" or
+                "maw-contour-capture" or "maw-contour-release";
 
         internal static bool PreviewApplies(bool context, bool held, bool visiting, int x, int y,
             int left, int top, int width, int height) => context && held && visiting &&

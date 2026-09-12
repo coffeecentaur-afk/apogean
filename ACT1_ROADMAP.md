@@ -2,6 +2,13 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+21:53UTC update: separate rib-contour N gallery and exact native reload pass;
+three1x comparisons show removed underside notches with existing textures.
+Final art remains pending. Clean background code replays the old shallow
+rib/pocket transitions without caught errors. All old specimen state preserved.
+Next independent work is moving/dense-scene performance evidence; do not spend
+another unbounded speculative art cycle on the same rib preference.
+
 September12: eleven-hour pass authorized, ending2026-09-13 04:46:58UTC.
 `MAW_AUTONOMOUS_PASS_2026-09-12.md` owns the bounded queue and current authority.
 Provisional art/native scenes are allowed without waiting; final visual/feel

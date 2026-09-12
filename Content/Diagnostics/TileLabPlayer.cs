@@ -103,6 +103,8 @@ namespace apogean.Content.Diagnostics
 				Main.screenPosition = camera;
 			if (ModContent.GetInstance<MawShallowTraversalLab>().TryCamera(out Vector2 shallowCamera))
 				Main.screenPosition = shallowCamera;
+			if (ModContent.GetInstance<MawRibContourStudy>().TryCamera(out Vector2 contourCamera))
+				Main.screenPosition = contourCamera;
 		}
 
 		private void ConsumeLiveValidationRequest()
@@ -121,7 +123,7 @@ namespace apogean.Content.Diagnostics
 				request = File.ReadAllText(requestPath).Trim().ToLowerInvariant();
 				File.Delete(requestPath);
 				if (Player.name == MawShallowQaScope.Plain && !MawShallowQaScope.Request(Player.name, request))
-					throw new System.InvalidOperationException("Plain QA character only accepts existing shallow-scene checks and safe exit; no builds or other laboratories.");
+					throw new System.InvalidOperationException("Plain QA character only accepts allowlisted existing-scene checks and safe exit; no builds.");
 				if (request.StartsWith("qa-perf-", System.StringComparison.Ordinal)) {
 					// Passive measurements must not release or move the scene they measure.
 					ModContent.GetInstance<QAPerformanceLab>().Run(request.Substring("qa-perf-".Length));
@@ -131,6 +133,8 @@ namespace apogean.Content.Diagnostics
 					throw new System.InvalidOperationException("Finish or stop the passive performance sample before another QA command.");
 				if (!request.StartsWith("maw-shallow-", System.StringComparison.Ordinal))
 					ModContent.GetInstance<MawShallowTraversalLab>().Release();
+				if (!request.StartsWith("maw-contour-", System.StringComparison.Ordinal))
+					ModContent.GetInstance<MawRibContourStudy>().Release();
 				if (!request.StartsWith("maw-fiber-anatomy-", System.StringComparison.Ordinal))
 					ModContent.GetInstance<MawAnatomyLab>().Release();
 				if (!request.StartsWith("maw-fiber-", System.StringComparison.Ordinal))
@@ -162,7 +166,7 @@ namespace apogean.Content.Diagnostics
 					Mod.Logger.Info("LIVE VALIDATION REQUEST CONSUMED: qa-save-and-quit");
 					return;
 				}
-				if (request.StartsWith("maw-shallow-", System.StringComparison.Ordinal))
+				if (request.StartsWith("maw-shallow-", System.StringComparison.Ordinal) || request.StartsWith("maw-contour-", System.StringComparison.Ordinal))
 				{
 					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
 					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
@@ -175,7 +179,9 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<MawFangLab>().Release();
 					ModContent.GetInstance<MawBoneLab>().Release();
 					ModContent.GetInstance<ArrivalPodLab>().Release();
-					ModContent.GetInstance<MawShallowTraversalLab>().Run(request.Substring("maw-shallow-".Length));
+					if(request.StartsWith("maw-contour-", System.StringComparison.Ordinal))
+						ModContent.GetInstance<MawRibContourStudy>().Run(request.Substring("maw-contour-".Length));
+					else ModContent.GetInstance<MawShallowTraversalLab>().Run(request.Substring("maw-shallow-".Length));
 					return;
 				}
 				if (request.StartsWith("wastes-camera-", System.StringComparison.Ordinal))

@@ -2,6 +2,14 @@
 
 This document is the binding creative and progression reference for the mod.  A feature that conflicts with it needs an explicit design decision before it is added.
 
+## Provisional Maw contour evidence
+
+September12 provisional Maw contour evidence: retain the uninterrupted tapered
+shaft direction, porous roots and native hammered points. A separate old/new
+8/11/12-tile gallery removes squared underside notches; its cortical shading is
+still under review. This does not approve a safe stair route, erase shallowV1,
+or authorize normal-world replacement. See `MAW_RIB_CONTOUR_CONTRACT.md`.
+
 ## Reusable engine/tooling authorization
 
 September7: the user permits a separate reusable engine or tooling mod when
