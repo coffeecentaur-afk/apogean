@@ -17,6 +17,13 @@ See AUTHORING_WORKFLOW.md for interpretation, testing and evidence rules.
 
 ## Provisional Maw contour evidence
 
+September13 seed-transfer pilot: approved drawing anatomy is now being validated
+in separately named fresh QA worlds. It does not replace ordinary-world generation.
+Preserve real structure/trap boundaries; improve site selection instead of clearing
+protected content until a seed works. A mechanically valid candidate can still fail
+visual blending: old outer material shells and bright fiber seams are not accepted
+as final art merely because tile-frame checks pass. See MAW_SEED_INTEGRATION_2026-09-13.md.
+
 September13 drawing-led revision supersedes the porous-root direction below:
 roots and ribs are one material, with buried branching joints that make the rib
 look grown out of the wall. Do not invent a dedicated blending block. Preserve

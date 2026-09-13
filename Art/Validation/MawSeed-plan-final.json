@@ -1,0 +1,208 @@
+{
+  "SchemaVersion": 1,
+  "Status": "PASS",
+  "Source": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Common\\WorldGeneration\\MawSeedPlan.cs",
+  "SourceSha256": "6AA2BB994A3847EEFA8A93B8E467CF0E1BCF3DD9324EDC01300A1969153A6058",
+  "SourceUnchanged": true,
+  "FinishedUtc": "2026-09-13T21:50:20.5818835Z",
+  "PreviewSeed": 101,
+  "Scope": "Pure plan only. Conservative 2x3 spatial reach with full 4x4 tooth hazards; no game, movement simulation, install, or visual acceptance.",
+  "Results": {
+    "DistinctSeeds": 128,
+    "Cases": 292,
+    "ConstructedCases": 292,
+    "DeterministicPairs": 292,
+    "CellComparisons": 20930560,
+    "Assertions": 146791931,
+    "MutationCases": 31,
+    "RejectedMutations": 31,
+    "InvalidInputCases": 9,
+    "RejectedInputs": 9,
+    "Seconds": 55.774981,
+    "Success": true,
+    "Failures": [],
+    "Controls": [
+      {
+        "Name": "missing-rib",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: continuous rib and branches"
+      },
+      {
+        "Name": "wall-fringe",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: surface wall fringe"
+      },
+      {
+        "Name": "blocked-outlet",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: mouth to deep outlet"
+      },
+      {
+        "Name": "missing-tooth-support",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth support"
+      },
+      {
+        "Name": "extra-chest-role",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: pocket semantics"
+      },
+      {
+        "Name": "extra-chest-object",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: sparse distinct pocket roles"
+      },
+      {
+        "Name": "side-amber-false",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: side amber"
+      },
+      {
+        "Name": "side-amber-wall-false",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: side amber"
+      },
+      {
+        "Name": "malformed/tooth-variant",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth variant"
+      },
+      {
+        "Name": "malformed/tooth-negative-variant",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth variant"
+      },
+      {
+        "Name": "malformed/tooth-bounds",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth footprint"
+      },
+      {
+        "Name": "malformed/rib-null-roots",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: rib root metadata"
+      },
+      {
+        "Name": "malformed/rib-empty-roots",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: rib root metadata"
+      },
+      {
+        "Name": "malformed/rib-duplicate-roots",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: rib root metadata"
+      },
+      {
+        "Name": "malformed/pocket-radius",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: pocket envelope"
+      },
+      {
+        "Name": "malformed/pocket-bounds",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: pocket envelope"
+      },
+      {
+        "Name": "malformed/pocket-role",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: pocket semantics"
+      },
+      {
+        "Name": "malformed/node-bounds",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: node reservation"
+      },
+      {
+        "Name": "malformed/center",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: center metadata"
+      },
+      {
+        "Name": "malformed/ground",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: ground metadata"
+      },
+      {
+        "Name": "malformed/fiber-length",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: fiber anchor"
+      },
+      {
+        "Name": "missing-fiber-anchor",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: fiber anchor"
+      },
+      {
+        "Name": "overlapping-teeth",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth footprint"
+      },
+      {
+        "Name": "blocked-tooth-footprint",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth footprint"
+      },
+      {
+        "Name": "rib-tooth-support",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth support"
+      },
+      {
+        "Name": "missing-chest-support",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: chest feet"
+      },
+      {
+        "Name": "insufficient-cave-spacing",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: independent cave separation"
+      },
+      {
+        "Name": "outside-write-padding",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: write padding"
+      },
+      {
+        "Name": "inactive-cell-data",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: inactive write"
+      },
+      {
+        "Name": "unknown-wall",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: wall material"
+      },
+      {
+        "Name": "invalid-slope",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: slope"
+      }
+    ],
+    "CountRanges": {
+      "writtenCells": [
+        28007,
+        30210
+      ],
+      "slopedCells": [
+        181,
+        315
+      ],
+      "ribs": [
+        5,
+        7
+      ],
+      "teeth": [
+        77,
+        110
+      ],
+      "fibers": [
+        14,
+        31
+      ],
+      "caveEnvelopeGap": [
+        54,
+        93
+      ]
+    }
+  }
+}

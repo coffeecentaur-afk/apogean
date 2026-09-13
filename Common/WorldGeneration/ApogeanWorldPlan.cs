@@ -42,6 +42,7 @@ namespace apogean.Common.WorldGeneration
 
 		internal static ApogeanWorldPlan CreateWorldGenPlanFromSeed(int planSeed, Func<int, int> findSurface)
 		{
+			MawSeedWorld.Instance.BeginPlanning();
 			if (Main.maxTilesX < 8400 || Main.maxTilesY < 2400)
 			{
 				throw new InvalidOperationException(
@@ -63,7 +64,7 @@ namespace apogean.Common.WorldGeneration
 
 			MawRupturePlan major = FindRuptureSite(random, findSurface, occupied, 200, 78, true, planSeed);
 			if (major is null)
-				throw new InvalidOperationException($"Apogee could not place a protected, traversable Maw Rupture on this seed; {MawNavigationPlanner.LastFailureReason}.");
+				throw new InvalidOperationException($"Apogee could not place a protected, traversable Maw Rupture on this seed; {MawNavigationPlanner.LastFailureReason}; shallow={MawSeedWorld.Instance.PlanningFailure}.");
 			plan.mawRuptures.Add(major);
 			occupied.Add(major.ReservedBounds);
 			plan.landmarks.AddRange(WorldAtlasPlanner.PlaceLandmarks(random, findSurface, major, occupied));
@@ -115,7 +116,10 @@ namespace apogean.Common.WorldGeneration
 				if (major)
 				{
 					int side = random.NextBool() ? 1 : -1;
-					x = spawnX + side * random.Next(900, 1401);
+					// A larger shallow anatomy needs more candidate sites, not weaker landmark
+					// protection. Keep the old near range first, then a bounded QA-only fallback.
+					int maximumDistance = MawSeedWorld.Instance.GeneratingCandidate && attempt >= 160 ? 2401 : 1401;
+					x = spawnX + side * random.Next(900, maximumDistance);
 				}
 				else
 				{
@@ -131,6 +135,15 @@ namespace apogean.Common.WorldGeneration
 				int y = findSurface(x);
 				if (!IsNeutralSurfaceSite(x, y, radiusX))
 					continue;
+				if (major && MawSeedWorld.Instance.GeneratingCandidate)
+				{
+					// Reject incompatible shallow shoulders before the expensive full-depth solve.
+					int top = y - MawSeedPlan.SurfaceY;
+					int left = findSurface(x - MawSeedPlan.Width / 2 + 4) - top;
+					int right = findSurface(x + MawSeedPlan.Width / 2 - 5) - top;
+					if (left is < 40 or > 76 || right is < 40 or > 76)
+						continue;
+				}
 
 				MawRupturePlan candidate;
 				if (major)
@@ -154,6 +167,10 @@ namespace apogean.Common.WorldGeneration
 				if (IntersectsAny(candidate.ReservedBounds, occupied))
 					continue;
 				if (!major && !WorldAtlasPlanner.CanReserve(candidate.ReservedBounds, 12))
+					continue;
+				// This preflight precedes both the landmark solve and our StructureMap registration.
+				// The shallow scope must fit inside the already-persisted major reservation.
+				if (major && !MawSeedWorld.Instance.TryPlan(candidate, findSurface, occupied))
 					continue;
 
 				return candidate;

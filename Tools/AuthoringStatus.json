@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-seed-shallow-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "MAW_SEED_INTEGRATION_2026-09-13.md",
+      "evidenceScope": "Opt-in named fresh-world candidate only. Pure292 cases/128 seeds and deterministic repeats pass;31 corrupt plans and9 invalid inputs reject. Source10 contracts/19 negative controls pass. Native seed202 generates twice with identical685AAD06 digest, saves and first client pristine reload passes.280x256 shallow slice,6 ribs, sparse side caves,1 empty cache and1 reserved Node pocket. Existing accepted mockup and regular worlds untouched.",
+      "blockers": ["Seeds101/303 fail finite protected-site search;404 fails an unowned native-state framing assertion. Not broad-seed readiness; do not relax protection or rebaseline failures.", "Outer legacy materials and bright fiber seams need correction. User-scale review, manual rope/grapple returnability, hazards, multiplayer, performance and whole-depth production integration remain open. No new scenery, enemies, acid or loot tables."]
+    },
+    {
       "id": "maw-anatomy-item-bindings-v1",
       "status": "contracted",
       "static": "pass",

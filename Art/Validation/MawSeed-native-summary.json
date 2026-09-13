@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-13",
+  "scope": "Opt-in fresh Large QA worlds only; upper280x256 candidate plus legacy deep-route validation",
+  "finalPackageSha256": "64204068913BF26BBE7CFB6B35132FAA54E878C15EAD3FEBAA914A9EB5285372",
+  "runtimeSha256": "D530E508B2841E66D880CE279A609624B5AB66CE8093EEDFA04F47C3D12D485C",
+  "sourceScopeChecks": { "contracts": 10, "rejectedControls": 19, "worldSourceSha256": "99FEF7A48EDC8B7C920580F7155B3ADAE3F154F1D82BB4FB9F1179FAE446706E" },
+  "trials": [
+    {
+      "seed": 202,
+      "result": "native-generation-pass",
+      "repeatedNativeDigest": true,
+      "digest": "685AAD06082CA3F56E1E81EE57DFE37D5767C3C4C94EC987B2FEB38D5A7EEC73",
+      "bounds": [5424, 361, 280, 256],
+      "plannedCells": 28973,
+      "objectCells": 1606,
+      "frameChecks": 37670,
+      "lightHookChecks": 37670,
+      "reachableBodyPositions": 13158,
+      "emptyCaches": 1,
+      "nodeReservations": 1,
+      "finalClientSavedPassLocalTime": "17:30:54",
+      "finalClientPristinePassLocalTime": "17:31:20",
+      "serverLogSha256": "1B15B2CACC81B068E111261FA0E7FDF060072D88C138E85540C83E0DC0603564"
+    },
+    {
+      "seed": 101,
+      "result": "rejected-site-search",
+      "diagnostic": "Protected StructureMap/trap content; real PressurePlates135 rejection retained",
+      "serverLogSha256": "5332F8E44FD1330F1F4AF0EF094C9C6F152C5E44FF145CE9311E572CE92236AE"
+    },
+    {
+      "seed": 303,
+      "result": "rejected-site-search",
+      "diagnostic": "Protected placement and blocked deep route; no forced overwrite",
+      "serverLogSha256": "3FA9DAFCDB545D8639B97036FD4B98973FBA30AFE374FBB13F02E9722715F4C0"
+    },
+    {
+      "seed": 404,
+      "result": "rejected-native-construction",
+      "diagnostic": "Framing changed unowned terrain/state at2866,637; tile IDs equal but native-state assertion fails; differing field undiagnosed",
+      "serverLogSha256": "4C02518CBB331FF63CDBC9285FE6264E726EF943711C71D60D202CA99F9003CF"
+    }
+  ],
+  "notProven": ["broad seed reliability", "client-created fresh-world path", "manual rope/grapple returnability", "hazard balance", "visual alpha coverage", "final material blending", "multiplayer", "Calamity compatibility", "FPS or minimum hardware", "whole-biome completion"],
+  "provenance": "Manually transcribed scoped native results; complete local raw logs and paths retained in HANDOFF_MAW_SEED_2026-09-13.md. Not a self-running validator."
+}

@@ -54,7 +54,8 @@ namespace apogean.Content.World
 				MawRupturePlan rupture = plan.MawRuptures[i];
 				int ruptureSeed = unchecked(plan.PlanSeed ^ ((i + 1) * 73856093));
 				MawRuptureGenerator.Generate(rupture, ruptureSeed, WorldEditIntent.MawGeneration);
-				RegisterNode(new Point16(rupture.SurfaceCenter.X, Math.Max(10, rupture.SurfaceCenter.Y - 3)));
+				if (!MawSeedWorld.Instance.IsCandidate(rupture))
+					RegisterNode(new Point16(rupture.SurfaceCenter.X, Math.Max(10, rupture.SurfaceCenter.Y - 3)));
 			}
 		}
 

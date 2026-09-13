@@ -18,6 +18,8 @@ namespace apogean.Common.WorldGeneration
 	{
 		public static MawRuptureValidationReport Inspect(MawRupturePlan rupture)
 		{
+			MawSeedWorld seedWorld = MawSeedWorld.Instance;
+			bool seedCandidate = seedWorld.IsCandidate(rupture);
 			Rectangle bounds = Rectangle.Intersect(
 				rupture.ReservedBounds,
 				new Rectangle(2, 2, Main.maxTilesX - 4, Main.maxTilesY - 4));
@@ -37,7 +39,7 @@ namespace apogean.Common.WorldGeneration
 					Tile tile = Framing.GetTileSafely(x, y);
 					if (tile.HasTile && tile.TileType == legacyAcid)
 						legacyAcidTiles++;
-					if (tile.WallType == mawWall && tile.LiquidAmount > 0)
+					if ((tile.WallType == mawWall || seedWorld.IsInterior(x, y, rupture)) && tile.LiquidAmount > 0)
 						vanillaLiquidTiles++;
 				}
 			}
@@ -46,6 +48,11 @@ namespace apogean.Common.WorldGeneration
 			int startBottom = Math.Min(bounds.Bottom - 1, rupture.SurfaceCenter.Y + 28);
 			int startLeft = Math.Max(bounds.Left, rupture.SurfaceCenter.X - 34);
 			int startRight = Math.Min(bounds.Right - 1, rupture.SurfaceCenter.X + 34);
+			if (seedCandidate)
+			{
+				startTop = startBottom = seedWorld.Entrance.Y;
+				startLeft = startRight = seedWorld.Entrance.X;
+			}
 			for (int x = startLeft; x <= startRight; x++)
 			{
 				for (int y = startTop; y <= startBottom; y++)
@@ -94,7 +101,9 @@ namespace apogean.Common.WorldGeneration
 				deepestIntestinalInterior,
 				requiredIntestinalDepth,
 				outletPlugTiles,
-				obstruction);
+				obstruction,
+				seedCandidate,
+				!seedCandidate || seedWorld.NativePassed);
 		}
 
 		private static int MeasureDeepestIntestinalInterior(MawRupturePlan rupture, int mawWall)
@@ -176,7 +185,7 @@ namespace apogean.Common.WorldGeneration
 
 					Tile tile = Framing.GetTileSafely(x, y);
 					bool solid = tile.HasTile && !tile.IsActuated && Main.tileSolid[tile.TileType] && !Main.tileSolidTop[tile.TileType];
-					if (!solid && tile.WallType == mawWall)
+					if (!solid && (tile.WallType == mawWall || MawSeedWorld.Instance.IsInterior(x, y, rupture)))
 					{
 						run++;
 						maximum = Math.Max(maximum, run);
@@ -193,8 +202,19 @@ namespace apogean.Common.WorldGeneration
 
 		private static bool AreAllSpinePointsReached(Rectangle bounds, bool[] visited, MawRupturePlan rupture)
 		{
+			MawSeedWorld seedWorld = MawSeedWorld.Instance;
+			bool candidate = seedWorld.IsCandidate(rupture);
+			if (candidate)
+			{
+				foreach (Point at in new[] { seedWorld.Entrance, seedWorld.Exit, seedWorld.ConnectorTarget })
+					if (!bounds.Contains(at) || !visited[(at.Y - bounds.Y) * bounds.Width + at.X - bounds.X])
+						return false;
+			}
 			for (int i = 0; i < rupture.NavigationSpine.Count; i++)
 			{
+				// The candidate owns its upper route; retained deep waypoints still all have to connect.
+				if (candidate && rupture.NavigationSpine[i].Y < seedWorld.Bounds.Bottom)
+					continue;
 				if (!IsSpineCrossSectionReached(bounds, visited, rupture.NavigationSpine[i]))
 					return false;
 			}
@@ -344,8 +364,10 @@ namespace apogean.Common.WorldGeneration
 					if (!WorldGen.InWorld(x, y, 2))
 						return false;
 					Tile tile = Framing.GetTileSafely(x, y);
-					if (tile.WallType == mawWall || IsSurfaceMouth(x, y, rupture))
+					if (tile.WallType == mawWall || IsSurfaceMouth(x, y, rupture) || MawSeedWorld.Instance.IsInterior(x, y, rupture))
 						hasMawInterior = true;
+					if (MawSeedWorld.Instance.IsHazard(x, y, rupture))
+						return false;
 					if (tile.HasTile && !tile.IsActuated && Main.tileSolid[tile.TileType] && !Main.tileSolidTop[tile.TileType])
 						return false;
 				}
@@ -374,7 +396,9 @@ namespace apogean.Common.WorldGeneration
 		int DeepestIntestinalInterior,
 		int RequiredIntestinalDepth,
 		int OutletPlugTiles,
-		string Obstruction)
+		string Obstruction,
+		bool SeedCandidate = false,
+		bool SeedNativePassed = true)
 	{
 		public const int MaximumAllowedVerticalFall = 120;
 		public const int MinimumStomachFloorClearance = 30;
@@ -383,14 +407,16 @@ namespace apogean.Common.WorldGeneration
 		public bool Passed =>
 			HasContinuousRoute &&
 			LegacyAcidTiles == 0 &&
-			MaximumVerticalFall <= MaximumAllowedVerticalFall &&
+			(SeedCandidate || MaximumVerticalFall <= MaximumAllowedVerticalFall) &&
+			SeedNativePassed &&
 			StomachFloorClearance is >= MinimumStomachFloorClearance and <= MaximumStomachFloorClearance &&
 			DeepestIntestinalInterior >= RequiredIntestinalDepth &&
 			OutletPlugTiles >= MinimumOutletPlugTiles;
 
 		public override string ToString() =>
 			$"route={(HasContinuousRoute ? "pass" : "blocked")} depth={DeepestReachableY}/{RequiredDepth}; " +
-			$"reachable={ReachableCells}; max-fall={MaximumVerticalFall}/{MaximumAllowedVerticalFall}; " +
+			$"reachable={ReachableCells}; max-fall={MaximumVerticalFall}/" +
+			(SeedCandidate ? $"diagnostic-only; seed-native={SeedNativePassed}; " : $"{MaximumAllowedVerticalFall}; ") +
 			$"stomach-clearance={StomachFloorClearance}/{MinimumStomachFloorClearance}-{MaximumStomachFloorClearance}; " +
 			$"intestine={DeepestIntestinalInterior}/{RequiredIntestinalDepth}; plug={OutletPlugTiles}/{MinimumOutletPlugTiles}; " +
 			$"legacy-acid={LegacyAcidTiles}; maw-water={VanillaLiquidTiles}; {Obstruction}";

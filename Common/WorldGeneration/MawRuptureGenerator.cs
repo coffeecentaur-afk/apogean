@@ -21,7 +21,12 @@ namespace apogean.Common.WorldGeneration
 		{
 			UnifiedRandom random = new(seed);
 			if (rupture.IsMajor)
+			{
+				MawSeedWorld.Instance.BeforeLegacy(rupture);
 				GenerateFeedingWound(rupture, random, seed, intent);
+				// All legacy clearing and shelves finish before the owned shallow mask is written.
+				MawSeedWorld.Instance.ApplyPlanned(rupture);
+			}
 			else
 				GenerateOutgrowth(rupture, random, intent);
 		}

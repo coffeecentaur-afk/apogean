@@ -1,0 +1,78 @@
+# Fresh-seed Maw review handoff
+
+Current work is an opt-in entrance/shallow-Gullet candidate, not production
+world generation. Preserve the user-approved MS Paint V1 in Apogee Native Visual
+V3. That world and regular worlds were never opened this turn. No new artwork,
+boss, liquid system, loot table, dependency or resumed overnight automation.
+
+## Review target and controls
+
+New world: `Apogean Maw Seed QA 202`, existing QA character `gg`.
+World pair: `Worlds/Apogean_Maw_Seed_QA_202.wld` and `.twld`. Do not overwrite
+this now-played pair with the pristine server output or reconstruct the scene.
+The lower Gullet and Stomach remain legacy; focus on the new upper280x256 tiles.
+
+`/mawseed entrance`, `ribs`, `cache`, `node`, `outlet` teleport once into the
+existing scene with free physics/controls. `/mawseed light-on` is an optional
+labelled local inspection light; `light-off` returns natural lighting. No held
+camera, construction or inventory grants. The inspection session suppresses
+ambient spawns; `/mawseed release` restores prior location/time and disables it.
+This is not a combat/balance test. Cache is empty; Node pocket is reservation only.
+
+Review the raised irregular lips, root continuity, rib/tooth placement, and wider
+cave spacing. Bright fiber-edge pixels and abrupt old/new outer materials are
+known defects, not proposed final polish. No need to reapprove existing rib art.
+
+## Installed package and evidence
+
+Final package SHA256:
+`64204068913BF26BBE7CFB6B35132FAA54E878C15EAD3FEBAA914A9EB5285372`.
+Pinned build mirror:
+`C:/Users/max_h/AppData/Local/Temp/ApogeanTmlBuild/1da39877053748e0aa6e18d890d04a27/apogean`.
+Use Tools/Build-CurrentQAPackage.ps1 with PackedMawPreview, MawAnatomyStudy,
+MawCaveBackdropStudy and MawAnatomyCandidateDirectory
+`Art/Candidates/MawRibSurface-v1/Native-v1`. Do not bare-build the repo and strip
+accepted QA assets.466 pinned assets plus8 known extras were retained.
+Build:0 errors/two pre-existing PaintID warnings. Scope checks10/19 pass.
+
+Pure plan292 cases/128 distinct seeds,292 deterministic pairs,31 corrupted-plan
+controls and9 invalid inputs pass. Native202 generates twice with digest
+`685AAD06082CA3F56E1E81EE57DFE37D5767C3C4C94EC987B2FEB38D5A7EEC73`.
+Bounds5424,361 /280x256; exit5517,608; connector5517,620. First client pristine
+reload passed. Native counts28,973 cells,1,606 object cells,37,670 frame/light-hook
+checks,13,158 reachable body positions; connected legacy depth route also passes.
+2x3 flood-fill is not a rope, jump, returnability or difficulty test.
+
+Final package client saved-digest check17:30:54 and full pristine geometry check
+17:31:20 both pass, still original685AAD06. Ribs/outlet/entrance visited normally.
+The game is left at the entrance with lamp OFF and free controls. No further input
+automation is running. The rib inspection PNG is a native viewport capture with
+the lamp ON, not a fully illuminated biome overview or natural-light art approval.
+
+Final isolated trials:
+`C:/Users/max_h/AppData/Local/Temp/ApogeanMawSeeds-23c1de7e3c6b45c9b711298079965d2a`.
+Seed202/server-pass.log preserved; seed404/server-failed.log preserved. First
+passing202 is in Temp/ApogeanMawSeeds-5f04f1b854ab412abefec594b3c69d51.
+Failed101/303 are in Temp/ApogeanMawSeeds-61c61c080f714f6fb8d392cd8190881d.
+Additional intermediate red trials remain local; see integration report.
+
+## Next bounded work
+
+1. Take user review of this generated adaptation. Preserve the accepted mockup.
+2. Diagnose404's unowned native state difference at2866,637; tile ID and printed
+   bit subset match, so log each remaining state field before proposing a fix.
+   Do not restore unowned state just to make validation pass. Keep owned-only
+   rollback and retained preflight impact mask/subset gate.
+3. Improve site selection for101/303 (real structure/trap and deep-route
+   conflicts), not arbitrary protection exemptions. Obtain several distinct
+   passing native seeds and client-new-world evidence before ordinary rollout.
+4. Correct old/new terrain joins and fiber seams in a bounded comparison;
+   demonstrate an actual rope/grapple descent/return with hazard readability.
+5. Only then expand the approved anatomy down the Gullet, retain Stomach/outlet
+   clearances, and move to Maw-specific layered scenery. No dependent boss work.
+
+Keep Wayfinder26 OPEN and this family contracted: one technical native success
+is not broad-seed, final-art, multiplayer or minimum-hardware acceptance.
+Unrelated dirty localization and RESEARCH_TMODLOADER_WORLD_SYSTEMS.md belong to
+other work and were not changed/staged. Existing failed historical fixtures stay
+failed; do not rebaseline them while implementing this separate candidate.

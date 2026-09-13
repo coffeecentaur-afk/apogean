@@ -1,0 +1,293 @@
+{
+  "SchemaVersion": 1,
+  "Status": "FAIL",
+  "Source": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\apogean\\Common\\WorldGeneration\\MawSeedPlan.cs",
+  "SourceSha256": "65DEC01A42D27AEC7E27170C74BAFB7AFED23926CAE420BCE8AE0830DEC663FE",
+  "SourceUnchanged": true,
+  "FinishedUtc": "2026-09-13T21:43:04.5563008Z",
+  "PreviewSeed": 101,
+  "Scope": "Pure plan only. Conservative 2x3 spatial reach with full 4x4 tooth hazards; no game, movement simulation, install, or visual acceptance.",
+  "Results": {
+    "DistinctSeeds": 128,
+    "Cases": 292,
+    "ConstructedCases": 266,
+    "DeterministicPairs": 266,
+    "CellComparisons": 19066880,
+    "Assertions": 133731952,
+    "MutationCases": 31,
+    "RejectedMutations": 20,
+    "InvalidInputCases": 9,
+    "RejectedInputs": 9,
+    "Seconds": 56.6814328,
+    "Success": false,
+    "Failures": [
+      {
+        "Check": "case-exception/InvalidOperationException/MAW_SEED: mouth to deep outlet",
+        "Occurrences": 9,
+        "FirstCase": "seed=12345, route=left-edge, shoulders=76/76",
+        "Detail": "MAW_SEED: mouth to deep outlet"
+      },
+      {
+        "Check": "case-exception/InvalidOperationException/MAW_SEED: rib attachment to host terrain",
+        "Occurrences": 15,
+        "FirstCase": "seed=2147483647, route=rising, shoulders=76/76",
+        "Detail": "MAW_SEED: rib attachment to host terrain"
+      },
+      {
+        "Check": "case-exception/InvalidOperationException/MAW_SEED: surface wall fringe",
+        "Occurrences": 2,
+        "FirstCase": "seed=-1630702169, route=left-edge, shoulders=76/76",
+        "Detail": "MAW_SEED: surface wall fringe"
+      },
+      {
+        "Check": "mutation/side-amber-wall-false",
+        "Occurrences": 1,
+        "FirstCase": "seed=42",
+        "Detail": "ACCEPTED: Corrupt plan survived the real Validate()."
+      },
+      {
+        "Check": "mutation/malformed/rib-null-roots",
+        "Occurrences": 1,
+        "FirstCase": "seed=42",
+        "Detail": "UNCONTROLLED-EXCEPTION: ArgumentNullException: Value cannot be null. (Parameter 'source')"
+      },
+      {
+        "Check": "mutation/malformed/rib-empty-roots",
+        "Occurrences": 1,
+        "FirstCase": "seed=42",
+        "Detail": "ACCEPTED: Corrupt plan survived the real Validate()."
+      },
+      {
+        "Check": "mutation/malformed/rib-duplicate-roots",
+        "Occurrences": 1,
+        "FirstCase": "seed=42",
+        "Detail": "ACCEPTED: Corrupt plan survived the real Validate()."
+      },
+      {
+        "Check": "mutation/malformed/pocket-radius",
+        "Occurrences": 1,
+        "FirstCase": "seed=42",
+        "Detail": "ACCEPTED: Corrupt plan survived the real Validate()."
+      },
+      {
+        "Check": "mutation/malformed/pocket-bounds",
+        "Occurrences": 1,
+        "FirstCase": "seed=42",
+        "Detail": "ACCEPTED: Corrupt plan survived the real Validate()."
+      },
+      {
+        "Check": "mutation/malformed/center",
+        "Occurrences": 1,
+        "FirstCase": "seed=42",
+        "Detail": "ACCEPTED: Corrupt plan survived the real Validate()."
+      },
+      {
+        "Check": "mutation/malformed/ground",
+        "Occurrences": 1,
+        "FirstCase": "seed=42",
+        "Detail": "ACCEPTED: Corrupt plan survived the real Validate()."
+      },
+      {
+        "Check": "mutation/rib-tooth-support",
+        "Occurrences": 1,
+        "FirstCase": "seed=42",
+        "Detail": "ACCEPTED: Corrupt plan survived the real Validate()."
+      },
+      {
+        "Check": "mutation/outside-write-padding",
+        "Occurrences": 1,
+        "FirstCase": "seed=42",
+        "Detail": "ACCEPTED: Corrupt plan survived the real Validate()."
+      },
+      {
+        "Check": "mutation/unknown-wall",
+        "Occurrences": 1,
+        "FirstCase": "seed=42",
+        "Detail": "ACCEPTED: Corrupt plan survived the real Validate()."
+      }
+    ],
+    "Controls": [
+      {
+        "Name": "missing-rib",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: continuous rib and branches"
+      },
+      {
+        "Name": "wall-fringe",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: surface wall fringe"
+      },
+      {
+        "Name": "blocked-outlet",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: mouth to deep outlet"
+      },
+      {
+        "Name": "missing-tooth-support",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth support"
+      },
+      {
+        "Name": "extra-chest-role",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: pocket semantics"
+      },
+      {
+        "Name": "extra-chest-object",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: sparse distinct pocket roles"
+      },
+      {
+        "Name": "side-amber-false",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: side amber"
+      },
+      {
+        "Name": "side-amber-wall-false",
+        "Status": "ACCEPTED",
+        "Detail": "Corrupt plan survived the real Validate()."
+      },
+      {
+        "Name": "malformed/tooth-variant",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth variant"
+      },
+      {
+        "Name": "malformed/tooth-negative-variant",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth variant"
+      },
+      {
+        "Name": "malformed/tooth-bounds",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth footprint"
+      },
+      {
+        "Name": "malformed/rib-null-roots",
+        "Status": "UNCONTROLLED-EXCEPTION",
+        "Detail": "ArgumentNullException: Value cannot be null. (Parameter 'source')"
+      },
+      {
+        "Name": "malformed/rib-empty-roots",
+        "Status": "ACCEPTED",
+        "Detail": "Corrupt plan survived the real Validate()."
+      },
+      {
+        "Name": "malformed/rib-duplicate-roots",
+        "Status": "ACCEPTED",
+        "Detail": "Corrupt plan survived the real Validate()."
+      },
+      {
+        "Name": "malformed/pocket-radius",
+        "Status": "ACCEPTED",
+        "Detail": "Corrupt plan survived the real Validate()."
+      },
+      {
+        "Name": "malformed/pocket-bounds",
+        "Status": "ACCEPTED",
+        "Detail": "Corrupt plan survived the real Validate()."
+      },
+      {
+        "Name": "malformed/pocket-role",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: pocket semantics"
+      },
+      {
+        "Name": "malformed/node-bounds",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: node reservation"
+      },
+      {
+        "Name": "malformed/center",
+        "Status": "ACCEPTED",
+        "Detail": "Corrupt plan survived the real Validate()."
+      },
+      {
+        "Name": "malformed/ground",
+        "Status": "ACCEPTED",
+        "Detail": "Corrupt plan survived the real Validate()."
+      },
+      {
+        "Name": "malformed/fiber-length",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: fiber anchor"
+      },
+      {
+        "Name": "missing-fiber-anchor",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: fiber anchor"
+      },
+      {
+        "Name": "overlapping-teeth",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth footprint"
+      },
+      {
+        "Name": "blocked-tooth-footprint",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: tooth footprint"
+      },
+      {
+        "Name": "rib-tooth-support",
+        "Status": "ACCEPTED",
+        "Detail": "Corrupt plan survived the real Validate()."
+      },
+      {
+        "Name": "missing-chest-support",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: chest feet"
+      },
+      {
+        "Name": "insufficient-cave-spacing",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: independent cave separation"
+      },
+      {
+        "Name": "outside-write-padding",
+        "Status": "ACCEPTED",
+        "Detail": "Corrupt plan survived the real Validate()."
+      },
+      {
+        "Name": "inactive-cell-data",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: inactive write"
+      },
+      {
+        "Name": "unknown-wall",
+        "Status": "ACCEPTED",
+        "Detail": "Corrupt plan survived the real Validate()."
+      },
+      {
+        "Name": "invalid-slope",
+        "Status": "REJECTED",
+        "Detail": "MAW_SEED: slope"
+      }
+    ],
+    "CountRanges": {
+      "writtenCells": [
+        27956,
+        30210
+      ],
+      "slopedCells": [
+        181,
+        315
+      ],
+      "ribs": [
+        5,
+        7
+      ],
+      "teeth": [
+        81,
+        110
+      ],
+      "fibers": [
+        18,
+        34
+      ],
+      "caveEnvelopeGap": [
+        64,
+        93
+      ]
+    }
+  }
+}

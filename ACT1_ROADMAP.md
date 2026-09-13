@@ -2,6 +2,15 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+September13 fresh-seed candidate: implementation now exists behind the exact
+`Apogean Maw Seed QA <number>` fresh-world name gate. Seed202 has passed native
+construction twice with the same digest and first client reload; regular
+generation remains unchanged. Seeds101/303 reject protected/blocked sites;
+404 rejects unowned native state changed by framing. Outer legacy terrain plus
+surface fiber seams need follow-up. Review this separate candidate before any
+full-depth rollout. Evidence and final replay status: MAW_SEED_INTEGRATION_2026-09-13.md.
+The older documentation-only checkpoint below is historical, not current status.
+
 Latest direction, September13 after native approval: preserve the drawing-led
 V1. Exposed upper bone is intentional escaped-growth anatomy. Next transfer its
 contours to seed-aware generation, with separated cave groups, smaller Node

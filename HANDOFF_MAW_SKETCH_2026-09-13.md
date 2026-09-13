@@ -1,5 +1,9 @@
 # Approved drawing-led Maw checkpoint
 
+Historical accepted-reference handoff. For the subsequent separate seed-aware
+candidate and current package/review state, read HANDOFF_MAW_SEED_2026-09-13.md.
+The V1 scene described below remains preserved; it was not rebuilt for that trial.
+
 The latest user approved the actual V1 scene: "That looked literally perfect."
 Read MAW_SKETCH_STUDY_2026-09-13.md before any further geometry or asset work.
 Do not redo the ribs as another art iteration. The uninstalled deeper-root V2

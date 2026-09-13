@@ -2,6 +2,32 @@
 
 This is the production rule for adding visual and gameplay content. It prevents a mechanically valid placeholder from silently becoming the foundation for another unfinished family.
 
+## Fresh-generation lifecycle evidence — September13
+
+Test both native dedicated autocreate and the client: their engine flags can
+differ. In the pinned2026.7 runtime, dedicated autocreate bypasses
+`CreateNewWorld`'s `generatingWorld` flag, while Final Cleanup clears `gen` before
+our late passes. A world name alone must never authorize terrain reconstruction.
+Use a nonpersistent `PreWorldGen`-armed latch tied to the actual world-file
+identity, require the requested candidate in `PostWorldGen`, and disarm on every
+load/unload/clear/completion path. Preserve failed trials; a successful engine
+save of legacy terrain is not a successful candidate test. Source-contract checks
+catch guard removal, but cannot replace the native lifecycle trial.
+
+Native framing may remove unsupported neighboring multi-tile rubble. Claim the
+complete bounded natural-decoration footprint before reservation, rather than
+allowing arbitrary frame-important furniture or undoing unowned changes after
+the fact. Retain the preflight impact mask and reject any post-legacy expansion
+before candidate writes. On failure restore only owned cells; preserve evidence
+of protected/unowned damage and reject the generated trial. Equal tile IDs are
+not proof of equal liquid, wall, coating, slope or other native state.
+
+Capture the actually visible, lit region for render evidence. A whole-biome
+photo can be mostly black because offscreen regions were never lit; archive it
+as a failed capture rather than calling it a complete visual pass. Label a local
+inspection lamp separately from natural biome lighting and never bake fullbright
+paint into terrain to improve a screenshot.
+
 September9 tooling audit: `RESEARCH_AUTHORING_TOOLING_2026-09-09.md` records
 proposed accepted-build manifests, shape/hazard overlays and consolidation of
 existing QA tools. These are not implemented gates yet. No new editor/library
