@@ -12,7 +12,7 @@
       "userReview": "pending",
       "evidenceReference": "Art/Validation/MawAnatomyItems-2026-09-13/README.md",
       "evidenceScope": "Y6AD8D2A6: two native15-case/687-check trials. Rib rejects30 Pick58 calls, breaks at59; cap breaks at35. Both actual first/second mining drops are exactly one matching QA item; native Item.SetDefaults binds exact named tile and API replacement succeeds. Exact56x56 restoration and9 known history locations unchanged;9 missing remain unverified. Native save preserves16 existing records. Original U schema1 and18 report controls retained; schema2 adds10 rejected binding defects.",
-      "blockers": ["Actual item-use placement, mouse pickup, inventory/world icon rendering and multiplayer remain unverified. Read-only browser search failed to accept text; no icon appearance pass claimed.", "QA-only materials, no recipe/economy/worldgen promotion. Original artwork and mining values unchanged. Old grove checkpoint remains independently RED."]
+      "blockers": ["AA passive native inventory comparison now passes technical centering/scale inspection; see Art/Validation/MawItemPreview-2026-09-13. Actual item-use placement, mouse pickup, ground-item rendering and multiplayer remain unverified. User art approval still pending.", "QA-only materials, no recipe/economy/worldgen promotion. Original artwork and mining values unchanged. Old grove checkpoint remains independently RED."]
     },
     {
       "id": "maw-rope-itemuse-v1",

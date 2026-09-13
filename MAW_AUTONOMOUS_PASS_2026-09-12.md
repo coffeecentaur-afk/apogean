@@ -78,6 +78,17 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- AA,03:17–03:18UTC September13:2450BDD2 pinned package, clean build,
+  unchanged466+7+1 art/map pins. Passive native ItemSlot preview on four
+  detached items records two correct16x16 candidate hooks, scale1, centered
+  against52px slots; displayed at user UI scale1.15.1953/651 drawn frames,
+  normal stop then save cleanup. Unedited native JPEG retained; no grants,
+  item-use or ground-item proof.16 saved records unchanged,8 scoped records,
+  old grove RED independently retained.36 actual-body/API-double checks,
+  16 malformed-report controls,75 shared-exit/7 omission checks pass.
+  Broad All gate also completed RED on known background readiness and two
+  stale world-integrity checks; no claim of full project acceptance.
+
 - Z,02:56–03:00UTC September13: FB1E19BE pinned package, clean build. New
   sixteen-seed variant reuses the same scratch/policy; six native240-update
   runs retain original32, full32, full8, disabled0, full32, original32.

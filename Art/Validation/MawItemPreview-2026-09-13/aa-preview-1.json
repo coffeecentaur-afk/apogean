@@ -1,0 +1,52 @@
+{
+  "Schema": 1,
+  "Reason": "new-command",
+  "Draws": 1953,
+  "FirstFrame": {
+    "GameUpdate": 867,
+    "UiScale": 1.15,
+    "OriginalInventoryScale": 0.75,
+    "SlotScale": 1,
+    "Context": 31,
+    "SlotTextureWidth": 52,
+    "SlotTextureHeight": 52,
+    "SlotLeft": 100,
+    "SlotTop": 230,
+    "SlotSpacing": 192,
+    "Hooks": [
+      {
+        "Index": 0,
+        "ItemType": 5546,
+        "Name": "apogean/AnatomyItem_rib",
+        "CenterX": 126,
+        "CenterY": 256,
+        "Scale": 1,
+        "SourceX": 0,
+        "SourceY": 180,
+        "SourceWidth": 16,
+        "SourceHeight": 16,
+        "FallbackWidth": 16,
+        "FallbackHeight": 16,
+        "FallbackOriginX": 8,
+        "FallbackOriginY": 8
+      },
+      {
+        "Index": 1,
+        "ItemType": 5547,
+        "Name": "apogean/AnatomyItem_cap",
+        "CenterX": 318,
+        "CenterY": 256,
+        "Scale": 1,
+        "SourceX": 0,
+        "SourceY": 270,
+        "SourceWidth": 16,
+        "SourceHeight": 16,
+        "FallbackWidth": 16,
+        "FallbackHeight": 16,
+        "FallbackOriginX": 8,
+        "FallbackOriginY": 8
+      }
+    ]
+  },
+  "Scope": "Native ItemSlot.Draw on detached items; sampled UI fields only; no actual world-item, inventory possession or item-use proof."
+}

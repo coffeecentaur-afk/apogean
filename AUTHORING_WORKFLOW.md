@@ -475,6 +475,14 @@ Replay statistics/counts/verdicts independently and mutation-test optimistic
 reports. Label expected negative-control exceptions and retain real failures;
 do not confuse a logged control with a new engine defect or conceal either.
 
+When inventory search/input is unreliable, use a bounded passive native icon
+row rather than inferring item size from an offline sheet. Owned detached Item
+objects through ItemSlot.Draw(context31) invoke inventory hooks without native
+navigation positions or transfer handlers. Restore inventoryScale in finally,
+include vanilla size controls and observe exact candidate identity/center/frame.
+Keep read-only icon evidence separate from possession, actual item use and
+ground-item drawing: context31's name does not make it a world render test.
+
 Per-update growth tests must retain consecutive native update IDs and actual
 changes per update, not just the configured cap. W's32-budget case only changes
 eight cells/update because its frontier is smaller: label that coverage gap,

@@ -102,6 +102,7 @@ namespace apogean.Content.Diagnostics
         public override bool PreDrawInInventory(SpriteBatch batch,Vector2 position,Rectangle frame,
             Color drawColor,Color itemColor,Vector2 origin,float scale)
         {
+            ModContent.GetInstance<MawItemPreview>().Observe(this,position,frame,origin,scale);
             Draw(batch,position,drawColor,0,scale);return false;
         }
         public override bool PreDrawInWorld(SpriteBatch batch,Color lightColor,Color alphaColor,ref float rotation,ref float scale,int whoAmI)

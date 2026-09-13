@@ -132,6 +132,7 @@ namespace apogean.Content.Diagnostics
                 Player.GetModPlayer<MawRopeClimbProbe>().Cancel("new-command");
                 Player.GetModPlayer<MawRopeItemUseProbe>().Cancel("new-command");
                 ModContent.GetInstance<MawGrowthLoadStudy>().Cancel("new-command");
+                ModContent.GetInstance<MawItemPreview>().Cancel("new-command");
 				if (request.StartsWith("qa-perf-", System.StringComparison.Ordinal)) {
 					// Passive measurements must not release or move the scene they measure.
 					ModContent.GetInstance<QAPerformanceLab>().Run(request.Substring("qa-perf-".Length));
@@ -199,6 +200,11 @@ namespace apogean.Content.Diagnostics
                 if (request == "maw-rope-properties")
 				{
 					MawRopeMaterialStudy.Run(Mod.Logger);
+                    return;
+                }
+                if (request == "maw-item-preview-start" || request == "maw-item-preview-stop")
+                {
+                    if (request == "maw-item-preview-start") ModContent.GetInstance<MawItemPreview>().Start();
                     return;
                 }
                 if (request.StartsWith("maw-rope-climb-", System.StringComparison.Ordinal))

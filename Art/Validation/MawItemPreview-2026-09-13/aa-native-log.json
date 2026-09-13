@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-13T03:19:11.8671510Z",
+  "sourceLogSha256": "047F295B11FE77E03CD34BF208E704AA47CB544DAB4C68D8ECDFA12E5A48EC45",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[22:17:04.369] [Main Thread/INFO] [apogean]: MAW ANATOMY ITEM PREVIEW START: four detached items; native ItemSlot context31; UI-scaled,90seconds; no inventory grant or world draw.",
+    "[22:17:04.371] [Main Thread/INFO] [apogean]: MAW ANATOMY ITEM PREVIEW FRAME: both custom inventory hooks observed; sampled UI interaction fields unchanged; scale restored in finally.",
+    "[22:17:36.952] [Main Thread/INFO] [apogean]: MAW ANATOMY ITEM PREVIEW STOP: new-command; draws=1953; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\maw-item-preview-20260913-031736-919-2763a45f654040a293e3a006947bb009.json",
+    "[22:18:07.918] [Main Thread/INFO] [apogean]: MAW ANATOMY ITEM PREVIEW START: four detached items; native ItemSlot context31; UI-scaled,90seconds; no inventory grant or world draw.",
+    "[22:18:07.920] [Main Thread/INFO] [apogean]: MAW ANATOMY ITEM PREVIEW FRAME: both custom inventory hooks observed; sampled UI interaction fields unchanged; scale restored in finally.",
+    "[22:18:18.772] [Main Thread/INFO] [apogean]: MAW ANATOMY ITEM PREVIEW STOP: new-command; draws=651; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\maw-item-preview-20260913-031818-768-d4e3bfa0859240e4acffe40986458eb0.json",
+    "[22:18:20.074] [.NET TP Worker/INFO] [apogean]: MAW RIB CONTOUR SAVE: creation=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; actual=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; failed=False.",
+    "[22:18:20.076] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state."
+  ],
+  "caughtRenderFailures": []
+}

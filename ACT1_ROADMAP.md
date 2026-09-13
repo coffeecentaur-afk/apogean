@@ -2,6 +2,14 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+03:18UTC September13: AA adds a passive native inventory preview, not new art.
+Two native runs display rib/cap beside vanilla stone/dirt with matching16px
+footprints and centered hooks. Prior UI scale restores; explicit stop and
+save release the preview. Native save retains16 records. Unedited screenshot
+and first-frame replays: Art/Validation/MawItemPreview-2026-09-13. Ground-item
+appearance, mouse pickup and actual item-use remain pending. No grants or
+worldgen changes. Next: close stale validator warnings, final regressions/review.
+
 03:00UTC September13: Z adds a second seed layout to the existing growth scratch,
 not new production behavior. Six native240-update runs pass; both sixteen-seed
 32-budget repeats actually change32/32/32/32/16 cells, then idle. Worst measured

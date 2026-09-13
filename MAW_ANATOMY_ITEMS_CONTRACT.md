@@ -30,3 +30,21 @@ Parameterized dynamically registered items opt into `CloneNewInstances`; the
 immutable material key is shared explicitly. Installed compiler verifies the
 protected override. Runtime `new Item().SetDefaults(type)` remains a separate
 instancing test, not proven by compiling the override.
+
+## Passive native icon comparison
+
+`maw-item-preview-start` and `maw-item-preview-stop` are gg/V3/single-player
+only, with anatomy candidates enabled. Four detached initialized items run
+through the actual array overload of `ItemSlot.Draw`, context31, in a UI-scaled
+layer before Mouse Text. The two native blocks are scale/fallback controls.
+No hover, transfer or input handler is called. A finally restores the prior
+inventory scale; missing layer/context,90seconds or the next command releases
+the preview. It does not add an item to any player or world collection.
+
+Context31 still dispatches inventory hooks, not world-item hooks. Native
+first-frame observations prove both candidate callbacks and their actual
+16x16 source rectangles, centers and scale. Sampled UI fields are checked
+within each draw; this is not a global purity guarantee for arbitrary mods.
+The controller-doubled draw regression exercises exception cleanup separately.
+Actual ground-item appearance and mouse pickup/placement remain separate gates.
+Research: `RESEARCH_MAW_ITEM_PREVIEW_2026-09-13.md`.

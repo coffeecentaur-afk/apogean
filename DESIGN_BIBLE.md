@@ -279,6 +279,11 @@ fiber art may be selected for disposable native studies while the user is away.
 Final art/feel and ordinary-world deployment are not thereby approved. See
 `MAW_AUTONOMOUS_PASS_2026-09-12.md` for the bounded implementation authority.
 
+September13 QA implementation: cortical rib/full-fiber candidates now return
+matching placeable test items through native mining. Passive native inventory
+icons use the same material atlas at ordinary block size. This does not approve
+ground-item art, player placement, recipes or progression/worldgen deployment.
+
 September12 lighting evidence: clean starter-character captures confirm ambient
 amber dims in dormancy, but the shallow pocket is still hard to read without
 player light. This is an unresolved implementation/readability issue, not a new
