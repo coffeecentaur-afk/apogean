@@ -1,0 +1,14 @@
+Mods: {
+  apogean: {
+    Items: {
+      AnatomyItem_rib: {
+        DisplayName: QA Cortical Rib Block
+        Tooltip: Candidate material; no recipe or progression role yet
+      }
+      AnatomyItem_cap: {
+        DisplayName: QA Full Fiber Block
+        Tooltip: Candidate material; no recipe or progression role yet
+      }
+    }
+  }
+}

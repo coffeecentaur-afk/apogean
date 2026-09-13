@@ -12,6 +12,12 @@ or authorize normal-world replacement. See `MAW_RIB_CONTOUR_CONTRACT.md`.
 
 ## Reusable engine/tooling authorization
 
+September13 candidate pickup evidence: harmless structural rib and full fiber
+cap now have separate QA-only recoverable item bindings. Keep their existing
+mining strength and texture identity; no recipe, economy or progression decision
+is implied. Native mine–replace–mine checks do not approve player item use or
+icon appearance. Never infer a finished inventory asset from an atlas crop.
+
 September13 growth measurement is not growth design: bounded native QA maturation
 on already-Maw soil does not set shipping infection speed, dormancy or cleansing
 balance. Match measured work to actual changed cells, preserve disabled controls,

@@ -10,6 +10,14 @@ solving the next family; do not turn workflow improvement into an engine detour.
 
 ## QA persistence lesson — September12
 
+Parameterized dynamic ModItems need the engine's explicit instancing contract;
+test actual Item.SetDefaults as well as compilation. Reuse the exact tile atlas
+for provisional16x16 block icons instead of loading an entire atlas as an item.
+Validate both named createTile/drop bindings and two real mining drops. Preserve
+older no-binding reports under their original schema rather than retroactively
+claiming they covered the new feature. Native icon and dropped-item rendering
+still require separate inspection. A failed UI search is not a render pass.
+
 Identify the item, not just its icon/count, before designing an inventory-based
 trial. The bow hotbar displays ammunition; it is not a rope stack. X's native
 preflight correctly refused before scratch writes. Keep that failed prerequisite

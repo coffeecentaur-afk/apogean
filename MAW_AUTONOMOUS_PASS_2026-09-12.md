@@ -78,6 +78,17 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- Y,02:38–02:45UTC September13: installed6AD8D2A6, clean pinned build with
+  unchanged466+7+1 asset pins. Two actual15-case/687-check material trials each
+  return exactly one matching rib/cap item, replace through its createTile
+  binding, and return one again. Original pick59 rib/ordinary cap thresholds
+  unchanged. Exact56x56 cleanup,9 known history locations retained/9 missing.
+  Native save preserves16 existing canonical records. Two independent replays,
+  18 original/10 new corrupt-report controls and raw logs retained under
+  Art/Validation/MawAnatomyItems-2026-09-13. Native UI search remained blank
+  after one refocused retry; no items granted and no icon appearance approval.
+  Old grove mismatch remains RED. No terrain, art, worldgen or economy change.
+
 - X,02:24–02:28UTC September13: installed6490C290, clean pinned build. Actual
   item-use probe refused vanilla before terrain setup because no ordinary Rope
   exists in gg's hotbar. Native UI identifies the assumed rope as Keen Sinew Bow

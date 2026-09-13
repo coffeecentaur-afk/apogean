@@ -94,8 +94,26 @@ namespace apogean.Content.Diagnostics
                     object drops=Drops(()=>{while(Main.tile[top].HasTile&&hits<40){Main.LocalPlayer.PickTile(top.X,top.Y,material.Power);hits++;}},out _);
                     Check(!Main.tile[top].HasTile,"candidate removed through native pick-power path");
                     int registeredDrop=TileLoader.GetItemDropFromTypeAndStyle(material.Type);
+                    string key=material.Type==rib?"rib":"cap";
+                    int expectedDrop=MawAnatomyMaterials.Item(key).Type;
+                    Check(registeredDrop==expectedDrop,"exact candidate item registered");
+                    Check(ownDrops.Count==1&&ownDrops.All(i=>Main.item[i].type==expectedDrop&&Main.item[i].stack==1),"one matching candidate drop");
+                    var item=new Item();item.SetDefaults(expectedDrop); // Unattached defaults only; no player grant.
+                    Check(item.createTile==material.Type&&item.consumable&&item.width==16&&item.height==16&&item.maxStack>1,"native candidate placeable defaults");
+                    var binding=new{itemName=item.ModItem.FullName,tileName=MawAnatomyMaterials.Tile(key).FullName,
+                        createTile=item.createTile,tileType=material.Type,itemType=item.type,item.consumable,item.width,item.height,item.maxStack};
+                    Restore();Place(top.X,top.Y,item.createTile);int replacedType=Main.tile[top].TileType;
+                    int repickHits=0;
+                    object secondDrops=Drops(()=>{while(Main.tile[top].HasTile&&repickHits<40){Main.LocalPlayer.PickTile(top.X,top.Y,material.Power);repickHits++;}},out _);
+                    Check(!Main.tile[top].HasTile,"replacement can be mined again");
+                    Check(ownDrops.Count==1&&ownDrops.All(i=>Main.item[i].type==expectedDrop&&Main.item[i].stack==1),"replacement yields exactly one same item");
+                    var tile=MawAnatomyMaterials.Tile(key);Main.instance.LoadTiles(tile.Type);
+                    var texture=Terraria.GameContent.TextureAssets.Tile[tile.Type].Value;
+                    Rectangle icon=tile.IconFrame;
+                    Check(icon.Width==16&&icon.Height==16&&icon.X>=0&&icon.Y>=0&&icon.Right<=texture.Width&&icon.Bottom<=texture.Height,"icon uses a bounded existing16px tile cell");
                     cases.Add(new{kind="candidate-mining",host=material.Name,power=material.Power,rejected58Calls=rejectedCalls,hits,registeredDrop,drops,
-                        note="Candidate tile may have no placeable item binding. Record absence; do not promote it as a shipping pickup/replacement feature."});
+                        binding,replacedType,repickHits,secondDrops,
+                        note="Registered item and repeated native tile/mining API cycle only. No mouse pickup, inventory rendering, item-use placement or shipping promotion."});
                 }
             }catch(Exception ex){error=ex.GetType().Name+": "+ex.Message;}
             finally{
@@ -105,7 +123,7 @@ namespace apogean.Content.Diagnostics
             }
             string after=S.Fingerprint(new[]{guard});
             bool pass=error==null&&restored&&historyUnchanged&&before==after&&cases.Count==15&&negativeControls==2;
-            var report=new{schemaVersion=1,utc=DateTime.UtcNow,pass,error,checks,negativeControls,restored,historyUnchanged,before,after,
+            var report=new{schemaVersion=2,utc=DateTime.UtcNow,pass,error,checks,negativeControls,restored,historyUnchanged,before,after,
                 historyKnown=history.Count(r=>r.Width>0&&r.Height>0),historyMissing=history.Count(r=>r.Width<=0||r.Height<=0),
                 patch=new{patch.X,patch.Y,patch.Width,patch.Height},elapsedMs=clock.Elapsed.TotalMilliseconds,cases,
                 scope="Synchronous disposable native tile/mining APIs. No item-use placement, reach, swing timing, pulley ascent, manual feel, multiplayer or production promotion. Missing historical locations unverified."};
