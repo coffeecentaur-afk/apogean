@@ -17,6 +17,13 @@ logger fails `Test-QAHistoryCoverage.ps1` with17 empty slots; the corrected path
 passes56 count/zero-area cases. Native verification remains required separately.
 Preserve older logs and annotate their limitation instead of rewriting evidence.
 
+Read the complete dispatch path before declaring cleanup missing. The shared
+prefix already releases cave/shallow/contour views before `qa-save-and-quit`;
+looking only at its final branch incorrectly suggested an omission. No runtime
+fix was needed. `Test-QAExitDispatch.ps1` compiles that actual prefix and branch,
+checks cleanup-before-save and passive-measurement isolation, and rejects three
+removed-release mutations. This checks call ordering, not native state restore.
+
 World-owned fixture data must survive saves by another QA character or a
 dedicated server without granting either permission to operate the fixture.
 Separate existing-data load/save ownership from interactive/mutation guards.
