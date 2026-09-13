@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-rope-interaction-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/MawRope-2026-09-13/README.md",
+      "evidenceScope": "U native tile/mining APIs pass15 cases/671 checks: cardinal rope support/framing, middle mining/drop, support removal, isolated API rope, candidate rib58 rejection/59 break and cap35 break. Exact scratch restoration; nine known and nine missing history locations separately reported. Native saved specimen hashes retained. Independent report replay rejects18 defects.",
+      "blockers": ["No actual item-use placement or input-driven ascent yet. Direct PlaceTile bypasses player adjacency/reach and PickTile bypasses reach/swing timing.", "Experimental rib/cap have no item binding/drop. No whole-route returnability, manual feel, art, multiplayer or worldgen approval."]
+    },
+    {
       "id": "qa-world-persistence-v1",
       "status": "contracted",
       "static": "pass",

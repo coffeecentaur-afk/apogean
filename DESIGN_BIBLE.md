@@ -12,6 +12,12 @@ or authorize normal-world replacement. See `MAW_RIB_CONTOUR_CONTRACT.md`.
 
 ## Reusable engine/tooling authorization
 
+September13 rope lesson: distinguish direct tile creation, native mining hooks,
+actual item-use placement and actual player ascent. Native rope persists after
+support removal; do not invent a vine-style anchor requirement. Candidate rib/cap
+mining proof does not supply missing placeable-item bindings. These are separate
+gates, not reasons to install ropes or safe staircases in the Gullet.
+
 September13 evidence discipline: a jump-only QA attempt that does not reach an
 exit does not justify a forced gear gate, guaranteed damage or automatic safe
 ledges. Preserve the difficult, player-modifiable descent and test rope, mining

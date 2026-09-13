@@ -25,7 +25,7 @@ namespace apogean.Content.Diagnostics
             new Family("ice",TileID.IceBlock,ModContent.TileType<MawIce>(),ModContent.TileType<WastesIce>(),WallID.IceUnsafe,ModContent.WallType<MawIceWallUnsafe>(),ModContent.WallType<WastesIceWallUnsafe>()),
             new Family("mud",TileID.Mud,ModContent.TileType<MawMud>(),ModContent.TileType<WastesMud>(),WallID.MudUnsafe,ModContent.WallType<MawMudWallUnsafe>(),ModContent.WallType<WastesMudWallUnsafe>())
         };
-        private static Rectangle Find(Rectangle[] history)
+        internal static Rectangle FindEmptyPatch(Rectangle[] history)
         {
             foreach(int dx in new[]{-2800,-2520,-1960,-1680}) foreach(int dy in new[]{-660,-540,-420,-300}) {
                 Rectangle patch=new(Main.spawnTileX+dx,Main.spawnTileY+dy,32,32),guard=patch;guard.Inflate(12,12);
@@ -47,7 +47,7 @@ namespace apogean.Content.Diagnostics
                 throw new InvalidOperationException("Conversion-load probe requires idle packed gg/V3/SP.");
             var history=MawShallowTraversalLab.Historical().Append(ModContent.GetInstance<MawShallowTraversalLab>().PreservedBounds).ToArray();
             string oldHistory=MawShallowTraversalLab.Fingerprint(history);
-            Rectangle patch=Find(history);patch.Width=patch.Height=side;Rectangle guard=patch;guard.Inflate(12,12);
+            Rectangle patch=FindEmptyPatch(history);patch.Width=patch.Height=side;Rectangle guard=patch;guard.Inflate(12,12);
             var original=new MawShallowTraversalLab.CellState[guard.Width*guard.Height];
             int Index(int x,int y)=>(x-guard.X)*guard.Height+y-guard.Y;
             for(int x=guard.Left;x<guard.Right;x++)for(int y=guard.Top;y<guard.Bottom;y++)original[Index(x,y)]=MawShallowTraversalLab.CellState.Read(x,y);

@@ -1,0 +1,1021 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-09-13T01:00:57.4961137Z",
+  "pass": true,
+  "error": null,
+  "checks": 671,
+  "negativeControls": 2,
+  "restored": true,
+  "historyUnchanged": true,
+  "before": "81115FCEACB61196D870A241C12D0F66662EBA5036175A7E51E217AA0651009D",
+  "after": "81115FCEACB61196D870A241C12D0F66662EBA5036175A7E51E217AA0651009D",
+  "historyKnown": 9,
+  "historyMissing": 9,
+  "patch": {
+    "X": 1396,
+    "Y": 60,
+    "Width": 32,
+    "Height": 32
+  },
+  "elapsedMs": 16.9131,
+  "cases": [
+    {
+      "kind": "rope-api",
+      "host": "vanilla-gray-brick",
+      "anchor": "above",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 108,
+          "y": 54
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "rope-api",
+      "host": "vanilla-gray-brick",
+      "anchor": "left",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 18,
+          "y": 54
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 108,
+          "y": 54
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "rope-api",
+      "host": "vanilla-gray-brick",
+      "anchor": "right",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 54
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 108,
+          "y": 54
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "rope-api",
+      "host": "vanilla-gray-brick",
+      "anchor": "below",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 144,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "rope-api",
+      "host": "candidate-rib",
+      "anchor": "above",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 126,
+          "y": 54
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "rope-api",
+      "host": "candidate-rib",
+      "anchor": "left",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 54,
+          "y": 54
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 108,
+          "y": 54
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "rope-api",
+      "host": "candidate-rib",
+      "anchor": "right",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 54
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 126,
+          "y": 54
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "rope-api",
+      "host": "candidate-rib",
+      "anchor": "below",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 126,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "rope-api",
+      "host": "candidate-fiber-cap",
+      "anchor": "above",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 144,
+          "y": 54
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "rope-api",
+      "host": "candidate-fiber-cap",
+      "anchor": "left",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 18,
+          "y": 54
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 126,
+          "y": 54
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "rope-api",
+      "host": "candidate-fiber-cap",
+      "anchor": "right",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 72,
+          "y": 54
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 144,
+          "y": 54
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "rope-api",
+      "host": "candidate-fiber-cap",
+      "anchor": "below",
+      "placed": 16,
+      "afterMining": 15,
+      "ropeDrops": 1,
+      "drops": [
+        {
+          "type": 965,
+          "stack": 1
+        }
+      ],
+      "frames": [
+        {
+          "x": 126,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 0
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 18
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 36
+        },
+        {
+          "x": 90,
+          "y": 0
+        }
+      ],
+      "note": "Direct PlaceTile bypasses player adjacency. Support persistence is not player-placement or ascent evidence."
+    },
+    {
+      "kind": "isolated-tile-api",
+      "recognized": true,
+      "playerPlacementTested": false
+    },
+    {
+      "kind": "candidate-mining",
+      "host": "candidate-rib",
+      "power": 59,
+      "rejected58Calls": 30,
+      "hits": 5,
+      "registeredDrop": 0,
+      "drops": [],
+      "note": "Candidate tile may have no placeable item binding. Record absence; do not promote it as a shipping pickup/replacement feature."
+    },
+    {
+      "kind": "candidate-mining",
+      "host": "candidate-fiber-cap",
+      "power": 35,
+      "rejected58Calls": 0,
+      "hits": 4,
+      "registeredDrop": 0,
+      "drops": [],
+      "note": "Candidate tile may have no placeable item binding. Record absence; do not promote it as a shipping pickup/replacement feature."
+    }
+  ],
+  "scope": "Synchronous disposable native tile/mining APIs. No item-use placement, reach, swing timing, pulley ascent, manual feel, multiplayer or production promotion. Missing historical locations unverified."
+}

@@ -2,6 +2,12 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+01:02UTC September13: U native rope/material microchecks pass15 cases with exact
+scratch cleanup and known-scene preservation. Ordinary rope support/mining agrees
+across gray brick and candidate rib/cap. Candidate rib59/cap35 native mining works,
+but these diagnostic tiles have no item binding yet. API placement is explicitly
+not player placement/ascent. See `MAW_ROPE_INTERACTION_CONTRACT.md`; no worldgen.
+
 00:33UTC: corrected T native report confirms8 known locations/9 empty slots;
 pristine/reload and119-update entry pass. Entry18→18HP is separately labeled
 after a nighttime-spawn Demon Eye death outside the passage. Normal save retains

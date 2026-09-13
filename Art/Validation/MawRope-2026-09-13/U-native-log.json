@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-13T01:02:53.6725525Z",
+  "sourceLogSha256": "DAED743D43AAA8E290D6008FF6B70274487132880418A7A958744D43D24F1E73",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[20:00:57.539] [Main Thread/INFO] [apogean]: MAW ROPE MATERIAL COMPLETE: pass=True; cases=15; checks=671; restored=True; historyKnown=9; missing=9; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\maw-rope-material-20260913-010057-496-36c9f4.json. No player-placement or ascent claim.",
+    "[20:01:17.624] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: pristine",
+    "[20:01:17.631] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[20:01:17.641] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: 8/17 nonempty historical bounds semantically unchanged during command; 9 missing/empty slots [1,2,3,4,5,6,7,8,9] are NOT verified. Slots use Historical() order; no recovery or whole-world preservation claim.",
+    "[20:01:17.641] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: pristine",
+    "[20:02:26.098] [.NET TP Worker/INFO] [apogean]: MAW RIB CONTOUR SAVE: creation=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; actual=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; failed=False.",
+    "[20:02:26.099] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state."
+  ],
+  "caughtRenderFailures": []
+}

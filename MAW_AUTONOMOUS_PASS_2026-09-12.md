@@ -78,6 +78,21 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- U,01:00–01:02UTC September13: FE713ED5 candidate builds0warnings/errors with
+ 466+7+1 unchanged art. Native scratch rope/material APIs pass15 cases/671 checks
+ in16.9131ms; exact scratch restored,9 known/9 missing historical bounds separately
+ reported. Sixteen rope cells beside each gray-brick/rib/cap cardinal support;
+ middle mining yields one Rope965 and15 remaining, support removal retains them.
+ Candidate rib rejects30 pick58 calls then breaks after5 pick59 calls; cap breaks
+ after4 pick35 calls. Both diagnostic candidates have NO registered/actual item
+ drops; retain that missing binding. Isolated API rope is not player placement.
+ Independent checker rejects18 corrupt reports and keeps partial failures.
+ Shallow pristine and native save01:02:26 retain24163E65 and contour6F7998FF.
+ Seven scoped log records retained; old grove refusal remains unrelated/unfixed.
+ Added code-only compile tool and routed gate-Build through it: bare root build
+ had compiled but failed packaging on the live tmod lock; prior T package hash
+ stayed unchanged. Next separate native input-driven rope ascent, not production.
+
 - S/T,00:15–00:33UTC September13: two identical360-update native Plain return-
   jump attempts stop without exit;98.0718px rise,105 jump-held/123 rising/106
   falling ticks,100HP retained, zero teeth, exact24163E65 scene. Independent

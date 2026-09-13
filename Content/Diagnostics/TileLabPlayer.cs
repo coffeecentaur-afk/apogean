@@ -191,6 +191,11 @@ namespace apogean.Content.Diagnostics
 					else ModContent.GetInstance<MawShallowTraversalLab>().Run(request.Substring("maw-shallow-".Length));
 					return;
 				}
+				if (request == "maw-rope-properties")
+				{
+					MawRopeMaterialStudy.Run(Mod.Logger);
+					return;
+				}
 				if (request.StartsWith("wastes-camera-", System.StringComparison.Ordinal))
 				{
 					ModContent.GetInstance<ForestSprayVisualLab>().Stop();

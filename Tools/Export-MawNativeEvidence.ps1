@@ -17,7 +17,7 @@ $includeStack=$false
 $lines=@(foreach($line in ($decoded -split '\r?\n')) {
     if($line -match '^\[') {
         $includeStack=$line -match '\[apogean\]: LIVE VALIDATION REQUEST FAILED: (maw-|qa-perf-)|\[apogean\]: (QA PERFORMANCE|MAW SHALLOW MOTION) EXPORT FAILED'
-        if($includeStack -or $line -match '\[apogean\]: MAW (CAVE|NATURAL|LAB REQUEST|LAB COMPLETE|PROPERTY|PRODUCTION PROPERTIES|PROPERTIES RESTORE|SAND|SEAM|JOIN|FIBER|RIB|ANATOMY|HANGING|AMBER|SHALLOW)|\[apogean\]: QA (PERFORMANCE|RENDER ALLOCATION|RENDER CACHE IDENTITY)|\[apogean\]: \[DEBUG-closewidth\]'){$line}
+        if($includeStack -or $line -match '\[apogean\]: MAW (ROPE|CAVE|NATURAL|LAB REQUEST|LAB COMPLETE|PROPERTY|PRODUCTION PROPERTIES|PROPERTIES RESTORE|SAND|SEAM|JOIN|FIBER|RIB|ANATOMY|HANGING|AMBER|SHALLOW)|\[apogean\]: QA (PERFORMANCE|RENDER ALLOCATION|RENDER CACHE IDENTITY)|\[apogean\]: \[DEBUG-closewidth\]'){$line}
     } elseif($includeStack) {$line}
 })
 if(-not $lines.Count){throw 'No matching native Maw evidence in this log.'}

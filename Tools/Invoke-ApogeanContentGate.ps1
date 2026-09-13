@@ -28,6 +28,7 @@ $profiles = @{
 }
 $profiles.Background += 'Tools/Test-CloseBackgroundDimensions.ps1'
 $profiles.MawShallow += 'Tools/Test-QAHistoryCoverage.ps1'
+$profiles.MawShallow += 'Tools/Test-MawRopeEvidence.ps1'
   $profiles.MawShallow += 'Tools/Test-MawRibContour.ps1'
   $profiles.Performance += 'Tools/Test-QACameraSweep.ps1'
   $profiles.Performance += 'Tools/Test-QAPerformanceEvidence.ps1'
@@ -51,9 +52,9 @@ foreach ($script in $scripts) {
 }
 
 if ($Build) {
-    Write-Host 'GATE: dotnet build --no-restore' -ForegroundColor Cyan
-    & dotnet build $root --no-restore
-    if ($LASTEXITCODE -ne 0) { $failures.Add('dotnet build --no-restore') }
+    Write-Host 'GATE: C# compile only; no tmod install' -ForegroundColor Cyan
+    & $hostExecutable -NoProfile -File (Join-Path $PSScriptRoot 'Compile-ApogeanOnly.ps1')
+    if ($LASTEXITCODE -ne 0) { $failures.Add('Compile-ApogeanOnly.ps1') }
 }
 
 Write-Host ''

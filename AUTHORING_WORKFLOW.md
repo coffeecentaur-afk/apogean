@@ -10,6 +10,13 @@ solving the next family; do not turn workflow improvement into an engine detour.
 
 ## QA persistence lesson — September12
 
+Use `Tools/Compile-ApogeanOnly.ps1` for code-only checks, including content-gate
+`-Build`. tML's default build after-target packs and writes the installed mod;
+bare root `dotnet build` is not a harmless compile with the client open. Install
+through the pinned isolated wrapper after normal client exit. A successful C#
+compile, package install, native API check and input-driven interaction each
+prove different things; retain their separate evidence and failure boundaries.
+
 September13 correction: an array length is not a verified-fixture count. Empty
 saved locations hash no terrain. Report nonempty coverage, missing/empty slots
 and limits explicitly; never call absent checkpoints preserved. The actual old
