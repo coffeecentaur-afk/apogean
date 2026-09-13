@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "qa-world-persistence-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "MAW_HEADLESS_QA_CONTRACT.md",
+      "evidenceScope": "Copied large V3 on loopback-only headless server. Unfixed native save silently omitted two records; fourteen unchanged. Real pinned TagIO reader and14 digest controls retain RED. Narrow ten-hook ownership fix passes180 actual-hook cases; all16 original native system records survive fixed-package save/exit/reload/save. Original files unchanged, both scene hashes retained, zero logged server error stacks. No action/mutation guard relaxed.",
+      "blockers": ["Eight older fixture records were already absent before the server trial; do not reconstruct or rebaseline them automatically. Native preservation only covers records present in this input.", "No active-player stress, whole-world tile equality, multiplayer gameplay, malformed-data migration or visual approval. No-client resource samples are observations, not performance limits."]
+    },
+    {
       "id": "maw-cave-backdrop-seam-v1",
       "status": "contracted",
       "static": "pass",

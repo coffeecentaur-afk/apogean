@@ -144,7 +144,7 @@ namespace apogean.Content.Diagnostics
 			if (IsQa) Main.LocalPlayer.Teleport(previousPosition, 1);
 			viewing = false;
 		}
-		public override void SaveWorldData(TagCompound tag) { if (IsQa && !bounds.IsEmpty) tag["mawToothArtV1"] = new TagCompound { ["x"] = bounds.X, ["y"] = bounds.Y }; }
+		public override void SaveWorldData(TagCompound tag) { if (Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" && !bounds.IsEmpty) tag["mawToothArtV1"] = new TagCompound { ["x"] = bounds.X, ["y"] = bounds.Y }; }
 		public override void LoadWorldData(TagCompound tag)
 		{
 			if (Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" && tag.ContainsKey("mawToothArtV1")) {

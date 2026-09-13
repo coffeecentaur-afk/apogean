@@ -304,7 +304,7 @@ namespace apogean.Content.Diagnostics
             captureDelay=-1;if(!viewing)return;Main.dayTime=oldDay;Main.time=oldTime;Main.raining=oldRain;Main.eclipse=oldEclipse;
             if(IsQa)Main.LocalPlayer.Teleport(oldPosition,1);viewing=false;
         }
-        public override void SaveWorldData(TagCompound tag){if(IsQa && !bounds.IsEmpty)tag["mawClusterOrientationV1"]=new TagCompound{["x"]=bounds.X,["y"]=bounds.Y,["curveProofV4"]=curveProof};}
+        public override void SaveWorldData(TagCompound tag){if(Main.ActiveWorldFileData?.Name=="Apogee Native Visual V3" && !bounds.IsEmpty)tag["mawClusterOrientationV1"]=new TagCompound{["x"]=bounds.X,["y"]=bounds.Y,["curveProofV4"]=curveProof};}
         public override void LoadWorldData(TagCompound tag){if(Main.ActiveWorldFileData?.Name=="Apogee Native Visual V3" && tag.ContainsKey("mawClusterOrientationV1")){var t=tag.GetCompound("mawClusterOrientationV1");bounds=new Rectangle(t.GetInt("x"),t.GetInt("y"),104,42);curveProof=t.GetBool("curveProofV4");}}
         public override void ClearWorld(){bounds=Rectangle.Empty;viewing=false;captureDelay=-1;curveProof=false;}
     }

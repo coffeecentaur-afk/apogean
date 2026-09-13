@@ -16,20 +16,22 @@ namespace apogean.Content.Backgrounds
 		private WastesGroundProfile profile;
 		private static bool InScope => Main.netMode == NetmodeID.SinglePlayer &&
 			Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3";
+		// Preserve a loaded immutable snapshot on servers; never sample or draw there.
+		private static bool OwnsQaSave => Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3";
 		private static int ExpectedCount => (Main.maxTilesX - 1) / WastesGroundProfile.StepTiles + 2;
 		public override void OnWorldLoad() => profile = null;
 		public override void OnWorldUnload() => profile = null;
 
 		public override void LoadWorldData(TagCompound tag)
 		{
-			if (!InScope || !tag.TryGet(SaveKey, out int[] rows) || rows.Length != ExpectedCount) return;
+			if (!OwnsQaSave || !tag.TryGet(SaveKey, out int[] rows) || rows.Length != ExpectedCount) return;
 			foreach (int row in rows)
 				if (row < 10 || row >= Main.maxTilesY - 10) return;
 			profile = new WastesGroundProfile(rows);
 		}
 		public override void SaveWorldData(TagCompound tag)
 		{
-			if (InScope && profile != null) tag[SaveKey] = profile.CopyRows();
+			if (OwnsQaSave && profile != null) tag[SaveKey] = profile.CopyRows();
 		}
 
 		public override void PostUpdateWorld()

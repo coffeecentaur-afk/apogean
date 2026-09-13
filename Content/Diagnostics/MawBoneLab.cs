@@ -217,7 +217,7 @@ namespace apogean.Content.Diagnostics
 		}
 		public override void SaveWorldData(TagCompound tag)
 		{
-			if (!IsQa || checkpoint == null) return;
+			if (Main.ActiveWorldFileData?.Name != "Apogee Native Visual V3" || checkpoint == null) return;
 			tag["mawBoneFixtureV1"] = new TagCompound { ["x"] = bounds.X, ["y"] = bounds.Y, ["checkpoint"] = checkpoint };
 		}
 		public override void LoadWorldData(TagCompound tag)

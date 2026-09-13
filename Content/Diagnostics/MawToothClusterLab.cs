@@ -175,7 +175,7 @@ namespace apogean.Content.Diagnostics
 			captureDelay=-1;if(!viewing)return;Main.dayTime=oldDay;Main.time=oldTime;Main.raining=oldRain;Main.eclipse=oldEclipse;
 			if(IsQa)Main.LocalPlayer.Teleport(oldPosition,1);viewing=false;
 		}
-		public override void SaveWorldData(TagCompound tag){if(IsQa && !bounds.IsEmpty)tag["mawClusterV1"]=new TagCompound{["x"]=bounds.X,["y"]=bounds.Y};}
+		public override void SaveWorldData(TagCompound tag){if(Main.ActiveWorldFileData?.Name=="Apogee Native Visual V3" && !bounds.IsEmpty)tag["mawClusterV1"]=new TagCompound{["x"]=bounds.X,["y"]=bounds.Y};}
 		public override void LoadWorldData(TagCompound tag){if(Main.ActiveWorldFileData?.Name=="Apogee Native Visual V3" && tag.ContainsKey("mawClusterV1")){var t=tag.GetCompound("mawClusterV1");bounds=new Rectangle(t.GetInt("x"),t.GetInt("y"),60,24);}}
 		public override void ClearWorld(){bounds=Rectangle.Empty;viewing=false;captureDelay=-1;}
 	}

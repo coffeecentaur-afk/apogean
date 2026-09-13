@@ -12,6 +12,12 @@ or authorize normal-world replacement. See `MAW_RIB_CONTOUR_CONTRACT.md`.
 
 ## Reusable engine/tooling authorization
 
+September12 validation lesson: preserving existing QA-world records is not
+permission to run QA controls. Saves by a plain character or server must retain
+checkpoints and fixed background profiles without rebuilding them. Keep
+movement/rendering/mutation gates separate, and compare native save contents.
+This improves evidence reliability; it is not a lore, multiplayer, or art change.
+
 September7: the user permits a separate reusable engine or tooling mod when
 needed, with a downloadable dependency for consumers. Do not infer that every
 feature needs a new mod or require players to install development-only tools.

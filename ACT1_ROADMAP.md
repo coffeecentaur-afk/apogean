@@ -2,6 +2,14 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+00:01UTC September13 update: copied large-world headless testing found silent
+loss of two QA records despite clean save logs. Ten narrowly related save/load
+guards repaired;180 actual-hook cases pass, and all16 existing native system
+records survive B save/exit/reload/save. Originals unchanged; no source world
+replacement. Eight already-absent old records remain an explicit provenance
+gap. See `MAW_HEADLESS_QA_CONTRACT.md`. Next: remaining independent shallow
+route-interaction checks; no production generator or multiplayer acceptance.
+
 23:29UTC update: Q/R ordinary-cave dry seam study completed. Original Q
 activation refusal retained and repaired by actual scheduled-overlay membership,
 not shader visibility. R native pattern/art, camera/zoom and release retain

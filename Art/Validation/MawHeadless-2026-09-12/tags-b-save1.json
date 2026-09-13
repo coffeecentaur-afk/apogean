@@ -1,0 +1,320 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-09-12T23:56:52.5815747Z",
+  "reader": "Pinned installed TagIO.FromFile(compressed:true)",
+  "digest": "typed ordinal compound keys, ordered lists, exact numeric bytes; version1",
+  "before": {
+    "path": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Worlds\\Apogee_Native_Visual_V3.twld",
+    "sha256": "948F7E5E910E2C73F34F2D723B8C88134DB293CEC77E7C4AF0880BFF8BA9AB27"
+  },
+  "after": {
+    "path": "C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Worlds\\Apogee_Native_Visual_V3.twld",
+    "sha256": "5A6A2FA6792484ADCA300BBD1218760C6EF233C6553826EA51725D0497B96D4E"
+  },
+  "digestChecks": 14,
+  "systems": [
+    {
+      "system": "apogean/ApogeanWorldPlanSystem",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "B60DA117477B796CCB22A436B8495B7C4679243C832498ECDB54B807367D2FED",
+      "afterSha256": "B60DA117477B796CCB22A436B8495B7C4679243C832498ECDB54B807367D2FED",
+      "equal": true,
+      "beforeKeys": [
+        "apogeanWorldPlan"
+      ],
+      "afterKeys": [
+        "apogeanWorldPlan"
+      ]
+    },
+    {
+      "system": "apogean/CompoundGen",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "DC21C8D5D1F6A58BBE09621BE427C4B2FD4E9A5630D954530D713324D03D7295",
+      "afterSha256": "DC21C8D5D1F6A58BBE09621BE427C4B2FD4E9A5630D954530D713324D03D7295",
+      "equal": true,
+      "beforeKeys": [
+        "compound_Helix_door_height",
+        "compound_Helix_door_width",
+        "compound_Helix_door_x",
+        "compound_Helix_door_y",
+        "compound_Helix_height",
+        "compound_Helix_width",
+        "compound_Helix_x",
+        "compound_Helix_y",
+        "compound_Kessler_door_height",
+        "compound_Kessler_door_width",
+        "compound_Kessler_door_x",
+        "compound_Kessler_door_y",
+        "compound_Kessler_height",
+        "compound_Kessler_width",
+        "compound_Kessler_x",
+        "compound_Kessler_y",
+        "compound_Sentrix_door_height",
+        "compound_Sentrix_door_width",
+        "compound_Sentrix_door_x",
+        "compound_Sentrix_door_y",
+        "compound_Sentrix_height",
+        "compound_Sentrix_width",
+        "compound_Sentrix_x",
+        "compound_Sentrix_y"
+      ],
+      "afterKeys": [
+        "compound_Helix_door_height",
+        "compound_Helix_door_width",
+        "compound_Helix_door_x",
+        "compound_Helix_door_y",
+        "compound_Helix_height",
+        "compound_Helix_width",
+        "compound_Helix_x",
+        "compound_Helix_y",
+        "compound_Kessler_door_height",
+        "compound_Kessler_door_width",
+        "compound_Kessler_door_x",
+        "compound_Kessler_door_y",
+        "compound_Kessler_height",
+        "compound_Kessler_width",
+        "compound_Kessler_x",
+        "compound_Kessler_y",
+        "compound_Sentrix_door_height",
+        "compound_Sentrix_door_width",
+        "compound_Sentrix_door_x",
+        "compound_Sentrix_door_y",
+        "compound_Sentrix_height",
+        "compound_Sentrix_width",
+        "compound_Sentrix_x",
+        "compound_Sentrix_y"
+      ]
+    },
+    {
+      "system": "apogean/EngraftSystem",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "E47AFF714E1B79BA73387862BEFFA36FBF91797E5B988CF9190CCBC3718CCF10",
+      "afterSha256": "E47AFF714E1B79BA73387862BEFFA36FBF91797E5B988CF9190CCBC3718CCF10",
+      "equal": true,
+      "beforeKeys": [
+        "engraftNodes"
+      ],
+      "afterKeys": [
+        "engraftNodes"
+      ]
+    },
+    {
+      "system": "apogean/FactionProgression",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "AC375BDA6176745B8D01BEC8FE55FC76D3EF6CF89FCBC900522612AFD8491EF4",
+      "afterSha256": "AC375BDA6176745B8D01BEC8FE55FC76D3EF6CF89FCBC900522612AFD8491EF4",
+      "equal": true,
+      "beforeKeys": [
+        "chosenAlliance",
+        "kesslerArrivalSawNight",
+        "kesslerArrivalStage",
+        "matriarchDowned",
+        "quota_Helix",
+        "quota_Kessler",
+        "quota_Sentrix",
+        "relation_Helix",
+        "relation_Kessler",
+        "relation_Sentrix"
+      ],
+      "afterKeys": [
+        "chosenAlliance",
+        "kesslerArrivalSawNight",
+        "kesslerArrivalStage",
+        "matriarchDowned",
+        "quota_Helix",
+        "quota_Kessler",
+        "quota_Sentrix",
+        "relation_Helix",
+        "relation_Kessler",
+        "relation_Sentrix"
+      ]
+    },
+    {
+      "system": "apogean/MawAmberLightStudy",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "AC50F8374F1525F5D6E0B613EA4FD941EAAFD3359BCA77F1CEADD83019D020CC",
+      "afterSha256": "AC50F8374F1525F5D6E0B613EA4FD941EAAFD3359BCA77F1CEADD83019D020CC",
+      "equal": true,
+      "beforeKeys": [
+        "mawAmberStudyV1"
+      ],
+      "afterKeys": [
+        "mawAmberStudyV1"
+      ]
+    },
+    {
+      "system": "apogean/MawAnatomyLab",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "09817C0E4F22845A29316CE88D0B7D55A4AF2774E89294AC4BAD53D8E30F6A10",
+      "afterSha256": "09817C0E4F22845A29316CE88D0B7D55A4AF2774E89294AC4BAD53D8E30F6A10",
+      "equal": true,
+      "beforeKeys": [
+        "mawAnatomyStudyV1"
+      ],
+      "afterKeys": [
+        "mawAnatomyStudyV1"
+      ]
+    },
+    {
+      "system": "apogean/MawFiberRibLab",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "C364078738998AACF8C07022AC7916307DD8DD704A6EED308C9EDDDB741D2506",
+      "afterSha256": "C364078738998AACF8C07022AC7916307DD8DD704A6EED308C9EDDDB741D2506",
+      "equal": true,
+      "beforeKeys": [
+        "mawFiberRibStudyV1"
+      ],
+      "afterKeys": [
+        "mawFiberRibStudyV1"
+      ]
+    },
+    {
+      "system": "apogean/MawHangingFiberStudy",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "5CB187ADC3CB5912743BE5A87118325D93B821494757CF3EF50D8057538D07A4",
+      "afterSha256": "5CB187ADC3CB5912743BE5A87118325D93B821494757CF3EF50D8057538D07A4",
+      "equal": true,
+      "beforeKeys": [
+        "mawHangingFiberV1"
+      ],
+      "afterKeys": [
+        "mawHangingFiberV1"
+      ]
+    },
+    {
+      "system": "apogean/MawNaturalLab",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "45A6C8BBF92151642DFE1243961DB669C153AC7BC7693B61DE05F8C87534D3DE",
+      "afterSha256": "45A6C8BBF92151642DFE1243961DB669C153AC7BC7693B61DE05F8C87534D3DE",
+      "equal": true,
+      "beforeKeys": [
+        "mawNaturalFixtureV1"
+      ],
+      "afterKeys": [
+        "mawNaturalFixtureV1"
+      ]
+    },
+    {
+      "system": "apogean/MawPlayableLab",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "EA8C746D506DAF25BE7F150BA8110D2CF40F2A0BC0E2912E03169694130BE9E0",
+      "afterSha256": "EA8C746D506DAF25BE7F150BA8110D2CF40F2A0BC0E2912E03169694130BE9E0",
+      "equal": true,
+      "beforeKeys": [
+        "mawPlayableFixtureV1"
+      ],
+      "afterKeys": [
+        "mawPlayableFixtureV1"
+      ]
+    },
+    {
+      "system": "apogean/MawRibContourStudy",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "8F222D154BCB181DFF8E1B2322EED639829E8EBE83F1AEDBAE3209627E1D786A",
+      "afterSha256": "8F222D154BCB181DFF8E1B2322EED639829E8EBE83F1AEDBAE3209627E1D786A",
+      "equal": true,
+      "beforeKeys": [
+        "mawRibContourStudyV1"
+      ],
+      "afterKeys": [
+        "mawRibContourStudyV1"
+      ]
+    },
+    {
+      "system": "apogean/MawShallowTraversalLab",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "3F2F8FF9909BF2AB49620BBDE2577518F2854865B1DB1C87CE46A9816CE45621",
+      "afterSha256": "3F2F8FF9909BF2AB49620BBDE2577518F2854865B1DB1C87CE46A9816CE45621",
+      "equal": true,
+      "beforeKeys": [
+        "mawShallowTraversalV1"
+      ],
+      "afterKeys": [
+        "mawShallowTraversalV1"
+      ]
+    },
+    {
+      "system": "apogean/RuinedBackgroundSelectionSystem",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "3505482BB98C26F4475FE5B68F263504D0C3DECE2D5698FC7E97F611B533CC52",
+      "afterSha256": "3505482BB98C26F4475FE5B68F263504D0C3DECE2D5698FC7E97F611B533CC52",
+      "equal": true,
+      "beforeKeys": [
+        "ruinedBackgroundVariants"
+      ],
+      "afterKeys": [
+        "ruinedBackgroundVariants"
+      ]
+    },
+    {
+      "system": "apogean/VegetationVisualLab",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "EC7967629ACCB51586525C1076D50A4CEECE83A412F34311CA78E0BDEADB7A0A",
+      "afterSha256": "EC7967629ACCB51586525C1076D50A4CEECE83A412F34311CA78E0BDEADB7A0A",
+      "equal": true,
+      "beforeKeys": [
+        "groveCheckpointV1",
+        "groveLeft",
+        "groveTop"
+      ],
+      "afterKeys": [
+        "groveCheckpointV1",
+        "groveLeft",
+        "groveTop"
+      ]
+    },
+    {
+      "system": "apogean/WastesGroundProfileSystem",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "485D8AAB6B5C172857E4EBB029DFFED8EF11569063243221D70CF3E7DCE80187",
+      "afterSha256": "485D8AAB6B5C172857E4EBB029DFFED8EF11569063243221D70CF3E7DCE80187",
+      "equal": true,
+      "beforeKeys": [
+        "wastesGroundProfileQA2"
+      ],
+      "afterKeys": [
+        "wastesGroundProfileQA2"
+      ]
+    },
+    {
+      "system": "ModLoader/UnloadedSystem",
+      "beforePresent": true,
+      "afterPresent": true,
+      "beforeSha256": "4196BC68F9FB1982293C5C9B454C090EDDACD14FB9D5C62D374D16F1FF8EDE1C",
+      "afterSha256": "4196BC68F9FB1982293C5C9B454C090EDDACD14FB9D5C62D374D16F1FF8EDE1C",
+      "equal": true,
+      "beforeKeys": [
+        "list",
+        "unloadedBestiaryChats",
+        "unloadedBestiaryKills",
+        "unloadedBestiarySights",
+        "unloadedKillCounts",
+        "unloadedNPCs"
+      ],
+      "afterKeys": [
+        "list",
+        "unloadedBestiaryChats",
+        "unloadedBestiaryKills",
+        "unloadedBestiarySights",
+        "unloadedKillCounts",
+        "unloadedNPCs"
+      ]
+    }
+  ],
+  "limits": "System metadata only. No tile payload equivalence, world geometry, client rendering, multiplayer gameplay or whole-file equality claim."
+}

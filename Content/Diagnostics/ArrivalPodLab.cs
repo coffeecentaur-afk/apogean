@@ -342,7 +342,8 @@ namespace apogean.Content.Diagnostics
 
 		public override void SaveWorldData(TagCompound tag)
 		{
-			if (!IsQa || bounds.IsEmpty || (checkpoint == null && legacyCheckpoint == null)) return;
+			// Persistence belongs to the QA world, not the current player/control mode.
+			if (Main.ActiveWorldFileData?.Name != "Apogee Native Visual V3" || bounds.IsEmpty || (checkpoint == null && legacyCheckpoint == null)) return;
 			tag["podFixtureV1"] = new TagCompound {
 				["left"] = bounds.Left, ["top"] = bounds.Top, ["checkpoint"] = checkpoint ?? legacyCheckpoint,
 				["fingerprintVersion"] = checkpoint == null ? 1 : 2, ["legacyCheckpoint"] = legacyCheckpoint ?? "",

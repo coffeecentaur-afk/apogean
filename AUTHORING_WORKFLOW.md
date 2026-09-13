@@ -8,6 +8,21 @@ existing QA tools. These are not implemented gates yet. No new editor/library
 or automatic visual approval is implied. Add the smallest reusable check while
 solving the next family; do not turn workflow improvement into an engine detour.
 
+## QA persistence lesson — September12
+
+World-owned fixture data must survive saves by another QA character or a
+dedicated server without granting either permission to operate the fixture.
+Separate existing-data load/save ownership from interactive/mutation guards.
+Test gg, plain and absent player contexts, absent tags and ordinary/null worlds.
+Do not sample new terrain or reconstruct missing checkpoints on a server.
+
+A clean save log is insufficient: the native server silently omitted two QA
+records. The fixed package preserves all16 existing system digests through a
+copied-world load/save/exit/reload/save. Run the fast `Persistence` profile and
+the native pinned TagIO comparison. Eight older records already missing before
+this test remain a provenance gap, not an invitation to rebuild or rebaseline.
+See `MAW_HEADLESS_QA_CONTRACT.md`; no multiplayer/visual promotion is implied.
+
 ## Cave compositor lesson — September12
 
 Verify the installed draw order before borrowing a surface/Underworld hook.

@@ -41,6 +41,8 @@ namespace apogean.Content.Diagnostics
 		}
 
 		private static bool IsQaWorld => Main.netMode == NetmodeID.SinglePlayer && Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3";
+		// Loading/saving existing records is distinct from permission to operate the lab.
+		private static bool OwnsQaSave => Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3";
 
 		// A captured baseline is deliberately NOT recomputed during save or load. Otherwise
 		// rebuilding the fixture, or saving damaged state, could conceal a persistence failure.
@@ -84,14 +86,14 @@ namespace apogean.Content.Diagnostics
 
 		public override void SaveWorldData(TagCompound tag)
 		{
-			if (!IsQaWorld || checkpoint == null) return;
+			if (!OwnsQaSave || checkpoint == null) return;
 			tag["groveCheckpointV1"] = checkpoint;
 			tag["groveLeft"] = bounds.Left; tag["groveTop"] = bounds.Top;
 		}
 
 		public override void LoadWorldData(TagCompound tag)
 		{
-			if (!IsQaWorld || !tag.ContainsKey("groveCheckpointV1")) return;
+			if (!OwnsQaSave || !tag.ContainsKey("groveCheckpointV1")) return;
 			bounds = new Rectangle(tag.GetInt("groveLeft"), tag.GetInt("groveTop"), 170, 45);
 			checkpoint = tag.GetString("groveCheckpointV1");
 		}

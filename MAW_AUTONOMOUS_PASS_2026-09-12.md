@@ -78,6 +78,21 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- Headless A/B,23:39–00:01UTC: own isolated large V3 copies, no players,
+  localhost17777 and noSteam/noUPnP flags. A/R package019B5515 saved cleanly but
+  real TagIO comparison finds two omitted existing system records;14 unchanged.
+  Eight older records already absent in original, not attributed to this test.
+  Narrow ten-hook persistence repair, unchanged interactive guards:84/180
+  initial synthetic hook failures to180/180 pass. B packageB9BD5B88 clean build,
+  same466+7+1 art pins; all16 existing records match after save, exit and second
+  process reload/save. Both scene fingerprints retained, originals unchanged,
+  no relevant server exceptions. A idle~1.04GB/private, after-save A/B~1.438GB
+  are observations only; no-client idle is not active stress or a leak test.
+  Canonical digest has14 controls, native RED replay retained. Added reusable
+  sandbox/evidence/TagIO tools and Persistence gate. No new dependency or
+  ordinary save writes; server copies never replace client originals. Next
+  independent route-interaction work; cave-art iteration stays parked.
+
 - Q/R,23:12–23:29UTC: bounded dry ordinary-cave overlay proof, existing96x64
   region4660,689. Q refused a visible but unscheduled shader before any draw;
   retain failure and zero callbacks. Installed code research and80-case guard

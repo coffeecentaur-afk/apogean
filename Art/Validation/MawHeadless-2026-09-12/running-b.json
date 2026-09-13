@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-09-12T23:56:34.7491044Z",
+  "phase": "running",
+  "processId": 18748,
+  "lifecycleScope": true,
+  "originalSourcesUnchanged": true,
+  "connections": [
+    {
+      "localAddress": "127.0.0.1",
+      "localPort": 17777,
+      "remoteAddress": "0.0.0.0",
+      "remotePort": 0,
+      "state": "Listen"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Apogee_Native_Visual_V3.wld",
+      "originalSha256": "592E5615F308F51CC53945FFFD40014D068193E7190F4E92E2E5D19ED25C6DB9",
+      "sourceSha256": "592E5615F308F51CC53945FFFD40014D068193E7190F4E92E2E5D19ED25C6DB9",
+      "sourceUnchanged": true,
+      "copySha256": "592E5615F308F51CC53945FFFD40014D068193E7190F4E92E2E5D19ED25C6DB9"
+    },
+    {
+      "name": "Apogee_Native_Visual_V3.twld",
+      "originalSha256": "948F7E5E910E2C73F34F2D723B8C88134DB293CEC77E7C4AF0880BFF8BA9AB27",
+      "sourceSha256": "948F7E5E910E2C73F34F2D723B8C88134DB293CEC77E7C4AF0880BFF8BA9AB27",
+      "sourceUnchanged": true,
+      "copySha256": "948F7E5E910E2C73F34F2D723B8C88134DB293CEC77E7C4AF0880BFF8BA9AB27"
+    },
+    {
+      "name": "apogean.tmod",
+      "originalSha256": "B9BD5B8816109E3D2262A671AEDB8560A0677440871BA298D11EE2881D3AB18D",
+      "sourceSha256": "B9BD5B8816109E3D2262A671AEDB8560A0677440871BA298D11EE2881D3AB18D",
+      "sourceUnchanged": true,
+      "copySha256": "B9BD5B8816109E3D2262A671AEDB8560A0677440871BA298D11EE2881D3AB18D"
+    },
+    {
+      "name": "CheatSheet.tmod",
+      "originalSha256": "C1B3436C2B5EFF41942ABAC954DA6BCDF4E603066B0938682184EA937E7FE56B",
+      "sourceSha256": "C1B3436C2B5EFF41942ABAC954DA6BCDF4E603066B0938682184EA937E7FE56B",
+      "sourceUnchanged": true,
+      "copySha256": "C1B3436C2B5EFF41942ABAC954DA6BCDF4E603066B0938682184EA937E7FE56B"
+    },
+    {
+      "name": "enabled.json",
+      "originalSha256": "40FC81045424A0CF2891FA02F58E178F6EE69DFF77E9CD4CDC87D2F634EA5197",
+      "sourceSha256": "40FC81045424A0CF2891FA02F58E178F6EE69DFF77E9CD4CDC87D2F634EA5197",
+      "sourceUnchanged": true,
+      "copySha256": "40FC81045424A0CF2891FA02F58E178F6EE69DFF77E9CD4CDC87D2F634EA5197"
+    }
+  ],
+  "sourceLogSha256": "4A3E8DF507DC85B9372D3A76B49B7C53352D5DEEDC953C7014738DCF9141A770",
+  "records": [
+    "[18:55:49.398] [Main Thread/INFO] [tML]: Starting tModLoader server 1.4.4.9+2026.07.3.0|2026.07|stable|Stable|666f69962d3bdffde54fc14025f02634965b4e7c|5250924198908260370 built 8/31/2026 7:07 PM",
+    "[18:55:49.403] [Main Thread/INFO] [tML]: Launch Parameters: -server -nosteam -noupnp -ip 127.0.0.1 -port 17777 -players 1 -forcepriority 3 -config C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\serverconfig.txt -tmlsavedirectory C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915 -modpath C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Mods -world C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Worlds\\Apogee_Native_Visual_V3.wld",
+    "[18:55:49.405] [Main Thread/INFO] [tML]: Parsed Launch Parameters: -server -nosteam -noupnp -ip 127.0.0.1 -port 17777 -players 1 -forcepriority 3 -config C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\serverconfig.txt -tmlsavedirectory C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915 -modpath C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Mods -world C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Worlds\\Apogee_Native_Visual_V3.wld",
+    "[18:55:49.553] [Main Thread/INFO] [tML]: Saves Are Located At: C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915",
+    "[18:55:51.260] [Main Thread/DEBUG] [tML]: Selected apogean 0.1 for tML 2026.7.3.0 from Local.",
+    "[18:55:51.260] [Main Thread/DEBUG] [tML]: Selected CheatSheet 0.7.8.1 for tML 2026.7.3.0 from Local.",
+    "[18:55:51.668] [Main Thread/INFO] [tML]: Mods using the most RAM: apogean 3.8 MB, CheatSheet 914.1 KB",
+    "[18:55:51.679] [Main Thread/INFO] [tML]: RAM physical: tModLoader usage: 365.5 MB, All processes usage: 19.1 GB, Available: 12.0 GB, Total Installed: 31.1 GB",
+    "[18:55:51.679] [Main Thread/INFO] [tML]: RAM virtual: tModLoader usage: 354.7 MB, All processes usage: 18.6 GB",
+    "[18:55:51.889] [Main Thread/INFO] [tML]: Mod Load Completed in 628ms",
+    "[18:55:51.891] [.NET TP Worker/INFO] [Terraria]: Loading World: Apogee Native Visual V3, IsCloud=False, Width: 8400, Height: 2400, Evil: 1, GameMode: 0",
+    "[18:55:51.898] [.NET TP Worker/INFO] [StatusText]: Loading world data",
+    "[18:55:52.517] [.NET TP Worker/INFO] [StatusText]: Settling liquids",
+    "[18:55:53.828] [Main Thread/INFO] [Terraria]: Listening on port 17777",
+    "[18:55:53.829] [Main Thread/INFO] [StatusText]: Starting server...",
+    "[18:55:53.880] [Main Thread/INFO] [StatusText]: Server started",
+    "[18:55:54.164] [43/DEBUG] [tML]: SSDP search line separator: CRLF"
+  ],
+  "errors": [],
+  "limits": "Read-only loopback/listener and original-file guards plus verbatim scoped server log. Copied world hashes may legitimately change on save. No proof of all mod tags, client synchronization, active simulation, performance under players, or visual correctness. UPnP is disabled by flags; logged SSDP discovery is retained rather than claiming no network traffic."
+}

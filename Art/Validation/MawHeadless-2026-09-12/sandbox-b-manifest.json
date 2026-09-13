@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "createdUtc": "2026-09-12T23:55:32.7856072Z",
+  "sandbox": "C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915",
+  "runtimeDllSha256": "D530E508B2841E66D880CE279A609624B5AB66CE8093EEDFA04F47C3D12D485C",
+  "workingDirectory": "E:/SteamLibrary/steamapps/common/tModLoader",
+  "executable": "E:\\SteamLibrary\\steamapps\\common\\tModLoader\\dotnet\\dotnet.exe",
+  "arguments": [
+    "tModLoader.dll",
+    "-server",
+    "-nosteam",
+    "-noupnp",
+    "-ip",
+    "127.0.0.1",
+    "-port",
+    "17777",
+    "-players",
+    "1",
+    "-forcepriority",
+    "3",
+    "-config",
+    "C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\serverconfig.txt",
+    "-tmlsavedirectory",
+    "C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915",
+    "-modpath",
+    "C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Mods",
+    "-world",
+    "C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Worlds\\Apogee_Native_Visual_V3.wld"
+  ],
+  "inputs": [
+    {
+      "source": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Worlds\\Apogee_Native_Visual_V3.wld",
+      "copy": "C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Worlds\\Apogee_Native_Visual_V3.wld",
+      "sha256": "592E5615F308F51CC53945FFFD40014D068193E7190F4E92E2E5D19ED25C6DB9",
+      "bytes": 11813320
+    },
+    {
+      "source": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Worlds\\Apogee_Native_Visual_V3.twld",
+      "copy": "C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Worlds\\Apogee_Native_Visual_V3.twld",
+      "sha256": "948F7E5E910E2C73F34F2D723B8C88134DB293CEC77E7C4AF0880BFF8BA9AB27",
+      "bytes": 169895
+    },
+    {
+      "source": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Mods\\apogean.tmod",
+      "copy": "C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Mods\\apogean.tmod",
+      "sha256": "B9BD5B8816109E3D2262A671AEDB8560A0677440871BA298D11EE2881D3AB18D",
+      "bytes": 91987686
+    },
+    {
+      "source": "E:\\SteamLibrary\\steamapps\\workshop\\content\\1281930\\2563784437\\2026.7\\CheatSheet.tmod",
+      "copy": "C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Mods\\CheatSheet.tmod",
+      "sha256": "C1B3436C2B5EFF41942ABAC954DA6BCDF4E603066B0938682184EA937E7FE56B",
+      "bytes": 160344
+    },
+    {
+      "source": "C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Mods\\enabled.json",
+      "copy": "C:\\Users\\max_h\\AppData\\Local\\Temp\\ApogeanHeadless\\e0e14f4c82fb464c9f34fb5b08035915\\Mods\\enabled.json",
+      "sha256": "40FC81045424A0CF2891FA02F58E178F6EE69DFF77E9CD4CDC87D2F634EA5197",
+      "bytes": 34
+    }
+  ],
+  "limits": "Copied existing QA world only, no autocreate, no players copied, loopback only, no UPnP/Steam server. Prepare does not launch. Defaults for isolated mod configs; no gameplay/modpack equivalence claim. Original saves never overwritten."
+}

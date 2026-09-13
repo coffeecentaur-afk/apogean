@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "phase": "after-probes",
+  "processId": 11688,
+  "processStartedUtc": "2026-09-12T23:39:14.1937947Z",
+  "sampleCount": 15,
+  "intervalMilliseconds": 1000,
+  "gpuProvider": "Win32_PerfRawData_GPUPerformanceCounters_GPUProcessMemory",
+  "gpuError": null,
+  "scope": "Read-only process-wide counters. Not exact mod ownership or driver residency guarantees; empty GPU rows mean unavailable, not zero.",
+  "records": [
+    {
+      "utc": "2026-09-12T23:42:42.2741372Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.859375,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:43.3159917Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.859375,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:44.3318573Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.875,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:45.3458510Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.875,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:46.3591725Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.890625,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:47.3770502Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.890625,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:48.3916021Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.890625,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:49.4113053Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.890625,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:50.4250449Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.890625,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:51.4384042Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.90625,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:52.4558646Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.921875,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:53.4712647Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.9375,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:54.4855754Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.9375,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:55.4986451Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.9375,
+      "gpu": []
+    },
+    {
+      "utc": "2026-09-12T23:42:56.5113741Z",
+      "privateBytes": 1438072832,
+      "workingSetBytes": 1365491712,
+      "peakWorkingSetBytes": 1365835776,
+      "cpuSeconds": 17.9375,
+      "gpu": []
+    }
+  ]
+}

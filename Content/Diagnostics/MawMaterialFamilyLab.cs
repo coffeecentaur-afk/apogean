@@ -182,7 +182,7 @@ namespace apogean.Content.Diagnostics
         }
         public override void SaveWorldData(TagCompound tag)
         {
-            if(IsQa&&checkpoint!=null)tag["mawFamilyFixtureV1"]=new TagCompound{["x"]=bounds.X,["y"]=bounds.Y,["checkpoint"]=checkpoint};
+            if(Main.ActiveWorldFileData?.Name=="Apogee Native Visual V3"&&checkpoint!=null)tag["mawFamilyFixtureV1"]=new TagCompound{["x"]=bounds.X,["y"]=bounds.Y,["checkpoint"]=checkpoint};
         }
         public override void LoadWorldData(TagCompound tag)
         {

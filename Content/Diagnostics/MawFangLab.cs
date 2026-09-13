@@ -219,7 +219,7 @@ namespace apogean.Content.Diagnostics
 			Main.dayTime = previousDay; Main.time = previousTime; Main.raining = previousRain; Main.eclipse = previousEclipse;
 			if (IsQa) Main.LocalPlayer.Teleport(previousPosition, 1); viewing = false;
 		}
-		public override void SaveWorldData(TagCompound tag) { if (IsQa && !bounds.IsEmpty) tag["mawFangFixtureV1"] = new TagCompound { ["x"] = bounds.X, ["y"] = bounds.Y }; }
+		public override void SaveWorldData(TagCompound tag) { if (Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" && !bounds.IsEmpty) tag["mawFangFixtureV1"] = new TagCompound { ["x"] = bounds.X, ["y"] = bounds.Y }; }
 		public override void LoadWorldData(TagCompound tag) {
 			if (Main.ActiveWorldFileData?.Name == "Apogee Native Visual V3" && tag.ContainsKey("mawFangFixtureV1")) {
 				TagCompound saved = tag.GetCompound("mawFangFixtureV1"); bounds = new Rectangle(saved.GetInt("x"), saved.GetInt("y"), 46, 30);
