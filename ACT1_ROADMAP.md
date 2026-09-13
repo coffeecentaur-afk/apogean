@@ -2,6 +2,11 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+Safe pause03:59:44UTC September13: checkpoint6a37417 pushed and Wayfinder#26
+updated/open. Unattended heartbeat PAUSED before the hard stop. Resume only
+when the user asks; begin with MAW_REVIEW_2026-09-12.md and HANDOFF_2026-09-12.md,
+not an automatic fixture rebuild or another unreviewed background revision.
+
 Final regression checkpoint, September13: all80 scripts ran;79 pass, with only
 the generic HD V0 BackgroundProductionReadiness gate RED. Compile-only finishes
 0 warnings/0 errors. Complete child output and34 archived native report replays

@@ -9,6 +9,8 @@ position the existing scenes when you return.
 The authorized work window ends September12 at11:46:58PM Central
 (September13 04:46:58UTC). Exact technical evidence is in
 [the pass ledger](MAW_AUTONOMOUS_PASS_2026-09-12.md).
+Unattended work was paused at10:59PM Central at the review boundary; the QA
+world is saved, the game is closed and the heartbeat is paused.
 
 ## First: rib shape and material
 
