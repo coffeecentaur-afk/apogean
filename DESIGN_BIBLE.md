@@ -4,6 +4,19 @@ This document is the binding creative and progression reference for the mod.  A 
 
 ## Provisional Maw contour evidence
 
+September13 drawing-led revision supersedes the porous-root direction below:
+roots and ribs are one material, with buried branching joints that make the rib
+look grown out of the wall. Do not invent a dedicated blending block. Preserve
+the old studies, vary rib curvature/spacing, thicken surface fiber and concentrate
+amber discovery lighting in side passages. The new sketch is a separate QA
+mockup; two empty side-cave chests are layout markers, not approved loot tables.
+See MAW_SKETCH_STUDY_2026-09-13.md. Player inspection defaults to free movement.
+
+The user subsequently approved the in-game drawing-led V1 as looking perfect.
+Retain that actual scene, including its exposed upper-root contour; do not
+substitute the uninstalled deeper-root experiment. Approval covers its visual
+direction, not automatic production promotion or completed traversal balance.
+
 September12 provisional Maw contour evidence: retain the uninterrupted tapered
 shaft direction, porous roots and native hammered points. A separate old/new
 8/11/12-tile gallery removes squared underside notches; its cortical shading is

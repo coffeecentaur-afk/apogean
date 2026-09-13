@@ -2,6 +2,14 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+Latest active request, September13: implement the user's mouth drawing as a
+separate 200×136 QA scene. Same-material branching rib roots, dense thorn teeth,
+thicker fiber and two amber-lit side-cave cache sites. Static plan, scope and
+save-exit tests pass. Native placement and save/reload pass; the user approved
+the displayed V1. Freeze its visual direction and preserve the separate scene.
+Do not regenerate shallow V1 or resume the expired unattended schedule.
+Contract and eventual evidence: MAW_SKETCH_STUDY_2026-09-13.md.
+
 Safe pause03:59:44UTC September13: checkpoint6a37417 pushed and Wayfinder#26
 updated/open. Unattended heartbeat PAUSED before the hard stop. Resume only
 when the user asks; begin with MAW_REVIEW_2026-09-12.md and HANDOFF_2026-09-12.md,

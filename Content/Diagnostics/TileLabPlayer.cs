@@ -146,6 +146,8 @@ namespace apogean.Content.Diagnostics
 					ModContent.GetInstance<MawShallowTraversalLab>().Release();
 				if (!request.StartsWith("maw-contour-", System.StringComparison.Ordinal))
 					ModContent.GetInstance<MawRibContourStudy>().Release();
+				if (!request.StartsWith("maw-sketch-", System.StringComparison.Ordinal))
+					ModContent.GetInstance<MawSketchLab>().Release();
 				if (!request.StartsWith("maw-fiber-anatomy-", System.StringComparison.Ordinal))
 					ModContent.GetInstance<MawAnatomyLab>().Release();
 				if (!request.StartsWith("maw-fiber-", System.StringComparison.Ordinal))
@@ -195,6 +197,14 @@ namespace apogean.Content.Diagnostics
 					else if(request.StartsWith("maw-contour-", System.StringComparison.Ordinal))
 						ModContent.GetInstance<MawRibContourStudy>().Run(request.Substring("maw-contour-".Length));
 					else ModContent.GetInstance<MawShallowTraversalLab>().Run(request.Substring("maw-shallow-".Length));
+					return;
+				}
+				if (request.StartsWith("maw-sketch-", System.StringComparison.Ordinal))
+				{
+					Player.GetModPlayer<WastesLandscapeCameraLab>().Release();
+					ModContent.GetInstance<ForestSprayVisualLab>().Stop();
+					ModContent.GetInstance<VegetationVisualLab>().Release();
+					ModContent.GetInstance<MawSketchLab>().Run(request.Substring("maw-sketch-".Length));
 					return;
 				}
                 if (request == "maw-rope-properties")

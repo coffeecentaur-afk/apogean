@@ -8,6 +8,7 @@ $end=$source.IndexOf('if (request.StartsWith("maw-shallow-", System.StringCompar
 if($start -lt 0 -or $end -lt $start){throw 'Shared command seam changed; inspect before adjusting this test.'}
 $dispatch=$source.Substring($start,$end-$start)
 $names=@('MawRopeClimbProbe','MawRopeItemUseProbe','MawGrowthLoadStudy','MawItemPreview','MawCaveBackdropProbe','MawShallowTraversalLab','MawRibContourStudy','MawAnatomyLab','MawFiberRibLab','MawNaturalLab','MawPlayableLab','MawMaterialFamilyLab','MawMaterialLab','MawClusterOrientationLab','MawToothClusterLab','MawToothArtLab','MawFangLab','MawBoneLab','ArrivalPodLab','WastesLandscapeCameraLab','ForestSprayVisualLab','VegetationVisualLab')
+$names+='MawSketchLab'
 $classes=($names|ForEach-Object {"public sealed class $_ : View {}"}) -join "`n"
 $expected=($names|ForEach-Object {'"'+$_+'"'}) -join ','
 $support=@'
@@ -44,7 +45,7 @@ $test=@'
   Check(blocked&&Seen.Events.Count==0&&Seen.Active.Count==1,"ongoing sample requires explicit stop first");
   Seen.Reset();Seen.Recording=true;Seen.Active.Add("MawShallowTraversalLab");Run("qa-perf-stop");
   Check(Seen.Events.SequenceEqual(new[]{"performance/stop"})&&Seen.Active.Count==1,"passive command does not move measured scene");
-  foreach(var pair in new[]{("maw-shallow-pristine","MawShallowTraversalLab"),("maw-cave-report","MawCaveBackdropProbe"),("maw-contour-pristine","MawRibContourStudy")}){
+  foreach(var pair in new[]{("maw-sketch-pristine","MawSketchLab"),("maw-shallow-pristine","MawShallowTraversalLab"),("maw-cave-report","MawCaveBackdropProbe"),("maw-contour-pristine","MawRibContourStudy")}){
    Seen.Reset();Seen.Active.Add(pair.Item2);Run(pair.Item1);Check(Seen.Active.Contains(pair.Item2),"same-family command retains own view");Check(!Seen.Events.Contains("save"),"no incidental save");
   }
   return n;
@@ -57,7 +58,7 @@ function Code([string]$ns,[string]$body){
 Add-Type -TypeDefinition (Code 'Baseline' $dispatch)
 $count=[Baseline.Dispatch]::Test()
 $controls=0
-foreach($name in @('MawCaveBackdropProbe','MawShallowTraversalLab','MawRibContourStudy','MawRopeClimbProbe','MawRopeItemUseProbe','MawGrowthLoadStudy','MawItemPreview')){
+foreach($name in @('MawSketchLab','MawCaveBackdropProbe','MawShallowTraversalLab','MawRibContourStudy','MawRopeClimbProbe','MawRopeItemUseProbe','MawGrowthLoadStudy','MawItemPreview')){
  $call=if($name -in @('MawRopeClimbProbe','MawRopeItemUseProbe')){"Player.GetModPlayer<$name>().Cancel(""new-command"");"}elseif($name -in @('MawGrowthLoadStudy','MawItemPreview')){"ModContent.GetInstance<$name>().Cancel(""new-command"");"}else{"ModContent.GetInstance<$name>().Release();"}
  $bad=$dispatch.Replace($call,'{ }')
  if($bad -eq $dispatch){throw "No actual release to mutate for $name"}

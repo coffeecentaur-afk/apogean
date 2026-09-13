@@ -21,7 +21,10 @@ namespace apogean.Content.Diagnostics
                 "maw-contour-pristine" or "maw-contour-reload" or
                 "maw-contour-short" or "maw-contour-medium" or "maw-contour-long" or
                 "maw-contour-inspect-on" or "maw-contour-inspect-off" or
-                "maw-contour-capture" or "maw-contour-release";
+                "maw-contour-capture" or "maw-contour-release" or
+                "maw-sketch-pristine" or "maw-sketch-reload" or "maw-sketch-entrance" or
+                "maw-sketch-ribs" or "maw-sketch-cave" or "maw-sketch-lower" or
+                "maw-sketch-light-on" or "maw-sketch-light-off" or "maw-sketch-capture" or "maw-sketch-release";
 
         internal static bool PreviewApplies(bool context, bool held, bool visiting, int x, int y,
             int left, int top, int width, int height) => context && held && visiting &&
