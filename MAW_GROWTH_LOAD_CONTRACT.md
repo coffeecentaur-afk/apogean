@@ -18,6 +18,16 @@ eight seconds. Expected enabled endpoint160 grass from4seeds,156conversions;
 disabled stays4. Idle and active work timings are separate. This is a fixed
 small workload, not a full-world scheduler or minimum hardware certification.
 
+Second explicit layout (September13): `maw-growth-load-saturated-{0|1|8|32}`
+keeps exactly the same soil, structural control, shapes and ownership. Seed the
+midpoint of all four sides of each island, giving16 initial grass cells. The
+first four32-budget updates must each convert32 cells, then16 on update5,
+ending at160 total after144 conversions. Remaining updates are idle; this is
+four full-budget updates, NOT240 saturated updates or whole-world stress.
+Original four-seed requests/layout/evidence remain unchanged. Schema2 names
+the layout and independently validates its exact expected change sequence;
+schema1 retains its original narrower evidence. No production policy change.
+
 Record game-update IDs, actual changes/grass count, read/plan/apply/frame time,
 thread allocation and separate validation time for EVERY update. Setup, guard
 checks, serialization and restoration are outside work timing. Log aggregate

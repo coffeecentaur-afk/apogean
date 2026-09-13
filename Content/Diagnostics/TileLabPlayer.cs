@@ -210,7 +210,11 @@ namespace apogean.Content.Diagnostics
                 if (request.StartsWith("maw-growth-load-", System.StringComparison.Ordinal))
                 {
                     string value=request.Substring("maw-growth-load-".Length);
-                    if(value!="stop") ModContent.GetInstance<MawGrowthLoadStudy>().Start(int.Parse(value));
+                    if(value!="stop") {
+                        if(!MawGrowthLoadPlan.Request(value,out int budget,out bool saturated))
+                            throw new System.InvalidOperationException("Unknown bounded growth request.");
+                        ModContent.GetInstance<MawGrowthLoadStudy>().Start(budget,saturated);
+                    }
                     return;
                 }
                 if (request.StartsWith("maw-rope-itemuse-", System.StringComparison.Ordinal))

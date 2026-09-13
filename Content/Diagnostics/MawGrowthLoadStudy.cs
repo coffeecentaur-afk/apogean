@@ -25,7 +25,8 @@ namespace apogean.Content.Diagnostics
         private int budget, count, soil, grass, bone, worldId;
         private long started;
         private ulong previousUpdate;
-        private bool active;
+        private bool active, saturated;
+        private int InitialGrass => saturated?MawGrowthLoadPlan.SaturatedInitialGrass:MawGrowthLoadPlan.InitialGrass;
         private object failedStep;
         private readonly List<Sample> samples = new(MawGrowthLoadPlan.Updates);
         private readonly record struct Sample(int Tick, ulong GameUpdate, int Changed, int Grass,
@@ -46,7 +47,7 @@ namespace apogean.Content.Diagnostics
             if(original==null) return;
             for(int x=guard.Left;x<guard.Right;x++) for(int y=guard.Top;y<guard.Bottom;y++) original[Index(x,y)].Restore(x,y);
         }
-        internal void Start(int requestedBudget)
+        internal void Start(int requestedBudget, bool saturatedFrontier = false)
         {
             if(!MawGrowthLoadPlan.Budget(requestedBudget)) throw new ArgumentOutOfRangeException(nameof(requestedBudget));
             worldId=Main.worldID;
@@ -54,13 +55,13 @@ namespace apogean.Content.Diagnostics
                 !MawPackedPreview.Enabled || ModContent.GetInstance<QAPerformanceLab>().Recording ||
                 Main.LocalPlayer.GetModPlayer<MawShallowMotionProbe>().Active || Main.LocalPlayer.GetModPlayer<MawRopeClimbProbe>().Active)
                 throw new InvalidOperationException("Growth load requires idle packed gg/V3/SP without another probe.");
-            budget=requestedBudget; count=0; failedStep=null; samples.Clear();
+            budget=requestedBudget; saturated=saturatedFrontier; count=0; failedStep=null; samples.Clear();
             soil=MawPackedPreview.TileType("soil"); grass=MawPackedPreview.TileType("grass"); bone=MawPackedPreview.TileType("bone");
             history=S.Historical().Append(ModContent.GetInstance<S>().PreservedBounds).ToArray(); historyBefore=S.Fingerprint(history);
             patch=MawConversionLoadStudy.FindEmptyPatch(history); guard=patch; guard.Inflate(12,12);
             original=new S.CellState[guard.Width*guard.Height];
             for(int x=guard.Left;x<guard.Right;x++) for(int y=guard.Top;y<guard.Bottom;y++) original[Index(x,y)]=S.CellState.Read(x,y);
-            before=S.Fingerprint(new[]{guard}); expected=MawGrowthLoadPlan.Seed(); cells=new P.Cell[32,32];
+            before=S.Fingerprint(new[]{guard}); expected=MawGrowthLoadPlan.Seed(saturated); cells=new P.Cell[32,32];
             try {
                 for(int x=0;x<32;x++) for(int y=0;y<32;y++) {
                     P.Host host=expected[x,y].Material; if(host==P.Host.Air) continue;
@@ -70,7 +71,7 @@ namespace apogean.Content.Diagnostics
                 }
                 WorldGen.RangeFrame(patch.Left-1,patch.Top-1,patch.Right+1,patch.Bottom+1);
                 Validate(); previousUpdate=Main.GameUpdateCount; started=Stopwatch.GetTimestamp(); active=true;
-                Mod.Logger.Info($"QA PERFORMANCE GROWTH START: budget={budget}; patch={patch}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.");
+                Mod.Logger.Info($"QA PERFORMANCE GROWTH START: budget={budget}; seeds={InitialGrass}; patch={patch}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.");
             } catch { RestoreTiles(); original=null; throw; }
         }
         private int Validate()
@@ -142,12 +143,13 @@ namespace apogean.Content.Diagnostics
                 historyAfter=S.Fingerprint(history);
             } catch(Exception ex) { error=(error??"")+" Cleanup: "+ex.Message; }
             try {
-                Sample[] rows=samples.ToArray(); int converted=rows.Sum(s=>s.Changed),finalGrass=rows.Length==0?4:rows[^1].Grass;
+                Sample[] rows=samples.ToArray(); int converted=rows.Sum(s=>s.Changed),finalGrass=rows.Length==0?InitialGrass:rows[^1].Grass;
                 bool pass=error==null && reason=="complete" && count==240 && restored && historyBefore==historyAfter &&
-                    converted==(budget==0?0:156) && finalGrass==(budget==0?4:160);
+                    converted==(budget==0?0:160-InitialGrass) && finalGrass==(budget==0?InitialGrass:160);
                 object Describe(Sample[] set) => new { count=set.Length,work=QASampleStatistics.Describe(set.Select(s=>s.WorkMs).ToArray(),set.Length),
                     validation=QASampleStatistics.Describe(set.Select(s=>s.ValidationMs).ToArray(),set.Length), allocatedBytes=set.Sum(s=>s.WorkAllocatedBytes) };
-                var report=new {schemaVersion=1,utc=DateTime.UtcNow,reason,error,failedStep,pass,budget,updates=count,converted,initialGrass=4,finalGrass,
+                var report=new {schemaVersion=2,layout=saturated?"sixteen-seed-perimeter":"four-seed-perimeter",
+                    utc=DateTime.UtcNow,reason,error,failedStep,pass,budget,updates=count,converted,initialGrass=InitialGrass,finalGrass,
                     worldId,player=Main.LocalPlayer.name,patch=new{patch.X,patch.Y,patch.Width,patch.Height},
                     before,after,restored,historyBefore,historyAfter,historyUnchanged=historyBefore==historyAfter,
                     historyKnown=history.Count(r=>r.Width>0&&r.Height>0),historyMissing=history.Count(r=>r.Width<=0||r.Height<=0),

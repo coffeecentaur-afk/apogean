@@ -1,0 +1,2242 @@
+{
+  "schemaVersion": 2,
+  "layout": "four-seed-perimeter",
+  "utc": "2026-09-13T02:59:35.206287Z",
+  "reason": "complete",
+  "error": null,
+  "failedStep": null,
+  "pass": true,
+  "budget": 32,
+  "updates": 240,
+  "converted": 156,
+  "initialGrass": 4,
+  "finalGrass": 160,
+  "worldId": 1931010991,
+  "player": "gg",
+  "patch": {
+    "X": 1396,
+    "Y": 60,
+    "Width": 32,
+    "Height": 32
+  },
+  "before": "81115FCEACB61196D870A241C12D0F66662EBA5036175A7E51E217AA0651009D",
+  "after": "81115FCEACB61196D870A241C12D0F66662EBA5036175A7E51E217AA0651009D",
+  "restored": true,
+  "historyBefore": "D048B208B5EE51C248E51A25A2B7E3BF5D64C019C8108F0CF5A7AE6DE003920F",
+  "historyAfter": "D048B208B5EE51C248E51A25A2B7E3BF5D64C019C8108F0CF5A7AE6DE003920F",
+  "historyUnchanged": true,
+  "historyKnown": 9,
+  "historyMissing": 9,
+  "measuredElapsedMs": 3971.0935,
+  "samples": [
+    {
+      "Tick": 0,
+      "GameUpdate": 12027,
+      "Changed": 8,
+      "Grass": 12,
+      "WorkMs": 0.0841,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.027
+    },
+    {
+      "Tick": 1,
+      "GameUpdate": 12028,
+      "Changed": 8,
+      "Grass": 20,
+      "WorkMs": 0.0818,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0274
+    },
+    {
+      "Tick": 2,
+      "GameUpdate": 12029,
+      "Changed": 8,
+      "Grass": 28,
+      "WorkMs": 0.0899,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 3,
+      "GameUpdate": 12030,
+      "Changed": 8,
+      "Grass": 36,
+      "WorkMs": 0.0926,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 4,
+      "GameUpdate": 12031,
+      "Changed": 8,
+      "Grass": 44,
+      "WorkMs": 0.0815,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0301
+    },
+    {
+      "Tick": 5,
+      "GameUpdate": 12032,
+      "Changed": 8,
+      "Grass": 52,
+      "WorkMs": 0.0984,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0307
+    },
+    {
+      "Tick": 6,
+      "GameUpdate": 12033,
+      "Changed": 8,
+      "Grass": 60,
+      "WorkMs": 0.0909,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0301
+    },
+    {
+      "Tick": 7,
+      "GameUpdate": 12034,
+      "Changed": 8,
+      "Grass": 68,
+      "WorkMs": 0.0886,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0301
+    },
+    {
+      "Tick": 8,
+      "GameUpdate": 12035,
+      "Changed": 8,
+      "Grass": 76,
+      "WorkMs": 0.0873,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0298
+    },
+    {
+      "Tick": 9,
+      "GameUpdate": 12036,
+      "Changed": 8,
+      "Grass": 84,
+      "WorkMs": 0.09,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0309
+    },
+    {
+      "Tick": 10,
+      "GameUpdate": 12037,
+      "Changed": 8,
+      "Grass": 92,
+      "WorkMs": 0.0917,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0301
+    },
+    {
+      "Tick": 11,
+      "GameUpdate": 12038,
+      "Changed": 8,
+      "Grass": 100,
+      "WorkMs": 0.0888,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0305
+    },
+    {
+      "Tick": 12,
+      "GameUpdate": 12039,
+      "Changed": 8,
+      "Grass": 108,
+      "WorkMs": 0.0851,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 13,
+      "GameUpdate": 12040,
+      "Changed": 8,
+      "Grass": 116,
+      "WorkMs": 0.0885,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.03
+    },
+    {
+      "Tick": 14,
+      "GameUpdate": 12041,
+      "Changed": 8,
+      "Grass": 124,
+      "WorkMs": 0.0819,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0301
+    },
+    {
+      "Tick": 15,
+      "GameUpdate": 12042,
+      "Changed": 8,
+      "Grass": 132,
+      "WorkMs": 0.0969,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0303
+    },
+    {
+      "Tick": 16,
+      "GameUpdate": 12043,
+      "Changed": 8,
+      "Grass": 140,
+      "WorkMs": 0.0858,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 17,
+      "GameUpdate": 12044,
+      "Changed": 8,
+      "Grass": 148,
+      "WorkMs": 0.0878,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0305
+    },
+    {
+      "Tick": 18,
+      "GameUpdate": 12045,
+      "Changed": 8,
+      "Grass": 156,
+      "WorkMs": 0.0898,
+      "WorkAllocatedBytes": 176,
+      "ValidationMs": 0.0308
+    },
+    {
+      "Tick": 19,
+      "GameUpdate": 12046,
+      "Changed": 4,
+      "Grass": 160,
+      "WorkMs": 0.0706,
+      "WorkAllocatedBytes": 88,
+      "ValidationMs": 0.0304
+    },
+    {
+      "Tick": 20,
+      "GameUpdate": 12047,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0428,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0288
+    },
+    {
+      "Tick": 21,
+      "GameUpdate": 12048,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0452,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 22,
+      "GameUpdate": 12049,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.044,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 23,
+      "GameUpdate": 12050,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0443,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 24,
+      "GameUpdate": 12051,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0429,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0288
+    },
+    {
+      "Tick": 25,
+      "GameUpdate": 12052,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0441,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 26,
+      "GameUpdate": 12053,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0438,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 27,
+      "GameUpdate": 12054,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0434,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 28,
+      "GameUpdate": 12055,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0432,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 29,
+      "GameUpdate": 12056,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0447,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 30,
+      "GameUpdate": 12057,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0431,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0288
+    },
+    {
+      "Tick": 31,
+      "GameUpdate": 12058,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0442,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 32,
+      "GameUpdate": 12059,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0475,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0298
+    },
+    {
+      "Tick": 33,
+      "GameUpdate": 12060,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0444,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 34,
+      "GameUpdate": 12061,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0452,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 35,
+      "GameUpdate": 12062,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0462,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 36,
+      "GameUpdate": 12063,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0458,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0299
+    },
+    {
+      "Tick": 37,
+      "GameUpdate": 12064,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0459,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0302
+    },
+    {
+      "Tick": 38,
+      "GameUpdate": 12065,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.045,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 39,
+      "GameUpdate": 12066,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0525,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0303
+    },
+    {
+      "Tick": 40,
+      "GameUpdate": 12067,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0452,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 41,
+      "GameUpdate": 12068,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0456,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0298
+    },
+    {
+      "Tick": 42,
+      "GameUpdate": 12069,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0453,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.03
+    },
+    {
+      "Tick": 43,
+      "GameUpdate": 12070,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0447,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 44,
+      "GameUpdate": 12071,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0452,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0292
+    },
+    {
+      "Tick": 45,
+      "GameUpdate": 12072,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0455,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.03
+    },
+    {
+      "Tick": 46,
+      "GameUpdate": 12073,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0449,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 47,
+      "GameUpdate": 12074,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0461,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.03
+    },
+    {
+      "Tick": 48,
+      "GameUpdate": 12075,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0447,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 49,
+      "GameUpdate": 12076,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0557,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0368
+    },
+    {
+      "Tick": 50,
+      "GameUpdate": 12077,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0438,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 51,
+      "GameUpdate": 12078,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0444,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 52,
+      "GameUpdate": 12079,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0429,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0289
+    },
+    {
+      "Tick": 53,
+      "GameUpdate": 12080,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0438,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0288
+    },
+    {
+      "Tick": 54,
+      "GameUpdate": 12081,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0431,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 55,
+      "GameUpdate": 12082,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0433,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 56,
+      "GameUpdate": 12083,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0421,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0287
+    },
+    {
+      "Tick": 57,
+      "GameUpdate": 12084,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0435,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0292
+    },
+    {
+      "Tick": 58,
+      "GameUpdate": 12085,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0434,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 59,
+      "GameUpdate": 12086,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0487,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0292
+    },
+    {
+      "Tick": 60,
+      "GameUpdate": 12087,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0427,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0341
+    },
+    {
+      "Tick": 61,
+      "GameUpdate": 12088,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0437,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 62,
+      "GameUpdate": 12089,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0433,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0289
+    },
+    {
+      "Tick": 63,
+      "GameUpdate": 12090,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0433,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 64,
+      "GameUpdate": 12091,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0427,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 65,
+      "GameUpdate": 12092,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0438,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0298
+    },
+    {
+      "Tick": 66,
+      "GameUpdate": 12093,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0827,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.03
+    },
+    {
+      "Tick": 67,
+      "GameUpdate": 12094,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0438,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0379
+    },
+    {
+      "Tick": 68,
+      "GameUpdate": 12095,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0418,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 69,
+      "GameUpdate": 12096,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0438,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 70,
+      "GameUpdate": 12097,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.044,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 71,
+      "GameUpdate": 12098,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0439,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 72,
+      "GameUpdate": 12099,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0429,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0289
+    },
+    {
+      "Tick": 73,
+      "GameUpdate": 12100,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0595,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0468
+    },
+    {
+      "Tick": 74,
+      "GameUpdate": 12101,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0435,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0289
+    },
+    {
+      "Tick": 75,
+      "GameUpdate": 12102,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0439,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0298
+    },
+    {
+      "Tick": 76,
+      "GameUpdate": 12103,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0433,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 77,
+      "GameUpdate": 12104,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0452,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.03
+    },
+    {
+      "Tick": 78,
+      "GameUpdate": 12105,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0444,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 79,
+      "GameUpdate": 12106,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.044,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 80,
+      "GameUpdate": 12107,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.042,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0289
+    },
+    {
+      "Tick": 81,
+      "GameUpdate": 12108,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0434,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0304
+    },
+    {
+      "Tick": 82,
+      "GameUpdate": 12109,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0433,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0299
+    },
+    {
+      "Tick": 83,
+      "GameUpdate": 12110,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0433,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 84,
+      "GameUpdate": 12111,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0419,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 85,
+      "GameUpdate": 12112,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0425,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0298
+    },
+    {
+      "Tick": 86,
+      "GameUpdate": 12113,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0428,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 87,
+      "GameUpdate": 12114,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0427,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 88,
+      "GameUpdate": 12115,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0424,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 89,
+      "GameUpdate": 12116,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0427,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 90,
+      "GameUpdate": 12117,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0428,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 91,
+      "GameUpdate": 12118,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0474,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 92,
+      "GameUpdate": 12119,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0429,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 93,
+      "GameUpdate": 12120,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0438,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 94,
+      "GameUpdate": 12121,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0436,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 95,
+      "GameUpdate": 12122,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0444,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0301
+    },
+    {
+      "Tick": 96,
+      "GameUpdate": 12123,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0451,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 97,
+      "GameUpdate": 12124,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0438,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 98,
+      "GameUpdate": 12125,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0435,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 99,
+      "GameUpdate": 12126,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0427,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0289
+    },
+    {
+      "Tick": 100,
+      "GameUpdate": 12127,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0429,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 101,
+      "GameUpdate": 12128,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0447,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 102,
+      "GameUpdate": 12129,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0428,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 103,
+      "GameUpdate": 12130,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0433,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 104,
+      "GameUpdate": 12131,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0416,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0292
+    },
+    {
+      "Tick": 105,
+      "GameUpdate": 12132,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0436,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 106,
+      "GameUpdate": 12133,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0423,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0289
+    },
+    {
+      "Tick": 107,
+      "GameUpdate": 12134,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0437,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 108,
+      "GameUpdate": 12135,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0427,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0292
+    },
+    {
+      "Tick": 109,
+      "GameUpdate": 12136,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0434,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 110,
+      "GameUpdate": 12137,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0432,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0292
+    },
+    {
+      "Tick": 111,
+      "GameUpdate": 12138,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0431,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.03
+    },
+    {
+      "Tick": 112,
+      "GameUpdate": 12139,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0421,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 113,
+      "GameUpdate": 12140,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0435,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 114,
+      "GameUpdate": 12141,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0426,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 115,
+      "GameUpdate": 12142,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0436,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 116,
+      "GameUpdate": 12143,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0437,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0299
+    },
+    {
+      "Tick": 117,
+      "GameUpdate": 12144,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0427,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 118,
+      "GameUpdate": 12145,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0429,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 119,
+      "GameUpdate": 12146,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.043,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 120,
+      "GameUpdate": 12147,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0481,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 121,
+      "GameUpdate": 12148,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.043,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 122,
+      "GameUpdate": 12149,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0424,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 123,
+      "GameUpdate": 12150,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0432,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 124,
+      "GameUpdate": 12151,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0425,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0292
+    },
+    {
+      "Tick": 125,
+      "GameUpdate": 12152,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0435,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 126,
+      "GameUpdate": 12153,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0433,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 127,
+      "GameUpdate": 12154,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0433,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 128,
+      "GameUpdate": 12155,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.043,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 129,
+      "GameUpdate": 12156,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0444,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 130,
+      "GameUpdate": 12157,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0435,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 131,
+      "GameUpdate": 12158,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0442,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 132,
+      "GameUpdate": 12159,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0432,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0298
+    },
+    {
+      "Tick": 133,
+      "GameUpdate": 12160,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0435,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 134,
+      "GameUpdate": 12161,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0431,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 135,
+      "GameUpdate": 12162,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0427,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 136,
+      "GameUpdate": 12163,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0431,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 137,
+      "GameUpdate": 12164,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0464,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0299
+    },
+    {
+      "Tick": 138,
+      "GameUpdate": 12165,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0447,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0299
+    },
+    {
+      "Tick": 139,
+      "GameUpdate": 12166,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0433,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 140,
+      "GameUpdate": 12167,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0418,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0292
+    },
+    {
+      "Tick": 141,
+      "GameUpdate": 12168,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0429,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 142,
+      "GameUpdate": 12169,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0436,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 143,
+      "GameUpdate": 12170,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0446,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 144,
+      "GameUpdate": 12171,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0429,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 145,
+      "GameUpdate": 12172,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0431,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 146,
+      "GameUpdate": 12173,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0424,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 147,
+      "GameUpdate": 12174,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0428,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 148,
+      "GameUpdate": 12175,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0417,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 149,
+      "GameUpdate": 12176,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0435,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0298
+    },
+    {
+      "Tick": 150,
+      "GameUpdate": 12177,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0424,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 151,
+      "GameUpdate": 12178,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0428,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 152,
+      "GameUpdate": 12179,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0418,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 153,
+      "GameUpdate": 12180,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0431,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 154,
+      "GameUpdate": 12181,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0421,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0292
+    },
+    {
+      "Tick": 155,
+      "GameUpdate": 12182,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0425,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0292
+    },
+    {
+      "Tick": 156,
+      "GameUpdate": 12183,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0426,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0288
+    },
+    {
+      "Tick": 157,
+      "GameUpdate": 12184,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0429,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 158,
+      "GameUpdate": 12185,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0428,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0299
+    },
+    {
+      "Tick": 159,
+      "GameUpdate": 12186,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0426,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 160,
+      "GameUpdate": 12187,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0422,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 161,
+      "GameUpdate": 12188,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0437,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 162,
+      "GameUpdate": 12189,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0429,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 163,
+      "GameUpdate": 12190,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0432,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 164,
+      "GameUpdate": 12191,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0421,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 165,
+      "GameUpdate": 12192,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0426,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 166,
+      "GameUpdate": 12193,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0418,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 167,
+      "GameUpdate": 12194,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0437,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 168,
+      "GameUpdate": 12195,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0428,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 169,
+      "GameUpdate": 12196,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0431,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 170,
+      "GameUpdate": 12197,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0422,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 171,
+      "GameUpdate": 12198,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0431,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 172,
+      "GameUpdate": 12199,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0425,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 173,
+      "GameUpdate": 12200,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0431,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 174,
+      "GameUpdate": 12201,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0426,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 175,
+      "GameUpdate": 12202,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0441,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 176,
+      "GameUpdate": 12203,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0458,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0287
+    },
+    {
+      "Tick": 177,
+      "GameUpdate": 12204,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0432,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 178,
+      "GameUpdate": 12205,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0418,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 179,
+      "GameUpdate": 12206,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0419,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 180,
+      "GameUpdate": 12207,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0412,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 181,
+      "GameUpdate": 12208,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0427,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 182,
+      "GameUpdate": 12209,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0423,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 183,
+      "GameUpdate": 12210,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0471,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 184,
+      "GameUpdate": 12211,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0422,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 185,
+      "GameUpdate": 12212,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0425,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0289
+    },
+    {
+      "Tick": 186,
+      "GameUpdate": 12213,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0456,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0301
+    },
+    {
+      "Tick": 187,
+      "GameUpdate": 12214,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0457,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0301
+    },
+    {
+      "Tick": 188,
+      "GameUpdate": 12215,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0456,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 189,
+      "GameUpdate": 12216,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0451,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 190,
+      "GameUpdate": 12217,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0455,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 191,
+      "GameUpdate": 12218,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0456,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0302
+    },
+    {
+      "Tick": 192,
+      "GameUpdate": 12219,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0504,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0299
+    },
+    {
+      "Tick": 193,
+      "GameUpdate": 12220,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0449,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0301
+    },
+    {
+      "Tick": 194,
+      "GameUpdate": 12221,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0463,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0305
+    },
+    {
+      "Tick": 195,
+      "GameUpdate": 12222,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0458,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0303
+    },
+    {
+      "Tick": 196,
+      "GameUpdate": 12223,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0448,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 197,
+      "GameUpdate": 12224,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0452,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0303
+    },
+    {
+      "Tick": 198,
+      "GameUpdate": 12225,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0451,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0302
+    },
+    {
+      "Tick": 199,
+      "GameUpdate": 12226,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0448,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 200,
+      "GameUpdate": 12227,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.045,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0296
+    },
+    {
+      "Tick": 201,
+      "GameUpdate": 12228,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0857,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0302
+    },
+    {
+      "Tick": 202,
+      "GameUpdate": 12229,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0452,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0298
+    },
+    {
+      "Tick": 203,
+      "GameUpdate": 12230,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0449,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 204,
+      "GameUpdate": 12231,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0448,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0306
+    },
+    {
+      "Tick": 205,
+      "GameUpdate": 12232,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0454,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 206,
+      "GameUpdate": 12233,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0447,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 207,
+      "GameUpdate": 12234,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0446,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0303
+    },
+    {
+      "Tick": 208,
+      "GameUpdate": 12235,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.045,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 209,
+      "GameUpdate": 12236,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0449,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 210,
+      "GameUpdate": 12237,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0457,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0299
+    },
+    {
+      "Tick": 211,
+      "GameUpdate": 12238,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0446,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.03
+    },
+    {
+      "Tick": 212,
+      "GameUpdate": 12239,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.045,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0298
+    },
+    {
+      "Tick": 213,
+      "GameUpdate": 12240,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0459,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0305
+    },
+    {
+      "Tick": 214,
+      "GameUpdate": 12241,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0453,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0302
+    },
+    {
+      "Tick": 215,
+      "GameUpdate": 12242,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0454,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0299
+    },
+    {
+      "Tick": 216,
+      "GameUpdate": 12243,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0448,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 217,
+      "GameUpdate": 12244,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0441,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 218,
+      "GameUpdate": 12245,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.042,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0289
+    },
+    {
+      "Tick": 219,
+      "GameUpdate": 12246,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0419,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 220,
+      "GameUpdate": 12247,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0411,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0284
+    },
+    {
+      "Tick": 221,
+      "GameUpdate": 12248,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0421,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 222,
+      "GameUpdate": 12249,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0428,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 223,
+      "GameUpdate": 12250,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0509,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0289
+    },
+    {
+      "Tick": 224,
+      "GameUpdate": 12251,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0418,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 225,
+      "GameUpdate": 12252,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.043,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 226,
+      "GameUpdate": 12253,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.042,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 227,
+      "GameUpdate": 12254,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0434,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 228,
+      "GameUpdate": 12255,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0435,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0295
+    },
+    {
+      "Tick": 229,
+      "GameUpdate": 12256,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0435,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0297
+    },
+    {
+      "Tick": 230,
+      "GameUpdate": 12257,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0426,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 231,
+      "GameUpdate": 12258,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0424,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0294
+    },
+    {
+      "Tick": 232,
+      "GameUpdate": 12259,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.042,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 233,
+      "GameUpdate": 12260,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0429,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0291
+    },
+    {
+      "Tick": 234,
+      "GameUpdate": 12261,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0422,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 235,
+      "GameUpdate": 12262,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0442,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 236,
+      "GameUpdate": 12263,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0425,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.029
+    },
+    {
+      "Tick": 237,
+      "GameUpdate": 12264,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0432,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0292
+    },
+    {
+      "Tick": 238,
+      "GameUpdate": 12265,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0426,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.0293
+    },
+    {
+      "Tick": 239,
+      "GameUpdate": 12266,
+      "Changed": 0,
+      "Grass": 160,
+      "WorkMs": 0.0436,
+      "WorkAllocatedBytes": 32,
+      "ValidationMs": 0.03
+    }
+  ],
+  "active": {
+    "count": 20,
+    "work": {
+      "Count": 20,
+      "MeanMs": 0.08760000000000003,
+      "P50Ms": 0.0885,
+      "P95Ms": 0.0969,
+      "P99Ms": 0.0984,
+      "MaxMs": 0.0984,
+      "Over33Ms": 0,
+      "Over50Ms": 0
+    },
+    "validation": {
+      "Count": 20,
+      "MeanMs": 0.029844999999999993,
+      "P50Ms": 0.0301,
+      "P95Ms": 0.0308,
+      "P99Ms": 0.0309,
+      "MaxMs": 0.0309,
+      "Over33Ms": 0,
+      "Over50Ms": 0
+    },
+    "allocatedBytes": 3432
+  },
+  "idle": {
+    "count": 220,
+    "work": {
+      "Count": 220,
+      "MeanMs": 0.04426363636363639,
+      "P50Ms": 0.0434,
+      "P95Ms": 0.0471,
+      "P99Ms": 0.0595,
+      "MaxMs": 0.0857,
+      "Over33Ms": 0,
+      "Over50Ms": 0
+    },
+    "validation": {
+      "Count": 220,
+      "MeanMs": 0.02962681818181816,
+      "P50Ms": 0.0294,
+      "P95Ms": 0.0303,
+      "P99Ms": 0.0368,
+      "MaxMs": 0.0468,
+      "Over33Ms": 0,
+      "Over50Ms": 0
+    },
+    "allocatedBytes": 7040
+  },
+  "scope": "One bounded native growth plan per actual game update over1024 observed cells. Work includes read/plan/apply/frame, not setup/validation/cleanup/export. Allocations are per-thread work only. Not production spread speed, full-world scheduler, render/frame/GPU time, visual, low-end or multiplayer proof."
+}

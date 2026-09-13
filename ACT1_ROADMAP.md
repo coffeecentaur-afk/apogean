@@ -2,6 +2,15 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+03:00UTC September13: Z adds a second seed layout to the existing growth scratch,
+not new production behavior. Six native240-update runs pass; both sixteen-seed
+32-budget repeats actually change32/32/32/32/16 cells, then idle. Worst measured
+full-budget work0.1872ms; original first-call baseline0.7543ms also retained.
+Normal save preserves16 records. See Art/Validation/MawSaturatedGrowth-2026-09-13.
+Only four fully loaded updates per repeat, not sustained world-scale stress.
+Next independent task: read-only native item-presentation inspection, then the
+reserved final regression/review hour. No new biome or speculative art cycle.
+
 02:45UTC September13: Y adds QA-only pickup/placeable bindings for the existing
 cortical rib and full fiber cap, without changing artwork or mining strength.
 Two native mine–replace–mine trials pass15 cases/687 checks, one matching item

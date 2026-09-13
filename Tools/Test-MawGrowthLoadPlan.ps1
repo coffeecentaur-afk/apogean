@@ -9,21 +9,29 @@ $test=@'
 namespace apogean.Content.Diagnostics {
  public static class GrowthChecks {
   public static int Run(){int checks=0;void Need(bool ok){if(!ok)throw new System.Exception("GROWTH_PLAN");checks++;}
-   foreach(int budget in new[]{0,1,8,32}){
-    var cells=MawGrowthLoadPlan.Seed();var seed=(MawFiberGrowthPolicy.Cell[,])cells.Clone();int converted=0;
+   foreach(bool saturated in new[]{false,true})foreach(int budget in new[]{0,1,8,32}){
+    var cells=MawGrowthLoadPlan.Seed(saturated);var seed=(MawFiberGrowthPolicy.Cell[,])cells.Clone();int converted=0;
+    int initial=saturated?16:4;
     for(int tick=0;tick<240;tick++){
      var before=(MawFiberGrowthPolicy.Cell[,])cells.Clone();var sites=MawFiberGrowthPolicy.Plan(cells,budget,budget!=0);
      Need(sites.Count<=budget);foreach(var p in sites){Need(MawGrowthLoadPlan.IsMatureGrass(p.X,p.Y));Need(before[p.X,p.Y].Material==MawFiberGrowthPolicy.Host.Soil);}
+     if(saturated&&budget==32)Need(sites.Count==(tick<4?32:tick==4?16:0));
      for(int x=0;x<32;x++)for(int y=0;y<32;y++)Need(before[x,y]==cells[x,y]);
      foreach(var p in sites)cells[p.X,p.Y]=new(MawFiberGrowthPolicy.Host.Grass);converted+=sites.Count;
     }
-    Need(converted==(budget==0?0:156));int grass=0;
+    Need(converted==(budget==0?0:160-initial));int grass=0;
     for(int x=0;x<32;x++)for(int y=0;y<32;y++){
      bool expected=budget!=0&&MawGrowthLoadPlan.IsMatureGrass(x,y);
      Need(cells[x,y]==(expected?new(MawFiberGrowthPolicy.Host.Grass):seed[x,y]));
      if(cells[x,y].Material==MawFiberGrowthPolicy.Host.Grass)grass++;
-    }Need(grass==(budget==0?4:160));
+    }Need(grass==(budget==0?initial:160));
    }
+   foreach(bool saturated in new[]{false,true})foreach(int b in new[]{0,1,8,32}){
+    string value=(saturated?"saturated-":"")+b;
+    Need(MawGrowthLoadPlan.Request(value,out int parsed,out bool wide)&&parsed==b&&wide==saturated);
+   }
+   foreach(string value in new[]{null,"stop","2","-1","033"," 32","32 ","+32","Saturated-32","saturated-033","saturated-2","saturated-32-extra"})
+    Need(!MawGrowthLoadPlan.Request(value,out _,out _));
    foreach(int b in new[]{-1,2,33,1000})Need(!MawGrowthLoadPlan.Budget(b));
    foreach(string w in new[]{"Apogee Native Visual V3","aga",null})foreach(string p in new[]{"gg","Maw QA Plain","Maw QA Rope",null})foreach(bool single in new[]{false,true})foreach(bool menu in new[]{false,true})
     Need(MawGrowthLoadPlan.Context(w,p,single,menu)==(w=="Apogee Native Visual V3"&&p=="gg"&&single&&!menu));

@@ -34,9 +34,9 @@
       "liveFixture": "pass",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "Art/Validation/MawGrowthLoad-2026-09-13/README.md",
-      "evidenceScope": "W six actual240-update32x32 native growth runs:1/8/32/0/8/1 budgets. Enabled156 conversions/160grass, disabled0; exact native shape/paint/wire/coating checks. Work max0.7411ms, not full frame time. Repeated1/8 arms;32 arm actually peaks at8changes/update. Explicit stop31updates is retained incomplete. Seven raw reports independently replay with27 corrupt-report controls. Every56x56guard restored,9 known history bounds unchanged/9missing unverified. Native save preserves16 canonical system digests; old grove checkpoint RED remains separate.",
-      "blockers": ["Not saturated32 stress, world-scale scheduling, production protection/cadence/dormancy/infection, vines, multiplayer or minimum hardware acceptance. Idle plan still allocates32bytes/update.", "Sampled local correctness/cost does not approve art, biome generation or original historical baselines. Old grove failure was present before this probe and was not repaired/rebaselined."]
+      "evidenceReference": "Art/Validation/MawSaturatedGrowth-2026-09-13/README.md",
+      "evidenceScope": "W original six240-update runs plus retained31-update interruption remain valid (four seeds, peak8changes). Z adds six native240-update runs in same scratch with original/full-frontier/disabled comparisons. Both sixteen-seed32-budget repeats change32/32/32/32/16 then idle;144 conversions/160 grass. Full-frontier max0.1872/.1781ms, original first-call0.7543ms retained. Work only, not whole-frame timing. Six Z and seven W reports replay independently;27 original plus6 layout/frontier defect controls. Exact56x56 restoration,9 known history bounds unchanged/9missing unverified. Normal saves preserve16 existing records; old grove RED separate.",
+      "blockers": ["Only four full32-change updates per Z repeat, not sustained world-scale scheduling, production protection/cadence/dormancy/infection, vines, multiplayer or minimum hardware acceptance. Idle plan still allocates32bytes/update.", "Sampled local correctness/cost does not approve art, biome generation or original historical baselines. Old grove failure was present before this probe and was not repaired/rebaselined."]
     },
     {
       "id": "maw-rope-interaction-v1",

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-13T03:00:53.8128757Z",
+  "sourceLogSha256": "B2CFD965E37315390BC5C062497429210A319B848BF95FE40CD37034CDBBA992",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[21:56:23.678] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=32; seeds=4; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[21:56:27.701] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=32; updates=240; converted=156; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-025627-659-b32.json.",
+    "[21:56:51.572] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=32; seeds=16; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[21:56:55.559] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=32; updates=240; converted=144; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-025655-554-b32.json.",
+    "[21:57:44.790] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=8; seeds=16; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[21:57:48.778] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=8; updates=240; converted=144; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-025748-773-b8.json.",
+    "[21:58:04.423] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=0; seeds=16; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[21:58:08.409] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=0; updates=240; converted=0; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-025808-406-b0.json.",
+    "[21:58:48.340] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=32; seeds=16; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[21:58:52.327] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=32; updates=240; converted=144; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-025852-323-b32.json.",
+    "[21:59:31.222] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=32; seeds=4; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[21:59:35.210] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=32; updates=240; converted=156; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-025935-206-b32.json.",
+    "[22:00:13.317] [.NET TP Worker/INFO] [apogean]: MAW RIB CONTOUR SAVE: creation=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; actual=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; failed=False.",
+    "[22:00:13.319] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state."
+  ],
+  "caughtRenderFailures": []
+}

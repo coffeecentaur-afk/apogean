@@ -483,6 +483,13 @@ planner allocates32bytes/update. Preserve deliberately stopped partial runs and
 check cleanup before export. A before/after historical fingerprint can remain
 equal while an older saved baseline is already RED; state both facts.
 
+Z closes only the brief full-budget coverage gap: sixteen perimeter seeds yield
+four32-change updates followed by16. Preserve W's seed layout and old schema,
+name the new workload, and validate its expected raw sequence independently.
+Five active updates plus235 idle are not240 fully loaded updates. Keep first-call
+timings, unchanged disabled cases and within-session repeats; startup Workshop
+update notices must be distinguished from the list of actually enabled mods.
+
 Saved interactive galleries can legitimately drift during playtesting. When a
 historical layout assertion fails, audit actual native tiles/frames read-only
 before diagnosing an atlas regression. Preserve that failed assertion; do not

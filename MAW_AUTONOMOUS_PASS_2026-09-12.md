@@ -78,6 +78,17 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- Z,02:56–03:00UTC September13: FB1E19BE pinned package, clean build. New
+  sixteen-seed variant reuses the same scratch/policy; six native240-update
+  runs retain original32, full32, full8, disabled0, full32, original32.
+  Both full32 cases produce32/32/32/32/16 then idle; active max0.1872/.1781ms.
+  Original first-call0.7543ms and warm0.0984ms retained, no speedup claim.
+  All guards/history restored,16 records unchanged at native save. Six raw
+  reports and14 scoped records retained. Original grove RED still separate.
+  Startup auto-update notice refers to disabled Spirit Reforged; loaded mods
+  remain Apogean/CheatSheet. No install requested or settings changed. Next
+  bounded item-preview research runs in parallel; final hour starts03:46UTC.
+
 - Y,02:38–02:45UTC September13: installed6AD8D2A6, clean pinned build with
   unchanged466+7+1 asset pins. Two actual15-case/687-check material trials each
   return exactly one matching rib/cap item, replace through its createTile
