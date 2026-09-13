@@ -1,5 +1,14 @@
 # Fresh-seed Maw review handoff
 
+LATEST USER REVIEW after a9829ab: overall direction liked, hanging vines and
+their segmented breaking accepted, small caves liked. Changes requested:
+root-adjacent light pockets, visible fiber underside gaps, narrower/steeper mouth
+without the broad V wall edge, and a small winding cave network reconnecting to
+the shaft lower down. Read the new user-review section in the integration report
+before continuing; it supersedes the earlier "await review" next-action wording.
+This feedback checkpoint changes docs only. No scene, package or asset repaired.
+The last known game handoff below is historical; reobserve before taking control.
+
 Current work is an opt-in entrance/shallow-Gullet candidate, not production
 world generation. Preserve the user-approved MS Paint V1 in Apogee Native Visual
 V3. That world and regular worlds were never opened this turn. No new artwork,

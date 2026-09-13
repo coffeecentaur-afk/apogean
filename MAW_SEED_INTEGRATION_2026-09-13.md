@@ -46,6 +46,56 @@ worlds. The request bridge accepts only the closed review allowlist plus save/ex
 
 ## Status
 
+### User review after a9829ab — changes requested, not implemented
+
+The user likes the overall result, short offshoot caves, and hanging fiber
+including its segmented breaking. Keep those exact behaviors and approved art.
+Four attached screenshots show root-adjacent bright pockets, the fiber underside
+seams, and the overly broad mouth. Source screenshots remain local.
+
+1. Rib roots / neighboring biome: investigate actual wall IDs, tile/slope state
+   and lighting at the exposed root tips before calling this wall deletion.
+   Compare the native pre-write snapshot and generated result in a copied trial;
+   separate missing walls, unsuitable walls and terrain/lighting discontinuity.
+   Required result: continuous appropriate native backing behind buried roots,
+   without erasing protected neighbors or adding a special blending block.
+2. Fiber: the repeated bright gap immediately under the cap is still visible.
+   Exercise the actual cap/substrate frames on full, stepped and sloped surfaces
+   against daylight before repairing atlas/framing. Do not change the accepted
+   hanging vines to solve a surface cap problem.
+3. Mouth: tighter aperture with steep raised lips, closer to the accepted MS
+   Paint drawing. The current wide bowl is not accepted. No forced V-shaped
+   backing-wall boundary. Keep normal surface sky above terrain and appropriate
+   underground walls; do not cover the whole surface in walls to hide seams.
+4. Side network: include a winding hazardous connection that rejoins the main
+   shaft at a lower level. Test both junctions after teeth/fiber placement with
+   actual player-body clearance. Keep optional small pockets and sparse caches;
+   do not force a chest into each cave or create an easy safety staircase.
+
+The earlier technical passes remain evidence of their stated contracts, NOT
+proof against these reported defects. No native wall deletion cause, fix, new
+layout or updated atlas has been demonstrated in this feedback-only turn.
+
+### Scenery clarification and recommended sequence
+
+Source inspection confirms the new world is not eligible for the latest Wastes
+landscape: WastesLandscapeV1Renderer.EnabledForCurrentWorld only accepts the V3
+visual world or an explicit Forest render-lab override. Separately, detected Maw
+selects EngraftRuinedBackgroundStyle, and Engraft is absent from the HD layer map;
+it therefore resolves the old Content/Backgrounds/Engraft/V{variant} layers.
+The generic asset bank and latest Wastes scenery were not replaced this pass.
+This establishes the current source routing, not which style drew every supplied
+screenshot; no fresh native draw telemetry was collected in this feedback turn.
+
+Recommended next order: bounded root/fiber/mouth/loop correction; passing varied
+native seeds and player traversal; complete the functional full-depth Gullet,
+Stomach and enclosed intestinal route; then author the Maw's own layered scenery.
+Do not wait for all enemies, resources, quests or perfect texture polish before
+scenery. Verify the Wastes renderer on the next generated QA world separately;
+do not force Wastes scenery inside the Maw to conceal its missing background.
+
+### Existing technical checkpoint
+
 The first native candidate (seed202) generates and survives a server save and
 client reload with its original terrain digest unchanged. Gameplay-scale
 entrance/rib/cache/node views were inspected. This is NOT production readiness:

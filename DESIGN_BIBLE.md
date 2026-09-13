@@ -17,6 +17,23 @@ See AUTHORING_WORKFLOW.md for interpretation, testing and evidence rules.
 
 ## Provisional Maw contour evidence
 
+September13 generated202 user review: the overall anatomy, short offshoot caves
+and segmented breaking of hanging fiber are liked. Preserve those features.
+The seed-derived mouth is too wide and departs from the accepted drawing: use
+a narrower opening between steeper raised lips, not a broad shallow bowl. Do not
+retain an artificial V-shaped native backing-wall cutoff as a design requirement.
+Add a small winding side-cave network that can rejoin the main shaft farther down,
+so exploration can advance the descent instead of always requiring backtracking.
+Keep cache counts sparse and Node pockets distinct; this is not a safe bypass
+around all teeth or a supplied-rope route.
+
+Buried rib roots may protrude irregularly, but must not introduce unintended
+daylight pockets in neighboring terrain. Native wall continuity is a separate
+contract from rib tile support and anatomy. The reported light pockets and gaps
+under fiber remain defects requiring native state/lighting and actual-frame
+checks, not permission to flatten roots, add a special blending material, or
+conceal the gaps with brighter/darker scenery. No full candidate approval yet.
+
 September13 seed-transfer pilot: approved drawing anatomy is now being validated
 in separately named fresh QA worlds. It does not replace ordinary-world generation.
 Preserve real structure/trap boundaries; improve site selection instead of clearing

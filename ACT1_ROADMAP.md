@@ -2,6 +2,18 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+Latest review of generated202: preserve liked ribs/material direction, small
+offshoot caves and hanging fiber with segmented breakage. Next bounded revision:
+prove/fix root-adjacent light pockets and under-cap fiber gaps; tighten the mouth
+into steeper raised lips with a smaller aperture and no forced V wall cutoff;
+add a hazardous winding side route reconnecting to the shaft lower down. See
+MAW_SEED_INTEGRATION_2026-09-13.md for acceptance checks and scenery routing.
+Recommended order remains shallow corrections and seed reliability, then full
+Gullet/Stomach/intestine layout, then Maw-specific backgrounds. This means a
+functional tested generation baseline, not every ore/enemy/quest or final polish.
+The scenery routing regression should be checked in parallel, without making
+new Maw art depend on an unsettled world shape or replacing it with Wastes art.
+
 September13 fresh-seed candidate: implementation now exists behind the exact
 `Apogean Maw Seed QA <number>` fresh-world name gate. Seed202 has passed native
 construction twice with the same digest and first client reload; regular
