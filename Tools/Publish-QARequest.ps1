@@ -1,16 +1,18 @@
 param(
  [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]{1,128}$')][string]$Request,
- [string]$CaptureDirectory=(Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games/Terraria/tModLoader/Captures')
+ [string]$CaptureDirectory=(Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games/Terraria/tModLoader/Captures'),
+ [ValidateSet('ApogeanLiveValidation.request','ApogeanMawEntrance.request','ApogeanArrivalSite.request')]
+ [string]$RequestFileName='ApogeanLiveValidation.request'
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $directory=(Resolve-Path -LiteralPath $CaptureDirectory).Path
-$target=Join-Path $directory 'ApogeanLiveValidation.request'
+$target=Join-Path $directory $RequestFileName
 if(Test-Path -LiteralPath $target){throw 'A native request is pending; it was not overwritten.'}
 # Same-directory rename publishes a CLOSED complete file. The old CreateNew /
 # FileShare.Read writer exposed its live handle to File.ReadAllText, which opens
 # with a sharing mode incompatible with an existing writer on Windows.
-$staging=Join-Path $directory ('ApogeanLiveValidation.'+[Guid]::NewGuid().ToString('N')+'.staging')
+$staging=Join-Path $directory ($RequestFileName+'.'+[Guid]::NewGuid().ToString('N')+'.staging')
 if([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($staging)) -ne [IO.Path]::GetFullPath($directory)) {throw 'Invalid staging boundary.'}
 try {
  $stream=[IO.File]::Open($staging,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None)

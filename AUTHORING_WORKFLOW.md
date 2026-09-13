@@ -498,6 +498,27 @@ Five active updates plus235 idle are not240 fully loaded updates. Keep first-cal
 timings, unchanged disabled cases and within-session repeats; startup Workshop
 update notices must be distinguished from the list of actually enabled mods.
 
+When a static gate contradicts an accepted candidate, first distinguish changed
+asset bytes from a stale contract. Validate the actual parameter AST instead of
+an exact declaration string; preserve required values while allowing documented
+additions. Pin reviewed asset identity alongside topology/socket tests. Prove the
+new gate rejects old or malformed candidates before removing an obsolete palette
+threshold. Static identity cannot repair a separately failed native checkpoint.
+
+Negative controls must isolate their intended defect: a duplicate-value test
+must otherwise contain every required value. A test that fails for missing
+values can falsely appear to protect duplicate rejection. Mutate that rejection
+alone and verify the test fails. Capture child stdout/stderr explicitly when
+archiving multi-process gates; a driver transcript can omit successful or failed
+child output even when the console displays it.
+
+All QA request wrappers must publish through Publish-QARequest: close a uniquely
+owned staging file before same-directory no-overwrite rename. Only the three
+explicit game queues are allowed; never expose an open writer or replace a
+pending command. Exercise wrappers against temporary capture roots, including
+special save/quit mappings. Publication is not consumption or a test pass.
+See Art/Validation/MawPassGate-2026-09-13 for actual regressions and retained REDs.
+
 Saved interactive galleries can legitimately drift during playtesting. When a
 historical layout assertion fails, audit actual native tiles/frames read-only
 before diagnosing an atlas regression. Preserve that failed assertion; do not

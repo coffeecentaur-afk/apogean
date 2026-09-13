@@ -27,6 +27,9 @@ $profiles = @{
     Quest = @('Tools/Test-QuestDialoguePipeline.ps1')
 }
 $profiles.Background += 'Tools/Test-CloseBackgroundDimensions.ps1'
+$profiles.Performance += 'Tools/Test-LegacyQARequestSenders.ps1'
+$profiles.Structure += 'Tools/Test-LiteralValidateSetContract.ps1'
+$profiles.Tree += 'Tools/Test-ApprovedTreeContract.ps1'
 $profiles.MawShallow += 'Tools/Test-QAHistoryCoverage.ps1'
 $profiles.MawShallow += 'Tools/Test-MawRopeEvidence.ps1'
 $profiles.MawShallow += 'Tools/Test-MawRopeClimbScope.ps1'

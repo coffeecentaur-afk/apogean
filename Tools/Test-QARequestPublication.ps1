@@ -14,5 +14,19 @@ if([IO.File]::ReadAllText($target) -cne 'qa-perf-snapshot'){throw 'Published inc
 $refused=$false
 try {& (Join-Path $PSScriptRoot 'Publish-QARequest.ps1') -Request 'qa-perf-start' -CaptureDirectory $directory}catch {$refused=$true}
 if(-not $refused -or [IO.File]::ReadAllText($target) -cne 'qa-perf-snapshot'){throw 'Pending request overwritten.'}
+foreach($fileName in @('ApogeanMawEntrance.request','ApogeanArrivalSite.request')){
+ & (Join-Path $PSScriptRoot 'Publish-QARequest.ps1') -Request 'view' -CaptureDirectory $directory -RequestFileName $fileName
+ $namedTarget=Join-Path $directory $fileName
+ if([IO.File]::ReadAllText($namedTarget) -cne 'view'){throw 'Named request incomplete.'}
+ $refused=$false
+ try{& (Join-Path $PSScriptRoot 'Publish-QARequest.ps1') -Request 'shallow' -CaptureDirectory $directory -RequestFileName $fileName}catch{$refused=$true}
+ if(-not $refused -or [IO.File]::ReadAllText($namedTarget) -cne 'view'){throw 'Named pending request overwritten.'}
+}
+foreach($bad in @('../outside.request','Other.request','C:/outside.request')){
+ $refused=$false
+ try{& (Join-Path $PSScriptRoot 'Publish-QARequest.ps1') -Request 'view' -CaptureDirectory $directory -RequestFileName $bad}catch{$refused=$true}
+ if(-not $refused){throw 'Publisher accepted a path outside its three known queues.'}
+}
+if([IO.File]::ReadAllText($target) -cne 'qa-perf-snapshot'){throw 'Named queues changed the live queue.'}
 if(@(Get-ChildItem -LiteralPath $directory -Filter '*.staging').Count -ne 0){throw 'Unowned staging leftover.'}
-Write-Output 'PASS old writer reproduces read failure; atomic publication readable/complete; pending request preserved. Temporary evidence retained; game queue untouched.'
+Write-Output 'PASS old writer reproduces read failure; all three queues publish closed payloads, preserve pending requests and refuse unknown paths. Temporary evidence retained; game queue untouched.'

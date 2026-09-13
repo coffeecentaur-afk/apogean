@@ -1,0 +1,194 @@
+**********************
+PowerShell transcript start
+Start time: 20260912224219
+Username: SLIVEROFINFINTY\max_h
+RunAs User: SLIVEROFINFINTY\max_h
+Configuration Name: 
+Machine: SLIVEROFINFINTY (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\max_h\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$null=New-Item -ItemType Directory -Path 'Art/Validation/MawPassGate-2026-09-13' -Force
+Start-Transcript -Path 'Art/Validation/MawPassGate-2026-09-13/ac-all-gate.txt' -NoClobber
+& ./Tools/Invoke-ApogeanContentGate.ps1 -Profile All -Build
+Process ID: 15632
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is Art/Validation/MawPassGate-2026-09-13/ac-all-gate.txt
+GATE: Tools/Test-AuthoringStatus.ps1
+
+GATE: Tools/Test-VersionedSkills.ps1
+
+GATE: Tools/Test-GeneratorOwnership.ps1
+
+GATE: Tools/Test-TreeProductionReadiness.ps1
+
+GATE: Tools/Test-ApprovedTreeContract.ps1
+
+GATE: Tools/Test-WastesTerrainAtlases.ps1
+
+GATE: Tools/Test-MawStructuralWall.ps1
+
+GATE: Tools/Test-MawFang.ps1
+
+GATE: Tools/Test-MawFangValidator.ps1
+
+GATE: Tools/Test-RigidPlantAtlas.ps1
+
+GATE: Tools/Test-ReportedVisualRegressions.ps1
+
+GATE: Tools/Test-SurfaceRegression.ps1
+
+GATE: Tools/Test-PackedMawMaterials.ps1
+
+GATE: Tools/Test-PackedMaterialMap.ps1
+
+GATE: Tools/Test-PackedMaterialMutations.ps1
+
+GATE: Tools/Test-QAAssetSnapshotMutations.ps1
+
+GATE: Tools/Test-MawNativeSuite.ps1
+
+GATE: Tools/Test-MawFiberGrowthPolicy.ps1
+
+GATE: Tools/Test-MawAnatomyPlan.ps1
+
+GATE: Tools/Test-MawAnatomyCandidate.ps1
+
+GATE: Tools/Test-MawAnatomyMutations.ps1
+
+GATE: Tools/Test-MawHangingFiberCandidate.ps1
+
+GATE: Tools/Test-MawAmberEmission.ps1
+
+GATE: Tools/Test-MawAmberCompiler.ps1
+
+GATE: Tools/Test-MawShallowTraversalPlan.ps1
+
+GATE: Tools/Test-MawShallowMotionTrace.ps1
+
+GATE: Tools/Test-MawShallowReturnInputs.ps1
+
+GATE: Tools/Test-MawShallowReturnTrace.ps1
+
+GATE: Tools/Test-MawShallowQaScope.ps1
+
+GATE: Tools/Test-MawEvidenceRenderFailures.ps1
+
+GATE: Tools/Test-CloseBackgroundDimensions.ps1
+
+GATE: Tools/Test-QAHistoryCoverage.ps1
+
+GATE: Tools/Test-MawRopeEvidence.ps1
+
+GATE: Tools/Test-MawRopeClimbScope.ps1
+
+GATE: Tools/Test-MawRopeClimbEvidence.ps1
+
+GATE: Tools/Test-MawRopeItemUsePlan.ps1
+
+GATE: Tools/Test-MawRopeItemUseEvidence.ps1
+
+GATE: Tools/Test-MawItemPreview.ps1
+
+GATE: Tools/Test-MawItemPreviewEvidence.ps1
+
+GATE: Tools/Test-MawRibContour.ps1
+
+GATE: Tools/Test-MawToothPlacement.ps1
+
+GATE: Tools/Test-MawClusterPlayerCurves.ps1
+
+GATE: Tools/Test-MawPlayerCurveValidators.ps1
+
+GATE: Tools/Test-MawCaveDryMask.ps1
+
+GATE: Tools/Test-MawCaveOverlayGuard.ps1
+
+GATE: Tools/Test-QAPerformanceStatistics.ps1
+
+GATE: Tools/Test-QARequestPublication.ps1
+
+GATE: Tools/Test-QASharedWallAssets.ps1
+
+GATE: Tools/Test-LegacyQARequestSenders.ps1
+
+GATE: Tools/Test-QACameraSweep.ps1
+
+GATE: Tools/Test-QAPerformanceEvidence.ps1
+
+GATE: Tools/Test-QABatchPlan.ps1
+
+GATE: Tools/Test-MawConversionEvidence.ps1
+
+GATE: Tools/Test-MawGrowthLoadPlan.ps1
+
+GATE: Tools/Test-MawGrowthEvidence.ps1
+
+GATE: Tools/Test-QAWorldPersistence.ps1
+
+GATE: Tools/Test-QAExitDispatch.ps1
+
+GATE: Tools/Test-MaskedBackgroundExport.ps1
+
+GATE: Tools/Test-WastesCityMask.ps1
+
+GATE: Tools/Test-WastesHeightLock.ps1
+
+GATE: Tools/Test-WastesForegroundDepth.ps1
+
+GATE: Tools/Test-WastesRunningLiveValidator.ps1
+
+GATE: Tools/Test-WastesTelemetryExport.ps1
+
+GATE: Tools/Test-WastesRuinLayoutValidator.ps1
+
+GATE: Tools/Test-WastesFixedSections.ps1
+
+GATE: Tools/Test-WastesHeightMutations.ps1
+
+GATE: Tools/Test-ForestRestoration.ps1
+
+GATE: Tools/Test-BackgroundHdContracts.ps1
+
+GATE: Tools/Test-BackgroundProductionReadiness.ps1
+
+GATE: Tools/Test-ArrivalPodNativePipeline.ps1
+
+GATE: Tools/Test-ArrivalPodFooting.ps1
+
+GATE: Tools/Test-ArrivalPodLiveValidator.ps1
+
+GATE: Tools/Test-ArrivalSitePlanner.ps1
+
+GATE: Tools/Test-ArrivalSiteMutations.ps1
+
+GATE: Tools/Test-ArrivalSiteLiveValidator.ps1
+
+GATE: Tools/Test-HelixConstructionSet.ps1
+
+GATE: Tools/Test-WorldVisualIntegrity.ps1
+
+GATE: Tools/Test-LiteralValidateSetContract.ps1
+
+GATE: Tools/Test-BossAuthoringPipeline.ps1
+
+GATE: Tools/Test-QuestDialoguePipeline.ps1
+
+GATE: C# compile only; no tmod install
+
+
+APOGEAN All GATE: RED
+ - Tools/Test-BackgroundProductionReadiness.ps1
+PS>$global:?
+False
+**********************
+PowerShell transcript end
+End time: 20260912224743
+**********************

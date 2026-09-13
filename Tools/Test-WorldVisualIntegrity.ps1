@@ -190,10 +190,20 @@ Require-SourceContract 'Content/Diagnostics/TileLabPlayer.cs' @(
 )
 
 Require-SourceContract 'Tools/Request-LiveValidation.ps1' @(
-	"[ValidateSet('conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'entity-scale', 'forest-background', 'forest-background-aerial', 'forest-background-night', 'forest-background-eclipse', 'desert-background', 'jungle-background', 'jungle-routing', 'snow-background', 'corruption-background', 'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background', 'kessler-construction', 'helix-construction', 'kessler-campus', 'kessler-world', 'forest-restoration-wastes', 'forest-restoration-mixed', 'forest-restoration-green')]",
-	'ApogeanLiveValidation.request',
-	'Set-Content -LiteralPath $requestPath'
+	'Publish-QARequest.ps1',
+	'-Request $Fixture -CaptureDirectory $captureDirectory'
 )
+. (Join-Path $PSScriptRoot 'LiteralValidateSetContract.ps1')
+try {
+    Assert-LiteralValidateSet -Source (Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'Request-LiveValidation.ps1')) -ParameterName Fixture -Required @(
+        'conversion', 'vegetation', 'wastes-terrain', 'wastes-properties', 'material', 'grass', 'entity-scale',
+        'forest-background', 'forest-background-aerial', 'forest-background-night', 'forest-background-eclipse',
+        'desert-background', 'jungle-background', 'jungle-routing', 'snow-background', 'corruption-background',
+        'crimson-background', 'hallow-background', 'ocean-background', 'mushroom-background', 'underworld-background',
+        'kessler-construction', 'helix-construction', 'kessler-campus', 'kessler-world',
+        'forest-restoration-wastes', 'forest-restoration-mixed', 'forest-restoration-green'
+    )
+} catch { $failures.Add($_.Exception.Message) }
 
 Require-SourceContract 'Content/Backgrounds/RuinedBackgroundSelectionSystem.cs' @(
 	'SurfaceRenderLabBiome',
@@ -250,9 +260,12 @@ foreach ($treeAsset in @(
 )) {
     Require-File $treeAsset
 }
-Require-PngContract 'Content/Tiles/DeadForestTree.png' 176 264 8
-Require-PngContract 'Content/Tiles/DeadForestTree_Branches.png' 84 126 3
-Require-PngContract 'Content/Tiles/DeadForestTree_Tops.png' 246 82 3
+# Approved v3 intentionally removed bright flecks and uses five muted browns.
+# Delegate to stronger native topology/palette/pivot/thickness and exact-art
+# checks; do not force extra colors to satisfy an obsolete aesthetic heuristic.
+$treeShell = (Get-Process -Id $PID).Path
+& $treeShell -NoProfile -File (Join-Path $PSScriptRoot 'Test-TreeProductionReadiness.ps1')
+if ($LASTEXITCODE -ne 0) { $failures.Add('Approved v3 production tree contract failed.') }
 Require-SourceContract 'Content/Tiles/DeadForestTreeRootGlobalTile.cs' @(
     'Reserved compatibility type', 'intentionally draws nothing'
 )

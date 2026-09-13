@@ -1,0 +1,249 @@
+**********************
+PowerShell transcript start
+Start time: 20260912224229
+Username: SLIVEROFINFINTY\max_h
+RunAs User: SLIVEROFINFINTY\max_h
+Configuration Name: 
+Machine: SLIVEROFINFINTY (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\max_h\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$null=New-Item -ItemType Directory -Path 'Art/Validation/MawPassGate-2026-09-13' -Force
+Start-Transcript -Path 'Art/Validation/MawPassGate-2026-09-13/ac-archived-native-replay.txt' -NoClobber
+& ./Tools/Test-MawItemPreviewEvidence.ps1 -EvidencePath @('Art/Validation/MawItemPreview-2026-09-13/aa-preview-1.json','Art/Validation/MawItemPreview-2026-09-13/aa-preview-2.json')
+& ./Tools/Test-MawRopeEvidence.ps1 -RequireAnatomyItems -Path @('Art/Validation/MawAnatomyItems-2026-09-13/y-binding-1.json','Art/Validation/MawAnatomyItems-2026-09-13/y-binding-2.json')
+$growthReports=@(Get-ChildItem -LiteralPath 'Art/Validation/MawGrowthLoad-2026-09-13','Art/Validation/MawSaturatedGrowth-2026-09-13' -Filter 'growth-*.json' | Sort-Object FullName | ForEach-Object FullName)
+if($growthReports.Count -ne 13){throw 'Unexpected archived growth evidence count'}
+& ./Tools/Test-MawGrowthEvidence.ps1 -Path $growthReports
+& ./Tools/Test-MawRopeClimbEvidence.ps1 -Path @('Art/Validation/MawRopeClimb-2026-09-13/V-vanilla-1.json','Art/Validation/MawRopeClimb-2026-09-13/V-rib-1.json','Art/Validation/MawRopeClimb-2026-09-13/V-none-1.json','Art/Validation/MawRopeClimb-2026-09-13/V-stop-rib.json','Art/Validation/MawRopeClimb-2026-09-13/V-focus-attempt-rib.json')
+Stop-Transcript
+Process ID: 18876
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is Art/Validation/MawPassGate-2026-09-13/ac-archived-native-replay.txt
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: incomplete or failed preview"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: incomplete or failed preview"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: incomplete or failed preview"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: wrong native comparison geometry"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: wrong native comparison geometry"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: wrong native comparison geometry"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: wrong native comparison geometry"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: missing/extra hooks"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: wrong candidate identity/frame/center/scale"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: wrong candidate identity/frame/center/scale"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: wrong candidate identity/frame/center/scale"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: wrong candidate identity/frame/center/scale"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: wrong candidate identity/frame/center/scale"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: duplicated candidate type"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: wrong candidate identity/frame/center/scale"
+PS>TerminatingError(): "ITEM_PREVIEW_EVIDENCE: wrong candidate identity/frame/center/scale"
+PASS one synthetic baseline and16 malformed-report controls. Geometry validation only, not screenshot/scale restoration proof.
+PASS native first-frame replay: Art/Validation/MawItemPreview-2026-09-13/aa-preview-1.json
+PASS native first-frame replay: Art/Validation/MawItemPreview-2026-09-13/aa-preview-2.json
+PS>TerminatingError(): "Rope segment accounting"
+>> TerminatingError(): "Rope segment accounting"
+PS>TerminatingError(): "Actual rope drop missing"
+>> TerminatingError(): "Actual rope drop missing"
+PS>TerminatingError(): "Rope segment accounting"
+>> TerminatingError(): "Rope segment accounting"
+PS>TerminatingError(): "Case order/identity"
+>> TerminatingError(): "Case order/identity"
+PS>TerminatingError(): "Case order/identity"
+>> TerminatingError(): "Case order/identity"
+PS>TerminatingError(): "Malformed native rope frame"
+>> TerminatingError(): "Malformed native rope frame"
+PS>TerminatingError(): "API placement mislabeled as player evidence"
+>> TerminatingError(): "API placement mislabeled as player evidence"
+PS>TerminatingError(): "Mining power/call accounting"
+>> TerminatingError(): "Mining power/call accounting"
+PS>TerminatingError(): "Mining power/call accounting"
+>> TerminatingError(): "Mining power/call accounting"
+PS>TerminatingError(): "Mining power/call accounting"
+>> TerminatingError(): "Mining power/call accounting"
+PS>TerminatingError(): "Optimistic rope verdict"
+>> TerminatingError(): "Optimistic rope verdict"
+PS>TerminatingError(): "Optimistic rope verdict"
+>> TerminatingError(): "Optimistic rope verdict"
+PS>TerminatingError(): "Optimistic rope verdict"
+>> TerminatingError(): "Optimistic rope verdict"
+PS>TerminatingError(): "Optimistic rope verdict"
+>> TerminatingError(): "Optimistic rope verdict"
+PS>TerminatingError(): "History accounting"
+>> TerminatingError(): "History accounting"
+PS>TerminatingError(): "Incomplete successful native checks"
+>> TerminatingError(): "Incomplete successful native checks"
+PS>TerminatingError(): "Optimistic rope verdict"
+>> TerminatingError(): "Optimistic rope verdict"
+PS>TerminatingError(): "Optimistic rope verdict"
+>> TerminatingError(): "Optimistic rope verdict"
+PASS 18 rope-report rejection controls and retained partial-failure control. Does not independently prove native state.
+PS>TerminatingError(): "Anatomy pickup binding absent"
+>> TerminatingError(): "Anatomy pickup binding absent"
+PS>TerminatingError(): "Anatomy pickup binding absent"
+>> TerminatingError(): "Anatomy pickup binding absent"
+PS>TerminatingError(): "Anatomy pickup binding absent"
+>> TerminatingError(): "Anatomy pickup binding absent"
+PS>TerminatingError(): "Wrong named binding"
+>> TerminatingError(): "Wrong named binding"
+PS>TerminatingError(): "Placeable item defaults"
+>> TerminatingError(): "Placeable item defaults"
+PS>TerminatingError(): "Placeable item defaults"
+>> TerminatingError(): "Placeable item defaults"
+PS>TerminatingError(): "Replacement cycle failed"
+>> TerminatingError(): "Replacement cycle failed"
+PS>TerminatingError(): "Replacement cycle failed"
+>> TerminatingError(): "Replacement cycle failed"
+PS>TerminatingError(): "Replacement cycle failed"
+>> TerminatingError(): "Replacement cycle failed"
+PS>TerminatingError(): "Replacement cycle failed"
+>> TerminatingError(): "Replacement cycle failed"
+PASS 10 schema2 binding/replacement defects; schema1 kept without retrospective guarantees.
+REPLAY Art/Validation/MawAnatomyItems-2026-09-13/y-binding-1.json : pass=True; cases=15; restored=True; known=9/18. Native tile/mining APIs only, not player placement/ascent.
+REPLAY Art/Validation/MawAnatomyItems-2026-09-13/y-binding-2.json : pass=True; cases=15; restored=True; known=9/18. Native tile/mining APIs only, not player placement/ascent.
+PS>TerminatingError(): "Identity/budget"
+>> TerminatingError(): "Identity/budget"
+PS>TerminatingError(): "Identity/budget"
+>> TerminatingError(): "Identity/budget"
+PS>TerminatingError(): "Update count"
+>> TerminatingError(): "Update count"
+PS>TerminatingError(): "Missed/duplicate native update"
+>> TerminatingError(): "Missed/duplicate native update"
+PS>TerminatingError(): "Missed/duplicate native update"
+>> TerminatingError(): "Missed/duplicate native update"
+PS>TerminatingError(): "Missed/duplicate native update"
+>> TerminatingError(): "Missed/duplicate native update"
+PS>TerminatingError(): "Per-update cell budget"
+>> TerminatingError(): "Per-update cell budget"
+PS>TerminatingError(): "Invalid timing sample"
+>> TerminatingError(): "Invalid timing sample"
+PS>TerminatingError(): "Invalid timing sample"
+>> TerminatingError(): "Invalid timing sample"
+PS>TerminatingError(): "Invalid allocation"
+>> TerminatingError(): "Invalid allocation"
+PS>TerminatingError(): "Cumulative grass mismatch"
+>> TerminatingError(): "Cumulative grass mismatch"
+PS>TerminatingError(): "False endpoint"
+>> TerminatingError(): "False endpoint"
+PS>TerminatingError(): "False endpoint"
+>> TerminatingError(): "False endpoint"
+PS>TerminatingError(): "Restoration mismatch"
+>> TerminatingError(): "Restoration mismatch"
+PS>TerminatingError(): "History mismatch"
+>> TerminatingError(): "History mismatch"
+PS>TerminatingError(): "Seed/history coverage"
+>> TerminatingError(): "Seed/history coverage"
+PS>TerminatingError(): "Active/idle mix"
+>> TerminatingError(): "Active/idle mix"
+PS>TerminatingError(): "Wrong summary MeanMs"
+>> TerminatingError(): "Wrong summary MeanMs"
+>> TerminatingError(): "Wrong summary MeanMs"
+PS>TerminatingError(): "Wrong summary P99Ms"
+>> TerminatingError(): "Wrong summary P99Ms"
+>> TerminatingError(): "Wrong summary P99Ms"
+PS>TerminatingError(): "Allocation sum"
+>> TerminatingError(): "Allocation sum"
+PS>TerminatingError(): "Optimistic pass verdict"
+>> TerminatingError(): "Optimistic pass verdict"
+PS>TerminatingError(): "Optimistic pass verdict"
+>> TerminatingError(): "Optimistic pass verdict"
+PS>TerminatingError(): "Hidden failed step or runaway duration"
+>> TerminatingError(): "Hidden failed step or runaway duration"
+PS>TerminatingError(): "Hidden failed step or runaway duration"
+>> TerminatingError(): "Hidden failed step or runaway duration"
+PS>TerminatingError(): "Optimistic pass verdict"
+>> TerminatingError(): "Optimistic pass verdict"
+PS>TerminatingError(): "Seed/history coverage"
+>> TerminatingError(): "Seed/history coverage"
+PS>TerminatingError(): "Patch bounds"
+>> TerminatingError(): "Patch bounds"
+PASS four synthetic budget/idle cases, 27 rejected reports and retained partial evidence. Not native performance proof.
+PS>TerminatingError(): "Unknown growth layout"
+>> TerminatingError(): "Unknown growth layout"
+PS>TerminatingError(): "Seed/history coverage"
+>> TerminatingError(): "Seed/history coverage"
+PS>TerminatingError(): "Seed/history coverage"
+>> TerminatingError(): "Seed/history coverage"
+PS>TerminatingError(): "Seed/history coverage"
+>> TerminatingError(): "Seed/history coverage"
+PS>TerminatingError(): "Full-budget frontier sequence"
+>> TerminatingError(): "Full-budget frontier sequence"
+PS>TerminatingError(): "Full-budget frontier sequence"
+>> TerminatingError(): "Full-budget frontier sequence"
+PASS eight schema2 layout/budget cases, six layout/frontier rejection controls and retained saturated partial.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawGrowthLoad-2026-09-13\growth-20260913-015554-563-b1.json : budget=1; pass=True; updates=240; converted=156; active max=0.7411ms; idle max=0.05ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawGrowthLoad-2026-09-13\growth-20260913-015621-943-b8.json : budget=8; pass=True; updates=240; converted=156; active max=0.1374ms; idle max=0.0954ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawGrowthLoad-2026-09-13\growth-20260913-015647-776-b32.json : budget=32; pass=True; updates=240; converted=156; active max=0.102ms; idle max=0.3453ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawGrowthLoad-2026-09-13\growth-20260913-015700-694-b0.json : budget=0; pass=True; updates=240; converted=0; active max=0ms; idle max=0.0512ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawGrowthLoad-2026-09-13\growth-20260913-015713-609-b8.json : budget=8; pass=True; updates=240; converted=156; active max=0.0965ms; idle max=0.0908ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawGrowthLoad-2026-09-13\growth-20260913-015724-459-b1.json : budget=1; pass=True; updates=240; converted=156; active max=0.1ms; idle max=0.0496ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawGrowthLoad-2026-09-13\growth-20260913-015753-025-b1.json : budget=1; pass=False; updates=31; converted=31; active max=0.044ms; idle max=0ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawSaturatedGrowth-2026-09-13\growth-20260913-025627-659-b32.json : budget=32; pass=True; updates=240; converted=156; active max=0.7543ms; idle max=0.0907ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawSaturatedGrowth-2026-09-13\growth-20260913-025655-554-b32.json : budget=32; pass=True; updates=240; converted=144; active max=0.1872ms; idle max=0.0811ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawSaturatedGrowth-2026-09-13\growth-20260913-025748-773-b8.json : budget=8; pass=True; updates=240; converted=144; active max=0.1451ms; idle max=0.0755ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawSaturatedGrowth-2026-09-13\growth-20260913-025808-406-b0.json : budget=0; pass=True; updates=240; converted=0; active max=0ms; idle max=0.0334ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawSaturatedGrowth-2026-09-13\growth-20260913-025852-323-b32.json : budget=32; pass=True; updates=240; converted=144; active max=0.1781ms; idle max=0.1204ms; restored=True. Bounded local work only.
+REPLAY C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Art\Validation\MawSaturatedGrowth-2026-09-13\growth-20260913-025935-206-b32.json : budget=32; pass=True; updates=240; converted=156; active max=0.0984ms; idle max=0.0857ms; restored=True. Bounded local work only.
+PS>TerminatingError(): "Unknown climb identity"
+>> TerminatingError(): "Unknown climb identity"
+PS>TerminatingError(): "Unknown climb identity"
+>> TerminatingError(): "Unknown climb identity"
+PS>TerminatingError(): "Skipped/duplicated tick"
+>> TerminatingError(): "Skipped/duplicated tick"
+PS>TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+>> TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+PS>TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+>> TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+PS>TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+>> TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+PS>TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+>> TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+PS>TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+>> TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+PS>TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+>> TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+PS>TerminatingError(): "Motion totals disagree with raw trace"
+>> TerminatingError(): "Motion totals disagree with raw trace"
+PS>TerminatingError(): "Motion totals disagree with raw trace"
+>> TerminatingError(): "Motion totals disagree with raw trace"
+PS>TerminatingError(): "Motion totals disagree with raw trace"
+>> TerminatingError(): "Motion totals disagree with raw trace"
+PS>TerminatingError(): "Attachment/ascent verdict"
+>> TerminatingError(): "Attachment/ascent verdict"
+PS>TerminatingError(): "Attachment/ascent verdict"
+>> TerminatingError(): "Attachment/ascent verdict"
+PS>TerminatingError(): "Sample/control budget"
+>> TerminatingError(): "Sample/control budget"
+PS>TerminatingError(): "Geometry verdict disagrees with hash"
+>> TerminatingError(): "Geometry verdict disagrees with hash"
+PS>TerminatingError(): "Restoration verdict disagrees with hash"
+>> TerminatingError(): "Restoration verdict disagrees with hash"
+PS>TerminatingError(): "History verdict disagrees with hash"
+>> TerminatingError(): "History verdict disagrees with hash"
+PS>TerminatingError(): "Missing history accounting"
+>> TerminatingError(): "Missing history accounting"
+PS>TerminatingError(): "Optimistic completion"
+>> TerminatingError(): "Optimistic completion"
+PS>TerminatingError(): "Optimistic completion"
+>> TerminatingError(): "Optimistic completion"
+PS>TerminatingError(): "Motion totals disagree with raw trace"
+>> TerminatingError(): "Motion totals disagree with raw trace"
+PS>TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+>> TerminatingError(): "Completed trace violates bounded native movement/input/life contract"
+PS>TerminatingError(): "Optimistic comparison"
+>> TerminatingError(): "Optimistic comparison"
+PASS 24 corrupt-climb-report rejection controls, matched no-rope and retained partial controls. Synthetic checker tests only.
+REPLAY Art/Validation/MawRopeClimb-2026-09-13/V-vanilla-1.json : variant=vanilla; complete=True; comparisonPass=True; rise=266.2201; pulley=210; restored=True. Preplaced-rope ascent only.
+REPLAY Art/Validation/MawRopeClimb-2026-09-13/V-rib-1.json : variant=rib; complete=True; comparisonPass=True; rise=266.2201; pulley=210; restored=True. Preplaced-rope ascent only.
+REPLAY Art/Validation/MawRopeClimb-2026-09-13/V-none-1.json : variant=none; complete=True; comparisonPass=True; rise=0; pulley=0; restored=True. Preplaced-rope ascent only.
+REPLAY Art/Validation/MawRopeClimb-2026-09-13/V-stop-rib.json : variant=rib; complete=False; comparisonPass=False; rise=74.72009; pulley=31; restored=True. Preplaced-rope ascent only.
+REPLAY Art/Validation/MawRopeClimb-2026-09-13/V-focus-attempt-rib.json : variant=rib; complete=True; comparisonPass=True; rise=266.2201; pulley=210; restored=True. Preplaced-rope ascent only.
+**********************
+PowerShell transcript end
+End time: 20260912224234
+**********************

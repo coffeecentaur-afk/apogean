@@ -1,0 +1,203 @@
+**********************
+PowerShell transcript start
+Start time: 20260912225106
+Username: SLIVEROFINFINTY\max_h
+RunAs User: SLIVEROFINFINTY\max_h
+Configuration Name: 
+Machine: SLIVEROFINFINTY (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\max_h\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -Path 'Art/Validation/MawPassGate-2026-09-13/ac-earlier-native-replay.txt' -NoClobber
+& ./Tools/Test-QAPerformanceEvidence.ps1 -Directory 'Art/Validation/MawPerformance-2026-09-12'
+& ./Tools/Test-MawConversionEvidence.ps1 -Directory 'Art/Validation/MawConversionLoad-2026-09-12'
+& ./Tools/Test-MawShallowReturnTrace.ps1 -Path 'Art/Validation/MawReturn-2026-09-13/S-return-attempt-1.json'
+& ./Tools/Test-MawShallowReturnTrace.ps1 -Path 'Art/Validation/MawReturn-2026-09-13/S-return-attempt-2.json'
+& ./Tools/Test-MawShallowMotionTrace.ps1 -Path 'Art/Validation/MawReturn-2026-09-13/T-entry-regression-18hp.json'
+Stop-Transcript
+Process ID: 6820
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is Art/Validation/MawPassGate-2026-09-13/ac-earlier-native-replay.txt
+PS>TerminatingError(): "Incorrect statistic MeanMs"
+>> TerminatingError(): "Incorrect statistic MeanMs"
+>> TerminatingError(): "Incorrect statistic MeanMs"
+PS>TerminatingError(): "Incorrect statistic P99Ms"
+>> TerminatingError(): "Incorrect statistic P99Ms"
+>> TerminatingError(): "Incorrect statistic P99Ms"
+PS>TerminatingError(): "Geometry verdict does not match hashes"
+>> TerminatingError(): "Geometry verdict does not match hashes"
+PS>TerminatingError(): "Camera coverage verdict mismatch"
+>> TerminatingError(): "Camera coverage verdict mismatch"
+PS>TerminatingError(): "Usable verdict mismatch"
+>> TerminatingError(): "Usable verdict mismatch"
+PS>TerminatingError(): "Usable verdict mismatch"
+>> TerminatingError(): "Usable verdict mismatch"
+PS>TerminatingError(): "Usable verdict mismatch"
+>> TerminatingError(): "Usable verdict mismatch"
+PS>TerminatingError(): "Usable verdict mismatch"
+>> TerminatingError(): "Usable verdict mismatch"
+PS>TerminatingError(): "Usable verdict mismatch"
+>> TerminatingError(): "Usable verdict mismatch"
+PS>TerminatingError(): "Camera coverage verdict mismatch"
+>> TerminatingError(): "Camera coverage verdict mismatch"
+PS>TerminatingError(): "Unexpected workload lighting"
+>> TerminatingError(): "Unexpected workload lighting"
+PASS independent timing replay and 11 optimistic-report rejection controls. Not a performance acceptance threshold.
+REPLAY timing-20260912-220850-826-8d9546.json: shallow-static; usable=True; reason=duration-complete; NPCs=3->4. Raw statistics consistent; not gameplay/low-end approval.
+REPLAY timing-20260912-220957-474-140c16.json: shallow-sweep; usable=True; reason=duration-complete; NPCs=4->3. Raw statistics consistent; not gameplay/low-end approval.
+REPLAY timing-20260912-221104-641-c50eae.json: shallow-sweep; usable=True; reason=duration-complete; NPCs=3->5. Raw statistics consistent; not gameplay/low-end approval.
+REPLAY timing-20260912-221211-291-2d93fc.json: shallow-static; usable=True; reason=duration-complete; NPCs=5->5. Raw statistics consistent; not gameplay/low-end approval.
+REPLAY timing-20260912-221302-975-6cbb07.json: shallow-sweep; usable=False; reason=manual-stop; NPCs=6->6. Raw statistics consistent; not gameplay/low-end approval.
+PS>TerminatingError(): "Incorrect statistic MeanMs"
+>> TerminatingError(): "Incorrect statistic MeanMs"
+>> TerminatingError(): "Incorrect statistic MeanMs"
+PS>TerminatingError(): "Incorrect statistic P99Ms"
+>> TerminatingError(): "Incorrect statistic P99Ms"
+>> TerminatingError(): "Incorrect statistic P99Ms"
+PS>TerminatingError(): "Invalid bounded batch accounting"
+>> TerminatingError(): "Invalid bounded batch accounting"
+PS>TerminatingError(): "Invalid bounded batch accounting"
+>> TerminatingError(): "Invalid bounded batch accounting"
+PS>TerminatingError(): "Work continued after failed phase"
+>> TerminatingError(): "Work continued after failed phase"
+PS>TerminatingError(): "Phase order mismatch"
+>> TerminatingError(): "Phase order mismatch"
+PS>TerminatingError(): "Successful report lacks complete validation"
+>> TerminatingError(): "Successful report lacks complete validation"
+PS>TerminatingError(): "Completed cells mismatch"
+>> TerminatingError(): "Completed cells mismatch"
+PS>TerminatingError(): "Successful report lacks complete validation"
+>> TerminatingError(): "Successful report lacks complete validation"
+PS>TerminatingError(): "Pass verdict mismatch"
+>> TerminatingError(): "Pass verdict mismatch"
+PS>TerminatingError(): "Pass verdict mismatch"
+>> TerminatingError(): "Pass verdict mismatch"
+PS>TerminatingError(): "Pass verdict mismatch"
+>> TerminatingError(): "Pass verdict mismatch"
+PS>TerminatingError(): "Pass verdict mismatch"
+>> TerminatingError(): "Pass verdict mismatch"
+PS>TerminatingError(): "Successful report lacks complete validation"
+>> TerminatingError(): "Successful report lacks complete validation"
+PS>TerminatingError(): "Timed batches exceed total duration"
+>> TerminatingError(): "Timed batches exceed total duration"
+PS>TerminatingError(): "Contract mismatch"
+>> TerminatingError(): "Contract mismatch"
+PASS conversion report replay: 16 rejection controls and retained partial-failure control. Does not independently prove native world state.
+REPLAY conversion-20260912-223702-862-db90f2.json: side=16; pass=True; cells=2304; totalMs=34.7467. Native throughput only, not per-frame performance.
+REPLAY conversion-20260912-223723-038-f40d4b.json: side=32; pass=True; cells=9216; totalMs=63.277. Native throughput only, not per-frame performance.
+REPLAY conversion-20260912-223740-597-f9e432.json: side=32; pass=True; cells=9216; totalMs=55.0817. Native throughput only, not per-frame performance.
+REPLAY conversion-20260912-223741-081-5d8021.json: side=16; pass=True; cells=2304; totalMs=22.8504. Native throughput only, not per-frame performance.
+PS>TerminatingError(): "RETURN_TRACE: wrong claimed destination"
+>> TerminatingError(): "RETURN_TRACE: wrong claimed destination"
+PS>TerminatingError(): "RETURN_TRACE: changed or missing geometry"
+>> TerminatingError(): "RETURN_TRACE: changed or missing geometry"
+PS>TerminatingError(): "RETURN_TRACE: typed geometryUnchanged"
+>> TerminatingError(): "RETURN_TRACE: typed geometryUnchanged"
+PS>TerminatingError(): "RETURN_TRACE: plain loadout"
+>> TerminatingError(): "RETURN_TRACE: plain loadout"
+PS>TerminatingError(): "RETURN_TRACE: scope"
+>> TerminatingError(): "RETURN_TRACE: scope"
+PS>TerminatingError(): "RETURN_TRACE: interrupted attempt"
+>> TerminatingError(): "RETURN_TRACE: interrupted attempt"
+PS>TerminatingError(): "RETURN_TRACE: envelope"
+>> TerminatingError(): "RETURN_TRACE: envelope"
+PS>TerminatingError(): "RETURN_TRACE: tick sequence"
+>> TerminatingError(): "RETURN_TRACE: tick sequence"
+PS>TerminatingError(): "RETURN_TRACE: setup position"
+>> TerminatingError(): "RETURN_TRACE: setup position"
+PS>TerminatingError(): "RETURN_TRACE: attempt not exercised"
+>> TerminatingError(): "RETURN_TRACE: attempt not exercised"
+PS>TerminatingError(): "RETURN_TRACE: sample health"
+>> TerminatingError(): "RETURN_TRACE: sample health"
+PS>TerminatingError(): "RETURN_TRACE: attempt not exercised"
+>> TerminatingError(): "RETURN_TRACE: attempt not exercised"
+PS>TerminatingError(): "RETURN_TRACE: missing controls"
+>> TerminatingError(): "RETURN_TRACE: missing controls"
+PS>TerminatingError(): "RETURN_TRACE: changed or missing geometry"
+>> TerminatingError(): "RETURN_TRACE: changed or missing geometry"
+PS>TerminatingError(): "RETURN_TRACE: typed Jump"
+>> TerminatingError(): "RETURN_TRACE: typed Jump"
+PASS synthetic incomplete-attempt parser and 15 rejected controls. Not native traversal.
+{
+  "evidenceValid": true,
+  "routeReached": false,
+  "ticks": 360,
+  "rightTicks": 65,
+  "jumpHeldTicks": 105,
+  "risingTicks": 123,
+  "fallingTicks": 106,
+  "highestRisePixels": 98.07180000000005,
+  "toothContactTicks": 0,
+  "lifeBefore": 100,
+  "lifeAfter": 100,
+  "geometryUnchanged": true,
+  "scope": "Recorded bounded attempt only. Incomplete attempt is NOT proof of impossible traversal, forced gear, manual feel or difficulty approval."
+}
+PS>TerminatingError(): "RETURN_TRACE: wrong claimed destination"
+>> TerminatingError(): "RETURN_TRACE: wrong claimed destination"
+PS>TerminatingError(): "RETURN_TRACE: changed or missing geometry"
+>> TerminatingError(): "RETURN_TRACE: changed or missing geometry"
+PS>TerminatingError(): "RETURN_TRACE: typed geometryUnchanged"
+>> TerminatingError(): "RETURN_TRACE: typed geometryUnchanged"
+PS>TerminatingError(): "RETURN_TRACE: plain loadout"
+>> TerminatingError(): "RETURN_TRACE: plain loadout"
+PS>TerminatingError(): "RETURN_TRACE: scope"
+>> TerminatingError(): "RETURN_TRACE: scope"
+PS>TerminatingError(): "RETURN_TRACE: interrupted attempt"
+>> TerminatingError(): "RETURN_TRACE: interrupted attempt"
+PS>TerminatingError(): "RETURN_TRACE: envelope"
+>> TerminatingError(): "RETURN_TRACE: envelope"
+PS>TerminatingError(): "RETURN_TRACE: tick sequence"
+>> TerminatingError(): "RETURN_TRACE: tick sequence"
+PS>TerminatingError(): "RETURN_TRACE: setup position"
+>> TerminatingError(): "RETURN_TRACE: setup position"
+PS>TerminatingError(): "RETURN_TRACE: attempt not exercised"
+>> TerminatingError(): "RETURN_TRACE: attempt not exercised"
+PS>TerminatingError(): "RETURN_TRACE: sample health"
+>> TerminatingError(): "RETURN_TRACE: sample health"
+PS>TerminatingError(): "RETURN_TRACE: attempt not exercised"
+>> TerminatingError(): "RETURN_TRACE: attempt not exercised"
+PS>TerminatingError(): "RETURN_TRACE: missing controls"
+>> TerminatingError(): "RETURN_TRACE: missing controls"
+PS>TerminatingError(): "RETURN_TRACE: changed or missing geometry"
+>> TerminatingError(): "RETURN_TRACE: changed or missing geometry"
+PS>TerminatingError(): "RETURN_TRACE: typed Jump"
+>> TerminatingError(): "RETURN_TRACE: typed Jump"
+PASS synthetic incomplete-attempt parser and 15 rejected controls. Not native traversal.
+{
+  "evidenceValid": true,
+  "routeReached": false,
+  "ticks": 360,
+  "rightTicks": 65,
+  "jumpHeldTicks": 105,
+  "risingTicks": 123,
+  "fallingTicks": 106,
+  "highestRisePixels": 98.07180000000005,
+  "toothContactTicks": 0,
+  "lifeBefore": 100,
+  "lifeAfter": 100,
+  "geometryUnchanged": true,
+  "scope": "Recorded bounded attempt only. Incomplete attempt is NOT proof of impossible traversal, forced gear, manual feel or difficulty approval."
+}
+{
+  "pass": true,
+  "route": "entry",
+  "plainBaseline": true,
+  "ticks": 119,
+  "airborneTicks": 46,
+  "toothContactTicks": 0,
+  "lifeBefore": 18,
+  "lifeAfter": 18,
+  "scope": "Trace validation of one named route with existing equipment. Not return traversal, full descent, independent engine simulation, manual feel or difficulty acceptance."
+}
+**********************
+PowerShell transcript end
+End time: 20260912225108
+**********************

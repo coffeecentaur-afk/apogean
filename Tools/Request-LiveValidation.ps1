@@ -5,8 +5,9 @@ param(
 	[string]$TModLoaderRoot = (Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games/Terraria/tModLoader')
 )
 
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
 $captureDirectory = Join-Path $TModLoaderRoot 'Captures'
-$requestPath = Join-Path $captureDirectory 'ApogeanLiveValidation.request'
 New-Item -ItemType Directory -Path $captureDirectory -Force | Out-Null
-Set-Content -LiteralPath $requestPath -Value $Fixture -Encoding ascii -NoNewline
-Write-Host "Requested Apogean live-validation fixture '$Fixture' at $requestPath"
+& (Join-Path $PSScriptRoot 'Publish-QARequest.ps1') -Request $Fixture -CaptureDirectory $captureDirectory
+Write-Host "Requested Apogean live-validation fixture '$Fixture'; inspect actual consumption."

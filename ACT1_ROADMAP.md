@@ -2,6 +2,23 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+Final regression checkpoint, September13: all80 scripts ran;79 pass, with only
+the generic HD V0 BackgroundProductionReadiness gate RED. Compile-only finishes
+0 warnings/0 errors. Complete child output and34 archived native report replays
+are retained under Art/Validation/MawPassGate-2026-09-13. Sixteen saved records
+remain unchanged; AA package2450BDD2 is still installed, QA saved/game closed.
+User-facing review: MAW_REVIEW_2026-09-12.md. Exact resume/build/scope instructions:
+HANDOFF_2026-09-12.md. Next art/readability and actual-placement gates need review;
+no automatic full-biome promotion or resumed art loop.
+
+03:41UTC September13: AB/AC repair the stale static tree/fixture contracts and
+ten legacy request senders. Actual v3/v1/v2 CLI checks, declaration mutation
+controls and twelve isolated wrapper cases pass; no texture or runtime change.
+The earlier full gate now has only the known background-production RED. Final
+All/build and archived-native replay transcripts are being retained under
+Art/Validation/MawPassGate-2026-09-13. Next: final regressions, user review guide
+and checkpoint; no new art/biome branch during the reserved final hour.
+
 03:18UTC September13: AA adds a passive native inventory preview, not new art.
 Two native runs display rib/cap beside vanilla stone/dirt with matching16px
 footprints and centered hooks. Prior UI scale restores; explicit stop and

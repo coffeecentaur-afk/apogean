@@ -12,6 +12,13 @@ or authorize normal-world replacement. See `MAW_RIB_CONTOUR_CONTRACT.md`.
 
 ## Reusable engine/tooling authorization
 
+September13 item-preview follow-up: native inventory comparison now confirms
+the rib/cap icons' centered 16px footprint beside vanilla controls. Appearance
+approval remains the user's; ground-item rendering and manual use stay separate.
+Tools may repair stale validation contracts only against preserved reviewed
+assets and real failing controls, never by changing art to satisfy an obsolete
+color-count test. See Art/Validation/MawPassGate-2026-09-13.
+
 September13 candidate pickup evidence: harmless structural rib and full fiber
 cap now have separate QA-only recoverable item bindings. Keep their existing
 mining strength and texture identity; no recipe, economy or progression decision

@@ -78,6 +78,29 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- Final regression checkpoint,03:56UTC September13: complete child stdout/stderr
+  captures all80 scripts,79 pass/only generic BackgroundProductionReadiness RED;
+  compile-only0 warnings/errors. The prior Start-Transcript driver log omitted
+  child output and is explicitly labeled incomplete. Thirty-four old native
+  reports replay consistently, including interrupted/incomplete verdicts.
+  Review caught a duplicate-value negative masked by missing fixtures; full-set
+  duplicate now rejects a duplicate-check-disabled in-memory helper mutant.
+  Final native TagIO reread16/16 equal. AA package still2450BDD2, actual rib v1
+  mirror identity verified, real queues empty/no Terraria window. Review guide
+  and technical handoff written; no new game/art/production/regular-world change.
+
+- AB/AC,03:26–03:41UTC September13: static gate repair, not new artwork.
+  AB All+Build finishes clean compile and only BackgroundProductionReadiness
+  RED. The actual 41-case sender retains the original28; AST contract replaces
+  brittle exact-text matching. Reviewed v3 hashes/native socket/contour checks
+  replace obsolete eight-color minimum; actual v1/v2 rejected, no pixels changed.
+  Thirty-four malformed declarations plus isolated option guard rejected.
+  AC reproduces pending-command overwrite in Temp, then migrates ten wrappers
+  to closed-stage/no-overwrite publication across three explicit queues.
+  Twelve real wrapper cases and invalid-path/isolation controls pass. Real game
+  queue untouched; client remains closed after AA. Final all-gate and archived
+  native evidence replays retained in Art/Validation/MawPassGate-2026-09-13.
+
 - AA,03:17–03:18UTC September13:2450BDD2 pinned package, clean build,
   unchanged466+7+1 art/map pins. Passive native ItemSlot preview on four
   detached items records two correct16x16 candidate hooks, scale1, centered

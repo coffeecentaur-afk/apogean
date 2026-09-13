@@ -5,6 +5,7 @@ param(
     [string]$TModLoaderRoot = (Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games/Terraria/tModLoader')
 )
 # The in-engine receiver additionally requires the named disposable SP world.
-$request = Join-Path $TModLoaderRoot 'Captures/ApogeanLiveValidation.request'
-Set-Content -LiteralPath $request -Value "wastes-camera-$Case" -Encoding ascii -NoNewline
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+& (Join-Path $PSScriptRoot 'Publish-QARequest.ps1') -Request "wastes-camera-$Case" -CaptureDirectory (Join-Path $TModLoaderRoot 'Captures')
 Write-Host "Requested live camera $Case; ordinary holds expire after 1800 ticks; pan sweeps use 1800 ticks plus a 600-tick endpoint hold."

@@ -1,0 +1,402 @@
+GATE: Tools/Test-AuthoringStatus.ps1
+PASS: 62 authoring families have evidence-consistent Wayfinder states.
+GATE: Tools/Test-VersionedSkills.ps1
+PASS: 8 installed authoring skills match their Git-versioned snapshots.
+GATE: Tools/Test-GeneratorOwnership.ps1
+PASS: the legacy broad generator cannot invoke focused Kessler, Helix, Wastes, or Maw asset families.
+GATE: Tools/Test-TreeProductionReadiness.ps1
+PASS: tree sheets satisfy dimensions, hard alpha, palette, sparse leafless mass, and trunk-matched top-socket contracts. Live grove validation is still required.
+PASS: muted five-color wood, unchanged trunk/top silhouettes, solid smooth branch shafts, six-pixel mirrored pivots and intact sockets. Appearance and live behavior still require review.
+PASS: the fixture-pass tree candidate uses segmented ModTree assets, a validated trunk-matched top socket, and no global whole-tree/root overlay. Fresh-world distribution and user review remain required.
+GATE: Tools/Test-ApprovedTreeContract.ps1
+PASS: tree sheets satisfy dimensions, hard alpha, palette, sparse leafless mass, and trunk-matched top-socket contracts. Live grove validation is still required.
+PASS: muted five-color wood, unchanged trunk/top silhouettes, solid smooth branch shafts, six-pixel mirrored pivots and intact sockets. Appearance and live behavior still require review.
+PASS: the fixture-pass tree candidate uses segmented ModTree assets, a validated trunk-matched top socket, and no global whole-tree/root overlay. Fresh-world distribution and user review remain required.
+PASS: historical v1 refused as production v3; no pixels edited.
+PASS: historical v2 refused as production v3; no pixels edited.
+PASS current production/v1/v2 through the actual validator CLI. Static identity/topology only, not fresh native behavior.
+GATE: Tools/Test-WastesTerrainAtlases.ps1
+ATLAS: Content/Tiles/WastesSoil.png
+TMODLOADER ATLAS: PASS — 288x270, 44104 opaque pixels, 5 colors
+ATLAS: Content/Walls/WastesDirtWallUnsafe.png
+TMODLOADER ATLAS: PASS — 468x180, 28864 opaque pixels, 5 colors
+ATLAS: Content/Tiles/WastesGrass.png
+TMODLOADER ATLAS: PASS — 288x1980, 97004 opaque pixels, 11 colors
+ATLAS: Content/Walls/WastesGrassWallUnsafe.png
+TMODLOADER ATLAS: PASS — 468x180, 26776 opaque pixels, 5 colors
+ATLAS: Content/Tiles/WastesStone.png
+TMODLOADER ATLAS: PASS — 288x270, 44104 opaque pixels, 10 colors
+ATLAS: Content/Walls/WastesStoneWallUnsafe.png
+TMODLOADER ATLAS: PASS — 468x180, 28864 opaque pixels, 6 colors
+ATLAS: Content/Tiles/WastesSand.png
+TMODLOADER ATLAS: PASS — 288x270, 44192 opaque pixels, 11 colors
+ATLAS: Content/Walls/WastesSandWallUnsafe.png
+TMODLOADER ATLAS: PASS — 468x180, 28864 opaque pixels, 5 colors
+ATLAS: Content/Tiles/WastesIce.png
+TMODLOADER ATLAS: PASS — 288x270, 44036 opaque pixels, 11 colors
+ATLAS: Content/Walls/WastesIceWallUnsafe.png
+TMODLOADER ATLAS: PASS — 468x180, 30528 opaque pixels, 6 colors
+ATLAS: Content/Tiles/WastesSnow.png
+TMODLOADER ATLAS: PASS — 288x270, 44048 opaque pixels, 9 colors
+ATLAS: Content/Walls/WastesSnowWallUnsafe.png
+TMODLOADER ATLAS: PASS — 468x180, 28864 opaque pixels, 5 colors
+ATLAS: Content/Tiles/WastesMud.png
+TMODLOADER ATLAS: PASS — 288x270, 44104 opaque pixels, 10 colors
+ATLAS: Content/Walls/WastesMudWallUnsafe.png
+TMODLOADER ATLAS: PASS — 468x180, 28864 opaque pixels, 6 colors
+PASS: all 14 Wastes terrain atlases match native topology, dimensions, hard alpha, palette limits and grass white-mask locations. Slope/merge appearance still needs live inspection.
+GATE: Tools/Test-MawStructuralWall.ps1
+Structural-wall resolver: three paths / five rejected defects. Packed atlas acceptance remains separate.
+Checking structural wall atlas: C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\Content\Walls\MawDirtWallUnsafe.png
+TMODLOADER ATLAS: PASS — 468x180, 28864 opaque pixels, 5 colors
+MAW STRUCTURAL WALL: PASS (production fallback native dirt-wall topology; packed QA/native scene review is separate).
+GATE: Tools/Test-MawFang.ps1
+PASS: four rotations, 20 frame roundtrips, invalid frames rejected, 1280 independent pixel geometry cases, sloped contact.
+GATE: Tools/Test-MawFangValidator.ps1
+PASS: four rotations, 20 frame roundtrips, invalid frames rejected, 1280 independent pixel geometry cases, sloped contact.
+PASS: exact 54x216 occupancy, hard alpha, zero-RGB padding, 8 opaque colors. Art and native physics still require review.
+PASS: actual validator rejected wrong-size
+PASS: actual validator rejected opaque-padding
+PASS: actual validator rejected soft-alpha
+PASS: actual validator rejected missing-tip
+PASS: actual validator rejected dirty-transparent-rgb
+Five deliberately defective atlases rejected. Test artifacts retained: C:\Users\max_h\AppData\Local\Temp\ApogeanFangNegative-2a85fe97f67448dd9b87e73bd22a0ed9
+GATE: Tools/Test-RigidPlantAtlas.ps1
+PASS: rejects alpha damage.
+PASS: rejects color damage.
+PASS DeadTuft: 2048 native atlas pixels exactly reproduce the approved whole sprite.
+PASS WastesBristle: 4608 native atlas pixels exactly reproduce the approved whole sprite.
+PASS WastesRootShrub: 4608 native atlas pixels exactly reproduce the approved whole sprite.
+GATE: Tools/Test-ReportedVisualRegressions.ps1
+REPORTED VISUAL REGRESSIONS: PASS
+GATE: Tools/Test-SurfaceRegression.ps1
+SURFACE REGRESSION: PASS
+GATE: Tools/Test-PackedMawMaterials.ps1
+PASS 24 packed tile/wall atlases; 148945920 reconstructed native-frame pixels checked. Not native render acceptance.
+GATE: Tools/Test-PackedMaterialMap.ps1
+PASS actual runtime lookup: 1326272 exhaustive frame/phase/bounds/invalid-metadata checks.
+GATE: Tools/Test-PackedMaterialMutations.ps1
+PASS packed compiler control: positive
+PASS packed compiler control: alpha
+PASS packed compiler control: white
+PASS packed compiler control: guard
+PASS packed compiler control: wrongPhase
+PASS packed compiler control: dimensions
+PASS packed compiler control: badIndex
+PASS packed compiler control: wallOverlap
+PASS 8 compiler controls (not CLI provenance controls). Retained in C:\Users\max_h\AppData\Local\Temp\ApogeanPackedControls-218efa3269254ef2afa368bab6f6127d
+GATE: Tools/Test-QAAssetSnapshotMutations.ps1
+PASS actual CLI continuity control: positive
+PASS actual CLI continuity control: changed
+PASS actual CLI continuity control: missing
+PASS actual CLI continuity control: unexpected
+PASS actual CLI continuity control: duplicate
+PASS actual CLI continuity control: traversal
+PASS actual CLI continuity control: invalidHash
+Seven controls retained at C:\Users\max_h\AppData\Local\Temp\ApogeanAssetContinuityControls-4197d8d62f5f459590eacf1838343c37; no real asset modified.
+GATE: Tools/Test-MawNativeSuite.ps1
+PASS suite CLI control: valid
+PASS suite CLI control: stale-only
+PASS suite CLI control: native-reject
+PASS suite CLI control: sand-without-physics
+PASS suite CLI control: missing-completion
+PASS suite CLI control: sender-failure
+PASS suite CLI control: existing-evidence
+PASS 7 isolated suite controls. No native requests sent; retained scratch: C:\Users\max_h\AppData\Local\Temp\ApogeanSuiteControls-1fa83b05e34c4de480f1851310fd1cfb
+GATE: Tools/Test-MawFiberGrowthPolicy.ps1
+PASS 38 pure-policy checks; 16 perimeter cells, four faces, buried soil preserved. Not native framing, vines, ecology rate, multiplayer or worldgen approval.
+GATE: Tools/Test-MawAnatomyPlan.ps1
+PASS 2962 anatomy layout checks and broken-shaft negative; no native collision/visual claim.
+GATE: Tools/Test-MawAnatomyCandidate.ps1
+PASS rib: 4976640 independently replayed native mask pixels. Not visual acceptance.
+PASS cap: 36495360 independently replayed native mask pixels. Not visual acceptance.
+GATE: Tools/Test-MawAnatomyMutations.ps1
+PASS actual CLI control: positive
+PASS actual CLI control: rib-alpha
+PASS actual CLI control: cap-alpha
+PASS actual CLI control: guard
+PASS actual CLI control: index
+PASS 5 controls; malformed candidates retained only in C:\Users\max_h\AppData\Local\Temp\ApogeanAnatomyControls-049c0b7844a9477cb5b704005e24ab57
+GATE: Tools/Test-MawHangingFiberCandidate.ps1
+PASS 16x96 strand; 18x108 ordered sheet; 506 connected opaque pixels; hard alpha, no matte color; two deliberate broken-input controls. Native draw still required.
+GATE: Tools/Test-MawAmberEmission.ps1
+PASS 785 emission lookup/monotonic activity assertions and six corrupt-input controls. No native lighting claim.
+GATE: Tools/Test-MawAmberCompiler.ps1
+Amber tile: 1 emitting and 1 quiet packed cells. Native alpha + explicit palette; cell-level light, not per-pixel rays.
+Amber wall: 1 emitting and 1 quiet packed cells. Native alpha + explicit palette; cell-level light, not per-pixel rays.
+PASS actual amber compiler CLI: exact 2/0 terrain,3/0 wall counts; alpha, gutters, central overlap and quiet-source rejection. Synthetic fixtures only; not native lighting.
+GATE: Tools/Test-MawShallowTraversalPlan.ps1
+PASS shallow traversal pure plan: 11930 assertions; 10 rejected exported-plan defects; 20x42 swept-body and point-only negative controls. No native movement, damage, art or worldgen claim.
+GATE: Tools/Test-MawShallowMotionTrace.ps1
+PASS three synthetic trace-validator baselines and twenty-eight rejected defects. No native game evidence.
+GATE: Tools/Test-MawShallowReturnInputs.ps1
+PASS 1458 pure input decisions plus held-jump negative control. Not native jumping, route viability or gameplay approval.
+GATE: Tools/Test-MawShallowReturnTrace.ps1
+PASS synthetic incomplete-attempt parser and 15 rejected controls. Not native traversal.
+GATE: Tools/Test-MawShallowQaScope.ps1
+PASS 1011 pure QA context/request/preview boundary checks. Native behavior is separate.
+GATE: Tools/Test-MawEvidenceRenderFailures.ps1
+Exported 2 scoped native records. Existing evidence is never overwritten.
+PASS: two request completions plus four independent draw failures retained; unrelated data excluded; overwrite refused. Synthetic exporter test, not native render approval.
+GATE: Tools/Test-CloseBackgroundDimensions.ps1
+PASS 565 close-texture dimension/stride checks. Native cache repair, loading and visual checks remain separate.
+GATE: Tools/Test-QAHistoryCoverage.ps1
+PASS 56 actual history-report checks. Counts known coordinates only; not native tile preservation.
+GATE: Tools/Test-MawRopeEvidence.ps1
+PASS 18 rope-report rejection controls and retained partial-failure control. Does not independently prove native state.
+PASS 10 schema2 binding/replacement defects; schema1 kept without retrospective guarantees.
+GATE: Tools/Test-MawRopeClimbScope.ps1
+PASS 525 actual rope-scope and bounded-input policy checks. Not native movement or cleanup evidence.
+GATE: Tools/Test-MawRopeClimbEvidence.ps1
+PASS 24 corrupt-climb-report rejection controls, matched no-rope and retained partial controls. Synthetic checker tests only.
+GATE: Tools/Test-MawRopeItemUsePlan.ps1
+PASS 28891 scope/geometry/control checks; not native item-use, reach or consumption proof.
+GATE: Tools/Test-MawRopeItemUseEvidence.ps1
+PASS seven synthetic variants/32 corrupted reports/retained partial. Native item-use still separate.
+GATE: Tools/Test-MawItemPreview.ps1
+PASS 36 actual-draw-body dispatch/exception checks and wrong-restoration negative. API doubles only, not native icon evidence.
+GATE: Tools/Test-MawItemPreviewEvidence.ps1
+PASS one synthetic baseline and16 malformed-report controls. Geometry validation only, not screenshot/scale restoration proof.
+GATE: Tools/Test-MawRibContour.ps1
+PASS 642664 rib contour/pixel/mirror checks; old notches rejected. Not a native render or collision verdict.
+GATE: Tools/Test-MawToothPlacement.ps1
+PASS: 37 checks against the runtime C# policy. Rounded backs follow facing; wall points away vertically; exact-height tie points up.
+GATE: Tools/Test-MawClusterPlayerCurves.ps1
+PASS: 119808 exact atlas/padding pixels,32768 contact samples,16384 wall projections; all eight curves; original saved frames unchanged.
+GATE: Tools/Test-MawPlayerCurveValidators.ps1
+PASS: actual atlas validator rejects padding
+PASS: actual atlas validator rejects contact
+PASS: actual atlas validator rejects wrong-curve
+PASS: actual atlas validator rejects missing-inset
+PASS: actual atlas validator rejects metadata
+PASS: runtime policy test rejects tip-follows-facing
+PASS: runtime policy test rejects wall-always-up
+PASS: original art preserved; mirrored wall curves; 16384 masks,59904 atlas pixels and8192 native centered-cell projections.
+Compiled eight placement curves; legacy frames, rooted sockets and original colors unchanged. This is NOT simplified-art approval.
+PASS: deterministic replay and both output refusals. Seven real-CLI negative controls retained at C:\Users\max_h\AppData\Local\Temp\ApogeanCurveControls-0e30d0aa5e2145aca526992c408b9407
+GATE: Tools/Test-MawCaveDryMask.ps1
+PASS: 430080 comparisons of actual dry-mask arithmetic against independent 5x5 occupancy; all-dry, all-wet, exterior edges, seeded sparse layouts; missing-column mutation rejected. Not a native renderer/liquid-edge visual pass.
+GATE: Tools/Test-MawCaveOverlayGuard.ps1
+PASS: 80 real guard method/stub-manager cases; only scheduled membership rejects; own overlay is permitted. Original visible-but-unscheduled policy fails. Installed manager field layout still requires native verification.
+GATE: Tools/Test-QAPerformanceStatistics.ps1
+PASS 11 timing statistics controls; includes outlier, invalid data and unused-buffer guards. No native performance verdict.
+GATE: Tools/Test-QARequestPublication.ps1
+Published complete request qa-perf-snapshot. Await a fresh native result.
+Published complete request view. Await a fresh native result.
+Published complete request view. Await a fresh native result.
+PASS old writer reproduces read failure; all three queues publish closed payloads, preserve pending requests and refuse unknown paths. Temporary evidence retained; game queue untouched.
+GATE: Tools/Test-QASharedWallAssets.ps1
+PASS shared-wall contract: grass/soil PNG and frame-map bytes match exactly. Runtime identity still requires native snapshot.
+PASS actual shared-wall CLI rejects texture AND map divergence. Independent temporary fixtures retained.
+GATE: Tools/Test-LegacyQARequestSenders.ps1
+Requested Apogean live-validation fixture 'conversion'; inspect actual consumption.
+PASS Request-LiveValidation.ps1 / conversion: pending preserved, exact closed payload, no staging leftover.
+Requested live camera ground; ordinary holds expire after 1800 ticks; pan sweeps use 1800 ticks plus a 600-tick endpoint hold.
+PASS Request-WastesCameraCheck.ps1 / wastes-camera-ground: pending preserved, exact closed payload, no staging leftover.
+Requested arrival-pod-day (gg / disposable QA world / single-player only).
+PASS Request-ArrivalPodValidation.ps1 / arrival-pod-day: pending preserved, exact closed payload, no staging leftover.
+Queued maw-bone-test. Only gg in Apogee Native Visual V3 single-player may consume it.
+Wait for consumption and inspect client.log before the next request. An unfocused game may pause; a queued request is not a test pass.
+PASS Request-MawBoneValidation.ps1 / maw-bone-test: pending preserved, exact closed payload, no staging leftover.
+Queued maw-cluster-orientation-test; require gg/V3/SP and verify consumption.
+PASS Request-MawClusterValidation.ps1 / maw-cluster-orientation-test: pending preserved, exact closed payload, no staging leftover.
+Queued qa-save-and-quit; require gg/V3/SP and verify consumption.
+PASS Request-MawClusterValidation.ps1 / qa-save-and-quit: pending preserved, exact closed payload, no staging leftover.
+PASS Request-MawFamilyValidation.ps1 / maw-family-row1: pending preserved, exact closed payload, no staging leftover.
+PASS Request-MawMaterialValidation.ps1 / maw-material-test: pending preserved, exact closed payload, no staging leftover.
+Queued maw-tooth-art-day. Require gg / V3 / SP, then inspect actual consumption. Art only.
+PASS Request-MawToothArtValidation.ps1 / maw-tooth-art-day: pending preserved, exact closed payload, no staging leftover.
+Queued qa-save-and-quit. Require gg / V3 / SP, then inspect actual consumption. Art only.
+PASS Request-MawToothArtValidation.ps1 / qa-save-and-quit: pending preserved, exact closed payload, no staging leftover.
+Requested survey. Only gg in a disposable Apogee Arrival QA world can consume it. No terrain construction.
+PASS Request-MawEntranceValidation.ps1 / survey: pending preserved, exact closed payload, no staging leftover.
+Requested view; requires gg in a new Apogee Arrival QA world. Never edits terrain.
+PASS Request-ArrivalSiteValidation.ps1 / view: pending preserved, exact closed payload, no staging leftover.
+PASS 12 actual sender cases in C:\Users\max_h\AppData\Local\Temp\ApogeanLegacySenders-1f8f2a8c53dd4df3b5c58a0650a5afee; real game queue untouched.
+GATE: Tools/Test-QACameraSweep.ps1
+PASS 12811 camera path assertions (sampled bounds/continuity, static control, finite expiry). Synthetic camera only, not native movement evidence.
+GATE: Tools/Test-QAPerformanceEvidence.ps1
+PASS independent timing replay and 11 optimistic-report rejection controls. Not a performance acceptance threshold.
+GATE: Tools/Test-QABatchPlan.ps1
+PASS 7759 finite batch partition assertions. Native timings and update scheduling are separate.
+GATE: Tools/Test-MawConversionEvidence.ps1
+PASS conversion report replay: 16 rejection controls and retained partial-failure control. Does not independently prove native world state.
+GATE: Tools/Test-MawGrowthLoadPlan.ps1
+PASS 1978320 fixed-grid/budget/context comparisons (mostly unchanged-cell checks). No native growth, performance or visual proof.
+GATE: Tools/Test-MawGrowthEvidence.ps1
+PASS four synthetic budget/idle cases, 27 rejected reports and retained partial evidence. Not native performance proof.
+PASS eight schema2 layout/budget cases, six layout/frontier rejection controls and retained saturated partial.
+GATE: Tools/Test-QAWorldPersistence.ps1
+PASS 240 actual-hook cases, each with two round trips, foreign/null-world guards. Existing metadata only; no new fixture creation.
+GATE: Tools/Test-QAExitDispatch.ps1
+PASS 75 shared-dispatch ordering checks and 7 omitted-release controls. Not native view restoration, outer authorization or engine saving proof.
+GATE: Tools/Test-MaskedBackgroundExport.ps1
+PASS real export CLI: transparent exterior/window, preserved gray/white art and one-pixel bridge.
+PASS pinned inputs reproduce the exact PNG hash and measured report.
+PASS real export CLI rejects hash
+PASS real export CLI rejects softMask
+PASS real export CLI rejects maskHash
+PASS real export CLI rejects dimensions
+PASS real export CLI rejects colored
+PASS real export CLI rejects gray
+PASS real export CLI rejects softSource
+PASS real export CLI rejects empty
+PASS real export CLI rejects full
+PASS real export CLI rejects overwrite
+PASS real export CLI rejects reportCollision
+GATE: Tools/Test-WastesCityMask.ps1
+PASS actual city: 6926 recorded edge-color changes; zero interior/lower-earth changes; exact masked export.
+GATE: Tools/Test-WastesHeightLock.ps1
+PASS: 179811 actual-projection speed, depth, ground, no-fade, exit and statelessness checks. Not native comfort approval.
+GATE: Tools/Test-WastesForegroundDepth.ps1
+PASS: 1731 Close-depth assertions. This is the user's farther-back parallax trial, not final comfort or production approval.
+GATE: Tools/Test-WastesRunningLiveValidator.ps1
+PASS: running-trace validator control valid
+PASS: running-trace validator control old-depth
+PASS: running-trace validator control false-zero-failures
+PASS: running-trace validator control no-diagonal-rise
+PASS: running-trace validator control missing-result
+Synthetic validator-only evidence at C:\Users\max_h\AppData\Local\Temp\ApogeanRunTraceControls-62f57717de8140448b32976d93bd3957. Not native test results.
+GATE: Tools/Test-WastesTelemetryExport.ps1
+Exported 8 QA-only records. Original log unchanged.
+PASS: eight diagnostic record types preserved exactly; private/unknown startup records excluded; source and overwrite protection preserved.
+Synthetic exporter-only fixtures: C:\Users\max_h\AppData\Local\Temp\ApogeanTelemetryExport-4e41456e73b34a979e361912f7e5271d
+GATE: Tools/Test-WastesRuinLayoutValidator.ps1
+PASS: 176 independent bank enumeration cases; 32% fewer landmarks, >=459px open intervals, unchanged asset sizes/order and no movement randomization. Not a render proof.
+PASS: rejected MissingGroup via layout CLI
+PASS: rejected PhaseJump via layout CLI
+PASS: rejected WrongAsset via layout CLI
+PASS: rejected OldDensity via layout CLI
+Static layout/validator proof only; no native composition approval.
+GATE: Tools/Test-WastesFixedSections.ps1
+PASS: 5799 fixed-section assertions plus live-call wiring guard. Synthetic terrain; native horizontal/diagonal proof still required.
+GATE: Tools/Test-WastesHeightMutations.ps1
+PASS: rejected tile-speed foreground
+PASS: rejected camera-close foreground
+PASS: rejected no exit excursion
+PASS: rejected abrupt response
+PASS: rejected depth order collapsed
+PASS: rejected early ground movement
+PASS: rejected ignores zoom
+PASS: rejected height fade returns
+PASS: rejected wrong section location
+PASS: rejected renderer bypass
+PASS: 10 incorrect camera/anchor mutations rejected. Temporary evidence retained at C:\Users\max_h\AppData\Local\Temp\ApogeanHeightMutations-ea774d0d0e24452cad768095db1837ea
+GATE: Tools/Test-ForestRestoration.ps1
+PASS: 25 forest-restoration policy checks. This is not live rendering evidence.
+GATE: Tools/Test-BackgroundHdContracts.ps1
+Surface HD background contracts passed: 9 biomes, 27 native-detail layers, hard alpha, exact seams, >=128 sampled colours, and 162.01 MiB total raw RGBA.
+GATE: Tools/Test-BackgroundProductionReadiness.ps1
+BACKGROUND PRODUCTION READINESS: RED
+ - Forest Mid is 1881x836; production target is at least 2048x720 native-detail source art
+ - Forest Close is 1921x819; production target is at least 2048x720 native-detail source art
+ - Desert Far is 1914x822; production target is at least 2048x720 native-detail source art
+ - Desert Mid is 1920x819; production target is at least 2048x720 native-detail source art
+ - Desert Close is 1918x820; production target is at least 2048x720 native-detail source art
+ - Jungle Far is 1920x819; production target is at least 2048x720 native-detail source art
+ - Jungle Mid is 1918x820; production target is at least 2048x720 native-detail source art
+ - Jungle Close is 1920x819; production target is at least 2048x720 native-detail source art
+ - Snow Far is 1919x820; production target is at least 2048x720 native-detail source art
+ - Snow Mid is 1919x820; production target is at least 2048x720 native-detail source art
+ - Snow Close is 1918x820; production target is at least 2048x720 native-detail source art
+ - Corruption Far is 1919x820; production target is at least 2048x720 native-detail source art
+ - Corruption Mid is 1919x820; production target is at least 2048x720 native-detail source art
+ - Corruption Close is 1919x820; production target is at least 2048x720 native-detail source art
+ - Crimson Far is 1915x821; production target is at least 2048x720 native-detail source art
+ - Crimson Mid is 1915x821; production target is at least 2048x720 native-detail source art
+ - Crimson Close is 1915x821; production target is at least 2048x720 native-detail source art
+ - Hallow Far is 1915x821; production target is at least 2048x720 native-detail source art
+ - Hallow Mid is 1915x821; production target is at least 2048x720 native-detail source art
+ - Hallow Close is 1915x821; production target is at least 2048x720 native-detail source art
+ - Ocean Far is 1672x941; production target is at least 2048x720 native-detail source art
+ - Ocean Mid is 1672x941; production target is at least 2048x720 native-detail source art
+ - Ocean Close is 1672x941; production target is at least 2048x720 native-detail source art
+ - Mushroom Far is 1672x941; production target is at least 2048x720 native-detail source art
+ - Mushroom Mid is 1672x941; production target is at least 2048x720 native-detail source art
+ - Mushroom Close is 1672x941; production target is at least 2048x720 native-detail source art
+ - renderer still stretches the final source row for vertical coverage; final layers need authored lower coverage
+GATE: Tools/Test-ArrivalPodNativePipeline.ps1
+PASS CLI rejects NATIVE_ART_MISSING
+PASS CLI rejects NATIVE_DIMENSIONS
+PASS CLI rejects SOFT_ALPHA
+PASS CLI rejects HIDDEN_MATTE_RGB
+PASS CLI rejects EXPORTER_KEY_COLOR
+PASS CLI rejects SILHOUETTE_OCCUPANCY
+PASS CLI rejects PALETTE_BUDGET
+PASS CLI rejects FLOATING_FOOT
+PASS CLI rejects DETACHED_PIXELS
+PASS CLI rejects FRAME_ROUNDTRIP
+PASS CLI rejects NONEMPTY_PADDING
+PASS CLI refuses existing candidate outputs
+PASS CLI refuses production Content output without creating the directory
+PASS CLI rejects COARSE_PIXEL_GRID
+PASS CLI rejects COARSE_PIXEL_GRID
+PASS CLI rejects COARSE_PIXEL_GRID
+PASS: both variants + repeated exports; 11 defective/missing inputs and 3 coarse-grid controls rejected; both variants refuse overwrite/Content. Original 5 image hashes and coarse 6 image/2 report hashes reproduced; 19 inputs/outputs preserved. Temporary controls: C:\Users\max_h\AppData\Local\Temp\ApogeanPodChecks-2d97eeb593744bb4874b63f33727f698
+GATE: Tools/Test-ArrivalPodFooting.ps1
+PASS: 80x96 art; 90x108 sheet; 30 cells round-trip exactly; 19 colors; 64 grounded pixels; one connected silhouette; 2-pixel grid. Static only, not native renderer proof.
+Footing candidate: upper88rows unchanged; generated metal-only strip fitted to 64x8 at (2,88); 2px grid. Static assembly, not live acceptance.
+PASS: old curved base and contact-hole CLI controls rejected; new flat base passes; 7040 upper pixels preserved; deterministic atlas replay; overwrite/Content refused; original pins unchanged. Scratch=C:\Users\max_h\AppData\Local\Temp\ArrivalPodFooting-441fa1561c844aa985d2de6dcba248bc
+GATE: Tools/Test-ArrivalPodLiveValidator.ps1
+PASS: baseline
+PASS: missing-start
+PASS: missing-cell
+PASS: duplicate-cell
+PASS: incomplete
+PASS: stale-success
+PASS: later-failure
+PASS: missing-guard
+PASS: no-reload
+PASS: wrong-reload
+PASS: archived native evidence plus 9 defective real-CLI controls. Synthetic mutations are validator tests only. Retained: C:\Users\max_h\AppData\Local\Temp\ApogeanPodLiveControls-50e90a2331a242fcae77c2d556ff2abe
+GATE: Tools/Test-ArrivalSitePlanner.ps1
+PASS: 561 real-planner shape, full-envelope obstacle, cavity, seed, spawn and fallback checks. Not native generation proof.
+GATE: Tools/Test-ArrivalSiteMutations.ps1
+REJECTED: missing-compact => NO_TREE_PRESERVING_COMPACT_SITE
+REJECTED: ignore-obstacle => IGNORED_OBSTACLE
+REJECTED: ignore-support => CAVITY_OPENED
+REJECTED: ignore-reservation => RESERVATION_BYPASS_OR_RETRY_LOOP
+REJECTED: ignore-spawn => SPAWN_ENVELOPE_CHANGED
+REJECTED: too-deep => FLAT_DIVOT
+REJECTED: partial-cover => PARTIAL_COVER_CUT
+PASS: 7 actual-source mutations rejected by the real planner suite. Scratch retained: C:\Users\max_h\AppData\Local\Temp\ApogeanArrivalMutations-bda22c0b55ff4a408de4129492e7854b
+GATE: Tools/Test-ArrivalSiteLiveValidator.ps1
+PASS validator control: valid
+PASS validator control: skip
+PASS validator control: late-failure
+PASS validator control: wet
+PASS validator control: moved-spawn
+PASS validator control: no-final
+PASS validator control: no-view
+PASS validator control: no-reload
+PASS: 1 valid sequence and 7 deliberately defective native logs tested through the actual CLI. Not game evidence.
+GATE: Tools/Test-HelixConstructionSet.ps1
+PASS: furniture sheet matches 2x1 TileObjectData, 1 style(s), and 1 animation frame(s).
+PASS: furniture sheet matches 3x4 TileObjectData, 1 style(s), and 4 animation frame(s).
+PASS: Helix structural tiles and walls preserve native topology, use bounded palettes, have one generator owner, and expose a dedicated live fixture.
+GATE: Tools/Test-WorldVisualIntegrity.ps1
+Surface HD background contracts passed: 9 biomes, 27 native-detail layers, hard alpha, exact seams, >=128 sampled colours, and 162.01 MiB total raw RGBA.
+PASS: tree sheets satisfy dimensions, hard alpha, palette, sparse leafless mass, and trunk-matched top-socket contracts. Live grove validation is still required.
+PASS: muted five-color wood, unchanged trunk/top silhouettes, solid smooth branch shafts, six-pixel mirrored pivots and intact sockets. Appearance and live behavior still require review.
+PASS: the fixture-pass tree candidate uses segmented ModTree assets, a validated trunk-matched top socket, and no global whole-tree/root overlay. Fresh-world distribution and user review remain required.
+WORLD VISUAL INTEGRITY: PASS
+GATE: Tools/Test-LiteralValidateSetContract.ps1
+PASS current/old/reordered+extended declarations and 34 malformed controls; actual gate uses the semantic checker. No QA requests sent.
+GATE: Tools/Test-BossAuthoringPipeline.ps1
+PASS: boss encounter spec contains progression, decision-readable attacks, multiplayer authority, loot, and a complete test matrix.
+PASS: the boss authoring pipeline rejects incomplete encounter state cards before AI implementation.
+GATE: Tools/Test-QuestDialoguePipeline.ps1
+PASS: quest spec defines availability, observable stages, recoverable rewards, dialogue fallback, multiplayer ownership, and failure recovery.
+PASS: the quest/dialogue pipeline rejects incomplete ownership, reward, recovery, and co-op contracts before implementation.
+GATE: C# compile only; no tmod install
+  apogean -> C:\Users\max_h\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\apogean\bin\Debug\net8.0\apogean.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.48
+C# compile only. No tmod packaging/install or art/runtime acceptance.
+
+APOGEAN All GATE: RED
+ - Tools/Test-BackgroundProductionReadiness.ps1

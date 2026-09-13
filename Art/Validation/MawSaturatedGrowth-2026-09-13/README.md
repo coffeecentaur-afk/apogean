@@ -47,7 +47,7 @@ not repaired or certified clean by this export.
 
 ## Environment and reusable checks
 
-tML2026.7.3.0 / Terraria1.4.4.9. Same31.1GiB reported RAM, RTX3090 setup as W;
+tML2026.7.3.0 / Terraria1.4.4.9. Same31.1GB reported RAM, RTX3090 setup as W;
 loaded content mods are Apogean0.1 and CheatSheet0.7.8.1. Startup announced an
 automatic SpiritReforged0.2.2.7→0.2.2.8 Workshop update, but the content-loading
 log confirms it is NOT enabled. No update/install was requested by this pass.
