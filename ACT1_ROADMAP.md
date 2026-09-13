@@ -2,7 +2,23 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
-Latest active request, September13: implement the user's mouth drawing as a
+Latest direction, September13 after native approval: preserve the drawing-led
+V1. Exposed upper bone is intentional escaped-growth anatomy. Next transfer its
+contours to seed-aware generation, with separated cave groups, smaller Node
+pockets instead of clustered caches, and no exposed surface backing-wall fringe.
+Production still uses legacy shelves/chambers; it has NOT inherited this look.
+Replace that path and its old traversal assumptions together, validate a bounded
+fresh-seed slice, then expand down to Stomach/intestine and author the Maw's own
+layered scenery. Native walls and parallax scenery have separate coverage tests.
+Detailed sequence: MAW_SKETCH_STUDY_2026-09-13.md, generation-transfer section.
+This follow-up changes documentation only; no QA rebuild or runtime promotion.
+
+Creative workflow agreed: use user-drawn layouts as briefs for future faction
+buildings, labs, depots and crash sites, with agent-authored assets and native
+mockups. Request sketches at meaningful layout ambiguities, not for every tile.
+This does not jump ahead of the current Maw slice; see AUTHORING_WORKFLOW.md.
+
+Completed September13 reference task: implement the user's mouth drawing as a
 separate 200×136 QA scene. Same-material branching rib roots, dense thorn teeth,
 thicker fiber and two amber-lit side-cave cache sites. Static plan, scope and
 save-exit tests pass. Native placement and save/reload pass; the user approved

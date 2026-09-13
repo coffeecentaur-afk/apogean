@@ -2,6 +2,19 @@
 
 This document is the binding creative and progression reference for the mod.  A feature that conflicts with it needs an explicit design decision before it is added.
 
+## Sketch-led creative direction
+
+September13: the user wants to supply rough MS Paint layouts for environments
+and structures, following the successful Maw drawing. Extend that collaboration
+to faction buildings, labs, abandoned depots and crash sites. Ask for a visual
+explanation when it would resolve an important design ambiguity; do not require
+one for routine implementation. The agent supplies cohesive materials/assets,
+native tile construction and testing while preserving the drawn relationships.
+Show a playable disposable mockup before multiplying the design into worldgen.
+Approved headquarters retain authored identity; procedural areas vary within
+accepted rules. A drawing does not override protected sites or progression.
+See AUTHORING_WORKFLOW.md for interpretation, testing and evidence rules.
+
 ## Provisional Maw contour evidence
 
 September13 drawing-led revision supersedes the porous-root direction below:
@@ -16,6 +29,18 @@ The user subsequently approved the in-game drawing-led V1 as looking perfect.
 Retain that actual scene, including its exposed upper-root contour; do not
 substitute the uninstalled deeper-root experiment. Approval covers its visual
 direction, not automatic production promotion or completed traversal balance.
+
+September13 follow-up: escaped bioengineering grows opportunistically. Exposed
+bone breaking through topsoil and uneven development are intentional, not flaws
+to smooth away; actual disconnected assets and framing gaps remain defects.
+Keep the approved scene intact. In generated variants, spread independent cave
+groups farther apart, let winding connectors reach smaller Node pockets instead
+of adding a chest to every room, and keep caches sparse. Nodes are feeding/spread
+organs, distinct from Brood Nests. Preserve thick fiber and its terrain blending
+without an exposed backing-wall fringe above the surface. Carry this anatomy
+down to the Stomach above Hell and its enclosed intestinal continuation, then
+author the Maw's own layered backgrounds using the proven camera/coverage
+workflow. See the generation-transfer section of MAW_SKETCH_STUDY_2026-09-13.md.
 
 September12 provisional Maw contour evidence: retain the uninterrupted tapered
 shaft direction, porous roots and native hammered points. A separate old/new

@@ -8,6 +8,54 @@ existing QA tools. These are not implemented gates yet. No new editor/library
 or automatic visual approval is implied. Add the smallest reusable check while
 solving the next family; do not turn workflow improvement into an engine detour.
 
+## Sketch-led collaboration — September13
+
+The user explicitly prefers the successful MS Paint layout workflow for creative
+direction. Apply it to Maw anatomy, faction headquarters, abandoned depots, labs,
+crash sites and other authored places. The user owns creative layout intent;
+the agent translates it into coherent assets, native tile construction and
+tested behavior. Sketches are useful design briefs, not pixel-perfect atlases.
+
+- Ask for a rough drawing when a spatial/art question remains genuinely unclear
+  or repeated prose revisions are not resolving it. Do not require a drawing
+  for every detail or block independent technical work while awaiting one.
+- A color legend and labels are enough. Helpful optional marks: entrances/exits,
+  rooms, hazards, loot, NPC areas, locked sections, terrain surface and one player
+  silhouette or approximate scale. Do not make the user produce technical plans.
+- First restate the intended relationships and identify only consequential
+  unknowns. A sketch's colors usually identify functions; they are not automatic
+  palette replacements. Preserve the approved art direction and existing lore.
+- Use tested tile/material/furniture families where possible; make missing assets
+  through the relevant authoring workflow. A diagram is not an engine texture.
+  Resolve grid sizes, slopes, object anchors, wall coverage, doors, supports and
+  collision without silently changing the user's silhouette or room purpose.
+- Build one bounded, disposable in-game mockup from the drawing. Let the user
+  move normally and inspect at player scale; distinguish optional inspection
+  lighting and empty loot markers from shipping behavior. Preserve prior scenes.
+- Once accepted, freeze that reference. For headquarters, retain the authored
+  identity/layout and fit it safely to a legal site. For caves, ruins and other
+  variable content, derive bounded seed variations from the accepted rules;
+  do not turn every landmark into random rooms or stamp identical copies.
+- A preferred location in a sketch is intent, not permission to overwrite
+  protected landmarks or player builds. Explain real engine/placement tradeoffs
+  before changing a consequential layout, access gate or progression decision.
+- Record the source reference, legend, agreed interpretation, native evidence
+  and approval in the feature's existing contract and Wayfinder. Personal source
+  drawings stay local unless the user asks to publish them; written interpretation
+  and implementation can be versioned. Art approval does not certify gameplay,
+  loot balance, multiplayer, seed safety or performance.
+
+## Intentional irregularity — September13
+
+September13 design-transfer lesson: an accepted anatomical irregularity is not
+an engineering defect. The Maw's exposed upper root stays intentional; require
+connected support, correct framing and readable collision, not uniformly buried
+endpoints or a polished/symmetric silhouette. Keep an approved specimen intact
+when adding generation variants. Transfer its spatial rules, not literal chest
+counts or identical room spacing. Native background-wall edges and decorative
+fiber need separate surface coverage checks from parallax scenery. A pure-plan
+pass or approved mockup does not prove that the shipping generator uses either.
+
 ## QA persistence lesson — September12
 
 Parameterized dynamic ModItems need the engine's explicit instancing contract;

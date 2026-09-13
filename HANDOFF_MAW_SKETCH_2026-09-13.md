@@ -5,6 +5,19 @@ Read MAW_SKETCH_STUDY_2026-09-13.md before any further geometry or asset work.
 Do not redo the ribs as another art iteration. The uninstalled deeper-root V2
 experiment was discarded; source matches the installed V1 build mirror.
 
+Follow-up: the exposed upper bone is explicitly desirable escaped-growth
+anatomy, not a defect. Read the study's generation-transfer section: farther-apart
+cave groups, small Node pockets instead of extra clustered chests, and no visible
+surface backing-wall fringe. The approved QA scene stays unchanged. Production
+still uses old shelves/chambers; next is bounded seed-aware adaptation and
+traversal/placement validation, then its own layered Maw scenery. This follow-up
+only records direction; no game, package or generated world was changed.
+
+The user also adopted sketch-led collaboration for future bases, labs, depots
+and crash sites. Ask for rough layouts when they will resolve creative ambiguity;
+the agent handles tiles/assets and native testing. AUTHORING_WORKFLOW.md records
+the process. No new drawing is required before the current Maw transfer work.
+
 Current scene: Apogee Native Visual V3, bounds1496,250 /200×136.
 Six continuous branching ribs,40 thorn clusters,17 hanging strands,2 empty
 side-cave chests. New QA scene only; old shallow layout and regular worlds
