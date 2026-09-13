@@ -78,6 +78,19 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- W,01:55–01:58UTC September13: installed1D7DC30C (full SHA in growth README),
+  zero warnings/errors and unchanged466+7+1 pins. Six native240-update fixed32x32
+  growth runs, budgets1/8/32/0/8/1, independently replay. Enabled endpoint156
+  conversions/160 grass; disabled0.32-budget layout only supplies8 targets/update,
+  so saturated32 load is NOT proven. Work max0.7411ms; not whole-frame timing.
+  Explicit stop at31 updates retains incomplete evidence and exact cleanup.
+  All56x56 guards and9 known history bounds restored;9 missing remain unverified.
+  Normal save preserves16 existing digests/contour/shallow hashes. Old grove
+  mismatch recurs before growth, refused/reported, not repaired or claimed clean.
+  Seven raw JSONs,16 scoped records and save comparison retained. Performance and
+  Persistence gates pass;69 dispatch/5 omitted-release controls. No production
+  growth/visual/worldgen promotion. Client saved/menu/normal exit.
+
 - V,01:25–01:37UTC September13: installed52EF6858 (full SHA in the climb README),
   clean pinned466+7+1 build. Separate native-created Maw QA Rope character,
   three210-update comparisons on empty32x32 scratch at1396,60. Vanilla/rib rise

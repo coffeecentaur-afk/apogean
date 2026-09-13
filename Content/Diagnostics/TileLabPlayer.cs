@@ -130,6 +130,7 @@ namespace apogean.Content.Diagnostics
                 if (Player.name == MawRopeClimbScope.PlayerName && !MawRopeClimbScope.Request(request))
                     throw new System.InvalidOperationException("Rope QA accepts only its isolated climb comparisons, stop and safe exit.");
                 Player.GetModPlayer<MawRopeClimbProbe>().Cancel("new-command");
+                ModContent.GetInstance<MawGrowthLoadStudy>().Cancel("new-command");
 				if (request.StartsWith("qa-perf-", System.StringComparison.Ordinal)) {
 					// Passive measurements must not release or move the scene they measure.
 					ModContent.GetInstance<QAPerformanceLab>().Run(request.Substring("qa-perf-".Length));
@@ -203,6 +204,12 @@ namespace apogean.Content.Diagnostics
                 {
                     string variant = request.Substring("maw-rope-climb-".Length);
                     if (variant != "stop") Player.GetModPlayer<MawRopeClimbProbe>().Start(variant);
+                    return;
+                }
+                if (request.StartsWith("maw-growth-load-", System.StringComparison.Ordinal))
+                {
+                    string value=request.Substring("maw-growth-load-".Length);
+                    if(value!="stop") ModContent.GetInstance<MawGrowthLoadStudy>().Start(int.Parse(value));
                     return;
                 }
 				if (request.StartsWith("wastes-camera-", System.StringComparison.Ordinal))

@@ -12,6 +12,12 @@ or authorize normal-world replacement. See `MAW_RIB_CONTOUR_CONTRACT.md`.
 
 ## Reusable engine/tooling authorization
 
+September13 growth measurement is not growth design: bounded native QA maturation
+on already-Maw soil does not set shipping infection speed, dormancy or cleansing
+balance. Match measured work to actual changed cells, preserve disabled controls,
+and keep active/idle costs separate. No zero-allocation or whole-world performance
+claim from small patches; no new player dependency is needed for these tools.
+
 September13 bounded native ascent confirms ordinary player rope works beside
 the candidate rib; this does not install safety ropes or approve full-route
 returnability. Keep actual item placement, climb, dismount, mining and natural

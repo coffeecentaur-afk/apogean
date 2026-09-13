@@ -462,6 +462,14 @@ Replay statistics/counts/verdicts independently and mutation-test optimistic
 reports. Label expected negative-control exceptions and retain real failures;
 do not confuse a logged control with a new engine defect or conceal either.
 
+Per-update growth tests must retain consecutive native update IDs and actual
+changes per update, not just the configured cap. W's32-budget case only changes
+eight cells/update because its frontier is smaller: label that coverage gap,
+not32-cell stress. Separate active and idle statistics/allocations; current idle
+planner allocates32bytes/update. Preserve deliberately stopped partial runs and
+check cleanup before export. A before/after historical fingerprint can remain
+equal while an older saved baseline is already RED; state both facts.
+
 Saved interactive galleries can legitimately drift during playtesting. When a
 historical layout assertion fails, audit actual native tiles/frames read-only
 before diagnosing an atlas regression. Preserve that failed assertion; do not

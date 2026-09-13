@@ -36,6 +36,8 @@ $profiles.MawShallow += 'Tools/Test-MawRopeClimbEvidence.ps1'
   $profiles.Performance += 'Tools/Test-QAPerformanceEvidence.ps1'
   $profiles.Performance += 'Tools/Test-QABatchPlan.ps1'
   $profiles.Performance += 'Tools/Test-MawConversionEvidence.ps1'
+  $profiles.Performance += 'Tools/Test-MawGrowthLoadPlan.ps1'
+  $profiles.Performance += 'Tools/Test-MawGrowthEvidence.ps1'
 
 $selectedProfiles = if ($Profile -eq 'All') { @('Status', 'Tree', 'Terrain', 'MawMaterials', 'MawAnatomy', 'MawShallow', 'MawTeeth', 'MawCave', 'Performance', 'Persistence', 'Background', 'Entity', 'Structure', 'Boss', 'Quest') } else { @($Profile) }
 $scripts = [Collections.Generic.List[string]]::new()

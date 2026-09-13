@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-bounded-growth-load-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/MawGrowthLoad-2026-09-13/README.md",
+      "evidenceScope": "W six actual240-update32x32 native growth runs:1/8/32/0/8/1 budgets. Enabled156 conversions/160grass, disabled0; exact native shape/paint/wire/coating checks. Work max0.7411ms, not full frame time. Repeated1/8 arms;32 arm actually peaks at8changes/update. Explicit stop31updates is retained incomplete. Seven raw reports independently replay with27 corrupt-report controls. Every56x56guard restored,9 known history bounds unchanged/9missing unverified. Native save preserves16 canonical system digests; old grove checkpoint RED remains separate.",
+      "blockers": ["Not saturated32 stress, world-scale scheduling, production protection/cadence/dormancy/infection, vines, multiplayer or minimum hardware acceptance. Idle plan still allocates32bytes/update.", "Sampled local correctness/cost does not approve art, biome generation or original historical baselines. Old grove failure was present before this probe and was not repaired/rebaselined."]
+    },
+    {
       "id": "maw-rope-interaction-v1",
       "status": "contracted",
       "static": "pass",

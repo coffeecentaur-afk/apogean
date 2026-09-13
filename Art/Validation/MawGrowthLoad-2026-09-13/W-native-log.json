@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-13T01:59:01.2051279Z",
+  "sourceLogSha256": "3DECDCC4E79F4C71034BFDA0842B2E19AD97C05D7BFA6F4D10AE1B27335DF9AC",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[20:55:50.581] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=1; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[20:55:54.606] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=1; updates=240; converted=156; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-015554-563-b1.json.",
+    "[20:56:17.959] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=8; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[20:56:21.949] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=8; updates=240; converted=156; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-015621-943-b8.json.",
+    "[20:56:43.794] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=32; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[20:56:47.780] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=32; updates=240; converted=156; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-015647-776-b32.json.",
+    "[20:56:56.710] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=0; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[20:57:00.697] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=0; updates=240; converted=0; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-015700-694-b0.json.",
+    "[20:57:09.627] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=8; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[20:57:13.612] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=8; updates=240; converted=156; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-015713-609-b8.json.",
+    "[20:57:20.479] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=1; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[20:57:24.462] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=True; budget=1; updates=240; converted=156; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-015724-459-b1.json.",
+    "[20:57:52.510] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH START: budget=1; patch={X:1396 Y:60 Width:32 Height:32}; 240updates/8seconds, one1024-cell observation per update, native framing; no player or production edits.",
+    "[20:57:53.028] [Main Thread/INFO] [apogean]: QA PERFORMANCE GROWTH COMPLETE: pass=False; budget=1; updates=31; converted=31; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\ApogeanPerformance\\growth-20260913-015753-025-b1.json.",
+    "[20:58:08.808] [.NET TP Worker/INFO] [apogean]: MAW RIB CONTOUR SAVE: creation=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; actual=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; failed=False.",
+    "[20:58:08.809] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state."
+  ],
+  "caughtRenderFailures": []
+}

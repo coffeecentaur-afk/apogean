@@ -2,6 +2,15 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+01:58UTC September13: W six actual240-update local fiber-growth measurements
+pass at1/8/32/0/8/1 budgets; enabled156 conversions, disabled0, exact cleanup.
+Explicit stop retains31-update partial evidence. Full-budget32 stress remains
+unproven because this frontier supplies at most8 changes/update. Actual native
+save retains16 system digests. Old grove mismatch remains RED independently.
+See `Art/Validation/MawGrowthLoad-2026-09-13/README.md`; no production scheduling,
+art, whole-world or minimum-spec claim. Next independent gate: remaining native
+item-use/placement coverage, before final regression and handoff.
+
 01:38UTC September13: V native preplaced-rope ascent comparison passes on both
 gray brick and candidate rib (266.2201px); no-rope remains grounded. Explicit
 stop restores scratch after31 updates; focus-switch interruption is unverified.
