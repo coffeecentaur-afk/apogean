@@ -10,6 +10,11 @@ solving the next family; do not turn workflow improvement into an engine detour.
 
 ## QA persistence lesson — September12
 
+Identify the item, not just its icon/count, before designing an inventory-based
+trial. The bow hotbar displays ammunition; it is not a rope stack. X's native
+preflight correctly refused before scratch writes. Keep that failed prerequisite
+separate from a failed mechanic and never grant/refund inventory to conceal it.
+
 Use `Tools/Compile-ApogeanOnly.ps1` for code-only checks, including content-gate
 `-Build`. tML's default build after-target packs and writes the installed mod;
 bare root `dotnet build` is not a harmless compile with the client open. Install

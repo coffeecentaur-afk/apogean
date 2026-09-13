@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-13T02:27:31.3648281Z",
+  "sourceLogSha256": "25B7767F94AF63B3EB2ED45E04DD359C65EBE8BA2A7FC997B17B4449795D4F5F",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[21:24:50.634] [Main Thread/ERROR] [apogean]: LIVE VALIDATION REQUEST FAILED: maw-rope-itemuse-vanilla",
+    "System.InvalidOperationException: No existing ordinary Rope stack in hotbar; nothing granted.",
+    "   at apogean.Content.Diagnostics.MawRopeItemUseProbe.Start(String choice) in apogean\\Content\\Diagnostics\\MawRopeItemUseProbe.cs:line 90",
+    "   at apogean.Content.Diagnostics.TileLabPlayer.ConsumeLiveValidationRequest() in apogean\\Content\\Diagnostics\\TileLabPlayer.cs:line 219",
+    "[21:26:43.600] [.NET TP Worker/INFO] [apogean]: MAW RIB CONTOUR SAVE: creation=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; actual=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; failed=False.",
+    "[21:26:43.602] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state."
+  ],
+  "caughtRenderFailures": []
+}

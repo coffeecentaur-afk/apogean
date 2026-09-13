@@ -3,6 +3,18 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-rope-itemuse-v1",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pending",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "Art/Validation/MawRopeItemUse-2026-09-13/README.md",
+      "evidenceScope": "X pinned build6490C290 compiled clean. Native vanilla request refused before scratch setup: no ordinary Rope in gg hotbar; observed icon was Sinew Bow ammunition. No grants/placement/60-update trace. Normal save preserves16 existing system digests.28891 pure plan checks, seven synthetic variants/32 corrupt-report controls and partial preservation validate harness only. Installed engine hook-order research retained.",
+      "blockers": ["Supply existing ordinary Rope in gg hotbar, then demonstrate supported vanilla and unsupported controls before Maw comparisons. Actual item-use seam, normal timer draining and target restoration remain unrun.", "No manual placement, starter reach, full-route return, arbitrary native-exception containment, multiplayer or production approval. Old grove mismatch remains separate and unrepaired."]
+    },
+    {
       "id": "maw-bounded-growth-load-v1",
       "status": "contracted",
       "static": "pass",

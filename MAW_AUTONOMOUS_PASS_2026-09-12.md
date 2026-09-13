@@ -78,6 +78,15 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- X,02:24–02:28UTC September13: installed6490C290, clean pinned build. Actual
+  item-use probe refused vanilla before terrain setup because no ordinary Rope
+  exists in gg's hotbar. Native UI identifies the assumed rope as Keen Sinew Bow
+  (284 is ammunition). No grants, placements or60-update evidence; hook seam
+  remains untested. Preserve scoped refusal and16 unchanged native saved-system
+  digests in Art/Validation/MawRopeItemUse-2026-09-13. Known grove RED unchanged.
+  User asked asynchronously for rope; continue independent work. Pure plan and
+  report controls are not live evidence. No actual placement promotion.
+
 - W,01:55–01:58UTC September13: installed1D7DC30C (full SHA in growth README),
   zero warnings/errors and unchanged466+7+1 pins. Six native240-update fixed32x32
   growth runs, budgets1/8/32/0/8/1, independently replay. Enabled endpoint156

@@ -2,6 +2,12 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+02:28UTC September13: X actual rope-use harness compiled, but native preflight
+refused before setup: gg has no ordinary rope in its hotbar. Bow ammunition was
+misread as a rope stack. No items granted; placement remains pending. Native
+save preserves16 existing digests. See Art/Validation/MawRopeItemUse-2026-09-13.
+Proceed to independent candidate pickup/binding work, not an invented pass.
+
 01:58UTC September13: W six actual240-update local fiber-growth measurements
 pass at1/8/32/0/8/1 budgets; enabled156 conversions, disabled0, exact cleanup.
 Explicit stop retains31-update partial evidence. Full-budget32 stress remains

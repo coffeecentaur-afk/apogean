@@ -7,7 +7,7 @@ $start=$source.IndexOf('Player.GetModPlayer<MawRopeClimbProbe>().Cancel("new-com
 $end=$source.IndexOf('if (request.StartsWith("maw-shallow-", System.StringComparison.Ordinal) ||', $start)
 if($start -lt 0 -or $end -lt $start){throw 'Shared command seam changed; inspect before adjusting this test.'}
 $dispatch=$source.Substring($start,$end-$start)
-$names=@('MawRopeClimbProbe','MawGrowthLoadStudy','MawCaveBackdropProbe','MawShallowTraversalLab','MawRibContourStudy','MawAnatomyLab','MawFiberRibLab','MawNaturalLab','MawPlayableLab','MawMaterialFamilyLab','MawMaterialLab','MawClusterOrientationLab','MawToothClusterLab','MawToothArtLab','MawFangLab','MawBoneLab','ArrivalPodLab','WastesLandscapeCameraLab','ForestSprayVisualLab','VegetationVisualLab')
+$names=@('MawRopeClimbProbe','MawRopeItemUseProbe','MawGrowthLoadStudy','MawCaveBackdropProbe','MawShallowTraversalLab','MawRibContourStudy','MawAnatomyLab','MawFiberRibLab','MawNaturalLab','MawPlayableLab','MawMaterialFamilyLab','MawMaterialLab','MawClusterOrientationLab','MawToothClusterLab','MawToothArtLab','MawFangLab','MawBoneLab','ArrivalPodLab','WastesLandscapeCameraLab','ForestSprayVisualLab','VegetationVisualLab')
 $classes=($names|ForEach-Object {"public sealed class $_ : View {}"}) -join "`n"
 $expected=($names|ForEach-Object {'"'+$_+'"'}) -join ','
 $support=@'
@@ -57,8 +57,8 @@ function Code([string]$ns,[string]$body){
 Add-Type -TypeDefinition (Code 'Baseline' $dispatch)
 $count=[Baseline.Dispatch]::Test()
 $controls=0
-foreach($name in @('MawCaveBackdropProbe','MawShallowTraversalLab','MawRibContourStudy','MawRopeClimbProbe','MawGrowthLoadStudy')){
- $call=if($name -eq 'MawRopeClimbProbe'){'Player.GetModPlayer<MawRopeClimbProbe>().Cancel("new-command");'}elseif($name -eq 'MawGrowthLoadStudy'){'ModContent.GetInstance<MawGrowthLoadStudy>().Cancel("new-command");'}else{"ModContent.GetInstance<$name>().Release();"}
+foreach($name in @('MawCaveBackdropProbe','MawShallowTraversalLab','MawRibContourStudy','MawRopeClimbProbe','MawRopeItemUseProbe','MawGrowthLoadStudy')){
+ $call=if($name -in @('MawRopeClimbProbe','MawRopeItemUseProbe')){"Player.GetModPlayer<$name>().Cancel(""new-command"");"}elseif($name -eq 'MawGrowthLoadStudy'){'ModContent.GetInstance<MawGrowthLoadStudy>().Cancel("new-command");'}else{"ModContent.GetInstance<$name>().Release();"}
  $bad=$dispatch.Replace($call,'{ }')
  if($bad -eq $dispatch){throw "No actual release to mutate for $name"}
  $ns='Missing'+$controls
