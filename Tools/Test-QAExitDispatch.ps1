@@ -3,11 +3,11 @@ $ErrorActionPreference='Stop'
 $source=Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot '../Content/Diagnostics/TileLabPlayer.cs')
 # Execute the real shared dispatch prefix AND save branch together. Looking only
 # at the final branch misses the newer scene releases that already precede it.
-$start=$source.IndexOf('if (request.StartsWith("qa-perf-", System.StringComparison.Ordinal))')
+$start=$source.IndexOf('Player.GetModPlayer<MawRopeClimbProbe>().Cancel("new-command");')
 $end=$source.IndexOf('if (request.StartsWith("maw-shallow-", System.StringComparison.Ordinal) ||', $start)
 if($start -lt 0 -or $end -lt $start){throw 'Shared command seam changed; inspect before adjusting this test.'}
 $dispatch=$source.Substring($start,$end-$start)
-$names=@('MawCaveBackdropProbe','MawShallowTraversalLab','MawRibContourStudy','MawAnatomyLab','MawFiberRibLab','MawNaturalLab','MawPlayableLab','MawMaterialFamilyLab','MawMaterialLab','MawClusterOrientationLab','MawToothClusterLab','MawToothArtLab','MawFangLab','MawBoneLab','ArrivalPodLab','WastesLandscapeCameraLab','ForestSprayVisualLab','VegetationVisualLab')
+$names=@('MawRopeClimbProbe','MawCaveBackdropProbe','MawShallowTraversalLab','MawRibContourStudy','MawAnatomyLab','MawFiberRibLab','MawNaturalLab','MawPlayableLab','MawMaterialFamilyLab','MawMaterialLab','MawClusterOrientationLab','MawToothClusterLab','MawToothArtLab','MawFangLab','MawBoneLab','ArrivalPodLab','WastesLandscapeCameraLab','ForestSprayVisualLab','VegetationVisualLab')
 $classes=($names|ForEach-Object {"public sealed class $_ : View {}"}) -join "`n"
 $expected=($names|ForEach-Object {'"'+$_+'"'}) -join ','
 $support=@'
@@ -20,6 +20,7 @@ public static class Seen {
 }
 public class View {
  public void Release(){string n=GetType().Name;Seen.Active.Remove(n);Seen.Events.Add(n+"/release");}
+ public void Cancel(string why){if(Seen.Active.Contains(GetType().Name))Release();}
  public void Stop()=>Release();public void Start(string s)=>Seen.Events.Add(GetType().Name+"/start");
 }
 public class QAPerformanceLab {public bool Recording=>Seen.Recording;public void Run(string s)=>Seen.Events.Add("performance/"+s);}
@@ -56,8 +57,8 @@ function Code([string]$ns,[string]$body){
 Add-Type -TypeDefinition (Code 'Baseline' $dispatch)
 $count=[Baseline.Dispatch]::Test()
 $controls=0
-foreach($name in @('MawCaveBackdropProbe','MawShallowTraversalLab','MawRibContourStudy')){
- $call="ModContent.GetInstance<$name>().Release();"
+foreach($name in @('MawCaveBackdropProbe','MawShallowTraversalLab','MawRibContourStudy','MawRopeClimbProbe')){
+ $call=if($name -eq 'MawRopeClimbProbe'){'Player.GetModPlayer<MawRopeClimbProbe>().Cancel("new-command");'}else{"ModContent.GetInstance<$name>().Release();"}
  $bad=$dispatch.Replace($call,'{ }')
  if($bad -eq $dispatch){throw "No actual release to mutate for $name"}
  $ns='Missing'+$controls

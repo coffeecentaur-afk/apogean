@@ -10,9 +10,9 @@
       "liveFixture": "pending",
       "production": "pending",
       "userReview": "pending",
-      "evidenceReference": "Art/Validation/MawRope-2026-09-13/README.md",
-      "evidenceScope": "U native tile/mining APIs pass15 cases/671 checks: cardinal rope support/framing, middle mining/drop, support removal, isolated API rope, candidate rib58 rejection/59 break and cap35 break. Exact scratch restoration; nine known and nine missing history locations separately reported. Native saved specimen hashes retained. Independent report replay rejects18 defects.",
-      "blockers": ["No actual item-use placement or input-driven ascent yet. Direct PlaceTile bypasses player adjacency/reach and PickTile bypasses reach/swing timing.", "Experimental rib/cap have no item binding/drop. No whole-route returnability, manual feel, art, multiplayer or worldgen approval."]
+      "evidenceReference": "Art/Validation/MawRopeClimb-2026-09-13/README.md",
+      "evidenceScope": "U API microchecks remain valid:15 cases/671 checks, exact cleanup,18 report controls. V separate native starter character climbs266.2201px on ordinary preplaced rope with gray-brick or rib anchor; matched no-rope rises0. Both210-update samples preserve health and have81 upward pulley updates. Explicit stop after31updates restores scratch/history and retains partial evidence; attempted focus switch did not interrupt. Five raw reports replay independently with24 defect controls; three native saves retain16 existing system digests. Nine known/nine missing history bounds explicitly separated.",
+      "blockers": ["Actual item-use placement is not tested. Direct PlaceTile bypasses player adjacency/reach and PickTile bypasses reach/swing timing. Focus/pause/death/unload interruption and top-exit remain unverified.", "Experimental rib/cap have no item binding/drop. No whole-route returnability, manual feel, art, multiplayer or worldgen approval. Ambient QA spawn damage between runs is not sample damage; night screenshots do not approve appearance."]
     },
     {
       "id": "qa-world-persistence-v1",

@@ -28,8 +28,18 @@ Read the complete dispatch path before declaring cleanup missing. The shared
 prefix already releases cave/shallow/contour views before `qa-save-and-quit`;
 looking only at its final branch incorrectly suggested an omission. No runtime
 fix was needed. `Test-QAExitDispatch.ps1` compiles that actual prefix and branch,
-checks cleanup-before-save and passive-measurement isolation, and rejects three
+checks cleanup-before-save and passive-measurement isolation, and rejects four
 removed-release mutations. This checks call ordering, not native state restore.
+
+Separate input-driven movement probes from direct tile APIs. Use a distinctly
+named disposable player rather than relaxing a preserved baseline. Compare
+native movement against a matched missing-tool control, retain partial stopped
+traces, and restore exact owned scratch before exporting. V's explicit stop has
+native cleanup proof; its focus-switch attempt completed and cannot certify
+focus cancellation. Do not infer a tested abort from a guard merely existing.
+Never leave a vulnerable QA character idle while doing lengthy offline work;
+save to the menu between batches. Ambient spawn damage otherwise confounds the
+next baseline even when each short measured trial preserves health.
 
 World-owned fixture data must survive saves by another QA character or a
 dedicated server without granting either permission to operate the fixture.

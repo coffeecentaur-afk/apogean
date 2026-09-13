@@ -40,10 +40,10 @@ namespace apogean.Content.Diagnostics
 			// This existing disposable validation world is our deterministic client-render harness.
 			// Delaying one second lets the player and camera finish settling before the active fixture is built.
 			string worldName = Main.ActiveWorldFileData?.Name;
-			if (worldName == AutomaticWorldName && Player.name == MawShallowQaScope.Plain) {
+            if (worldName == AutomaticWorldName && Player.name is MawShallowQaScope.Plain or MawRopeClimbScope.PlayerName) {
 				_automaticBuildDelay = -1;
 				_automaticCampusFixture = false;
-				Mod.Logger.Info("MAW PLAIN QA: request-only character; no automatic grove restoration or fixture construction.");
+				Mod.Logger.Info($"MAW REQUEST-ONLY QA: {Player.name}; no automatic grove restoration or fixture construction.");
 				return;
 			}
 			bool automaticWorld = worldName == AutomaticWorldName;
@@ -125,8 +125,11 @@ namespace apogean.Content.Diagnostics
 			{
 				request = File.ReadAllText(requestPath).Trim().ToLowerInvariant();
 				File.Delete(requestPath);
-				if (Player.name == MawShallowQaScope.Plain && !MawShallowQaScope.Request(Player.name, request))
-					throw new System.InvalidOperationException("Plain QA character only accepts allowlisted existing-scene checks and safe exit; no builds.");
+                if (Player.name == MawShallowQaScope.Plain && !MawShallowQaScope.Request(Player.name, request))
+                    throw new System.InvalidOperationException("Plain QA character only accepts allowlisted existing-scene checks and safe exit; no builds.");
+                if (Player.name == MawRopeClimbScope.PlayerName && !MawRopeClimbScope.Request(request))
+                    throw new System.InvalidOperationException("Rope QA accepts only its isolated climb comparisons, stop and safe exit.");
+                Player.GetModPlayer<MawRopeClimbProbe>().Cancel("new-command");
 				if (request.StartsWith("qa-perf-", System.StringComparison.Ordinal)) {
 					// Passive measurements must not release or move the scene they measure.
 					ModContent.GetInstance<QAPerformanceLab>().Run(request.Substring("qa-perf-".Length));
@@ -191,11 +194,17 @@ namespace apogean.Content.Diagnostics
 					else ModContent.GetInstance<MawShallowTraversalLab>().Run(request.Substring("maw-shallow-".Length));
 					return;
 				}
-				if (request == "maw-rope-properties")
+                if (request == "maw-rope-properties")
 				{
 					MawRopeMaterialStudy.Run(Mod.Logger);
-					return;
-				}
+                    return;
+                }
+                if (request.StartsWith("maw-rope-climb-", System.StringComparison.Ordinal))
+                {
+                    string variant = request.Substring("maw-rope-climb-".Length);
+                    if (variant != "stop") Player.GetModPlayer<MawRopeClimbProbe>().Start(variant);
+                    return;
+                }
 				if (request.StartsWith("wastes-camera-", System.StringComparison.Ordinal))
 				{
 					ModContent.GetInstance<ForestSprayVisualLab>().Stop();

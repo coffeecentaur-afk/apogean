@@ -12,6 +12,11 @@ or authorize normal-world replacement. See `MAW_RIB_CONTOUR_CONTRACT.md`.
 
 ## Reusable engine/tooling authorization
 
+September13 bounded native ascent confirms ordinary player rope works beside
+the candidate rib; this does not install safety ropes or approve full-route
+returnability. Keep actual item placement, climb, dismount, mining and natural
+hazard readability as separate gates. Preserve the difficult editable descent.
+
 September13 rope lesson: distinguish direct tile creation, native mining hooks,
 actual item-use placement and actual player ascent. Native rope persists after
 support removal; do not invent a vine-style anchor requirement. Candidate rib/cap

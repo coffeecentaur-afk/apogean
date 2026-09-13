@@ -72,7 +72,7 @@ public static class PersistenceCases {
  }
  public static object[] Run(){
   var results=new List<object>();
-  foreach(string name in new[]{NAMES})foreach(int mode in new[]{0,1,2})foreach(string player in new[]{"gg","Maw Plain",null})foreach(bool existing in new[]{true,false}){
+  foreach(string name in new[]{NAMES})foreach(int mode in new[]{0,1,2})foreach(string player in new[]{"gg","Maw QA Plain","Maw QA Rope",null})foreach(bool existing in new[]{true,false}){
    string error=null;try{
     Main.netMode=mode;Main.ActiveWorldFileData=new WorldFile{Name="Apogee Native Visual V3"};Main.LocalPlayer=player==null?null:new Player{name=player};
     var seed=existing?Seed(name):new TagCompound();var first=(Fields)Activator.CreateInstance(typeof(PersistenceCases).Assembly.GetType(name));

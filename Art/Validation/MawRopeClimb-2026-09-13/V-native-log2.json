@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-13T01:34:09.6069700Z",
+  "sourceLogSha256": "29541B8C43CDC5B380DD72CA5DAC53A4052086DCB725BAA46C968C1E82D7F463",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[20:25:30.891] [Main Thread/INFO] [apogean]: MAW ROPE CLIMB START: vanilla; player=Maw QA Rope; patch={X:1396 Y:60 Width:32 Height:32}; max210 updates/8s; setup relocation only, no physics writes during measurement; no item grants.",
+    "[20:25:34.428] [Main Thread/INFO] [apogean]: MAW ROPE CLIMB COMPLETE: vanilla; complete=True; comparisonPass=True; attached=True; rise=266.2201; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\maw-rope-climb-20260913-012534-387-vanilla.json.",
+    "[20:25:56.717] [Main Thread/INFO] [apogean]: MAW ROPE CLIMB START: rib; player=Maw QA Rope; patch={X:1396 Y:60 Width:32 Height:32}; max210 updates/8s; setup relocation only, no physics writes during measurement; no item grants.",
+    "[20:26:00.221] [Main Thread/INFO] [apogean]: MAW ROPE CLIMB COMPLETE: rib; complete=True; comparisonPass=True; attached=True; rise=266.2201; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\maw-rope-climb-20260913-012600-217-rib.json.",
+    "[20:26:25.135] [Main Thread/INFO] [apogean]: MAW ROPE CLIMB START: none; player=Maw QA Rope; patch={X:1396 Y:60 Width:32 Height:32}; max210 updates/8s; setup relocation only, no physics writes during measurement; no item grants.",
+    "[20:26:28.638] [Main Thread/INFO] [apogean]: MAW ROPE CLIMB COMPLETE: none; complete=True; comparisonPass=True; attached=False; rise=0; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\maw-rope-climb-20260913-012628-634-none.json.",
+    "[20:26:51.476] [.NET TP Worker/INFO] [apogean]: MAW RIB CONTOUR SAVE: creation=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; actual=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; failed=False.",
+    "[20:26:51.478] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state.",
+    "[20:33:19.403] [Main Thread/INFO] [apogean]: MAW ROPE CLIMB START: rib; player=Maw QA Rope; patch={X:1396 Y:60 Width:32 Height:32}; max210 updates/8s; setup relocation only, no physics writes during measurement; no item grants.",
+    "[20:33:22.904] [Main Thread/INFO] [apogean]: MAW ROPE CLIMB COMPLETE: rib; complete=True; comparisonPass=True; attached=True; rise=266.2201; restored=True; evidence=C:\\Users\\max_h\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\Captures\\maw-rope-climb-20260913-013322-901-rib.json.",
+    "[20:33:47.617] [.NET TP Worker/INFO] [apogean]: MAW RIB CONTOUR SAVE: creation=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; actual=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; failed=False.",
+    "[20:33:47.619] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state."
+  ],
+  "caughtRenderFailures": []
+}

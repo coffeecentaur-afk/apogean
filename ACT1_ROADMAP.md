@@ -2,6 +2,15 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+01:38UTC September13: V native preplaced-rope ascent comparison passes on both
+gray brick and candidate rib (266.2201px); no-rope remains grounded. Explicit
+stop restores scratch after31 updates; focus-switch interruption is unverified.
+Three normal saves retain16 existing system digests. Separate native character
+and allowlist preserve Plain's original baseline. Actual item placement, whole
+route return, candidate item bindings and final art remain open. Evidence:
+`Art/Validation/MawRopeClimb-2026-09-13/README.md`. Next independent gate is
+bounded per-update fiber growth work; earlier conversion throughput was synchronous.
+
 01:02UTC September13: U native rope/material microchecks pass15 cases with exact
 scratch cleanup and known-scene preservation. Ordinary rope support/mining agrees
 across gray brick and candidate rib/cap. Candidate rib59/cap35 native mining works,

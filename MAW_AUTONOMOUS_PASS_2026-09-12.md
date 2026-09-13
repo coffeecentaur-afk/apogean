@@ -78,6 +78,21 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- V,01:25–01:37UTC September13: installed52EF6858 (full SHA in the climb README),
+  clean pinned466+7+1 build. Separate native-created Maw QA Rope character,
+  three210-update comparisons on empty32x32 scratch at1396,60. Vanilla/rib rise
+  266.2201px with210 pulley/81 upward-pulley ticks; no-rope rise0/pulley0.
+  All retain sample health and exact56x56 restoration,9 known/9 missing history.
+  Focus-switch attempt completed normally: interruption unverified. A subsequent
+  explicit stop interrupts at31updates/100HP,74.72009pxrise and exact restoration;
+  partial result remains incomplete. Three native saves preserve all16 canonical
+  system digests; both saved scene hashes unchanged. Five raw movement reports,
+  cumulative scoped logs and independent replay retained.525scope/24report
+  defects/240actual-persistence/66dispatch+4mutation checks; no item-use/top-exit,
+  manual/full-route/MP/art/worldgen claims. Night QA spawn caused damage outside
+  samples; save promptly between batches rather than leaving the character idle.
+  Next bounded per-update growth coverage. Hard stop remains04:46:58UTC.
+
 - U,01:00–01:02UTC September13: FE713ED5 candidate builds0warnings/errors with
  466+7+1 unchanged art. Native scratch rope/material APIs pass15 cases/671 checks
  in16.9131ms; exact scratch restored,9 known/9 missing historical bounds separately
