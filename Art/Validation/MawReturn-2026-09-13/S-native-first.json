@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-13T00:20:12.4662170Z",
+  "sourceLogSha256": "5C8AB2F14AF8C0C50CB5D9BBDFC95D4A202173848CDCB943182986EB02F6766F",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[19:14:57.685] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: pristine",
+    "[19:14:57.693] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[19:14:57.703] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all17 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[19:14:57.703] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: pristine",
+    "[19:15:32.483] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: motion-connector-return",
+    "[19:15:32.487] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[19:15:32.490] [Main Thread/INFO] [apogean]: MAW SHALLOW MOTION START: route=connector-return-jump-only; max360 updates/10s; actual player inputs only; player=Maw QA Plain; plainBaseline=True; start={X:18800 Y:3942}; equipment=0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,; no gear, immunity, speed, gravity or damage overrides. Not whole-descent or difficulty approval.",
+    "[19:15:32.499] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: all17 historical bounds semantically unchanged during command, including old failed fixtures.",
+    "[19:15:32.499] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: motion-connector-return",
+    "[19:15:38.515] [Main Thread/INFO] [apogean]: MAW SHALLOW MOTION STOP: route=connector-return-jump-only; tick-budget; 360 actual updates/360 controlled; airborne=106; settled=0; life=100->100; evidence=Apogean Maw Shallow Motion 20260913-001538-475.json."
+  ],
+  "caughtRenderFailures": []
+}

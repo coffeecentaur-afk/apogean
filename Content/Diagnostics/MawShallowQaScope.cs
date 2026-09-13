@@ -13,7 +13,7 @@ namespace apogean.Content.Diagnostics
                 "maw-shallow-test" or "maw-shallow-pristine" or "maw-shallow-audit" or "maw-shallow-reload" or
                 "maw-shallow-top" or "maw-shallow-bottom" or "maw-shallow-pocket" or
                 "maw-shallow-rib1" or "maw-shallow-rib2" or "maw-shallow-rib3" or
-                "maw-shallow-play" or "maw-shallow-motion-entry" or "maw-shallow-motion-connector-out" or "maw-shallow-light" or
+                "maw-shallow-play" or "maw-shallow-motion-entry" or "maw-shallow-motion-connector-out" or "maw-shallow-motion-connector-return" or "maw-shallow-light" or
                 "maw-shallow-light-awake" or "maw-shallow-light-dormant" or "maw-shallow-light-natural" or
                 "maw-shallow-light-awake-bright" or "maw-shallow-light-dormant-bright" or
                 "maw-shallow-inspect-on" or "maw-shallow-inspect-off" or

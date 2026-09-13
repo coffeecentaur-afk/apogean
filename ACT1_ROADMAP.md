@@ -2,6 +2,20 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+00:33UTC: corrected T native report confirms8 known locations/9 empty slots;
+pristine/reload and119-update entry pass. Entry18→18HP is separately labeled
+after a nighttime-spawn Demon Eye death outside the passage. Normal save retains
+both known specimen hashes. Missing historical areas remain unverified. See
+`Art/Validation/MawReturn-2026-09-13/README.md`; no terrain/art changes.
+
+00:23UTC September13: two S native return-jump attempts finish their360update
+budget, each rising98.0718px but not reaching the exit.100HP, zero tooth contacts
+and exact shallow state retained. Not an impossibility proof or gear mandate.
+Saved normally; raw traces and independent replay retained. History-report
+overcount reproduced: empty slots were being included in `all17`. Narrow count
+fix passes56 checks; native corrected-report verification follows. No new art,
+scene repair, generator promotion or route difficulty acceptance.
+
 00:01UTC September13 update: copied large-world headless testing found silent
 loss of two QA records despite clean save logs. Ten narrowly related save/load
 guards repaired;180 actual-hook cases pass, and all16 existing native system

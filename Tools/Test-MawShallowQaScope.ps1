@@ -15,7 +15,7 @@ namespace apogean.Content.Diagnostics {
                 Check(MawShallowQaScope.Context(world,player,single,menu)==(world==MawShallowQaScope.World && (player=="gg"||player==MawShallowQaScope.Plain)&&single&&!menu),"world/player/mode guard");
             foreach(string request in new[]{"maw-shallow-build","maw-contour-build","maw-contour-unknown","maw-shallow-unknown","vegetation-view-build","qa-perf-start","kessler-campus",null})
                 Check(!MawShallowQaScope.Request(MawShallowQaScope.Plain,request),"plain cannot mutate other scenes");
-            foreach(string request in new[]{"qa-save-and-quit","maw-shallow-pristine","maw-shallow-motion-entry","maw-shallow-motion-connector-out","maw-shallow-light-awake","maw-shallow-light-dormant","maw-shallow-light-awake-bright","maw-shallow-light-dormant-bright","maw-shallow-release"}) {
+            foreach(string request in new[]{"qa-save-and-quit","maw-shallow-pristine","maw-shallow-motion-entry","maw-shallow-motion-connector-out","maw-shallow-motion-connector-return","maw-shallow-light-awake","maw-shallow-light-dormant","maw-shallow-light-awake-bright","maw-shallow-light-dormant-bright","maw-shallow-release"}) {
                 Check(MawShallowQaScope.Request(MawShallowQaScope.Plain,request),"plain allowed request");
                 Check(!MawShallowQaScope.Request("ordinary",request),"unknown player denied");
             }

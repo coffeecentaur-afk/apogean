@@ -19,11 +19,12 @@ namespace apogean.Content.Diagnostics
         private Rectangle scene;
         private int count, controlled, airborne, settled, startLife;
         private long started;
-        private bool active, braked, baselineStart, connector;
+        private bool active, braked, baselineStart, connector, returning;
         private Vector2 start;
         private string equipment;
+        private string geometryBefore;
         private readonly record struct Sample(int Tick, float X, float Y, float Vx, float Vy,
-            bool Right, bool Left, bool Grounded, bool Teeth, int Life);
+            bool Right, bool Left, bool Grounded, bool Teeth, int Life, bool Jump);
         internal bool Active => active;
         private bool Context => Player.whoAmI == Main.myPlayer && MawShallowTraversalLab.IsQa && MawPackedPreview.Enabled;
         internal static bool PlainBaseline(Player p)
@@ -49,14 +50,17 @@ namespace apogean.Content.Diagnostics
                 if (Player.armor[i].type != equipmentState[i].type || Player.armor[i].prefix != equipmentState[i].prefix) return false;
             return true;
         }
-        internal void Start(Rectangle bounds, bool connectorOut = false)
+        internal void Start(Rectangle bounds, bool connectorOut = false, bool connectorReturn = false)
         {
             if (!Context || active || Player.dead || Player.mount.Active || Player.width != 20 || Player.height != 42 || Player.gravDir != 1 || Player.pulley || Player.grapCount != 0)
                 throw new InvalidOperationException("Entry motion requires living unmounted/unhooked QA player with ordinary20x42 gravity; no loadout is changed.");
             baselineStart=PlainBaseline(Player);
             if(Player.name==MawShallowQaScope.Plain && !baselineStart) throw new InvalidOperationException("Plain motion requires fresh Classic100HP starter-only inventory, no equipment/buffs. Nothing is removed or granted.");
             if (ModContent.GetInstance<QAPerformanceLab>().Recording) throw new InvalidOperationException("Do not overlap this input probe with passive timings.");
-            scene = bounds; connector = connectorOut; start = Player.position; startLife = Player.statLife; equipment = Equipment();
+            if (connectorOut && connectorReturn) throw new InvalidOperationException("Choose one motion route.");
+            if (connectorReturn && !baselineStart) throw new InvalidOperationException("Return-jump study requires the unchanged Plain starter loadout.");
+            scene = bounds; connector = connectorOut; returning = connectorReturn; start = Player.position; startLife = Player.statLife; equipment = Equipment();
+            geometryBefore = returning ? MawShallowTraversalLab.Fingerprint(new[] { scene }) : null;
             samples=new Sample[Limit]; equipmentState=new (int,int)[Player.armor.Length];
             for(int i=0;i<equipmentState.Length;i++) equipmentState[i]=(Player.armor[i].type,Player.armor[i].prefix);
             count = controlled = airborne = settled = 0; braked = false; started = Stopwatch.GetTimestamp(); active = true;
@@ -72,7 +76,12 @@ namespace apogean.Content.Diagnostics
             // Two native traces at x32 coasted beyond the rib before landing.
             // Release at x30 so native momentum still has room to dissipate;
             // there is no velocity override, snap-to-surface or terrain change.
-            if (connector) {
+            if (returning) {
+                Vector2 local = Player.position - scene.Location.ToVector2() * 16;
+                var input = MawShallowReturnInputs.Decide(local.X, local.Y, Player.velocity.X, controlled);
+                Player.controlRight = input.Right; Player.controlLeft = input.Left; Player.controlJump = input.Jump;
+                braked = Math.Abs(Player.Center.X - (scene.X + 82) * 16) <= 6;
+            } else if (connector) {
                 // Steer through the narrow middle shaft before approaching the lower exit.
                 // The stopping estimate decides INPUT only; actual friction/collision remain native.
                 bool lower = Player.position.Y >= (scene.Y + 63) * 16;
@@ -87,7 +96,8 @@ namespace apogean.Content.Diagnostics
                 if (Player.Center.X >= (scene.X + 30) * 16) braked = true;
                 Player.controlRight = !braked; Player.controlLeft = false;
             }
-            Player.controlUp = Player.controlDown = Player.controlJump = false;
+            Player.controlUp = Player.controlDown = false;
+            if (!returning) Player.controlJump = false;
             Player.controlHook = Player.controlMount = Player.controlUseItem = Player.controlUseTile = Player.controlThrow = false;
             controlled++;
         }
@@ -100,30 +110,37 @@ namespace apogean.Content.Diagnostics
             Vector2 local = Player.position - scene.Location.ToVector2() * 16;
             bool grounded = Math.Abs(Player.velocity.Y) < .001f && Collision.SolidCollision(Player.position + new Vector2(0,2),20,42);
             bool tooth = ModContent.GetInstance<apogean.Content.Tiles.MawToothClusterTile>().Touching(Player.Hitbox);
-            samples[count] = new(count,local.X,local.Y,Player.velocity.X,Player.velocity.Y,Player.controlRight,Player.controlLeft,grounded,tooth,Player.statLife);
+            samples[count] = new(count,local.X,local.Y,Player.velocity.X,Player.velocity.Y,Player.controlRight,Player.controlLeft,grounded,tooth,Player.statLife,Player.controlJump);
             count++;
             if (Player.velocity.Y > .25f) airborne++;
-            if (braked && grounded && Player.position.Y - start.Y > 200) settled++; else settled = 0;
-            bool outside = connector ? local.X < 54*16 || local.X > 90*16 || local.Y < 36*16 || local.Y > 72*16 :
+            bool progressed = returning ? start.Y - Player.position.Y > 200 && Math.Abs(local.Y + 42 - 43 * 16) <= 2 : Player.position.Y - start.Y > 200;
+            if (braked && grounded && progressed) settled++; else settled = 0;
+            bool outside = connector || returning ? local.X < 54*16 || local.X > 90*16 || local.Y < 36*16 || local.Y > 72*16 :
                 local.X < 4*16 || local.X > 108*16 || local.Y < 0 || local.Y > 48*16;
             if (outside || Player.dead) { Cancel("left-route-test-envelope-or-died"); return; }
             if (settled >= 12) Finish("landed", true);
             else if (count >= Limit) Finish("tick-budget", false);
         }
         internal void Cancel(string reason) { if (active) Finish(reason,false); }
-        private string Route => connector ? "connector-out" : "entry";
+        private string Route => returning ? "connector-return-jump-only" : connector ? "connector-out" : "entry";
         private void Finish(string reason, bool landed)
         {
             if (!active) return; active = false;
-            Player.controlRight = Player.controlLeft = false;
+            Player.controlRight = Player.controlLeft = Player.controlJump = false;
             bool pass = landed && controlled > 0 && airborne > 10 && count >= 12 &&
-                SameEquipment() && Player.position.Y - start.Y > 200;
+                SameEquipment() && (returning ? start.Y - Player.position.Y > 200 : Player.position.Y - start.Y > 200);
             try {
+                string geometryAfter = returning ? MawShallowTraversalLab.Fingerprint(new[] { scene }) : null;
+                bool geometryUnchanged = !returning || geometryBefore == geometryAfter;
+                pass &= geometryUnchanged;
                 string folder = Path.Combine(Main.SavePath,"Captures");
                 string path = Path.Combine(folder,"Apogean Maw Shallow Motion " + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss-fff") + ".json");
-                var evidence = new { schemaVersion=3, route=Route, utc=DateTime.UtcNow, reason, pass, controlled, airborne, settled,
+                var evidence = new { schemaVersion=returning ? 4 : 3, route=Route, utc=DateTime.UtcNow, reason, pass, controlled, airborne, settled,
                     baselineStart, baselineEnd=PlainBaseline(Player),
-                    scope="One named actual walk/fall/landing route. Plain baseline is asserted separately; NOT return traversal, full descent, manual play, vanilla-only modpack or difficulty acceptance.",
+                    scope=returning ? "One bounded360-update jump-only RETURN ATTEMPT. Native movement, no gear/terrain/velocity edits during control. Stopping does NOT prove this route impossible with other inputs, mining, building or equipment. Not full traversal/difficulty approval." :
+                        "One named actual walk/fall/landing route. Plain baseline is asserted separately; NOT return traversal, full descent, manual play, vanilla-only modpack or difficulty acceptance.",
+                    geometryBefore, geometryAfter, geometryUnchanged,
+                    startLocalX=start.X-scene.X*16, startLocalY=start.Y-scene.Y*16,
                     world=Main.ActiveWorldFileData?.Name, player=Player.name, equipment, startLife, endLife=Player.statLife,
                     scene=new {scene.X,scene.Y,scene.Width,scene.Height}, samples=samples.AsSpan(0,count).ToArray() };
                 string temp=path+".partial";

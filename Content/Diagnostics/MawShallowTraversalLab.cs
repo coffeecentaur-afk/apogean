@@ -73,6 +73,16 @@ namespace apogean.Content.Diagnostics
             ModContent.GetInstance<MawAmberLightStudy>().Bounds,
             ModContent.GetInstance<MawRibContourStudy>().PreservedBounds
         };
+        internal static string DescribeHistory(Rectangle[] areas)
+        {
+            int known = 0;
+            var missing = new List<int>();
+            for (int i = 0; i < areas.Length; i++) {
+                if (areas[i].Width > 0 && areas[i].Height > 0) known++;
+                else missing.Add(i);
+            }
+            return $"MAW SHALLOW PRESERVATION: {known}/{areas.Length} nonempty historical bounds semantically unchanged during command; {missing.Count} missing/empty slots [{string.Join(",", missing)}] are NOT verified. Slots use Historical() order; no recovery or whole-world preservation claim.";
+        }
         internal static string Fingerprint(IEnumerable<Rectangle> areas)
         {
             using var stream = new MemoryStream(); using var w = new BinaryWriter(stream);
@@ -270,13 +280,15 @@ namespace apogean.Content.Diagnostics
                         ValidatePristine(); StartVisit(false); Main.LocalPlayer.GetModPlayer<MawShallowMotionProbe>().Start(bounds); break;
                     case "motion-connector-out":
                         ValidatePristine(); StartVisit(false, true); Main.LocalPlayer.GetModPlayer<MawShallowMotionProbe>().Start(bounds, true); break;
+                    case "motion-connector-return":
+                        ValidatePristine(); StartVisit(false, false, true); Main.LocalPlayer.GetModPlayer<MawShallowMotionProbe>().Start(bounds, false, true); break;
                     case "capture": Require(); if (!viewing) throw new InvalidOperationException("Choose top/bottom held view before native capture."); captureDelay = 90; break;
                     case "release": Release(); break;
                     default: throw new InvalidOperationException("Unknown shallow request.");
                 }
             } finally {
                 if (before != Fingerprint(old)) throw new InvalidOperationException("Historical fixture state changed during shallow command; not repaired.");
-                Mod.Logger.Info($"MAW SHALLOW PRESERVATION: all{old.Length} historical bounds semantically unchanged during command, including old failed fixtures.");
+                Mod.Logger.Info(DescribeHistory(old));
             }
             Mod.Logger.Info("MAW SHALLOW COMPLETE: " + request);
         }
@@ -315,9 +327,9 @@ namespace apogean.Content.Diagnostics
             0 => At(40,27), 1 => At(40,78), 2 => At(98,36),
             3 => At(35,28), 4 => At(42,51), _ => At(34,78)
         }).ToVector2() * 16;
-        private void StartVisit(bool hold, bool connectorOut = false)
+        private void StartVisit(bool hold, bool connectorOut = false, bool connectorReturn = false)
         {
-            Vector2 destination = hold ? ViewPosition : (connectorOut ? At(82,43) : At(20,12)).ToVector2() * 16 - new Vector2(0, Main.LocalPlayer.height);
+            Vector2 destination = hold ? ViewPosition : (connectorReturn ? At(59,69) : connectorOut ? At(82,43) : At(20,12)).ToVector2() * 16 - new Vector2(0, Main.LocalPlayer.height);
             if (Collision.SolidCollision(destination, Main.LocalPlayer.width, Main.LocalPlayer.height) || Teeth.Touching(new((int)destination.X, (int)destination.Y, Main.LocalPlayer.width, Main.LocalPlayer.height)))
                 throw new InvalidOperationException("Visit destination obstructed; not clearing it.");
             if (!hold && !Collision.SolidCollision(destination + new Vector2(0, 2), Main.LocalPlayer.width, Main.LocalPlayer.height)) throw new InvalidOperationException("Entry footing missing; not creating a ledge.");

@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][ValidateSet('build','test','pristine','audit','reload','top','bottom','pocket','rib1','rib2','rib3','play','motion-entry','motion-connector-out','light','light-awake','light-dormant','light-natural','light-awake-bright','light-dormant-bright','inspect-on','inspect-off','capture','release')][string]$Case)
+param([Parameter(Mandatory)][ValidateSet('build','test','pristine','audit','reload','top','bottom','pocket','rib1','rib2','rib3','play','motion-entry','motion-connector-out','motion-connector-return','light','light-awake','light-dormant','light-natural','light-awake-bright','light-dormant-bright','inspect-on','inspect-off','capture','release')][string]$Case)
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 & (Join-Path $PSScriptRoot 'Publish-QARequest.ps1') -Request "maw-shallow-$Case"

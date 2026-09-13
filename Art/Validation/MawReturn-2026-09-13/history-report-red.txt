@@ -1,0 +1,10 @@
+2026-09-13 UTC. Test-QAHistoryCoverage.ps1 compiled the actual old reporting
+expression from MawShallowTraversalLab.Run, with seventeen empty locations.
+Exit code 1:
+HISTORY_COVERAGE: 0 known areas must not be reported as17;
+actual=MAW SHALLOW PRESERVATION: all17 historical bounds semantically unchanged
+during command, including old failed fixtures.
+
+This reproduces the reporting defect, not a terrain mutation. Empty coordinates
+have no tile cells to compare. Earlier native logs must be retained with this
+limitation, not rewritten as if the old count were valid.

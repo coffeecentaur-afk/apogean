@@ -12,6 +12,12 @@ or authorize normal-world replacement. See `MAW_RIB_CONTOUR_CONTRACT.md`.
 
 ## Reusable engine/tooling authorization
 
+September13 evidence discipline: a jump-only QA attempt that does not reach an
+exit does not justify a forced gear gate, guaranteed damage or automatic safe
+ledges. Preserve the difficult, player-modifiable descent and test rope, mining
+and other approaches separately. Missing fixture coordinates must never be
+reported as preserved terrain merely because their array slots exist.
+
 September12 validation lesson: preserving existing QA-world records is not
 permission to run QA controls. Saves by a plain character or server must retain
 checkpoints and fixed background profiles without rebuilding them. Keep

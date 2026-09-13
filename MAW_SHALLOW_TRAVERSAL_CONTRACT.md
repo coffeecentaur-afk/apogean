@@ -156,6 +156,37 @@ The native JSON must separately
 pass via `-Path`. One successful landing does not certify the winding connector,
 full descent, return route, all loadouts, manual feel or difficulty.
 
+## S bounded return-jump attempt — September13
+
+`motion-connector-return` requires the unchanged Plain100HP starter baseline.
+An explicit setup visit places the player at local body(944,1062), on the lower
+connector floor. The subsequent360-update/10-second input-only probe approaches
+the shaft, then tries24-held/36-released jump cycles. Terraria owns jumping,
+friction, collision and damage. No terrain, gear, velocity or gravity edits occur
+during the input sequence. `release` restores the pre-visit position afterwards.
+
+Both native S runs stopped at360updates without reaching the upper exit. Each
+rose98.0718px, retained100HP, recorded zero tooth contacts and kept the exact
+scene fingerprint. This is a reproducible bounded attempt, **not proof that
+return travel is impossible**, or that a named piece of equipment is required.
+No layout change follows automatically from it. Manual alternatives, mining,
+rope/building and equipped traversal remain separate gates.
+
+Schema4 records actual jump inputs, setup coordinates, start/end loadout checks
+and scene hashes. The independent return-trace validator must accept a complete
+incomplete attempt without converting it to a route-pass, and reject interrupted
+or contradictory records. See `Art/Validation/MawReturn-2026-09-13`.
+
+### Historical coverage correction
+
+The old `all17 historical bounds` log counted array slots, including empty
+rectangles. It is not evidence that17 real specimens were preserved. Empty
+coordinates cannot verify an absent fixture. The corrected reporter separately
+lists nonempty locations and missing/empty slot indices in `Historical()` order.
+Keep old raw evidence unchanged with this qualification; do not reconstruct or
+rebaseline the already-missing historical records. The known shallow11648-cell
+and contour10168-cell checks/hashes are independent of that misleading count.
+
 ## Clean lighting preview
 
 Plain held views may request `light-awake`, `light-dormant` or `light-natural`.

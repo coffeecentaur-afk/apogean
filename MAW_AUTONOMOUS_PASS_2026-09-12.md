@@ -78,6 +78,23 @@ Checkpoint completed owned chunks to GitHub and update Wayfinder/Bible/status.
 
 ## Live ledger
 
+- S/T,00:15–00:33UTC September13: two identical360-update native Plain return-
+  jump attempts stop without exit;98.0718px rise,105 jump-held/123 rising/106
+  falling ticks,100HP retained, zero teeth, exact24163E65 scene. Independent
+  validator accepts evidence but not route success. No named gear gate inferred.
+  Found old logger counting17 array slots despite empty locations; actual-path
+  reproduction fails on17 empty slots,56 corrected count/zero-area cases pass.
+  T994E4BE3 compiles0warnings/errors with466+7+1 immutable art. Native reporter
+  confirms8 nonempty/9 empty locations [1..9]; missing does not mean recovered.
+  T pristine/reload and119-update entry pass; entry18→18HP is explicitly labeled
+  after an observed Demon Eye death outside the passage at nighttime spawn.
+  Raw S25/T19 scoped records and native traces retained. S Plain save preserves
+  all16 existing canonical system digests compared with verified headlessB copy.
+  T safe save00:32:49 retains contour6F7998FF/shallow24163E65; menu observed.
+  Documentation/status qualify earlier all16/all17 statements, no raw evidence
+  rewritten. Next: narrow remaining interaction/support checks, not another
+  speculative background or rib-art loop. Deadline still04:46:58UTC.
+
 - Headless A/B,23:39–00:01UTC: own isolated large V3 copies, no players,
   localhost17777 and noSteam/noUPnP flags. A/R package019B5515 saved cleanly but
   real TagIO comparison finds two omitted existing system records;14 unchanged.

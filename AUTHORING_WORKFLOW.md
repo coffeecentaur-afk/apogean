@@ -10,6 +10,13 @@ solving the next family; do not turn workflow improvement into an engine detour.
 
 ## QA persistence lesson — September12
 
+September13 correction: an array length is not a verified-fixture count. Empty
+saved locations hash no terrain. Report nonempty coverage, missing/empty slots
+and limits explicitly; never call absent checkpoints preserved. The actual old
+logger fails `Test-QAHistoryCoverage.ps1` with17 empty slots; the corrected path
+passes56 count/zero-area cases. Native verification remains required separately.
+Preserve older logs and annotate their limitation instead of rewriting evidence.
+
 World-owned fixture data must survive saves by another QA character or a
 dedicated server without granting either permission to operate the fixture.
 Separate existing-data load/save ownership from interactive/mutation guards.

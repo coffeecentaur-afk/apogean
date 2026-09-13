@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "capturedUtc": "2026-09-13T00:33:06.1488500Z",
+  "sourceLogSha256": "934DA4F0B024C9EDD2D2CAE9AEA6BFB744455D0051F51C91D24E933949A28254",
+  "logTimeZone": "America/Chicago",
+  "scope": "Verbatim scoped native records, including failures. Not a blanket acceptance verdict.",
+  "records": [
+    "[19:29:43.043] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: pristine",
+    "[19:29:43.051] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[19:29:43.061] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: 8/17 nonempty historical bounds semantically unchanged during command; 9 missing/empty slots [1,2,3,4,5,6,7,8,9] are NOT verified. Slots use Historical() order; no recovery or whole-world preservation claim.",
+    "[19:29:43.061] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: pristine",
+    "[19:30:18.359] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: motion-entry",
+    "[19:30:18.363] [Main Thread/INFO] [apogean]: MAW SHALLOW PRISTINE PASS: 11648 exact cells; eight native clusters/all variants; immutable creation=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9. Not art or traversal approval.",
+    "[19:30:18.364] [Main Thread/INFO] [apogean]: MAW SHALLOW MOTION START: route=entry; max360 updates/10s; actual player inputs only; player=Maw QA Plain; plainBaseline=True; start={X:18176 Y:3030}; equipment=0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,0:0,; no gear, immunity, speed, gravity or damage overrides. Not whole-descent or difficulty approval.",
+    "[19:30:18.374] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: 8/17 nonempty historical bounds semantically unchanged during command; 9 missing/empty slots [1,2,3,4,5,6,7,8,9] are NOT verified. Slots use Historical() order; no recovery or whole-world preservation claim.",
+    "[19:30:18.374] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: motion-entry",
+    "[19:30:20.371] [Main Thread/INFO] [apogean]: MAW SHALLOW MOTION PASS: route=entry; landed; 119 actual updates/119 controlled; airborne=46; settled=12; life=18->18; evidence=Apogean Maw Shallow Motion 20260913-003020-333.json.",
+    "[19:31:34.308] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: reload",
+    "[19:31:34.313] [Main Thread/INFO] [apogean]: MAW SHALLOW RELOAD PASS: actual contents match saved interaction state; original contract retained separately.",
+    "[19:31:34.322] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: 8/17 nonempty historical bounds semantically unchanged during command; 9 missing/empty slots [1,2,3,4,5,6,7,8,9] are NOT verified. Slots use Historical() order; no recovery or whole-world preservation claim.",
+    "[19:31:34.323] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: reload",
+    "[19:32:05.308] [Main Thread/INFO] [apogean]: MAW SHALLOW REQUEST: release",
+    "[19:32:05.317] [Main Thread/INFO] [apogean]: MAW SHALLOW PRESERVATION: 8/17 nonempty historical bounds semantically unchanged during command; 9 missing/empty slots [1,2,3,4,5,6,7,8,9] are NOT verified. Slots use Historical() order; no recovery or whole-world preservation claim.",
+    "[19:32:05.317] [Main Thread/INFO] [apogean]: MAW SHALLOW COMPLETE: release",
+    "[19:32:49.242] [.NET TP Worker/INFO] [apogean]: MAW RIB CONTOUR SAVE: creation=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; actual=6F7998FFECA9D342C28B3A7FC2F8E319FE3AB73598956BB221945EF35AB4B4DF; failed=False.",
+    "[19:32:49.244] [.NET TP Worker/INFO] [apogean]: MAW SHALLOW SAVE: original=F3CC4D2B7672EFA22C657E047CD71F1D18418F3442B8BFD3699568E966885FF9; actualInteractionState=24163E65FC677E84DA67BBE7DC7E1535CEBB4096AE3326516418EC0A6213F5A5; failed=False. Creation is never replaced by interaction state."
+  ],
+  "caughtRenderFailures": []
+}
