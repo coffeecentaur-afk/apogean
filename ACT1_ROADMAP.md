@@ -2,6 +2,11 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+`rainier.png` adds a downstream depth-transition reference: large threshold ribs
+and a broader dark cavern with irregular terrain projections. Color/material
+roles need clarification; no new arena or gate inferred. Preserve implementation
+order below. The shared drawing contract now records all three references.
+
 The companion `deeper cave.png` now specifies the continuation: winding Gullet,
 uneven ribs, hazardous narrow side networks with chambers and lower reentries,
 fiber and side-path amber. No palette change. Intake only; implement a bounded

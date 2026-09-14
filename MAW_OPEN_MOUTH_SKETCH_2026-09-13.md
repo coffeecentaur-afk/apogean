@@ -79,6 +79,10 @@ later post-corporate Deep Maw. Stomach/intestine and protected-site rules remain
 
 ## Next bounded implementation
 
+The depth-threshold drawing below is a downstream design reference. Its color
+roles need clarification before new materials or a depth palette are assigned;
+that does not block the already specified entrance and upper-cave mockups.
+
 1. Translate this outline into tile-coordinate solid, air, native-wall, fiber,
    root and tooth masks; check the two labelled dimensions and show their actual
    in-game scale. Do not attempt to copy each MS Paint stroke as an atlas pixel.
@@ -96,6 +100,35 @@ The unresolved seed404 framing-boundary failure remains a separate engineering
 task. This drawing is not a fix, a waived guard, or evidence of worldgen safety.
 Full-depth anatomy and Maw parallax backgrounds remain later gates. Native
 backing walls in this drawing must not be confused with distant scenery.
+
+## Entrance to a new depth — rainier.png
+
+Local user reference: `C:/Users/max_h/Downloads/rainier.png`.
+SHA256: `CDD54CA540EE8D9D8034B7A553F7923669CD126EAC6C282855F4947E443E1F08`.
+User label: entrance to new depth change. Keep the source image local.
+Status: layout reference recorded; color/material roles pending clarification.
+
+Working spatial interpretation: the upper Gullet opens into a substantially
+broader cavern below. Two prominent asymmetric white ribs mark the threshold,
+one attached on either side at different heights. The lower area has irregular
+ceiling edges, large terrain projections from below, hanging fiber and open
+channels between the projections. Preserve connectivity and the open reveal;
+do not turn the threshold into a sealed floor or copy the cropped image as a
+closed rectangular chamber. Use connected structural ribs, not floating assets.
+
+The teal central area is labelled "dark". It appears to represent open cavern
+space/backing, with navy areas representing bordering solid terrain, but these
+roles are NOT confirmed. Ask whether navy means a new solid material and teal
+means open cavern with darker backing walls. Do not infer water, acid, a literal
+teal wall texture, a fixed lighting level or an approved blue biome palette.
+The preceding drawing's no-color-change instruction remains attached to that
+drawing; it must not silently forbid a new depth palette if the user confirms one.
+
+No depth in tiles, chamber dimensions, encounter, progression gate or mutation
+mechanic is specified. Do not name this the Stomach, post-corporate Deep Maw or
+a boss arena without confirmation. The geometry can be planned after the upper
+slice; assigning new materials waits for the color-role answer. Existing world,
+protection, hazard, save/reload and visual approval gates remain unchanged.
 
 ## Collaboration
 

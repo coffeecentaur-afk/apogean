@@ -17,6 +17,14 @@ See AUTHORING_WORKFLOW.md for interpretation, testing and evidence rules.
 
 ## Provisional Maw contour evidence
 
+Newest depth-transition reference, September13 `rainier.png`: the user labels
+an entrance into a new depth. Read as an upper Gullet opening into a wider dark
+cavern, with prominent uneven ribs at the threshold and irregular terrain below.
+Navy terrain/teal cavern color roles remain an interpretation awaiting an answer,
+not approved new materials, liquid, a boss arena or a progression gate. Record
+separately from the previous drawing's no-recolor instruction. Full intake is in
+MAW_OPEN_MOUTH_SKETCH_2026-09-13.md; this is design only, not runtime acceptance.
+
 Latest companion drawing, September13 `deeper cave.png`: carry the main winding
 Gullet downward with uneven ribs and narrower side networks linking small
 chambers, lower reentries and occasional exploratory ends. Teeth remain hazards
