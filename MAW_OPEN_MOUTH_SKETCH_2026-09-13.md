@@ -124,23 +124,30 @@ teal wall texture, a fixed lighting level or an approved blue biome palette.
 The preceding drawing's no-color-change instruction remains attached to that
 drawing; it must not silently forbid a new depth palette if the user confirms one.
 
-Follow-up user pitch defines THREE major destination routes from this depth:
-the main downward continuation toward Hell, one side branch to the lab from
-which the Maw escaped, and another side branch to a boss chamber. Left/right
-assignment is not specified. These are major routes, not a limit of three total
+Follow-up user decision defines THREE major destination routes from this depth:
+the main downward continuation ending at the Matriarch's Stomach immediately
+before Hell, one side branch to the lab from which the Maw escaped, and another
+side branch to the Nest Warden's chamber. Left/right assignment is not specified.
+These are major routes, not a limit of three total
 tunnels: the previously requested small caves, pockets and local loops remain.
 The origin lab is a specific story destination, not a generic random loot lab.
 
-Keep the established Stomach above Hell and enclosed intestinal descent on the
-main route unless explicitly revised. "Straight down goes to Hell" identifies
-the central destination; do not silently replace hazardous winding anatomy
-with an unobstructed free-fall chute or open the Stomach floor into Hell.
+The user explicitly identifies the Stomach as the end of the Maw, right before
+Hell, and as the Matriarch boss chamber. Preserve its position above Hell and
+Wall of Flesh clearance; do not move it into the side branch or add another
+full Maw depth beneath this terminal chamber. "Straight down goes to Hell"
+describes the route's destination, not an unobstructed free-fall chute or an
+instruction to open the Stomach floor. The previously documented enclosed
+intestinal outlet is a separate connector concept, not another playable Maw
+depth; reconcile that detail with this endpoint before full-depth placement.
 
-The side chamber's boss identity is not specified. Ask which encounter belongs
-there before assigning progression, dimensions or moving/duplicating the
-Matriarch's established Stomach. The central three-way transition is not itself
-automatically a boss arena, the Stomach, or the lore's post-corporate Deep Maw.
-No exact depth, new gate or mutation mechanic is specified. Geometry can be
+The side chamber's boss identity is now CONFIRMED: Nest Warden. Do not ask that
+question again. This is the earlier encounter, distinct from the pre-Wall of
+Flesh Matriarch; retain existing Brood Nest summoning/progression decisions.
+No new boss, summon requirement, balance or chamber dimensions are authorized.
+The central three-way transition is not itself automatically a boss arena,
+the Stomach, or the lore's post-corporate Deep Maw. No exact depth, new gate or
+mutation mechanic is specified. Geometry can be
 planned after the upper slice; assigning new materials waits for the color-role
 answer. Existing world, protection, hazard, save/reload and visual gates remain.
 

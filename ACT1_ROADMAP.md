@@ -5,8 +5,10 @@
 `rainier.png` adds a downstream depth-transition reference: large threshold ribs
 and a broader dark cavern with irregular terrain projections. Color/material
 roles need clarification. The follow-up specifies three major destinations:
-central descent toward Hell, escape-origin lab, and a separate boss chamber.
-Boss identity is open; do not move the Matriarch/Stomach or assign new gates.
+central descent ends at the Matriarch's Stomach just before Hell; the two side
+routes lead to the escape-origin lab and the CONFIRMED Nest Warden chamber.
+The Stomach is the Maw's terminal boss area. Do not move/duplicate the Matriarch,
+add another full depth beneath it, or assign new gates from this clarification.
 Preserve implementation order below. The shared contract records all references.
 
 The companion `deeper cave.png` now specifies the continuation: winding Gullet,
