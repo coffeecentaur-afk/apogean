@@ -17,6 +17,17 @@ See AUTHORING_WORKFLOW.md for interpretation, testing and evidence rules.
 
 ## Provisional Maw contour evidence
 
+Latest Nest Warden chamber sketch: a broad irregular room, bone around its
+perimeter, a winding right-hand approach and the final nest near the floor
+center. TWO prerequisite Brood Nests occupy separate earlier-Maw side caverns.
+The chamber nest is unbreakable until both are destroyed, explaining that the
+other nests shield it. Then it becomes breakable; breaking it summons the Warden
+there. Unlocking alone must not start combat. The first attempt drops a repeat
+summon item, before victory; do not use the agent-proposed nest regrowth.
+Reusability is recommended but not confirmed. This refines the three-nest rule,
+not the spread-Node system. See MAW_OPEN_MOUTH_SKETCH_2026-09-13.md for the
+appshot interpretation, persistence/retry requirements and pending choices.
+
 Newest depth-transition reference, September13 `rainier.png`: the user labels
 an entrance into a new depth. Read as an upper Gullet opening into a wider dark
 cavern, with prominent uneven ribs at the threshold and irregular terrain below.
@@ -556,10 +567,10 @@ teeth and no-safe-ledges composition still await integration.
 - The Nest Warden's **Cautery Brand** ruptures a Node's protective sheath. The collapsed organ leaves **Ossamber**, amber-yellow mineralized Broodmass tissue threaded through an ivory skeletal lattice. Exposed Ossamber can be mined with approximately Platinum-tier pickaxe power or ordinary explosives.
 - A major Node leaves roughly 45–60 Ossamber shards; a minor outgrowth leaves roughly 12–20. The material condenses only at the destroyed Node rather than spraying random ore through the world.
 - Raw Ossamber occupies the Demonite/Crimtane-to-Necro progression band. MATRIARCH-7A-1 Mutagen Cells stabilize selected Ossamber recipes at approximately Hellstone strength, never beyond the vanilla pre-Wall-of-Flesh ceiling.
-- After the first Nest Warden victory, a craftable repeat summon makes Ossamber renewable. Node geodes remain the more efficient first-clear reward, but finite world deposits can never permanently starve multiplayer or late-joining characters.
+- The final arena nest drops a repeat-summon item on the first attempt, before a Nest Warden victory is required. The post-victory craftable summon remains an additional acquisition path, not the only way to retry. Reusable behavior is recommended but not yet confirmed; do not substitute nest regrowth. Repeat fights make Ossamber renewable. Node geodes remain the more efficient first-clear reward, but finite world deposits can never permanently starve multiplayer or late-joining characters.
 - Raw Ossamber supports a Necro-tier ranger armor alternative, tools, a grapple, and introductory melee and ranged weapons. Matriarch-catalyzed Brood equipment uses shared body and leg pieces with separate mage and summoner helmets and includes one appropriate weapon route for every class. Melee retains Molten armor as its conventional pre-Wall-of-Flesh armor ceiling.
 - Ossamber is Broodmass matter that corporations may study or exploit; it is not one of the corporations' later faction-specific Hardmode ores. The Nest Warden reserves a true optional one-percent chase drop, but no rare drop is required for progression.
-- **Brood Nests** are separate reproductive structures. Destroying three awakens the Nest Warden; they do not control biome spread.
+- **Brood Nests** are separate reproductive structures, not spread Nodes. Destroy two distinct nests in earlier-Maw side caverns, in either order, to remove the protection from the third nest in the Nest Warden chamber. Attempting to break the third early explains that the other nests protect it. Breaking the unlocked final nest awakens the Warden inside that chamber; destroying the second prerequisite alone does not summon it. The first-attempt summon-item drop is available regardless of victory.
 - **Maw Ruptures** are large, persistent collapsed hollows where players can build their own boss arenas.
 - **The Deep Maw** is the later, endgame hive domain.
 - Supported large worlds receive one major Rupture, one guaranteed Maw Outgrowth, and a second Outgrowth only when uncontested space remains. Outgrowths are small regional patches, not additional Gullets, and required Brood Nests remain inside the primary Maw. The major Rupture is an authored vertical scar that penetrates natural surface, underground, cavern, and Underworld terrain rather than repainting only the first soil row. Its terrain, walls, hazards, and scenery change with depth while remaining one continuous landmark. Growth is slow before Hardmode and bounded thereafter.

@@ -2,6 +2,15 @@
 
 ## Newest checkpoint — dimensioned open-mouth drawing
 
+New Paint appshot supplies the Nest Warden chamber: wide center, perimeter bone,
+winding right entry, final floor nest. Two separate earlier-side-cave nests must
+be broken before that final nest can be destroyed. Early hits explain protection;
+breaking the unlocked arena nest starts the fight AND drops a retry summon item
+on the first attempt, not first victory. User chose this instead of nest regrowth.
+Reusability is recommended, still unconfirmed. Record only; no summon runtime,
+package or world change. Full contract and test obligations are in the shared
+sketch document. Keep entrance-first implementation order.
+
 Third drawing `rainier.png` is the entrance to a new depth, recorded in the same
 contract. A broad dark cavern and large threshold ribs are the working layout;
 navy solid-terrain versus teal open-cavern roles need user clarification.

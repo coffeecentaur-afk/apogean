@@ -2,6 +2,13 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+New Warden chamber drawing fixes the initial summon layout: two nests in earlier
+side caverns protect the final nest in the boss chamber. Break both, then the
+chamber nest, to start the fight. First attempt drops a repeat-summon item;
+reusability is recommended, not approved. Do not regrow the nest. This is a
+recorded downstream contract, not implemented AI or a change to the current
+entrance-first order. Shared contract includes the chamber and future tests.
+
 `rainier.png` adds a downstream depth-transition reference: large threshold ribs
 and a broader dark cavern with irregular terrain projections. Color/material
 roles need clarification. The follow-up specifies three major destinations:

@@ -143,13 +143,70 @@ depth; reconcile that detail with this endpoint before full-depth placement.
 
 The side chamber's boss identity is now CONFIRMED: Nest Warden. Do not ask that
 question again. This is the earlier encounter, distinct from the pre-Wall of
-Flesh Matriarch; retain existing Brood Nest summoning/progression decisions.
-No new boss, summon requirement, balance or chamber dimensions are authorized.
+Flesh Matriarch. The following chamber sketch refines the Brood Nest summoning
+sequence; it does not authorize new boss AI, balance or chamber dimensions.
 The central three-way transition is not itself automatically a boss arena,
 the Stomach, or the lore's post-corporate Deep Maw. No exact depth, new gate or
 mutation mechanic is specified. Geometry can be
 planned after the upper slice; assigning new materials waits for the color-role
 answer. Existing world, protection, hazard, save/reload and visual gates remain.
+
+## Nest Warden chamber and protected final nest
+
+Reference: user-supplied Paint appshot, window title
+`nest warden boss chamber - Paint`, supplied September13 local time
+(appshot timestamp 2026-09-14T02-18-14.904Z). The visible canvas is 1536x864;
+no saved image path was supplied. Do not invent a source file, save over the
+Paint document or publish the personal screenshot.
+
+The drawing shows a broad, irregular chamber with open central fighting space,
+a winding approach descending along the right and entering at the lower right,
+large white bone forms around the perimeter and ceiling, and one orange nest
+on the floor near the center. Preserve those relationships at player scale;
+the right-hand local doorway does not decide which side of the whole Gullet
+owns this branch. White bone is not automatically a damaging tooth. Exact tile
+dimensions, bone collision shapes and the unresolved depth palette need their
+own material/arena checks. Do not add prebuilt platform rows from a generic
+arena template, or turn the orange egg marker into a new kind of spread Node.
+
+Confirmed summon sequence, superseding the generic "break any three" reading:
+
+1. Place TWO distinct prerequisite Brood Nests in separate earlier-Maw side
+   caverns. Players may destroy them in either order; neither starts the fight.
+2. The THIRD, final Brood Nest is inside the Nest Warden chamber. Until both
+   earlier nests are destroyed, it cannot be broken. A failed attempt explains
+   that the other nests protect it. Proposed wording: "The other nests still
+   shield this brood." With one remaining, use the singular equivalent.
+3. Once both prerequisites are destroyed, the final nest becomes breakable.
+   This unlock alone does NOT summon the boss; deliberately breaking that nest
+   starts the Warden encounter in its own chamber. Discovering or entering the
+   chamber early remains allowed; protection applies to the nest, not a new door.
+4. Latest user retry choice: the first attempt drops a summon item. Bind that
+   drop to the final nest breaking/first summon, BEFORE any victory is required.
+   It is a retry item, not the event that consumes/causes the initial summon.
+   Do not implement the agent's earlier nest-regrowth suggestion.
+
+Recommended, NOT yet confirmed: make the dropped summon reusable so successive
+losses cannot exhaust a single consumable. Restrict duplicate concurrent boss
+spawns. Exact item name, consumability, co-op distribution and replacement if
+lost remain to specify before implementation. The prior post-victory craftable
+summon remains an additional acquisition path, but must not gate first-loss
+retries. The user selected an item instead of regeneration, not an auto-respawn.
+
+Engineering requirements for the eventual implementation: save the two distinct
+prerequisite identities and destroyed flags in shared world state; one multi-tile
+nest must never count several times. The server validates the final unlock,
+starts at most one encounter and issues the first-attempt drop once. Preserve
+progress through reload/join/death. Keep existing Brood Nest bomb protection;
+support loss, conversion or tile cleanup must not bypass the final-nest lock
+or falsely advance it. The earlier two must not require the Warden's own
+Cautery Brand. Add bounded protection feedback, not chat spam on every hit.
+
+Required future checks: both prerequisite orders; final-hit refusal at zero/one;
+no auto-summon at two; correct deliberate final break and pre-victory item drop;
+duplicate break/packet rejection; save/reload and host/client agreement; failed
+first and second attempts remain retryable. Native visual/collision/loot tests
+are still pending. This section records design, not working summon code.
 
 ## Collaboration
 
