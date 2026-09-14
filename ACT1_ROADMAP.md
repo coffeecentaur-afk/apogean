@@ -2,7 +2,15 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
-Latest September13 direction is now a V3 test candidate: rounded uneven lip
+Newest September13 input is the dimensioned `open.png` mouth drawing. The next
+target is an overhanging, scooped mouth with a 20-block aperture/20-block open
+depth and a dirt-to-stone backing-wall transition below. Record only specified
+status: no new geometry or render proof yet. Build a separate playable mockup
+before seeded rollout, preserving V3 and all prior played references. See
+MAW_OPEN_MOUTH_SKETCH_2026-09-13.md. Seed404 and outer-terrain reliability remain
+engineering work, not user drawing responsibilities.
+
+Prior September13 direction has a V3 test candidate: rounded uneven lip
 crests, a downward semicircular native-wall aperture, and finite upper clearance.
 Native Large202 generation passed with prior played references preserved.
 Client render, cap/root checks and normal save/reload also passed. User review

@@ -1,6 +1,18 @@
 # Fresh-seed Maw review handoff
 
-## Newest checkpoint — V3 rounded mouth
+## Newest checkpoint — dimensioned open-mouth drawing
+
+Read MAW_OPEN_MOUTH_SKETCH_2026-09-13.md first. User supplied `open.png` with a
+20-block top aperture, 20-block open gap, inward-overhanging lips and scooped
+inner walls. It supersedes the V3 silhouette target, not historical evidence.
+The dirt background starts below the rounded air cutout; it is not a solid floor.
+Next: separate playable mockup using existing materials, then user review and
+bounded seed transfer. No new runtime implementation, art or world changes in
+this intake. V3 installed package and prior game handoff below are unchanged;
+reobserve before UI use. Do not rebuild any played reference or claim the
+seed404 framing failure is fixed. Drawing stays local, not uploaded to GitHub.
+
+## Prior checkpoint — V3 rounded mouth
 
 Read MAW_SEED_V3_2026-09-13.md first, then the V2 report for diagnostic history.
 User requested a semicircular native-wall cutout and less triangular lips.

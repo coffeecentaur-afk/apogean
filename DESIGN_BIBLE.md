@@ -17,7 +17,17 @@ See AUTHORING_WORKFLOW.md for interpretation, testing and evidence rules.
 
 ## Provisional Maw contour evidence
 
-LATEST USER DIRECTION, September13 evening: the visible native backing-wall
+LATEST USER DRAWING, September13 `open.png`: a 20-block top opening and 20-block
+open-air depth, scooped inner walls beneath inward-overhanging unequal lips,
+and a rounded lower air cutout leading into dirt then stone backing walls.
+The drawn dirt background transition does not block the descent with a floor.
+This is more specific than V3's rounded crests: preserve a hollow mouth and
+natural asymmetric outer slopes, not two rounded pylons. Existing fiber, ribs,
+teeth and material identities remain. Next is one separate disposable mockup,
+then bounded seed transfer after review. No played world is rewritten. See
+MAW_OPEN_MOUTH_SKETCH_2026-09-13.md for dimensions and interpretation.
+
+Earlier September13 evening direction: the visible native backing-wall
 edge inside the mouth should descend in a semicircular/U-shaped cutout, not a
 V or a straight horizontal cutoff. Raised mouth lips should have broader,
 uneven rounded crests, not narrow triangular peaks. Keep the small aperture,
