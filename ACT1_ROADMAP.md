@@ -2,6 +2,21 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+Latest September13 direction is now a V3 test candidate: rounded uneven lip
+crests, a downward semicircular native-wall aperture, and finite upper clearance.
+Native Large202 generation passed with prior played references preserved.
+Client render, cap/root checks and normal save/reload also passed. User review
+remains pending; see MAW_SEED_V3_2026-09-13.md for exact evidence limits.
+This does not resolve the separate seed404 framing-boundary rejection.
+
+September13 V2 checkpoint: narrower steep lips, independent surface backing,
+buried-root backing and a lower-rejoining hazardous side route now exist in a
+separate fresh QA version. Native202 and cap red/green tests pass;404 still
+rejects a framing-boundary change. The new aperture can leave oversized old
+shoulders outside its smaller clearing mask, so entrance polish is not complete.
+Preserve the now-played V2 pair and the earlier V1 worlds. Current evidence:
+MAW_SEED_V2_2026-09-13.md. Do not infer production readiness from one seed.
+
 Latest review of generated202: preserve liked ribs/material direction, small
 offshoot caves and hanging fiber with segmented breakage. Next bounded revision:
 prove/fix root-adjacent light pockets and under-cap fiber gaps; tighten the mouth

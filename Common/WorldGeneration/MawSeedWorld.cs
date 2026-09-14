@@ -23,6 +23,8 @@ namespace apogean.Common.WorldGeneration
     public sealed class MawSeedWorld : ModSystem
     {
         internal const string WorldPrefix = "Apogean Maw Seed QA ";
+        internal const string WorldV2Prefix = "Apogean Maw Seed V2 QA ";
+        internal const string WorldV3Prefix = "Apogean Maw Seed V3 QA ";
         private const string SaveKey = "mawSeedWorldV1";
         private const int Padding = 12;
         private TagCompound record;
@@ -39,11 +41,18 @@ namespace apogean.Common.WorldGeneration
         internal static MawSeedWorld Instance => ModContent.GetInstance<MawSeedWorld>();
         private string WorldName => Main.ActiveWorldFileData?.Name ?? Main.worldName;
         internal static bool IsTestWorldName(string name) => TryNameSeed(name, out _);
-        private static bool TryNameSeed(string name, out int seed)
+        private static bool TryNameSeed(string name, out int seed) => TryNameVersion(name, out seed, out _);
+        private static bool TryNameVersion(string name, out int seed, out int version)
         {
             seed = 0;
-            if (name == null || !name.StartsWith(WorldPrefix, StringComparison.Ordinal)) return false;
-            string suffix = name.Substring(WorldPrefix.Length);
+            version = 0;
+            if (name == null) return false;
+            string prefix;
+            if (name.StartsWith(WorldPrefix, StringComparison.Ordinal)) { prefix = WorldPrefix; version = 1; }
+            else if (name.StartsWith(WorldV2Prefix, StringComparison.Ordinal)) { prefix = WorldV2Prefix; version = 2; }
+            else if (name.StartsWith(WorldV3Prefix, StringComparison.Ordinal)) { prefix = WorldV3Prefix; version = 3; }
+            else return false;
+            string suffix = name.Substring(prefix.Length);
             return suffix.Length > 0 && suffix.All(c => c >= '0' && c <= '9') &&
                 int.TryParse(suffix, NumberStyles.None, CultureInfo.InvariantCulture, out seed);
         }
@@ -69,7 +78,8 @@ namespace apogean.Common.WorldGeneration
                 if (record == null || record.GetString("world") != WorldName) return false;
                 if (validMetadata.HasValue) return validMetadata.Value;
                 Rectangle b = Bounds, s = AffectedBounds;
-                validMetadata = IsTestWorldName(WorldName) && LayoutVersion == P.Version && b.Width == P.Width && b.Height == P.Height &&
+                validMetadata = TryNameVersion(WorldName, out int namedSeed, out int namedVersion) &&
+                    namedSeed == Seed && LayoutVersion == namedVersion && b.Width == P.Width && b.Height == P.Height &&
                     s.Contains(b) && s.Width <= P.Width + 2 * Padding && s.Height <= P.Height + 64 &&
                     InWorld(s) && record.Get<byte[]>("mask").Length == (s.Width * s.Height + 7) / 8;
                 return validMetadata.Value;
@@ -83,7 +93,7 @@ namespace apogean.Common.WorldGeneration
                 Require(HasLayout, "No supported saved seed layout in this world.");
                 int[] spine = record.Get<int[]>("spine");
                 Require(spine.Length == P.Height, "Saved row profile has invalid dimensions.");
-                return P.Create(Seed, (int[])spine.Clone(), record.GetInt("leftSurface"), record.GetInt("rightSurface"));
+                return P.CreateVersion(LayoutVersion, Seed, (int[])spine.Clone(), record.GetInt("leftSurface"), record.GetInt("rightSurface"));
             }
         }
 
@@ -117,8 +127,8 @@ namespace apogean.Common.WorldGeneration
                 for (int y = 0; y < spine.Length; y++) spine[y] = SpineX(rupture, bounds.Y + y) - bounds.X;
                 int left = findSurface(bounds.Left + 4) - bounds.Top;
                 int right = findSurface(bounds.Right - 5) - bounds.Top;
-                TryNameSeed(generationName, out int seed);
-                P plan = P.Create(seed, spine, left, right);
+                Require(TryNameVersion(generationName, out int seed, out int version), "Unsupported candidate name.");
+                P plan = P.CreateVersion(version, seed, spine, left, right);
                 Point exit = At(bounds, plan.Exit);
                 Point16 next = rupture.NavigationSpine.FirstOrDefault(p => p.Y >= bounds.Bottom + 4);
                 Require(next.Y > 0 && next.Y <= bounds.Bottom + 18, "No nearby saved deep waypoint for the outlet.");
@@ -128,6 +138,7 @@ namespace apogean.Common.WorldGeneration
                     Math.Abs(exit.X - target.X) + 2, target.Y - exit.Y + 3));
                 scope.Inflate(Padding, Padding);
                 Require(InWorld(scope) && rupture.ReservedBounds.Contains(scope), "Shallow scope escapes the major reservation.");
+                VerifySurfaceClearance(plan, bounds);
                 Require(!occupied.Any(r => r.Intersects(scope)), "Shallow scope overlaps another planned site.");
                 var placement = new Placement(rupture, plan, bounds, scope, seed, spine, left, right, target, connector);
                 byte[] impact = ImpactMask(scope, MakeMask(placement));
@@ -185,6 +196,21 @@ namespace apogean.Common.WorldGeneration
                 !CaveClutter(t.TileType) && t.TileType != ModContent.TileType<EngraftTuft>();
         }
 
+        private static void VerifySurfaceClearance(P plan, Rectangle bounds)
+        {
+            if (plan.LayoutVersion < 3) return;
+            // V3 owns air down from local row4. Never cut off terrain that crosses
+            // its upper boundary and leave a suspended roof outside the edit mask.
+            for (int x = 4; x < P.Width - 4; x++)
+            {
+                P.Cell cell = plan.Cells[x, 4];
+                if (!cell.Write || cell.Key != null) continue;
+                Tile above = Main.tile[bounds.X + x, bounds.Y + 3];
+                Require(!above.HasTile && above.WallType == WallID.None && above.LiquidAmount == 0,
+                    $"Surface clearance crosses terrain at {bounds.X+x},{bounds.Y+3}; choose another site.");
+            }
+        }
+
         internal void ApplyPlanned(MawRupturePlan rupture)
         {
             if (!Requested) return;
@@ -193,6 +219,7 @@ namespace apogean.Common.WorldGeneration
             Require(p != null && ReferenceEquals(p.Rupture, rupture) && record == null, "No unique preflighted shallow plan for this rupture.");
             Require(ApogeanWorldPlanSystem.Instance.CanPlace(p.Scope, WorldEditIntent.MawGeneration), "Shallow reservation now conflicts with the atlas.");
             VerifyProtected(p.Scope);
+            VerifySurfaceClearance(p.Plan, p.Bounds);
             byte[] mask = MakeMask(p);
             byte[] impact = ImpactMask(p.Scope, mask);
             Require(p.ApprovedImpact != null && p.ApprovedImpact.Length == impact.Length, "Missing approved impact.");
@@ -256,7 +283,7 @@ namespace apogean.Common.WorldGeneration
                     Require(!tile.HasTile, $"Fiber footprint occupied at {x},{y}.");
                     tile.HasTile = true; tile.TileType = (ushort)bindings.Fiber;
                     tile.TileFrameX = 0; tile.TileFrameY = (short)((d - 1) * 18);
-                    WorldGen.SquareTileFrame(x, y);
+                    WorldGen.TileFrame(x, y, resetFrame: true);
                 }
                 FrameOwned(p.Scope, mask);
                 // Framing observes final topology; it does not confer ownership over inactive cells.
@@ -267,8 +294,11 @@ namespace apogean.Common.WorldGeneration
                     if (Owned(p.Scope, mask, x, y)) continue;
                     CellState before = original[x - p.Scope.X, y - p.Scope.Y], after = CellState.Read(x, y);
                     Require(after.SameNonFrameState(before), $"Framing changed unowned terrain/state at {x},{y}: before={before.Describe()}; after={after.Describe()}.");
-                    if (!Owned(p.Scope, impact, x, y)) Require(after.Equals(before), $"Framing escaped its impact halo at {x},{y}.");
-                    before.Restore(x, y);
+                    if (!Owned(p.Scope, impact, x, y)) Require(after.Equals(before),
+                        $"Framing escaped its impact halo at {x},{y}: before={before.Describe()};{before.DescribeFrames()}; after={after.Describe()};{after.DescribeFrames()}.");
+                    // Amount/type already match; retain live skip/check flags so the native
+                    // liquid queue remains consistent while restoring original frame state.
+                    (before with { Liquid = after.Liquid }).Restore(x, y);
                 }
                 // Ignore only the newly created QA cache when comparing pre-existing containers.
                 VerifyProtectedCells();
@@ -403,7 +433,7 @@ namespace apogean.Common.WorldGeneration
                 Require(tile.HasTile == (cell.Key != null || obj) && tile.WallType == bindings.Wall(cell.Wall) && Clean(tile), $"Native cell/artifact mismatch at {at}.");
                 if (tile.HasTile) Require(tile.TileType == (obj ? expected.Type : bindings.Tile(cell.Key)) && !tile.IsHalfBlock &&
                     (byte)tile.Slope == cell.Slope && (!obj || tile.TileFrameX == expected.X && tile.TileFrameY == expected.Y), $"Native tile/frame/slope mismatch at {at}.");
-                if (y < plan.Ground[x] + 3) Require(tile.WallType == WallID.None, $"Surface wall fringe at {at}.");
+                if (!plan.AllowsWall(x, y)) Require(tile.WallType == WallID.None, $"Surface wall fringe at {at}.");
                 if (cell.Key != null && !obj)
                 {
                     Require(bindings.Maps[cell.Key].TryMap(at.X, at.Y, tile.TileFrameX, tile.TileFrameY, out _, out _), $"Unmapped native tile frame at {at}."); frames++;
@@ -419,27 +449,39 @@ namespace apogean.Common.WorldGeneration
                 cells++;
             }
             int routePositions = VerifyNativeRoute(plan);
+            int branchPositions = plan.LayoutVersion >= 2 ? VerifyNativeRoute(plan, true) : 0;
             foreach (Point position in Connector(Exit, ConnectorTarget))
                 Require(BodyClear(position), $"Exact exit-to-spine connector obstructed at {position}.");
-            return $"cells={cells}; objects={objects.Count}; frames={frames}; light-hooks={lights}; reachable={routePositions}; cache=1-empty; node=1-reservation; visual-alpha/manual-traversal=unverified";
+            return $"cells={cells}; objects={objects.Count}; frames={frames}; light-hooks={lights}; reachable={routePositions}; branch-only={branchPositions}; cache=1-empty; node=1-reservation; visual-alpha/manual-traversal=unverified";
         }
 
-        private int VerifyNativeRoute(P plan)
+        private int VerifyNativeRoute(P plan, bool branchOnly = false)
         {
             Rectangle b = Bounds; var seen = new HashSet<Point>(); var queue = new Queue<Point>();
             void Visit(Point at)
             {
                 if (!b.Contains(at) || !b.Contains(at.X + 1, at.Y + 2) || seen.Contains(at)) return;
                 for (int dx = 0; dx < 2; dx++) for (int dy = 0; dy < 3; dy++)
-                    if (!plan.Cells[at.X + dx - b.X, at.Y + dy - b.Y].Write) return;
+                {
+                    int x = at.X + dx - b.X, y = at.Y + dy - b.Y;
+                    if (!plan.Cells[x, y].Write || branchOnly &&
+                        (!plan.Cells[x, y].Side || plan.IsCentralShaft(x, y))) return;
+                }
                 if (!BodyClear(at)) return; seen.Add(at); queue.Enqueue(at);
             }
-            Visit(Entrance);
+            Visit(branchOnly ? At(b, plan.LowerRejoinEntrance) : Entrance);
             while (queue.Count > 0)
             {
                 Point p = queue.Dequeue(); Visit(new(p.X - 1, p.Y)); Visit(new(p.X + 1, p.Y)); Visit(new(p.X, p.Y - 1)); Visit(new(p.X, p.Y + 1));
             }
+            if (branchOnly)
+            {
+                Require(seen.Contains(At(b, plan.LowerRejoinExit)), "Native side route cannot reach lower rejoin without using central shaft.");
+                return seen.Count;
+            }
             Require(seen.Contains(Exit), "Native entrance cannot reach exact exit.");
+            if (plan.LayoutVersion >= 2) Require(seen.Contains(At(b, plan.LowerRejoinEntrance)) &&
+                seen.Contains(At(b, plan.LowerRejoinExit)), "Native side-route junction disconnected from main descent.");
             foreach (P.Point c in plan.Chests) Require(seen.Contains(new(b.X + c.X, b.Y + c.Y - 2)), "Native cache is unreachable.");
             foreach (P.Point c in plan.NodeSites) Require(seen.Contains(new(b.X + c.X, b.Y + c.Y - 1)), "Native node reservation is unreachable.");
             return seen.Count;
@@ -526,7 +568,7 @@ namespace apogean.Common.WorldGeneration
         }
         private TagCompound MakeRecord(Placement p, byte[] mask) => new()
         {
-            ["world"] = generationName, ["version"] = P.Version, ["seed"] = p.Seed,
+            ["world"] = generationName, ["version"] = p.Plan.LayoutVersion, ["seed"] = p.Seed,
             ["bounds"] = RectTag(p.Bounds), ["scope"] = RectTag(p.Scope), ["spine"] = p.Spine,
             ["leftSurface"] = p.LeftSurface, ["rightSurface"] = p.RightSurface,
             ["mouthX"] = (int)p.Rupture.SurfaceCenter.X, ["mouthY"] = (int)p.Rupture.SurfaceCenter.Y,
@@ -599,10 +641,13 @@ namespace apogean.Common.WorldGeneration
         }
         private static void FrameOwned(Rectangle scope, byte[] mask)
         {
+            // Start native framing only at owned centers. Square wrappers also start
+            // work on the unowned ring, whose recursive reframing can escape impact.
+            // Native recursion remains subject to the unchanged exact halo assertion.
             foreach (Rectangle span in Spans(scope, mask)) for (int x = span.Left; x < span.Right; x++)
             {
-                WorldGen.SquareTileFrame(x, span.Y);
-                WorldGen.SquareWallFrame(x, span.Y);
+                WorldGen.TileFrame(x, span.Y, resetFrame: true);
+                Framing.WallFrame(x, span.Y, resetFrame: true);
             }
         }
         private void VerifyProtectedCells()
@@ -668,9 +713,22 @@ namespace apogean.Common.WorldGeneration
         private readonly record struct CellState(TileTypeData Type, WallTypeData Wall, TileWallWireStateData State,
             LiquidData Liquid, TileWallBrightnessInvisibilityData Coating)
         {
-            internal string Describe() => $"tile={Type.Type};bits={State.NonFrameBits:X8}";
+            // Cover every value compared by SameNonFrameState, including liquid
+            // bookkeeping and all coating bits; frame coordinates/caches are excluded.
+            internal string Describe() => $"tile={Type.Type};wall={Wall.Type};bits={State.NonFrameBits:X8};" +
+                $"hasTile={State.HasTile};actuated={State.IsActuated};actuator={State.HasActuator};" +
+                $"tileColor={State.TileColor};wallColor={State.WallColor};halfBlock={State.IsHalfBlock};slope={State.Slope};" +
+                $"redWire={State.RedWire};blueWire={State.BlueWire};greenWire={State.GreenWire};yellowWire={State.YellowWire};" +
+                $"liquidAmount={Liquid.Amount};liquidType={Liquid.LiquidType};skipLiquid={Liquid.SkipLiquid};checkingLiquid={Liquid.CheckingLiquid};" +
+                $"coating={Coating.Data:X2};tileInvisible={Coating.IsTileInvisible};wallInvisible={Coating.IsWallInvisible};" +
+                $"tileFullbright={Coating.IsTileFullbright};wallFullbright={Coating.IsWallFullbright}";
+            internal string DescribeFrames() => $"tileFrameX={State.TileFrameX};tileFrameY={State.TileFrameY};tileFrameNumber={State.TileFrameNumber};" +
+                $"wallFrameX={State.WallFrameX};wallFrameY={State.WallFrameY};wallFrameNumber={State.WallFrameNumber}";
+            // SkipLiquid/CheckingLiquid are transient native queue bookkeeping, not water
+            // content. The unowned restore caller preserves their current values.
             internal bool SameNonFrameState(CellState other) => Type.Equals(other.Type) && Wall.Equals(other.Wall) &&
-                Liquid.Equals(other.Liquid) && Coating.Equals(other.Coating) && State.NonFrameBits == other.State.NonFrameBits;
+                Liquid.Amount == other.Liquid.Amount && Liquid.LiquidType == other.Liquid.LiquidType &&
+                Coating.Equals(other.Coating) && State.NonFrameBits == other.State.NonFrameBits;
             internal static CellState Read(int x, int y) { Tile t = Main.tile[x, y]; return new(t.Get<TileTypeData>(), t.Get<WallTypeData>(), t.Get<TileWallWireStateData>(), t.Get<LiquidData>(), t.Get<TileWallBrightnessInvisibilityData>()); }
             internal void Restore(int x, int y) { Tile t = Main.tile[x, y]; t.Get<TileTypeData>() = Type; t.Get<WallTypeData>() = Wall; t.Get<TileWallWireStateData>() = State; t.Get<LiquidData>() = Liquid; t.Get<TileWallBrightnessInvisibilityData>() = Coating; }
         }

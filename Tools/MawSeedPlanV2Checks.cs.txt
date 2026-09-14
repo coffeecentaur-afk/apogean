@@ -1,0 +1,190 @@
+namespace apogean.Common.WorldGeneration
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.IO;
+    using System.Security.Cryptography;
+    using P = MawSeedPlan;
+
+    public static class MawSeedPlanV2Checks
+    {
+        public static string Compatibility()
+        {
+            string[] golden={"BCDB5085DA6B516A68DCEE93945983AE9E6F16B51F1743E0E1B18F56D1DC82A5", "CF1860B9D18D32B574421AE0D2F57078DDCD3D9758FAA9C4A2B75F062A0C8FDD", "56F215B7E1DE85F2A6760598764D9B188B7EFDD0ED452A6549A3721C0B380C54", "C29C0F8D9818D08169A672C18B75EF0DA6FDF910E0F9A8D87E77269855A8760E"};
+            int[] seeds={42,202,404,42};
+            for(int i=0;i<seeds.Length;i++) {
+                int[] spine=i==3?Enumerable.Range(0,P.Height).Select(y=>110+55*y/(P.Height-1)).ToArray():null;
+                int left=i==3?48:56,right=i==3?65:56;
+                P legacy=P.Create(seeds[i],spine,left,right), replay=P.CreateVersion(1,seeds[i],spine,left,right);
+                Require(legacy.LayoutVersion==1&&Digest(legacy)==golden[i]&&Digest(replay)==golden[i],"v1 golden replay "+i);
+            }
+            foreach(int bad in new[]{int.MinValue,-1,0,4,int.MaxValue}) {
+                try { P.CreateVersion(bad,202); throw new Exception("Accepted unknown layout version "+bad); }
+                catch(ArgumentOutOfRangeException) { }
+            }
+            return "PASS v1: four complete-output goldens, default/explicit replay, unknown-version rejection";
+        }
+        private static void Require(bool condition,string message) { if(!condition)throw new InvalidOperationException(message); }
+        public static string Geometry()
+        {
+            int cases=0;
+            foreach(int seed in Enumerable.Range(0,64).Concat(new[]{101,202,303,404,int.MinValue,int.MaxValue})) {
+                P p=P.CreateVersion(2,seed), old=P.Create(seed);
+                Require(p.LayoutVersion==2,"v2 identity");
+                Require(Digest(p)==Digest(P.CreateVersion(2,seed)),"v2 determinism");
+                int aperture=Enumerable.Range(4,P.Width-8).Count(x=>p.Cells[x,16].Write&&p.Cells[x,16].Key==null);
+                int oldAperture=Enumerable.Range(4,P.Width-8).Count(x=>old.Cells[x,16].Write&&old.Cells[x,16].Key==null);
+                Require(aperture<oldAperture,"narrower upper mouth");
+                Require(p.Ground.Skip(4).Take(P.Width-8).Min()<=32,"raised lip");
+                Require(Enumerable.Range(5,P.Width-10).Any(x=>Math.Abs(p.Ground[x]-p.Ground[x-1])>=2),"steeper lip");
+                Require(p.WallStartY.Skip(4).Take(P.Width-8).All(y=>y==59),"independent level surface wall cutoff");
+                Require(BranchConnected(p),"branch-only lower rejoin");
+                Require(p.Teeth.Contains(p.LowerRejoinHazard),"guaranteed lower branch hazard");
+                var h=p.LowerRejoinHazard.Root;
+                Require(!p.IsCentralShaft(h.X,h.Y)&&p.Cells[h.X,h.Y].Side,"hazard belongs to side branch");
+                CheckOwnershipAndRoots(p);
+                cases++;
+            }
+            P cut=P.CreateVersion(2,202);
+            int cutY=(cut.LowerRejoinEntrance.Y+cut.LowerRejoinExit.Y)/2;
+            for(int x=4;x<P.Width-4;x++)if(!cut.IsCentralShaft(x,cutY)&&cut.Cells[x,cutY].Write)
+                cut.Cells[x,cutY]=cut.Cells[x,cutY] with {Key="stone"};
+            Require(!BranchConnected(cut),"negative control: central shaft must not bypass branch cut");
+            Require(cut.Reachable()[cut.Exit.X,cut.Exit.Y],"negative control leaves central route open");
+            Require(!cut.ReachableBranch()[cut.LowerRejoinExit.X,cut.LowerRejoinExit.Y],"planner branch check rejects shaft shortcut");
+            P missing=P.CreateVersion(2,202);
+            var buried=missing.Ribs.SelectMany(r=>r.Roots).First(at=>at.Y>=missing.Ground[at.X]+10&&missing.AllowsWall(at.X,at.Y));
+            missing.Cells[buried.X,buried.Y]=missing.Cells[buried.X,buried.Y] with {Wall=null};
+            Reject(missing,"removed buried rib wall");
+            P unhosted=P.CreateVersion(2,202);
+            for(int dx=-2;dx<=2;dx++)for(int dy=-2;dy<=2;dy++) {
+                var c=unhosted.Cells[buried.X+dx,buried.Y+dy];
+                if(c.Key!="rib")unhosted.Cells[buried.X+dx,buried.Y+dy]=c with {Key=null};
+            }
+            Reject(unhosted,"removed deep root host envelope");
+            P noHazard=P.CreateVersion(2,202);noHazard.Teeth.Remove(noHazard.LowerRejoinHazard);Reject(noHazard,"removed guaranteed branch hazard");
+            return $"PASS v2 geometry: {cases} seeds; branch-only cut control; missing backing/host/hazard rejected";
+        }
+        private static void Reject(P p,string context)
+        {
+            bool rejected=false;try {p.Validate();}catch(InvalidOperationException){rejected=true;}
+            Require(rejected,"corrupt plan accepted: "+context);
+        }
+        private static void CheckOwnershipAndRoots(P p)
+        {
+            int unowned=0;
+            for(int x=0;x<P.Width;x++)for(int y=0;y<P.Height;y++) {
+                var c=p.Cells[x,y];
+                if(!c.Write){unowned++;Require(c==default,"unowned cell carries desired data");}
+                if(x<4||y<4||x>=P.Width-4||y>=P.Height-4)Require(c==default,"finite placement padding");
+                if(c.Key=="rib"&&(y>=p.Ground[x]+10||p.AllowsWall(x,y)))Require(c.Wall!=null,"buried rib backing");
+                if(y<p.WallStartY[x]&&c.Wall!=null)Require(c.Key!=null&&y>=p.Ground[x]+10,"above-cutoff backing stays inside buried host material");
+                if(!p.AllowsWall(x,y))Require(c.Wall==null,"surface wall fringe");
+            }
+            Require(unowned>P.Width*P.Height/3,"finite ownership must not become a rectangular clear");
+            foreach(var r in p.Ribs) {
+                foreach(var end in r.Roots.Where(at=>at.Y>=p.Ground[at.X]+10&&p.AllowsWall(at.X,at.Y))) {
+                    bool host=false;
+                    for(int dx=-2;dx<=2;dx++)for(int dy=-2;dy<=2;dy++) {
+                        var c=p.Cells[end.X+dx,end.Y+dy];
+                        if(c.Write&&c.Wall!=null&&c.Key is "stone" or "soil" or "grass" or "cap")host=true;
+                    }
+                    Require(host,"owned backed host envelope at deep root "+end);
+                }
+                bool protrudes=false;
+                for(int dx=-2;dx<=2;dx++)for(int dy=-2;dy<=2;dy++) {
+                    var c=p.Cells[r.Tip.X+dx,r.Tip.Y+dy];if(c.Write&&c.Key==null)protrudes=true;
+                }
+                Require(protrudes,"rib tip buried by host repair");
+            }
+        }
+        public static string Profiles()
+        {
+            int cases=0;
+            foreach(int seed in new[]{202,404})for(int profile=0;profile<6;profile++)
+                foreach(var shoulder in new[]{(40,40),(76,76),(40,76),(76,40),(48,65),(65,48)}) {
+                    var spine=Enumerable.Range(0,P.Height).Select(y=>profile switch {
+                        0=>110,1=>165,2=>110+55*y/(P.Height-1),3=>165-55*y/(P.Height-1),
+                        4=>(int)Math.Round(137.5+27.5*Math.Sin(y*Math.PI*2/(P.Height-1))),
+                        _=>(int)Math.Round(137.5-27.5*Math.Cos(y*Math.PI*2/(P.Height-1))) }).ToArray();
+                    var original=(int[])spine.Clone();
+                    try {
+                        P p=P.CreateVersion(2,seed,spine,shoulder.Item1,shoulder.Item2);
+                        Require(spine.SequenceEqual(original),"mutated caller spine");
+                        CheckOwnershipAndRoots(p);Require(BranchConnected(p),"branch-only profiled rejoin");
+                        Require(Digest(p)==Digest(P.CreateVersion(2,seed,spine,shoulder.Item1,shoulder.Item2)),"profile replay");
+                        for(int x=4;x<P.Width-4;x++)Require(p.WallStartY[x]==shoulder.Item1+(shoulder.Item2-shoulder.Item1)*(x-4)/(P.Width-9)+3,"sampled independent wall cutoff");
+                        cases++;
+                    } catch(Exception e){throw new InvalidOperationException($"seed={seed} profile={profile} shoulders={shoulder}: {e.Message}",e);}
+                }
+            return $"PASS v2 profiles: {cases} route/shoulder cases, replay and caller input preservation";
+        }
+        private static bool BranchConnected(P p)
+        {
+            var blocked=new HashSet<P.Point>();
+            foreach(var t in p.Teeth)for(int dx=0;dx<4;dx++)for(int dy=0;dy<4;dy++)blocked.Add(new(t.Root.X+dx,t.Root.Y+dy));
+            bool Fits(P.Point at) {
+                for(int dx=0;dx<2;dx++)for(int dy=0;dy<3;dy++) {
+                    int x=at.X+dx,y=at.Y+dy;
+                    if(x<4||y<4||x>=P.Width-4||y>=P.Height-4||p.IsCentralShaft(x,y))return false;
+                    var c=p.Cells[x,y];if(!c.Write||!c.Side||c.Key!=null||blocked.Contains(new(x,y)))return false;
+                }
+                return true;
+            }
+            var queue=new Queue<P.Point>();var seen=new HashSet<P.Point>();queue.Enqueue(p.LowerRejoinEntrance);
+            while(queue.Count>0) {
+                var at=queue.Dequeue();if(!Fits(at)||!seen.Add(at))continue;
+                if(at==p.LowerRejoinExit)return true;
+                queue.Enqueue(new(at.X-1,at.Y));queue.Enqueue(new(at.X+1,at.Y));queue.Enqueue(new(at.X,at.Y-1));queue.Enqueue(new(at.X,at.Y+1));
+            }
+            return false;
+        }
+        public static string BaselineSnapshots()
+        {
+            return string.Join("\n", new[] { 42, 202, 404 }.Select(seed => $"v1 seed={seed}: {Digest(P.Create(seed))}")) +
+                "\nv1 profile42: " + Digest(P.Create(42, Enumerable.Range(0, P.Height).Select(y => 110 + 55 * y / (P.Height - 1)).ToArray(), 48, 65));
+        }
+        private static string Digest(P p)
+        {
+            using var stream = new MemoryStream(); using var writer = new BinaryWriter(stream);
+            void Text(string text) { writer.Write(text != null); if (text != null) writer.Write(text); }
+            void Point(P.Point at) { writer.Write(at.X); writer.Write(at.Y); }
+            writer.Write(p.LayoutVersion); writer.Write(P.Width); writer.Write(P.Height); Point(p.Entrance); Point(p.Exit);
+            for (int y = 0; y < P.Height; y++) for (int x = 0; x < P.Width; x++)
+            { var c = p.Cells[x, y]; Text(c.Key); Text(c.Wall); writer.Write(c.Slope); writer.Write(c.Side); writer.Write(c.Write); }
+            writer.Write(p.Ground.Length); foreach (int v in p.Ground) writer.Write(v);
+            writer.Write(p.Center.Length); foreach (int v in p.Center) writer.Write(v);
+            writer.Write(p.Teeth.Count); foreach (var t in p.Teeth) { Point(t.Root); writer.Write(t.Variant); }
+            writer.Write(p.Fibers.Count); foreach (var f in p.Fibers) { Point(f.Root); writer.Write(f.Length); }
+            writer.Write(p.Ribs.Count); foreach (var r in p.Ribs) { Point(r.Root); Point(r.Tip); writer.Write(r.Roots.Length); foreach (var at in r.Roots) Point(at); }
+            writer.Write(p.Pockets.Count); foreach (var c in p.Pockets) { Point(c.Center); writer.Write(c.RadiusX); writer.Write(c.RadiusY); Text(c.Role); }
+            writer.Write(p.Chests.Count); foreach (var c in p.Chests) Point(c);
+            writer.Write(p.NodeSites.Count); foreach (var n in p.NodeSites) Point(n);
+            if(p.LayoutVersion==2) {
+                foreach(int value in p.WallStartY)writer.Write(value);
+                Point(p.LowerRejoinEntrance);Point(p.LowerRejoinExit);
+                Point(p.LowerRejoinHazard.Root);writer.Write(p.LowerRejoinHazard.Variant);
+            }
+            writer.Flush(); return Convert.ToHexString(SHA256.HashData(stream.ToArray()));
+        }
+        public static string RootBacking(bool legacy = false)
+        {
+            // Captured before repair: 139 missing across these seeds; seed42 (83,198), ground48,
+            // with adjacent (82,198) unowned and (89,198) backed. -Baseline deliberately remains red.
+            int missing = 0;
+            var samples = new List<string>();
+            foreach (int seed in new[] { 42, 101, 202, 303, 404 })
+            {
+                P p = legacy ? P.Create(seed) : P.CreateVersion(2, seed);
+                for (int x = 4; x < P.Width - 4; x++) for (int y = 4; y < P.Height - 4; y++)
+                    if (p.Cells[x, y].Key == "rib" && y >= p.Ground[x] + 10 && p.Cells[x, y].Wall == null)
+                    {
+                        missing++;
+                        if (samples.Count < 8) samples.Add($"seed={seed} ({x},{y}) ground={p.Ground[x]}");
+                    }
+            }
+            return $"{(missing == 0 ? "PASS" : "FAIL")} buried-rib-backing: missing={missing}; " + string.Join("; ", samples);
+        }
+    }
+}

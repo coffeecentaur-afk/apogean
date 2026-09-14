@@ -3,6 +3,30 @@
   "states": ["specified", "contracted", "fixture-pass", "integrated", "polished", "rejected"],
   "families": [
     {
+      "id": "maw-seed-shallow-v3",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "pass",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "MAW_SEED_V3_2026-09-13.md",
+      "evidenceScope": "Fresh Large202 only: rounded uneven lip crests, discrete semicircular wall cutout, bounded upper clearance. Native generation passed; first client pristine digest31E4E130 retained. Root backing862/0 missing and cap step samples0/0/0 holes. Actual mouth PNG and running U-wall viewport inspected. Static32 V3 profiles/9 negatives, frozen V1/V2 goldens, full292-case V1 replay and V2 70seeds/72profiles pass. No played-world reconstruction or new artwork.",
+      "blockers": ["User review of the rounded silhouette remains pending. Native normal save/reload retained31E4E130; no terrain reconstruction used.", "Independent seed404 outside-impact frame mutation remains unresolved; this single successful seed is not a broad generation pass. Protected-site failures also remain retained.", "No manual rope/grapple difficulty, multiplayer, performance, full-depth anatomy, Maw scenery or production rollout acceptance."]
+    },
+    {
+      "id": "maw-seed-shallow-v2",
+      "status": "contracted",
+      "static": "pass",
+      "build": "pass",
+      "liveFixture": "fail",
+      "production": "pending",
+      "userReview": "pending",
+      "evidenceReference": "MAW_SEED_V2_2026-09-13.md",
+      "evidenceScope": "Separate exact-name V2 candidate, with V1 replay preserved. Native Large202 constructs and client pristine checks retain D3933563;862 required rib backing cells have no missing walls. Actual cap frames at flat/left/right steps give0/0/0 holes versus old-host0/16/8. All121 scratch states restored. Side-only route has1566 native body positions without central-shaft shortcuts. PureV1 292 cases and V2 70seeds/72profiles pass. Partial lamp-lit views inspected; not whole-biome visual or traversal approval.",
+      "blockers": ["V2 seed404 fails the exact outside-impact native-framing guard at2924,667; latest diagnostic distinguishes complete tile state and six frame fields. Overall native seed gate stays fail despite202success. Protected-site failures101/303 also remain open.", "Narrowed upper clearing mask can leave original/legacy-converted terrain as an oversized outer shoulder. Do not repair the played V2 scene or silently change its replay; a bounded future clearance revision needs separate versioning and preflight.", "No new scenery, full-depth anatomy, manual rope/grapple returnability, multiplayer, performance certification, loot economy or production rollout. Hanging fiber behavior remains unchanged."]
+    },
+    {
       "id": "maw-seed-shallow-v1",
       "status": "contracted",
       "static": "pass",

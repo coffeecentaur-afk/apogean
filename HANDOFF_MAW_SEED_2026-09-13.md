@@ -1,5 +1,47 @@
 # Fresh-seed Maw review handoff
 
+## Newest checkpoint — V3 rounded mouth
+
+Read MAW_SEED_V3_2026-09-13.md first, then the V2 report for diagnostic history.
+User requested a semicircular native-wall cutout and less triangular lips.
+V3 adds those plus bounded upper clearance. Native Large202 passed generation,
+client seam/pristine checks and normal save/reload. Mouth/U viewport inspection
+is complete; user silhouette/traversal review is next. Installed package
+9478B541...BBFDEAF, new review world `Apogean Maw Seed V3 QA 202`, character `gg`.
+This is different from the approved MS Paint world `Apogee Native Visual V3`.
+Do not overwrite or rebuild any played V1/V2/V3 world. Regular worlds unchanged.
+
+Exact seed404 framing-boundary failure remains open; no weaker guard or silent
+repair was used. Full-depth anatomy, traversal/balance, multiplayer, performance
+and new Maw scenery are not complete. Reobserve UI before controlling it.
+Latest user handoff: V3 seed202 with `gg` after a mouth visit, free movement and
+inspection lamp OFF. No input held. `/mawseed mouth` takes a one-time mouth
+visit/capture; `/mawseed lower-return` visits the new branch exit. Visits suppress
+ambient spawns; `/mawseed release` restores the prior location/time and clears
+the inspection session. Raw client proof remains local, not uploaded logs.
+The far-left outer legacy/candidate transition still forms an abrupt cliff.
+The approach visit can fall onto its teeth; use the mouth/upper rib for review.
+
+## Historical V2 corrections checkpoint
+
+Read **MAW_SEED_V2_2026-09-13.md** first. The sections below this newest entry
+describe the earlier V1 handoff, not the current package or game state.
+
+Historical review pair: `Apogean Maw Seed V2 QA 202`, character `gg`.
+Preserve that now-played pair, the earlier `Apogean Maw Seed QA 202`, and the
+approved drawing scene in `Apogee Native Visual V3`. No migration/reconstruction.
+V2 changes the mouth/side route/backing; the dense fiber cap now uses the correct
+immediate framing host. Segmented hanging fiber behavior and all artwork remain.
+
+Native202 and sampled cap/root tests pass, with D3933563 original digest retained
+after viewport visits. A normal save completed19:40:40 local.404 still fails
+outside-impact framing; the complete diagnostic trial is in progress. Oversized
+outer shoulders and full mouth-center visual review remain separate open items.
+No broader seed, traversal, performance, multiplayer or production acceptance.
+Wayfinder26 stays OPEN. Reobserve the game before any input.
+
+## Historical V1 handoff
+
 LATEST USER REVIEW after a9829ab: overall direction liked, hanging vines and
 their segmented breaking accepted, small caves liked. Changes requested:
 root-adjacent light pockets, visible fiber underside gaps, narrower/steeper mouth

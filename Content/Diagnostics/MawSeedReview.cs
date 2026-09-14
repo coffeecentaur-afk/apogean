@@ -10,7 +10,8 @@ using apogean.Content.Tiles;
 
 namespace apogean.Content.Diagnostics
 {
-    // Read/visit controls for separately generated candidate worlds. Never builds terrain.
+    // Read/visit controls for separately generated candidate worlds. The seam probe
+    // uses a fully restored empty scratch; these controls never rebuild a saved layout.
     public sealed class MawSeedReview : ModSystem
     {
         private bool visiting, lamp, oldDay, oldRain, oldEclipse;
@@ -28,9 +29,11 @@ namespace apogean.Content.Diagnostics
             if(!Context)throw new InvalidOperationException("Maw seed review requires a generated candidate world, gg/Plain, and single player.");
             Mod.Logger.Info("MAW SEED REVIEW REQUEST: "+command);
             switch(command) {
-                case "entrance": case "ribs": case "cache": case "node": case "outlet": Visit(command); break;
+                case "entrance": case "mouth": case "ribs": case "cache": case "node": case "outlet": case "lower-return": Visit(command); break;
                 case "pristine": Mod.Logger.Info(World.VerifyOriginal()); break;
                 case "reload": Mod.Logger.Info(World.VerifySaved()); break;
+                case "seams": MawSeedSeamProbe.Run(World,Mod.Logger); break;
+                case "seam-trials": MawSeedSeamProbe.Run(World,Mod.Logger,true); break;
                 case "light-on": case "light-off":
                     if(!visiting)throw new InvalidOperationException("Visit the candidate first.");
                     lamp=command=="light-on";
@@ -45,7 +48,10 @@ namespace apogean.Content.Diagnostics
         private void Visit(string view)
         {
             MawSeedPlan p=World.Blueprint;Rectangle bounds=World.Bounds;
+            if(view=="lower-return"&&p.LayoutVersion<2)throw new InvalidOperationException("Lower rejoin view requires layout V2 or later.");
             MawSeedPlan.Point at=view switch {
+                "mouth"=>new(p.Center[32]-1,28),
+                "lower-return"=>p.LowerRejoinExit,
                 "cache"=>new(p.Chests[0].X,p.Chests[0].Y-3),
                 "node"=>new(p.NodeSites[0].X,p.NodeSites[0].Y-2),
                 "outlet"=>p.Exit,
@@ -59,6 +65,9 @@ namespace apogean.Content.Diagnostics
             if(!visiting) {oldPosition=Main.LocalPlayer.position;oldDay=Main.dayTime;oldTime=Main.time;oldRain=Main.raining;oldEclipse=Main.eclipse;visiting=true;}
             Main.LocalPlayer.Teleport(target,1);Main.LocalPlayer.velocity=Vector2.Zero;
             Main.dayTime=true;Main.time=27000;Main.raining=false;Main.eclipse=false;
+            // Record the aperture before gravity carries the free-moving player down
+            // the shaft. This is a delayed native capture, not a camera/physics lock.
+            if(view=="mouth")capture=20;
             Main.NewText("Generated Maw candidate — FREE MOVEMENT. Cache is empty; node pocket is a reservation. Deep generation remains legacy.",Color.Wheat);
         }
         internal void Release()
@@ -105,11 +114,11 @@ namespace apogean.Content.Diagnostics
     {
         public override string Command=>"mawseed";
         public override CommandType Type=>CommandType.Chat;
-        public override string Usage=>"/mawseed entrance|ribs|cache|node|outlet|pristine|reload|light-on|light-off|capture|release";
+        public override string Usage=>"/mawseed entrance|mouth|ribs|cache|node|outlet|lower-return|pristine|reload|seams|light-on|light-off|capture|release";
         public override string Description=>"Inspect the separately generated Maw seed candidate without building or holding movement.";
         public override void Action(CommandCaller caller,string input,string[] args)
         {
-            if(args.Length!=1||args[0] is not ("entrance" or "ribs" or "cache" or "node" or "outlet" or "pristine" or "reload" or "light-on" or "light-off" or "capture" or "release"))throw new UsageException(Usage);
+            if(args.Length!=1||args[0] is not ("entrance" or "mouth" or "ribs" or "cache" or "node" or "outlet" or "lower-return" or "pristine" or "reload" or "seams" or "light-on" or "light-off" or "capture" or "release"))throw new UsageException(Usage);
             ModContent.GetInstance<MawSeedReview>().Run(args[0]);
         }
     }

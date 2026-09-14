@@ -59,8 +59,8 @@ function First-Code($Member) {
 function Get-Contracts([hashtable]$Text) {
     $world = Parse-Source $Text.World
     $m = @{}
-    foreach ($name in @('WorldName','Requested','IsTestWorldName','TryNameSeed','PreWorldGen','BeginPlanning','TryPlan',
-        'ApplyPlanned','WriteCell','PostWorldGen','DisarmGeneration','LoadWorldData','SaveWorldData','ClearWorld','OnWorldLoad','OnWorldUnload','NativePassed')) {
+    foreach ($name in @('WorldName','Requested','IsTestWorldName','TryNameSeed','TryNameVersion','HasLayout','Blueprint','MakeRecord','PreWorldGen','BeginPlanning','TryPlan',
+        'ApplyPlanned','WriteCell','VerifySurfaceClearance','PostWorldGen','DisarmGeneration','LoadWorldData','SaveWorldData','ClearWorld','OnWorldLoad','OnWorldUnload','NativePassed')) {
         $m[$name] = Find-Member $world $name
     }
     $pre = Code $m.PreWorldGen.Body
@@ -72,12 +72,41 @@ function Get-Contracts([hashtable]$Text) {
     $prefix = @($world.DescendantNodes() | Where-Object {
         $_ -is [Microsoft.CodeAnalysis.CSharp.Syntax.VariableDeclaratorSyntax] -and $_.Identifier.ValueText -eq 'WorldPrefix'
     })
-    $nameCode = Code $m.TryNameSeed.Body
+    $prefixV2 = @($world.DescendantNodes() | Where-Object {
+        $_ -is [Microsoft.CodeAnalysis.CSharp.Syntax.VariableDeclaratorSyntax] -and $_.Identifier.ValueText -eq 'WorldV2Prefix'
+    })
+    $prefixV3 = @($world.DescendantNodes() | Where-Object {
+        $_ -is [Microsoft.CodeAnalysis.CSharp.Syntax.VariableDeclaratorSyntax] -and $_.Identifier.ValueText -eq 'WorldV3Prefix'
+    })
+    $nameCode = Code $m.TryNameVersion.Body
     $checks['explicit-name'] = $prefix.Count -eq 1 -and $prefix[0].Initializer.Value.Token.ValueText -ceq 'Apogean Maw Seed QA ' -and
+        $prefixV2.Count -eq 1 -and $prefixV2[0].Initializer.Value.Token.ValueText -ceq 'Apogean Maw Seed V2 QA ' -and
+        $prefixV3.Count -eq 1 -and $prefixV3[0].Initializer.Value.Token.ValueText -ceq 'Apogean Maw Seed V3 QA ' -and
         (Code $m.IsTestWorldName.ExpressionBody.Expression) -eq 'TryNameSeed(name,out_)' -and
+        (Code $m.TryNameSeed.ExpressionBody.Expression) -eq 'TryNameVersion(name,outseed,out_)' -and
         $nameCode.Contains('name.StartsWith(WorldPrefix,StringComparison.Ordinal)') -and
+        $nameCode.Contains('name.StartsWith(WorldV2Prefix,StringComparison.Ordinal)') -and
+        $nameCode.Contains('name.StartsWith(WorldV3Prefix,StringComparison.Ordinal)') -and
+        $nameCode.Contains('prefix=WorldV3Prefix;version=3;') -and
+        $nameCode.Contains('prefix=WorldPrefix;version=1;') -and $nameCode.Contains('prefix=WorldV2Prefix;version=2;') -and
         $nameCode.Contains("suffix.Length>0&&suffix.All(c=>c>='0'&&c<='9')") -and
         $nameCode.Contains('int.TryParse(suffix,NumberStyles.None,CultureInfo.InvariantCulture,outseed)')
+    $checks['saved-version-isolation'] = (Code $m.HasLayout).Contains('TryNameVersion(WorldName,outintnamedSeed,outintnamedVersion)&&namedSeed==Seed&&LayoutVersion==namedVersion') -and
+        (Code $m.Blueprint).Contains('P.CreateVersion(LayoutVersion,Seed,') -and
+        (Code $m.TryPlan).Contains('TryNameVersion(generationName,outintseed,outintversion)') -and
+        (Code $m.TryPlan).Contains('P.CreateVersion(version,seed,') -and
+        (Code $m.MakeRecord).Contains('p.Plan.LayoutVersion')
+    $surface = Code $m.VerifySurfaceClearance.Body
+    $planningSurface = Code $m.TryPlan.Body
+    $applyingSurface = Code $m.ApplyPlanned.Body
+    $checks['bounded-upper-clearance'] = $surface.Contains('if(plan.LayoutVersion<3)return;') -and
+        $surface.Contains('for(intx=4;x<P.Width-4;x++)') -and
+        $surface.Contains('P.Cellcell=plan.Cells[x,4];if(!cell.Write||cell.Key!=null)continue;') -and
+        $surface.Contains('Tileabove=Main.tile[bounds.X+x,bounds.Y+3];') -and
+        $surface.Contains('Require(!above.HasTile&&above.WallType==WallID.None&&above.LiquidAmount==0,') -and
+        $planningSurface.Contains('VerifySurfaceClearance(plan,bounds);') -and
+        $applyingSurface.Contains('VerifySurfaceClearance(p.Plan,p.Bounds);') -and
+        $applyingSurface.IndexOf('VerifySurfaceClearance(p.Plan,p.Bounds);') -lt $applyingSurface.IndexOf('record=MakeRecord(')
     $checks['identity-latch'] = (Code $m.Requested.ExpressionBody.Expression) -eq
         'generationFile!=null&&ReferenceEquals(generationFile,Main.ActiveWorldFileData)&&generationName==WorldName&&IsTestWorldName(generationName)' -and
         (Code $m.WorldName.ExpressionBody.Expression) -eq 'Main.ActiveWorldFileData?.Name??Main.worldName'
@@ -190,6 +219,9 @@ $worldTree = Parse-Source $sources.World
 $generatorTree = Parse-Source $sources.Generator
 $controls = @(
     @{ Name='accept-arbitrary-world-names'; Check='explicit-name'; Member='IsTestWorldName'; Replace='internal static bool IsTestWorldName(string name) => name != null;' }
+    @{ Name='replay-v1-as-v2'; Check='saved-version-isolation'; Member='Blueprint'; Replace='internal P Blueprint => P.CreateVersion(2, Seed);' }
+    @{ Name='omit-upper-clearance'; Check='bounded-upper-clearance'; Member='VerifySurfaceClearance'; Replace='private static void VerifySurfaceClearance(P plan, Rectangle bounds) { }' }
+    @{ Name='upper-clearance-allows-wall'; Check='bounded-upper-clearance'; Member='VerifySurfaceClearance'; Replace='private static void VerifySurfaceClearance(P plan, Rectangle bounds) { if (plan.LayoutVersion < 3) return; for (int x=4;x<P.Width-4;x++) { P.Cell cell=plan.Cells[x,4]; if(!cell.Write||cell.Key!=null)continue; Tile above=Main.tile[bounds.X+x,bounds.Y+3]; Require(!above.HasTile && above.LiquidAmount==0,"missing wall guard"); } }' }
     @{ Name='drop-file-identity'; Check='identity-latch'; Member='Requested'; Replace='private bool Requested => generationFile != null && generationName == WorldName && IsTestWorldName(generationName);' }
     @{ Name='omit-native-arm'; Check='native-arm-survives-planning'; Member='PreWorldGen'; Replace='public override void PreWorldGen() { ClearWorld(); }' }
     @{ Name='legacy-generatingWorld-return'; Check='native-arm-survives-planning'; Member='BeginPlanning'; Replace='internal void BeginPlanning() { if (!WorldGen.generatingWorld) return; if (!Requested) return; RequireBindings(); }' }

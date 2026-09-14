@@ -4,6 +4,26 @@ This is the production rule for adding visual and gameplay content. It prevents 
 
 ## Fresh-generation lifecycle evidence — September13
 
+Separate tile topology from the transient liquid scheduler when investigating
+framing changes: compare occupancy, type, amount, walls, slopes, wires, paint
+and coatings explicitly. CheckingLiquid/SkipLiquid are live queue bookkeeping;
+do not reset them independently of the engine queue. A radius-two direct frame
+call is not proof that recursive native framing stays within radius two. Keep
+the preflight boundary test and log the exact escaped fields before changing it.
+
+For grass-like stacked materials, sample the actual engine-selected frames
+against the immediate substrate. The dense Maw cap sits on sparse fiber grass,
+not directly on soil. Its old host choice reproduced bottom alpha holes only
+at steps; a flat swatch alone missed the defect. Test both step directions,
+include the old-host negative control, and restore scratch tiles and global
+framing flags exactly. These checks complement, not replace, visual inspection.
+
+When narrowing a generated contour, audit cells that were formerly owned but
+become unowned. Otherwise old terrain can survive above the new shoulder and
+look like a failed silhouette despite a correct inner plan. Version saved
+geometry and preflight any new clearance envelope; never silently regenerate a
+played candidate to make a screenshot look right.
+
 Test both native dedicated autocreate and the client: their engine flags can
 differ. In the pinned2026.7 runtime, dedicated autocreate bypasses
 `CreateNewWorld`'s `generatingWorld` flag, while Final Cleanup clears `gen` before

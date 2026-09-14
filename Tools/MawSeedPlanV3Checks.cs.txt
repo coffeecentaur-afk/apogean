@@ -1,0 +1,161 @@
+namespace apogean.Common.WorldGeneration
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Security.Cryptography;
+    using P = MawSeedPlan;
+
+    public static class MawSeedPlanV3Checks
+    {
+        private static void Check(bool ok,string why) { if(!ok)throw new InvalidOperationException(why); }
+        private static string Digest(P p,bool cells=true,bool version=true)
+        {
+            using var stream=new MemoryStream();using var w=new BinaryWriter(stream);
+            void Text(string s){w.Write(s!=null);if(s!=null)w.Write(s);}
+            void Point(P.Point at){w.Write(at.X);w.Write(at.Y);}
+            if(version)w.Write(p.LayoutVersion);
+            w.Write(P.Width);w.Write(P.Height);Point(p.Entrance);Point(p.Exit);
+            foreach(int v in p.Ground)w.Write(v);foreach(int v in p.Center)w.Write(v);foreach(int v in p.WallStartY)w.Write(v);
+            Point(p.LowerRejoinEntrance);Point(p.LowerRejoinExit);Point(p.LowerRejoinHazard.Root);w.Write(p.LowerRejoinHazard.Variant);
+            w.Write(p.Teeth.Count);foreach(var t in p.Teeth){Point(t.Root);w.Write(t.Variant);}
+            w.Write(p.Fibers.Count);foreach(var f in p.Fibers){Point(f.Root);w.Write(f.Length);}
+            w.Write(p.Ribs.Count);foreach(var r in p.Ribs){Point(r.Root);Point(r.Tip);w.Write(r.Roots.Length);foreach(var at in r.Roots)Point(at);}
+            w.Write(p.Pockets.Count);foreach(var c in p.Pockets){Point(c.Center);w.Write(c.RadiusX);w.Write(c.RadiusY);Text(c.Role);}
+            w.Write(p.Chests.Count);foreach(var c in p.Chests)Point(c);
+            w.Write(p.NodeSites.Count);foreach(var c in p.NodeSites)Point(c);
+            for(int x=0;x<P.Width;x++)for(int y=0;y<P.Height;y++) {
+                w.Write(p.AllowsWall(x,y));w.Write(p.IsCentralShaft(x,y));
+                if(!cells)continue;var c=p.Cells[x,y];Text(c.Key);Text(c.Wall);w.Write(c.Slope);w.Write(c.Side);w.Write(c.Write);
+            }
+            w.Flush();return Convert.ToHexString(SHA256.HashData(stream.ToArray()));
+        }
+        public static string CaptureGoldens() => string.Join("\n",new[]{1,2}.SelectMany(v=>new[]{202,404}.Select(seed=>$"v{v} seed={seed}: {Digest(P.CreateVersion(v,seed))}")));
+        public static string LegacyGap()
+        {
+            var p=P.CreateVersion(2,202);int count=0;
+            for(int x=4;x<P.Width-4;x++)for(int y=4;y<p.Ground[x];y++)
+                if(Math.Abs(x-p.Center[32])<=90&&!p.Cells[x,y].Write)count++;
+            Check(count==4740,"Frozen V2 ownership-gap negative control drifted.");
+            return $"FAIL V2 full-column overhead clearance: {count} unowned air cells (default seed202).";
+        }
+        private static void FrozenVersions()
+        {
+            string[] goldens={"9F2BA5EE06C77DA99DAA86DCCA2E3080F14561C1C72E89BCAE171A7AE328DB8A","3D3607A523F07C20E40B0A5D0DABB92257B48BFDE4D96D472E37FCACAD77A3DB",
+                "F3964333D75CB787E4E868C2C7115FD78C7EAE8F96BCD0EF32BFE53D40B7992F","693BCB3D433127B498630F0BA140A0008929EB761470B4DCDD1D20AA66E3489D"};
+            int i=0;foreach(int version in new[]{1,2})foreach(int seed in new[]{202,404})
+                Check(Digest(P.CreateVersion(version,seed))==goldens[i++],$"frozen v{version} seed{seed} replay");
+            Check(Digest(P.Create(202))==goldens[0]&&P.Version==1,"default remains v1");
+            foreach(int bad in new[]{-1,0,4,int.MaxValue}) {
+                bool rejected=false;try {P.CreateVersion(bad,202);}catch(ArgumentOutOfRangeException){rejected=true;}
+                Check(rejected,"unknown layout version accepted");
+            }
+        }
+        private static void Shape(P old,P next,int left,int right)
+        {
+            Check(old.Center.SequenceEqual(next.Center),"sampled spine or phase drift");
+            Check(old.Pockets.SequenceEqual(next.Pockets)&&old.Chests.SequenceEqual(next.Chests)&&old.NodeSites.SequenceEqual(next.NodeSites),"pre-object branch RNG drift");
+            Check(old.LowerRejoinEntrance==next.LowerRejoinEntrance&&old.LowerRejoinExit==next.LowerRejoinExit&&old.LowerRejoinHazard==next.LowerRejoinHazard,"lower branch construction drift");
+            int mouth=next.Center[32];
+            int radius=(Enumerable.Range(4,272).Count(x=>next.IsCentralShaft(x,32))-1)/2+3;
+            int baseline=left+(right-left)*(mouth-4)/271;
+            Check(next.WallStartY[mouth]==baseline+3+radius,"U deepest point");
+            for(int dx=-radius;dx<=radius;dx++) {
+                int dy=next.WallStartY[mouth+dx]-baseline-3;
+                Check(dy>=0&&dy*dy+dx*dx<=radius*radius&&(dy+1)*(dy+1)+dx*dx>radius*radius,"wall cutoff is not the discrete lower semicircle");
+            }
+            if(left==right) {
+                Check(Enumerable.Range(5,40).Any(dx=>next.Ground[mouth-dx]!=next.Ground[mouth+dx]),"mirrored perfect lips");
+                int high=Enumerable.Range(mouth-45,91).Count(x=>next.Ground[x]<=baseline-20);
+                int oldHigh=Enumerable.Range(mouth-45,91).Count(x=>old.Ground[x]<=baseline-20);
+                Check(high>oldHigh,"rounded crest not broader than v2 triangle");
+            }
+            for(int x=0;x<P.Width;x++)for(int y=0;y<P.Height;y++) {
+                var c=next.Cells[x,y];bool inside=x>=4&&x<276&&y>=4&&y<252;
+                if(!inside||!c.Write)Check(c==default,"padding or inactive data changed");
+                if(inside&&Math.Abs(x-mouth)<=90&&y<next.Ground[x])Check(c.Write&&c.Wall==null,"incomplete full-column sky clearance");
+                if(c.Wall!=null&&y<next.WallStartY[x])Check(c.Key!=null&&y>=next.Ground[x]+10,"sky wall above U contour");
+                if(c.Key=="rib"&&(y>=next.Ground[x]+10||next.AllowsWall(x,y)))Check(c.Wall!=null,"missing buried rib backing");
+            }
+            foreach(var rib in next.Ribs)foreach(var root in rib.Roots.Where(at=>at.Y>=next.Ground[at.X]+10))
+                Check(Enumerable.Range(-2,5).Any(dx=>Enumerable.Range(-2,5).Any(dy=> {
+                    var c=next.Cells[root.X+dx,root.Y+dy];return c.Write&&c.Wall!=null&&c.Key is "grass" or "soil" or "stone" or "cap";
+                })),"deep root host envelope");
+            foreach(var t in next.Teeth)for(int i=0;i<4;i++) {
+                var at=t.Support(i);var c=next.Cells[at.X,at.Y];Check(c.Write&&c.Key!=null&&c.Key!="rib"&&c.Slope==0,"native tooth anchor");
+            }
+            Check(next.Teeth.Count(t=>t.Root.Y<90&&!next.Cells[t.Root.X,t.Root.Y].Side)>=8,"dense upper teeth lost");
+            Check(Connected(next,next.Entrance,next.Exit,false),"2x3 throat route");
+            Check(Connected(next,next.LowerRejoinEntrance,next.LowerRejoinExit,true),"branch-only route");
+        }
+        private static bool Connected(P p,P.Point start,P.Point end,bool branch)
+        {
+            var blocked=new HashSet<P.Point>();foreach(var t in p.Teeth)for(int dx=0;dx<4;dx++)for(int dy=0;dy<4;dy++)blocked.Add(new(t.Root.X+dx,t.Root.Y+dy));
+            bool Fits(P.Point at) {
+                for(int dx=0;dx<2;dx++)for(int dy=0;dy<3;dy++) {
+                    int x=at.X+dx,y=at.Y+dy;if(x<4||x>=276||y<4||y>=252)return false;
+                    var c=p.Cells[x,y];if(!c.Write||c.Key!=null||blocked.Contains(new(x,y))||branch&&(!c.Side||p.IsCentralShaft(x,y)))return false;
+                }
+                return true;
+            }
+            var q=new Queue<P.Point>();var seen=new HashSet<P.Point>();q.Enqueue(start);
+            while(q.Count>0) {
+                var at=q.Dequeue();if(!Fits(at)||!seen.Add(at))continue;if(at==end)return true;
+                q.Enqueue(new(at.X-1,at.Y));q.Enqueue(new(at.X+1,at.Y));q.Enqueue(new(at.X,at.Y-1));q.Enqueue(new(at.X,at.Y+1));
+            }
+            return false;
+        }
+        public static string Run()
+        {
+            FrozenVersions();int cases=0;
+            void Case(int seed,int[] spine=null,int left=56,int right=56) {
+                int[] before=spine==null?null:(int[])spine.Clone();
+                P old=P.CreateVersion(2,seed,spine,left,right),next=P.CreateVersion(3,seed,spine,left,right);
+                Check(next.LayoutVersion==3&&old.LayoutVersion==2&&P.Version==1,"version identity");
+                Shape(old,next,left,right);
+                Check(Digest(next)==Digest(P.CreateVersion(3,seed,spine,left,right)),"V3 deterministic replay");
+                Check(spine==null||spine.SequenceEqual(before),"caller profile mutated");
+                next.Validate();Check(next.ReachableBranch()[next.LowerRejoinExit.X,next.LowerRejoinExit.Y],"branch-only route changed");
+                cases++;
+            }
+            foreach(int seed in new[]{0,42,101,202,303,404,int.MinValue,int.MaxValue})Case(seed);
+            foreach(int seed in new[]{202,404})for(int profile=0;profile<3;profile++)
+                foreach(var shoulder in new[]{(40,40),(76,76),(40,76),(76,40)}) {
+                    int[] spine=Enumerable.Range(0,P.Height).Select(y=>profile==0?110:profile==1?165:110+55*y/255).ToArray();
+                    Case(seed,spine,shoulder.Item1,shoulder.Item2);
+                }
+            int controls=NegativeControls();
+            return $"PASS V3: {cases} deterministic shape/profile cases; four frozen V1/V2 goldens; {controls} negative controls; rounded asymmetric lips, semicircle wall boundary, full-column sky clearance, tooth anchors, buried roots, 2x3 throat and branch-only route. Native top-edge/protection checks remain runtime-owned.";
+        }
+        private static int NegativeControls()
+        {
+            int count=0;
+            void Reject(Action action,string expected) {
+                bool rejected=false;try{action();}catch(InvalidOperationException e){rejected=e.Message.Contains(expected);}
+                Check(rejected,"negative control missed: "+expected);count++;
+            }
+            P baseline=P.CreateVersion(2,202);
+            foreach(int bank in new[]{-1,1}) {
+                P p=P.CreateVersion(3,202);int x=p.Center[32]+bank*90;
+                p.Cells[x,4]=default;Reject(p.Validate,"full-column surface clearance");
+            }
+            P padding=P.CreateVersion(3,202);padding.Cells[padding.Center[32]-90,3]=new(Write:true);Reject(padding.Validate,"write padding");
+            P sky=P.CreateVersion(3,202);int mouth=sky.Center[32];
+            sky.Cells[mouth,4]=sky.Cells[mouth,4] with {Wall="stone"};Reject(sky.Validate,"sky wall above U contour");
+            P root=P.CreateVersion(3,202);var at=root.Ribs.SelectMany(r=>r.Roots).First(r=>r.Y>=root.Ground[r.X]+10);
+            root.Cells[at.X,at.Y]=root.Cells[at.X,at.Y] with {Wall=null};Reject(root.Validate,"buried rib backing");
+            P tooth=P.CreateVersion(3,202);var support=tooth.Teeth[0].Support(0);
+            tooth.Cells[support.X,support.Y]=tooth.Cells[support.X,support.Y] with {Slope=1};Reject(tooth.Validate,"tooth support");
+            P flat=P.CreateVersion(3,202);flat.WallStartY[flat.Center[32]]=59;Reject(()=>Shape(baseline,flat,56,56),"U deepest point");
+            P vee=P.CreateVersion(3,202);int radius=vee.WallStartY[mouth]-59;
+            for(int dx=-radius;dx<=radius;dx++)vee.WallStartY[mouth+dx]=59+radius-Math.Abs(dx);
+            Reject(()=>Shape(baseline,vee,56,56),"discrete lower semicircle");
+            P branch=P.CreateVersion(3,202);int row=(branch.LowerRejoinEntrance.Y+branch.LowerRejoinExit.Y)/2;
+            for(int x=4;x<276;x++)if(!branch.IsCentralShaft(x,row)&&branch.Cells[x,row].Write)
+                branch.Cells[x,row]=branch.Cells[x,row] with {Key="stone"};
+            Check(!Connected(branch,branch.LowerRejoinEntrance,branch.LowerRejoinExit,true)&&Connected(branch,branch.Entrance,branch.Exit,false),"branch cut did not isolate the side route");count++;
+            return count;
+        }
+    }
+}

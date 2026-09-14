@@ -17,6 +17,22 @@ See AUTHORING_WORKFLOW.md for interpretation, testing and evidence rules.
 
 ## Provisional Maw contour evidence
 
+LATEST USER DIRECTION, September13 evening: the visible native backing-wall
+edge inside the mouth should descend in a semicircular/U-shaped cutout, not a
+V or a straight horizontal cutoff. Raised mouth lips should have broader,
+uneven rounded crests, not narrow triangular peaks. Keep the small aperture,
+steep hazardous inner walls, existing materials and dense teeth. Apply in a
+new V3 candidate; do not rewrite the played V1/V2 references. The distant
+parallax background remains a separate task.
+
+September13 implementation checkpoint: V2 tests correct dense-fiber cap framing
+against its immediate sparse-fiber substrate and require walls behind buried
+rib roots. The hazardous lower-rejoining side passage is now represented in a
+fresh candidate. These are technical corrections, not a new art approval or a
+change to accepted vine breaking. Old outer terrain surviving a smaller mouth
+mask is a placement defect; do not redesign approved ribs to hide it. See
+MAW_SEED_V2_2026-09-13.md for failures and limits still preventing rollout.
+
 September13 generated202 user review: the overall anatomy, short offshoot caves
 and segmented breaking of hanging fiber are liked. Preserve those features.
 The seed-derived mouth is too wide and departs from the accepted drawing: use

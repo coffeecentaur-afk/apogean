@@ -58,7 +58,9 @@ namespace apogean.Content.Diagnostics
             AddMapEntry(key=="rib"?new Color(150,135,113):new Color(142,99,28));
             if(key=="cap") {
                 TileID.Sets.Grass[Type]=TileID.Sets.NeedsGrassFraming[Type]=true;
-                TileID.Sets.NeedsGrassFramingDirt[Type]=MawPackedPreview.TileType("soil");
+                // Dense fiber sits on the sparse fibrous substrate, then bare soil.
+                // Framing directly against soil exposes transparent corner cuts on steps.
+                TileID.Sets.NeedsGrassFramingDirt[Type]=MawPackedPreview.TileType("grass");
             }
         }
         public override void SetSpriteEffects(int i,int j,ref SpriteEffects effects)=>effects=SpriteEffects.None;

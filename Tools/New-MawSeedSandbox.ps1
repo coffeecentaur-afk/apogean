@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory)][ValidatePattern('^[A-Fa-f0-9]{64}$')][string]$ExpectedModSha256,
-    [int[]]$Seeds = @(101,202,303)
+    [int[]]$Seeds = @(101,202,303),
+    [ValidateSet(1,2,3)][int]$LayoutVersion = 1
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -26,16 +27,17 @@ $runs = @(foreach ($seed in $Seeds) {
         Copy-Item -LiteralPath $source -Destination $destination
         if ((Get-FileHash -LiteralPath $destination).Hash -ne $before -or (Get-FileHash -LiteralPath $source).Hash -ne $before) { throw 'Moving source or incomplete candidate copy.' }
     }
-    $world = Join-Path $run "Worlds/Apogean_Maw_Seed_QA_$seed.wld"
+    $worldName = if ($LayoutVersion -eq 1) { "Apogean Maw Seed QA $seed" } else { "Apogean Maw Seed V$LayoutVersion QA $seed" }
+    $world = Join-Path $run ('Worlds/' + $worldName.Replace(' ','_') + '.wld')
     if (Test-Path -LiteralPath $world) { throw 'Fresh-world target already exists.' }
     $port = 17800 + [Array]::IndexOf($Seeds,$seed)
     $config = Join-Path $run 'serverconfig.txt'
     [IO.File]::WriteAllText($config,"maxplayers=1`nport=$port`nupnp=0`npriority=3`nlanguage=en-US`ndifficulty=0`n")
     [ordered]@{
-        seed=$seed; name="Apogean Maw Seed QA $seed"; directory=$run; world=$world
+        seed=$seed; layoutVersion=$LayoutVersion; name=$worldName; directory=$run; world=$world
         executable=(Join-Path $runtime 'dotnet/dotnet.exe'); workingDirectory=$runtime
         arguments=@('tModLoader.dll','-server','-nosteam','-noupnp','-ip','127.0.0.1','-port',"$port",'-players','1','-forcepriority','3',
-            '-config',$config,'-tmlsavedirectory',$run,'-modpath',(Join-Path $run 'Mods'),'-world',$world,'-autocreate','3','-seed',"$seed",'-worldname',"Apogean Maw Seed QA $seed")
+            '-config',$config,'-tmlsavedirectory',$run,'-modpath',(Join-Path $run 'Mods'),'-world',$world,'-autocreate','3','-seed',"$seed",'-worldname',$worldName)
     }
 })
 $manifest = [ordered]@{
