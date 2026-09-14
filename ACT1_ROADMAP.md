@@ -4,8 +4,10 @@
 
 `rainier.png` adds a downstream depth-transition reference: large threshold ribs
 and a broader dark cavern with irregular terrain projections. Color/material
-roles need clarification; no new arena or gate inferred. Preserve implementation
-order below. The shared drawing contract now records all three references.
+roles need clarification. The follow-up specifies three major destinations:
+central descent toward Hell, escape-origin lab, and a separate boss chamber.
+Boss identity is open; do not move the Matriarch/Stomach or assign new gates.
+Preserve implementation order below. The shared contract records all references.
 
 The companion `deeper cave.png` now specifies the continuation: winding Gullet,
 uneven ribs, hazardous narrow side networks with chambers and lower reentries,

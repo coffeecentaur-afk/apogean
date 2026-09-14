@@ -4,8 +4,11 @@
 
 Third drawing `rainier.png` is the entrance to a new depth, recorded in the same
 contract. A broad dark cavern and large threshold ribs are the working layout;
-navy solid-terrain versus teal open-cavern roles need user clarification. Do not
-infer liquid or a boss arena. No runtime change; earlier mockups stay next.
+navy solid-terrain versus teal open-cavern roles need user clarification.
+Follow-up adds three major routes: down toward Hell, escape-origin lab, and a
+side boss chamber. Boss identity/left-right placement remain open. Keep existing
+Stomach/enclosed outlet unless revised. Do not infer liquid or make the junction
+itself an arena. No runtime change; earlier mockups stay next.
 
 Companion `deeper cave.png` adds the downstream side-network layout, explicitly
 without recoloring materials. Read its own red-teeth/yellow-amber legend in the

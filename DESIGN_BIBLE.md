@@ -20,8 +20,12 @@ See AUTHORING_WORKFLOW.md for interpretation, testing and evidence rules.
 Newest depth-transition reference, September13 `rainier.png`: the user labels
 an entrance into a new depth. Read as an upper Gullet opening into a wider dark
 cavern, with prominent uneven ribs at the threshold and irregular terrain below.
-Navy terrain/teal cavern color roles remain an interpretation awaiting an answer,
-not approved new materials, liquid, a boss arena or a progression gate. Record
+Follow-up pitch: three major routes, central descent toward Hell and side routes
+to the Maw's escape-origin lab and a boss chamber. Boss identity and left/right
+assignment remain undecided; preserve the Stomach/enclosed outlet pending any
+explicit revision. Small side caves and loops remain. The junction is not itself
+automatically an arena. Navy terrain/teal cavern color roles await an answer,
+not approved new materials, liquid or a progression gate. Record
 separately from the previous drawing's no-recolor instruction. Full intake is in
 MAW_OPEN_MOUTH_SKETCH_2026-09-13.md; this is design only, not runtime acceptance.
 

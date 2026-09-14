@@ -124,11 +124,25 @@ teal wall texture, a fixed lighting level or an approved blue biome palette.
 The preceding drawing's no-color-change instruction remains attached to that
 drawing; it must not silently forbid a new depth palette if the user confirms one.
 
-No depth in tiles, chamber dimensions, encounter, progression gate or mutation
-mechanic is specified. Do not name this the Stomach, post-corporate Deep Maw or
-a boss arena without confirmation. The geometry can be planned after the upper
-slice; assigning new materials waits for the color-role answer. Existing world,
-protection, hazard, save/reload and visual approval gates remain unchanged.
+Follow-up user pitch defines THREE major destination routes from this depth:
+the main downward continuation toward Hell, one side branch to the lab from
+which the Maw escaped, and another side branch to a boss chamber. Left/right
+assignment is not specified. These are major routes, not a limit of three total
+tunnels: the previously requested small caves, pockets and local loops remain.
+The origin lab is a specific story destination, not a generic random loot lab.
+
+Keep the established Stomach above Hell and enclosed intestinal descent on the
+main route unless explicitly revised. "Straight down goes to Hell" identifies
+the central destination; do not silently replace hazardous winding anatomy
+with an unobstructed free-fall chute or open the Stomach floor into Hell.
+
+The side chamber's boss identity is not specified. Ask which encounter belongs
+there before assigning progression, dimensions or moving/duplicating the
+Matriarch's established Stomach. The central three-way transition is not itself
+automatically a boss arena, the Stomach, or the lore's post-corporate Deep Maw.
+No exact depth, new gate or mutation mechanic is specified. Geometry can be
+planned after the upper slice; assigning new materials waits for the color-role
+answer. Existing world, protection, hazard, save/reload and visual gates remain.
 
 ## Collaboration
 
