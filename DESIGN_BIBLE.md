@@ -17,7 +17,16 @@ See AUTHORING_WORKFLOW.md for interpretation, testing and evidence rules.
 
 ## Provisional Maw contour evidence
 
-LATEST USER DRAWING, September13 `open.png`: a 20-block top opening and 20-block
+Latest companion drawing, September13 `deeper cave.png`: carry the main winding
+Gullet downward with uneven ribs and narrower side networks linking small
+chambers, lower reentries and occasional exploratory ends. Teeth remain hazards
+in both routes; fiber wraps walls/ceilings and amber highlights side discoveries.
+The user explicitly excludes the changed-color aspect: keep the approved Maw
+palette and material art. Its red-teeth/yellow-amber legend is diagram-specific,
+not a tooth recolor. No new depth mutation tier, loot table or fixed cave width.
+See MAW_OPEN_MOUTH_SKETCH_2026-09-13.md for the paired drawing contract.
+
+Entrance drawing, September13 `open.png`: a 20-block top opening and 20-block
 open-air depth, scooped inner walls beneath inward-overhanging unequal lips,
 and a rounded lower air cutout leading into dirt then stone backing walls.
 The drawn dirt background transition does not block the descent with a floor.

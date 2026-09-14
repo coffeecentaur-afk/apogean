@@ -2,6 +2,12 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
+The companion `deeper cave.png` now specifies the continuation: winding Gullet,
+uneven ribs, hazardous narrow side networks with chambers and lower reentries,
+fiber and side-path amber. No palette change. Intake only; implement a bounded
+continuation after the new entrance mockup, before full-depth rollout. Both
+drawings are recorded in MAW_OPEN_MOUTH_SKETCH_2026-09-13.md.
+
 Newest September13 input is the dimensioned `open.png` mouth drawing. The next
 target is an overhanging, scooped mouth with a 20-block aperture/20-block open
 depth and a dirt-to-stone backing-wall transition below. Record only specified

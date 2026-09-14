@@ -1,4 +1,4 @@
-# Maw opening — dimensioned drawing intake
+# Maw opening and deeper caves — drawing intake
 
 Status: specified; not implemented or render-approved. This supersedes V3's
 mouth silhouette as the next target, not its retained test evidence.
@@ -36,6 +36,46 @@ Keep the source drawing local; this written interpretation may be versioned.
   ribs. Continue the accepted side-route/Node/cache rules below this opening;
   their omission from this cropped drawing does not remove them. No supplied
   rope or regular safety staircase.
+
+## Deeper-cave continuation
+
+Companion local reference: `C:/Users/max_h/Downloads/deeper cave.png`.
+SHA256: `6CF63A1DF7629F1CE19840DF5616CC222C0849A69FE549445183F5CED1B75C9C`.
+The user requests this deeper generation layout, explicitly excluding the
+changed-color aspect. Retain accepted Maw textures and palette; no new depth
+recolor or mutation tier is authorized by this drawing. Keep this source local.
+
+Its legend is local to this drawing: RED = hazardous teeth, ORANGE = fiber,
+WHITE = structural ribs, YELLOW = amber light. Yellow meant teeth in the earlier
+mouth drawing; do not carry that older legend into this one. Neither diagram's
+marker colors dictate the in-game tooth color. Gray fields distinguish terrain
+and passage/background space; blue is the legend panel, not a generated region.
+
+- One winding main Gullet continues vertically, expanding and narrowing with
+  uneven rooted ribs projecting from both sides. Preserve varied spacing and
+  projection rather than turning the ribs into an evenly spaced staircase.
+- Side networks branch off both sides through narrower winding passages, linking
+  occasional small chambers. Some routes reconnect to the Gullet lower down;
+  others form short exploratory pockets or continue beyond this cropped view.
+  Do not turn every branch into a dead end, require every pocket to reconnect,
+  or close a continuation merely because it reaches the edge of the image.
+- Side routes retain hazards, including teeth near bends and chamber entries.
+  They offer another way down, not an automatically safe bypass. Make passage
+  clearance work for a player after placing the actual tooth/rib footprints;
+  a centerline flood fill alone is not traversal evidence.
+- Fiber wraps the passage walls and roofs, with hanging strands. Amber lights
+  emphasize offshoots and discoveries; occasional nearby embedded deposits are
+  compatible with the drawing. Do not uniformly floodlight the main shaft.
+- Small chambers are not automatically chest rooms. Retain sparse caches and
+  separate Node pockets from the prior direction; this sketch assigns no loot
+  tables, boss rooms or new progression gates.
+
+No new dimensions are labelled here. The entrance's 20-block measurement is
+not a mandatory width for every deeper passage. Translate this composition
+into a bounded player-scale continuation after the entrance mockup, test an
+actual lower-rejoining route, and retain technical/visual approval separately.
+This is the deeper Gullet layout, not automatic introduction of the lore's
+later post-corporate Deep Maw. Stomach/intestine and protected-site rules remain.
 
 ## Next bounded implementation
 

@@ -2,6 +2,11 @@
 
 ## Newest checkpoint — dimensioned open-mouth drawing
 
+Companion `deeper cave.png` adds the downstream side-network layout, explicitly
+without recoloring materials. Read its own red-teeth/yellow-amber legend in the
+same contract. Next remains the entrance mockup, then a bounded deeper section
+with hazardous lower reentries; neither new drawing is implemented yet.
+
 Read MAW_OPEN_MOUTH_SKETCH_2026-09-13.md first. User supplied `open.png` with a
 20-block top aperture, 20-block open gap, inward-overhanging lips and scooped
 inner walls. It supersedes the V3 silhouette target, not historical evidence.
