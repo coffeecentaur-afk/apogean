@@ -17,6 +17,12 @@ See AUTHORING_WORKFLOW.md for interpretation, testing and evidence rules.
 
 ## Provisional Maw contour evidence
 
+Latest rough lab appshot (`Untitled - Paint`, 02:47:05UTC September14): record
+as the escape-origin lab concept on its own branch, not a corporate-HQ redesign.
+Outer shell, nested inner space, connecting horizontal feature and surrounding
+growth are visible; room purposes and color/material roles remain provisional.
+See the shared sketch contract. Do not treat the unfinished drawing as final art.
+
 Latest Nest Warden chamber sketch: a broad irregular room, bone around its
 perimeter, a winding right-hand approach and the final nest near the floor
 center. TWO prerequisite Brood Nests occupy separate earlier-Maw side caverns.

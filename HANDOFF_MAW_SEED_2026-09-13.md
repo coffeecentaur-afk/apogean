@@ -2,6 +2,11 @@
 
 ## Newest checkpoint — dimensioned open-mouth drawing
 
+Newest input is an unsaved `Untitled - Paint` rough lab sketch (02:47:05UTC).
+Recorded as escape-origin lab concept; purple inner-room/pale-surrounding-room
+roles remain a question, not an approved containment tank or liquid. No source
+path supplied, no Paint action or runtime change. Entrance mockup stays next.
+
 New Paint appshot supplies the Nest Warden chamber: wide center, perimeter bone,
 winding right entry, final floor nest. Two separate earlier-side-cave nests must
 be broken before that final nest can be destroyed. Early hits explain protection;

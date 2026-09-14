@@ -208,6 +208,37 @@ duplicate break/packet rejection; save/reload and host/client agreement; failed
 first and second attempts remain retryable. Native visual/collision/loot tests
 are still pending. This section records design, not working summon code.
 
+## Escape-origin lab — rough sketch
+
+Reference: user-supplied `Untitled - Paint` appshot,
+2026-09-14T02-47-05.539Z (September13 local). Visible canvas 1536x864.
+The user calls it a "lab really rough sketch"; this is not a finished blueprint.
+No saved file path was supplied. Do not operate on/save the unsaved Paint
+document or invent a local image file; keep personal reference media unshared.
+
+In the current three-route context, treat this as the escape-origin lab concept,
+not a replacement for the separate corporate headquarters. Visible relationships
+are a broad surrounding cavern, an irregular sloping/curved outer shell with a
+flatter upper roof, pale interior space, a smaller purple inner section, and a
+thin horizontal connection toward its upper edge. Orange growth traces the
+outer shell and inner surfaces and hangs into the inner section. Small cyan
+marks occur near its left boundary. The lower structure runs into the drawing's
+bottom edge; do not invent a completed foundation or missing floors from that.
+
+Room functions and material colors are NOT yet confirmed. Main clarification:
+is the purple inner section the original containment chamber, with pale lavender
+representing surrounding lab rooms/corridors? Do not silently label purple as
+liquid, assign cyan as glass/acid, or specify containment machinery from color
+alone. The thin connection's floor/platform/beam role also needs a later tile
+contract. No new progression lock, boss, furnishing list or final palette is
+approved by the rough sketch.
+
+Once roles are clear, preserve this authored silhouette and arrangement in a
+bounded player-scale mockup using validated materials. Fit it to its cave without
+a uniform clearing moat or floating foundation; test actual entry and movement
+between spaces. The current entrance-first order stays unchanged. This intake
+adds no game geometry, assets, package or live evidence.
+
 ## Collaboration
 
 The user can supply biome and structure composition through rough drawings;
