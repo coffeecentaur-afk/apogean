@@ -19,9 +19,13 @@ See AUTHORING_WORKFLOW.md for interpretation, testing and evidence rules.
 
 Latest rough lab appshot (`Untitled - Paint`, 02:47:05UTC September14): record
 as the escape-origin lab concept on its own branch, not a corporate-HQ redesign.
-Outer shell, nested inner space, connecting horizontal feature and surrounding
-growth are visible; room purposes and color/material roles remain provisional.
-See the shared sketch contract. Do not treat the unfinished drawing as final art.
+User confirms dark purple = Helix construction blocks, medium purple = original
+containment chamber, light purple = office areas. Containment was breached;
+broken glass and Maw fiber spreading among the Helix blocks and throughout
+the surrounding cavern show the escape. Retain readable Helix architecture
+under the infestation. Room roles are answered; final material atlases, missing
+lower rooms and glass behavior are not approved by this rough drawing. See the
+shared sketch contract. Do not carry this into unrelated campus spread/protection.
 
 Latest Nest Warden chamber sketch: a broad irregular room, bone around its
 perimeter, a winding right-hand approach and the final nest near the floor

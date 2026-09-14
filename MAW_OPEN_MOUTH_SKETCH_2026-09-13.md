@@ -225,15 +225,30 @@ outer shell and inner surfaces and hangs into the inner section. Small cyan
 marks occur near its left boundary. The lower structure runs into the drawing's
 bottom edge; do not invent a completed foundation or missing floors from that.
 
-Room functions and material colors are NOT yet confirmed. Main clarification:
-is the purple inner section the original containment chamber, with pale lavender
-representing surrounding lab rooms/corridors? Do not silently label purple as
-liquid, assign cyan as glass/acid, or specify containment machinery from color
-alone. The thin connection's floor/platform/beam role also needs a later tile
-contract. No new progression lock, boss, furnishing list or final palette is
-approved by the rough sketch.
+User clarification CONFIRMS the room/material legend:
 
-Once roles are clear, preserve this authored silhouette and arrangement in a
+- Dark purple: Helix foundation/construction blocks, with Maw fiber growing
+  among and over those blocks. Keep the underlying lab architecture readable;
+  do not replace its entire shell with indistinguishable natural Maw rock.
+- Medium purple: the original containment chamber, which was breached when
+  its occupants escaped. Include visible broken containment glass.
+- Light purple/lavender: office areas around the containment space.
+- The spoken "moss fiber" refers to the Maw infestation in this context, not a
+  newly requested vanilla-moss material or unrelated biome.
+
+The environmental story is containment failure, broken glass, fiber spreading
+through the Helix construction and ultimately throughout the surrounding cavern.
+This is the authored ruined origin lab, not permission to mutate every protected
+Helix campus through runtime spread. Infested variants/overlays must preserve
+material framing, wall coverage, terrain contact and the visible breach. This
+clarification confirms roles and Helix identity, not final atlas colors/pixel art.
+Do not treat the purple room fills as liquid. Exact machinery/furniture, the thin
+connection's floor/platform/beam role, glass collision/damage, and the unfinished
+lower layout remain implementation/design details; no new gate or boss is added.
+Do not ask the already answered containment/office question again. The earlier
+depth-transition drawing's navy/teal roles remain separate and unanswered.
+
+With these roles confirmed, preserve the authored silhouette and arrangement in a
 bounded player-scale mockup using validated materials. Fit it to its cave without
 a uniform clearing moat or floating foundation; test actual entry and movement
 between spaces. The current entrance-first order stays unchanged. This intake

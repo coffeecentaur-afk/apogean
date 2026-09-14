@@ -2,10 +2,11 @@
 
 ## Current slice — Maw entrance and shallow baseline
 
-Rough escape-lab appshot recorded in the shared sketch contract. Inner purple
-section versus pale surrounding-space purposes need clarification before an
-authored lab mockup. This does not replace a faction HQ or move lab construction
-ahead of the current entrance/terrain proof.
+Escape-lab roles now confirmed: dark purple Helix construction, medium purple
+breached containment, light purple offices. Show broken glass and fiber spreading
+over/among construction into the surrounding cavern. Preserve the recognizable
+lab under infestation. Shared sketch contract updated; this does not replace a
+faction HQ or move lab construction ahead of the current entrance/terrain proof.
 
 New Warden chamber drawing fixes the initial summon layout: two nests in earlier
 side caverns protect the final nest in the boss chamber. Break both, then the
